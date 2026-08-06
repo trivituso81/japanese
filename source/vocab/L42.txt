@@ -1,0 +1,57 @@
+VOCAB
+つつみます I|包みます|wrap
+わかします I|沸かします|boil
+まぜます II|混ぜます|mix
+けいさんします III|計算します|calculate
+あつい|厚い|thick
+うすい|薄い|thin
+べんごし|弁護士|lawyer, attorney
+おんがくか|音楽家|musician
+こどもたち|子どもたち|children
+ふたり|二人|couple
+きょういく|教育|education
+れきし|歴史|history
+ぶんか|文化|culture
+しゃかい|社会|society
+ほうりつ|法律|law
+せんそう|戦争|war
+へいわ|平和|peace
+もくてき|目的|purpose
+あんぜん|安全|safety
+ろんぶん|論文|thesis, academic paper
+かんけい|関係|relation, connection
+ミキサー||mixer, blender
+やかん||kettle
+せんぬき|栓抜き|cap opener
+かんきり|缶切り|can opener
+かんづめ|缶詰|canned food, tinned food
+ふろしき||wrapping cloth used to carry things
+そろばん||abacus
+たいおんけい|体温計|(clinical) thermometer
+ざいりょう|材料|material, ingredient
+いし|石|stone
+ピラミッド||pyramid
+データ||data
+ファイル||file
+ある ～||a certain ～, one ～
+いっしょうけんめい|一生懸命|with all one's effort
+なぜ||why
+ローン||loan
+セット||set
+あと||the amount left unused, the rest
+カップラーメン||instant Chinese noodles sold in a ready-to-use disposable container
+インスタントラーメン||instant Chinese noodles
+なべ||pan, pot
+どんぶり||ceramic bowl
+しょくひん|食品|food
+ちょうさ|調査|investigation, survey
+カップ||cup
+また||and
+～の かわりに|～の 代わりに|in place of ～, instead of ～
+どこででも||in any place
+いまでは|今では|now
+PROPER
+こくれん|国連|United Nations
+エリーゼの ために||Für Elize
+ベートーベン||Ludwig van Beethoven, German composer (1770-1827)
+ポーランド||Poland

@@ -1,0 +1,43 @@
+VOCAB
+あつまります I ［ひとが ～］|集まります ［人が ～］|[people] gather
+わかれます II ［ひとが ～］|別れます ［人が ～］|[people] part, separate
+ながいきします III|長生きします|live long
+します III ［おと／こえが ～］|します ［音／声が ～］|[sound/ voice] be heard
+します III ［あじが ～］|します ［味が ～］|taste
+します III ［においが ～］||smell
+さします I ［かさを ～］|さします ［傘を ～］|put up [an umbrella]
+ひどい||terrible, severe
+こわい|怖い|frightening, horrible
+てんきよほう|天気予報|weather forecast
+はっぴょう|発表|announcement, presentation
+じっけん|実験|experiment
+じんこう|人口|population
+におい||smell
+かがく|科学|science
+いがく|医学|medicine, medical science
+ぶんがく|文学|literature
+パトカー||patrol car
+きゅうきゅうしゃ|救急車|ambulance
+さんせい|賛成|approval, agreement
+はんたい|反対|objection, opposition
+だんせい|男性|male, man
+じょせい|女性|female, woman
+どうも||it appears that (used when making a tentative judgement)
+～に よると||according to ～ (indicates the source of information)
+こいびと|恋人|sweetheart, boyfriend, girlfriend
+こんやくします III|婚約します|get engaged
+あいて|相手|the other person
+しりあいます I|知り合います|get acquainted
+へいきんじゅみょう|平均寿命|average life span
+くらべます II ［だんせいと ～］|比べます ［男性と ～］|compare [with men]
+はかせ|博士|doctor
+のう|脳|brain
+ホルモン||hormone
+けしょうひん|化粧品|cosmetics
+しらべ|調べ|survey, research
+けしょう|化粧|makeup (～を します: put on makeup)
+PROPER
+バリ［とう］|バリ［島］|Bali [island] (in Indonesia)
+イラン||Iran
+カリフォルニア||California (in U. S. A.)
+グアム||Guam

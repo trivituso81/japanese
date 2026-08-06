@@ -1,0 +1,51 @@
+VOCAB
+います||exist, be (referring to animate things)
+あります||exist, be (referring to inanimate things)
+いろいろ［な］||various
+おとこの ひと|男の 人|man
+おんなの ひと|女の 人|woman
+おとこの こ|男の 子|boy
+おんなの こ|女の 子|girl
+いぬ|犬|dog
+ねこ|猫|cat
+き|木|tree, wood
+もの|物|thing
+フィルム||film
+でんち|電池|battery
+はこ|箱|box
+スイッチ||switch
+れいぞうこ|冷蔵庫|refrigerator
+テーブル||table
+ベッド||bed
+たな|棚|shelf
+ドア||door
+まど|窓|window
+ポスト||mailbox, postbox
+ビル||building
+こうえん|公園|park
+きっさてん|喫茶店|coffee shop
+ほんや|本屋|bookstore
+～や|～屋|～ store
+のりば|乗り場|a fixed place to catch taxis, trains, etc.
+けん|県|prefecture
+うえ|上|on, above, over
+した|下|under, below, beneath
+まえ|前|front, before
+うしろ||back, behind
+みぎ|右|right [side]
+ひだり|左|left [side]
+なか|中|in, inside
+そと|外|outside
+となり|隣|next, next door
+ちかく|近く|near, vicinity
+あいだ|間|between, among
+～や ～［など］||～, ～, and so on
+いちばん ～||the most ～ (いちばん うえ: the top)
+－だんめ|－段目|the -th shelf (だん is the counter for shelves)
+［どうも］すみません。||Thank you.
+チリソース||chili sauce
+おく|奥|the back
+スパイス・コーナー||spice corner
+PROPER
+とうきょうディズニーランド|東京ディズニーランド|Tokyo Disneyland
+ユニューヤ・ストア||fictitious supermarket

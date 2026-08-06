@@ -1,0 +1,1676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Japanese Study Guide · Minna no Nihongo I &amp; II</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-soft: #f7f6f3;
+    --bg-inset: #f0efec;
+    --text: #1a1a18;
+    --text-soft: #55534e;
+    --text-faint: #8a8781;
+    --rule: #e2e0db;
+    --rule-strong: #c9c6bf;
+    --accent: #3b4f8f;
+    --done: #2b6141;
+    --now: #a35a12;
+    --miss: #a3341f;
+    --maxw: 1000px;
+    --jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 30px 22px 100px;
+    overflow-wrap: break-word; }
+  a { color: var(--accent); }
+
+  /* masthead + nav */
+  header.masthead { border-bottom: 2px solid var(--text); padding-bottom: 16px; }
+  .kicker { font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--text-faint); margin: 0 0 10px; font-weight: 600; }
+  h1 { font-size: 27px; line-height: 1.2; letter-spacing: -0.016em; margin: 0 0 8px; font-weight: 650; }
+  h1 .jp { font-family: var(--jp); }
+  .standfirst { font-size: 15.5px; color: var(--text-soft); margin: 0; max-width: 74ch; }
+  .standfirst b { color: var(--text); font-weight: 650; }
+
+  .crumbs { margin: 20px 0 0; font-size: 13px; color: var(--text-faint); }
+  .crumbs a { text-decoration: none; }
+  .crumbs a:hover { text-decoration: underline; }
+
+  /* buttons */
+  .btn { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 13px; cursor: pointer;
+    border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
+    border-radius: 3px; white-space: nowrap; }
+  .btn:hover:not(:disabled) { border-color: var(--text-faint); color: var(--text); }
+  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
+  .btn.primary { background: var(--text); border-color: var(--text); color: #fff; }
+  .btn.primary:hover { background: #000; color: #fff; }
+  .btn.good { color: var(--done); border-color: var(--done); }
+  .btn.bad { color: var(--miss); border-color: var(--miss); }
+  .btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: #fff; }
+  .btn.sm { font-size: 12px; padding: 5px 9px; }
+
+  /* summary strip */
+  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    border: 1px solid var(--rule-strong); margin: 22px 0 0; }
+  .strip > div { padding: 12px 15px; border-right: 1px solid var(--rule); }
+  .strip > div:last-child { border-right: none; }
+  .strip .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; }
+  .strip .val { font-size: 22px; font-weight: 650; letter-spacing: -0.01em; margin-top: 2px;
+    font-variant-numeric: tabular-nums; }
+  .strip .sub { font-size: 12px; color: var(--text-faint); }
+
+  /* review panel */
+  .review { margin: 22px 0 0; border: 1px solid var(--text); }
+  .rhead { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
+    padding: 12px 16px; background: var(--bg-inset); border-bottom: 1px solid var(--rule-strong); }
+  .rhead .k { font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; }
+  .rhead h3 { margin: 2px 0 0; font-size: 17px; font-weight: 650; letter-spacing: -0.012em; }
+  .rscopes { display: flex; gap: 6px; }
+  .rbody { padding: 15px 16px 16px; }
+  .resume { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
+    justify-content: space-between; margin: 0 0 15px; padding: 11px 13px;
+    background: #fdf6ec; border: 1px solid #e6cfa8; border-left: 3px solid var(--now); }
+  .resume b { font-size: 13.5px; display: block; }
+  .resume span { font-size: 12.5px; color: var(--text-soft); }
+  .rstats { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-bottom: 12px; }
+  .rstats .rv { font-size: 21px; font-weight: 650; font-variant-numeric: tabular-nums;
+    letter-spacing: -0.01em; }
+  .rstats .rv i { font-style: normal; font-size: 13px; color: var(--text-faint); font-weight: 400; }
+  .rstats .rk { display: block; font-size: 11.5px; color: var(--text-faint); }
+  .rlead { margin: 0 0 14px; font-size: 14px; color: var(--text-soft); max-width: 72ch; }
+  .weak { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--rule); }
+  .weak .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; margin-bottom: 8px; }
+  .wlist { display: flex; flex-wrap: wrap; gap: 6px; }
+  .wchip { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none;
+    font-size: 12.5px; color: var(--text-soft); border: 1px solid var(--rule-strong);
+    border-radius: 3px; padding: 4px 8px; }
+  .wchip:hover { border-color: var(--text-faint); background: var(--bg-soft); }
+  .wchip b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .wchip i { font-style: normal; font-weight: 650; color: var(--now); font-variant-numeric: tabular-nums; }
+  .wchip i.bad { color: var(--miss); }
+
+  /* sweep result map */
+  .map { margin: 4px 0 18px; padding: 13px 15px; background: var(--bg-soft); border: 1px solid var(--rule); }
+  .map .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; margin-bottom: 9px; }
+  .cells { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; }
+  .cell { display: inline-flex; align-items: center; justify-content: center; min-width: 30px;
+    height: 28px; padding: 0 5px; font-size: 12.5px; font-weight: 650; text-decoration: none;
+    font-variant-numeric: tabular-nums; border: 1px solid var(--rule-strong); border-radius: 3px; }
+  .cell.ok { color: var(--done); border-color: #b9d3c3; background: #f1f7f3; }
+  .cell.no { color: #fff; background: var(--miss); border-color: var(--miss); }
+  .map .hintline { margin: 0; }
+
+  /* toolbar */
+  .toolbar { margin: 20px 0 0; padding: 13px 0; border-top: 1px solid var(--rule);
+    border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 9px 12px; align-items: center; }
+  .toolbar input[type=search] { flex: 1 1 220px; min-width: 0; font: inherit; font-size: 14px;
+    padding: 7px 11px; border: 1px solid var(--rule-strong); border-radius: 3px; }
+  .toolbar input[type=search]:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+
+  /* dashboard table */
+  .board { width: 100%; border-collapse: collapse; margin: 8px 0 0; }
+  .board thead th { position: sticky; top: 0; background: var(--bg); z-index: 2;
+    text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; padding: 10px 8px; border-bottom: 2px solid var(--text); }
+  .board td { padding: 9px 8px; border-bottom: 1px solid var(--rule); vertical-align: middle; font-size: 14px; }
+  .board tr.current td { background: #fdf8f2; }
+  .board tr:hover td { background: var(--bg-soft); }
+  .board tr.current:hover td { background: #fbf2e6; }
+  .bnum { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 12.5px;
+    color: var(--text-faint); white-space: nowrap; }
+  .btitle { font-weight: 600; }
+  .btitle small { display: block; font-weight: 400; font-size: 12px; color: var(--text-faint);
+    font-family: var(--jp); }
+  .bookrow td { background: var(--bg-inset) !important; font-size: 11px; letter-spacing: 0.09em;
+    text-transform: uppercase; font-weight: 700; color: var(--text-soft); padding: 8px; }
+
+  /* meters */
+  .meter { display: block; width: 100%; max-width: 130px; height: 7px; background: var(--bg-inset);
+    border: 1px solid var(--rule); }
+  .meter i { display: block; height: 100%; background: var(--done); }
+  .meter i.part { background: var(--now); }
+  .mlabel { font-size: 11.5px; color: var(--text-faint); margin-top: 3px;
+    font-variant-numeric: tabular-nums; }
+  .none { color: var(--text-faint); font-size: 12px; font-style: italic; }
+
+  select.status { font: inherit; font-size: 12.5px; padding: 4px 6px; border: 1px solid var(--rule-strong);
+    border-radius: 3px; background: var(--bg); color: var(--text-soft); max-width: 130px; }
+  select.status[data-v="confident"] { color: var(--done); border-color: var(--done); }
+  select.status[data-v="learning"] { color: var(--now); border-color: var(--now); }
+
+  .acts { display: flex; gap: 5px; justify-content: flex-end; }
+
+  /* lesson view */
+  h2.view { font-size: 22px; margin: 22px 0 4px; font-weight: 650; letter-spacing: -0.014em; }
+  h2.view .jp { font-family: var(--jp); font-weight: 600; }
+  .viewsub { color: var(--text-soft); margin: 0 0 18px; font-size: 14.5px; }
+  .gap { margin: 18px 0 0; padding: 13px 15px; border: 1px dashed var(--rule-strong);
+    background: var(--bg-soft); font-size: 14px; color: var(--text-soft); }
+  .gap b { color: var(--text); }
+
+  .point { border: 1px solid var(--rule-strong); margin: 16px 0 0; }
+  .point > h3 { margin: 0; padding: 11px 15px; background: var(--bg-inset);
+    border-bottom: 1px solid var(--rule-strong); font-size: 17px; font-family: var(--jp); font-weight: 650; }
+  .point > h3 span { font-family: -apple-system, sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-left: 10px; }
+  .point .body { padding: 14px 15px; }
+  .point p { margin: 0 0 11px; font-size: 14.5px; }
+  .point .form { font-size: 13.5px; background: var(--bg-inset); border-left: 3px solid var(--accent);
+    padding: 9px 12px; margin: 0 0 12px; font-family: var(--jp); }
+  .ex { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+  .ex li { padding: 8px 0; border-bottom: 1px dotted var(--rule); }
+  .ex li:last-child { border-bottom: none; }
+  .ex .j { font-family: var(--jp); font-size: 16px; line-height: 2; }
+  .ex .t { display: block; font-size: 13.5px; color: var(--text-soft); }
+
+  /* vocabulary block */
+  .vlist { display: grid; grid-template-columns: minmax(170px, 38%) 1fr;
+    border: 1px solid var(--rule-strong); margin: 8px 0 0; }
+  .vlist > div { padding: 7px 12px; border-top: 1px solid var(--rule); }
+  .vlist > div:nth-child(1), .vlist > div:nth-child(2) { border-top: none; }
+  .vj { font-family: var(--jp); font-size: 15.5px; }
+  .vr { display: block; font-family: var(--jp); font-size: 12px; color: var(--text-faint); }
+  body.no-furi .vr, body.no-furi rt { display: none; }
+  .ve2 { font-size: 13.5px; color: var(--text-soft); }
+  .vhead { grid-column: 1 / -1; background: var(--bg-soft); font-size: 11px; letter-spacing: 0.08em;
+    text-transform: uppercase; color: var(--text-faint); font-weight: 650; }
+  .vbox { font-size: 10px; font-weight: 700; color: var(--text-faint); float: right;
+    border: 1px solid var(--rule-strong); padding: 0 5px; border-radius: 2px; }
+  .vbox.learned { color: var(--done); border-color: var(--done); }
+
+  /* card + drill stage */
+  .stage { border: 1px solid var(--rule-strong); margin: 18px 0 0; }
+  .stagehead { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
+    justify-content: space-between; padding: 11px 15px; background: var(--bg-inset);
+    border-bottom: 1px solid var(--rule-strong); font-size: 12.5px; color: var(--text-soft); }
+  .stagehead b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .card { padding: 44px 24px; text-align: center; min-height: 250px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
+  .prompt { font-size: 30px; line-height: 1.5; font-weight: 600; }
+  .prompt.jp { font-family: var(--jp); font-size: 34px; }
+  .prompt .rd { display: block; font-size: 15px; color: var(--text-faint); font-weight: 400;
+    font-family: var(--jp); margin-top: 6px; }
+  .answer { font-size: 22px; line-height: 1.6; padding-top: 14px; border-top: 1px solid var(--rule);
+    width: 100%; max-width: 620px; }
+  .answer.jp { font-family: var(--jp); font-size: 26px; }
+  .answer .rd { display: block; font-size: 14px; color: var(--text-faint); font-family: var(--jp); }
+  .hintline { font-size: 13px; color: var(--text-faint); }
+  .grades { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 0 0 6px; }
+  .keys { font-size: 11.5px; color: var(--text-faint); }
+  .taphint { display: none; font-size: 12px; color: var(--text-faint); margin: 0; }
+  .t-narrow { display: none; }
+
+  /* swipeable card */
+  .prog { height: 4px; background: var(--bg-inset); border-bottom: 1px solid var(--rule); }
+  .prog i { display: block; height: 100%; background: var(--done); transition: width .25s ease; }
+  .deck { position: relative; overflow: hidden; }
+  .deck .card { position: relative; touch-action: pan-y; user-select: none;
+    -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+  .deck .card.live { cursor: grab; }
+  .deck .card.live:active { cursor: grabbing; }
+  .swipetag { position: absolute; top: 14px; z-index: 2; padding: 5px 10px; font-size: 11.5px;
+    font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; background: var(--bg);
+    border: 2px solid; border-radius: 4px; opacity: 0; pointer-events: none; }
+  .tag-yes { right: 14px; color: var(--done); border-color: var(--done); transform: rotate(9deg); }
+  .tag-no { left: 14px; color: var(--miss); border-color: var(--miss); transform: rotate(-9deg); }
+  .rep { color: var(--now); font-weight: 650; }
+  .cardacts { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center;
+    padding: 16px 16px 0; }
+  .btn.wide { min-width: 150px; }
+  .cardmeta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+    justify-content: center; padding: 11px 16px 16px; }
+
+  .boxbar { display: flex; height: 6px; width: 150px; background: var(--bg-inset); border: 1px solid var(--rule); }
+  .boxbar i { display: block; height: 100%; }
+  .boxbar i.b0 { background: var(--rule-strong); }
+  .boxbar i.b1 { background: #d8b48a; }
+  .boxbar i.b2 { background: #c9a05e; }
+  .boxbar i.b3 { background: #7fa383; }
+  .boxbar i.b4 { background: #4f7f5e; }
+  .boxbar i.b5 { background: var(--done); }
+
+  /* drill */
+  .qbox { padding: 22px 20px; }
+  .qnum { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; }
+  .qen { font-size: 21px; line-height: 1.45; margin: 8px 0 16px; font-weight: 600; max-width: 60ch; }
+  textarea.jp { width: 100%; min-height: 76px; font-family: var(--jp); font-size: 19px; line-height: 1.7;
+    padding: 11px 13px; border: 1px solid var(--rule-strong); border-radius: 3px; resize: vertical; }
+  textarea.jp:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+  .model { margin: 14px 0 0; padding: 13px 15px; background: var(--bg-soft); border: 1px solid var(--rule); }
+  .model .lab { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; margin-bottom: 5px; }
+  .model .j { font-family: var(--jp); font-size: 21px; line-height: 2; }
+  .model .note { font-size: 13px; color: var(--text-soft); margin-top: 6px; }
+  .yours { font-family: var(--jp); font-size: 17px; color: var(--text-soft); margin-top: 8px;
+    padding-top: 8px; border-top: 1px dotted var(--rule-strong); }
+  .rowacts { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; align-items: center; }
+
+  /* marked answer */
+  .verdict { border-left: 3px solid var(--rule-strong); }
+  .verdict.ok { border-left-color: var(--done); background: #f7fbf8; }
+  .verdict.near { border-left-color: #b8873c; background: #fdfaf3; }
+  .verdict.no { border-left-color: var(--miss); background: #fdf7f5; }
+  .verdict .vhead { font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 10px; display: flex; gap: 8px; align-items: center; }
+  .verdict.ok .vhead b { color: var(--done); }
+  .verdict.near .vhead b { color: #966a22; }
+  .verdict.no .vhead b { color: var(--miss); }
+  .verdict .qen { font-size: 18px; margin: 0 0 14px; }
+  .vrow { margin-top: 10px; padding: 11px 13px; background: var(--bg); border: 1px solid var(--rule); }
+  .vrow .lab { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; margin-bottom: 5px; }
+  .vrow .j { font-family: var(--jp); font-size: 21px; line-height: 2; }
+  .vrow .j.yours { margin: 0; padding: 0; border-top: 0; color: var(--text); font-size: 20px; }
+  .verdict.no .vrow .j.yours, .verdict.near .vrow .j.yours { color: var(--miss); }
+  .vtag { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 650;
+    color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 2px; padding: 1px 5px; }
+  .verdict .note { font-size: 13.5px; color: var(--text-soft); margin: 10px 0 0; line-height: 1.6; }
+
+  .results { padding: 22px 20px; }
+  .bigscore { font-size: 46px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+  .bd { width: 100%; border-collapse: collapse; margin: 14px 0 0; font-size: 13.5px; }
+  .bd th, .bd td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--rule); }
+  .bd th { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); }
+  .bd .j { font-family: var(--jp); font-size: 15px; }
+  .bd tr.wrong td { background: #fdf6f4; }
+  .c-mark { font-weight: 700; color: var(--done); }
+  .wrong .c-mark { color: var(--miss); }
+
+  ruby { ruby-position: over; -webkit-ruby-position: before; }
+  rt { font-size: 0.5em; color: var(--text-faint); font-weight: 400; }
+
+  footer.foot { margin: 46px 0 0; padding-top: 16px; border-top: 1px solid var(--rule);
+    font-size: 13px; color: var(--text-faint); }
+
+  /* ============================================================
+     Touch and small screens
+     ============================================================ */
+
+  /* Touch: keyboard hints are noise, and targets want to be thumb-sized. */
+  @media (hover: none) and (pointer: coarse) {
+    .keys { display: none; }
+    .taphint { display: block; }
+    .card.tappable { cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .btn { font-size: 14px; padding: 10px 14px; min-height: 44px; }
+    .btn.sm { font-size: 13px; padding: 8px 10px; min-height: 40px; }
+    .wchip { font-size: 13px; padding: 9px 11px; }
+    .cell { min-width: 40px; height: 40px; font-size: 13.5px; }
+    .board tr:hover td, .board tr.current:hover td { background: inherit; }
+  }
+
+  @media (max-width: 900px) {
+    .wrap { padding: 26px 18px 90px; }
+  }
+
+  @media (max-width: 720px) {
+    /* 16px on form controls is what stops iOS zooming the page on focus */
+    input, select, textarea { font-size: 16px; }
+    .toolbar input[type=search] { font-size: 16px; flex: 1 1 100%; }
+    select.status { font-size: 16px; width: 100%; max-width: none; }
+
+    h2.view { font-size: 20px; margin-top: 16px; }
+    .viewsub { font-size: 14px; margin-bottom: 14px; }
+    rt { font-size: 0.55em; }
+
+    /* Off the dashboard the masthead is just a title bar, and the screen is
+       better spent on the card or question you came here for. */
+    body:not([data-view="dash"]) .kicker,
+    body:not([data-view="dash"]) .standfirst { display: none; }
+    body:not([data-view="dash"]) header.masthead { padding-bottom: 10px; border-bottom-width: 1px; }
+    body:not([data-view="dash"]) h1 { font-size: 19px; margin: 0; }
+    body:not([data-view="dash"]) .crumbs { margin-top: 12px; }
+
+    .strip { grid-template-columns: 1fr 1fr; }
+    .strip > div { padding: 11px 13px; border-right: 1px solid var(--rule);
+      border-bottom: 1px solid var(--rule); }
+    .strip > div:nth-child(2n) { border-right: none; }
+    .strip > div:nth-child(n+3) { border-bottom: none; }
+    .strip .val { font-size: 20px; }
+
+    .rhead { padding: 12px 13px; }
+    .rscopes { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .rscopes .btn { width: 100%; }
+    .rbody { padding: 13px; }
+    .rstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 10px; }
+    .rstats .rv { font-size: 19px; }
+    .resume { flex-direction: column; align-items: stretch; gap: 10px; }
+    .resume .rowacts { margin: 0; }
+    .resume .rowacts .btn { flex: 1 1 0; }
+
+    /* One card per lesson. Dropping the vocabulary and grammar columns would
+       hide exactly the two numbers a review is meant to surface. */
+    .board, .board tbody, .board tr, .board td { display: block; }
+    .board thead { display: none; }
+    .board tr:not(.bookrow) { display: grid; grid-template-columns: 1fr 1fr;
+      gap: 11px 12px; border: 1px solid var(--rule-strong); border-radius: 4px;
+      padding: 12px; margin: 0 0 9px; }
+    .board tr.current { border-color: #e0b681; background: #fdf8f2; }
+    .board td, .board tr:hover td, .board tr.current td { background: none;
+      border: none; padding: 0; font-size: 14px; }
+    .board tr:not(.bookrow) td:nth-child(1):not([colspan]) { display: none; }
+    .board tr:not(.bookrow) td.btitle  { grid-area: 1 / 1 / 2 / 3; }
+    .board tr:not(.bookrow) td.mcol:nth-child(4) { grid-area: 2 / 1 / 3 / 2; }
+    .board tr:not(.bookrow) td.mcol:nth-child(5) { grid-area: 2 / 2 / 3 / 3; }
+    .board tr:not(.bookrow) td.bstatus { grid-area: 3 / 1 / 4 / 2; }
+    .board tr:not(.bookrow) td.bacts   { grid-area: 4 / 1 / 5 / 3; }
+    .board td[colspan] { grid-column: 1 / -1; }
+    .btitle { font-size: 15px; }
+    .btitle::before { content: attr(data-n) " · "; color: var(--text-faint);
+      font-weight: 700; font-variant-numeric: tabular-nums; }
+    .bookrow td { margin: 16px 0 9px; border-radius: 3px; }
+    .meter { max-width: none; }
+    .acts { gap: 6px; }
+    .acts .btn { flex: 1 1 0; }
+
+    /* Results stop being a table: five columns of Japanese will not fit. */
+    .bd, .bd tbody, .bd tr, .bd td { display: block; }
+    .bd thead { display: none; }
+    .bd tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
+      border: 1px solid var(--rule); border-radius: 4px; padding: 10px 12px; margin: 0 0 9px; }
+    .bd td, .bd tr.wrong td { border: none; padding: 0; background: none; }
+    .bd tr.wrong { border-color: #e0b3a6; background: #fdf6f4; }
+    .c-lesson { grid-area: 1 / 1 / 2 / 2; font-size: 12px; font-weight: 700; }
+    .c-mark   { grid-area: 1 / 2 / 2 / 3; justify-self: end; }
+    .c-en     { grid-area: 2 / 1 / 3 / 3; font-weight: 600; }
+    .c-jp     { grid-area: 3 / 1 / 4 / 3; margin-top: 4px; }
+    .c-pat    { grid-area: 4 / 1 / 5 / 3; margin-top: 4px; font-size: 13px; color: var(--text-faint); }
+
+    .card { padding: 26px 16px; min-height: 210px; }
+    .prompt { font-size: 24px; } .prompt.jp { font-size: 28px; }
+    .answer { font-size: 19px; } .answer.jp { font-size: 22px; }
+    .grades { width: 100%; }
+    .grades .btn { flex: 1 1 0; }
+    .boxbar { width: 100% !important; }
+    .cardacts { padding: 13px 13px 0; gap: 8px; }
+    .cardacts .btn { flex: 1 1 0; min-width: 0; }
+    .cardmeta { padding: 9px 13px 14px; }
+
+    .qbox { padding: 16px 14px; }
+    .qen { font-size: 18px; }
+    .model { padding: 12px 13px; }
+    .model .j { font-size: 19px; line-height: 1.95; }
+    .verdict .qen { font-size: 16px; margin-bottom: 12px; }
+    .vrow { padding: 10px 12px; }
+    .vrow .j, .vrow .j.yours { font-size: 19px; line-height: 1.95; }
+    .results { padding: 16px 14px; }
+    .bigscore { font-size: 38px; }
+    .map { padding: 12px 13px; }
+
+    .point > h3 { font-size: 16px; padding: 10px 12px; }
+    .point .body { padding: 12px; }
+    .gap { padding: 12px 13px; }
+  }
+
+  @media (max-width: 560px) {
+    .wrap { padding: 18px 14px 72px;
+      padding-left: calc(14px + env(safe-area-inset-left, 0px));
+      padding-right: calc(14px + env(safe-area-inset-right, 0px));
+      padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
+    .kicker { font-size: 11px; margin-bottom: 8px; }
+    h1 { font-size: 22px; }
+    .standfirst { font-size: 14px; }
+    .rstats { grid-template-columns: 1fr 1fr; }
+    .rowacts .btn { flex: 1 1 100%; }
+    .board tr:not(.bookrow) td.bstatus { grid-area: 3 / 1 / 4 / 3; }
+
+    /* Shorter control labels so the session options stay on two rows */
+    .t-wide { display: none; }
+    .t-narrow { display: inline; }
+    .tlabel { display: none; }
+    .toolbar { gap: 7px 8px; padding: 11px 0; }
+    .toolbar .btn { flex: 1 1 auto; }
+
+    /* Japanese over English rather than beside it, so neither gets squeezed */
+    .vlist { grid-template-columns: 1fr; }
+    .vlist > div { border-top: none; padding: 5px 12px; }
+    .vlist > .vj { border-top: 1px solid var(--rule); padding-top: 9px; }
+    .vlist > .vj:first-child { border-top: none; }
+    .vlist > .ve2 { padding-bottom: 9px; }
+    .vlist > .vhead { border-top: 1px solid var(--rule); }
+    .vbox { float: none; margin-left: 8px; }
+  }
+
+  /* Phone in landscape: almost no height, so give it back to the card */
+  @media (max-height: 560px) and (orientation: landscape) {
+    .standfirst { display: none; }
+    header.masthead { padding-bottom: 10px; }
+    .card { min-height: 0; padding: 16px 14px; gap: 10px; }
+    .prompt { font-size: 21px; } .prompt.jp { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="masthead">
+  <p class="kicker">Preply · Nao san · Minna no Nihongo I &amp; II</p>
+  <h1>Japanese Study Guide <span class="jp">勉強ノート</span></h1>
+  <p class="standfirst">
+    Know the <b>vocabulary</b>, know the <b>grammar</b>, then prove both. Vocabulary is drilled with
+    flashcards, grammar with English sentences you translate into Japanese. Work a single lesson to
+    prepare for it, or <b>review a whole book</b> to find out what has gone rusty. Scores are earned
+    from those sessions, not self-declared.
+  </p>
+</header>
+
+<nav class="crumbs" id="crumbs"></nav>
+<main id="view"></main>
+
+<footer class="foot">
+  Progress lives in this browser only. Use <b>Export</b> on the dashboard for a backup.
+  Keep <code>japanese-data.js</code> in the same folder as this file.
+  The reference tracker is at <a href="japanese.html">japanese.html</a>.
+</footer>
+
+</div>
+
+<script src="japanese-data.js"></script>
+<script>
+/* ============================================================
+   State
+   ============================================================ */
+const KEY = "mnn-study-v1";
+const OVERALL = [
+  { id: "todo",       label: "Not started" },
+  { id: "learning",   label: "Learning" },
+  { id: "reviewed",   label: "Reviewed" },
+  { id: "confident",  label: "Confident" }
+];
+const LEARNED_BOX = 4;   // a word counts as learned once it reaches this Leitner box
+const WINDOW = 20;       // grammar score reads the last this-many answers for a lesson
+const HISTORY_CAP = 60;
+
+const blank = () => ({ lessons: {}, cards: {}, drills: {} });
+let S = load();
+function load() {
+  let s;
+  try { s = Object.assign(blank(), JSON.parse(localStorage.getItem(KEY)) || {}); }
+  catch (e) { return blank(); }
+  // earlier versions stored whole attempts; scores now read individual answers so
+  // that mixed review sessions can feed the same per-lesson figures
+  for (const n of Object.keys(s.drills || {})) {
+    const d = s.drills[n];
+    if (d && d.attempts && !d.history) {
+      d.history = [];
+      d.attempts.forEach(a => {
+        for (let i = 0; i < a.correct; i++) d.history.push(1);
+        for (let i = 0; i < a.total - a.correct; i++) d.history.push(0);
+      });
+      d.runs = d.attempts.length;
+      delete d.attempts;
+    }
+  }
+  return s;
+}
+function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function lessonState(n) {
+  if (!S.lessons[n]) S.lessons[n] = { overall: "todo", note: "" };
+  return S.lessons[n];
+}
+
+/* ============================================================
+   Helpers
+   ============================================================ */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
+const ruby = s => esc(s).replace(/([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g, "<ruby>$1<rt>$2</rt></ruby>");
+const plain = s => String(s).replace(/[{}]/g, "");
+const lessonById = n => LESSONS.find(l => l.n === +n);
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+
+function shuffle(a) {
+  const x = a.slice();
+  for (let i = x.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [x[i], x[j]] = [x[j], x[i]];
+  }
+  return x;
+}
+
+/* A scope is a set of lessons: "36", "1-25", "26-50" or "all". Cards and
+   drills both work over a scope, so one lesson and a whole book share code. */
+const ALL_N = () => LESSONS.map(l => l.n);
+function scopeOf(s) {
+  if (s === "all") return ALL_N();
+  const m = String(s).match(/^(\d+)-(\d+)$/);
+  if (m) return ALL_N().filter(n => n >= +m[1] && n <= +m[2]);
+  return ALL_N().filter(n => n === +s);
+}
+function scopeLabel(s) {
+  if (s === "all") return "All 50 lessons";
+  if (s === "1-25") return "Book I · Lessons 1–25";
+  if (s === "26-50") return "Book II · Lessons 26–50";
+  const m = String(s).match(/^(\d+)-(\d+)$/);
+  return m ? `Lessons ${m[1]}–${m[2]}` : `Lesson ${s}`;
+}
+const isRange = s => s === "all" || /^\d+-\d+$/.test(String(s));
+
+/* deck = every vocabulary entry in scope, as stable card ids */
+function deck(ns, includeProper) {
+  const out = [];
+  for (const n of ns) {
+    const v = VOCAB[n];
+    if (!v) continue;
+    v.v.forEach((e, i) => out.push({ id: `${n}:v:${i}`, e, n }));
+    if (includeProper && v.p) v.p.forEach((e, i) => out.push({ id: `${n}:p:${i}`, e, n }));
+  }
+  return out;
+}
+const boxOf = id => (S.cards[id] && S.cards[id].box) || 0;
+
+function vocabScore(n) {
+  const d = deck([n], false);
+  if (!d.length) return null;
+  const learned = d.filter(c => boxOf(c.id) >= LEARNED_BOX).length;
+  const seen = d.filter(c => boxOf(c.id) > 0).length;
+  return { learned, seen, total: d.length, pct: pct(learned, d.length) };
+}
+
+function points(n) {
+  const c = CONTENT[n];
+  if (c) return c.points;
+  const l = lessonById(n);
+  return l ? l.points.map(p => ({ pattern: p[0], short: "", explain: "", gloss: p[1],
+    examples: [], drills: [] })) : [];
+}
+const authored = n => !!CONTENT[n];
+function drillBank(ns) {
+  const out = [];
+  for (const n of ns) points(n).forEach((p, pi) => (p.drills || []).forEach(d =>
+    out.push({ en: d[0], jp: d[1], note: d[2] || "", pi, pattern: p.pattern, n })));
+  return out;
+}
+
+function grammarScore(n) {
+  const d = S.drills[n];
+  if (!d || !d.history || !d.history.length) return null;
+  const recent = d.history.slice(-WINDOW);
+  const correct = recent.reduce((a, x) => a + x, 0);
+  return { pct: pct(correct, recent.length), answered: d.history.length,
+           runs: d.runs || 0, correct, total: recent.length };
+}
+
+function recordAnswer(n, ok, pi) {
+  const d = S.drills[n] = S.drills[n] || { history: [], byPoint: {}, runs: 0 };
+  d.history.push(ok ? 1 : 0);
+  if (d.history.length > HISTORY_CAP) d.history = d.history.slice(-HISTORY_CAP);
+  const p = d.byPoint[pi] = d.byPoint[pi] || { ok: 0, n: 0 };
+  p.n++; if (ok) p.ok++;
+}
+
+/* How badly a lesson needs attention: never drilled counts as urgent, since
+   the point of a review sweep is to find out rather than to assume. */
+function weakness(n) {
+  const g = grammarScore(n);
+  if (!g) return 3;
+  return g.pct < 60 ? 3 : g.pct < 80 ? 2 : 1;
+}
+
+/* ============================================================
+   Dashboard
+   ============================================================ */
+let query = "";
+let reviewScope = localStorage.getItem(KEY + ":scope") || "1-25";
+function setScope(s) { reviewScope = s; localStorage.setItem(KEY + ":scope", s); }
+
+function resumeBanner() {
+  const s = S.session;
+  if (!s || !s.qs || s.i >= s.qs.length) return "";
+  const left = s.qs.length - s.i;
+  return `<div class="resume">
+    <div>
+      <b>Unfinished ${s.sweep ? "diagnostic sweep" : "drill"} · ${esc(scopeLabel(s.scope))}</b>
+      <span>${s.i} of ${s.qs.length} answered${s.i ? " and already scored" : ""} ·
+        ${left} question${left > 1 ? "s" : ""} left</span>
+    </div>
+    <div class="rowacts">
+      <button class="btn sm primary" data-go="#/resume">Resume</button>
+      <button class="btn sm" id="dropSession">Discard</button>
+    </div>
+  </div>`;
+}
+
+/* The review panel: cumulative practice across a whole book, which is what
+   shaking off rust needs — per-lesson drilling only tests what you just read. */
+function reviewPanel() {
+  const ns = scopeOf(reviewScope);
+  const withDrills = ns.filter(n => drillBank([n]).length);
+  const withWords = ns.filter(n => VOCAB[n]);
+  const words = deck(withWords, false);
+  const learned = words.filter(c => boxOf(c.id) >= LEARNED_BOX).length;
+  const scored = ns.map(n => ({ n, g: grammarScore(n) })).filter(x => x.g);
+  const swept = scored.length;
+  const overall = swept
+    ? pct(scored.reduce((a, x) => a + x.g.correct, 0), scored.reduce((a, x) => a + x.g.total, 0))
+    : null;
+
+  const weak = ns.map(n => ({ n, g: grammarScore(n), v: vocabScore(n) }))
+    .filter(x => x.g && x.g.pct < 80)
+    .sort((a, b) => a.g.pct - b.g.pct)
+    .slice(0, 8);
+  const untested = ns.filter(n => !grammarScore(n) && drillBank([n]).length);
+
+  const scopes = [["1-25", "Book I"], ["26-50", "Book II"], ["all", "Everything"]];
+
+  return `<section class="review">
+    <div class="rhead">
+      <div>
+        <div class="k">Review</div>
+        <h3>${scopeLabel(reviewScope)}</h3>
+      </div>
+      <div class="rscopes">
+        ${scopes.map(([id, label]) =>
+          `<button class="btn sm scope" data-scope="${id}" aria-pressed="${id === reviewScope}">${label}</button>`).join("")}
+      </div>
+    </div>
+
+    <div class="rbody">
+      ${resumeBanner()}
+      <div class="rstats">
+        <div><span class="rv">${overall === null ? "—" : overall + "%"}</span>
+          <span class="rk">grammar, recent answers</span></div>
+        <div><span class="rv">${swept}<i>/${withDrills.length}</i></span>
+          <span class="rk">lessons tested</span></div>
+        <div><span class="rv">${learned}<i>/${words.length}</i></span>
+          <span class="rk">words at box ${LEARNED_BOX}</span></div>
+      </div>
+
+      <p class="rlead">${untested.length === withDrills.length
+        ? `Nothing here has been tested yet. The sweep asks one question from every lesson in
+           range, so it tells you which lessons need work rather than making you guess.`
+        : untested.length
+          ? `${untested.length} of these ${withDrills.length} lessons are still untested.`
+          : `Every lesson in range has been tested at least once. Mixed practice now leans
+             towards whichever are scoring worst.`}</p>
+
+      <div class="rowacts">
+        <button class="btn primary" data-go="#/sweep/${reviewScope}">
+          Diagnostic sweep · ${withDrills.length} questions</button>
+        <button class="btn primary" data-go="#/drill/${reviewScope}">Mixed drill · 10 questions</button>
+        <button class="btn" data-go="#/cards/${reviewScope}">Mixed flashcards</button>
+      </div>
+
+      ${weak.length ? `<div class="weak">
+        <div class="k">Weakest lessons</div>
+        <div class="wlist">${weak.map(w => {
+          const l = lessonById(w.n);
+          return `<a href="#/lesson/${w.n}" class="wchip">
+            <b>L${w.n}</b> ${esc(l.title)}
+            <i class="${w.g.pct < 60 ? "bad" : ""}">${w.g.pct}%</i></a>`;
+        }).join("")}</div>
+      </div>` : ""}
+    </div>
+  </section>`;
+}
+
+function meter(p, label, tone) {
+  return `<span class="meter"><i class="${tone || ""}" style="width:${p}%"></i></span>
+    <span class="mlabel">${label}</span>`;
+}
+
+/* Rows are built on their own so that typing in the search box can replace the
+   table body alone. Re-rendering the whole dashboard would drop focus, which on
+   a phone means the keyboard closes after every keystroke. */
+function boardRows() {
+  const q = query.trim().toLowerCase();
+  let rows = "", book = null;
+  LESSONS.forEach(l => {
+    if (q) {
+      const hay = [l.n, l.title, plain(l.jp),
+        ...points(l.n).map(p => plain(p.pattern) + " " + (p.short || p.gloss || ""))]
+        .join(" ").toLowerCase();
+      if (!hay.includes(q)) return;
+    }
+    if (l.book !== book) {
+      book = l.book;
+      const b = BOOKS.find(x => x.book === book);
+      rows += `<tr class="bookrow"><td colspan="6">${b.label} · ${b.range}</td></tr>`;
+    }
+    const st = lessonState(l.n);
+    const v = vocabScore(l.n);
+    const g = grammarScore(l.n);
+    const bank = drillBank([l.n]).length;
+    rows += `<tr class="${l.current ? "current" : ""}">
+      <td class="bnum">L${l.n}</td>
+      <td class="btitle" data-n="L${l.n}">${esc(l.title)}<small>${ruby(l.jp)}</small></td>
+      <td class="bstatus"><select class="status" data-n="${l.n}" data-v="${st.overall}"
+        aria-label="Status for lesson ${l.n}">
+        ${OVERALL.map(o => `<option value="${o.id}" ${o.id === st.overall ? "selected" : ""}>${o.label}</option>`).join("")}
+      </select></td>
+      <td class="mcol">${v
+        ? meter(v.pct, `${v.learned}/${v.total} learned`, v.pct < 100 ? "part" : "")
+        : `<span class="none">no word list yet</span>`}</td>
+      <td class="mcol">${g
+        ? meter(g.pct, `${g.pct}% · ${g.answered} answer${g.answered > 1 ? "s" : ""}`, g.pct < 80 ? "part" : "")
+        : (bank ? `<span class="none">not tested yet</span>` : `<span class="none">no drills yet</span>`)}</td>
+      <td class="bacts"><div class="acts">
+        <button class="btn sm" data-go="#/lesson/${l.n}">Study</button>
+        <button class="btn sm" data-go="#/cards/${l.n}" ${v ? "" : "disabled"}>Cards</button>
+        <button class="btn sm" data-go="#/drill/${l.n}" ${bank ? "" : "disabled"}>Drill</button>
+      </div></td>
+    </tr>`;
+  });
+  return rows || `<tr><td colspan="6" class="none" style="padding:24px 8px">No lessons match.</td></tr>`;
+}
+
+function wireStatusSelects() {
+  document.querySelectorAll("select.status").forEach(sel =>
+    sel.addEventListener("change", () => {
+      lessonState(sel.dataset.n).overall = sel.value;
+      sel.dataset.v = sel.value; save();
+    }));
+}
+
+function renderDashboard() {
+  document.getElementById("crumbs").innerHTML = "";
+
+  const done = LESSONS.filter(l => ["reviewed", "confident"].includes(lessonState(l.n).overall)).length;
+  const vocabLessons = LESSONS.map(l => vocabScore(l.n)).filter(Boolean);
+  const wordsLearned = vocabLessons.reduce((a, v) => a + v.learned, 0);
+  const wordsTotal = vocabLessons.reduce((a, v) => a + v.total, 0);
+  const drilled = LESSONS.filter(l => grammarScore(l.n)).length;
+  const authoredCount = Object.keys(CONTENT).length;
+
+  document.getElementById("view").innerHTML = `
+    <div class="strip">
+      <div><div class="k">Lessons covered</div><div class="val">${done}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
+        <div class="sub">marked reviewed or confident</div></div>
+      <div><div class="k">Words learned</div><div class="val">${wordsLearned}<span style="font-size:14px;color:var(--text-faint)"> / ${wordsTotal}</span></div>
+        <div class="sub">reached box ${LEARNED_BOX} of 5</div></div>
+      <div><div class="k">Lessons drilled</div><div class="val">${drilled}</div>
+        <div class="sub">grammar sets completed</div></div>
+      <div><div class="k">Write-ups ready</div><div class="val">${authoredCount}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
+        <div class="sub">explanations, examples, drills</div></div>
+    </div>
+
+    ${reviewPanel()}
+
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
+      <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
+      <button class="btn" id="exportBtn">Export</button>
+      <button class="btn" id="importBtn">Import</button>
+      <input type="file" id="importFile" accept="application/json" hidden>
+    </div>
+
+    <table class="board">
+      <thead><tr>
+        <th>#</th><th>Lesson</th><th>Status</th>
+        <th class="mcol">Vocabulary</th><th class="mcol">Grammar</th><th></th>
+      </tr></thead>
+      <tbody id="rows">${boardRows()}</tbody>
+    </table>`;
+
+  document.getElementById("q").addEventListener("input", e => {
+    query = e.target.value;
+    document.getElementById("rows").innerHTML = boardRows();
+    wireStatusSelects();
+  });
+  wireStatusSelects();
+  document.querySelectorAll("button.scope").forEach(b =>
+    b.addEventListener("click", () => { setScope(b.dataset.scope); renderDashboard(); }));
+  const drop = document.getElementById("dropSession");
+  if (drop) drop.addEventListener("click", () => { clearSession(); renderDashboard(); });
+  wireFurigana();
+  document.getElementById("exportBtn").addEventListener("click", exportProgress);
+  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change", importProgress);
+}
+
+function exportProgress() {
+  const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
+  a.click(); URL.revokeObjectURL(a.href);
+}
+function importProgress(e) {
+  const f = e.target.files[0];
+  if (!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try { S = Object.assign(blank(), JSON.parse(r.result)); save(); route(); }
+    catch (err) { alert("That file could not be read as saved progress."); }
+  };
+  r.readAsText(f);
+}
+
+/* ============================================================
+   Lesson view
+   ============================================================ */
+function renderLesson(n) {
+  const l = lessonById(n);
+  if (!l) return renderDashboard();
+  crumbs([["#/", "All lessons"], [null, `Lesson ${n}`]]);
+
+  const pts = points(n);
+  const v = VOCAB[n];
+  const bank = drillBank([n]).length;
+
+  const head = `
+    <h2 class="view">Lesson ${n} · ${esc(l.title)}</h2>
+    <p class="viewsub"><span class="jp" style="font-family:var(--jp)">${ruby(l.jp)}</span></p>
+    <div class="toolbar">
+      <button class="btn primary" data-go="#/cards/${n}" ${v ? "" : "disabled"}>
+        Flashcards${v ? ` · ${v.v.length} words` : ""}</button>
+      <button class="btn primary" data-go="#/drill/${n}" ${bank ? "" : "disabled"}>
+        Grammar drill${bank ? ` · ${bank} in bank` : ""}</button>
+      <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
+    </div>`;
+
+  const gaps = [];
+  if (!authored(n)) gaps.push("explanations, examples and translation drills");
+  if (!v) gaps.push("the vocabulary list");
+  const gapNote = gaps.length
+    ? `<div class="gap"><b>Not written up yet:</b> ${gaps.join(" and ")} for this lesson.
+       ${!authored(n) ? "The patterns below are the one-line summaries from the tracker." : ""}
+       ${!v ? " Book II word lists need the Volume 2 Translation &amp; Grammatical Notes." : ""}</div>`
+    : "";
+
+  const grammar = pts.map((p, i) => `
+    <div class="point">
+      <h3>${ruby(p.pattern)}${p.short ? `<span>${esc(p.short)}</span>` : ""}</h3>
+      <div class="body">
+        ${p.explain ? `<p>${ruby(p.explain)}</p>` : `<p>${ruby(p.gloss || "")}</p>`}
+        ${p.formation ? `<div class="form">${ruby(p.formation)}</div>` : ""}
+        ${p.examples && p.examples.length ? `<ul class="ex">${p.examples.map(([j, e]) =>
+          `<li><span class="j">${ruby(j)}</span><span class="t">${ruby(e)}</span></li>`).join("")}</ul>` : ""}
+      </div>
+    </div>`).join("");
+
+  const vocab = v ? `
+    <h2 class="view" style="font-size:18px">Vocabulary</h2>
+    <p class="viewsub" style="font-size:13.5px">${v.v.length} words${v.p ? ` · ${v.p.length} proper nouns` : ""}.
+      The box number shows how far each word has climbed in the flashcard rotation.</p>
+    <div class="vlist">
+      ${v.v.map((e, i) => vocabRow(e, `${n}:v:${i}`)).join("")}
+      ${v.p && v.p.length ? `<div class="vhead" style="padding:8px 12px">Proper nouns</div>` +
+        v.p.map((e, i) => vocabRow(e, `${n}:p:${i}`)).join("") : ""}
+    </div>` : "";
+
+  document.getElementById("view").innerHTML = head + gapNote +
+    `<h2 class="view" style="font-size:18px;margin-top:26px">Grammar points</h2>` + grammar + vocab;
+  wireFurigana();
+}
+
+function vocabRow([reading, kanji, en], id) {
+  const b = boxOf(id);
+  return `<div class="vj">${esc(kanji || reading)}${kanji && reading ? `<span class="vr">${esc(reading)}</span>` : ""}</div>
+    <div class="ve2">${b ? `<span class="vbox ${b >= LEARNED_BOX ? "learned" : ""}">box ${b}</span>` : ""}${esc(en)}</div>`;
+}
+
+/* ============================================================
+   Flashcards
+
+   A round is a stack you work until it is empty. Knowing a card retires it;
+   not knowing it sends the card back into the stack a few places later, so it
+   comes round again in the same sitting. Boxes still feed the dashboard: a
+   card you know climbs one, a card you miss drops to box 1.
+   ============================================================ */
+let CARD = null;
+const SWIPE_MIN = 90;        // pixels of drag before a swipe counts as an answer
+const REQUEUE = [3, 6];      // how many cards later a missed one reappears
+
+const ORDERS = [
+  ["weak",   "Weakest first", "Weakest"],
+  ["book",   "Textbook",      "Book"],
+  ["random", "Random",        "Random"]
+];
+const reduceMotion = () => !!(window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+
+function renderCards(scope) {
+  const ns = scopeOf(scope).filter(n => VOCAB[n]);
+  if (!ns.length) return renderDashboard();
+  const range = isRange(scope);
+  const l = range ? null : lessonById(ns[0]);
+  crumbs(range
+    ? [["#/", "All lessons"], [null, "Flashcards"]]
+    : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Flashcards"]]);
+  const total = deck(ns, false).length;
+  const size = range ? 30 : 20;
+  CARD = { scope, ns, dir: "jp-en", order: "weak", proper: false, size,
+           round: [], i: 0, shown: false, total: 0, retired: 0, firstTry: 0,
+           missed: new Set(), attempts: {}, prev: null, animating: false };
+  document.getElementById("view").innerHTML = `
+    <h2 class="view">Flashcards · ${range ? esc(scopeLabel(scope)) : `Lesson ${ns[0]}`}</h2>
+    <p class="viewsub">${range
+      ? `${total} words across ${ns.length} lessons.`
+      : esc(l.title)}</p>
+    <div class="toolbar">
+      <span class="qnum tlabel">Direction</span>
+      <button class="btn dir" data-dir="jp-en" aria-pressed="true" aria-label="Japanese to English">
+        <span class="t-wide">Japanese → English</span><span class="t-narrow">JA → EN</span></button>
+      <button class="btn dir" data-dir="en-jp" aria-label="English to Japanese">
+        <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
+      <button class="btn dir" data-dir="mixed">Mixed</button>
+    </div>
+    <div class="toolbar">
+      <span class="qnum tlabel">Order</span>
+      ${ORDERS.map(([id, wide, narrow]) =>
+        `<button class="btn ord" data-ord="${id}" ${id === "weak" ? 'aria-pressed="true"' : ""}>
+          <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("")}
+      <span class="qnum tlabel" style="margin-left:10px">Session</span>
+      ${(range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
+        `<button class="btn size" data-size="${s}" ${s === size ? 'aria-pressed="true"' : ""}>${s || "All"}</button>`).join("")}
+      <button class="btn" id="proper" aria-pressed="false" aria-label="Include proper nouns">
+        <span class="t-wide">Include proper nouns</span><span class="t-narrow">+ Proper nouns</span></button>
+    </div>
+    <div id="stage"></div>`;
+
+  const group = (sel, apply) => document.querySelectorAll(sel).forEach(b =>
+    b.addEventListener("click", () => {
+      apply(b);
+      document.querySelectorAll(sel).forEach(x => x.setAttribute("aria-pressed", x === b));
+      startSession();
+    }));
+  group(".btn.dir",  b => CARD.dir = b.dataset.dir);
+  group(".btn.ord",  b => CARD.order = b.dataset.ord);
+  group(".btn.size", b => CARD.size = +b.dataset.size);
+  const pb = document.getElementById("proper");
+  pb.addEventListener("click", () => {
+    CARD.proper = !CARD.proper;
+    pb.setAttribute("aria-pressed", String(CARD.proper));
+    startSession();
+  });
+  startSession();
+}
+
+/* Order decides both which cards make the cut and the sequence they arrive in. */
+function buildRound(only) {
+  const d = deck(CARD.ns, CARD.proper);
+  let pool;
+  if (only) pool = d.filter(c => only.has(c.id));
+  else if (CARD.order === "random") pool = shuffle(d);
+  else if (CARD.order === "book") {
+    // work forward through the book rather than restarting at lesson 1 each time
+    const unlearned = d.filter(c => boxOf(c.id) < LEARNED_BOX);
+    pool = unlearned.length ? unlearned : d;
+  } else {
+    const bands = {};
+    d.forEach(c => { const b = boxOf(c.id); (bands[b] = bands[b] || []).push(c); });
+    pool = [];
+    Object.keys(bands).map(Number).sort((a, b) => a - b)
+      .forEach(b => pool.push(...shuffle(bands[b])));
+  }
+  const round = (CARD.size && !only) ? pool.slice(0, CARD.size) : pool;
+  // fix each card's direction now so a card does not change sides when it returns
+  round.forEach(c => {
+    c.dir = CARD.dir === "mixed" ? (Math.random() < 0.5 ? "jp-en" : "en-jp") : CARD.dir;
+  });
+  return round;
+}
+
+function startSession(only) {
+  CARD.round = buildRound(only);
+  CARD.total = CARD.round.length;
+  CARD.i = 0; CARD.shown = false; CARD.retired = 0; CARD.firstTry = 0;
+  CARD.missed = new Set(); CARD.attempts = {}; CARD.prev = null; CARD.animating = false;
+  drawCard();
+}
+
+function revealCard() {
+  if (CARD.animating || CARD.shown) return;
+  CARD.shown = true;
+  drawCard();
+}
+
+/* Buttons and swipes share this so both animate the same way. */
+function commitCard(known) {
+  if (CARD.animating || !CARD.shown) return;
+  const face = document.getElementById("face");
+  if (!face || reduceMotion()) return answerCard(known);
+  CARD.animating = true;
+  face.style.transition = "transform .2s ease-in, opacity .2s ease-in";
+  face.style.transform = `translateX(${known ? 480 : -480}px) rotate(${known ? 14 : -14}deg)`;
+  face.style.opacity = "0";
+  setTimeout(() => { CARD.animating = false; answerCard(known); }, 200);
+}
+
+function answerCard(known) {
+  const c = CARD.round[CARD.i];
+  if (!c) return;
+  CARD.prev = {
+    round: CARD.round.slice(), i: CARD.i, retired: CARD.retired, firstTry: CARD.firstTry,
+    missed: new Set(CARD.missed), attempts: Object.assign({}, CARD.attempts),
+    id: c.id, rec: S.cards[c.id] ? Object.assign({}, S.cards[c.id]) : null
+  };
+  CARD.attempts[c.id] = (CARD.attempts[c.id] || 0) + 1;
+
+  const rec = S.cards[c.id] || { box: 0, seen: 0, ok: 0 };
+  rec.seen++; rec.ts = Date.now();
+  if (known) { rec.box = Math.min(5, (rec.box || 0) + 1); rec.ok++; }
+  else rec.box = 1;
+  S.cards[c.id] = rec;
+
+  CARD.round.splice(CARD.i, 1);
+  if (known) {
+    CARD.retired++;
+    if (!CARD.missed.has(c.id)) CARD.firstTry++;
+  } else {
+    CARD.missed.add(c.id);
+    const gap = REQUEUE[0] + Math.floor(Math.random() * (REQUEUE[1] - REQUEUE[0] + 1));
+    CARD.round.splice(Math.min(CARD.round.length, CARD.i + gap), 0, c);
+  }
+  if (CARD.i >= CARD.round.length) CARD.i = 0;
+  CARD.shown = false;
+  save();
+  drawCard();
+}
+
+/* One step of undo, because a mis-tap should not cost a word its box. */
+function undoCard() {
+  const p = CARD && CARD.prev;
+  if (!p || CARD.animating) return;
+  CARD.round = p.round; CARD.i = p.i; CARD.retired = p.retired;
+  CARD.firstTry = p.firstTry; CARD.missed = p.missed; CARD.attempts = p.attempts;
+  if (p.rec) S.cards[p.id] = p.rec; else delete S.cards[p.id];
+  CARD.prev = null; CARD.shown = true;
+  save();
+  drawCard();
+}
+
+function drawCard() {
+  const stage = document.getElementById("stage");
+  if (!CARD.total) {
+    stage.innerHTML = `<div class="stage"><div class="card"><p class="none">No cards in this deck.</p></div></div>`;
+    return;
+  }
+  if (!CARD.round.length) return drawSessionEnd(stage);
+
+  const c = CARD.round[CARD.i];
+  const [reading, kanji, en] = c.e;
+  const dir = c.dir || "jp-en";
+  const again = (CARD.attempts[c.id] || 0) > 0;
+  const jpFace = `<span class="prompt jp">${esc(kanji || reading)}${kanji && reading
+    ? `<span class="rd">${esc(reading)}</span>` : ""}</span>`;
+  const enFace = `<span class="prompt">${esc(en)}</span>`;
+  const jpAns = `<div class="answer jp">${esc(kanji || reading)}${kanji && reading
+    ? `<span class="rd">${esc(reading)}</span>` : ""}</div>`;
+  const enAns = `<div class="answer">${esc(en)}</div>`;
+
+  stage.innerHTML = `<div class="stage">
+    <div class="stagehead">
+      <span><b>${CARD.retired}</b> of <b>${CARD.total}</b> done · <b>${CARD.round.length}</b> left</span>
+      <span>${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b> of 5${
+        again ? ` · <span class="rep">seen again</span>` : ""}</span>
+    </div>
+    <div class="prog"><i style="width:${pct(CARD.retired, CARD.total)}%"></i></div>
+    <div class="deck">
+      <span class="swipetag tag-no">Don't know</span>
+      <span class="swipetag tag-yes">Know</span>
+      <div class="card${CARD.shown ? " live" : " tappable"}" id="face">
+        ${dir === "jp-en" ? jpFace : enFace}
+        ${CARD.shown ? (dir === "jp-en" ? enAns : jpAns) : ""}
+      </div>
+    </div>
+    <div class="cardacts">
+      ${CARD.shown
+        ? `<button class="btn bad wide" id="no">← Don't know</button>
+           <button class="btn good wide" id="yes">Know →</button>`
+        : `<button class="btn primary wide" id="reveal">Show answer</button>`}
+    </div>
+    <div class="cardmeta">
+      <button class="btn sm" id="undo" ${CARD.prev ? "" : "disabled"}>Undo</button>
+      <span class="keys">${CARD.shown
+        ? "← don't know · → know · U to undo"
+        : "space to flip · U to undo"}</span>
+      <span class="taphint">${CARD.shown
+        ? "Swipe left if you don't know it, right if you do"
+        : "Tap the card to flip it"}</span>
+    </div>
+  </div>`;
+
+  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("click", fn); };
+  on("reveal", revealCard);
+  on("no", () => commitCard(false));
+  on("yes", () => commitCard(true));
+  on("undo", undoCard);
+  wireSwipe(document.getElementById("face"));
+}
+
+function drawSessionEnd(stage) {
+  const d = deck(CARD.ns, CARD.proper);
+  const dist = [0, 0, 0, 0, 0, 0];
+  d.forEach(c => dist[boxOf(c.id)]++);
+  const missed = CARD.missed.size;
+  const back = isRange(CARD.scope)
+    ? `<button class="btn" data-go="#/">Back to dashboard</button>`
+    : `<button class="btn" data-go="#/lesson/${CARD.ns[0]}">Back to lesson</button>`;
+  stage.innerHTML = `<div class="stage">
+    <div class="stagehead"><span>Stack cleared</span>
+      <span><b>${CARD.total}</b> card${CARD.total > 1 ? "s" : ""} retired</span></div>
+    <div class="card">
+      <div class="prompt">${CARD.firstTry}<span style="color:var(--text-faint)"> / ${CARD.total}</span></div>
+      <p class="hintline">known first time${missed
+        ? ` · ${missed} needed another look` : " · nothing needed repeating"}</p>
+      <div class="boxbar" style="width:280px">${dist.map((c, b) =>
+        c ? `<i class="b${b}" style="width:${c / d.length * 100}%"></i>` : "").join("")}</div>
+      <p class="hintline">${dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0)} of ${d.length} words in this deck have reached box ${LEARNED_BOX}.</p>
+      <div class="grades">
+        <button class="btn primary" id="again">New round</button>
+        ${missed ? `<button class="btn" id="redo">Repeat the ${missed} you missed</button>` : ""}
+        ${back}
+      </div>
+    </div></div>`;
+  document.getElementById("again").addEventListener("click", () => startSession());
+  const redo = document.getElementById("redo");
+  if (redo) {
+    const ids = new Set(CARD.missed);
+    redo.addEventListener("click", () => startSession(ids));
+  }
+  save();
+}
+
+/* Drag the card left or right. Vertical movement is left to the page so the
+   view still scrolls normally on a phone. */
+function wireSwipe(face) {
+  if (!face || !face.addEventListener) return;
+  // the labels sit on the deck rather than the card, so they stay put and
+  // readable while the card slides out from under them
+  const yes = document.querySelector(".tag-yes");
+  const no = document.querySelector(".tag-no");
+  let x0 = 0, y0 = 0, dx = 0, dragging = false, decided = false;
+
+  const settle = () => {
+    face.style.transition = "transform .18s ease, opacity .18s ease";
+    face.style.transform = "";
+    if (yes) yes.style.opacity = "0";
+    if (no) no.style.opacity = "0";
+  };
+
+  face.addEventListener("pointerdown", e => {
+    if (CARD.animating) return;
+    dragging = true; decided = false; dx = 0;
+    x0 = e.clientX; y0 = e.clientY;
+    face.style.transition = "none";
+    if (face.setPointerCapture) { try { face.setPointerCapture(e.pointerId); } catch (err) {} }
+  });
+
+  face.addEventListener("pointermove", e => {
+    if (!dragging) return;
+    dx = e.clientX - x0;
+    const dy = e.clientY - y0;
+    if (!decided) {
+      if (Math.abs(dy) > 14 && Math.abs(dy) > Math.abs(dx)) { dragging = false; settle(); return; }
+      if (Math.abs(dx) > 8) decided = true; else return;
+    }
+    const slide = Math.max(-160, Math.min(160, dx));
+    face.style.transform = `translateX(${slide}px) rotate(${slide / 24}deg)`;
+    if (CARD.shown) {
+      if (yes) yes.style.opacity = String(Math.max(0, Math.min(1, dx / SWIPE_MIN)));
+      if (no) no.style.opacity = String(Math.max(0, Math.min(1, -dx / SWIPE_MIN)));
+    }
+  });
+
+  face.addEventListener("pointerup", () => {
+    if (!dragging) return;
+    dragging = false;
+    // before the answer is shown any gesture just flips the card: grading a
+    // word you have not checked is not worth recording
+    if (!CARD.shown) { settle(); return revealCard(); }
+    if (Math.abs(dx) >= SWIPE_MIN) commitCard(dx > 0);
+    else settle();
+  });
+
+  face.addEventListener("pointercancel", () => { dragging = false; settle(); });
+}
+
+/* ============================================================
+   Marking a written answer
+
+   A translation can be right in more than one shape, so an answer is compared
+   against every form of the model sentence that means the same thing: spacing
+   and punctuation are dropped, and each kanji word may be written either in
+   kanji or in the reading its furigana gives. A handful of words that the
+   textbook prints in kana but a keyboard will happily convert (私, 下さい)
+   are folded to kana on both sides.
+
+   Anything left over is a real difference. A one or two character miss is
+   reported as a near miss rather than silently forgiven: in Japanese a single
+   character is usually a particle, and a wrong particle is the exact mistake
+   these drills exist to catch.
+   ============================================================ */
+const KANA_FOLD = [
+  [/私/g, "わたし"], [/貴方/g, "あなた"], [/下さい/g, "ください"],
+  [/出来/g, "でき"], [/誰/g, "だれ"], [/沢山/g, "たくさん"],
+  [/綺麗/g, "きれい"], [/何処/g, "どこ"], [/一寸/g, "ちょっと"],
+  [/勿論/g, "もちろん"], [/有難う/g, "ありがとう"], [/是非/g, "ぜひ"],
+  [/丁度/g, "ちょうど"]
+];
+
+function normJa(s) {
+  let x = String(s == null ? "" : s);
+  KANA_FOLD.forEach(([re, to]) => { x = x.replace(re, to); });
+  return x
+    .replace(/[〜～]/g, "~")
+    .replace(/[\s\u3000]+/g, "")
+    .replace(/[、。，．,.！!？?…‥「」『』（）()]/g, "");
+}
+
+/* Every readable spelling of the model sentence. With at most seven kanji
+   words in a drill answer the full set stays small. */
+function acceptedForms(jp) {
+  const parts = [];
+  const re = /([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g;
+  let last = 0, m;
+  while ((m = re.exec(jp))) {
+    if (m.index > last) parts.push({ t: jp.slice(last, m.index) });
+    parts.push({ k: m[1], y: m[2] });
+    last = m.index + m[0].length;
+  }
+  if (last < jp.length) parts.push({ t: jp.slice(last) });
+  const words = parts.filter(p => p.k).length;
+  const clean = s => s.replace(/[{}]/g, "");
+  if (!words) return [clean(jp)];
+  if (words > 10) return [
+    clean(parts.map(p => p.k || p.t).join("")),
+    clean(parts.map(p => p.y || p.t).join(""))
+  ];
+  let out = [""];
+  parts.forEach(p => {
+    out = p.k ? out.reduce((a, s) => a.concat([s + p.k, s + p.y]), [])
+              : out.map(s => s + p.t);
+  });
+  return out.map(clean);
+}
+
+function editDistance(a, b) {
+  if (a === b) return 0;
+  if (!a.length || !b.length) return Math.max(a.length, b.length);
+  let prev = [], cur = [];
+  for (let j = 0; j <= b.length; j++) prev[j] = j;
+  for (let i = 1; i <= a.length; i++) {
+    cur[0] = i;
+    for (let j = 1; j <= b.length; j++) {
+      cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1,
+                        prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    }
+    prev = cur; cur = [];
+  }
+  return prev[b.length];
+}
+
+const NEAR_MISS = 2;
+
+function judgeAnswer(typed, jp) {
+  const you = normJa(typed);
+  if (!you) return { verdict: "blank", ok: false, off: 0 };
+  const forms = acceptedForms(jp).map(normJa);
+  if (forms.indexOf(you) >= 0) return { verdict: "correct", ok: true, off: 0 };
+  let off = Infinity;
+  forms.forEach(f => { off = Math.min(off, editDistance(you, f)); });
+  return { verdict: off <= NEAR_MISS ? "near" : "wrong", ok: false, off };
+}
+
+/* ============================================================
+   Grammar drill
+   ============================================================ */
+let DRILL = null;
+const DRILL_SIZE = 10;
+
+function renderDrill(scope, sweep) {
+  const ns = scopeOf(scope).filter(n => drillBank([n]).length);
+  const bank = drillBank(ns);
+  if (!bank.length) return renderDashboard();
+  const range = isRange(scope);
+  crumbs(range
+    ? [["#/", "All lessons"], [null, sweep ? "Diagnostic sweep" : "Mixed drill"]]
+    : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
+  newDrill(scope, ns, bank, null, sweep);
+}
+
+/* One question per lesson, every lesson in range: the sweep is a map of where
+   the rust is, so coverage matters more than session length. */
+function sweepQuestions(ns, bank) {
+  const byLesson = groupBy(bank, q => q.n);
+  return ns.filter(n => byLesson[n]).map(n => pickOne(byLesson[n]));
+}
+
+/* Mixed practice works through weak and untested lessons first, one question
+   each, shuffled inside a tier so the order is not the same every session. */
+function mixedQuestions(ns, bank, size) {
+  const byLesson = groupBy(bank, q => q.n);
+  const tiers = {};
+  ns.filter(n => byLesson[n]).forEach(n => {
+    const w = weakness(n);
+    (tiers[w] = tiers[w] || []).push(n);
+  });
+  const order = Object.keys(tiers).map(Number).sort((a, b) => b - a)
+    .flatMap(t => shuffle(tiers[t]));
+  const picked = [];
+  while (picked.length < size) {
+    let added = false;
+    for (const n of order) {
+      if (picked.length >= size) break;
+      if (byLesson[n] && byLesson[n].length) { picked.push(pickOne(byLesson[n])); added = true; }
+    }
+    if (!added) break;
+  }
+  return picked;
+}
+
+/* A single-lesson set spreads across that lesson's own patterns. */
+function lessonQuestions(bank, size) {
+  const byPoint = groupBy(bank, q => q.pi);
+  const keys = shuffle(Object.keys(byPoint));
+  const picked = [];
+  const want = Math.min(size, bank.length);
+  while (picked.length < want) {
+    let added = false;
+    for (const k of keys) {
+      if (picked.length >= want) break;
+      if (byPoint[k].length) { picked.push(pickOne(byPoint[k])); added = true; }
+    }
+    if (!added) break;
+  }
+  return picked;
+}
+
+/* The sweep's real output: which lessons to go back to, in lesson order so it
+   reads like a table of contents with the gaps marked. */
+function sweepMap(answers) {
+  const missed = answers.filter(a => !a.ok).map(a => a.q.n);
+  return `<div class="map">
+    <div class="k">Lesson map</div>
+    <div class="cells">${answers.map(a => {
+      const l = lessonById(a.q.n);
+      return `<a href="#/lesson/${a.q.n}" class="cell ${a.ok ? "ok" : "no"}"
+        title="${esc(l ? l.title : "")}">${a.q.n}</a>`;
+    }).join("")}</div>
+    <p class="hintline">${missed.length
+      ? `Start with ${missed.length === 1 ? "lesson" : "lessons"} ${missed.join(", ")}.
+         Read the write-up, then drill that lesson until it is clean.`
+      : `Nothing missed. Mixed drills and flashcards are the better use of your time now.`}</p>
+  </div>`;
+}
+
+function groupBy(list, key) {
+  const out = {};
+  list.forEach(x => { const k = key(x); (out[k] = out[k] || []).push(x); });
+  return out;
+}
+const pickOne = list => list.splice(Math.floor(Math.random() * list.length), 1)[0];
+
+function newDrill(scope, ns, bank, only, sweep) {
+  let qs;
+  if (only && only.length) qs = shuffle(only).slice(0, Math.max(DRILL_SIZE, only.length));
+  else if (sweep) qs = sweepQuestions(ns, bank.slice());
+  else if (isRange(scope)) qs = mixedQuestions(ns, bank.slice(), DRILL_SIZE);
+  else qs = lessonQuestions(bank.slice(), DRILL_SIZE);
+  DRILL = { scope, ns, bank, sweep: !!sweep, qs: sweep ? qs : shuffle(qs),
+            i: 0, typed: "", verdict: null, answers: [] };
+  saveSession();
+  drawDrill();
+}
+
+/* One shot per question: the moment Submit is pressed the answer is marked,
+   banked and the question is done with. Banking immediately means a sweep
+   abandoned at question 20 still counts for those twenty lessons, and the
+   session is parked alongside it so the rest can be picked up later. */
+function submitAnswer(q) {
+  const typed = DRILL.typed || "";
+  const j = judgeAnswer(typed, q.jp);
+  DRILL.answers.push({ q, ok: j.ok, verdict: j.verdict, off: j.off, yours: typed });
+  recordAnswer(q.n, j.ok, q.pi);
+  DRILL.typed = ""; DRILL.i++; DRILL.verdict = j;
+  saveSession();
+  drawDrill();
+}
+
+/* The marker cannot know every good translation, so a verdict can be
+   overturned once — on the question just answered, never by re-typing it. */
+function regradeLast(ok) {
+  const a = DRILL.answers[DRILL.answers.length - 1];
+  if (!a || a.ok === ok) return;
+  const d = S.drills[a.q.n];
+  if (d && d.history.length) {
+    d.history[d.history.length - 1] = ok ? 1 : 0;
+    const p = d.byPoint[a.q.pi];
+    if (p) p.ok += ok ? 1 : -1;
+  }
+  a.ok = ok; a.overridden = true;
+  saveSession();
+  save();
+  drawDrill();
+}
+
+function saveSession() {
+  if (!DRILL) return;
+  if (DRILL.i >= DRILL.qs.length) return clearSession();
+  S.session = { scope: DRILL.scope, sweep: DRILL.sweep, qs: DRILL.qs,
+                i: DRILL.i, answers: DRILL.answers, ts: Date.now() };
+  save();
+}
+function clearSession() { delete S.session; save(); }
+
+function resumeDrill() {
+  const s = S.session;
+  if (!s || !s.qs || s.i >= s.qs.length) return renderDashboard();
+  const ns = scopeOf(s.scope).filter(n => drillBank([n]).length);
+  const range = isRange(s.scope);
+  crumbs(range
+    ? [["#/", "All lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
+    : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
+  DRILL = { scope: s.scope, ns, bank: drillBank(ns), sweep: s.sweep,
+            qs: s.qs, i: s.i, typed: "", verdict: null, answers: s.answers };
+  drawDrill();
+}
+
+function drawDrill() {
+  const { scope, qs, i, sweep } = DRILL;
+  const range = isRange(scope);
+  const view = document.getElementById("view");
+  const l = range ? null : lessonById(DRILL.ns[0]);
+  const heading = sweep ? `Diagnostic sweep · ${scopeLabel(scope)}`
+    : range ? `Mixed drill · ${scopeLabel(scope)}`
+    : `Grammar drill · Lesson ${DRILL.ns[0]}`;
+
+  // a freshly marked answer is shown before anything else, including the
+  // score, so the last question of a quiz still gets its feedback
+  if (DRILL.verdict) return drawVerdict(view, heading, range,
+    `<span>${DRILL.answers.filter(a => a.ok).length} of ${DRILL.answers.length} right</span>`);
+
+  if (i >= qs.length) {
+    const correct = DRILL.answers.filter(a => a.ok).length;
+    new Set(DRILL.answers.map(a => a.q.n)).forEach(n => {
+      const d = S.drills[n];
+      if (d) d.runs = (d.runs || 0) + 1;
+    });
+    clearSession();
+
+    const missed = DRILL.answers.filter(a => !a.ok).map(a => a.q);
+    view.innerHTML = `
+      <h2 class="view">${sweep ? "Sweep complete" : "Drill complete"} · ${range ? esc(scopeLabel(scope)) : `Lesson ${DRILL.ns[0]}`}</h2>
+      <p class="viewsub">${range ? "Scores have been written back to each lesson." : esc(l.title)}</p>
+      <div class="stage"><div class="results">
+        <div class="bigscore">${correct}<span style="font-size:20px;color:var(--text-faint)"> / ${qs.length}</span></div>
+        <p class="hintline">${Math.round(correct / qs.length * 100)}% · ${correct === qs.length
+          ? "Clean sweep." : `${qs.length - correct} to look at again.`}</p>
+        ${sweep ? sweepMap(DRILL.answers) : ""}
+        <table class="bd">
+          <thead><tr>${range ? "<th>#</th>" : ""}<th>Prompt</th><th>Model answer</th><th>Pattern</th><th></th></tr></thead>
+          <tbody>${DRILL.answers.map(a => `<tr class="${a.ok ? "" : "wrong"}">
+            ${range ? `<td class="c-lesson"><a href="#/lesson/${a.q.n}">L${a.q.n}</a></td>` : ""}
+            <td class="c-en">${ruby(a.q.en)}</td>
+            <td class="c-jp j">${ruby(a.q.jp)}${a.yours
+              ? `<div class="yours" style="font-size:14px">you: ${esc(a.yours)}${a.verdict === "near"
+                  ? ` <span class="vtag">${a.off} off</span>` : ""}</div>`
+              : `<div class="yours" style="font-size:14px">skipped</div>`}</td>
+            <td class="c-pat j">${ruby(a.q.pattern)}</td>
+            <td class="c-mark">${a.ok ? "✓" : "✗"}</td></tr>`).join("")}</tbody>
+        </table>
+        <div class="rowacts">
+          <button class="btn primary" id="againAll">${sweep ? "Sweep again" : "Another ten"}</button>
+          ${missed.length ? `<button class="btn" id="againMissed">Retry the ${missed.length} missed</button>` : ""}
+          <button class="btn" data-go="${range ? "#/" : `#/lesson/${DRILL.ns[0]}`}">
+            ${range ? "Back to dashboard" : "Back to lesson"}</button>
+        </div>
+      </div></div>`;
+    document.getElementById("againAll").addEventListener("click", () =>
+      newDrill(scope, DRILL.ns, DRILL.bank, null, sweep));
+    const am = document.getElementById("againMissed");
+    if (am) am.addEventListener("click", () => newDrill(scope, DRILL.ns, DRILL.bank, missed, false));
+    return;
+  }
+
+  const score = `<span>${DRILL.answers.filter(a => a.ok).length} of ${DRILL.answers.length} right</span>`;
+  const q = qs[i];
+  view.innerHTML = `
+    <h2 class="view">${esc(heading)}</h2>
+    <p class="viewsub">${sweep
+      ? "One question from every lesson in range. One attempt each — the misses become your study map."
+      : "Translate into Japanese, then submit. One attempt per question; the score feeds the dashboard."}</p>
+    <div class="stage">
+      <div class="stagehead">
+        <span>Question <b>${i + 1}</b> of <b>${qs.length}</b></span>
+        ${DRILL.answers.length ? score : "<span>one attempt each</span>"}
+      </div>
+      <div class="qbox">
+        <div class="qnum">English</div>
+        <p class="qen">${ruby(q.en)}</p>
+        <textarea class="jp" id="ans" placeholder="日本語で書いて ください"></textarea>
+        <div class="rowacts">
+          <button class="btn primary" id="submit" disabled>Submit answer</button>
+          <button class="btn" id="skip">Skip</button>
+          <span class="keys">Ctrl+Enter to submit</span>
+        </div>
+      </div>
+    </div>`;
+
+  const ta = document.getElementById("ans");
+  const go = document.getElementById("submit");
+  ta.value = DRILL.typed || "";
+  go.disabled = !ta.value.trim();
+  ta.focus();
+  ta.addEventListener("input", () => {
+    DRILL.typed = ta.value;
+    go.disabled = !ta.value.trim();
+  });
+  ta.addEventListener("keydown", e => {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey) && ta.value.trim()) submitAnswer(q);
+  });
+  go.addEventListener("click", () => { if (ta.value.trim()) submitAnswer(q); });
+  document.getElementById("skip").addEventListener("click", () => {
+    DRILL.typed = "";
+    submitAnswer(q);
+  });
+}
+
+const VERDICTS = {
+  correct: { cls: "ok", head: "Correct", say: "" },
+  near:    { cls: "near", head: "Not quite", say: "" },
+  wrong:   { cls: "no", head: "Wrong", say: "Read the model answer through before moving on." },
+  blank:   { cls: "no", head: "Skipped", say: "Nothing submitted, so it counts as a miss." }
+};
+
+function drawVerdict(view, heading, range, score) {
+  const a = DRILL.answers[DRILL.answers.length - 1];
+  const q = a.q;
+  const v = VERDICTS[a.verdict] || VERDICTS.wrong;
+  const done = DRILL.i >= DRILL.qs.length;
+  const say = a.verdict === "near"
+    ? `Only ${a.off} character${a.off > 1 ? "s" : ""} away from the model answer — check it closely, a single character is usually a particle.`
+    : v.say;
+
+  view.innerHTML = `
+    <h2 class="view">${esc(heading)}</h2>
+    <p class="viewsub">Question ${DRILL.i} of ${DRILL.qs.length} · one attempt each</p>
+    <div class="stage">
+      <div class="stagehead"><span>Marked</span>${score}</div>
+      <div class="qbox verdict ${v.cls}${a.overridden ? " over" : ""}">
+        <div class="vhead"><b>${a.ok ? "Correct" : v.head}</b>
+          ${a.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
+        <p class="qen">${ruby(q.en)}</p>
+        ${a.yours ? `<div class="vrow"><div class="lab">Your answer</div>
+          <div class="j yours">${esc(a.yours)}</div></div>` : ""}
+        <div class="vrow"><div class="lab">Model answer · ${plain(q.pattern)}${range ? ` · Lesson ${q.n}` : ""}</div>
+          <div class="j">${ruby(q.jp)}</div></div>
+        ${say ? `<p class="note">${esc(say)}</p>` : ""}
+        ${q.note ? `<p class="note">${ruby(q.note)}</p>` : ""}
+        <div class="rowacts">
+          <button class="btn primary" id="next">${done ? "See your score" : "Next question"}</button>
+          <button class="btn ${a.ok ? "bad" : "good"}" id="flip">${a.ok
+            ? "Count as wrong" : "My answer was right"}</button>
+          <span class="keys">Enter for the next question</span>
+        </div>
+      </div>
+    </div>`;
+
+  const next = document.getElementById("next");
+  next.addEventListener("click", () => { DRILL.verdict = null; drawDrill(); });
+  next.focus();
+  document.getElementById("flip").addEventListener("click", () => regradeLast(!a.ok));
+}
+
+/* ============================================================
+   Chrome, routing, keys
+   ============================================================ */
+function crumbs(parts) {
+  document.getElementById("crumbs").innerHTML = parts.map(([href, label]) =>
+    href ? `<a href="${href}">${esc(label)}</a>` : `<span>${esc(label)}</span>`).join(" › ");
+}
+
+function wireFurigana() {
+  const b = document.getElementById("furi");
+  if (!b) return;
+  b.setAttribute("aria-pressed", String(!document.body.classList.contains("no-furi")));
+  b.textContent = document.body.classList.contains("no-furi") ? "Furigana off" : "Furigana on";
+  b.addEventListener("click", () => {
+    const off = document.body.classList.toggle("no-furi");
+    b.textContent = off ? "Furigana off" : "Furigana on";
+    b.setAttribute("aria-pressed", String(!off));
+  });
+}
+
+document.addEventListener("click", e => {
+  const g = e.target.closest("[data-go]");
+  if (g) { location.hash = g.dataset.go; }
+});
+
+document.addEventListener("keydown", e => {
+  if (!CARD || !location.hash.startsWith("#/cards/")) return;
+  if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
+  if (e.key === "u" || e.key === "U") { e.preventDefault(); return undoCard(); }
+  if (!CARD.round || !CARD.round.length) return;
+  if (!CARD.shown) {
+    if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); revealCard(); }
+    return;
+  }
+  if (e.key === "ArrowRight") { e.preventDefault(); commitCard(true); }
+  else if (e.key === "ArrowLeft") { e.preventDefault(); commitCard(false); }
+});
+
+function route() {
+  const h = location.hash || "#/";
+  const m = h.match(/^#\/(lesson|cards|drill|sweep)\/(all|\d+(?:-\d+)?)$/);
+  CARD = m && m[1] === "cards" ? CARD : null;
+  window.scrollTo(0, 0);
+  // the masthead is an introduction, not something to re-read every session;
+  // on a phone it costs a third of the screen, so views other than the
+  // dashboard collapse it (see the small-screen rules)
+  document.body.dataset.view = h === "#/resume" ? "drill" : m ? m[1] : "dash";
+  if (h === "#/resume") return resumeDrill();
+  if (!m) return renderDashboard();
+  const [, kind, scope] = m;
+  if (kind === "lesson") return renderLesson(+scope);
+  if (kind === "cards") return renderCards(scope);
+  if (kind === "drill") return renderDrill(scope, false);
+  if (kind === "sweep") return renderDrill(scope, true);
+}
+window.addEventListener("hashchange", route);
+route();
+</script>
+</body>
+</html>

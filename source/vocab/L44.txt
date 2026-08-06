@@ -1,0 +1,42 @@
+VOCAB
+なきます I|泣きます|cry
+わらいます I|笑います|laugh, smile
+かわきます I|乾きます|dry
+ぬれます II||get wet
+すべります I|滑ります|slip
+おきます II ［じこが～］|起きます ［事故が～］|[an accident] happen
+ちょうせつします III|調節します|adjust
+あんぜん[な]|安全[な]|safe
+ていねい[な]|丁寧[な]|polite, courteous, careful
+こまかい|細かい|small, fine
+こい|濃い|strong (taste), dark (color)
+うすい|薄い|weak (taste), light (color)
+くうき|空気|air
+なみだ|涙|tear
+わしょく|和食|Japanese dish
+ようしょく|洋食|Western dish
+おかず||side dish
+りょう|量|quantity
+～ばい|～倍|～ times
+はんぶん|半分|half
+シングル||single room
+ツイン||twin-bedded room
+たんす||chest of drawers
+せんたくもの|洗濯物|washing, laundry
+りゆう|理由|reason
+どう なさいますか。||What can I do for you?
+カット||haircut
+シャンプー||shampoo
+どういうふうに なさいますか。||How would you like it done?
+ショート||short
+～みたいに して ください。||Do it like ～.
+これで よろしいでしょうか。||Would this be all right?
+[どうも] おつかれさまでした。|[どうも] お疲れさまでした。|Thank you for being patient.
+いやがります I|嫌がります|dislike
+また||and
+じゅんじょ|順序|order
+ひょうげん|表現|expression
+たとえば|例えば|for example
+わかれます II|別れます|part, separate
+これら||these things
+えんぎが わるい|縁起が 悪い|unlucky, ill-omened

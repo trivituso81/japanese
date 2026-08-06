@@ -1,0 +1,51 @@
+VOCAB
+とどきます I ［にもつが ～］|届きます ［荷物が ～］|[parcels] be delivered
+でます II ［しあいに ～］|出ます ［試合に ～］|participate [in the game]
+うちます I ［ワープロを ～］|打ちます|type [on a word processor]
+ちょきんします III|貯金します|save money
+ふとります I|太ります|get fat
+やせます II||get slim, lose weight
+すぎます II ［7じを ～］|過ぎます ［7時を ～］|pass [7 o'clock]
+なれます II ［しゅうかんに ～］|慣れます ［習慣に ～］|get accustomed to [the customs]
+かたい|硬い|hard, tough, solid
+やわらかい|軟らかい|soft, tender
+でんし～|電子～|electronic ～
+けいたい～|携帯～|portable ～
+こうじょう|工場|factory
+けんこう|健康|health
+けんどう|剣道|kendo (Japanese style fencing)
+まいしゅう|毎週|every week
+まいつき|毎月|every month
+まいとし（まいねん）|毎年|every year
+やっと||finally
+かなり||fairly
+かならず|必ず|without fail, by any means
+ぜったいに|絶対に|absolutely (used with negatives)
+じょうずに|上手に|well, skillfully
+できるだけ||as much as possible
+このごろ||these days
+～ずつ||～ (some amount) per (some suit)
+その ほうが ～||That is more ～
+おきゃくさま|お客様|guest, customer
+とくべつ[な]|特別[な]|special
+して いらっしゃいます||be doing (respectful equivalent of して います)
+すいえい|水泳|swimming
+～とか、～とか||～, ～, and so on
+タンゴ||tango
+チャレンジします III||challenge
+きもち|気持ち|feeling, enthusiasm
+のりもの|乗り物|vehicle, means of transportation
+れきし|歴史|history
+～せいき|～世紀|-th century
+とおく|遠く|far, remote place
+きしゃ|汽車|locomotive
+きせん|汽船|steam boat
+おおぜいの ～|大勢の ～|many (people)
+はこびます I|運びます|carry, transport
+とびます I|飛びます|fly
+あんぜん[な]|安全[な]|safe
+うちゅう|宇宙|space, universe
+ちきゅう|地球|earth
+PROPER
+ショパン||Chopin, Polish musician (1810-49)
+ライトきょうだい|ライト兄弟|Wright brothers, American pioneers in aviation Wilbur Wright (1867-1912) Orville Wright (1871-1948)

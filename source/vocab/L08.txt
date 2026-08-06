@@ -1,0 +1,64 @@
+VOCAB
+ハンサム［な］||handsome
+きれい［な］||beautiful, clean
+しずか［な］|静か［な］|quiet
+にぎやか［な］||lively
+ゆうめい［な］|有名［な］|famous
+しんせつ［な］|親切［な］|kind
+げんき［な］|元気［な］|healthy, sound, cheerful
+ひま［な］|暇［な］|free (time)
+べんり［な］|便利［な］|convenient
+すてき［な］||fine, nice, wonderful
+おおきい|大きい|big, large
+ちいさい|小さい|small, little
+あたらしい|新しい|new
+ふるい|古い|old (not of age)
+いい（よい）||good
+わるい|悪い|bad
+あつい|暑い、熱い|hot
+さむい|寒い|cold (referring to temperature)
+つめたい|冷たい|cold (referring to touch)
+むずかしい|難しい|difficult
+やさしい|易しい|easy
+たかい|高い|expensive, tall, high
+やすい|安い|inexpensive
+ひくい|低い|low
+おもしろい||interesting
+おいしい||delicious, tasty
+いそがしい|忙しい|busy
+たのしい|楽しい|enjoyable
+しろい|白い|white
+くろい|黒い|black
+あかい|赤い|red
+あおい|青い|blue
+さくら|桜|cherry (blossom)
+やま|山|mountain
+まち|町|town, city
+たべもの|食べ物|food
+くるま|車|car, vehicle
+ところ|所|place
+りょう|寮|dormitory
+べんきょう|勉強|study
+せいかつ|生活|life
+［お］しごと|［お］仕事|work, business (～を します: do one's job, work)
+どう||how
+どんな ～||what kind of ～
+どれ||which one (of three or more)
+とても||very
+あまり||not so (used with negatives)
+そして||and (used to connect sentences)
+～が、～||～, but ～
+おげんきですか。|お元気ですか。|How are you?
+そうですね。||Well let me see. (pausing)
+にほんの せいかつに なれましたか。|日本の 生活に 慣れましたか。|Have you got used to the life in Japan?
+［～、］もう いっぱい いかがですか。|［～、］もう 一杯 いかがですか。|Won't you have another cup of [～]?
+いいえ、けっこうです。||No, thank you.
+もう ～です［ね］。||It's already ～[, isn't it?].
+そろそろ しつれいします。|そろそろ 失礼します。|It's almost time to leave now.
+また いらっしゃって ください。||Please come again.
+PROPER
+ふじさん|富士山|Mt. Fuji, the highest mountain in Japan
+びわこ|琵琶湖|Lake Biwa, the biggest lake in Japan
+シャンハイ||Shanghai (上海)
+「しちにんの さむらい」|「七人の 侍」|"The Seven Samurai," a classic movie by Akira Kurosawa
+きんかくじ|金閣寺|Kinkakuji Temple (the Golden Pavilion)

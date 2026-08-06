@@ -1,0 +1,49 @@
+VOCAB
+あきます I ［ドアが ～］|開きます|[a door] open
+しまります I ［ドアが ～］|閉まります|[a door] close, shut
+つきます I ［でんきが ～］|つきます ［電気が ～］|[a light] come on
+きえます II ［でんきが ～］|消えます ［電気が ～］|[a light] go off, disappear
+こみます I ［みちが ～］|込みます ［道が ～］|[a road] get crowded
+すきます I ［みちが ～］|すきます ［道が ～］|[a road] get empty
+こわれます II ［いすが ～］|壊れます|[a chair] break
+われます II ［コップが ～］|割れます|[a glass] break, smash
+おれます II ［きが ～］|折れます ［木が ～］|[a tree] break, snap
+やぶれます II ［かみが ～］|破れます ［紙が ～］|[the paper] tear
+よごれます II ［ふくが ～］|汚れます ［服が ～］|[the clothes] get dirty
+つきます I ［ポケットが ～］|付きます|[a pocket] be attached
+はずれます II ［ボタンが ～］|外れます|[a button] be undone
+とまります I ［エレベーターが ～］|止まります|[an elevator] stop
+まちがえます II||make a mistake
+おとします I|落とします|drop, lose
+かかります I ［かぎが ～］|掛かります|be locked
+［お］さら|［お］皿|plate, dish
+［お］ちゃわん||rice bowl
+コップ||glass (vessel)
+ガラス||glass (material)
+ふくろ|袋|bag
+さいふ|財布|wallet, purse
+えだ|枝|branch, twig
+えきいん|駅員|station employee
+この へん|この 辺|this neighborhood, around here
+～へん|～辺|the place around ～
+このくらい||about this size
+おさきに どうぞ。|お先に どうぞ。|After you./Go ahead, please.
+［ああ、］よかった。||Thank goodness! (used to express a feeling of relief)
+いまの でんしゃ|今の 電車|the train which has just left
+わすれもの|忘れ物|things left behind, lost property
+～がわ|～側|～ side
+ポケット||pocket
+おぼえて いません。|覚えて いません。|I don't remember.
+あみだな|網棚|rack
+たしか|確か|I suppose, if I am correct
+じしん|地震|earthquake
+かべ|壁|wall
+はり|針|hands (of a clock)
+さします I|指します|point
+えきまえ|駅前|the area in front of a station
+たおれます II|倒れます|fall down
+にし|西|west
+ほう|方|direction
+PROPER
+よつや|四ツ谷|name of a station in Tokyo
+さんのみや|三宮|name of a place in Kobe

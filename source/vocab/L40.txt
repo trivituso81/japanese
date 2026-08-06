@@ -1,0 +1,68 @@
+VOCAB
+かぞえます II|数えます|count
+はかります I|測ります、量ります|measure, weigh
+たしかめます II|確かめます|confirm, make sure
+あいます I ［サイズが ～］|合います|[the size] fit
+しゅっぱつします III|出発します|depart
+とうちゃくします III|到着します|arrive
+よいます I|酔います|get drunk
+きけん[な]|危険[な]|dangerous
+ひつよう[な]|必要[な]|necessary
+うちゅう|宇宙|space, universe
+ちきゅう|地球|earth
+ぼうねんかい|忘年会|year-end party
+しんねんかい|新年会|New Year's party
+にじかい|二次会|second party
+たいかい|大会|mass meeting, convention
+マラソン||marathon
+コンテスト||contest
+おもて|表|face, front
+うら|裏|back (side)
+へんじ|返事|reply
+もうしこみ|申し込み|application
+ほんとう||truth, fact
+まちがい||mistake
+きず|傷|defect, wound, scratch
+ズボン||trousers
+ながさ|長さ|length
+おもさ|重さ|weight
+たかさ|高さ|height
+おおきさ|大きさ|size, scale
+[～]びん|[～]便|flight, flight number
+～ごう|～号|train number, typhoon number, etc.
+～こ|～個|(counter for small objects)
+～ほん（～ぼん、～ぽん）|～本|(counter for long objects)
+～はい（～ばい、～ぱい）|～杯|～ glass or cup of (counter for full cups, glasses, etc.)
+～キロ||～ kilograms, kilometers
+～グラム||～ grams
+～センチ||～ centimeters
+～ミリ||～ millimeters
+～いじょう|～以上|not less than ～, over ～
+～いか|～以下|not more than ～, under ～
+さあ||well, let me see (used when unsure of something)
+どうでしょうか。||How is ～? (polite way of saying どう ですか)
+クラス||class
+テスト||test, examination
+せいせき|成績|performance, score, result
+ところで||by the way
+いらっしゃいます I||come (respectful equivalent of きます)
+ようす|様子|situation, condition, appearance
+じけん|事件|incident, case
+オートバイ||motorcycle
+ばくだん|爆弾|bomb
+つみます I|積みます|load, pile up
+うんてんしゅ|運転手|driver
+はなれた|離れた|remote
+が||but
+きゅうに|急に|suddenly
+うごかします I|動かします|start, operate, move
+いっしょうけんめい|一生懸命|with all one's effort
+はんにん|犯人|suspect, criminal
+てに いれます II|手に 入れます|obtain, get
+いまでも|今でも|even now
+うわさします III||gossip
+PROPER
+ゴッホ||Vincent van Gogh, Dutch painter (1853-90)
+ゆきまつり|雪祭り|Snow Festival in Sapporo
+のぞみ||name of a Shinkansen train
+JL||Japan Airlines

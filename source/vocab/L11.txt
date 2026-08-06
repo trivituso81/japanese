@@ -1,0 +1,63 @@
+VOCAB
+います ［こどもが～］|います ［子どもが～］|have [a child]
+います ［にほんに～］|います ［日本に～］|stay, be [in Japan]
+かかります||take (referring to time or money)
+やすみます ［かいしゃを～］|休みます ［会社を～］|take a day off [work]
+ひとつ|1つ|one (used when counting things)
+ふたつ|2つ|two
+みっつ|3つ|three
+よっつ|4つ|four
+いつつ|5つ|five
+むっつ|6つ|six
+ななつ|7つ|seven
+やっつ|8つ|eight
+ここのつ|9つ|nine
+とお|10|ten
+いくつ||how many
+ひとり|1人|one person
+ふたり|2人|two persons
+－にん|－人|－ people
+－だい|－台|(counter for machines, cars, etc.)
+－まい|－枚|(counter for paper, stamps, etc.)
+－かい|－回|－ times
+りんご||apple
+みかん||mandarin orange
+サンドイッチ||sandwich
+カレー［ライス］||curry [and rice]
+アイスクリーム||ice cream
+きって|切手|postage stamp
+はがき||post card
+ふうとう|封筒|envelope
+そくたつ|速達|special delivery
+かきとめ|書留|registered mail
+エアメール （こうくうびん）|（航空便）|airmail
+ふなびん|船便|sea mail
+りょうしん|両親|parents
+きょうだい|兄弟|brothers and sisters
+あに|兄|(my) elder brother
+おにいさん|お兄さん|(someone else's) elder brother
+あね|姉|(my) elder sister
+おねえさん|お姉さん|(someone else's) elder sister
+おとうと|弟|(my) younger brother
+おとうとさん|弟さん|(someone else's) younger brother
+いもうと|妹|(my) younger sister
+いもうとさん|妹さん|(someone else's) younger sister
+がいこく|外国|foreign country
+－じかん|－時間|－ hours
+－しゅうかん|－週間|－ weeks
+－かげつ|－か月|－ months
+－ねん|－年|－ years
+～ぐらい||about ～
+どのくらい||how long
+ぜんぶで|全部で|in total
+みんな||all, everything
+～だけ||only ～
+いらっしゃいませ。||Welcome./May I help you? (a greeting to a customer or a guest entering a shop, etc.)
+いい［お］天気ですね。||Nice weather, isn't it?
+お出かけですか。||Are you going out?
+ちょっと ～まで。||I'm just going to ～.
+行って いらっしゃい。||So long. (lit. Go and come back.)
+行って まいります。||So long. (lit. I'm going and coming back.)
+それから||and, furthermore
+PROPER
+オーストラリア||Australia

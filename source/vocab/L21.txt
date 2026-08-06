@@ -1,0 +1,40 @@
+VOCAB
+おもいます I|思います|think
+いいます I|言います|say
+たります II|足ります|be enough, be sufficient
+かちます I|勝ちます|win
+まけます II|負けます|lose, be beaten
+あります I ［おまつりが～］|あります ［お祭りが～］|[a festival] be held, take place
+やくに たちます I|役に 立ちます|be useful
+むだ[な]||wasteful
+ふべん[な]|不便[な]|inconvenient
+おなじ|同じ|the same
+すごい||awful, great (expresses astonishment or admiration)
+しゅしょう|首相|prime minister
+だいとうりょう|大統領|president
+せいじ|政治|politics
+ニュース||news
+スピーチ||speech (～を します: make a speech)
+しあい|試合|game, match
+アルバイト||side job (～を します: work part time)
+いけん|意見|opinion
+[お]はなし|[お]話|talk, speech, what one says, story (～を します: talk, tell a story)
+ユーモア||humor
+むだ||waste
+デザイン||design
+こうつう|交通|transportation, traffic
+ラッシュ||rush hour
+さいきん|最近|recently, these days
+たぶん||probably, perhaps, maybe
+きっと||surely
+ほんとうに||really
+そんなに||not so much (used with negatives)
+～に ついて||about ～, concerning ～
+しかたが ありません。||There is no other choice./It can't be helped.
+しばらくですね。||It's been a long time (since I last saw you)./Long time no see.
+～でも 飲みませんか。||How about drinking ～ or something?
+見ないと……。||I've got to watch it.
+もちろん||of course
+PROPER
+カンガルー||kangaroo
+キャプテン・クック||Captain James Cook (1728－79)
