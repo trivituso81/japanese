@@ -136,9 +136,9 @@
     text-transform: uppercase; font-weight: 700; color: var(--text-soft); padding: 8px; }
 
   /* meters */
-  .meter { display: block; width: 100%; max-width: 130px; height: 7px; background: var(--bg-inset);
+  .meter { display: flex; width: 100%; max-width: 130px; height: 7px; background: var(--bg-inset);
     border: 1px solid var(--rule); }
-  .meter i { display: block; height: 100%; background: var(--done); }
+  .meter i { display: block; flex: none; height: 100%; background: var(--done); }
   .meter i.part { background: var(--now); }
   .mlabel { font-size: 11.5px; color: var(--text-faint); margin-top: 3px;
     font-variant-numeric: tabular-nums; }
@@ -649,6 +649,7 @@ function reviewPanel() {
   const withWords = ns.filter(n => VOCAB[n]);
   const words = deck(withWords, false);
   const learned = words.filter(c => boxOf(c.id) >= LEARNED_BOX).length;
+  const started = words.filter(c => boxOf(c.id) > 0).length - learned;
   const scored = ns.map(n => ({ n, g: grammarScore(n) })).filter(x => x.g);
   const swept = scored.length;
   const overall = swept
@@ -683,7 +684,7 @@ function reviewPanel() {
         <div><span class="rv">${swept}<i>/${withDrills.length}</i></span>
           <span class="rk">lessons tested</span></div>
         <div><span class="rv">${learned}<i>/${words.length}</i></span>
-          <span class="rk">words at box ${LEARNED_BOX}</span></div>
+          <span class="rk">words at box ${LEARNED_BOX}${started ? ` · ${started} started` : ""}</span></div>
       </div>
 
       <p class="rlead">${untested.length === withDrills.length
@@ -719,6 +720,16 @@ function meter(p, label, tone) {
     <span class="mlabel">${label}</span>`;
 }
 
+/* Words show two bands: those that have reached the learned box, and those
+   still climbing towards it. One band alone reads zero after a first session,
+   which looks as though nothing was saved. */
+function vmeter(v) {
+  const going = v.seen - v.learned;
+  return `<span class="meter"><i style="width:${pct(v.learned, v.total)}%"></i>
+      <i class="part" style="width:${pct(going, v.total)}%"></i></span>
+    <span class="mlabel">${v.learned}/${v.total} learned${going ? ` · ${going} started` : ""}</span>`;
+}
+
 /* Rows are built on their own so that typing in the search box can replace the
    table body alone. Re-rendering the whole dashboard would drop focus, which on
    a phone means the keyboard closes after every keystroke. */
@@ -749,7 +760,7 @@ function boardRows() {
         ${OVERALL.map(o => `<option value="${o.id}" ${o.id === st.overall ? "selected" : ""}>${o.label}</option>`).join("")}
       </select></td>
       <td class="mcol">${v
-        ? meter(v.pct, `${v.learned}/${v.total} learned`, v.pct < 100 ? "part" : "")
+        ? vmeter(v)
         : `<span class="none">no word list yet</span>`}</td>
       <td class="mcol">${g
         ? meter(g.pct, `${g.pct}% · ${g.answered} answer${g.answered > 1 ? "s" : ""}`, g.pct < 80 ? "part" : "")
@@ -779,6 +790,7 @@ function renderDashboard() {
   const vocabLessons = LESSONS.map(l => vocabScore(l.n)).filter(Boolean);
   const wordsLearned = vocabLessons.reduce((a, v) => a + v.learned, 0);
   const wordsTotal = vocabLessons.reduce((a, v) => a + v.total, 0);
+  const wordsStarted = vocabLessons.reduce((a, v) => a + v.seen, 0) - wordsLearned;
   const drilled = LESSONS.filter(l => grammarScore(l.n)).length;
   const authoredCount = Object.keys(CONTENT).length;
 
@@ -787,7 +799,8 @@ function renderDashboard() {
       <div><div class="k">Lessons covered</div><div class="val">${done}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
         <div class="sub">marked reviewed or confident</div></div>
       <div><div class="k">Words learned</div><div class="val">${wordsLearned}<span style="font-size:14px;color:var(--text-faint)"> / ${wordsTotal}</span></div>
-        <div class="sub">reached box ${LEARNED_BOX} of 5</div></div>
+        <div class="sub">reached box ${LEARNED_BOX} of 5${wordsStarted
+          ? ` · ${wordsStarted} more started` : ""}</div></div>
       <div><div class="k">Lessons drilled</div><div class="val">${drilled}</div>
         <div class="sub">grammar sets completed</div></div>
       <div><div class="k">Write-ups ready</div><div class="val">${authoredCount}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
@@ -920,7 +933,6 @@ function vocabRow([reading, kanji, en], id) {
    ============================================================ */
 let CARD = null;
 const SWIPE_MIN = 90;        // pixels of drag before a swipe counts as an answer
-const REQUEUE = [3, 6];      // how many cards later a missed one reappears
 
 const ORDERS = [
   ["weak",   "Weakest first", "Weakest"],
@@ -1012,11 +1024,27 @@ function buildRound(only) {
   return round;
 }
 
+/* A session is one trip through the stack. Every answer takes its card out,
+   right or wrong, so nothing comes round again mid-pass. What you missed can
+   be run through again afterwards, but those repeats are practice: the score
+   belongs to the first pass, and only a new session sets a new one. */
 function startSession(only) {
   CARD.round = buildRound(only);
   CARD.total = CARD.round.length;
-  CARD.i = 0; CARD.shown = false; CARD.retired = 0; CARD.firstTry = 0;
-  CARD.missed = new Set(); CARD.attempts = {}; CARD.prev = null; CARD.animating = false;
+  CARD.pass = 1; CARD.passSize = CARD.round.length; CARD.passDone = 0;
+  CARD.i = 0; CARD.shown = false; CARD.firstTry = 0;
+  CARD.missed = new Set(); CARD.graded = new Set(); CARD.attempts = {};
+  CARD.prev = null; CARD.animating = false;
+  drawCard();
+}
+
+function nextPass() {
+  const ids = new Set(CARD.missed);
+  if (!ids.size) return;
+  CARD.round = buildRound(ids);
+  CARD.pass++; CARD.passSize = CARD.round.length; CARD.passDone = 0;
+  CARD.i = 0; CARD.shown = false; CARD.missed = new Set();
+  CARD.prev = null; CARD.animating = false;
   drawCard();
 }
 
@@ -1028,7 +1056,7 @@ function revealCard() {
 
 /* Buttons and swipes share this so both animate the same way. */
 function commitCard(known) {
-  if (CARD.animating || !CARD.shown) return;
+  if (CARD.animating) return;
   const face = document.getElementById("face");
   if (!face || reduceMotion()) return answerCard(known);
   CARD.animating = true;
@@ -1041,28 +1069,30 @@ function commitCard(known) {
 function answerCard(known) {
   const c = CARD.round[CARD.i];
   if (!c) return;
+  const first = !CARD.graded.has(c.id);
   CARD.prev = {
-    round: CARD.round.slice(), i: CARD.i, retired: CARD.retired, firstTry: CARD.firstTry,
-    missed: new Set(CARD.missed), attempts: Object.assign({}, CARD.attempts),
-    id: c.id, rec: S.cards[c.id] ? Object.assign({}, S.cards[c.id]) : null
+    round: CARD.round.slice(), i: CARD.i, passDone: CARD.passDone, firstTry: CARD.firstTry,
+    missed: new Set(CARD.missed), graded: new Set(CARD.graded),
+    attempts: Object.assign({}, CARD.attempts), shown: CARD.shown, id: c.id,
+    rec: S.cards[c.id] ? Object.assign({}, S.cards[c.id]) : null
   };
   CARD.attempts[c.id] = (CARD.attempts[c.id] || 0) + 1;
 
-  const rec = S.cards[c.id] || { box: 0, seen: 0, ok: 0 };
-  rec.seen++; rec.ts = Date.now();
-  if (known) { rec.box = Math.min(5, (rec.box || 0) + 1); rec.ok++; }
-  else rec.box = 1;
-  S.cards[c.id] = rec;
+  // only a word's first answer in the session moves its box, so running the
+  // misses again cannot lift the score or the dashboard behind it
+  if (first) {
+    const rec = S.cards[c.id] || { box: 0, seen: 0, ok: 0 };
+    rec.seen++; rec.ts = Date.now();
+    if (known) { rec.box = Math.min(5, (rec.box || 0) + 1); rec.ok++; }
+    else rec.box = 1;
+    S.cards[c.id] = rec;
+    CARD.graded.add(c.id);
+    if (known) CARD.firstTry++;
+  }
 
   CARD.round.splice(CARD.i, 1);
-  if (known) {
-    CARD.retired++;
-    if (!CARD.missed.has(c.id)) CARD.firstTry++;
-  } else {
-    CARD.missed.add(c.id);
-    const gap = REQUEUE[0] + Math.floor(Math.random() * (REQUEUE[1] - REQUEUE[0] + 1));
-    CARD.round.splice(Math.min(CARD.round.length, CARD.i + gap), 0, c);
-  }
+  CARD.passDone++;
+  if (!known) CARD.missed.add(c.id);
   if (CARD.i >= CARD.round.length) CARD.i = 0;
   CARD.shown = false;
   save();
@@ -1073,10 +1103,11 @@ function answerCard(known) {
 function undoCard() {
   const p = CARD && CARD.prev;
   if (!p || CARD.animating) return;
-  CARD.round = p.round; CARD.i = p.i; CARD.retired = p.retired;
-  CARD.firstTry = p.firstTry; CARD.missed = p.missed; CARD.attempts = p.attempts;
+  CARD.round = p.round; CARD.i = p.i; CARD.passDone = p.passDone;
+  CARD.firstTry = p.firstTry; CARD.missed = p.missed; CARD.graded = p.graded;
+  CARD.attempts = p.attempts;
   if (p.rec) S.cards[p.id] = p.rec; else delete S.cards[p.id];
-  CARD.prev = null; CARD.shown = true;
+  CARD.prev = null; CARD.shown = p.shown;
   save();
   drawCard();
 }
@@ -1102,11 +1133,12 @@ function drawCard() {
 
   stage.innerHTML = `<div class="stage">
     <div class="stagehead">
-      <span><b>${CARD.retired}</b> of <b>${CARD.total}</b> done · <b>${CARD.round.length}</b> left</span>
+      <span>${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
+        <b>${CARD.passSize}</b> done · <b>${CARD.round.length}</b> left</span>
       <span>${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b> of 5${
         again ? ` · <span class="rep">seen again</span>` : ""}</span>
     </div>
-    <div class="prog"><i style="width:${pct(CARD.retired, CARD.total)}%"></i></div>
+    <div class="prog"><i style="width:${pct(CARD.passDone, CARD.passSize)}%"></i></div>
     <div class="deck">
       <span class="swipetag tag-no">Don't know</span>
       <span class="swipetag tag-yes">Know</span>
@@ -1116,19 +1148,18 @@ function drawCard() {
       </div>
     </div>
     <div class="cardacts">
-      ${CARD.shown
-        ? `<button class="btn bad wide" id="no">← Don't know</button>
-           <button class="btn good wide" id="yes">Know →</button>`
-        : `<button class="btn primary wide" id="reveal">Show answer</button>`}
+      <button class="btn bad wide" id="no">← Don't know</button>
+      <button class="btn good wide" id="yes">Know →</button>
     </div>
     <div class="cardmeta">
       <button class="btn sm" id="undo" ${CARD.prev ? "" : "disabled"}>Undo</button>
+      ${CARD.shown ? "" : `<button class="btn sm" id="reveal">Show answer</button>`}
       <span class="keys">${CARD.shown
         ? "← don't know · → know · U to undo"
-        : "space to flip · U to undo"}</span>
+        : "← / → to answer · space to flip · U to undo"}</span>
       <span class="taphint">${CARD.shown
         ? "Swipe left if you don't know it, right if you do"
-        : "Tap the card to flip it"}</span>
+        : "Swipe it now if you know it, or tap to flip"}</span>
     </div>
   </div>`;
 
@@ -1145,31 +1176,35 @@ function drawSessionEnd(stage) {
   const dist = [0, 0, 0, 0, 0, 0];
   d.forEach(c => dist[boxOf(c.id)]++);
   const missed = CARD.missed.size;
+  const repeat = CARD.pass > 1;
   const back = isRange(CARD.scope)
     ? `<button class="btn" data-go="#/">Back to dashboard</button>`
     : `<button class="btn" data-go="#/lesson/${CARD.ns[0]}">Back to lesson</button>`;
   stage.innerHTML = `<div class="stage">
-    <div class="stagehead"><span>Stack cleared</span>
-      <span><b>${CARD.total}</b> card${CARD.total > 1 ? "s" : ""} retired</span></div>
+    <div class="stagehead"><span>${repeat ? `Repeat ${CARD.pass - 1} finished` : "Stack cleared"}</span>
+      <span><b>${CARD.passSize}</b> card${CARD.passSize > 1 ? "s" : ""} answered</span></div>
     <div class="card">
       <div class="prompt">${CARD.firstTry}<span style="color:var(--text-faint)"> / ${CARD.total}</span></div>
-      <p class="hintline">known first time${missed
-        ? ` · ${missed} needed another look` : " · nothing needed repeating"}</p>
+      <p class="hintline">known first time${repeat
+        ? " · your score is set by the first pass" : missed
+        ? ` · ${missed} to look at again` : " · nothing missed"}</p>
+      ${repeat && missed ? `<p class="hintline">${missed} still missed on this repeat.</p>` : ""}
       <div class="boxbar" style="width:280px">${dist.map((c, b) =>
         c ? `<i class="b${b}" style="width:${c / d.length * 100}%"></i>` : "").join("")}</div>
-      <p class="hintline">${dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0)} of ${d.length} words in this deck have reached box ${LEARNED_BOX}.</p>
+      <p class="hintline">${dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0)} of ${d.length}
+        words in this deck have reached box ${LEARNED_BOX}${dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0)
+        ? `, and ${dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0)} are on their way there` : ""}.</p>
       <div class="grades">
-        <button class="btn primary" id="again">New round</button>
-        ${missed ? `<button class="btn" id="redo">Repeat the ${missed} you missed</button>` : ""}
+        ${missed ? `<button class="btn primary" id="redo">Run the ${missed} you missed again</button>` : ""}
+        <button class="btn${missed ? "" : " primary"}" id="again">New round</button>
         ${back}
       </div>
+      ${missed && !repeat ? `<p class="hintline">A repeat drills the words you missed without
+        touching the score or the boxes. Start a new round to be scored afresh.</p>` : ""}
     </div></div>`;
   document.getElementById("again").addEventListener("click", () => startSession());
   const redo = document.getElementById("redo");
-  if (redo) {
-    const ids = new Set(CARD.missed);
-    redo.addEventListener("click", () => startSession(ids));
-  }
+  if (redo) redo.addEventListener("click", () => nextPass());
   save();
 }
 
@@ -1208,20 +1243,19 @@ function wireSwipe(face) {
     }
     const slide = Math.max(-160, Math.min(160, dx));
     face.style.transform = `translateX(${slide}px) rotate(${slide / 24}deg)`;
-    if (CARD.shown) {
-      if (yes) yes.style.opacity = String(Math.max(0, Math.min(1, dx / SWIPE_MIN)));
-      if (no) no.style.opacity = String(Math.max(0, Math.min(1, -dx / SWIPE_MIN)));
-    }
+    if (yes) yes.style.opacity = String(Math.max(0, Math.min(1, dx / SWIPE_MIN)));
+    if (no) no.style.opacity = String(Math.max(0, Math.min(1, -dx / SWIPE_MIN)));
   });
 
   face.addEventListener("pointerup", () => {
     if (!dragging) return;
     dragging = false;
-    // before the answer is shown any gesture just flips the card: grading a
-    // word you have not checked is not worth recording
-    if (!CARD.shown) { settle(); return revealCard(); }
-    if (Math.abs(dx) >= SWIPE_MIN) commitCard(dx > 0);
-    else settle();
+    // a swipe answers from either face — knowing a word on sight is the whole
+    // point, and made you flip to a reading you did not need
+    if (Math.abs(dx) >= SWIPE_MIN) return commitCard(dx > 0);
+    // anything shorter was a tap, which turns a face-down card over
+    settle();
+    if (!CARD.shown) revealCard();
   });
 
   face.addEventListener("pointercancel", () => { dragging = false; settle(); });
@@ -1644,10 +1678,7 @@ document.addEventListener("keydown", e => {
   if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
   if (e.key === "u" || e.key === "U") { e.preventDefault(); return undoCard(); }
   if (!CARD.round || !CARD.round.length) return;
-  if (!CARD.shown) {
-    if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); revealCard(); }
-    return;
-  }
+  if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); return revealCard(); }
   if (e.key === "ArrowRight") { e.preventDefault(); commitCard(true); }
   else if (e.key === "ArrowLeft") { e.preventDefault(); commitCard(false); }
 });
