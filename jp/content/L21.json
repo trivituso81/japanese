@@ -1,0 +1,332 @@
+{
+  "points": [
+    {
+      "pattern": "普通形{ふつうけい} と 思{おも}います",
+      "short": "opinions",
+      "explain": "This is how you present something as your own view rather than as a fact. Whatever you think goes into a subordinate clause in the plain form, and only 思います at the end carries the polite ending. Remember that Japanese negates the inner clause, so 'I don't think he will come' comes out as 'I think he won't come'. To ask for someone's view, use どう 思いますか, never 何を 思いますか.",
+      "formation": "[plain form] ＋ と 思{おも}います　（な-adj and N add だ：便利{べんり}だと、学生{がくせい}だと）",
+      "examples": [
+        [
+          "日本{にほん}は 便利{べんり}だと 思{おも}います。",
+          "I think Japan is convenient."
+        ],
+        [
+          "あの 人{ひと}は 銀行員{ぎんこういん}だと 思{おも}います。",
+          "I think that person is a bank employee."
+        ],
+        [
+          "ミラーさんは きょう 来{こ}ないと 思{おも}います。",
+          "I don't think Mr Miller is coming today."
+        ],
+        [
+          "この 本{ほん}は おもしろいと 思{おも}います。",
+          "I think this book is interesting."
+        ]
+      ],
+      "drills": [
+        [
+          "I think it will rain tomorrow.",
+          "あした 雨{あめ}が 降{ふ}ると 思{おも}います。",
+          "plain form before と"
+        ],
+        [
+          "I think transport in Japan is convenient.",
+          "日本{にほん}の 交通{こうつう}は 便利{べんり}だと 思{おも}います。",
+          "な-adjective adds だ"
+        ],
+        [
+          "I think he is a teacher.",
+          "彼{かれ}は 先生{せんせい}だと 思{おも}います。",
+          "a noun also adds だ"
+        ],
+        [
+          "I don't think Mr Tanaka will come today.",
+          "田中{たなか}さんは きょう 来{こ}ないと 思{おも}います。",
+          "Japanese negates the inner clause"
+        ],
+        [
+          "What do you think about this news?",
+          "この ニュースに ついて どう 思{おも}いますか。",
+          "どう 思{おも}いますか, not 何{なに}を"
+        ],
+        [
+          "I thought yesterday's game was interesting.",
+          "きのうの 試合{しあい}は おもしろかったと 思{おも}います。",
+          "plain past inside the clause"
+        ]
+      ]
+    },
+    {
+      "pattern": "「～」と 言{い}います ／ 普通形{ふつうけい} と 言{い}います",
+      "short": "quotation",
+      "explain": "Japanese reports speech in two ways. Quote the words exactly as they were spoken and wrap them in 「」, keeping whatever politeness the speaker used; or report the content indirectly, in which case the quoted clause goes into the plain form. Either way と marks the end of the quotation and the reporting verb follows. The person quoted is the topic, so は normally marks them.",
+      "formation": "「[exact words]」と 言{い}いました　／　[plain form] ＋ と 言{い}いました",
+      "examples": [
+        [
+          "ミラーさんは 「あした 休{やす}みます」と 言{い}いました。",
+          "Mr Miller said, \"I'll take tomorrow off.\""
+        ],
+        [
+          "ミラーさんは あした 休{やす}むと 言{い}いました。",
+          "Mr Miller said that he would take tomorrow off."
+        ],
+        [
+          "先生{せんせい}は 試験{しけん}は 難{むずか}しいと 言{い}いました。",
+          "The teacher said the exam is difficult."
+        ],
+        [
+          "課長{かちょう}は 何{なん}と 言{い}いましたか。",
+          "What did the section chief say?"
+        ]
+      ],
+      "drills": [
+        [
+          "Mr Miller said, \"I'll take tomorrow off.\"",
+          "ミラーさんは 「あした 休{やす}みます」と 言{い}いました。",
+          "a direct quotation keeps the polite form inside 「」"
+        ],
+        [
+          "Mr Miller said that he would take tomorrow off.",
+          "ミラーさんは あした 休{やす}むと 言{い}いました。",
+          "an indirect quotation uses the plain form"
+        ],
+        [
+          "The teacher said the exam is difficult.",
+          "先生{せんせい}は 試験{しけん}は 難{むずか}しいと 言{い}いました。",
+          ""
+        ],
+        [
+          "My wife said she doesn't want to go.",
+          "妻{つま}は 行{い}きたくないと 言{い}いました。",
+          "the たい-form negates like an い-adjective"
+        ],
+        [
+          "What did the section chief say?",
+          "課長{かちょう}は 何{なん}と 言{い}いましたか。",
+          "何{なん}と for 'what' before と"
+        ],
+        [
+          "Mr Yamada said it was a good speech.",
+          "山田{やまだ}さんは いい スピーチだったと 言{い}いました。",
+          "the plain past of a noun is だった"
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} でしょう？",
+      "short": "seeking confirmation",
+      "explain": "Said with a rising intonation, this asks the listener to confirm something you already believe to be true, rather like the English tag 'isn't it?'. It assumes the listener knows more about the matter than you do, or at least agrees. Unlike と 思います, な-adjectives and nouns take no だ here.",
+      "formation": "[plain form] ＋ でしょう？　（な-adj and N take no だ：にぎやかでしょう？、休{やす}みでしょう？）",
+      "examples": [
+        [
+          "あしたは 休{やす}みでしょう？",
+          "Tomorrow's a day off, isn't it?"
+        ],
+        [
+          "日本語{にほんご}は 難{むずか}しいでしょう？",
+          "Japanese is difficult, isn't it?"
+        ],
+        [
+          "きのうの 試合{しあい}を 見{み}たでしょう？",
+          "You watched yesterday's game, didn't you?"
+        ],
+        [
+          "あの 町{まち}は にぎやかでしょう？",
+          "That town is lively, isn't it?"
+        ]
+      ],
+      "drills": [
+        [
+          "Tomorrow's a day off, isn't it?",
+          "あしたは 休{やす}みでしょう？",
+          "a noun takes no だ before でしょう"
+        ],
+        [
+          "Japanese is difficult, isn't it?",
+          "日本語{にほんご}は 難{むずか}しいでしょう？",
+          ""
+        ],
+        [
+          "You watched yesterday's game, didn't you?",
+          "きのうの 試合{しあい}を 見{み}たでしょう？",
+          "plain past"
+        ],
+        [
+          "That town is lively, isn't it?",
+          "あの 町{まち}は にぎやかでしょう？",
+          "な-adjective drops だ"
+        ],
+        [
+          "You're going to the party too, aren't you?",
+          "あなたも パーティーへ 行{い}くでしょう？",
+          "dictionary form for something still to happen"
+        ],
+        [
+          "It was hot in Osaka, wasn't it?",
+          "大阪{おおさか}は 暑{あつ}かったでしょう？",
+          "plain past of an い-adjective"
+        ]
+      ]
+    },
+    {
+      "pattern": "N(place)で N(event)が あります",
+      "short": "events taking place",
+      "explain": "When あります is used of an event — a meeting, a festival, a concert, an exam — the place where it happens takes で, not に. Compare Lesson 10's 場所に Nが あります, which is about a thing simply existing somewhere. The event itself is new information, so it takes が.",
+      "formation": "N(place)で ＋ N(event)が ＋ あります",
+      "examples": [
+        [
+          "東京{とうきょう}で 会議{かいぎ}が あります。",
+          "There's a meeting in Tokyo."
+        ],
+        [
+          "京都{きょうと}で お祭{まつ}りが あります。",
+          "There's a festival in Kyoto."
+        ],
+        [
+          "大学{だいがく}で 日本語{にほんご}の 試験{しけん}が あります。",
+          "There's a Japanese exam at the university."
+        ],
+        [
+          "あの 公園{こうえん}で コンサートが ありました。",
+          "There was a concert in that park."
+        ]
+      ],
+      "drills": [
+        [
+          "There's a meeting in Tokyo tomorrow.",
+          "あした 東京{とうきょう}で 会議{かいぎ}が あります。",
+          "the place takes で, the event が"
+        ],
+        [
+          "There's a festival in Kyoto next week.",
+          "来週{らいしゅう} 京都{きょうと}で お祭{まつ}りが あります。",
+          ""
+        ],
+        [
+          "Was there a game at the school yesterday?",
+          "きのう 学校{がっこう}で 試合{しあい}が ありましたか。",
+          ""
+        ],
+        [
+          "There's a concert in the park on Sunday.",
+          "日曜日{にちようび} 公園{こうえん}で コンサートが あります。",
+          ""
+        ],
+        [
+          "There's no Japanese exam this week.",
+          "今週{こんしゅう}は 日本語{にほんご}の 試験{しけん}が ありません。",
+          ""
+        ],
+        [
+          "There was a party at Mr Miller's house.",
+          "ミラーさんの うちで パーティーが ありました。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Nでも V",
+      "short": "or something",
+      "explain": "Attaching でも to a noun offers it as an example rather than a firm choice, softening a suggestion in the way English 'or something' does. It is very common with invitations, since it leaves the other person free to propose an alternative. Note that this でも replaces を or は; it is not the concessive でも of Lesson 25.",
+      "formation": "N ＋ でも ＋ V ませんか／ましょう",
+      "examples": [
+        [
+          "コーヒーでも 飲{の}みませんか。",
+          "Won't you have some coffee or something?"
+        ],
+        [
+          "日曜日{にちようび} 映画{えいが}でも 見{み}ませんか。",
+          "Shall we see a film or something on Sunday?"
+        ],
+        [
+          "お茶{ちゃ}でも 飲{の}みましょう。",
+          "Let's have tea or something."
+        ]
+      ],
+      "drills": [
+        [
+          "Won't you have some coffee or something?",
+          "コーヒーでも 飲{の}みませんか。",
+          "でも softens the suggestion"
+        ],
+        [
+          "Shall we see a film or something on Sunday?",
+          "日曜日{にちようび} 映画{えいが}でも 見{み}ませんか。",
+          ""
+        ],
+        [
+          "Let's have tea or something.",
+          "お茶{ちゃ}でも 飲{の}みましょう。",
+          ""
+        ],
+        [
+          "Won't you play tennis or something at the weekend?",
+          "週末{しゅうまつ} テニスでも しませんか。",
+          "でも replaces を here"
+        ],
+        [
+          "Shall we have a beer or something after work finishes?",
+          "仕事{しごと}が 終{お}わってから、ビールでも 飲{の}みませんか。",
+          ""
+        ],
+        [
+          "Won't you eat sushi or something tonight?",
+          "今晩{こんばん} おすしでも 食{た}べませんか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vない-form ないと……",
+      "short": "casual obligation",
+      "explain": "In conversation Japanese often stops after the ないと of なければ なりません and leaves the rest unsaid, trailing off with a slight sigh. It means 'I've got to…' and is used when talking to yourself or to someone close, not in polite speech to a customer or a superior. The full form is still what you should write.",
+      "formation": "[V-ない form] ＋ と……　（＝なければ なりません）",
+      "examples": [
+        [
+          "あの ニュースを 見{み}ないと……。",
+          "I've got to watch that news."
+        ],
+        [
+          "きょうは 早{はや}く 帰{かえ}らないと……。",
+          "I have to go home early today."
+        ],
+        [
+          "薬{くすり}を 飲{の}まないと……。",
+          "I've got to take my medicine."
+        ]
+      ],
+      "drills": [
+        [
+          "I've got to watch that news.",
+          "あの ニュースを 見{み}ないと……。",
+          "clipped from 見{み}なければ なりません"
+        ],
+        [
+          "I have to go home early today.",
+          "きょうは 早{はや}く 帰{かえ}らないと……。",
+          ""
+        ],
+        [
+          "I've got to study for tomorrow's exam.",
+          "あしたの 試験{しけん}の 勉強{べんきょう}を しないと……。",
+          ""
+        ],
+        [
+          "I've got to take my medicine.",
+          "薬{くすり}を 飲{の}まないと……。",
+          ""
+        ],
+        [
+          "I have to hand in the report by Friday.",
+          "金曜日{きんようび}までに レポートを 出{だ}さないと……。",
+          "までに for a deadline"
+        ],
+        [
+          "I've got to hurry.",
+          "急{いそ}がないと……。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

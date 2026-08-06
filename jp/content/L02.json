@@ -1,0 +1,336 @@
+{
+  "points": [
+    {
+      "pattern": "これ／それ／あれ",
+      "short": "this and that",
+      "explain": "These three words stand on their own in place of a noun, and they divide the world by distance from the two speakers: これ is near me, それ is near you, and あれ is away from both of us. English makes do with two words, so the middle term takes some practice — if the thing is in the listener's hands, it is それ even when it is only a step away. Because they behave like nouns, they slot straight into the は…です frame you already know.",
+      "formation": "これ／それ／あれ ＋ は ＋ N ＋ です",
+      "examples": [
+        [
+          "これは 本{ほん}です。",
+          "This is a book."
+        ],
+        [
+          "それは 辞書{じしょ}ですか。",
+          "Is that a dictionary?"
+        ],
+        [
+          "あれは カメラです。",
+          "That over there is a camera."
+        ],
+        [
+          "これは 何{なん}ですか。",
+          "What is this?"
+        ]
+      ],
+      "drills": [
+        [
+          "This is a book.",
+          "これは 本{ほん}です。",
+          "これ is what is near the speaker"
+        ],
+        [
+          "Is that (near you) a dictionary?",
+          "それは 辞書{じしょ}ですか。",
+          "それ for something by the listener"
+        ],
+        [
+          "That over there is a camera.",
+          "あれは カメラです。",
+          ""
+        ],
+        [
+          "What is this?",
+          "これは 何{なん}ですか。",
+          "The reading is なん, not なに, before です"
+        ],
+        [
+          "That (near you) is not a magazine.",
+          "それは 雑誌{ざっし}じゃ ありません。",
+          ""
+        ],
+        [
+          "This is a Japanese newspaper.",
+          "これは 日本語{にほんご}の 新聞{しんぶん}です。",
+          "の links the language to the thing"
+        ]
+      ]
+    },
+    {
+      "pattern": "この／その／あの ＋ N",
+      "short": "this book, that book",
+      "explain": "When you want to name the thing as well as point at it, use この, その, あの in front of the noun. The distances are exactly the same as これ, それ, あれ, but the grammar is different: these three cannot stand alone, so この on its own is never a sentence. Remember it as これ = 'this one', この 本 = 'this book'.",
+      "formation": "この／その／あの ＋ N ＋ は ＋ ～です",
+      "examples": [
+        [
+          "この 本{ほん}は わたしの 本{ほん}です。",
+          "This book is my book."
+        ],
+        [
+          "その 傘{かさ}は 佐藤{さとう}さんの 傘{かさ}ですか。",
+          "Is that umbrella Ms. Sato's umbrella?"
+        ],
+        [
+          "あの 人{ひと}は 山田{やまだ}さんです。",
+          "That person over there is Mr. Yamada."
+        ],
+        [
+          "この 雑誌{ざっし}は 英語{えいご}の 雑誌{ざっし}です。",
+          "This magazine is an English magazine."
+        ]
+      ],
+      "drills": [
+        [
+          "This book is my book.",
+          "この 本{ほん}は わたしの 本{ほん}です。",
+          "この attaches to a noun; これ stands alone"
+        ],
+        [
+          "Is that notebook Mr. Miller's notebook?",
+          "その ノートは ミラーさんの ノートですか。",
+          ""
+        ],
+        [
+          "That person over there is a teacher at Sakura University.",
+          "あの 人{ひと}は さくら大学{だいがく}の 先生{せんせい}です。",
+          "あの 人{ひと} is the standard way to say 'he' or 'she'"
+        ],
+        [
+          "This magazine is not an English magazine.",
+          "この 雑誌{ざっし}は 英語{えいご}の 雑誌{ざっし}じゃ ありません。",
+          ""
+        ],
+        [
+          "Whose umbrella is that?",
+          "その 傘{かさ}は だれの 傘{かさ}ですか。",
+          "だれの asks whose"
+        ],
+        [
+          "This desk is Ms. Sato's desk too.",
+          "この 机{つくえ}も 佐藤{さとう}さんの 机{つくえ}です。",
+          "も replaces は here as well"
+        ]
+      ]
+    },
+    {
+      "pattern": "そうです／そうじゃ ありません",
+      "short": "yes it is",
+      "explain": "はい and いいえ answer whether the sentence is true, but a bare はい can sound abrupt, so Japanese adds そうです to confirm and そうじゃ ありません to deny. This pair only works for sentences ending in です that identify something; it cannot answer a question containing a question word such as 何. 違います is a blunter denial, useful when you want to correct a mistake outright.",
+      "formation": "はい、そうです。　／　いいえ、そうじゃ ありません。／ いいえ、違{ちが}います。",
+      "examples": [
+        [
+          "これは 手帳{てちょう}ですか。…はい、そうです。",
+          "Is this a pocket notebook? … Yes, it is."
+        ],
+        [
+          "それは 名刺{めいし}ですか。…いいえ、そうじゃ ありません。",
+          "Is that a business card? … No, it isn't."
+        ],
+        [
+          "ミラーさんは 会社員{かいしゃいん}ですか。…はい、そうです。",
+          "Is Mr. Miller a company employee? … Yes, he is."
+        ],
+        [
+          "これは 鉛筆{えんぴつ}ですか。…いいえ、違{ちが}います。",
+          "Is this a pencil? … No, it's not."
+        ]
+      ],
+      "drills": [
+        [
+          "Is this a pocket notebook? — Yes, it is.",
+          "これは 手帳{てちょう}ですか。…はい、そうです。",
+          "そうです confirms a です question"
+        ],
+        [
+          "Is that a business card? — No, it isn't.",
+          "それは 名刺{めいし}ですか。…いいえ、そうじゃ ありません。",
+          ""
+        ],
+        [
+          "Is that over there a tape recorder? — No, it's not.",
+          "あれは テープレコーダーですか。…いいえ、違{ちが}います。",
+          "違{ちが}います is a blunter denial"
+        ],
+        [
+          "Are you a student? — Yes, I am.",
+          "あなたは 学生{がくせい}ですか。…はい、そうです。",
+          ""
+        ],
+        [
+          "Is this your key? — No, it isn't.",
+          "これは あなたの かぎですか。…いいえ、そうじゃ ありません。",
+          ""
+        ],
+        [
+          "Is Mr. Santos an employee of IMC? — Yes, he is.",
+          "サントスさんは IMCの 社員{しゃいん}ですか。…はい、そうです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "～か、～か",
+      "short": "choice question",
+      "explain": "To offer the listener a choice, ask two complete questions in a row, each ending in か. The answer is not はい or いいえ but the chosen item itself, usually with です. In speech the first か rises and the second falls, and the second half is normally shortened to just the noun plus ですか.",
+      "formation": "N1ですか、N2ですか。→ (answer) N1です。",
+      "examples": [
+        [
+          "それは ボールペンですか、シャープペンシルですか。…ボールペンです。",
+          "Is that a ballpoint pen or a mechanical pencil? … It's a ballpoint pen."
+        ],
+        [
+          "これは 「9」ですか、「7」ですか。",
+          "Is this a 9 or a 7?"
+        ],
+        [
+          "あの 人{ひと}は 先生{せんせい}ですか、学生{がくせい}ですか。",
+          "Is that person a teacher or a student?"
+        ],
+        [
+          "この 新聞{しんぶん}は 英語{えいご}ですか、日本語{にほんご}ですか。",
+          "Is this newspaper in English or in Japanese?"
+        ]
+      ],
+      "drills": [
+        [
+          "Is that a ballpoint pen or a mechanical pencil? — It's a ballpoint pen.",
+          "それは ボールペンですか、シャープペンシルですか。…ボールペンです。",
+          "Answer with the choice itself, not はい or いいえ"
+        ],
+        [
+          "Is this a magazine or a book?",
+          "これは 雑誌{ざっし}ですか、本{ほん}ですか。",
+          ""
+        ],
+        [
+          "Is that person a teacher or a student?",
+          "あの 人{ひと}は 先生{せんせい}ですか、学生{がくせい}ですか。",
+          ""
+        ],
+        [
+          "Is this newspaper in English or in Japanese?",
+          "この 新聞{しんぶん}は 英語{えいご}ですか、日本語{にほんご}ですか。",
+          ""
+        ],
+        [
+          "Is Ms. Karina Indonesian or Indian?",
+          "カリナさんは インドネシア人{じん}ですか、インド人{じん}ですか。",
+          ""
+        ],
+        [
+          "Is this chocolate or coffee?",
+          "これは チョコレートですか、コーヒーですか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Nの (noun omitted)",
+      "short": "mine, yours",
+      "explain": "Once の has linked two nouns, the second may be left out when the context makes it obvious, which gives the equivalent of English 'mine' or 'Mr. Miller's'. This is how Japanese manages without possessive pronouns; there is no separate word for 'mine'. Note that the の itself stays put, so わたしのです is right and わたしです would mean something quite different.",
+      "formation": "N1の（＋ N2）＋ です → わたしのです",
+      "examples": [
+        [
+          "これは わたしのです。",
+          "This is mine."
+        ],
+        [
+          "その 傘{かさ}は ミラーさんのです。",
+          "That umbrella is Mr. Miller's."
+        ],
+        [
+          "この かばんは だれのですか。",
+          "Whose is this bag?"
+        ],
+        [
+          "あの 自動車{じどうしゃ}は 佐藤{さとう}さんのです。",
+          "That car over there is Ms. Sato's."
+        ]
+      ],
+      "drills": [
+        [
+          "This is mine.",
+          "これは わたしのです。",
+          "The second noun drops, but の stays"
+        ],
+        [
+          "Whose is this umbrella?",
+          "この 傘{かさ}は だれのですか。",
+          "だれの ＋ です"
+        ],
+        [
+          "That notebook is Mr. Miller's.",
+          "その ノートは ミラーさんのです。",
+          ""
+        ],
+        [
+          "Is this key yours?",
+          "これは あなたのですか。",
+          ""
+        ],
+        [
+          "That car over there is not mine.",
+          "あの 自動車{じどうしゃ}は わたしのじゃ ありません。",
+          ""
+        ],
+        [
+          "Whose is that bag? — It's mine.",
+          "その かばんは だれのですか。…わたしのです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "お～",
+      "short": "polite prefix",
+      "explain": "Adding お to a noun makes it a shade politer, and it is used above all for things belonging to the person you are speaking to or to someone you respect. Asking お名前は？ is therefore normal, while your own name takes no お. A few words such as おいくつ have been polite so long that the plain form is barely used. There is no rule that lets you attach お freely, so learn each word as it comes.",
+      "formation": "お ＋ N (something of the listener's) → お名前{なまえ}",
+      "examples": [
+        [
+          "失礼{しつれい}ですが、お名前{なまえ}は？",
+          "Excuse me, may I have your name?"
+        ],
+        [
+          "お名前{なまえ}は 何{なん}ですか。",
+          "What is your name?"
+        ],
+        [
+          "おいくつですか。",
+          "How old are you?"
+        ]
+      ],
+      "drills": [
+        [
+          "Excuse me, may I have your name?",
+          "失礼{しつれい}ですが、お名前{なまえ}は？",
+          "お～ on something belonging to the listener"
+        ],
+        [
+          "What is your name?",
+          "お名前{なまえ}は 何{なん}ですか。",
+          ""
+        ],
+        [
+          "How old are you?",
+          "おいくつですか。",
+          "The polite form of 何歳{なんさい}ですか"
+        ],
+        [
+          "My name is Miller.",
+          "わたしの 名前{なまえ}は ミラーです。",
+          "No お on your own name"
+        ],
+        [
+          "How do you do? May I ask your name?",
+          "初{はじ}めまして。お名前{なまえ}は？",
+          ""
+        ],
+        [
+          "What is the teacher's name?",
+          "先生{せんせい}の お名前{なまえ}は 何{なん}ですか。",
+          "お also marks respect for a third person"
+        ]
+      ]
+    }
+  ]
+}

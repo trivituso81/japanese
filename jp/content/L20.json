@@ -1,0 +1,280 @@
+{
+  "points": [
+    {
+      "pattern": "普通形{ふつうけい}",
+      "short": "plain form",
+      "explain": "The plain forms you have met one at a time — dictionary, ない and た — belong to a single system, and adjectives and nouns have plain forms of their own too. い-adjectives simply drop です, so the past is 〜かった and the negative 〜くない. な-adjectives and nouns end in だ in the affirmative, but take じゃない for the negative and だった for the past. This whole set is what Japanese calls the plain form, and from Lesson 21 onwards it is the base that pattern after pattern attaches to.",
+      "formation": "行{い}きます→行{い}く／行{い}かない／行{い}った／行{い}かなかった　／　高{たか}いです→高{たか}い／高{たか}くない／高{たか}かった／高{たか}くなかった　／　元気{げんき}です→元気{げんき}だ／元気{げんき}じゃない／元気{げんき}だった　／　学生{がくせい}です→学生{がくせい}だ／学生{がくせい}じゃない／学生{がくせい}だった",
+      "examples": [
+        [
+          "あした 大阪{おおさか}へ 行{い}く。",
+          "I'm going to Osaka tomorrow."
+        ],
+        [
+          "きのうは 忙{いそが}しくなかった。",
+          "I wasn't busy yesterday."
+        ],
+        [
+          "この 着物{きもの}は 高{たか}かった。",
+          "This kimono was expensive."
+        ],
+        [
+          "彼{かれ}は サラリーマンだ。",
+          "He's an office worker."
+        ]
+      ],
+      "drills": [
+        [
+          "I'm going to Osaka tomorrow. (casual)",
+          "あした 大阪{おおさか}へ 行{い}く。",
+          "The dictionary form ends the sentence"
+        ],
+        [
+          "I didn't go anywhere yesterday. (casual)",
+          "きのうは どこへも 行{い}かなかった。",
+          "Plain past negative: 〜なかった"
+        ],
+        [
+          "This kimono was expensive. (casual)",
+          "この 着物{きもの}は 高{たか}かった。",
+          "い-adjective past: 〜かった"
+        ],
+        [
+          "It isn't cold today. (casual)",
+          "きょうは 寒{さむ}くない。",
+          "い-adjective negative: 〜くない"
+        ],
+        [
+          "He's an office worker. (casual)",
+          "彼{かれ}は サラリーマンだ。",
+          "Nouns take だ"
+        ],
+        [
+          "That town wasn't lively. (casual)",
+          "あの 町{まち}は にぎやかじゃなかった。",
+          "な-adjective, past negative"
+        ]
+      ]
+    },
+    {
+      "pattern": "Casual conversation",
+      "short": "dropping です／ます",
+      "explain": "In conversation with close friends, family and people clearly junior to you, the plain forms take the place of ます and です at the end of the sentence. Nothing else about the grammar changes. うん and ううん replace はい and いいえ, and men often use ぼく and きみ where they would otherwise say わたし and あなた. Women commonly leave off the だ of a noun or な-adjective sentence, so a bare noun or adjective can be a complete casual reply.",
+      "formation": "～ます→～る　／　～ました→～た　／　～ません→～ない　／　～ませんでした→～なかった",
+      "examples": [
+        [
+          "「あした 何{なに}を する？」「うちで ゆっくり 休{やす}む。」",
+          "'What are you doing tomorrow?' 'Taking it easy at home.'"
+        ],
+        [
+          "「この間{あいだ}の 映画{えいが}、おもしろかった？」「うん、よかったよ。」",
+          "'Was that film the other day any good?' 'Yeah, it was great.'"
+        ],
+        [
+          "「元気{げんき}？」「うん、元気{げんき}。」",
+          "'You all right?' 'Yeah, I'm fine.'"
+        ],
+        [
+          "きょうは 疲{つか}れたから、早{はや}く 寝{ね}る。",
+          "I'm tired today, so I'm going to bed early."
+        ]
+      ],
+      "drills": [
+        [
+          "What are you doing tomorrow? (to a friend)",
+          "あした 何{なに}を する？",
+          "する, not します"
+        ],
+        [
+          "I'm going to take it easy at home. (casual)",
+          "うちで ゆっくり 休{やす}む。",
+          ""
+        ],
+        [
+          "Was the film any good? (casual)",
+          "映画{えいが}、おもしろかった？",
+          ""
+        ],
+        [
+          "Yeah, it was good. (casual)",
+          "うん、おもしろかった。",
+          "うん is the casual はい"
+        ],
+        [
+          "No, I didn't go. (casual)",
+          "ううん、行{い}かなかった。",
+          "ううん is the casual いいえ"
+        ],
+        [
+          "I'm busy today, so I'm not going. (casual)",
+          "きょうは 忙{いそが}しいから、行{い}かない。",
+          "から joins straight onto a plain form"
+        ]
+      ]
+    },
+    {
+      "pattern": "Particle dropping",
+      "short": "dropping particles",
+      "explain": "Casual speech leaves out the particles the listener can work out for himself, above all を, は and が. Particles that carry real information — に, へ, で, と — normally stay, because dropping them would make the sentence ambiguous. This is a feature of speech rather than writing, and it goes hand in hand with the plain style: you would not drop particles in a です／ます sentence.",
+      "formation": "ごはん[を] 食{た}べる？　／　これ[は] 君{きみ}の？　／　時間{じかん}[が] ない。",
+      "examples": [
+        [
+          "ごはん、食{た}べる？",
+          "Want something to eat?"
+        ],
+        [
+          "これ、君{きみ}の 本{ほん}？",
+          "Is this your book?"
+        ],
+        [
+          "あした 時間{じかん}、ある？",
+          "Have you got time tomorrow?"
+        ],
+        [
+          "その 荷物{にもつ}、僕{ぼく}が 持{も}つ。",
+          "I'll carry that bag."
+        ]
+      ],
+      "drills": [
+        [
+          "Want something to eat? (casual)",
+          "ごはん、食{た}べる？",
+          "を dropped"
+        ],
+        [
+          "Is this yours? (casual)",
+          "これ、君{きみ}の？",
+          "は dropped"
+        ],
+        [
+          "Have you got time tomorrow? (casual)",
+          "あした 時間{じかん}、ある？",
+          "が dropped"
+        ],
+        [
+          "I'll carry that bag. (casual)",
+          "その 荷物{にもつ}、僕{ぼく}が 持{も}つ。",
+          "が stays when it marks who does it"
+        ],
+        [
+          "Are you going to Osaka tomorrow? (casual)",
+          "あした 大阪{おおさか}へ 行{い}く？",
+          "へ is not dropped"
+        ],
+        [
+          "Do you need a visa? (casual)",
+          "ビザ、要{い}る？",
+          "が dropped"
+        ]
+      ]
+    },
+    {
+      "pattern": "Rising intonation",
+      "short": "casual questions",
+      "explain": "In plain style the question particle か is normally dropped and the sentence is simply spoken on a rising tone. Adding か to a plain form sounds blunt and distinctly masculine, so as a learner you are safer leaving it off. In writing, a question mark stands in for the rise. The particle の is also very common in casual questions, where it softens the question and asks for an explanation rather than a bare fact.",
+      "formation": "行{い}きますか。　→　行{い}く？　／　国{くに}へ 帰{かえ}るの？",
+      "examples": [
+        [
+          "国{くに}へ 帰{かえ}る？",
+          "Are you going back to your country?"
+        ],
+        [
+          "どうするの？",
+          "So what are you going to do?"
+        ],
+        [
+          "この ことば、わかる？",
+          "Do you know this word?"
+        ],
+        [
+          "時計{とけい}、直{なお}したの？",
+          "Did you get the watch fixed?"
+        ]
+      ],
+      "drills": [
+        [
+          "Are you going back to your country? (casual)",
+          "国{くに}へ 帰{かえ}る？",
+          "No か; the voice rises instead"
+        ],
+        [
+          "So what are you going to do? (casual)",
+          "どうするの？",
+          "の softens the question"
+        ],
+        [
+          "Do you know this word? (casual)",
+          "この ことば、わかる？",
+          ""
+        ],
+        [
+          "Did you check it? (casual)",
+          "調{しら}べた？",
+          "Plain past as a question"
+        ],
+        [
+          "Isn't it expensive? (casual)",
+          "高{たか}くない？",
+          ""
+        ],
+        [
+          "Are you free tomorrow? (casual)",
+          "あした 暇{ひま}？",
+          "な-adjectives drop だ in a casual question"
+        ]
+      ]
+    },
+    {
+      "pattern": "Register awareness",
+      "short": "when to use it",
+      "explain": "Plain style belongs to close relationships: family, old friends, classmates, and people clearly younger or junior to you at work. With anyone senior, any customer, or anyone you have only just met, stay in です／ます — using plain style upwards sounds rude in a way an ordinary grammatical mistake never does. The safe rule is to keep to polite style until the other person uses plain forms with you first. Note that plain forms are also the normal style for diaries, notes and newspapers, where there is no listener to be polite to.",
+      "formation": "polite です／ます　→　strangers, seniors, customers　／　plain 普通形{ふつうけい}　→　family, close friends, juniors, and writing",
+      "examples": [
+        [
+          "友{とも}だちに：「あした 大阪{おおさか}へ 行{い}く？」",
+          "To a friend: 'Are you going to Osaka tomorrow?'"
+        ],
+        [
+          "部長{ぶちょう}に：「あした 大阪{おおさか}へ 行{い}きますか。」",
+          "To your department chief: 'Are you going to Osaka tomorrow?'"
+        ],
+        [
+          "きょうは 忙{いそが}しかった。しかし、楽{たの}しかった。",
+          "Today was busy. But it was fun. (a diary entry)"
+        ]
+      ],
+      "drills": [
+        [
+          "Ask a close friend whether they're coming tomorrow.",
+          "あした 来{く}る？",
+          "Plain style is fine with friends"
+        ],
+        [
+          "Ask your section chief the same question.",
+          "課長{かちょう}、あした 来{き}ますか。",
+          "Stay in です／ます with seniors"
+        ],
+        [
+          "Ask a customer in your shop whether they'll pay in cash.",
+          "現金{げんきん}で 払{はら}いますか。",
+          "Never plain style with a customer"
+        ],
+        [
+          "Write in your diary: today was busy, but it was fun.",
+          "きょうは 忙{いそが}しかった。しかし、楽{たの}しかった。",
+          "Diaries are written in plain forms"
+        ],
+        [
+          "Ask a younger colleague whether they're all right.",
+          "大丈夫{だいじょうぶ}？",
+          "だ is usually dropped in a casual question"
+        ],
+        [
+          "Ask someone you have just met where they come from.",
+          "お国{くに}は どちらですか。",
+          "Polite style with someone you have just met"
+        ]
+      ]
+    }
+  ]
+}

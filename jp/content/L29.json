@@ -1,0 +1,284 @@
+{
+  "points": [
+    {
+      "pattern": "Vて-form います",
+      "short": "resulting state",
+      "explain": "With the intransitive verbs of this lesson, ～て います describes the state that is left behind once the change has happened. 窓{まど}が 割{わ}れて います does not mean the window is breaking; it means it broke at some point and is broken now. The verbs used this way name an instantaneous change — 壊{こわ}れます、消{き}えます、開{あ}きます、込{こ}みます and the like. Use が when you are simply reporting what is in front of you, は when the thing has already been taken up as the topic, and ～て いました for a state in the past.",
+      "formation": "Nが ／ Nは ＋ [intransitive V-て form] ＋ います　（～て いました for a past state）",
+      "examples": [
+        [
+          "窓{まど}が 割{わ}れて います。",
+          "The window is broken."
+        ],
+        [
+          "電気{でんき}が ついて います。",
+          "The light is on."
+        ],
+        [
+          "けさは 道{みち}が 込{こ}んで いました。",
+          "The road was crowded this morning."
+        ],
+        [
+          "この いすは 壊{こわ}れて います。",
+          "This chair is broken."
+        ]
+      ],
+      "drills": [
+        [
+          "The window is broken.",
+          "窓{まど}が 割{わ}れて います。",
+          "the state left behind after it broke"
+        ],
+        [
+          "The light is on.",
+          "電気{でんき}が ついて います。",
+          ""
+        ],
+        [
+          "The road was crowded this morning.",
+          "けさは 道{みち}が 込{こ}んで いました。",
+          "～て いました for a state in the past"
+        ],
+        [
+          "This chair is broken.",
+          "この いすは 壊{こわ}れて います。",
+          "は, because この いす is taken up as the topic"
+        ],
+        [
+          "The door is open.",
+          "ドアが 開{あ}いて います。",
+          ""
+        ],
+        [
+          "Your shirt button has come undone.",
+          "シャツの ボタンが 外{はず}れて いますよ。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて-form しまいました ／ しまいます",
+      "short": "finishing it off",
+      "explain": "V ました on its own can report that an action was completed, but ～て しまいました puts the stress on carrying it right through to the end, which is why もう and 全部{ぜんぶ} sit so naturally with it. It also suggests the state that the finishing leaves behind — no wine left in the bottle, no homework left to worry about. Put in the present, ～て しまいます looks forward to getting something finished by a certain time.",
+      "formation": "[V-て form] ＋ しまいました（already finished）／しまいます（will finish）　（often with もう・全部{ぜんぶ}）",
+      "examples": [
+        [
+          "ワインは 全部{ぜんぶ} 飲{の}んで しまいました。",
+          "We drank all the wine."
+        ],
+        [
+          "漢字{かんじ}の 宿題{しゅくだい}は もう やって しまいました。",
+          "I have done my kanji homework already."
+        ],
+        [
+          "昼{ひる}ごはんまでに レポートを 書{か}いて しまいます。",
+          "I intend to finish writing the report by lunch time."
+        ],
+        [
+          "この 本{ほん}は もう 読{よ}んで しまいました。",
+          "I've already finished reading this book."
+        ]
+      ],
+      "drills": [
+        [
+          "We drank all the wine.",
+          "ワインは 全部{ぜんぶ} 飲{の}んで しまいました。",
+          "全部{ぜんぶ} goes naturally with しまいました"
+        ],
+        [
+          "I've already done my kanji homework.",
+          "漢字{かんじ}の 宿題{しゅくだい}は もう やって しまいました。",
+          ""
+        ],
+        [
+          "I'll finish writing the report by lunch time.",
+          "昼{ひる}ごはんまでに レポートを 書{か}いて しまいます。",
+          "しまいます looks forward to finishing"
+        ],
+        [
+          "I've already finished reading this book.",
+          "この 本{ほん}は もう 読{よ}んで しまいました。",
+          ""
+        ],
+        [
+          "I'll eat it all.",
+          "全部{ぜんぶ} 食{た}べて しまいます。",
+          ""
+        ],
+        [
+          "Have you finished the work already?",
+          "仕事{しごと}は もう して しまいましたか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて-form しまいました",
+      "short": "regrettable mistake",
+      "explain": "The same form has a second use: it tells the listener that what happened was unfortunate, and that the speaker feels awkward or sorry about it. なくしました states the bare fact that you lost something, whereas なくして しまいました adds your dismay at having done so. That extra feeling is the whole point of the form here, so it appears constantly when confessing accidents and mistakes.",
+      "formation": "[V-て form] ＋ しまいました　（regret；cf. plain なくしました, a bare statement of fact）",
+      "examples": [
+        [
+          "パスポートを なくして しまいました。",
+          "I've lost my passport."
+        ],
+        [
+          "どこかで 財布{さいふ}を 落{お}として しまいました。",
+          "I dropped my wallet somewhere."
+        ],
+        [
+          "電車{でんしゃ}の 中{なか}に かさを 忘{わす}れて しまいました。",
+          "I left my umbrella on the train."
+        ],
+        [
+          "まちがえて しまいました。",
+          "I've made a mistake."
+        ]
+      ],
+      "drills": [
+        [
+          "I've lost my passport.",
+          "パスポートを なくして しまいました。",
+          "しまいました adds the speaker's dismay"
+        ],
+        [
+          "I dropped my wallet somewhere.",
+          "どこかで 財布{さいふ}を 落{お}として しまいました。",
+          ""
+        ],
+        [
+          "I left my umbrella on the train.",
+          "電車{でんしゃ}の 中{なか}に かさを 忘{わす}れて しまいました。",
+          ""
+        ],
+        [
+          "I've made a mistake.",
+          "まちがえて しまいました。",
+          ""
+        ],
+        [
+          "My child dropped the rice bowl.",
+          "子{こ}どもが おちゃわんを 落{お}として しまいました。",
+          ""
+        ],
+        [
+          "I was late for the meeting.",
+          "会議{かいぎ}に 遅{おく}れて しまいました。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "ありました",
+      "short": "it turned up",
+      "explain": "ありました normally means that something existed at some past time, but in this lesson it is used at the moment of finding what had been lost: 'here it is', 'it's turned up'. It reports the discovery, not the past existence, and it is often said with よ because it is news for the listener. The negative ありません then means it has not been found.",
+      "formation": "Nが ／ Nは ＋ ありました　（＝ it has been found）",
+      "examples": [
+        [
+          "かばんが ありましたよ。",
+          "I've found the bag."
+        ],
+        [
+          "財布{さいふ}は ありましたか。",
+          "Did your wallet turn up?"
+        ],
+        [
+          "ああ、ここに ありました。",
+          "Ah, here it is."
+        ],
+        [
+          "いいえ、まだ ありません。",
+          "No, it hasn't turned up yet."
+        ]
+      ],
+      "drills": [
+        [
+          "I've found your bag.",
+          "かばんが ありましたよ。",
+          "ありました here means it has turned up"
+        ],
+        [
+          "Did your wallet turn up?",
+          "財布{さいふ}は ありましたか。",
+          ""
+        ],
+        [
+          "Ah, here it is.",
+          "ああ、ここに ありました。",
+          ""
+        ],
+        [
+          "No, it hasn't turned up yet.",
+          "いいえ、まだ ありません。",
+          ""
+        ],
+        [
+          "Thank goodness — the key has turned up.",
+          "ああ、よかった。かぎが ありました。",
+          "［ああ、］よかった。 expresses relief"
+        ],
+        [
+          "Where was it?",
+          "どこに ありましたか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "どこかで ／ どこかに",
+      "short": "somewhere",
+      "explain": "When か follows a question word, some particles may be dropped and others may not. In Lesson 13 you saw that the へ of どこかへ and the を of 何{なに}かを can be left out. で and に, however, cannot: they stay in place after the か, giving どこかで for the place where something happened and どこかに for the place where something is.",
+      "formation": "どこか ＋ で／に（both kept）　／　どこか[へ]、何{なに}か[を]（may be dropped）",
+      "examples": [
+        [
+          "どこかで 財布{さいふ}を なくして しまいました。",
+          "I've lost my wallet somewhere."
+        ],
+        [
+          "どこかに 電話{でんわ}が ありませんか。",
+          "Is there a pay phone somewhere nearby?"
+        ],
+        [
+          "日曜日{にちようび} どこか 行{い}きましたか。",
+          "Did you go anywhere on Sunday?"
+        ],
+        [
+          "何{なに}か 食{た}べましたか。",
+          "Did you eat anything?"
+        ]
+      ],
+      "drills": [
+        [
+          "I've lost my wallet somewhere.",
+          "どこかで 財布{さいふ}を なくして しまいました。",
+          "で cannot be left out"
+        ],
+        [
+          "Is there a telephone somewhere nearby?",
+          "どこかに 電話{でんわ}が ありませんか。",
+          "に cannot be left out either"
+        ],
+        [
+          "Did you go anywhere on Sunday?",
+          "日曜日{にちようび} どこか 行{い}きましたか。",
+          "へ can be dropped after か"
+        ],
+        [
+          "Did you eat anything?",
+          "何{なに}か 食{た}べましたか。",
+          "を can be dropped too"
+        ],
+        [
+          "Let's have lunch somewhere.",
+          "どこかで 昼{ひる}ごはんを 食{た}べましょう。",
+          ""
+        ],
+        [
+          "I've met that person somewhere before.",
+          "あの 人{ひと}には どこかで 会{あ}いましたね。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,340 @@
+{
+  "points": [
+    {
+      "pattern": "命令形{めいれいけい}・禁止形{きんしけい}",
+      "short": "imperative and prohibitive",
+      "explain": "Every verb has an imperative, which orders someone to do something, and a prohibitive, which orders them not to. The imperative moves the ます-form to the え-line for Group I, adds ろ for Group II, and gives しろ and 来{こ}い for the two irregulars. The prohibitive is far simpler: attach な to the dictionary form, with no exceptions anywhere. The textbook adds one restriction — verbs that describe things you cannot will, such as わかります, できます and あります, have no imperative at all.",
+      "formation": "命令{めいれい}：ます-form → え-line（書{か}きます→書{か}け）／ ます-form ＋ ろ（食{た}べます→食{た}べろ）／ しろ、来{こ}い　　禁止{きんし}：[V-dictionary] ＋ な（行{い}くな）",
+      "examples": [
+        [
+          "急{いそ}ぎます → 急{いそ}げ",
+          "hurry → hurry! (Group I, ぎ→げ)"
+        ],
+        [
+          "逃{に}げます → 逃{に}げろ",
+          "run away → run! (Group II, ます-form ＋ ろ)"
+        ],
+        [
+          "来{き}ます → 来{こ}い",
+          "come → come! (Group III, irregular)"
+        ],
+        [
+          "使{つか}います → 使{つか}うな",
+          "use → don't use (prohibitive: dictionary form ＋ な)"
+        ]
+      ],
+      "drills": [
+        [
+          "Give the imperative of 待{ま}ちます (wait).",
+          "待{ま}て",
+          "Group I: ち→て"
+        ],
+        [
+          "Give the imperative of 休{やす}みます (rest).",
+          "休{やす}め",
+          "Group I: み→め"
+        ],
+        [
+          "Give the imperative of 止{と}まります (stop).",
+          "止{と}まれ",
+          "Group I: り→れ; this is the word on the road sign"
+        ],
+        [
+          "Give the imperative of 勉強{べんきょう}します (study).",
+          "勉強{べんきょう}しろ",
+          "Group III: します→しろ"
+        ],
+        [
+          "Give the prohibitive of 入{はい}ります (enter).",
+          "入{はい}るな",
+          "な on the dictionary form 入{はい}る"
+        ],
+        [
+          "Give the prohibitive of 忘{わす}れます (forget).",
+          "忘{わす}れるな",
+          "Group II dictionary form ＋ な"
+        ]
+      ]
+    },
+    {
+      "pattern": "命令形{めいれいけい}・禁止形{きんしけい}の 使{つか}い方{かた}",
+      "short": "using the blunt forms",
+      "explain": "These forms are strongly coercive, so the textbook is careful to say that using them on their own is very limited and that in conversation they are mostly male speech. In practice they run downwards: a man to someone junior to him, a father to his child, or between male friends, where よ is often tacked on to take the edge off. They also appear wherever politeness has to give way to speed or brevity — factory instructions, emergencies, sports training, cheering at a match, and above all signs and slogans. For telling someone what to do more gently, use the ます-form plus なさい, which parents and teachers use and which women prefer to the bare imperative.",
+      "formation": "[imperative]（よ）　／　[prohibitive]（よ）　　gentler: [V-ます form] ＋ なさい（勉強{べんきょう}しなさい）",
+      "examples": [
+        [
+          "早{はや}く 寝{ね}ろ。",
+          "Go to bed immediately."
+        ],
+        [
+          "遅{おく}れるな。",
+          "Don't be late."
+        ],
+        [
+          "エレベーターを 使{つか}うな。",
+          "Don't use the elevator."
+        ],
+        [
+          "勉強{べんきょう}しなさい。",
+          "Study."
+        ]
+      ],
+      "drills": [
+        [
+          "Go to bed early. (a father to his child)",
+          "早{はや}く 寝{ね}ろ。",
+          "the imperative runs downwards in the family"
+        ],
+        [
+          "Don't be late. (a boss to a subordinate)",
+          "遅{おく}れるな。",
+          "the prohibitive is just as blunt"
+        ],
+        [
+          "Come to my house tomorrow. (between male friends)",
+          "あした うちへ 来{こ}いよ。",
+          "よ softens the tone between friends"
+        ],
+        [
+          "Don't use the elevator. (an emergency instruction)",
+          "エレベーターを 使{つか}うな。",
+          "no time to be polite"
+        ],
+        [
+          "Don't lose! (cheering at a match)",
+          "負{ま}けるな。",
+          "women use these forms too when cheering"
+        ],
+        [
+          "Study. (a mother to her child)",
+          "勉強{べんきょう}しなさい。",
+          "なさい is gentler than しろ"
+        ]
+      ]
+    },
+    {
+      "pattern": "～と 読{よ}みます ／ ～と 書{か}いて あります",
+      "short": "reading signs aloud",
+      "explain": "The same quotative と that you met with 言{い}います in Lesson 21 also marks how something is read out and what a sign says. 何{なん}と 読{よ}みますか asks for the reading of a word you cannot pronounce, and 〜と 書{か}いて あります reports what is written somewhere, using the deliberate-state て あります from Lesson 30. In both cases what stands in front of と is a piece of language rather than a thing.",
+      "formation": "「～」と 読{よ}みます　／　「～」と 書{か}いて あります　／　何{なん}と 読{よ}みますか",
+      "examples": [
+        [
+          "あの 漢字{かんじ}は 何{なん}と 読{よ}むんですか。",
+          "How do you read that kanji?"
+        ],
+        [
+          "あそこに 「止{と}まれ」と 書{か}いて あります。",
+          "'Tomare' is written over there."
+        ],
+        [
+          "この 漢字{かんじ}は 「やま」と 読{よ}みます。",
+          "This kanji is read 'yama'."
+        ],
+        [
+          "入口{いりぐち}に 「使用禁止{しようきんし}」と 書{か}いて あります。",
+          "'Do not use' is written at the entrance."
+        ]
+      ],
+      "drills": [
+        [
+          "How do you read that kanji?",
+          "あの 漢字{かんじ}は 何{なん}と 読{よ}むんですか。",
+          "何{なん}と, the same と as in と 言{い}います"
+        ],
+        [
+          "'Tomare' is written over there.",
+          "あそこに 「止{と}まれ」と 書{か}いて あります。",
+          "て あります for something deliberately put up"
+        ],
+        [
+          "This kanji is read 'yama'.",
+          "この 漢字{かんじ}は 「やま」と 読{よ}みます。",
+          ""
+        ],
+        [
+          "'Do not use' is written at the entrance.",
+          "入口{いりぐち}に 「使用禁止{しようきんし}」と 書{か}いて あります。",
+          ""
+        ],
+        [
+          "What is written on that mark?",
+          "あの マークには 何{なん}と 書{か}いて ありますか。",
+          "には keeps the place as the topic"
+        ],
+        [
+          "'Keep out' is written on the door.",
+          "ドアに 「立入禁止{たちいりきんし}」と 書{か}いて あります。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Xは Yと いう 意味{いみ}です",
+      "short": "explaining meanings",
+      "explain": "To explain what a word or a sign means, put it as the topic with は and finish with と いう 意味{いみ}です. The という here is the quotative と plus 言{い}います, so whatever precedes it is treated as language rather than as an object, and it stays in the plain form. To ask for a meaning, use the question word どういう: どういう 意味{いみ}ですか.",
+      "formation": "X ＋ は ＋ [Y plain form] ＋ と いう 意味{いみ}です　／　どういう 意味{いみ}ですか",
+      "examples": [
+        [
+          "「立入禁止{たちいりきんし}」は 入{はい}るなと いう 意味{いみ}です。",
+          "'Tachiiri-kinshi' means 'don't enter'."
+        ],
+        [
+          "この マークは どういう 意味{いみ}ですか。",
+          "What does this mark mean?"
+        ],
+        [
+          "洗濯機{せんたくき}で 洗{あら}えると いう 意味{いみ}です。",
+          "It means it is machine washable."
+        ],
+        [
+          "「本日休業{ほんじつきゅうぎょう}」は きょうは 休{やす}みだと いう 意味{いみ}です。",
+          "'Honjitsu kyūgyō' means the shop is closed today."
+        ]
+      ],
+      "drills": [
+        [
+          "'Tachiiri-kinshi' means 'don't enter'.",
+          "「立入禁止{たちいりきんし}」は 入{はい}るなと いう 意味{いみ}です。",
+          "a prohibitive can sit inside the quotation"
+        ],
+        [
+          "What does this mark mean?",
+          "この マークは どういう 意味{いみ}ですか。",
+          "どういう to ask for a meaning"
+        ],
+        [
+          "It means you can wash it in a washing machine.",
+          "洗濯機{せんたくき}で 洗{あら}えると いう 意味{いみ}です。",
+          "the potential form from Lesson 27"
+        ],
+        [
+          "'Honjitsu kyūgyō' means the shop is closed today.",
+          "「本日休業{ほんじつきゅうぎょう}」は きょうは 休{やす}みだと いう 意味{いみ}です。",
+          "a noun takes だ in front of と"
+        ],
+        [
+          "'Shiyō-chū' means someone is using it.",
+          "「使用中{しようちゅう}」は だれかが 使{つか}って いると いう 意味{いみ}です。",
+          "だれか takes が here"
+        ],
+        [
+          "What does this rule mean?",
+          "この 規則{きそく}は どういう 意味{いみ}ですか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "「S」／普通形{ふつうけい} ＋ と 言{い}って いました",
+      "short": "passing on words",
+      "explain": "Lesson 21 gave you と 言{い}いました, which simply reports that someone said something. と 言{い}って いました is what you use when you are handing that message on to the person in front of you: the continuous form makes clear that you are the messenger rather than the source. As before, you can quote the words exactly inside 「」, keeping whatever politeness the speaker used, or report them indirectly with the plain form.",
+      "formation": "[person]は ＋ 「S」／[plain form] ＋ と 言{い}って いました",
+      "examples": [
+        [
+          "田中{たなか}さんは 「あした 休{やす}みます」と 言{い}って いました。",
+          "Mr Tanaka said, \"I will take a day off work tomorrow.\""
+        ],
+        [
+          "田中{たなか}さんは あした 休{やす}むと 言{い}って いました。",
+          "Mr Tanaka said that he would take a day off work tomorrow."
+        ],
+        [
+          "部長{ぶちょう}は 会議{かいぎ}は 3時{じ}からだと 言{い}って いました。",
+          "The department manager said the meeting is from three."
+        ],
+        [
+          "ミラーさんは きょう 会社{かいしゃ}へ 来{こ}ないと 言{い}って いました。",
+          "Mr Miller said he isn't coming to the office today."
+        ]
+      ],
+      "drills": [
+        [
+          "Mr Tanaka said, \"I will take tomorrow off.\"",
+          "田中{たなか}さんは 「あした 休{やす}みます」と 言{い}って いました。",
+          "a direct quotation keeps the polite form inside 「」"
+        ],
+        [
+          "Mr Tanaka said that he would take tomorrow off.",
+          "田中{たなか}さんは あした 休{やす}むと 言{い}って いました。",
+          "an indirect quotation uses the plain form"
+        ],
+        [
+          "The department manager said the meeting is from three.",
+          "部長{ぶちょう}は 会議{かいぎ}は 3時{じ}からだと 言{い}って いました。",
+          "a noun predicate takes だ before と"
+        ],
+        [
+          "Mr Miller said he isn't coming to the office today.",
+          "ミラーさんは きょう 会社{かいしゃ}へ 来{こ}ないと 言{い}って いました。",
+          "the plain negative inside the quotation"
+        ],
+        [
+          "My wife said yesterday's film was interesting.",
+          "妻{つま}は きのうの 映画{えいが}は おもしろかったと 言{い}って いました。",
+          "the plain past of an い-adjective"
+        ],
+        [
+          "The station employee said the train is late.",
+          "駅員{えきいん}は 電車{でんしゃ}が 遅{おく}れて いると 言{い}って いました。",
+          "て いる for a state that continues"
+        ]
+      ]
+    },
+    {
+      "pattern": "「S」／普通形{ふつうけい} ＋ と 伝{つた}えて いただけませんか",
+      "short": "asking to relay",
+      "explain": "When you need somebody else to carry a message for you, wrap the message in と and finish with 伝{つた}えて いただけませんか, the very polite request form from Lesson 26. The person who is to receive the message is marked with に, and the person you are asking is usually left unsaid. Like the other quotation patterns, the message can be quoted directly inside 「」 or reported in the plain form.",
+      "formation": "[person]に ＋ 「S」／[plain form] ＋ と 伝{つた}えて いただけませんか",
+      "examples": [
+        [
+          "ワンさんに 「あとで 電話{でんわ}を ください」と 伝{つた}えて いただけませんか。",
+          "Could you please tell Mr Wang to give me a call later?"
+        ],
+        [
+          "すみませんが、渡辺{わたなべ}さんに あしたの パーティーは 6時{じ}からだと 伝{つた}えて いただけませんか。",
+          "Could you please tell Ms Watanabe that the party tomorrow will be from six o'clock?"
+        ],
+        [
+          "田中{たなか}さんに あとで 電話{でんわ}すると 伝{つた}えて いただけませんか。",
+          "Could you tell Mr Tanaka that I'll call him later?"
+        ],
+        [
+          "課長{かちょう}に きょうは 早{はや}く 帰{かえ}ると 伝{つた}えて いただけませんか。",
+          "Could you tell the section chief that I'm going home early today?"
+        ]
+      ],
+      "drills": [
+        [
+          "Could you please tell Mr Wang to call me later?",
+          "ワンさんに 「あとで 電話{でんわ}を ください」と 伝{つた}えて いただけませんか。",
+          "the recipient of the message takes に"
+        ],
+        [
+          "Could you tell Ms Watanabe that tomorrow's party is from six?",
+          "渡辺{わたなべ}さんに あしたの パーティーは 6時{じ}からだと 伝{つた}えて いただけませんか。",
+          "a noun predicate takes だ"
+        ],
+        [
+          "Could you tell Mr Tanaka that I'll phone him later?",
+          "田中{たなか}さんに あとで 電話{でんわ}すると 伝{つた}えて いただけませんか。",
+          "the plain form for an indirect message"
+        ],
+        [
+          "Could you tell the section chief that I'm going home early today?",
+          "課長{かちょう}に きょうは 早{はや}く 帰{かえ}ると 伝{つた}えて いただけませんか。",
+          ""
+        ],
+        [
+          "Could you tell my son that I'll be late?",
+          "息子{むすこ}に 遅{おく}れると 伝{つた}えて いただけませんか。",
+          ""
+        ],
+        [
+          "Could you tell Mr Miller that I'm away from my desk?",
+          "ミラーさんに 席{せき}を 外{はず}して いると 伝{つた}えて いただけませんか。",
+          "席{せき}を 外{はず}します from this lesson"
+        ]
+      ]
+    }
+  ]
+}

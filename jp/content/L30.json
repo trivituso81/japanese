@@ -1,0 +1,228 @@
+{
+  "points": [
+    {
+      "pattern": "Vて-form あります",
+      "short": "left deliberately",
+      "explain": "This describes the state that remains after somebody has done something on purpose, so the verb is a transitive one and there is always an intention behind the state. Compare 窓{まど}が 閉{し}まって います, which merely reports that the window is shut, with 窓{まど}が 閉{し}めて あります, which says someone shut it with some object in mind. The thing acted on takes が, or は when it is the topic, and the place takes に. Because it so often describes preparations that are already taken care of, it goes hand in hand with もう.",
+      "formation": "N₁に ＋ N₂が ＋ [transitive V-て form] ＋ あります　／　N₂は N₁に ～て あります",
+      "examples": [
+        [
+          "机{つくえ}の 上{うえ}に メモが 置{お}いて あります。",
+          "There is a memo put on the desk."
+        ],
+        [
+          "カレンダーに 今月{こんげつ}の 予定{よてい}が 書{か}いて あります。",
+          "This month's schedule is written on the calendar."
+        ],
+        [
+          "ホテルは もう 予約{よやく}して あります。",
+          "I have already reserved a hotel."
+        ],
+        [
+          "窓{まど}が 閉{し}めて あります。",
+          "The window has been closed for some purpose."
+        ]
+      ],
+      "drills": [
+        [
+          "There's a memo left on the desk.",
+          "机{つくえ}の 上{うえ}に メモが 置{お}いて あります。",
+          "someone put it there on purpose"
+        ],
+        [
+          "This month's schedule is written on the calendar.",
+          "カレンダーに 今月{こんげつ}の 予定{よてい}が 書{か}いて あります。",
+          ""
+        ],
+        [
+          "Where's the memo? — It's been put on the desk.",
+          "メモは 机{つくえ}の 上{うえ}に 置{お}いて あります。",
+          "the topic comes first with は"
+        ],
+        [
+          "I've already booked the hotel.",
+          "ホテルは もう 予約{よやく}して あります。",
+          "もう ～て あります for preparations already made"
+        ],
+        [
+          "The window has been closed.",
+          "窓{まど}が 閉{し}めて あります。",
+          "compare 窓{まど}が 閉{し}まって います, which only reports the state"
+        ],
+        [
+          "A map is put up on the wall.",
+          "壁{かべ}に 地図{ちず}が 貼{は}って あります。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて-form おきます",
+      "short": "doing in advance",
+      "explain": "～て おきます covers three related ideas. It says you will get a necessary job done in advance of some deadline, as in buying tickets before a trip; it says you are putting things back so that they are ready for the next use; and it says you are leaving a state exactly as it is because it will be wanted that way. In everyday speech ～て おきます is often shortened to ～ときます, so 置{お}いて おいて ください becomes 置{お}いといて ください.",
+      "formation": "[V-て form] ＋ おきます　／　～て おいて ください（in speech ～て おきます → ～ときます）",
+      "examples": [
+        [
+          "旅行{りょこう}の まえに 切符{きっぷ}を 買{か}って おきます。",
+          "I'll buy a ticket before the trip."
+        ],
+        [
+          "はさみを 使{つか}ったら、元{もと}の 所{ところ}に 戻{もど}して おいて ください。",
+          "When you finish using the scissors, put them back where they were."
+        ],
+        [
+          "あした 会議{かいぎ}が ありますから、いすは この ままに して おいて ください。",
+          "Please leave the chairs as they are, as a meeting will be held here tomorrow."
+        ],
+        [
+          "次{つぎ}の 会議{かいぎ}までに 何{なに}を して おいたら いいですか。",
+          "What should I do before the next meeting?"
+        ]
+      ],
+      "drills": [
+        [
+          "I'll buy the tickets before the trip.",
+          "旅行{りょこう}の まえに 切符{きっぷ}を 買{か}って おきます。",
+          "getting a necessary job done in advance"
+        ],
+        [
+          "When you've finished with the scissors, please put them back where they were.",
+          "はさみを 使{つか}ったら、元{もと}の 所{ところ}に 戻{もど}して おいて ください。",
+          "leaving things ready for the next person"
+        ],
+        [
+          "There's a meeting tomorrow, so please leave the chairs as they are.",
+          "あした 会議{かいぎ}が ありますから、いすは この ままに して おいて ください。",
+          "leaving a state alone on purpose"
+        ],
+        [
+          "What should I do before the next meeting?",
+          "次{つぎ}の 会議{かいぎ}までに 何{なに}を して おいたら いいですか。",
+          "with Lesson 26's ～たら いいですか"
+        ],
+        [
+          "Please read these materials beforehand.",
+          "この 資料{しりょう}を 読{よ}んで おいて ください。",
+          ""
+        ],
+        [
+          "I'll tidy the room before my friends come.",
+          "友{とも}だちが 来{く}る まえに、部屋{へや}を 片{かた}づけて おきます。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "まだ V(affirmative)",
+      "short": "still going on",
+      "explain": "In Lesson 17 you met まだ with a negative, meaning 'not yet'. With an affirmative verb it means the opposite kind of thing: the action or the state has not stopped and is still continuing. It goes very naturally with ～て います, since that form already describes something in progress or a state that holds.",
+      "formation": "まだ ＋ V（affirmative）＝ still　（cf. まだ ＋ negative ＝ not yet）",
+      "examples": [
+        [
+          "まだ 雨{あめ}が 降{ふ}って います。",
+          "It's still raining."
+        ],
+        [
+          "まだ 使{つか}って いますから、その ままに して おいて ください。",
+          "I'm still using them, so please leave them there."
+        ],
+        [
+          "田中{たなか}さんは まだ 会社{かいしゃ}に います。",
+          "Mr Tanaka is still at the office."
+        ],
+        [
+          "まだ 時間{じかん}が あります。",
+          "There's still time."
+        ]
+      ],
+      "drills": [
+        [
+          "It's still raining.",
+          "まだ 雨{あめ}が 降{ふ}って います。",
+          "まだ with an affirmative means 'still'"
+        ],
+        [
+          "I'm still using them, so please leave them as they are.",
+          "まだ 使{つか}って いますから、その ままに して おいて ください。",
+          ""
+        ],
+        [
+          "Mr Tanaka is still at the office.",
+          "田中{たなか}さんは まだ 会社{かいしゃ}に います。",
+          ""
+        ],
+        [
+          "There's still time.",
+          "まだ 時間{じかん}が あります。",
+          ""
+        ],
+        [
+          "I haven't decided yet.",
+          "まだ 決{き}めて いません。",
+          "まだ with a negative is 'not yet'"
+        ],
+        [
+          "Are you still eating?",
+          "まだ 食{た}べて いるんですか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "それは ～",
+      "short": "picking up",
+      "explain": "Here それ does not point at an object in the room; it refers back to whatever the other person has just said, so that you can comment on it. The comment is usually a short set response — それは いいですね for something pleasant, それは おめでとう ございます for good news, それは いけませんね for bad. Note how naturally it follows a ～んですが or ～んです remark, which is what invites a reaction in the first place.",
+      "formation": "それは ＋ [comment]（いいですね／おめでとう ございます／いけませんね …）",
+      "examples": [
+        [
+          "ブロードウェイで ミュージカルを 見{み}たいと 思{おも}うんですが……。",
+          "I'd like to see a musical on Broadway…"
+        ],
+        [
+          "それは いいですね。",
+          "That sounds nice."
+        ],
+        [
+          "時々{ときどき} 頭{あたま}が 痛{いた}く なるんです。…それは いけませんね。",
+          "Sometimes I get a headache. …That's bad."
+        ],
+        [
+          "来月{らいげつ} 結婚{けっこん}するんです。…それは おめでとう ございます。",
+          "I'm getting married next month. …Congratulations!"
+        ]
+      ],
+      "drills": [
+        [
+          "I'd like to see a musical on Broadway…",
+          "ブロードウェイで ミュージカルを 見{み}たいと 思{おも}うんですが……。",
+          "～んですが leaves the request itself unsaid"
+        ],
+        [
+          "That sounds nice.",
+          "それは いいですね。",
+          "それ picks up what was just said"
+        ],
+        [
+          "Sometimes I get a headache.",
+          "時々{ときどき} 頭{あたま}が 痛{いた}く なるんです。",
+          ""
+        ],
+        [
+          "That's bad.",
+          "それは いけませんね。",
+          ""
+        ],
+        [
+          "I'm getting married next month.",
+          "来月{らいげつ} 結婚{けっこん}するんです。",
+          ""
+        ],
+        [
+          "That's wonderful — congratulations.",
+          "それは おめでとう ございます。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

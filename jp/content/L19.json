@@ -1,0 +1,336 @@
+{
+  "points": [
+    {
+      "pattern": "Vた form",
+      "short": "plain past",
+      "explain": "The た-form is the plain past. It is built with exactly the same sound changes as the て-form: wherever て appears you put た, and wherever で appears you put だ. If you already know one form you know the other, including the irregular いきます. Like the dictionary and ない-forms it does not end a polite sentence on its own, but it carries the two patterns that follow.",
+      "formation": "Vて → Vた　（書{か}いて→書{か}いた、読{よ}んで→読{よ}んだ、食{た}べて→食{た}べた、して→した、来{き}て→来{き}た）",
+      "examples": [
+        [
+          "行{い}きます　→　行{い}って　→　行{い}った",
+          "go"
+        ],
+        [
+          "泳{およ}ぎます　→　泳{およ}いで　→　泳{およ}いだ",
+          "swim"
+        ],
+        [
+          "泊{と}まります　→　泊{と}まって　→　泊{と}まった",
+          "stay"
+        ],
+        [
+          "練習{れんしゅう}します　→　練習{れんしゅう}して　→　練習{れんしゅう}した",
+          "practise"
+        ]
+      ],
+      "drills": [
+        [
+          "た-form of 登{のぼ}ります (climb)",
+          "登{のぼ}った",
+          "Group I: り → った"
+        ],
+        [
+          "た-form of 飲{の}みます (drink)",
+          "飲{の}んだ",
+          "Group I: み → んだ, with a voiced ending"
+        ],
+        [
+          "た-form of 見{み}ます (see)",
+          "見{み}た",
+          "Group II"
+        ],
+        [
+          "た-form of 洗濯{せんたく}します (do the washing)",
+          "洗濯{せんたく}した",
+          "Group III"
+        ],
+        [
+          "た-form of 行{い}きます (go)",
+          "行{い}った",
+          "The one irregular in Group I"
+        ],
+        [
+          "た-form of 来{き}ます (come)",
+          "来{き}た",
+          "Group III; here the reading stays き"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vた ことが あります",
+      "short": "experience",
+      "explain": "Says that you have had the experience of doing something at some point in your life. This is not the same as an ordinary past tense: a plain past sentence reports one particular occasion, while this pattern says the action is something you have done before. For that reason it does not go with a definite time word like 'yesterday'; it takes expressions like 'once', 'twice' or 'never' instead.",
+      "formation": "V-た ＋ ことが あります　（negative: V-た ことが ありません）",
+      "examples": [
+        [
+          "富士山{ふじさん}に 登{のぼ}った ことが あります。",
+          "I have climbed Mt Fuji."
+        ],
+        [
+          "馬{うま}に 乗{の}った ことが ありますか。",
+          "Have you ever ridden a horse?"
+        ],
+        [
+          "おすしを 食{た}べた ことが あります。",
+          "I have eaten sushi before."
+        ],
+        [
+          "相撲{すもう}を 見{み}た ことが 一度{いちど}も ありません。",
+          "I have never once seen sumo."
+        ]
+      ],
+      "drills": [
+        [
+          "I have climbed Mt Fuji.",
+          "富士山{ふじさん}に 登{のぼ}った ことが あります。",
+          "登{のぼ}ります takes に"
+        ],
+        [
+          "Have you ever eaten sushi?",
+          "おすしを 食{た}べた ことが ありますか。",
+          ""
+        ],
+        [
+          "I have never ridden a horse.",
+          "馬{うま}に 乗{の}った ことが ありません。",
+          "The negative is ことが ありません"
+        ],
+        [
+          "I have stayed at that hotel twice.",
+          "あの ホテルに 2回{かい} 泊{と}まった ことが あります。",
+          "The frequency goes before the verb"
+        ],
+        [
+          "I have never once played pachinko.",
+          "パチンコを 一度{いちど}も した ことが ありません。",
+          "一度{いちど}も needs a negative"
+        ],
+        [
+          "Have you ever looked round a Japanese company?",
+          "日本{にほん}の 会社{かいしゃ}を 見学{けんがく}した ことが ありますか。",
+          "見学{けんがく}します from Lesson 18"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vたり、Vたり します",
+      "short": "listing activities",
+      "explain": "Picks out two or three representative activities from a longer list and leaves the rest unsaid, so it is the verb equivalent of や. The order does not matter here, unlike a chain of て-forms, because you are naming examples rather than reporting a sequence. The final します carries the tense and everything else for the whole sentence, so the past is しました and the negative is しません.",
+      "formation": "V1た ＋ り、V2た ＋ り します／しました",
+      "examples": [
+        [
+          "日曜日{にちようび}は 掃除{そうじ}したり、洗濯{せんたく}したり します。",
+          "On Sundays I do the cleaning, the washing and so on."
+        ],
+        [
+          "きのうは 音楽{おんがく}を 聞{き}いたり、本{ほん}を 読{よ}んだり しました。",
+          "Yesterday I listened to music, read a book and so on."
+        ],
+        [
+          "休{やす}みの 日{ひ}は ゴルフを したり、公園{こうえん}を 散歩{さんぽ}したり します。",
+          "On my days off I play golf, walk in the park and so on."
+        ],
+        [
+          "大阪{おおさか}で お寺{てら}を 見{み}たり、写真{しゃしん}を 撮{と}ったり しました。",
+          "In Osaka I saw temples, took photographs and so on."
+        ]
+      ],
+      "drills": [
+        [
+          "On Sundays I do the cleaning and the washing, among other things.",
+          "日曜日{にちようび}は 掃除{そうじ}したり、洗濯{せんたく}したり します。",
+          "The final します carries the tense"
+        ],
+        [
+          "Yesterday I listened to music and read a book, among other things.",
+          "きのうは 音楽{おんがく}を 聞{き}いたり、本{ほん}を 読{よ}んだり しました。",
+          "The past goes on しました, not on the たり forms"
+        ],
+        [
+          "In Osaka I saw temples and took photographs.",
+          "大阪{おおさか}で お寺{てら}を 見{み}たり、写真{しゃしん}を 撮{と}ったり しました。",
+          ""
+        ],
+        [
+          "On my days off I play golf and walk in the park.",
+          "休{やす}みの 日{ひ}は ゴルフを したり、公園{こうえん}を 散歩{さんぽ}したり します。",
+          ""
+        ],
+        [
+          "I want to swim in the sea, climb mountains and so on.",
+          "海{うみ}で 泳{およ}いだり、山{やま}に 登{のぼ}ったり したいです。",
+          "たいです attaches to the final します"
+        ],
+        [
+          "Please don't smoke or drink here.",
+          "ここで たばこを 吸{す}ったり、お酒{さけ}を 飲{の}んだり しないで ください。",
+          "The negative also goes on the final verb"
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj く なります",
+      "short": "becoming",
+      "explain": "なります describes a change of state: something ends up different from how it was. With an い-adjective the final い becomes く before it. The change may happen by itself or be brought about by someone, but either way Japanese uses this construction rather than a separate verb like the English 'get' or 'turn'. Remember that いい is irregular and gives よく なります.",
+      "formation": "い-adj (drop い) ＋ く なります　（寒{さむ}い→寒{さむ}く なります、いい→よく なります）",
+      "examples": [
+        [
+          "だんだん 寒{さむ}く なりました。",
+          "It has gradually got cold."
+        ],
+        [
+          "子{こ}どもは 大{おお}きく なりました。",
+          "The children have grown big."
+        ],
+        [
+          "髪{かみ}が 長{なが}く なりました。",
+          "My hair has got long."
+        ],
+        [
+          "調子{ちょうし}が よく なりました。",
+          "I'm in better shape now."
+        ]
+      ],
+      "drills": [
+        [
+          "It has gradually got cold.",
+          "だんだん 寒{さむ}く なりました。",
+          ""
+        ],
+        [
+          "My hair has got long.",
+          "髪{かみ}が 長{なが}く なりました。",
+          ""
+        ],
+        [
+          "The children have grown big.",
+          "子{こ}どもは 大{おお}きく なりました。",
+          ""
+        ],
+        [
+          "I'm in better shape now.",
+          "調子{ちょうし}が よく なりました。",
+          "いい → よく なります"
+        ],
+        [
+          "It will get warm soon.",
+          "もうすぐ 暖{あたた}かく なります。",
+          ""
+        ],
+        [
+          "Have you got sleepy?",
+          "眠{ねむ}く なりましたか。",
+          "眠{ねむ}い is an い-adjective"
+        ]
+      ]
+    },
+    {
+      "pattern": "な-adj に なります ／ Nに なります",
+      "short": "becoming (nouns)",
+      "explain": "The same change verb with the other two word classes. な-adjectives and nouns both take に in front of なります, where い-adjectives take く. This is how you say that someone has recovered, that a place has become lively, that a season has arrived, or that you have turned a certain age.",
+      "formation": "な-adj ＋ に なります　／　N ＋ に なります　（元気{げんき}に なります、25歳{さい}に なります）",
+      "examples": [
+        [
+          "元気{げんき}に なりました。",
+          "I've got better."
+        ],
+        [
+          "この 町{まち}は にぎやかに なりました。",
+          "This town has become lively."
+        ],
+        [
+          "来月{らいげつ} 25歳{さい}に なります。",
+          "I turn twenty-five next month."
+        ],
+        [
+          "日本語{にほんご}が 上手{じょうず}に なりました。",
+          "I've got good at Japanese."
+        ]
+      ],
+      "drills": [
+        [
+          "I've got better.",
+          "元気{げんき}に なりました。",
+          "な-adjective ＋ に"
+        ],
+        [
+          "This town has become lively.",
+          "この 町{まち}は にぎやかに なりました。",
+          ""
+        ],
+        [
+          "I'll be twenty-five next month.",
+          "来月{らいげつ} 25歳{さい}に なります。",
+          "Noun ＋ に"
+        ],
+        [
+          "I've got good at Japanese.",
+          "日本語{にほんご}が 上手{じょうず}に なりました。",
+          ""
+        ],
+        [
+          "My elder brother has become a doctor.",
+          "兄{あに}は 医者{いしゃ}に なりました。",
+          ""
+        ],
+        [
+          "Has your room got clean?",
+          "部屋{へや}は きれいに なりましたか。",
+          "きれい is a な-adjective in spite of the い"
+        ]
+      ]
+    },
+    {
+      "pattern": "そうですね",
+      "short": "pausing to think",
+      "explain": "Said slowly, with the ね drawn out and a pause after it, this is a stalling phrase — 'well now, let me see' — that buys you a moment before answering a question. Said briskly on a falling tone, the very same words mean 'yes, I agree'. Nothing but the delivery separates them, so listen for the pause and for what came before: after a question it is thinking, after a statement it is agreement.",
+      "formation": "そうですねえ……（thinking）　／　そうですね。（agreeing）",
+      "examples": [
+        [
+          "「日本{にほん}の 生活{せいかつ}は どうですか。」「そうですね……。とても おもしろいです。」",
+          "'How is life in Japan?' 'Well, let me see... it's very interesting.'"
+        ],
+        [
+          "「日曜日{にちようび}は 何{なに}を しますか。」「そうですね……。掃除{そうじ}したり、洗濯{せんたく}したり します。」",
+          "'What do you do on Sundays?' 'Let me think... the cleaning, the washing and so on.'"
+        ],
+        [
+          "「もうすぐ 春{はる}ですね。」「そうですね。」",
+          "'It'll be spring soon, won't it?' 'Yes, it will.'"
+        ]
+      ],
+      "drills": [
+        [
+          "'How is your work?' 'Well, let me see... I'm busy every day.'",
+          "「仕事{しごと}は どうですか。」「そうですね……。毎日{まいにち} 忙{いそが}しいです。」",
+          "Pausing to think"
+        ],
+        [
+          "'It's got cold, hasn't it?' 'Yes, it has.'",
+          "「寒{さむ}く なりましたね。」「そうですね。」",
+          "Agreeing"
+        ],
+        [
+          "'What will you do at the weekend?' 'Let me see... I'll play golf.'",
+          "「週末{しゅうまつ}は 何{なに}を しますか。」「そうですね……。ゴルフを します。」",
+          ""
+        ],
+        [
+          "'Won't you have a meal with me?' 'Yes, let's.'",
+          "「いっしょに 食事{しょくじ}しませんか。」「そうですね。しましょう。」",
+          "Agreeing to an invitation"
+        ],
+        [
+          "'Which would you like, tea or coffee?' 'Let me think... coffee, please.'",
+          "「紅茶{こうちゃ}と コーヒーと どちらが いいですか。」「そうですね……。コーヒーを お願{ねが}いします。」",
+          ""
+        ],
+        [
+          "'This town has become lively, hasn't it?' 'Yes, it has.'",
+          "「この 町{まち}は にぎやかに なりましたね。」「そうですね。」",
+          ""
+        ]
+      ]
+    }
+  ]
+}

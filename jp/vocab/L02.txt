@@ -1,0 +1,48 @@
+VOCAB
+これ||this (thing here)
+それ||that (thing near you)
+あれ||that (thing over there)
+この ～||this ～, this ～ here
+その ～||that ～, that ～ near you
+あの ～||that ～, that ～ over there
+ほん|本|book
+じしょ|辞書|dictionary
+ざっし|雑誌|magazine
+しんぶん|新聞|newspaper
+ノート||notebook
+てちょう|手帳|pocket notebook
+めいし|名刺|business card
+カード||card
+テレホンカード||telephone card
+えんぴつ|鉛筆|pencil
+ボールペン||ballpoint pen
+シャープペンシル||mechanical pencil, propelling pencil
+かぎ||key
+とけい|時計|watch, clock
+かさ|傘|umbrella
+かばん||bag, briefcase
+［カセット］テープ||[cassette] tape
+テープレコーダー||tape recorder
+テレビ||television
+ラジオ||radio
+カメラ||camera
+コンピューター||computer
+じどうしゃ|自動車|automobile, car
+つくえ|机|desk
+いす||chair
+チョコレート||chocolate
+コーヒー||coffee
+えいご|英語|the English language
+にほんご|日本語|the Japanese language
+～ご|～語|～ language
+なん|何|what
+そう||so
+ちがいます。|違います。|No, it isn't./You are wrong.
+そうですか。||I see./Is that so?
+あのう||well (used to show hesitation)
+ほんの きもちです。|ほんの 気持ちです。|It's nothing./It's a token of my gratitude.
+どうぞ。||Please./Here you are. (used when offering someone something)
+どうも。||Well, thanks.
+［どうも］ありがとう［ございます］。||Thank you [very much].
+これから お世話に なります。||I hope for your kind assistance hereafter.
+こちらこそ よろしく。||I am pleased to meet you. (response to どうぞ よろしく)

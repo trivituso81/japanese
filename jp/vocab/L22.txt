@@ -1,0 +1,26 @@
+VOCAB
+きます II ［シャツを ～］|着ます|put on [a shirt, etc.]
+はきます I ［くつを ～］|はきます ［靴を ～］|put on [shoes, trousers, etc.]
+かぶります I ［ぼうしを ～］|かぶります ［帽子を ～］|put on [a hat, etc.]
+かけます II ［めがねを ～］|かけます ［眼鏡を ～］|put on [glasses]
+うまれます II|生まれます|be born
+コート||coat
+スーツ||suit
+セーター||sweater
+ぼうし|帽子|hat, cap
+めがね|眼鏡|glasses
+よく||often
+おめでとう ございます。||Congratulations. (used on birthdays, at weddings, New Year's Day, etc.)
+こちら||this (polite equivalent of これ)
+家賃||house rent
+うーん。||Let me see.
+ダイニングキチン||kitchen with a dining area
+和室||Japanese-style room
+押し入れ||Japanese-style closet
+布団||Japanese-style mattress and quilt
+アパート||apartment
+PROPER
+パリ||Paris
+ばんりの ちょうじょう|万里の 長城|the Great Wall of China
+よかかいはつセンター|余暇開発センター|Center for Developing Leisure Activities
+レジャーはくしょ|レジャー白書|white paper on leisure

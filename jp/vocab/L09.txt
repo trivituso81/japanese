@@ -1,0 +1,53 @@
+VOCAB
+わかります||understand
+あります||have
+すき［な］|好き［な］|like
+きらい［な］|嫌い［な］|dislike
+じょうず［な］|上手［な］|good at
+へた［な］|下手［な］|poor at
+りょうり|料理|dish (cooked food), cooking
+のみもの|飲み物|drinks
+スポーツ||sport (～を します: play sports)
+やきゅう|野球|baseball (～を します: play baseball)
+ダンス||dance (～を します: dance)
+おんがく|音楽|music
+うた|歌|song
+クラシック||classical music
+ジャズ||jazz
+コンサート||concert
+カラオケ||karaoke
+かぶき|歌舞伎|Kabuki (traditional Japanese musical drama)
+え|絵|picture, drawing
+じ|字|letter, character
+かんじ|漢字|Chinese characters
+ひらがな||Hiragana script
+かたかな||Katakana script
+ローマじ|ローマ字|the Roman alphabet
+こまかい おかね|細かい お金|small change
+チケット||ticket
+じかん|時間|time
+ようじ|用事|something to do, errand
+やくそく|約束|appointment, promise
+ごしゅじん|ご主人|(someone else's) husband
+おっと／しゅじん|夫／主人|(my) husband
+おくさん|奥さん|(someone else's) wife
+つま／かない|妻／家内|(my) wife
+こども|子ども|child
+よく||well, much
+だいたい||mostly, roughly
+たくさん||many, much
+すこし|少し|a little, a few
+ぜんぜん|全然|not at all (used with negatives)
+はやく|早く、速く|early, quickly, fast
+～から||because ～
+どうして||why
+ざんねんです［ね］。|残念です［ね］。|I'm sorry (to hear that)./That's a pity.
+すみません。||I am sorry.
+もしもし||hello (used on the phone)
+ああ||oh
+いっしょに いかがですか。||Won't you join me (us)?
+［～は］ちょっと……。||[～] is a bit difficult. (an euphemism used when declining an invitation)
+だめですか。||So you cannot (come)?
+また こんど おねがいします。|また 今度 お願いします。|Please ask me again some other time. (used when refusing an invitation indirectly, considering someone's feelings)
+PROPER
+おざわ せいじ|小沢 征爾|famous Japanese conductor (1935－)

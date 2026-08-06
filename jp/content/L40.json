@@ -1,0 +1,284 @@
+{
+  "points": [
+    {
+      "pattern": "疑問詞{ぎもんし} ＋ 普通形{ふつうけい} ＋ か、～",
+      "short": "embedded question",
+      "explain": "A question containing a question word can be built into a larger sentence instead of standing on its own. Put the question into the plain form, close it with か, and let the main verb follow — typically 調{しら}べます、聞{き}きます、話{はな}します、覚{おぼ}えて います or わかりません. The question word stays where it belongs inside the clause, and な-adjectives and nouns drop their だ before か.",
+      "formation": "[疑問詞{ぎもんし} ＋ plain form] ＋ か、＋ 調{しら}べます／わかりません など　（な-adj・N drop だ）",
+      "examples": [
+        [
+          "JL107便{びん}は 何時{なんじ}に 到着{とうちゃく}するか、調{しら}べて ください。",
+          "Please check what time flight JL107 arrives."
+        ],
+        [
+          "わたしたちが 初{はじ}めて 会{あ}ったのは いつか、覚{おぼ}えて いますか。",
+          "Do you remember when it was that we first met?"
+        ],
+        [
+          "パーティーに だれが 来{く}るか、まだ わかりません。",
+          "I still don't know who is coming to the party."
+        ],
+        [
+          "この 漢字{かんじ}を どう 読{よ}むか、教{おし}えて ください。",
+          "Please tell me how to read this kanji."
+        ]
+      ],
+      "drills": [
+        [
+          "Please check what time flight JL107 arrives.",
+          "JL107便{びん}は 何時{なんじ}に 到着{とうちゃく}するか、調{しら}べて ください。",
+          "the plain form, then か"
+        ],
+        [
+          "Do you remember when it was that we first met?",
+          "わたしたちが 初{はじ}めて 会{あ}ったのは いつか、覚{おぼ}えて いますか。",
+          "a noun-like いつ needs no だ before か"
+        ],
+        [
+          "I still don't know who is coming to the party.",
+          "パーティーに だれが 来{く}るか、まだ わかりません。",
+          "the question word stays inside the clause"
+        ],
+        [
+          "Please tell me how to read this kanji.",
+          "この 漢字{かんじ}を どう 読{よ}むか、教{おし}えて ください。",
+          ""
+        ],
+        [
+          "We are talking about where to hold the year-end party.",
+          "忘年会{ぼうねんかい}を どこで するか、話{はな}して います。",
+          "忘年会{ぼうねんかい} is new in this lesson"
+        ],
+        [
+          "Please ask how much this costs.",
+          "これは いくらか、聞{き}いて ください。",
+          "いくら takes no だ before か"
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} ＋ か どうか、～",
+      "short": "whether or not",
+      "explain": "When the embedded question has no question word in it — that is, when it is a plain yes-or-no question — か on its own is not enough and か どうか is required. As before the clause takes the plain form, and な-adjectives and nouns drop their だ. Where English would say 'whether there are any mistakes', Japanese prefers to put it the other way round and ask まちがいが ないか どうか, because the speaker is hoping to confirm that there are none.",
+      "formation": "[plain form] ＋ か どうか、＋ 調{しら}べます／わかりません など　（な-adj・N drop だ）",
+      "examples": [
+        [
+          "忘年会{ぼうねんかい}に 出席{しゅっせき}するか どうか、金曜日{きんようび}までに 返事{へんじ}を ください。",
+          "Please reply by Friday whether or not you will attend the year-end party."
+        ],
+        [
+          "その 話{はなし}は ほんとうか どうか、わかりません。",
+          "I don't know whether that story is true or not."
+        ],
+        [
+          "まちがいが ないか どうか、調{しら}べて ください。",
+          "Please check whether there are any mistakes."
+        ],
+        [
+          "サイズが 合{あ}うか どうか、着{き}て みて ください。",
+          "Please try it on and see whether the size fits."
+        ]
+      ],
+      "drills": [
+        [
+          "Please reply by Friday whether or not you will attend the year-end party.",
+          "忘年会{ぼうねんかい}に 出席{しゅっせき}するか どうか、金曜日{きんようび}までに 返事{へんじ}を ください。",
+          "no question word, so か どうか"
+        ],
+        [
+          "I don't know whether that story is true or not.",
+          "その 話{はなし}は ほんとうか どうか、わかりません。",
+          "a noun drops だ before か どうか"
+        ],
+        [
+          "Please check whether there are any mistakes.",
+          "まちがいが ないか どうか、調{しら}べて ください。",
+          "Japanese asks 'whether there are none'"
+        ],
+        [
+          "I haven't decided yet whether I will go or not.",
+          "行{い}くか どうか、まだ 決{き}めて いません。",
+          ""
+        ],
+        [
+          "Please make sure whether Mr Miller is coming.",
+          "ミラーさんが 来{く}るか どうか、確{たし}かめて ください。",
+          "確{たし}かめます is new in this lesson"
+        ],
+        [
+          "Please tell me whether this water is safe.",
+          "この 水{みず}が 安全{あんぜん}か どうか、教{おし}えて ください。",
+          "a な-adjective drops な and だ"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて-form みます",
+      "short": "try and see",
+      "explain": "Adding みます to the て-form says that you do something as a trial, to find out what will happen or what it is like. It is not the たい of wanting nor the volitional of resolving; the point is the experiment itself, and the result is left open. みます here is written in kana and conjugates as an ordinary Group II verb, so 〜て みたいです and 〜て みても いいですか are both available.",
+      "formation": "[V て-form] ＋ みます　（みたいです／みても いいですか／みました）",
+      "examples": [
+        [
+          "もう 一度{いちど} 考{かんが}えて みます。",
+          "I'll think it over again."
+        ],
+        [
+          "宇宙{うちゅう}から 地球{ちきゅう}を 見{み}て みたいです。",
+          "I'd like to see the earth from space."
+        ],
+        [
+          "この ズボンを はいて みても いいですか。",
+          "May I try on this pair of trousers?"
+        ],
+        [
+          "この 店{みせ}の ケーキを 食{た}べて みました。",
+          "I tried the cake at this shop."
+        ]
+      ],
+      "drills": [
+        [
+          "I'll think it over again.",
+          "もう 一度{いちど} 考{かんが}えて みます。",
+          "the て-form plus みます"
+        ],
+        [
+          "I'd like to see the earth from space.",
+          "宇宙{うちゅう}から 地球{ちきゅう}を 見{み}て みたいです。",
+          "みます conjugates as a Group II verb"
+        ],
+        [
+          "May I try on this pair of trousers?",
+          "この ズボンを はいて みても いいですか。",
+          "clothes worn below the waist take はきます"
+        ],
+        [
+          "I tried the cake at this shop.",
+          "この 店{みせ}の ケーキを 食{た}べて みました。",
+          ""
+        ],
+        [
+          "Please try asking the person at the front desk.",
+          "フロントの 人{ひと}に 聞{き}いて みて ください。",
+          "フロント is new in this lesson"
+        ],
+        [
+          "I want to try living in Japan once.",
+          "一度{いちど} 日本{にほん}に 住{す}んで みたいです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj (～い) → ～さ",
+      "short": "adjective to noun",
+      "explain": "Change the final い of an い-adjective into さ and you have a noun naming the measurement or degree of that quality. 高{たか}い gives 高{たか}さ, height; 長{なが}い gives 長{なが}さ, length; 大{おお}きい gives 大{おお}きさ, size. These behave as ordinary nouns, so they take は, が, を and の like any other, and they are the natural way to ask or state how tall, how long or how heavy something is.",
+      "formation": "い-adj（〜い）→ 〜さ　（高{たか}い→高{たか}さ、長{なが}い→長{なが}さ、重{おも}い→重{おも}さ、大{おお}きい→大{おお}きさ）",
+      "examples": [
+        [
+          "山{やま}の 高{たか}さは どうやって 測{はか}るか、知{し}って いますか。",
+          "Do you know how the height of a mountain is measured?"
+        ],
+        [
+          "新{あたら}しい 橋{はし}の 長{なが}さは 3,911メートルです。",
+          "The new bridge is 3,911 metres long."
+        ],
+        [
+          "この 荷物{にもつ}の 重{おも}さを 量{はか}って ください。",
+          "Please weigh this parcel."
+        ],
+        [
+          "部屋{へや}の 大{おお}きさは どのくらいですか。",
+          "What size is the room?"
+        ]
+      ],
+      "drills": [
+        [
+          "Do you know how the height of a mountain is measured?",
+          "山{やま}の 高{たか}さは どうやって 測{はか}るか、知{し}って いますか。",
+          "高{たか}い becomes the noun 高{たか}さ"
+        ],
+        [
+          "The new bridge is 3,911 metres long.",
+          "新{あたら}しい 橋{はし}の 長{なが}さは 3,911メートルです。",
+          "長{なが}い becomes 長{なが}さ"
+        ],
+        [
+          "Please weigh this parcel.",
+          "この 荷物{にもつ}の 重{おも}さを 量{はか}って ください。",
+          "the noun takes を like any other"
+        ],
+        [
+          "What size is the room?",
+          "部屋{へや}の 大{おお}きさは どのくらいですか。",
+          "大{おお}きい becomes 大{おお}きさ"
+        ],
+        [
+          "The speed of this train is amazing.",
+          "この 電車{でんしゃ}の 速{はや}さは すごいです。",
+          "速{はや}い becomes 速{はや}さ"
+        ],
+        [
+          "Please tell me the length and the weight of the desk.",
+          "机{つくえ}の 長{なが}さと 重{おも}さを 教{おし}えて ください。",
+          "two 〜さ nouns joined by と"
+        ]
+      ]
+    },
+    {
+      "pattern": "ハンスは 学校{がっこう}で どうでしょうか。",
+      "short": "asking for assessment",
+      "explain": "でしょうか normally asks about something the listener may be unsure of, but it is also used for questions the listener is perfectly able to answer. Used that way it is simply a gentler, more roundabout どうですか, and so it sounds more polite. It is the natural form for asking a teacher how your child is getting on, or a colleague how a piece of work is going.",
+      "formation": "N ＋ は ＋ ［place で］＋ どうでしょうか。　（＝ どうですか, but more polite）",
+      "examples": [
+        [
+          "息子{むすこ}は 学校{がっこう}で どうでしょうか。",
+          "How is my son getting on at school?"
+        ],
+        [
+          "クラスの 成績{せいせき}は どうでしょうか。",
+          "How are his marks in the class?"
+        ],
+        [
+          "あしたの 天気{てんき}は どうでしょうか。",
+          "What will the weather be like tomorrow?"
+        ],
+        [
+          "この 服{ふく}の サイズは どうでしょうか。",
+          "How is the size of these clothes?"
+        ]
+      ],
+      "drills": [
+        [
+          "How is my son getting on at school?",
+          "息子{むすこ}は 学校{がっこう}で どうでしょうか。",
+          "gentler than どうですか"
+        ],
+        [
+          "How are his marks in the class?",
+          "クラスの 成績{せいせき}は どうでしょうか。",
+          "成績{せいせき} is new in this lesson"
+        ],
+        [
+          "What will the weather be like tomorrow?",
+          "あしたの 天気{てんき}は どうでしょうか。",
+          "here the listener really may not know"
+        ],
+        [
+          "How is the size of these clothes?",
+          "この 服{ふく}の サイズは どうでしょうか。",
+          ""
+        ],
+        [
+          "How is your new work going?",
+          "新{あたら}しい 仕事{しごと}は どうでしょうか。",
+          ""
+        ],
+        [
+          "How was my daughter's test?",
+          "娘{むすめ}の テストは どうだったでしょうか。",
+          "the past goes on the plain form before でしょうか"
+        ]
+      ]
+    }
+  ]
+}

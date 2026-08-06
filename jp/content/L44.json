@@ -1,0 +1,284 @@
+{
+  "points": [
+    {
+      "pattern": "Vます-form ／ い-adj ／ な-adj ＋ すぎます",
+      "short": "too much",
+      "explain": "すぎます says that the degree of an action or a state has gone past what is right, so it nearly always carries a note of complaint or regret. This is what separates it from とても: 大{おお}きいです is simply a fact, while 大{おお}きすぎます is a problem. Verbs give up their ます, い-adjectives their final い and な-adjectives their な. The whole thing is itself a Group II verb, so it conjugates as 飲{の}みすぎる、飲{の}みすぎない、飲{の}みすぎた and can take て-form endings like any other verb.",
+      "formation": "Vます-form ／ い-adj（～い）／ な-adj［な］＋ すぎます　（Group II：飲{の}みすぎる、飲{の}みすぎた）",
+      "examples": [
+        [
+          "ゆうべ お酒{さけ}を 飲{の}みすぎました。",
+          "I drank too much last night."
+        ],
+        [
+          "この セーターは 大{おお}きすぎます。",
+          "This sweater is too big for me."
+        ],
+        [
+          "きのうの テストは 簡単{かんたん}すぎました。",
+          "Yesterday's test was too easy."
+        ],
+        [
+          "いくら 好{す}きでも、飲{の}みすぎると、体{からだ}に 悪{わる}いですよ。",
+          "No matter how much you like it, drinking too much is bad for your health."
+        ]
+      ],
+      "drills": [
+        [
+          "I drank too much last night.",
+          "ゆうべ お酒{さけ}を 飲{の}みすぎました。",
+          "ます-stem ＋ すぎます"
+        ],
+        [
+          "This sweater is too big for me.",
+          "この セーターは 大{おお}きすぎます。",
+          "the final い drops"
+        ],
+        [
+          "Yesterday's test was too easy.",
+          "きのうの テストは 簡単{かんたん}すぎました。",
+          "a な-adjective drops な"
+        ],
+        [
+          "You mustn't eat too much.",
+          "食{た}べすぎては いけません。",
+          "すぎます conjugates like a Group II verb"
+        ],
+        [
+          "This coffee is too strong, isn't it?",
+          "この コーヒーは 濃{こ}すぎますね。",
+          "濃{こ}い, strong in taste"
+        ],
+        [
+          "I think he works too much.",
+          "彼{かれ}は 働{はたら}きすぎると 思{おも}います。",
+          "the plain form before と 思{おも}います is 働{はたら}きすぎる"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vます-form ＋ やすいです ／ にくいです",
+      "short": "easy to do",
+      "explain": "These endings say how easy or hard a thing is to handle or to do, as in この パソコンは 使{つか}いやすいです. They also cover how readily something changes or how likely an event is: 白{しろ}い シャツは 汚{よご}れやすいです says that white shirts are prone to getting dirty, not that dirtying them is a skill. Both behave exactly like い-adjectives, so they inflect as ～やすかった、～やすくて、～やすく なります. The thing being judged is normally the topic, marked with は.",
+      "formation": "Vます-form ＋ やすいです ／ にくいです　（い-adj：～やすかった、～にくくて、～やすく なります）",
+      "examples": [
+        [
+          "この パソコンは 使{つか}いやすいです。",
+          "This computer is easy to use."
+        ],
+        [
+          "東京{とうきょう}は 住{す}みにくいです。",
+          "Tokyo is a hard place to live in."
+        ],
+        [
+          "白{しろ}い シャツは 汚{よご}れやすいです。",
+          "White shirts get dirty easily."
+        ],
+        [
+          "この 薬{くすり}は 砂糖{さとう}を 入{い}れると、飲{の}みやすく なりますよ。",
+          "If you add some sugar, this medicine becomes easier to take."
+        ]
+      ],
+      "drills": [
+        [
+          "This computer is easy to use.",
+          "この パソコンは 使{つか}いやすいです。",
+          "ます-stem ＋ やすいです"
+        ],
+        [
+          "Tokyo is a hard place to live in.",
+          "東京{とうきょう}は 住{す}みにくいです。",
+          ""
+        ],
+        [
+          "White shirts get dirty easily.",
+          "白{しろ}い シャツは 汚{よご}れやすいです。",
+          "also used of what happens readily"
+        ],
+        [
+          "The washing doesn't dry easily on a rainy day.",
+          "雨{あめ}の 日{ひ}は 洗濯物{せんたくもの}が 乾{かわ}きにくいです。",
+          "洗濯物{せんたくもの}, the washing"
+        ],
+        [
+          "This glass doesn't break easily, so it's safe.",
+          "この コップは 割{わ}れにくくて、安全{あんぜん}ですよ。",
+          "they inflect like い-adjectives"
+        ],
+        [
+          "If you add sugar, this medicine becomes easier to take.",
+          "この 薬{くすり}は 砂糖{さとう}を 入{い}れると、飲{の}みやすく なりますよ。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj → ～く ／ な-adj → に ／ Nに ＋ します",
+      "short": "making it so",
+      "explain": "Where the ～く／～に なります of Lesson 19 said that something turned into a certain state by itself, ～く／～に します says that somebody turns it into that state on purpose. い-adjectives change い to く, while な-adjectives and nouns take に, and します supplies the doing. Choosing between the two is therefore a question of whether there is an agent behind the change.",
+      "formation": "い-adj（～い→～く）／ な-adj（～な→～に）／ Nに ＋ します",
+      "examples": [
+        [
+          "音{おと}を 大{おお}きく します。",
+          "I'll turn the volume up."
+        ],
+        [
+          "部屋{へや}を きれいに します。",
+          "I'll tidy my room."
+        ],
+        [
+          "塩{しお}の 量{りょう}を 半分{はんぶん}に しました。",
+          "I reduced the amount of salt by half."
+        ],
+        [
+          "部屋{へや}を もう 少{すこ}し 明{あか}るく して ください。",
+          "Please make the room a little brighter."
+        ]
+      ],
+      "drills": [
+        [
+          "I'll turn the volume up.",
+          "音{おと}を 大{おお}きく します。",
+          "い-adjectives change い to く"
+        ],
+        [
+          "I'll tidy my room.",
+          "部屋{へや}を きれいに します。",
+          "な-adjectives take に"
+        ],
+        [
+          "I reduced the amount of salt by half.",
+          "塩{しお}の 量{りょう}を 半分{はんぶん}に しました。",
+          "a noun also takes に"
+        ],
+        [
+          "Please make the room a little brighter.",
+          "部屋{へや}を もう 少{すこ}し 明{あか}るく して ください。",
+          ""
+        ],
+        [
+          "Please make the coffee weaker.",
+          "コーヒーを 薄{うす}く して ください。",
+          "薄{うす}い, weak in taste"
+        ],
+        [
+          "The room got warm.",
+          "部屋{へや}が 暖{あたた}かく なりました。",
+          "なります when nobody did it on purpose"
+        ]
+      ]
+    },
+    {
+      "pattern": "Nに します",
+      "short": "choosing",
+      "explain": "With a bare noun in front of it, ～に します announces a choice or a decision: what you will have, which room you want, when the meeting will be. It is the natural reply when a waiter or a clerk asks you to pick one. Note that this is the same します as in the pattern above; it is only the absence of an adjective that makes it read as a decision rather than a change.",
+      "formation": "N ＋ に します",
+      "examples": [
+        [
+          "部屋{へや}は シングルに しますか、ツインに しますか。",
+          "Would you like a single room or a twin room?"
+        ],
+        [
+          "会議{かいぎ}は あしたに します。",
+          "I'll set the meeting for tomorrow."
+        ],
+        [
+          "わたしは コーヒーに します。",
+          "I'll have coffee."
+        ],
+        [
+          "旅行{りょこう}は 京都{きょうと}に しました。",
+          "We decided on Kyoto for the trip."
+        ]
+      ],
+      "drills": [
+        [
+          "Would you like a single room or a twin room?",
+          "部屋{へや}は シングルに しますか、ツインに しますか。",
+          "に します for a choice"
+        ],
+        [
+          "I'll set the meeting for tomorrow.",
+          "会議{かいぎ}は あしたに します。",
+          ""
+        ],
+        [
+          "I'll have coffee.",
+          "わたしは コーヒーに します。",
+          "the normal way to order"
+        ],
+        [
+          "We decided on Kyoto for the trip.",
+          "旅行{りょこう}は 京都{きょうと}に しました。",
+          ""
+        ],
+        [
+          "Which one will you have?",
+          "どれに しますか。",
+          ""
+        ],
+        [
+          "I'll take the cheaper one.",
+          "安{やす}い ほうに します。",
+          "～の ほう, 'the … one'"
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj → ～く ／ な-adj → に ＋ V",
+      "short": "adverbs",
+      "explain": "The same く and に endings turn an adjective into an adverb saying how the action is carried out: 細{こま}かく 切{き}ります is 'cut finely', 大切{たいせつ}に 使{つか}います is 'use with care'. You have been doing this with い-adjectives since 早{はや}く 起{お}きます in Book I; what this lesson adds is that な-adjectives do the same job with に. The adverb goes immediately in front of the verb it describes.",
+      "formation": "い-adj（～い→～く）／ な-adj（～な→～に）＋ V",
+      "examples": [
+        [
+          "野菜{やさい}を 細{こま}かく 切{き}って ください。",
+          "Please cut the vegetables into small pieces."
+        ],
+        [
+          "電気{でんき}や 水{みず}は 大切{たいせつ}に 使{つか}いましょう。",
+          "Let's use electricity and water carefully."
+        ],
+        [
+          "名前{なまえ}を 丁寧{ていねい}に 書{か}いて ください。",
+          "Please write your name neatly."
+        ],
+        [
+          "部屋{へや}を きれいに 掃除{そうじ}しました。",
+          "I cleaned the room thoroughly."
+        ]
+      ],
+      "drills": [
+        [
+          "Please cut the vegetables into small pieces.",
+          "野菜{やさい}を 細{こま}かく 切{き}って ください。",
+          "い-adjective → ～く"
+        ],
+        [
+          "Let's use electricity and water carefully.",
+          "電気{でんき}や 水{みず}は 大切{たいせつ}に 使{つか}いましょう。",
+          "な-adjective → ～に"
+        ],
+        [
+          "Please write your name neatly.",
+          "名前{なまえ}を 丁寧{ていねい}に 書{か}いて ください。",
+          "丁寧{ていねい}に, carefully"
+        ],
+        [
+          "I cleaned the room thoroughly.",
+          "部屋{へや}を きれいに 掃除{そうじ}しました。",
+          ""
+        ],
+        [
+          "Please cut my hair short.",
+          "髪{かみ}を 短{みじか}く 切{き}って ください。",
+          ""
+        ],
+        [
+          "The children were playing happily.",
+          "子{こ}どもたちが 楽{たの}しく 遊{あそ}んで いました。",
+          "楽{たの}しく, merrily"
+        ]
+      ]
+    }
+  ]
+}

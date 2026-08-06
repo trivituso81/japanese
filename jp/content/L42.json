@@ -1,0 +1,228 @@
+{
+  "points": [
+    {
+      "pattern": "V dictionary form ／ Nの ＋ ために、～",
+      "short": "purpose",
+      "explain": "ために states the purpose of a deliberate action: the first clause names the goal, the second names what you are doing to reach it. With a noun in front of it, it can also mean 'for the benefit of', as in 家族{かぞく}の ために. The contrast to watch is with ように from Lesson 36: ように takes a verb you cannot simply decide on, such as a potential form or an intransitive, while ために takes one you can. So 自分{じぶん}の 店{みせ}を 持{も}つ ために sets up having a shop as your objective, whereas 自分{じぶん}の 店{みせ}が 持{も}てる ように treats being able to have one as a state you are edging towards.",
+      "formation": "V dictionary form ／ Nの ＋ ために、［deliberate action］",
+      "examples": [
+        [
+          "自分{じぶん}の 店{みせ}を 持{も}つ ために、貯金{ちょきん}して います。",
+          "I'm saving money in order to have my own shop."
+        ],
+        [
+          "健康{けんこう}の ために、毎朝{まいあさ} 走{はし}って います。",
+          "I jog every morning for my health."
+        ],
+        [
+          "弁護士{べんごし}に なる ために、法律{ほうりつ}を 勉強{べんきょう}して います。",
+          "I'm studying law in order to become a lawyer."
+        ],
+        [
+          "家族{かぞく}の ために、うちを 建{た}てます。",
+          "I'm going to build a house for my family."
+        ]
+      ],
+      "drills": [
+        [
+          "I'm saving money in order to have my own shop.",
+          "自分{じぶん}の 店{みせ}を 持{も}つ ために、貯金{ちょきん}して います。",
+          "the verb before ために is one you can decide on"
+        ],
+        [
+          "I jog every morning for my health.",
+          "健康{けんこう}の ために、毎朝{まいあさ} 走{はし}って います。",
+          "a noun takes の"
+        ],
+        [
+          "I'm studying law in order to become a lawyer.",
+          "弁護士{べんごし}に なる ために、法律{ほうりつ}を 勉強{べんきょう}して います。",
+          "なります counts as volitional here"
+        ],
+        [
+          "He is building a house for his family.",
+          "彼{かれ}は 家族{かぞく}の ために、うちを 建{た}てます。",
+          "Nの ために can also mean 'for the benefit of'"
+        ],
+        [
+          "In order to enter university, I study as hard as I can.",
+          "大学{だいがく}に 入{はい}る ために、一生懸命{いっしょうけんめい} 勉強{べんきょう}します。",
+          "一生懸命{いっしょうけんめい}, with all one's effort"
+        ],
+        [
+          "I study every day so that my Japanese will improve.",
+          "日本語{にほんご}が 上手{じょうず}に なる ように、毎日{まいにち} 勉強{べんきょう}して います。",
+          "a change you cannot simply decide on takes ように, not ために"
+        ]
+      ]
+    },
+    {
+      "pattern": "V dictionary formの ／ N ＋ に ～",
+      "short": "used for",
+      "explain": "As you saw in Lesson 38, a dictionary-form verb plus の behaves as a noun. Put に after it and you have named a purpose, and the predicate that follows is drawn from a small set: 使{つか}います, 役{やく}に 立{た}ちます, いいです, 便利{べんり}です, 必要{ひつよう}です, いります, ［時間{じかん}が］かかります. A plain noun can stand in the same slot without の. This is the pattern for saying what a tool is for and how much time or money a job swallows.",
+      "formation": "V dictionary form ＋ の ／ N ＋ に ＋ 使{つか}います／便利{べんり}です／いります／かかります",
+      "examples": [
+        [
+          "この はさみは 花{はな}を 切{き}るのに 使{つか}います。",
+          "This pair of scissors is used for cutting flowers."
+        ],
+        [
+          "電話番号{でんわばんごう}を 調{しら}べるのに 時間{じかん}が かかりました。",
+          "It took a lot of time to find the telephone number."
+        ],
+        [
+          "この かばんは 大{おお}きくて、旅行{りょこう}に 便利{べんり}です。",
+          "This bag is big and convenient for trips."
+        ],
+        [
+          "ファイルは 書類{しょるい}を 整理{せいり}するのに 使{つか}います。",
+          "Files are used to put papers in order."
+        ]
+      ],
+      "drills": [
+        [
+          "This pair of scissors is used for cutting flowers.",
+          "この はさみは 花{はな}を 切{き}るのに 使{つか}います。",
+          "V dictionary form ＋ の turns the clause into a noun"
+        ],
+        [
+          "It took a lot of time to look up the telephone number.",
+          "電話番号{でんわばんごう}を 調{しら}べるのに 時間{じかん}が かかりました。",
+          ""
+        ],
+        [
+          "This bag is big and convenient for trips.",
+          "この かばんは 大{おお}きくて、旅行{りょこう}に 便利{べんり}です。",
+          "a plain noun fills the same slot, with no の"
+        ],
+        [
+          "You need a can opener to open tinned food.",
+          "缶詰{かんづめ}を 開{あ}けるのに 缶切{かんき}りが いります。",
+          "缶切{かんき}り, a can opener"
+        ],
+        [
+          "This kettle is used for boiling water.",
+          "この やかんは お湯{ゆ}を 沸{わ}かすのに 使{つか}います。",
+          ""
+        ],
+        [
+          "How much money do you need to build a house?",
+          "うちを 建{た}てるのに お金{かね}が いくら いりますか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Quantifierは",
+      "short": "at least",
+      "explain": "Attached to a quantifier, は presents the figure as the minimum the speaker reckons is needed, which English renders as 'at least'. It is the same contrastive は you met in Lesson 27, quietly setting the amount off against anything smaller. It goes most often with いります, かかります and 必要{ひつよう}です.",
+      "formation": "［quantifier］＋ は ＋ いります／かかります／必要{ひつよう}です",
+      "examples": [
+        [
+          "日本{にほん}では 結婚式{けっこんしき}を するのに 200万円{まんえん}は いります。",
+          "In Japan you need at least 2 million yen to hold a wedding."
+        ],
+        [
+          "駅{えき}まで 30分{ぷん}は かかります。",
+          "It takes at least thirty minutes to the station."
+        ],
+        [
+          "この 仕事{しごと}は 1週間{しゅうかん}は かかるでしょう。",
+          "This job will probably take at least a week."
+        ],
+        [
+          "パーティーには 10人{にん}は 来{き}ます。",
+          "At least ten people are coming to the party."
+        ]
+      ],
+      "drills": [
+        [
+          "In Japan you need at least 2 million yen to hold a wedding.",
+          "日本{にほん}では 結婚式{けっこんしき}を するのに 200万円{まんえん}は いります。",
+          "は puts a floor under the figure"
+        ],
+        [
+          "It takes at least thirty minutes to the station.",
+          "駅{えき}まで 30分{ぷん}は かかります。",
+          ""
+        ],
+        [
+          "This job will probably take at least a week.",
+          "この 仕事{しごと}は 1週間{しゅうかん}は かかるでしょう。",
+          ""
+        ],
+        [
+          "You had better sleep at least seven hours a day.",
+          "1日{にち}に 7時間{じかん}は 寝{ね}た ほうが いいです。",
+          "1日{にち}に, per day"
+        ],
+        [
+          "At least ten people are coming to the party.",
+          "パーティーには 10人{にん}は 来{き}ます。",
+          ""
+        ],
+        [
+          "I want to save at least 100,000 yen a month.",
+          "1か月{げつ}に 10万円{まんえん}は 貯金{ちょきん}したいです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Quantifierも",
+      "short": "as much as",
+      "explain": "も after a quantifier says that the speaker finds the amount startlingly large. It is the mirror image of the は you have just met: where は gives a floor, も raises an eyebrow. English reaches for 'as much as' or 'as many as', or simply for a tone of voice.",
+      "formation": "［quantifier］＋ も ＋ V",
+      "examples": [
+        [
+          "駅{えき}まで 行{い}くのに 2時間{じかん}も かかりました。",
+          "It took as long as two hours to get to the station."
+        ],
+        [
+          "うちを 建{た}てるのに 3,000万円{まんえん}も 必要{ひつよう}なんですか。",
+          "You need as much as 30 million yen to build a house?"
+        ],
+        [
+          "彼{かれ}は ゆうべ ビールを 10本{ぽん}も 飲{の}みました。",
+          "He drank as many as ten beers last night."
+        ],
+        [
+          "あの 人{ひと}は 車{くるま}を 3台{だい}も 持{も}って います。",
+          "That person has as many as three cars."
+        ]
+      ],
+      "drills": [
+        [
+          "It took as long as two hours to get to the station.",
+          "駅{えき}まで 行{い}くのに 2時間{じかん}も かかりました。",
+          "も says the speaker thinks it is a lot"
+        ],
+        [
+          "You need as much as 30 million yen to build a house?",
+          "うちを 建{た}てるのに 3,000万円{まんえん}も 必要{ひつよう}なんですか。",
+          "んですか asking for confirmation"
+        ],
+        [
+          "He drank as many as ten beers last night.",
+          "彼{かれ}は ゆうべ ビールを 10本{ぽん}も 飲{の}みました。",
+          ""
+        ],
+        [
+          "That person has as many as three cars.",
+          "あの 人{ひと}は 車{くるま}を 3台{だい}も 持{も}って います。",
+          ""
+        ],
+        [
+          "I waited a whole hour, but she didn't come.",
+          "1時間{じかん}も 待{ま}ちましたが、彼女{かのじょ}は 来{き}ませんでした。",
+          ""
+        ],
+        [
+          "As many as 500 people came to the meeting.",
+          "会議{かいぎ}に 500人{にん}も 来{き}ました。",
+          "compare 500人{にん}は, 'at least 500'"
+        ]
+      ]
+    }
+  ]
+}

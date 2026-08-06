@@ -1,0 +1,224 @@
+{
+  "points": [
+    {
+      "pattern": "普通形{ふつうけい} ＋ んです",
+      "short": "explaining",
+      "explain": "んです attaches to a plain form and turns a bare statement into an explanation: it presents the sentence as the reason or the background behind something the speaker and listener can both see. As a question it asks the other person to explain what you have just noticed, or checks a guess you have made; as an answer it supplies the reason. It belongs to speech — writing uses のです — and it cannot be used for a plain neutral fact, so わたしは ミラーです is right but わたしは ミラーなんです is not. Because a んですか question can sound like surprise or prying, use it with a little care.",
+      "formation": "[普通形{ふつうけい}] ＋ んです　（な-adj and N change だ to な：便利{べんり}なんです、休{やす}みなんです）",
+      "examples": [
+        [
+          "どうして 遅{おく}れたんですか。",
+          "Why were you late?"
+        ],
+        [
+          "バスが 来{こ}なかったんです。",
+          "It's because the bus didn't come."
+        ],
+        [
+          "どう したんですか。",
+          "What's the matter?"
+        ],
+        [
+          "ちょっと 気分{きぶん}が 悪{わる}いんです。",
+          "I don't feel very well."
+        ]
+      ],
+      "drills": [
+        [
+          "Why were you late?",
+          "どうして 遅{おく}れたんですか。",
+          "asking the listener for an explanation"
+        ],
+        [
+          "It's because the bus didn't come.",
+          "バスが 来{こ}なかったんです。",
+          "the plain past negative goes before んです"
+        ],
+        [
+          "Where did you buy those shoes?",
+          "どこで その 靴{くつ}を 買{か}ったんですか。",
+          "asking about something you have just noticed"
+        ],
+        [
+          "I don't feel very well.",
+          "ちょっと 気分{きぶん}が 悪{わる}いんです。",
+          "an い-adjective joins んです directly"
+        ],
+        [
+          "Is tomorrow a day off?",
+          "あしたは 休{やす}みなんですか。",
+          "a noun takes な before んです"
+        ],
+        [
+          "Did you live in Osaka?",
+          "大阪{おおさか}に 住{す}んで いたんですか。",
+          "checking a guess you have made from what you heard"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて-form いただけませんか",
+      "short": "polite request",
+      "explain": "This asks someone to do you a favour and is a good step politer than ～て ください, which is really an instruction. It suits requests made to a superior, to a stranger, or when what you are asking is a genuine inconvenience. It very often follows a ～んですが clause that sets the scene first, leaving the listener free to refuse.",
+      "formation": "[V-て form] ＋ いただけませんか　（politer than ～て ください）",
+      "examples": [
+        [
+          "いい 先生{せんせい}を 紹介{しょうかい}して いただけませんか。",
+          "Would you please introduce a good teacher to me?"
+        ],
+        [
+          "日本語{にほんご}で 手紙{てがみ}を 書{か}いたんですが、ちょっと 見{み}て いただけませんか。",
+          "I've written a letter in Japanese. Could you please check it for me?"
+        ],
+        [
+          "写真{しゃしん}を 撮{と}って いただけませんか。",
+          "Could you take a photo for us?"
+        ],
+        [
+          "あした 連絡{れんらく}して いただけませんか。",
+          "Could you contact me tomorrow?"
+        ]
+      ],
+      "drills": [
+        [
+          "Would you please introduce a good teacher to me?",
+          "いい 先生{せんせい}を 紹介{しょうかい}して いただけませんか。",
+          "politer than ～て ください"
+        ],
+        [
+          "I've written a letter in Japanese. Could you check it for me?",
+          "日本語{にほんご}で 手紙{てがみ}を 書{か}いたんですが、ちょっと 見{み}て いただけませんか。",
+          "～んですが sets up the request"
+        ],
+        [
+          "Could you take a photo for us?",
+          "写真{しゃしん}を 撮{と}って いただけませんか。",
+          ""
+        ],
+        [
+          "Could you lend me your dictionary?",
+          "辞書{じしょ}を 貸{か}して いただけませんか。",
+          ""
+        ],
+        [
+          "Could you tell me the way to the station?",
+          "駅{えき}までの 道{みち}を 教{おし}えて いただけませんか。",
+          ""
+        ],
+        [
+          "Could you contact me directly?",
+          "直接{ちょくせつ} 連絡{れんらく}して いただけませんか。",
+          "直接{ちょくせつ} is new in this lesson"
+        ]
+      ]
+    },
+    {
+      "pattern": "疑問詞{ぎもんし} ＋ Vた-form ら いいですか",
+      "short": "asking advice",
+      "explain": "This is how you ask someone to advise or instruct you about what to do. A question word states the part you are unsure about — where, when, what, how — and the たら clause supplies the action, with いいですか asking whether that would be a good idea. In practice it is a request for a recommendation, so it is usually preceded by a ～んですが clause explaining your difficulty.",
+      "formation": "[疑問詞{ぎもんし}] ＋ [V-た form] ＋ ら いいですか",
+      "examples": [
+        [
+          "どこで カメラを 買{か}ったら いいですか。",
+          "Where should I buy a camera?"
+        ],
+        [
+          "細{こま}かい お金{かね}が ないんですが、どう したら いいですか。",
+          "I don't have any small change. What should I do?"
+        ],
+        [
+          "いつ 申{もう}し込{こ}んだら いいですか。",
+          "When should I apply?"
+        ]
+      ],
+      "drills": [
+        [
+          "Where should I buy a camera?",
+          "どこで カメラを 買{か}ったら いいですか。",
+          "the question word carries what you don't know"
+        ],
+        [
+          "I don't have any small change. What should I do?",
+          "細{こま}かい お金{かね}が ないんですが、どう したら いいですか。",
+          "explain the trouble first, then ask"
+        ],
+        [
+          "When should I apply?",
+          "いつ 申{もう}し込{こ}んだら いいですか。",
+          ""
+        ],
+        [
+          "Where should I put the rubbish out?",
+          "どこに ごみを 出{だ}したら いいですか。",
+          ""
+        ],
+        [
+          "Who should I contact?",
+          "だれに 連絡{れんらく}したら いいですか。",
+          ""
+        ],
+        [
+          "What time should I come tomorrow?",
+          "あした 何時{なんじ}に 来{き}たら いいですか。",
+          "来{き}ます → 来{き}たら"
+        ]
+      ]
+    },
+    {
+      "pattern": "N(object)は 好{す}きです ／ 上手{じょうず}です ／ あります, etc.",
+      "short": "object as topic",
+      "explain": "In Book I you learned that a subject or an object marked を can be raised to topic and highlighted with は. The same is true of the objects that these predicates mark with が: 好きです、嫌いです、上手です、下手です、あります、わかります and the like. Putting は on the object usually sets it against something else or narrows the statement down to that one thing, which is why it is so common in replies that decline or qualify.",
+      "formation": "N(object) ＋ は ＋ 好{す}きです／上手{じょうず}です／わかります／あります …　（が・を → は）",
+      "examples": [
+        [
+          "スポーツは あまり 好{す}きじゃ ないんです。",
+          "I don't like sports very much."
+        ],
+        [
+          "お酒{さけ}は 飲{の}みません。",
+          "I don't drink alcohol."
+        ],
+        [
+          "時間{じかん}は ありますが、お金{かね}が ありません。",
+          "I have the time, but I don't have the money."
+        ],
+        [
+          "料理{りょうり}は あまり 上手{じょうず}じゃ ありません。",
+          "I'm not very good at cooking."
+        ]
+      ],
+      "drills": [
+        [
+          "I don't like sports very much.",
+          "スポーツは あまり 好{す}きじゃ ないんです。",
+          "が becomes は when the object is made the topic"
+        ],
+        [
+          "I don't drink alcohol.",
+          "お酒{さけ}は 飲{の}みません。",
+          "を is replaced by は too"
+        ],
+        [
+          "I have the time, but I don't have the money.",
+          "時間{じかん}は ありますが、お金{かね}が ありません。",
+          "は sets one thing against another"
+        ],
+        [
+          "I'm not very good at cooking.",
+          "料理{りょうり}は あまり 上手{じょうず}じゃ ありません。",
+          ""
+        ],
+        [
+          "I understand a little Japanese.",
+          "日本語{にほんご}は 少{すこ}し わかります。",
+          ""
+        ],
+        [
+          "I've already done today's homework.",
+          "きょうの 宿題{しゅくだい}は もう やりました。",
+          "やります is new in this lesson"
+        ]
+      ]
+    }
+  ]
+}

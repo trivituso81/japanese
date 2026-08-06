@@ -1,0 +1,336 @@
+{
+  "points": [
+    {
+      "pattern": "Vた ら、～",
+      "short": "たら conditional",
+      "explain": "This is the most flexible of the Japanese conditionals and the one to reach for when in doubt. It is built on the た-form, so if you can make the plain past you can make the conditional. Unlike Lesson 23's と, たら allows the main clause to be a request, an invitation or a statement of intention, which is why it suits ordinary conversation so well.",
+      "formation": "た-form ＋ ら：降{ふ}る→降{ふ}ったら、食{た}べる→食{た}べたら、する→したら、来{く}る→来{き}たら　／　negative なかった＋ら：わからない→わからなかったら",
+      "examples": [
+        [
+          "あした 雨{あめ}が 降{ふ}ったら、行{い}きません。",
+          "If it rains tomorrow, I won't go."
+        ],
+        [
+          "お金{かね}が あったら、車{くるま}を 買{か}います。",
+          "If I had the money, I'd buy a car."
+        ],
+        [
+          "時間{じかん}が あったら、手伝{てつだ}って ください。",
+          "If you have time, please help me."
+        ],
+        [
+          "わからなかったら、先生{せんせい}に 聞{き}いて ください。",
+          "If you don't understand, please ask the teacher."
+        ]
+      ],
+      "drills": [
+        [
+          "If it rains tomorrow, I won't go.",
+          "あした 雨{あめ}が 降{ふ}ったら、行{い}きません。",
+          "た-form plus ら"
+        ],
+        [
+          "If I had the money, I'd buy a car.",
+          "お金{かね}が あったら、車{くるま}を 買{か}います。",
+          "ある→あったら"
+        ],
+        [
+          "If you had 100 million yen, what would you do?",
+          "もし 1億{おく}円{えん} あったら、何{なに}を しますか。",
+          "もし signals a hypothesis"
+        ],
+        [
+          "If you have time, please help me.",
+          "時間{じかん}が あったら、手伝{てつだ}って ください。",
+          "たら allows a request in the main clause"
+        ],
+        [
+          "If you don't understand, please ask the teacher.",
+          "わからなかったら、先生{せんせい}に 聞{き}いて ください。",
+          "negative なかった plus ら"
+        ],
+        [
+          "If a friend comes, I'll introduce you.",
+          "友{とも}だちが 来{き}たら、紹介{しょうかい}します。",
+          "来{く}る→来{き}たら"
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj かったら ／ な-adj だったら ／ Nだったら",
+      "short": "adjective and noun たら",
+      "explain": "Adjectives and nouns form the conditional in the same way as verbs: take the plain past and add ら. An い-adjective becomes 〜かったら, while な-adjectives and nouns become 〜だったら. The negatives follow the same rule, giving 高くなかったら and 暇じゃ なかったら.",
+      "formation": "安{やす}い→安{やす}かったら　／　暇{ひま}[な]→暇{ひま}だったら　／　雨{あめ}→雨{あめ}だったら",
+      "examples": [
+        [
+          "安{やす}かったら、買{か}います。",
+          "If it's cheap, I'll buy it."
+        ],
+        [
+          "あした 暇{ひま}だったら、うちへ 来{き}て ください。",
+          "If you're free tomorrow, please come to my house."
+        ],
+        [
+          "あした 雨{あめ}だったら、うちに います。",
+          "If it rains tomorrow, I'll stay at home."
+        ],
+        [
+          "調子{ちょうし}が 悪{わる}かったら、薬{くすり}を 飲{の}んで ください。",
+          "If you don't feel well, please take this medicine."
+        ]
+      ],
+      "drills": [
+        [
+          "If it's cheap, I'll buy it.",
+          "安{やす}かったら、買{か}います。",
+          "い-adjective: 〜かったら"
+        ],
+        [
+          "If you're free tomorrow, please come to my house.",
+          "あした 暇{ひま}だったら、うちへ 来{き}て ください。",
+          "な-adjective: 〜だったら"
+        ],
+        [
+          "If it rains tomorrow, I'll stay at home.",
+          "あした 雨{あめ}だったら、うちに います。",
+          "a noun also takes 〜だったら"
+        ],
+        [
+          "If you don't feel well, please take your medicine.",
+          "調子{ちょうし}が 悪{わる}かったら、薬{くすり}を 飲{の}んで ください。",
+          ""
+        ],
+        [
+          "If it isn't expensive, I want to eat sushi.",
+          "高{たか}くなかったら、おすしを 食{た}べたいです。",
+          "negative of an い-adjective"
+        ],
+        [
+          "If the weather is good on Sunday, let's go to the sea.",
+          "日曜日{にちようび} いい 天気{てんき}だったら、海{うみ}へ 行{い}きましょう。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vた ら、～ (temporal)",
+      "short": "when, once",
+      "explain": "The same たら-clause means 'when' rather than 'if' as soon as the first event is certain to happen. 駅に 着いたら is not a doubt about whether you will arrive but a statement about the moment you do. This is the everyday way of arranging what will happen after something else, and it is why たら and と feel different: と reports what always happens, while たら looks forward to one particular occasion.",
+      "formation": "[V-た form] ＋ ら、＋ [what happens then]　（the first event is certain）",
+      "examples": [
+        [
+          "駅{えき}に 着{つ}いたら、電話{でんわ}を して ください。",
+          "Please phone me when you get to the station."
+        ],
+        [
+          "10時{じ}に なったら、出{で}かけましょう。",
+          "Let's set off when it gets to ten o'clock."
+        ],
+        [
+          "仕事{しごと}が 終{お}わったら、一杯{いっぱい} 飲{の}みましょう。",
+          "Let's have a drink when work finishes."
+        ],
+        [
+          "大学{だいがく}を 出{で}たら、国{くに}へ 帰{かえ}ります。",
+          "When I graduate, I'll go back to my country."
+        ]
+      ],
+      "drills": [
+        [
+          "Please phone me when you get to the station.",
+          "駅{えき}に 着{つ}いたら、電話{でんわ}を して ください。",
+          "arriving is certain, so たら means 'when'"
+        ],
+        [
+          "Let's set off when it gets to ten o'clock.",
+          "10時{じ}に なったら、出{で}かけましょう。",
+          ""
+        ],
+        [
+          "Let's have a drink when work finishes.",
+          "仕事{しごと}が 終{お}わったら、一杯{いっぱい} 飲{の}みましょう。",
+          ""
+        ],
+        [
+          "When I graduate from university, I'll go back to my country.",
+          "大学{だいがく}を 出{で}たら、国{くに}へ 帰{かえ}ります。",
+          ""
+        ],
+        [
+          "What will you do when you grow old?",
+          "年{とし}を 取{と}ったら、何{なに}を しますか。",
+          "年{とし}を 取{と}ります, to grow old"
+        ],
+        [
+          "When spring comes, I'm going to study in Japan.",
+          "春{はる}に なったら、日本{にほん}へ 留学{りゅうがく}します。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて も、～",
+      "short": "even if",
+      "explain": "The て-form plus も concedes the first clause and then says the result is not what you would expect: even if it rains, I'm going. Adjectives and nouns take 〜くても, 〜でも and Nでも respectively. Take care not to confuse this concessive でも with Lesson 21's 'or something' でも, which attaches to a noun in an invitation.",
+      "formation": "[V-て form] ＋ も　／　高{たか}い→高{たか}くても　／　暇{ひま}[な]→暇{ひま}でも　／　日曜日{にちようび}→日曜日{にちようび}でも",
+      "examples": [
+        [
+          "雨{あめ}が 降{ふ}っても、行{い}きます。",
+          "Even if it rains, I'll go."
+        ],
+        [
+          "高{たか}くても、買{か}います。",
+          "Even if it's expensive, I'll buy it."
+        ],
+        [
+          "日曜日{にちようび}でも、働{はたら}きます。",
+          "I work even on Sundays."
+        ],
+        [
+          "いくら 考{かんが}えても、わかりません。",
+          "However much I think about it, I don't understand."
+        ]
+      ],
+      "drills": [
+        [
+          "Even if it rains, I'll go.",
+          "雨{あめ}が 降{ふ}っても、行{い}きます。",
+          "て-form plus も"
+        ],
+        [
+          "Even if it's expensive, I'll buy it.",
+          "高{たか}くても、買{か}います。",
+          "い-adjective: 〜くても"
+        ],
+        [
+          "I work even on Sundays.",
+          "日曜日{にちようび}でも、働{はたら}きます。",
+          "a noun takes でも"
+        ],
+        [
+          "However much I think about it, I don't understand.",
+          "いくら 考{かんが}えても、わかりません。",
+          "いくら pairs with ても"
+        ],
+        [
+          "Even if the room is small, it's all right.",
+          "部屋{へや}が 狭{せま}くても、大丈夫{だいじょうぶ}です。",
+          ""
+        ],
+        [
+          "Even if you're not free, please come.",
+          "暇{ひま}じゃ なくても、来{き}て ください。",
+          "な-adjective negative: 〜じゃ なくても"
+        ]
+      ]
+    },
+    {
+      "pattern": "もし ／ いくら",
+      "short": "conditional signposts",
+      "explain": "These two adverbs sit at the head of the sentence and warn the listener which kind of conditional is coming. もし announces a supposition and is answered by たら, while いくら means 'however much' and is answered by ても. Neither is grammatically necessary, but they make a long sentence much easier to follow, and using them with the wrong ending sounds badly wrong.",
+      "formation": "もし ＋ ～たら　／　いくら ＋ ～ても",
+      "examples": [
+        [
+          "もし 雨{あめ}が 降{ふ}ったら、試合{しあい}は ありません。",
+          "If it should rain, there'll be no match."
+        ],
+        [
+          "もし チャンスが あったら、日本{にほん}へ 留学{りゅうがく}したいです。",
+          "If I get the chance, I want to study in Japan."
+        ],
+        [
+          "いくら 高{たか}くても、買{か}います。",
+          "However expensive it is, I'll buy it."
+        ],
+        [
+          "いくら 練習{れんしゅう}しても、上手{じょうず}に なりません。",
+          "However much I practise, I don't get any better."
+        ]
+      ],
+      "drills": [
+        [
+          "If it should rain, there'll be no match.",
+          "もし 雨{あめ}が 降{ふ}ったら、試合{しあい}は ありません。",
+          "もし announces a たら-clause"
+        ],
+        [
+          "If I get the chance, I want to study in Japan.",
+          "もし チャンスが あったら、日本{にほん}へ 留学{りゅうがく}したいです。",
+          ""
+        ],
+        [
+          "However expensive it is, I'll buy it.",
+          "いくら 高{たか}くても、買{か}います。",
+          "いくら announces a ても-clause"
+        ],
+        [
+          "However much I practise, I don't get any better.",
+          "いくら 練習{れんしゅう}しても、上手{じょうず}に なりません。",
+          ""
+        ],
+        [
+          "If you were transferred, would you go to the countryside?",
+          "もし 転勤{てんきん}したら、田舎{いなか}へ 行{い}きますか。",
+          ""
+        ],
+        [
+          "However much I ask, he doesn't explain.",
+          "いくら 聞{き}いても、彼{かれ}は 説明{せつめい}して くれません。",
+          "with Lesson 24's ～て くれません"
+        ]
+      ]
+    },
+    {
+      "pattern": "Nが",
+      "short": "subject in the clause",
+      "explain": "When the たら- or ても-clause has a subject of its own, that subject is marked with が and not with は, because は belongs to the sentence as a whole and cannot appear inside a subordinate clause. This is the same rule you met with noun-modifying clauses in Lesson 22. Getting it right is what stops 友だちが 来たら from sliding into ungrammatical 友だちは 来たら.",
+      "formation": "[N]が ＋ ～たら／～ても、＋ [main clause]",
+      "examples": [
+        [
+          "友{とも}だちが 来{き}たら、一緒{いっしょ}に 出{で}かけます。",
+          "When my friend comes, we'll go out together."
+        ],
+        [
+          "電車{でんしゃ}が 来{こ}なかったら、タクシーで 行{い}きます。",
+          "If the train doesn't come, I'll go by taxi."
+        ],
+        [
+          "雨{あめ}が 降{ふ}っても、試合{しあい}を します。",
+          "Even if it rains, we'll play the match."
+        ]
+      ],
+      "drills": [
+        [
+          "When my friend comes, we'll go out together.",
+          "友{とも}だちが 来{き}たら、一緒{いっしょ}に 出{で}かけます。",
+          "が inside the clause, never は"
+        ],
+        [
+          "If the train doesn't come, I'll go by taxi.",
+          "電車{でんしゃ}が 来{こ}なかったら、タクシーで 行{い}きます。",
+          "来{く}る→来{こ}なかったら"
+        ],
+        [
+          "Even if it rains, we'll play the match.",
+          "雨{あめ}が 降{ふ}っても、試合{しあい}を します。",
+          ""
+        ],
+        [
+          "If my wife is free, we'll go to the sea together.",
+          "妻{つま}が 暇{ひま}だったら、一緒{いっしょ}に 海{うみ}へ 行{い}きます。",
+          ""
+        ],
+        [
+          "If I have time, I'll go to the embassy.",
+          "時間{じかん}が あったら、大使館{たいしかん}へ 行{い}きます。",
+          ""
+        ],
+        [
+          "Even if my friends don't come, I'll go on my own.",
+          "友{とも}だちが 来{こ}なくても、一人{ひとり}で 行{い}きます。",
+          "ない-stem plus なくても"
+        ]
+      ]
+    }
+  ]
+}

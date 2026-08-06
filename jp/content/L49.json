@@ -1,0 +1,340 @@
+{
+  "points": [
+    {
+      "pattern": "敬語{けいご}",
+      "short": "what keigo is for",
+      "explain": "敬語 is the language you use to show respect for the person you are speaking to or the person you are speaking about. Three things decide whether it is called for: whether the other person is above you in age or position, how well you know them — a first meeting calls for it even between equals — and the division between ウチ, your own side, and ソト, everyone else. Your family and your own company count as ウチ, so when you talk about an insider to an outsider you treat that insider as you would yourself, and you do not use respectful language about them even if they are your boss.",
+      "formation": "敬語{けいご} ← senior in age or position ／ not close ／ ソトの 人{ひと}　（ウチの 人{ひと}の ことを ソトの 人{ひと}に 話{はな}す ときは 使{つか}いません）",
+      "examples": [
+        [
+          "ワット先生{せんせい}は 何時{なんじ}に 研究室{けんきゅうしつ}へ 来{こ}られましたか。",
+          "What time did Professor Watt come to his office?"
+        ],
+        [
+          "田中{たなか}は 今{いま} 出{で}かけて います。",
+          "Mr Tanaka is out at the moment. (said of your own section chief, to a customer)"
+        ],
+        [
+          "東京{とうきょう}から いらっしゃいましたか。",
+          "Have you come from Tokyo?"
+        ],
+        [
+          "今週{こんしゅう}は お忙{いそが}しいですか。",
+          "Are you busy this week?"
+        ]
+      ],
+      "drills": [
+        [
+          "Ask Professor Watt what time he came to his office.",
+          "ワット先生{せんせい}は 何時{なんじ}に 研究室{けんきゅうしつ}へ 来{こ}られましたか。",
+          "respect for someone senior in position"
+        ],
+        [
+          "A customer rings and asks for your section chief Mr Tanaka. Say that he is out at the moment.",
+          "田中{たなか}は 今{いま} 出{で}かけて います。",
+          "your own chief is ウチ: no 〜さん and no respectful verb"
+        ],
+        [
+          "Ask a visitor you have just met whether they have come from Tokyo.",
+          "東京{とうきょう}から いらっしゃいましたか。",
+          "keigo at a first meeting, even without a difference of rank"
+        ],
+        [
+          "Ask your teacher whether he plays golf.",
+          "先生{せんせい}は ゴルフを なさいますか。",
+          "the other person's action"
+        ],
+        [
+          "Ask a senior colleague whether he is busy this week.",
+          "今週{こんしゅう}は お忙{いそが}しいですか。",
+          "お also goes on some い-adjectives"
+        ],
+        [
+          "Tell your friend that you play golf too.",
+          "わたしも ゴルフを します。",
+          "never keigo about yourself"
+        ]
+      ]
+    },
+    {
+      "pattern": "敬語{けいご}の 種類{しゅるい}",
+      "short": "three types",
+      "explain": "敬語 falls into three kinds. 尊敬語 raises the other person by describing their actions and their belongings respectfully. 謙譲語 lowers your own actions and so raises theirs by contrast. 丁寧語 is the ordinary politeness of です and ます, which you have been using since Lesson 1 and which says nothing about whose action it is. Lesson 49 deals with 尊敬語; the other two come in Lesson 50.",
+      "formation": "尊敬語{そんけいご}：相手{あいて}の 動作{どうさ}　／　謙譲語{けんじょうご}：自分{じぶん}の 動作{どうさ}　／　丁寧語{ていねいご}：です・ます",
+      "examples": [
+        [
+          "部長{ぶちょう}は もう 帰{かえ}られました。",
+          "The department chief has already gone home. (尊敬語{そんけいご})"
+        ],
+        [
+          "社長{しゃちょう}は もう お帰{かえ}りに なりました。",
+          "The president has already left for home. (尊敬語{そんけいご})"
+        ],
+        [
+          "部長{ぶちょう}は もう 帰{かえ}りました。",
+          "The department chief has already gone home. (丁寧語{ていねいご} only)"
+        ],
+        [
+          "日本{にほん}の 料理{りょうり}を 召{め}し上{あ}がりますか。",
+          "Will you have some Japanese food? (尊敬語{そんけいご})"
+        ]
+      ],
+      "drills": [
+        [
+          "Using a respectful verb, say that the department chief has already gone home.",
+          "部長{ぶちょう}は もう 帰{かえ}られました。",
+          "尊敬語{そんけいご} raises the other person's action"
+        ],
+        [
+          "Say the same thing with お〜に なります.",
+          "部長{ぶちょう}は もう お帰{かえ}りに なりました。",
+          "the same level of respect, a shade politer"
+        ],
+        [
+          "Now say it in plain です／ます style, with no respect expressed.",
+          "部長{ぶちょう}は もう 帰{かえ}りました。",
+          "丁寧語{ていねいご} alone: polite to the listener, neutral about the chief"
+        ],
+        [
+          "Ask a guest whether they will have some Japanese food.",
+          "日本{にほん}の 料理{りょうり}を 召{め}し上{あ}がりますか。",
+          "a special 尊敬語{そんけいご} verb"
+        ],
+        [
+          "Say that you ate Japanese food yesterday.",
+          "わたしは きのう 日本{にほん}の 料理{りょうり}を 食{た}べました。",
+          "your own action takes no 尊敬語{そんけいご}"
+        ],
+        [
+          "Ask your teacher what he said.",
+          "先生{せんせい}は 何{なん}と おっしゃいましたか。",
+          "おっしゃいます for 言{い}います"
+        ]
+      ]
+    },
+    {
+      "pattern": "尊敬語{そんけいご}",
+      "short": "respectful forms",
+      "explain": "尊敬語 describes what the person you respect does, and the things belonging to them — never your own actions. There are three ways to build it. The （ら）れます form is identical in shape to the passive of Lesson 37. お ＋ ます-stem ＋ に なります is politer, but it cannot be used with a stem of only one mora such as み or ね, nor with Group III verbs. Beside these there is a set of special verbs, and where one exists you use it in preference to お〜に なります. To invite or instruct someone respectfully, use お ＋ ます-stem ＋ ください; the special verbs cannot enter that pattern, apart from お召{め}し上{あ}がり ください and ご覧{らん} ください.",
+      "formation": "（ら）れます：帰{かえ}られます　／　お ＋ Vます-form ＋ に なります：お帰{かえ}りに なります　／　special：いらっしゃいます（います・行{い}きます・来{き}ます）、召{め}し上{あ}がります（食{た}べます・飲{の}みます）、おっしゃいます（言{い}います）、なさいます（します）、ご覧{らん}に なります（見{み}ます）、ご存{ぞん}じです（知{し}って います）　／　お ＋ Vます-form ＋ ください：お入{はい}り ください",
+      "examples": [
+        [
+          "中村{なかむら}さんは 7時{じ}に 来{こ}られます。",
+          "Mr Nakamura is coming at seven."
+        ],
+        [
+          "社長{しゃちょう}は もう お帰{かえ}りに なりました。",
+          "The president has already left for home."
+        ],
+        [
+          "ワット先生{せんせい}は 研究室{けんきゅうしつ}に いらっしゃいます。",
+          "Professor Watt is in his office."
+        ],
+        [
+          "あちらから お入{はい}り ください。",
+          "Please come in from over there."
+        ]
+      ],
+      "drills": [
+        [
+          "Mr Nakamura is coming at seven.",
+          "中村{なかむら}さんは 7時{じ}に 来{こ}られます。",
+          "（ら）れます, the same shape as the passive"
+        ],
+        [
+          "Have you given up drinking?",
+          "お酒{さけ}を やめられたんですか。",
+          ""
+        ],
+        [
+          "The president has already left for home.",
+          "社長{しゃちょう}は もう お帰{かえ}りに なりました。",
+          "お ＋ ます-stem ＋ に なります"
+        ],
+        [
+          "Professor Watt is in his office.",
+          "ワット先生{せんせい}は 研究室{けんきゅうしつ}に いらっしゃいます。",
+          "the special verb replaces both います and お〜に なります"
+        ],
+        [
+          "Please help yourselves. (to guests at a meal)",
+          "どうぞ 召{め}し上{あ}がって ください。",
+          "召{め}し上{あ}がります takes 〜て ください"
+        ],
+        [
+          "Do you know Mr Miller's address?",
+          "ミラーさんの 住所{じゅうしょ}を ご存{ぞん}じですか。",
+          "ご存{ぞん}じです for 知{し}って います"
+        ]
+      ]
+    },
+    {
+      "pattern": "敬語{けいご}と 文体{ぶんたい}",
+      "short": "keigo in plain style",
+      "explain": "Politeness towards the listener and respect for the person referred to are two separate things, so a sentence can end in the plain form of a respectful verb. That gives a plain-style sentence which still honours the person it is about, and you hear it when someone speaks to a close friend or a family member about somebody they look up to. Note that いらっしゃいます, なさいます, くださいます and おっしゃいます are Group I verbs which are irregular only in the ます-form: elsewhere they conjugate in the ら-row, giving いらっしゃる and いらっしゃらない.",
+      "formation": "[respectful verb] plain form　（いらっしゃいます→いらっしゃる・いらっしゃらない、なさいます→なさる・なさらない、帰{かえ}られます→帰{かえ}られる）",
+      "examples": [
+        [
+          "部長{ぶちょう}は 何時{なんじ}に いらっしゃる？",
+          "What time is the department chief coming?"
+        ],
+        [
+          "先生{せんせい}は もう 帰{かえ}られた？",
+          "Has the teacher gone home already?"
+        ],
+        [
+          "ワット先生{せんせい}は 研究室{けんきゅうしつ}に いらっしゃらない。",
+          "Professor Watt isn't in his office."
+        ],
+        [
+          "社長{しゃちょう}は この 書類{しょるい}を ご覧{らん}に なった？",
+          "Has the president looked at this document?"
+        ]
+      ],
+      "drills": [
+        [
+          "Ask a colleague you are close to what time the department chief is coming.",
+          "部長{ぶちょう}は 何時{なんじ}に いらっしゃる？",
+          "plain style, but still respectful about the chief"
+        ],
+        [
+          "Ask the same colleague whether the teacher has gone home already.",
+          "先生{せんせい}は もう 帰{かえ}られた？",
+          "（ら）れます in the plain past"
+        ],
+        [
+          "Say to your friend that Professor Watt isn't in his office.",
+          "ワット先生{せんせい}は 研究室{けんきゅうしつ}に いらっしゃらない。",
+          "いらっしゃる conjugates in the ら-row"
+        ],
+        [
+          "Ask your colleague whether the president has looked at this document.",
+          "社長{しゃちょう}は この 書類{しょるい}を ご覧{らん}に なった？",
+          ""
+        ],
+        [
+          "Ask your sister whether Grandfather has eaten yet.",
+          "おじいさんは もう 召{め}し上{あ}がった？",
+          "family you look up to can take keigo in plain speech"
+        ],
+        [
+          "Ask your friend whether the section chief plays golf.",
+          "課長{かちょう}は ゴルフを なさる？",
+          "なさいます → なさる"
+        ]
+      ]
+    },
+    {
+      "pattern": "文{ぶん}の 中{なか}の 敬語{けいご}の レベル",
+      "short": "consistent level",
+      "explain": "Replacing the verb alone is not enough; the whole sentence has to be kept at one level of politeness. If the verb is 行かれます, then 奥さん must become 奥様 and いっしょに must become ごいっしょに to match. Nouns, adjectives and adverbs are raised by putting お or ご in front of them: お goes on words of Japanese origin and ご on words of Chinese origin.",
+      "formation": "お ＋ 和語{わご}：お国{くに}、お名前{なまえ}、お仕事{しごと}、お元気{げんき}、お忙{いそが}しい　／　ご ＋ 漢語{かんご}：ご家族{かぞく}、ご意見{いけん}、ご旅行{りょこう}、ご親切{しんせつ}、ご自由{じゆう}に",
+      "examples": [
+        [
+          "部長{ぶちょう}の 奥様{おくさま}も ごいっしょに ゴルフに 行{い}かれます。",
+          "The department chief's wife is going golfing together with him."
+        ],
+        [
+          "お国{くに}は どちらですか。",
+          "Where are you from?"
+        ],
+        [
+          "ご家族{かぞく}は お元気{げんき}で いらっしゃいますか。",
+          "Is your family well?"
+        ],
+        [
+          "どうぞ ご自由{じゆう}に ご覧{らん}に なって ください。",
+          "Please look at them as freely as you like."
+        ]
+      ],
+      "drills": [
+        [
+          "The department chief's wife is going golfing together with him.",
+          "部長{ぶちょう}の 奥様{おくさま}も ごいっしょに ゴルフに 行{い}かれます。",
+          "奥様{おくさま} and ごいっしょに to match 行{い}かれます"
+        ],
+        [
+          "Ask a visitor where they are from.",
+          "お国{くに}は どちらですか。",
+          "お on a word of Japanese origin"
+        ],
+        [
+          "Ask a customer what their name is.",
+          "お名前{なまえ}は 何{なん}と おっしゃいますか。",
+          "the noun and the verb are raised together"
+        ],
+        [
+          "Ask your teacher whether his family are well.",
+          "ご家族{かぞく}は お元気{げんき}で いらっしゃいますか。",
+          "で いらっしゃいます, the respectful です"
+        ],
+        [
+          "Tell the guests to look at the photographs as freely as they like.",
+          "どうぞ ご自由{じゆう}に 写真{しゃしん}を ご覧{らん}に なって ください。",
+          "ご on a word of Chinese origin"
+        ],
+        [
+          "Ask a senior colleague, on the telephone, whether he is busy with work at the moment.",
+          "今{いま} お仕事{しごと}が お忙{いそが}しいですか。",
+          "keep every word at the same level"
+        ]
+      ]
+    },
+    {
+      "pattern": "～まして",
+      "short": "polite te-form",
+      "explain": "When you want the middle of a sentence to sound as polite as the end, change the て-form to the ます-stem plus まして. It is used for consistency in a sentence that already contains keigo, and it turns up constantly on the telephone and in formal apologies and explanations.",
+      "formation": "[V]ます-form ＋ まして　（出{だ}します→出{だ}しまして、遅{おく}れます→遅{おく}れまして、なります→なりまして）",
+      "examples": [
+        [
+          "ハンスが ゆうべ 熱{ねつ}を 出{だ}しまして、けさも まだ 下{さ}がらないんです。",
+          "Hans ran a fever last night and it still hasn't gone down this morning."
+        ],
+        [
+          "電車{でんしゃ}が 遅{おく}れまして、会議{かいぎ}に 遅{おく}れて しまいました。",
+          "The train was late and I was late for the meeting."
+        ],
+        [
+          "子{こ}どもが かぜを ひきまして、きょうは 休{やす}ませて いただけませんか。",
+          "My child has caught a cold, so would you let me take today off?"
+        ],
+        [
+          "きのう 国{くに}から 母{はは}が 来{き}まして、あしたまで こちらに います。",
+          "My mother came from my home country yesterday and is here until tomorrow."
+        ]
+      ],
+      "drills": [
+        [
+          "Hans ran a fever last night and it still hasn't gone down this morning.",
+          "ハンスが ゆうべ 熱{ねつ}を 出{だ}しまして、けさも まだ 下{さ}がらないんです。",
+          "出{だ}して → 出{だ}しまして"
+        ],
+        [
+          "The train was late and I was late for the meeting.",
+          "電車{でんしゃ}が 遅{おく}れまして、会議{かいぎ}に 遅{おく}れて しまいました。",
+          ""
+        ],
+        [
+          "My child has caught a cold, so would you let me take today off?",
+          "子{こ}どもが かぜを ひきまして、きょうは 休{やす}ませて いただけませんか。",
+          "keeps the first half as polite as the request"
+        ],
+        [
+          "On the telephone: I'm Miller of IMC, and I'd like to meet the department chief.",
+          "IMCの ミラーと 言{い}いまして、部長{ぶちょう}に 会{あ}いたいんですが。",
+          "言{い}って → 言{い}いまして"
+        ],
+        [
+          "There was an accident and the road is very crowded.",
+          "事故{じこ}が ありまして、道{みち}が とても 込{こ}んで います。",
+          "あって → ありまして"
+        ],
+        [
+          "Thank you for being so kind to me yesterday. Please give my best regards to your wife.",
+          "きのうは ご親切{しんせつ}に して いただきまして、ありがとう ございました。奥様{おくさま}に よろしく お伝{つた}え ください。",
+          "いただいて → いただきまして"
+        ]
+      ]
+    }
+  ]
+}

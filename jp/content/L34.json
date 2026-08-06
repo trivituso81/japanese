@@ -1,0 +1,228 @@
+{
+  "points": [
+    {
+      "pattern": "V₁ dictionary form ／ V₁た-form ／ Nの ＋ とおりに、V₂",
+      "short": "following a model",
+      "explain": "とおりに tells someone to copy exactly, in words or in actions, what they have heard, seen, read or been taught. The choice of form turns on timing: the dictionary form is used when the model is still to come, so わたしが やる とおりに means 'the way I am about to do it', while the た-form is used when the model has already been given. A noun plus の とおりに points at something like a line, a diagram or a manual and says to follow that.",
+      "formation": "[V-dictionary]（model still to come）／ [V-た form]（model already given）／ [N]の ＋ とおりに、V₂",
+      "examples": [
+        [
+          "わたしが やる とおりに、やって ください。",
+          "Please do as I do."
+        ],
+        [
+          "見{み}た とおりに、話{はな}して ください。",
+          "Please tell us what you saw as it was."
+        ],
+        [
+          "線{せん}の とおりに、紙{かみ}を 切{き}って ください。",
+          "Please cut the paper following the line."
+        ],
+        [
+          "説明書{せつめいしょ}の とおりに、組{く}み立{た}てました。",
+          "I assembled it according to the handbook."
+        ]
+      ],
+      "drills": [
+        [
+          "Please do it the way I am about to do it.",
+          "わたしが やる とおりに、やって ください。",
+          "dictionary form: the model has not been shown yet"
+        ],
+        [
+          "Please write it down exactly as I say.",
+          "わたしが 言{い}う とおりに、書{か}いて ください。",
+          "still the dictionary form"
+        ],
+        [
+          "Please tell us what you saw as it was.",
+          "見{み}た とおりに、話{はな}して ください。",
+          "た-form: the seeing is already done"
+        ],
+        [
+          "Please cut the paper along the line.",
+          "線{せん}の とおりに、紙{かみ}を 切{き}って ください。",
+          "a noun takes の"
+        ],
+        [
+          "I assembled the furniture according to the instruction book.",
+          "説明書{せつめいしょ}の とおりに、家具{かぐ}を 組{く}み立{た}てました。",
+          ""
+        ],
+        [
+          "Please go in the direction of the arrow.",
+          "矢印{やじるし}の とおりに、行{い}って ください。",
+          "矢印{やじるし} from this lesson"
+        ]
+      ]
+    },
+    {
+      "pattern": "V₁た-form ／ Nの ＋ あとで、V₂",
+      "short": "after doing",
+      "explain": "あとで places the second action after the first has taken place. The verb in front of it is always in the た-form, whatever the tense of the sentence as a whole, and a noun takes の. It overlaps with the 〜てから of Lesson 16, but the textbook notes that あとで puts the emphasis on the time context in which the two events happen, rather than on one action leading into the next.",
+      "formation": "[V-た form] ／ [N]の ＋ あとで、V₂",
+      "examples": [
+        [
+          "新{あたら}しいのを 買{か}った あとで、なくした 時計{とけい}が 見{み}つかりました。",
+          "After I bought a new watch, I found the one I'd lost."
+        ],
+        [
+          "仕事{しごと}の あとで、飲{の}みに 行{い}きませんか。",
+          "Shall we go and have a drink after work?"
+        ],
+        [
+          "歯{は}を 磨{みが}いた あとで、寝{ね}ます。",
+          "I go to bed after brushing my teeth."
+        ],
+        [
+          "ごはんの あとで、薬{くすり}を 飲{の}んで ください。",
+          "Please take the medicine after your meal."
+        ]
+      ],
+      "drills": [
+        [
+          "After I bought a new one, I found the watch I had lost.",
+          "新{あたら}しいのを 買{か}った あとで、なくした 時計{とけい}が 見{み}つかりました。",
+          "the た-form stays even though everything is past"
+        ],
+        [
+          "Shall we go for a drink after work?",
+          "仕事{しごと}の あとで、飲{の}みに 行{い}きませんか。",
+          "a noun takes の"
+        ],
+        [
+          "I go to bed after brushing my teeth.",
+          "歯{は}を 磨{みが}いた あとで、寝{ね}ます。",
+          "た-form even though this is a habit"
+        ],
+        [
+          "Please take the medicine after your meal.",
+          "ごはんの あとで、薬{くすり}を 飲{の}んで ください。",
+          ""
+        ],
+        [
+          "I'll contact you after the meeting finishes.",
+          "会議{かいぎ}が 終{お}わった あとで、連絡{れんらく}します。",
+          "the subordinate subject takes が"
+        ],
+        [
+          "What are you going to do after you graduate?",
+          "卒業{そつぎょう}した あとで、何{なに}を しますか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "V₁て-form ／ V₁ない-form ないで ＋ V₂",
+      "short": "accompanying state",
+      "explain": "Here the first verb describes the state or circumstance in which the second action is carried out. しょうゆを つけて 食{た}べます says you eat it with soy sauce on it, and しょうゆを つけないで 食{た}べます says you eat it without — the same action, described with and without the accompanying condition. ないで is the negative counterpart of the て-form, and both halves must be actions of the same person.",
+      "formation": "[V₁-て form] ／ [V₁-ない form] ないで ＋ V₂",
+      "examples": [
+        [
+          "しょうゆを つけて 食{た}べます。",
+          "We eat it with soy sauce."
+        ],
+        [
+          "しょうゆを つけないで 食{た}べます。",
+          "We eat it without soy sauce."
+        ],
+        [
+          "シートベルトを して、運転{うんてん}して ください。",
+          "Please drive with your seat belt on."
+        ],
+        [
+          "きのうは 晩{ばん}ごはんを 食{た}べないで 寝{ね}ました。",
+          "Yesterday I went to bed without eating dinner."
+        ]
+      ],
+      "drills": [
+        [
+          "We eat it with soy sauce on it.",
+          "しょうゆを つけて 食{た}べます。",
+          "the て-form gives the accompanying state"
+        ],
+        [
+          "We eat it without soy sauce.",
+          "しょうゆを つけないで 食{た}べます。",
+          "ないで is the negative of the て-form"
+        ],
+        [
+          "Please drive with your seat belt on.",
+          "シートベルトを して、運転{うんてん}して ください。",
+          "シートベルトを します, not つけます"
+        ],
+        [
+          "Yesterday I went to bed without eating dinner.",
+          "きのうは 晩{ばん}ごはんを 食{た}べないで 寝{ね}ました。",
+          "both actions belong to the same person"
+        ],
+        [
+          "I went out without taking an umbrella.",
+          "かさを 持{も}たないで 出{で}かけました。",
+          "持{も}ちます → 持{も}たないで"
+        ],
+        [
+          "Please come tomorrow without bringing anything.",
+          "あしたは 何{なに}も 持{も}って 来{こ}ないで ください。",
+          "何{なに}も with a negative"
+        ]
+      ]
+    },
+    {
+      "pattern": "V₁ない-form ないで、V₂",
+      "short": "instead of",
+      "explain": "This looks identical to the ないで you have just met, but the sense is different. Rather than describing how the second action is done, it names one of two possible courses of action, says it was rejected, and then gives the one that was taken instead. The comma written after ないで reflects that break between the two alternatives. 'I won't go anywhere on Sunday; I'll take it easy at home instead' is the typical shape.",
+      "formation": "[V₁-ない form] ないで、＋ V₂　（V₂ instead of V₁）",
+      "examples": [
+        [
+          "日曜日{にちようび}は どこも 行{い}かないで、うちで ゆっくり 休{やす}みます。",
+          "On Sunday I won't go anywhere; I'll take it easy at home instead."
+        ],
+        [
+          "きのうは 勉強{べんきょう}しないで、ずっと テレビを 見{み}て いました。",
+          "Yesterday I didn't study; I watched television the whole time."
+        ],
+        [
+          "今晩{こんばん}は 出{で}かけないで、うちで 本{ほん}を 読{よ}みます。",
+          "I won't go out tonight; I'll read a book at home."
+        ],
+        [
+          "バスに 乗{の}らないで、歩{ある}いて 行{い}きましょう。",
+          "Let's not take the bus; let's walk instead."
+        ]
+      ],
+      "drills": [
+        [
+          "On Sunday I won't go anywhere; I'll take it easy at home instead.",
+          "日曜日{にちようび}は どこも 行{い}かないで、うちで ゆっくり 休{やす}みます。",
+          "one course of action chosen over another"
+        ],
+        [
+          "Yesterday I didn't study; I watched television the whole time.",
+          "きのうは 勉強{べんきょう}しないで、ずっと テレビを 見{み}て いました。",
+          "ずっと from Lesson 31"
+        ],
+        [
+          "I won't go out tonight; I'll read a book at home.",
+          "今晩{こんばん}は 出{で}かけないで、うちで 本{ほん}を 読{よ}みます。",
+          ""
+        ],
+        [
+          "Let's not take the bus; let's walk.",
+          "バスに 乗{の}らないで、歩{ある}いて 行{い}きましょう。",
+          "the rejected option comes first"
+        ],
+        [
+          "My son didn't go to the party; he stayed at home and studied.",
+          "息子{むすこ}は パーティーへ 行{い}かないで、うちで 勉強{べんきょう}しました。",
+          ""
+        ],
+        [
+          "This morning I didn't have breakfast; I came straight to the office.",
+          "けさは 朝{あさ}ごはんを 食{た}べないで、すぐ 会社{かいしゃ}へ 来{き}ました。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

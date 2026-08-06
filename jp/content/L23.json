@@ -1,0 +1,340 @@
+{
+  "points": [
+    {
+      "pattern": "Vる とき、～",
+      "short": "when",
+      "explain": "とき is grammatically a noun meaning 'time', so the clause in front of it is a noun-modifying clause of the kind you met in Lesson 22 and must be in the plain form. With the dictionary form the とき-clause names the moment before or during the action, not after it: 出かける とき、電気を 消します means you switch the light off on your way out. The main clause carries the tense and the politeness for the sentence as a whole.",
+      "formation": "[V-dictionary ／ V-ない] ＋ とき、＋ [main clause]",
+      "examples": [
+        [
+          "図書館{としょかん}で 本{ほん}を 借{か}りる とき、カードが 要{い}ります。",
+          "You need a card when you borrow a book from the library."
+        ],
+        [
+          "出{で}かける とき、電気{でんき}を 消{け}します。",
+          "I turn off the light when I go out."
+        ],
+        [
+          "道{みち}を 渡{わた}る とき、車{くるま}に 気{き}を つけて ください。",
+          "Please watch out for cars when you cross the road."
+        ],
+        [
+          "ことばが わからない とき、先生{せんせい}に 聞{き}きます。",
+          "When I don't understand a word, I ask the teacher."
+        ]
+      ],
+      "drills": [
+        [
+          "You need a card when you borrow a book from the library.",
+          "図書館{としょかん}で 本{ほん}を 借{か}りる とき、カードが 要{い}ります。",
+          "dictionary form: the action is not finished yet"
+        ],
+        [
+          "I turn off the light when I go out.",
+          "出{で}かける とき、電気{でんき}を 消{け}します。",
+          ""
+        ],
+        [
+          "Please watch out for cars when you cross the road.",
+          "道{みち}を 渡{わた}る とき、車{くるま}に 気{き}を つけて ください。",
+          ""
+        ],
+        [
+          "When I don't understand a word, I ask the teacher.",
+          "ことばが わからない とき、先生{せんせい}に 聞{き}きます。",
+          "a ない-form also works before とき"
+        ],
+        [
+          "What do you say when you go into someone's house?",
+          "うちに 入{はい}る とき、何{なん}と 言{い}いますか。",
+          "with Lesson 21's ～と 言{い}います"
+        ],
+        [
+          "I use chopsticks when I eat sushi.",
+          "おすしを 食{た}べる とき、はしを 使{つか}います。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vた とき、～",
+      "short": "after it happened",
+      "explain": "Putting the verb in the た-form before とき says that the first action was already complete when the second one took place. うちへ 帰った とき、「ただいま」と 言います means you say it once you are already home. The tense of とき is relative to the main clause, not to now, so a た-form can appear even when the whole sentence is about the future.",
+      "formation": "[V-た form] ＋ とき、＋ [main clause]",
+      "examples": [
+        [
+          "うちへ 帰{かえ}った とき、「ただいま」と 言{い}います。",
+          "When I get home, I say \"tadaima\"."
+        ],
+        [
+          "ごはんを 食{た}べた とき、「ごちそうさま」と 言{い}います。",
+          "When I've finished eating, I say \"gochisousama\"."
+        ],
+        [
+          "東京{とうきょう}へ 行{い}った とき、友{とも}だちに 会{あ}いました。",
+          "When I went to Tokyo, I met a friend."
+        ],
+        [
+          "疲{つか}れた とき、おふろに 入{はい}ります。",
+          "When I'm tired, I have a bath."
+        ]
+      ],
+      "drills": [
+        [
+          "When I get home, I say \"tadaima\".",
+          "うちへ 帰{かえ}った とき、「ただいま」と 言{い}います。",
+          "た-form: you are already home"
+        ],
+        [
+          "When I had finished eating, I said \"gochisousama\".",
+          "ごはんを 食{た}べた とき、「ごちそうさま」と 言{い}いました。",
+          ""
+        ],
+        [
+          "When I went to Tokyo, I met a friend.",
+          "東京{とうきょう}へ 行{い}った とき、友{とも}だちに 会{あ}いました。",
+          ""
+        ],
+        [
+          "When I'm tired, I have a bath.",
+          "疲{つか}れた とき、おふろに 入{はい}ります。",
+          "the main clause can still be non-past"
+        ],
+        [
+          "Please turn off the air conditioner when you leave the room.",
+          "部屋{へや}を 出{で}た とき、エアコンを 消{け}して ください。",
+          ""
+        ],
+        [
+          "What did you do when you lost your key?",
+          "かぎを なくした とき、どう しましたか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj い／な-adj な／Nの ＋ とき",
+      "short": "adjective and noun とき",
+      "explain": "とき is not restricted to verbs. An い-adjective keeps its final い, a な-adjective keeps な, and a noun links with の — exactly the shapes those words take before any other noun. This is how you talk about periods of your life or states you find yourself in, such as 子どもの とき for 'when I was a child'.",
+      "formation": "若{わか}い とき　／　暇{ひま}な とき　／　子{こ}どもの とき",
+      "examples": [
+        [
+          "暇{ひま}な とき、うちで 音楽{おんがく}を 聞{き}きます。",
+          "When I'm free, I listen to music at home."
+        ],
+        [
+          "子{こ}どもの とき、よく 川{かわ}で 泳{およ}ぎました。",
+          "When I was a child, I often swam in the river."
+        ],
+        [
+          "若{わか}い とき、あまり 勉強{べんきょう}しませんでした。",
+          "When I was young, I didn't study much."
+        ],
+        [
+          "頭{あたま}が 痛{いた}い とき、この 薬{くすり}を 飲{の}みます。",
+          "When I have a headache, I take this medicine."
+        ]
+      ],
+      "drills": [
+        [
+          "When I'm free, I listen to music at home.",
+          "暇{ひま}な とき、うちで 音楽{おんがく}を 聞{き}きます。",
+          "な-adjective keeps な"
+        ],
+        [
+          "When I was a child, I often swam in the river.",
+          "子{こ}どもの とき、よく 川{かわ}で 泳{およ}ぎました。",
+          "a noun links with の"
+        ],
+        [
+          "When I was young, I didn't study much.",
+          "若{わか}い とき、あまり 勉強{べんきょう}しませんでした。",
+          "い-adjective keeps い"
+        ],
+        [
+          "When I have a headache, I take this medicine.",
+          "頭{あたま}が 痛{いた}い とき、この 薬{くすり}を 飲{の}みます。",
+          ""
+        ],
+        [
+          "What do you do when you're not busy?",
+          "忙{いそが}しくない とき、何{なに}を しますか。",
+          "the negative form takes とき directly too"
+        ],
+        [
+          "When I was a student, I was working part time.",
+          "学生{がくせい}の とき、アルバイトを して いました。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vると、～",
+      "short": "automatic result",
+      "explain": "The dictionary form plus と states that the second thing always follows from the first: press this and the change comes out, turn right and the station is there. Because the result is presented as inevitable, the second clause cannot be a request, an invitation or an intention — 右へ 曲がると、行って ください is wrong. This is the pattern for machines, directions and natural change.",
+      "formation": "[V-dictionary] ＋ と、＋ [inevitable result]",
+      "examples": [
+        [
+          "この ボタンを 押{お}すと、お釣{つ}りが 出{で}ます。",
+          "If you press this button, the change comes out."
+        ],
+        [
+          "右{みぎ}へ 曲{ま}がると、駅{えき}が あります。",
+          "Turn right and there's the station."
+        ],
+        [
+          "この つまみを 回{まわ}すと、音{おと}が 大{おお}きく なります。",
+          "If you turn this knob, the sound gets louder."
+        ],
+        [
+          "春{はる}に なると、暖{あたた}かく なります。",
+          "When spring comes, it gets warm."
+        ]
+      ],
+      "drills": [
+        [
+          "If you press this button, the change comes out.",
+          "この ボタンを 押{お}すと、お釣{つ}りが 出{で}ます。",
+          "と for a result that always follows"
+        ],
+        [
+          "Turn right and there's the station.",
+          "右{みぎ}へ 曲{ま}がると、駅{えき}が あります。",
+          ""
+        ],
+        [
+          "If you turn this knob, the sound gets louder.",
+          "この つまみを 回{まわ}すと、音{おと}が 大{おお}きく なります。",
+          ""
+        ],
+        [
+          "When spring comes, it gets warm.",
+          "春{はる}に なると、暖{あたた}かく なります。",
+          ""
+        ],
+        [
+          "If you go straight along this road, there's a bridge.",
+          "この 道{みち}を まっすぐ 行{い}くと、橋{はし}が あります。",
+          ""
+        ],
+        [
+          "If you turn left at the traffic light, there's a car park.",
+          "信号{しんごう}を 左{ひだり}へ 曲{ま}がると、駐車場{ちゅうしゃじょう}が あります。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Nが adjective ／ Nが V",
+      "short": "noticing things",
+      "explain": "When you report what you have just noticed about something — a noise, a machine that has stopped, a pain — the thing itself takes が rather than は, because it is new information rather than an established topic. This is the が of Lesson 14's 雨が 降って います, and it is what you use when complaining that something is wrong.",
+      "formation": "N ＋ が ＋ [adjective]です ／ [verb]ます",
+      "examples": [
+        [
+          "音{おと}が 大{おお}きいです。",
+          "The sound is loud."
+        ],
+        [
+          "時計{とけい}が 動{うご}きません。",
+          "The clock isn't working."
+        ],
+        [
+          "お釣{つ}りが 出{で}ませんでした。",
+          "The change didn't come out."
+        ],
+        [
+          "機械{きかい}が 故障{こしょう}しました。",
+          "The machine has broken down."
+        ]
+      ],
+      "drills": [
+        [
+          "The sound is a bit loud.",
+          "音{おと}が ちょっと 大{おお}きいです。",
+          "が marks what you have noticed"
+        ],
+        [
+          "My watch isn't working.",
+          "時計{とけい}が 動{うご}きません。",
+          ""
+        ],
+        [
+          "The change didn't come out.",
+          "お釣{つ}りが 出{で}ませんでした。",
+          ""
+        ],
+        [
+          "This room has small windows.",
+          "この 部屋{へや}は 窓{まど}が 小{ちい}さいです。",
+          "topic は, then が for the detail"
+        ],
+        [
+          "The machine has broken down.",
+          "機械{きかい}が 故障{こしょう}しました。",
+          ""
+        ],
+        [
+          "My leg hurts.",
+          "足{あし}が 痛{いた}いです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "N(place)を V (movement)",
+      "short": "moving through",
+      "explain": "With verbs of movement such as 渡ります, 歩きます, 曲がります and 散歩します, を marks the space you move through or along rather than a direct object. Compare で, which marks the place where an action simply happens: 公園で 遊びます is playing in the park, while 公園を 散歩します is walking through it. This を is essential for giving street directions.",
+      "formation": "N(place) ＋ を ＋ 渡{わた}ります／歩{ある}きます／曲{ま}がります／散歩{さんぽ}します",
+      "examples": [
+        [
+          "あの 橋{はし}を 渡{わた}って ください。",
+          "Please cross that bridge."
+        ],
+        [
+          "毎日{まいにち} この 道{みち}を 歩{ある}きます。",
+          "I walk along this road every day."
+        ],
+        [
+          "毎朝{まいあさ} 公園{こうえん}を 散歩{さんぽ}します。",
+          "I take a walk in the park every morning."
+        ],
+        [
+          "2つ目{め}の 交差点{こうさてん}を 右{みぎ}へ 曲{ま}がって ください。",
+          "Please turn right at the second crossroads."
+        ]
+      ],
+      "drills": [
+        [
+          "Please cross that bridge.",
+          "あの 橋{はし}を 渡{わた}って ください。",
+          "を marks the space passed through"
+        ],
+        [
+          "I walk along this road every day.",
+          "毎日{まいにち} この 道{みち}を 歩{ある}きます。",
+          ""
+        ],
+        [
+          "I take a walk in the park every morning.",
+          "毎朝{まいあさ} 公園{こうえん}を 散歩{さんぽ}します。",
+          ""
+        ],
+        [
+          "Please turn right at the second crossroads.",
+          "2つ目{め}の 交差点{こうさてん}を 右{みぎ}へ 曲{ま}がって ください。",
+          ""
+        ],
+        [
+          "Please don't cross the road here.",
+          "ここで 道{みち}を 渡{わた}らないで ください。",
+          ""
+        ],
+        [
+          "Which corner do I turn at?",
+          "どの 角{かど}を 曲{ま}がりますか。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

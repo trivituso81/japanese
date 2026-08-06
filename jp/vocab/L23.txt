@@ -1,0 +1,36 @@
+VOCAB
+ききます I ［せんせいに ～］|聞きます ［先生に ～］|ask [the teacher]
+まわします I|回します|turn
+ひきます I|引きます|pull
+かえます II|変えます|change
+さわります I ［ドアに ～］|触ります|touch [a door]
+でます II ［おつりが ～］|出ます ［お釣りが ～］|[change] come out
+うごきます I ［とけいが ～］|動きます ［時計が ～］|[a watch] move, work
+あるきます I ［みちを ～］|歩きます ［道を ～］|walk [along a road]
+わたります I ［はしを ～］|渡ります ［橋を ～］|cross [a bridge]
+きを つけます II ［くるまに ～］|気を つけます ［車に ～］|pay attention [to cars], take care
+ひっこしします III|引っ越しします|move (house)
+でんきや|電気屋|electrician
+～や|～屋|person of ～ shop
+サイズ||size
+おと|音|sound
+きかい|機械|machine
+つまみ||knob
+こしょう|故障|breakdown (～します: break down)
+みち|道|road, way
+こうさてん|交差点|crossroad
+しんごう|信号|traffic light
+かど|角|corner
+はし|橋|bridge
+ちゅうしゃじょう|駐車場|parking lot, car park
+－め|－目|the -th (indicating order)
+[お]しょうがつ|[お]正月|New Year's Day
+ごちそうさま[でした]。||That was delicious. (said after eating or drinking)
+建物||building
+外国人登録証||alien registration card
+PROPER
+しょうとく たいし|聖徳太子|Prince Shotoku (574－622)
+ほうりゅうじ|法隆寺|Horyuji Temple, a temple in Nara Prefecture built by Prince Shotoku at the beginning of the 7th century
+げんきちゃ|元気茶|fictitious tea
+ほんだえき|本田駅|fictitious station
+としょかんまえ|図書館前|fictitious bus stop

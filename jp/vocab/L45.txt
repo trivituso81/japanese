@@ -1,0 +1,35 @@
+VOCAB
+あやまります I|謝ります|apologize
+あいます I ［じこに～］|あいます ［事故に～］|encounter [an accident]
+しんじます II|信じます|believe, trust
+よういします III|用意します|prepare
+キャンセルします III||cancel
+うまく いきます I||go well
+ほしょうしょ|保証書|guarantee
+りょうしゅうしょ|領収書|receipt
+おくりもの|贈り物|gift, present (～を します: give a present)
+まちがいでんわ|まちがい電話|wrong (telephone) number
+キャンプ||camp
+かかり|係|person in charge
+ちゅうし|中止|calling off, cancelling, suspension
+てん|点|point, score
+レバー||lever
+[～えん]さつ|[～円]札|[～ yen] note, bill
+ちゃんと||regularly, properly
+きゅうに|急に|suddenly
+たのしみに して います|楽しみに して います|be looking forward to, be expecting
+いじょうです。|以上です。|That's all.
+かかりいん|係員|person in charge, attendant
+コース||course
+スタート||start
+～い|～位|-th (ranking)
+ゆうしょうします III|優勝します|win the championship
+なやみ|悩み|trouble, worry
+めざまし[どけい]|目覚まし[時計]|alarm clock
+ねむります I|眠ります|sleep
+めが さめます II|目が 覚めます|wake up
+だいがくせい|大学生|university student
+かいとう|回答|answer, reply
+なります I|鳴ります|ring
+セットします III||set
+それでも||nevertheless, for all that

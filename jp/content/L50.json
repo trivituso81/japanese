@@ -1,0 +1,116 @@
+{
+  "points": [
+    {
+      "pattern": "謙譲語{けんじょうご}",
+      "short": "humble forms",
+      "explain": "謙譲語 lowers your own actions, and by lowering yourself it raises the person your action touches — someone above you in standing, or an outsider. The regular pattern is お ＋ ます-stem ＋ します for Group I and II verbs and ご ＋ noun ＋ します for Group III verbs, and it works only where the act actually involves the other person, so you cannot say お帰りします of merely going home yourself. Verbs with a one-mora stem such as みます and います have no お〜します form. Beside these there is a set of special humble verbs, and some of them — 参ります, 申します, おります — are used simply to speak modestly about yourself, even where the other person is not involved. Remember that you use these of your own group as well: speaking to a customer, an insider's action is humbled just as your own is.",
+      "formation": "お ＋ V(I・II)ます-form ＋ します：お持{も}ちします、お送{おく}りします　／　ご ＋ V(III) ＋ します：ご案内{あんない}します、ご説明{せつめい}します　（電話{でんわ}します・約束{やくそく}します take お）　／　special：参{まい}ります（行{い}きます・来{き}ます）、おります（います）、いただきます（食{た}べます・飲{の}みます・もらいます）、申{もう}します（言{い}います）、いたします（します）、拝見{はいけん}します（見{み}ます）、存{ぞん}じます（知{し}ります）、伺{うかが}います（聞{き}きます・行{い}きます）、お目{め}に かかります（会{あ}います）",
+      "examples": [
+        [
+          "重{おも}そうですね。お持{も}ちしましょうか。",
+          "It looks heavy. Shall I carry it for you?"
+        ],
+        [
+          "わたしが 社長{しゃちょう}に スケジュールを お知{し}らせします。",
+          "I will tell the president the schedule."
+        ],
+        [
+          "江戸東京博物館{えどとうきょうはくぶつかん}へ ご案内{あんない}します。",
+          "I will take you to the Edo-Tokyo Museum."
+        ],
+        [
+          "ミラーと 申{もう}します。アメリカから 参{まい}りました。",
+          "My name is Miller. I come from the United States."
+        ]
+      ],
+      "drills": [
+        [
+          "A guest is carrying a heavy bag. Offer to carry it.",
+          "重{おも}そうですね。お持{も}ちしましょうか。",
+          "お ＋ ます-stem ＋ します for a Group I verb"
+        ],
+        [
+          "As a guide, tell the visitors that you will take them to the Edo-Tokyo Museum.",
+          "江戸東京博物館{えどとうきょうはくぶつかん}へ ご案内{あんない}します。",
+          "ご ＋ Group III verb"
+        ],
+        [
+          "On the telephone, say that you are Miller of IMC.",
+          "IMCの ミラーと 申{もう}します。",
+          "申{もう}します for 言{い}います, even though the act does not touch the listener"
+        ],
+        [
+          "Tell a customer that you will visit their office at three tomorrow.",
+          "あしたの 3時{じ}に 伺{うかが}います。",
+          "伺{うかが}います for 行{い}きます"
+        ],
+        [
+          "Tell a visitor that your elder brother will drive them home.",
+          "兄{あに}が 車{くるま}で お送{おく}りします。",
+          "an insider's action is humbled too"
+        ],
+        [
+          "Tell your section chief that you have seen the document.",
+          "書類{しょるい}を 拝見{はいけん}しました。",
+          "拝見{はいけん}します for 見{み}ます"
+        ]
+      ]
+    },
+    {
+      "pattern": "丁寧語{ていねいご}",
+      "short": "polite forms",
+      "explain": "丁寧語 shows respect to the person you are talking to simply by making the sentence itself polite; unlike 尊敬語 and 謙譲語 it says nothing about whose action is being described. ございます is the polite equivalent of あります and ～で ございます of ～です, and よろしいでしょうか is the polite equivalent of いいですか. You hear all three from shop assistants, hotel staff and people answering the telephone at work, where です／ます alone would sound too plain; between colleagues the ordinary polite forms are enough.",
+      "formation": "あります → ございます　／　～です → ～で ございます　／　いいですか → よろしいでしょうか",
+      "examples": [
+        [
+          "電話{でんわ}は 階段{かいだん}の 横{よこ}に ございます。",
+          "The telephone is beside the stairs."
+        ],
+        [
+          "はい、IMCで ございます。",
+          "Hello, this is IMC."
+        ],
+        [
+          "お飲{の}み物{もの}は 何{なに}が よろしいでしょうか。",
+          "What would you like to drink?"
+        ],
+        [
+          "この パンフレットを いただいても よろしいでしょうか。",
+          "May I have one of these pamphlets?"
+        ]
+      ],
+      "drills": [
+        [
+          "Tell a visitor that the telephone is beside the stairs.",
+          "電話{でんわ}は 階段{かいだん}の 横{よこ}に ございます。",
+          "ございます for あります"
+        ],
+        [
+          "Answer the office telephone: hello, this is IMC.",
+          "はい、IMCで ございます。",
+          "～で ございます for ～です"
+        ],
+        [
+          "Ask a guest what they would like to drink.",
+          "お飲{の}み物{もの}は 何{なに}が よろしいでしょうか。",
+          "よろしいでしょうか for いいですか"
+        ],
+        [
+          "At a reception desk, ask whether you may have one of these pamphlets.",
+          "この パンフレットを いただいても よろしいでしょうか。",
+          "いただきます, the humble もらいます"
+        ],
+        [
+          "As a hotel clerk, tell the guest that the dining room is on the second floor.",
+          "食堂{しょくどう}は 2階{かい}に ございます。",
+          ""
+        ],
+        [
+          "Ask a customer whether three o'clock tomorrow would suit them.",
+          "あしたの 3時{じ}で よろしいでしょうか。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

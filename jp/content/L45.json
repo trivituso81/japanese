@@ -1,0 +1,116 @@
+{
+  "points": [
+    {
+      "pattern": "V dictionary form ／ Vた-form ／ Vない-form ない ／ い-adj ／ な-adjな ／ Nの ＋ 場合{ばあい}は、～",
+      "short": "in the case that",
+      "explain": "場合{ばあい} is an ordinary noun meaning 'case' or 'occasion', so whatever comes in front of it takes exactly the shape it would take modifying any other noun: plain verb forms, い-adjectives unchanged, な-adjectives with な and nouns with の. The clause after it says how to cope with that situation or what will follow from it. Because it names the contingency explicitly, it is at home in notices, rules and instructions, where a plain たら would sound too casual.",
+      "formation": "V dictionary ／ Vた ／ Vない ／ い-adj ／ な-adjな ／ Nの ＋ 場合{ばあい}は、～",
+      "examples": [
+        [
+          "会議{かいぎ}に 間{ま}に 合{あ}わない 場合{ばあい}は、連絡{れんらく}して ください。",
+          "If you cannot be in time for the meeting, please let us know."
+        ],
+        [
+          "領収書{りょうしゅうしょ}が 必要{ひつよう}な 場合{ばあい}は、係{かかり}に 言{い}って ください。",
+          "When you need a receipt, please tell the person in charge."
+        ],
+        [
+          "火事{かじ}や 地震{じしん}の 場合{ばあい}は、エレベーターを 使{つか}わないで ください。",
+          "In case of fire or earthquake, do not use the lift."
+        ],
+        [
+          "時間{じかん}に 遅{おく}れた 場合{ばあい}は、中{なか}に 入{はい}れません。",
+          "If you are late, you will not be able to get in."
+        ]
+      ],
+      "drills": [
+        [
+          "If you cannot be in time for the meeting, please let us know.",
+          "会議{かいぎ}に 間{ま}に 合{あ}わない 場合{ばあい}は、連絡{れんらく}して ください。",
+          "a plain ない-form modifies 場合{ばあい} directly"
+        ],
+        [
+          "In the event that the fax machine is not working properly, what should I do?",
+          "ファクスの 調子{ちょうし}が 悪{わる}い 場合{ばあい}は、どう したら いいですか。",
+          "い-adjectives need no change"
+        ],
+        [
+          "When you need a receipt, please tell the person in charge.",
+          "領収書{りょうしゅうしょ}が 必要{ひつよう}な 場合{ばあい}は、係{かかり}に 言{い}って ください。",
+          "な-adjectives keep な"
+        ],
+        [
+          "In case of fire or earthquake, do not use the lift.",
+          "火事{かじ}や 地震{じしん}の 場合{ばあい}は、エレベーターを 使{つか}わないで ください。",
+          "a noun takes の"
+        ],
+        [
+          "If you are late, you will not be able to get in.",
+          "時間{じかん}に 遅{おく}れた 場合{ばあい}は、中{なか}に 入{はい}れません。",
+          "the past form for something that has already happened"
+        ],
+        [
+          "If it rains, the game will be called off.",
+          "雨{あめ}が 降{ふ}った 場合{ばあい}は、試合{しあい}は 中止{ちゅうし}です。",
+          "中止{ちゅうし}, calling it off"
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} ＋ のに、～",
+      "short": "even though",
+      "explain": "のに joins two clauses when the second runs contrary to what the first leads you to expect, and it always carries a feeling of surprise, disappointment or complaint. Verbs and い-adjectives take their plain form in front of it, while な-adjectives and nouns change だ to な. It is not simply another ～が: が can join two different evaluations, so 部屋{へや}は 狭{せま}いですが、きれいです is fine while 狭{せま}いのに、きれいです is not. Nor can it replace ～ても, because のに only ever speaks of things that have actually happened, and with a question after it the reproach becomes very direct.",
+      "formation": "［plain form］＋ のに、～　（な-adj and N：だ → な：便利{べんり}なのに、日曜日{にちようび}なのに）",
+      "examples": [
+        [
+          "約束{やくそく}を したのに、彼女{かのじょ}は 来{き}ませんでした。",
+          "She didn't come, even though she promised."
+        ],
+        [
+          "きょうは 日曜日{にちようび}なのに、働{はたら}かなければ なりません。",
+          "Even though today is Sunday, I have to work."
+        ],
+        [
+          "約束{やくそく}を したのに、どうして 来{こ}なかったんですか。",
+          "You promised to come. Why didn't you come?"
+        ],
+        [
+          "薬{くすり}を 飲{の}んだのに、まだ 熱{ねつ}が 下{さ}がりません。",
+          "Even though I took the medicine, my temperature still hasn't come down."
+        ]
+      ],
+      "drills": [
+        [
+          "She didn't come, even though she promised.",
+          "約束{やくそく}を したのに、彼女{かのじょ}は 来{き}ませんでした。",
+          "のに carries the speaker's disappointment"
+        ],
+        [
+          "Even though today is Sunday, I have to work.",
+          "きょうは 日曜日{にちようび}なのに、働{はたら}かなければ なりません。",
+          "a noun changes だ to な"
+        ],
+        [
+          "You promised to come. Why didn't you come?",
+          "約束{やくそく}を したのに、どうして 来{こ}なかったんですか。",
+          "with a question after it, のに sounds like a reproach"
+        ],
+        [
+          "Even though I took the medicine, my temperature still hasn't come down.",
+          "薬{くすり}を 飲{の}んだのに、まだ 熱{ねつ}が 下{さ}がりません。",
+          ""
+        ],
+        [
+          "Even though I set the alarm clock, I couldn't get up.",
+          "目覚{めざ}まし時計{どけい}を セットしたのに、起{お}きられませんでした。",
+          "セットします, to set"
+        ],
+        [
+          "Even though this shop is cheap, it isn't very crowded.",
+          "この 店{みせ}は 安{やす}いのに、あまり 込{こ}んで いません。",
+          "い-adjectives keep their plain form"
+        ]
+      ]
+    }
+  ]
+}

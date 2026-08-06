@@ -1,0 +1,284 @@
+{
+  "points": [
+    {
+      "pattern": "Vて も いいです",
+      "short": "permission",
+      "explain": "The て-form followed by も いいです asks for or grants permission. As a question it is the everyday way of saying 'may I…?', and permission is given either with はい、どうぞ or by repeating the pattern. Japanese rarely refuses flatly, so a refusal is usually softened to すみません、ちょっと…… unless the speaker really does have the authority to forbid.",
+      "formation": "Vて ＋ も いいです ／ も いいですか",
+      "examples": [
+        [
+          "写真{しゃしん}を 撮{と}っても いいですか。……はい、どうぞ。",
+          "May I take a photograph? — Yes, go ahead."
+        ],
+        [
+          "この 資料{しりょう}を コピーしても いいですか。",
+          "May I copy these materials?"
+        ],
+        [
+          "ここに 荷物{にもつ}を 置{お}いても いいですか。",
+          "May I put my luggage here?"
+        ],
+        [
+          "あしたは 休{やす}んでも いいです。",
+          "You may take tomorrow off."
+        ]
+      ],
+      "drills": [
+        [
+          "May I take a photograph?",
+          "写真{しゃしん}を 撮{と}っても いいですか。",
+          "撮{と}ります → 撮{と}って"
+        ],
+        [
+          "May I use this computer?",
+          "この コンピューターを 使{つか}っても いいですか。",
+          "使{つか}います → 使{つか}って"
+        ],
+        [
+          "Yes, go ahead.",
+          "はい、どうぞ。",
+          "The usual way to grant permission"
+        ],
+        [
+          "May I sit here?",
+          "ここに 座{すわ}っても いいですか。",
+          "座{すわ}ります takes に for the place"
+        ],
+        [
+          "You may take tomorrow off.",
+          "あしたは 休{やす}んでも いいです。",
+          "A statement, not a question"
+        ],
+        [
+          "May I open the window?",
+          "窓{まど}を 開{あ}けても いいですか。",
+          "Group II: 開{あ}けます → 開{あ}けて"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて は いけません",
+      "short": "prohibition",
+      "explain": "This is a flat prohibition and the negative counterpart of 〜てもいいです. It is strong language, so it belongs to someone with the standing to forbid — a teacher, a parent, a notice on a wall — and is almost never aimed at a superior. In everyday conversation a request such as 〜ないでください, which comes in Lesson 17, is often used instead.",
+      "formation": "Vて ＋ は いけません",
+      "examples": [
+        [
+          "ここで 写真{しゃしん}を 撮{と}っては いけません。",
+          "You must not take photographs here."
+        ],
+        [
+          "図書館{としょかん}で たばこを 吸{す}っては いけません。",
+          "You must not smoke in the library."
+        ],
+        [
+          "この 部屋{へや}に 入{はい}っては いけません。",
+          "You must not go into this room."
+        ],
+        [
+          "教室{きょうしつ}で ごはんを 食{た}べては いけません。",
+          "You must not eat in the classroom."
+        ]
+      ],
+      "drills": [
+        [
+          "You must not take photographs here.",
+          "ここで 写真{しゃしん}を 撮{と}っては いけません。",
+          "で marks where the action happens"
+        ],
+        [
+          "You must not smoke in the library.",
+          "図書館{としょかん}で たばこを 吸{す}っては いけません。",
+          "吸{す}います → 吸{す}って"
+        ],
+        [
+          "You must not go into this room.",
+          "この 部屋{へや}に 入{はい}っては いけません。",
+          ""
+        ],
+        [
+          "May I use this? — No, you must not.",
+          "これを 使{つか}っても いいですか。……いいえ、使{つか}っては いけません。",
+          "The direct refusal"
+        ],
+        [
+          "You must not eat in the classroom.",
+          "教室{きょうしつ}で 食{た}べては いけません。",
+          ""
+        ],
+        [
+          "You must not park your car here.",
+          "ここに 車{くるま}を 止{と}めては いけません。",
+          "止{と}めます is a Group II verb"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて います (state)",
+      "short": "resulting state",
+      "explain": "With a small group of verbs, 〜て います describes not an action in progress but the state that the action left behind. Living somewhere, being employed, having something with you, being married and knowing a fact all work this way. Watch the plain ます form of these verbs, because it points to a future change instead: すみます means 'I am going to live somewhere', not 'I live there'.",
+      "formation": "住{す}んで います ／ 持{も}って います ／ 結婚{けっこん}して います ／ 知{し}って います",
+      "examples": [
+        [
+          "大阪{おおさか}に 住{す}んで います。",
+          "I live in Osaka."
+        ],
+        [
+          "わたしは 車{くるま}を 持{も}って います。",
+          "I have a car."
+        ],
+        [
+          "姉{あね}は 結婚{けっこん}して います。",
+          "My elder sister is married."
+        ],
+        [
+          "弟{おとうと}は 大学{だいがく}で 経済{けいざい}を 研究{けんきゅう}して います。",
+          "My younger brother is researching economics at university."
+        ]
+      ],
+      "drills": [
+        [
+          "I live in Osaka.",
+          "大阪{おおさか}に 住{す}んで います。",
+          "住{す}みます → 住{す}んで います for the state"
+        ],
+        [
+          "Do you have a car?",
+          "車{くるま}を 持{も}って いますか。",
+          "持{も}って います = have"
+        ],
+        [
+          "My elder sister is married.",
+          "姉{あね}は 結婚{けっこん}して います。",
+          ""
+        ],
+        [
+          "Where do you live?",
+          "どこに 住{す}んで いますか。",
+          ""
+        ],
+        [
+          "I'm not married.",
+          "結婚{けっこん}して いません。",
+          "独身{どくしん}です is the commoner way to say it"
+        ],
+        [
+          "My younger brother is doing research at university.",
+          "弟{おとうと}は 大学{だいがく}で 研究{けんきゅう}して います。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "知{し}って います ／ 知{し}りません",
+      "short": "know",
+      "explain": "Knowing a fact is 知って います, but the negative is the plain 知りません; 知って いません does not exist. When a piece of information reaches you for the first time you use the plain past 知りました, 'I found out', and 知りませんでした is the natural reaction to news. Keep this apart from わかります, which is about grasping or understanding rather than holding information.",
+      "formation": "知{し}って います ／ 知{し}りません ／ 知{し}りました　（×知{し}って いません）",
+      "examples": [
+        [
+          "ミラーさんの 住所{じゅうしょ}を 知{し}って いますか。……いいえ、知{し}りません。",
+          "Do you know Mr Miller's address? — No, I don't."
+        ],
+        [
+          "あの 人{ひと}の 名前{なまえ}を 知{し}って います。",
+          "I know that person's name."
+        ],
+        [
+          "山田{やまだ}さんは 結婚{けっこん}して います。……知{し}りませんでした。",
+          "Mr Yamada is married. — I didn't know that."
+        ],
+        [
+          "あの 店{みせ}を 知{し}って いますか。",
+          "Do you know that shop?"
+        ]
+      ],
+      "drills": [
+        [
+          "Do you know Mr Miller's address?",
+          "ミラーさんの 住所{じゅうしょ}を 知{し}って いますか。",
+          ""
+        ],
+        [
+          "No, I don't know.",
+          "いいえ、知{し}りません。",
+          "Never 知{し}って いません"
+        ],
+        [
+          "I know that person's name.",
+          "あの 人{ひと}の 名前{なまえ}を 知{し}って います。",
+          ""
+        ],
+        [
+          "I didn't know that.",
+          "知{し}りませんでした。",
+          "The natural reaction to news"
+        ],
+        [
+          "Do you know that shop?",
+          "あの 店{みせ}を 知{し}って いますか。",
+          ""
+        ],
+        [
+          "I don't know that kanji, but I know this one.",
+          "その 漢字{かんじ}は 知{し}りませんが、これは 知{し}って います。",
+          "が joins the two halves in contrast"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて います (habit)",
+      "short": "habit",
+      "explain": "The same 〜て います also covers an action you keep up over a stretch of time: an exercise routine, the job you hold, the goods a shop sells. A time expression such as 毎日 or 毎朝 usually makes the habitual reading clear. Where the plain ます form would state a general fact, 〜て います presents it as your current practice, which is why it is the form you want when describing your life at the moment.",
+      "formation": "[毎日{まいにち}／毎朝{まいあさ}／毎晩{まいばん}] ＋ Vて います",
+      "examples": [
+        [
+          "毎日{まいにち} 日本語{にほんご}を 勉強{べんきょう}して います。",
+          "I study Japanese every day."
+        ],
+        [
+          "あの 店{みせ}は 日本{にほん}の 製品{せいひん}を 売{う}って います。",
+          "That shop sells Japanese products."
+        ],
+        [
+          "父{ちち}は 銀行{ぎんこう}で 働{はたら}いて います。",
+          "My father works at a bank."
+        ],
+        [
+          "毎晩{まいばん} 妻{つま}と 公園{こうえん}を 散歩{さんぽ}して います。",
+          "I take a walk in the park with my wife every evening."
+        ]
+      ],
+      "drills": [
+        [
+          "I study Japanese every day.",
+          "毎日{まいにち} 日本語{にほんご}を 勉強{べんきょう}して います。",
+          "A habit kept up over time"
+        ],
+        [
+          "That shop sells clothes.",
+          "あの 店{みせ}は 服{ふく}を 売{う}って います。",
+          "売{う}ります → 売{う}って"
+        ],
+        [
+          "My father works at a bank.",
+          "父{ちち}は 銀行{ぎんこう}で 働{はたら}いて います。",
+          "働{はたら}きます → 働{はたら}いて"
+        ],
+        [
+          "I take a walk in the park every morning.",
+          "毎朝{まいあさ} 公園{こうえん}を 散歩{さんぽ}して います。",
+          "散歩{さんぽ}します takes を for the space walked"
+        ],
+        [
+          "My elder brother isn't working at the moment.",
+          "兄{あに}は 今{いま} 働{はたら}いて いません。",
+          "Negative of a state that continues"
+        ],
+        [
+          "What do you do every morning?",
+          "毎朝{まいあさ} 何{なに}を して いますか。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

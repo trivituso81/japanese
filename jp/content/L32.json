@@ -1,0 +1,340 @@
+{
+  "points": [
+    {
+      "pattern": "Vた-form ／ Vない-form ない ＋ ほうが いいです",
+      "short": "giving advice",
+      "explain": "This is how you tell someone what they had better do. The affirmative side takes the た-form, but the negative side takes the plain ない-form — not なかった, which is the mistake most learners make. Because ほう means 'side' or 'alternative', the pattern implies a choice between two courses of action even when the other one is never mentioned, and the textbook warns that it can therefore sound as though you are pressing your opinion on the listener. When you only want to float a suggestion, 〜たら いいです is the gentler choice.",
+      "formation": "[V-た form] ／ [V-ない form] ない ＋ ほうが いいです",
+      "examples": [
+        [
+          "毎日{まいにち} 運動{うんどう}した ほうが いいです。",
+          "It is good to take some exercise every day."
+        ],
+        [
+          "熱{ねつ}が あるんですから、おふろに 入{はい}らない ほうが いいですよ。",
+          "You've got a fever, so you'd better not take a bath."
+        ],
+        [
+          "薬{くすり}を 飲{の}んで、早{はや}く 寝{ね}た ほうが いいです。",
+          "You'd better take some medicine and go to bed early."
+        ],
+        [
+          "あまり 無理{むり}を しない ほうが いいですよ。",
+          "You'd better not overdo it."
+        ]
+      ],
+      "drills": [
+        [
+          "You'd better take some exercise every day.",
+          "毎日{まいにち} 運動{うんどう}した ほうが いいです。",
+          "the た-form for the affirmative side"
+        ],
+        [
+          "You'd better not take a bath today.",
+          "きょうは おふろに 入{はい}らない ほうが いいですよ。",
+          "the plain ない-form, not 入{はい}らなかった"
+        ],
+        [
+          "You'd better go to the hospital straight away.",
+          "すぐ 病院{びょういん}へ 行{い}った ほうが いいです。",
+          ""
+        ],
+        [
+          "You'd better not work beyond your strength.",
+          "あまり 無理{むり}を しない ほうが いいですよ。",
+          "よ turns it into friendly advice"
+        ],
+        [
+          "It's cold, so you'd better take a coat.",
+          "寒{さむ}いですから、コートを 持{も}って 行{い}った ほうが いいです。",
+          "the reason clause comes first"
+        ],
+        [
+          "You'd better not drink that much.",
+          "そんなに お酒{さけ}を 飲{の}まない ほうが いいですよ。",
+          "そんなに from this lesson"
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} ＋ でしょう",
+      "short": "confident guess",
+      "explain": "Said with a falling intonation, でしょう presents what the speaker infers from the information available. It is a confident prediction rather than a statement of fact, which is why the weather forecast is full of it. In a question it turns the inference over to the listener and asks what they reckon. Note that な-adjectives and nouns drop だ before it, and that this is not the rising 〜でしょう？ of Lesson 21, which asks the listener to agree with something you already believe.",
+      "formation": "[plain form] ＋ でしょう　（な-adj and N drop だ：元気{げんき}でしょう、雨{あめ}でしょう）",
+      "examples": [
+        [
+          "あしたは 雨{あめ}が 降{ふ}るでしょう。",
+          "It will rain tomorrow."
+        ],
+        [
+          "ミラーさんは 試験{しけん}に 合格{ごうかく}するでしょうか。",
+          "Do you think Mr Miller will pass the exam?"
+        ],
+        [
+          "あしたの 午後{ごご}は 晴{は}れるでしょう。",
+          "It will clear up tomorrow afternoon."
+        ],
+        [
+          "今夜{こんや}は 風{かぜ}が 強{つよ}く なるでしょう。",
+          "The wind will get strong tonight."
+        ]
+      ],
+      "drills": [
+        [
+          "It will rain tomorrow.",
+          "あしたは 雨{あめ}が 降{ふ}るでしょう。",
+          "the plain form before でしょう"
+        ],
+        [
+          "Do you think Mr Miller will pass the exam?",
+          "ミラーさんは 試験{しけん}に 合格{ごうかく}するでしょうか。",
+          "a question hands the inference to the listener"
+        ],
+        [
+          "It will clear up tomorrow afternoon.",
+          "あしたの 午後{ごご}は 晴{は}れるでしょう。",
+          ""
+        ],
+        [
+          "The north of the country will be cold tomorrow.",
+          "あした 北{きた}の ほうは 寒{さむ}いでしょう。",
+          "an い-adjective needs nothing extra"
+        ],
+        [
+          "That team will probably win.",
+          "あの チームは 勝{か}つでしょう。",
+          ""
+        ],
+        [
+          "Tomorrow will be a day off, so the roads will be empty.",
+          "あしたは 休{やす}みですから、道{みち}は すいて いるでしょう。",
+          "て いる before でしょう for a state"
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} ＋ かも しれません",
+      "short": "bare possibility",
+      "explain": "かも しれません also reports the speaker's inference, but it says only that something is possible. The textbook is explicit that the degree of certainty is much lower than with でしょう: where でしょう commits you to a prediction, かも しれません leaves the outcome genuinely open. It attaches to the plain form in exactly the same way, and な-adjectives and nouns again drop だ.",
+      "formation": "[plain form] ＋ かも しれません　（な-adj and N drop だ）",
+      "examples": [
+        [
+          "約束{やくそく}の 時間{じかん}に 間{ま}に 合{あ}わないかも しれません。",
+          "We might not be in time for the appointment."
+        ],
+        [
+          "あしたは 雪{ゆき}が 降{ふ}るかも しれません。",
+          "It might snow tomorrow."
+        ],
+        [
+          "インフルエンザかも しれませんから、病院{びょういん}へ 行{い}った ほうが いいですよ。",
+          "It might be flu, so you'd better go to the hospital."
+        ],
+        [
+          "この 料理{りょうり}は 少{すこ}し 辛{から}いかも しれません。",
+          "This dish might be a little hot."
+        ]
+      ],
+      "drills": [
+        [
+          "We might not be in time for the appointment.",
+          "約束{やくそく}の 時間{じかん}に 間{ま}に 合{あ}わないかも しれません。",
+          "the plain negative before かも しれません"
+        ],
+        [
+          "It might snow tomorrow.",
+          "あしたは 雪{ゆき}が 降{ふ}るかも しれません。",
+          "much weaker than 降{ふ}るでしょう"
+        ],
+        [
+          "It might be flu.",
+          "インフルエンザかも しれません。",
+          "a noun drops だ"
+        ],
+        [
+          "This dish might be a little hot.",
+          "この 料理{りょうり}は 少{すこ}し 辛{から}いかも しれません。",
+          ""
+        ],
+        [
+          "Mr Tanaka might already have gone home.",
+          "田中{たなか}さんは もう 帰{かえ}ったかも しれません。",
+          "the plain past works here too"
+        ],
+        [
+          "The engine might be broken.",
+          "エンジンが 故障{こしょう}して いるかも しれません。",
+          "て いる for a state that continues"
+        ]
+      ]
+    },
+    {
+      "pattern": "きっと ／ たぶん ／ もしかしたら",
+      "short": "grading certainty",
+      "explain": "These three adverbs let you flag in advance how sure you are, and each one pairs with a particular ending. きっと means you are quite certain and can stand with a plain statement or with でしょう. たぶん is a weaker 'probably' and normally goes with でしょう or と 思{おも}います. もしかしたら signals a slim chance and is almost always finished off with かも しれません. Since the adverb and the ending have to match, choosing the adverb first makes the rest of the sentence fall into place.",
+      "formation": "きっと ＋ V／でしょう　／　たぶん ＋ でしょう／と 思{おも}います　／　もしかしたら ＋ かも しれません",
+      "examples": [
+        [
+          "ミラーさんは きっと 来{き}ます。",
+          "Mr Miller will surely come."
+        ],
+        [
+          "あしたは きっと 雨{あめ}でしょう。",
+          "It will undoubtedly rain tomorrow."
+        ],
+        [
+          "山田{やまだ}さんは この ニュースを たぶん 知{し}らないと 思{おも}います。",
+          "I guess Mr Yamada does not know this news."
+        ],
+        [
+          "もしかしたら 3月{がつ}に 卒業{そつぎょう}できないかも しれません。",
+          "There is a possibility I might be unable to graduate in March."
+        ]
+      ],
+      "drills": [
+        [
+          "Mr Miller will surely come.",
+          "ミラーさんは きっと 来{き}ます。",
+          "きっと can stand with a plain statement"
+        ],
+        [
+          "It will undoubtedly rain tomorrow.",
+          "あしたは きっと 雨{あめ}でしょう。",
+          "きっと raises でしょう almost to certainty"
+        ],
+        [
+          "I guess Mr Yamada doesn't know this news.",
+          "山田{やまだ}さんは この ニュースを たぶん 知{し}らないと 思{おも}います。",
+          "たぶん often goes with と 思{おも}います"
+        ],
+        [
+          "There is a chance I won't be able to graduate in March.",
+          "もしかしたら 3月{がつ}に 卒業{そつぎょう}できないかも しれません。",
+          "もしかしたら calls for かも しれません"
+        ],
+        [
+          "Will Mr Miller come? — I guess so.",
+          "ミラーさんは 来{き}ますか。…たぶん 来{く}るでしょう。",
+          "たぶん ＋ でしょう as a hedged answer"
+        ],
+        [
+          "The rain might possibly stop by the evening.",
+          "もしかしたら 夕方{ゆうがた}までに 雨{あめ}が やむかも しれません。",
+          "までに for a deadline"
+        ]
+      ]
+    },
+    {
+      "pattern": "何{なに}か 心配{しんぱい}な こと",
+      "short": "modified question words",
+      "explain": "When you want to describe 何{なに}か, どこか or だれか with an adjective, Japanese cannot hang the adjective directly on the question word: 心配{しんぱい}な 何{なに}か is simply wrong. Instead the question word stays where it is and a general noun — こと, 物{もの}, 所{ところ}, 人{ひと}, 時{とき} — is added after the adjective to carry the description. So 'anything worrying' comes out as 何{なに}か 心配{しんぱい}な こと, literally 'something, a worrying thing'.",
+      "formation": "何{なに}か ＋ [adjective] ＋ こと／物{もの}　／　どこか ＋ [adjective] ＋ 所{ところ}　／　だれか ＋ [adjective] ＋ 人{ひと}",
+      "examples": [
+        [
+          "何{なに}か 心配{しんぱい}な ことが あるんですか。",
+          "Is anything bothering you?"
+        ],
+        [
+          "スキーに 行{い}きたいんですが、どこか いい 所{ところ} ありませんか。",
+          "I want to go skiing. Do you know a good place anywhere?"
+        ],
+        [
+          "何{なに}か 冷{つめ}たい 物{もの}が 飲{の}みたいです。",
+          "I'd like to drink something cold."
+        ],
+        [
+          "だれか 日本語{にほんご}が わかる 人{ひと}を 知{し}って いますか。",
+          "Do you know anyone who understands Japanese?"
+        ]
+      ],
+      "drills": [
+        [
+          "Is anything bothering you?",
+          "何{なに}か 心配{しんぱい}な ことが あるんですか。",
+          "not 心配{しんぱい}な 何{なに}か"
+        ],
+        [
+          "I want to go skiing. Do you know a good place anywhere?",
+          "スキーに 行{い}きたいんですが、どこか いい 所{ところ} ありませんか。",
+          "どこか ＋ adjective ＋ 所{ところ}"
+        ],
+        [
+          "I'd like to drink something cold.",
+          "何{なに}か 冷{つめ}たい 物{もの}が 飲{の}みたいです。",
+          "物{もの} carries the description"
+        ],
+        [
+          "Do you know anyone who understands Japanese?",
+          "だれか 日本語{にほんご}が わかる 人{ひと}を 知{し}って いますか。",
+          "だれか ＋ clause ＋ 人{ひと}"
+        ],
+        [
+          "Is there anything strange about this machine?",
+          "この 機械{きかい}は 何{なに}か おかしい ことが ありますか。",
+          "おかしい from this lesson"
+        ],
+        [
+          "I want to read something interesting.",
+          "何{なに}か おもしろい 物{もの}が 読{よ}みたいです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Quantifierで",
+      "short": "within an amount",
+      "explain": "Adding で to an amount marks it as the amount that is enough for something to be realised — 'in', 'within' or 'for'. It works the same way for time, money and quantity alike. Do not confuse it with the で of means or place: here the word in front is a number, and the sense is a limit that is not exceeded.",
+      "formation": "[quantity] ＋ で　（30分{ぷん}で、3万円{まんえん}で、1週間{しゅうかん}で）",
+      "examples": [
+        [
+          "駅{えき}まで 30分{ぷん}で 行{い}けますか。",
+          "Can I reach the station in thirty minutes?"
+        ],
+        [
+          "3万円{まんえん}で ビデオが 買{か}えますか。",
+          "Can I buy a video player for 30,000 yen?"
+        ],
+        [
+          "この 仕事{しごと}は 1週間{しゅうかん}で できます。",
+          "This job can be done in a week."
+        ],
+        [
+          "1000円{えん}で 何{なに}が 買{か}えますか。",
+          "What can you buy for 1,000 yen?"
+        ]
+      ],
+      "drills": [
+        [
+          "Can I get to the station in thirty minutes?",
+          "駅{えき}まで 30分{ぷん}で 行{い}けますか。",
+          "で marks the time that is enough"
+        ],
+        [
+          "Can I buy a video player for 30,000 yen?",
+          "3万円{まんえん}で ビデオが 買{か}えますか。",
+          "the same で for money"
+        ],
+        [
+          "This job can be finished in a week.",
+          "この 仕事{しごと}は 1週間{しゅうかん}で できます。",
+          ""
+        ],
+        [
+          "What can you buy for 1,000 yen?",
+          "1000円{えん}で 何{なに}が 買{か}えますか。",
+          ""
+        ],
+        [
+          "I read this book in two days.",
+          "この 本{ほん}は 2日{か}で 読{よ}みました。",
+          ""
+        ],
+        [
+          "Three people can't do this work.",
+          "この 仕事{しごと}は 3人{にん}で できません。",
+          "で also works with a number of people"
+        ]
+      ]
+    }
+  ]
+}

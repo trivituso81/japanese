@@ -1,0 +1,340 @@
+{
+  "points": [
+    {
+      "pattern": "Nが 好{す}きです／嫌{きら}いです",
+      "short": "likes and dislikes",
+      "explain": "すき and きらい are な-adjectives rather than verbs, so the thing liked is not a direct object and can never take を; it takes が instead. The full sentence normally puts は on the person and が on the thing: わたしは おんがくが すきです. Because they are な-adjectives the negative is じゃ ありません, and あまり in front of it produces the useful hedge あまり すきじゃ ありません, which is how a Japanese speaker usually says they dislike something.",
+      "formation": "N1は ＋ N2が ＋ 好{す}きです／嫌{きら}いです",
+      "examples": [
+        [
+          "わたしは 音楽{おんがく}が 好{す}きです。",
+          "I like music."
+        ],
+        [
+          "ミラーさんは 日本{にほん}の 料理{りょうり}が 好{す}きです。",
+          "Mr Miller likes Japanese food."
+        ],
+        [
+          "魚{さかな}が あまり 好{す}きじゃ ありません。",
+          "I don't like fish very much."
+        ],
+        [
+          "子{こ}どもは 野菜{やさい}が 嫌{きら}いです。",
+          "My child dislikes vegetables."
+        ]
+      ],
+      "drills": [
+        [
+          "I like music.",
+          "わたしは 音楽{おんがく}が 好{す}きです。",
+          "The thing liked takes が, never を"
+        ],
+        [
+          "Do you like Japanese food?",
+          "日本{にほん}の 料理{りょうり}が 好{す}きですか。",
+          ""
+        ],
+        [
+          "I don't like fish very much.",
+          "魚{さかな}が あまり 好{す}きじゃ ありません。",
+          "好{す}き is a な-adjective, so じゃ ありません"
+        ],
+        [
+          "My child dislikes vegetables.",
+          "子{こ}どもは 野菜{やさい}が 嫌{きら}いです。",
+          ""
+        ],
+        [
+          "My wife likes classical music.",
+          "妻{つま}は クラシックが 好{す}きです。",
+          "妻{つま} for one's own wife"
+        ],
+        [
+          "I don't dislike karaoke.",
+          "カラオケは 嫌{きら}いじゃ ありません。",
+          "は here sets karaoke off against other things"
+        ]
+      ]
+    },
+    {
+      "pattern": "Nが 上手{じょうず}です／下手{へた}です",
+      "short": "skill",
+      "explain": "じょうず (good at) and へた (poor at) use the same frame as すき: the skill or subject takes が while the person is the topic with は. Both are な-adjectives, so their negatives are じょうずじゃ ありません and へたじゃ ありません. It sounds boastful to say じょうずです about yourself, so of your own ability a Japanese speaker will normally say へたです or hedge with あまり じょうずじゃ ありません.",
+      "formation": "N1は ＋ N2が ＋ 上手{じょうず}です／下手{へた}です",
+      "examples": [
+        [
+          "ミラーさんは 日本語{にほんご}が 上手{じょうず}です。",
+          "Mr Miller is good at Japanese."
+        ],
+        [
+          "わたしは 歌{うた}が 下手{へた}です。",
+          "I'm bad at singing."
+        ],
+        [
+          "妻{つま}は 料理{りょうり}が とても 上手{じょうず}です。",
+          "My wife is very good at cooking."
+        ],
+        [
+          "絵{え}が あまり 上手{じょうず}じゃ ありません。",
+          "I'm not very good at drawing."
+        ]
+      ],
+      "drills": [
+        [
+          "Mr Miller is good at Japanese.",
+          "ミラーさんは 日本語{にほんご}が 上手{じょうず}です。",
+          ""
+        ],
+        [
+          "I'm bad at singing.",
+          "わたしは 歌{うた}が 下手{へた}です。",
+          ""
+        ],
+        [
+          "My wife is very good at cooking.",
+          "妻{つま}は 料理{りょうり}が とても 上手{じょうず}です。",
+          ""
+        ],
+        [
+          "I'm not very good at drawing.",
+          "絵{え}が あまり 上手{じょうず}じゃ ありません。",
+          "Hedged, because 上手{じょうず}です about oneself sounds boastful"
+        ],
+        [
+          "Is your husband good at baseball?",
+          "ご主人{しゅじん}は 野球{やきゅう}が 上手{じょうず}ですか。",
+          "ご主人{しゅじん} for someone else's husband"
+        ],
+        [
+          "That child is not bad at kanji.",
+          "あの 子{こ}どもは 漢字{かんじ}が 下手{へた}じゃ ありません。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Nが わかります",
+      "short": "understanding",
+      "explain": "わかります means to understand or grasp, and what is understood takes が rather than を. It describes a state you are in rather than an action you perform, which is why Japanese does not say を here even though English uses a direct object. よく わかります means you understand well, and the plain negative わかりません is the everyday way of saying you do not know or cannot follow.",
+      "formation": "N ＋ が ＋ わかります／わかりません",
+      "examples": [
+        [
+          "日本語{にほんご}が わかりますか。……はい、少{すこ}し わかります。",
+          "Do you understand Japanese? — Yes, a little."
+        ],
+        [
+          "この 漢字{かんじ}が わかりません。",
+          "I don't understand this kanji."
+        ],
+        [
+          "英語{えいご}が よく わかります。",
+          "I understand English well."
+        ],
+        [
+          "あの 人{ひと}は 日本語{にほんご}が 全然{ぜんぜん} わかりません。",
+          "That person doesn't understand Japanese at all."
+        ]
+      ],
+      "drills": [
+        [
+          "Do you understand Japanese?",
+          "日本語{にほんご}が わかりますか。",
+          "が, not を"
+        ],
+        [
+          "I understand a little.",
+          "少{すこ}し わかります。",
+          ""
+        ],
+        [
+          "I don't understand this kanji.",
+          "この 漢字{かんじ}が わかりません。",
+          ""
+        ],
+        [
+          "I understand English well.",
+          "英語{えいご}が よく わかります。",
+          "よく here means 'well', not 'often'"
+        ],
+        [
+          "He doesn't understand Japanese at all.",
+          "彼{かれ}は 日本語{にほんご}が 全然{ぜんぜん} わかりません。",
+          "全然{ぜんぜん} needs a negative"
+        ],
+        [
+          "Do you understand hiragana? — No, I don't.",
+          "ひらがなが わかりますか。……いいえ、わかりません。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Nが あります",
+      "short": "having",
+      "explain": "This あります says that you have something, and it is used above all for things you cannot hold in your hand: time, money, an errand, an appointment. What you have takes が, as with すき and わかります. Lesson 10 uses the same verb for physical existence in a place, so it is worth noticing now that あります covers both 'there is' and 'have'. With the negative, あまり and ぜんぜん combine naturally: じかんが あまり ありません.",
+      "formation": "N ＋ が ＋ あります／ありません",
+      "examples": [
+        [
+          "時間{じかん}が ありません。",
+          "I don't have time."
+        ],
+        [
+          "あした 用事{ようじ}が あります。",
+          "I have something to do tomorrow."
+        ],
+        [
+          "お金{かね}が 全然{ぜんぜん} ありません。",
+          "I have no money at all."
+        ],
+        [
+          "土曜日{どようび}は 約束{やくそく}が あります。",
+          "I have an appointment on Saturday."
+        ]
+      ],
+      "drills": [
+        [
+          "I don't have time.",
+          "時間{じかん}が ありません。",
+          ""
+        ],
+        [
+          "I have something to do tomorrow.",
+          "あした 用事{ようじ}が あります。",
+          ""
+        ],
+        [
+          "I have no money at all.",
+          "お金{かね}が 全然{ぜんぜん} ありません。",
+          "全然{ぜんぜん} with a negative"
+        ],
+        [
+          "Do you have an appointment on Saturday?",
+          "土曜日{どようび}は 約束{やくそく}が ありますか。",
+          "は puts Saturday up as the topic"
+        ],
+        [
+          "Do you have any small change?",
+          "細{こま}かい お金{かね}が ありますか。",
+          ""
+        ],
+        [
+          "I don't have much time today.",
+          "きょうは 時間{じかん}が あまり ありません。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "どうして ／ ～から",
+      "short": "why and because",
+      "explain": "どうして asks for a reason and sits early in the sentence, where an adverb would go. The reason itself is expressed as a complete sentence with から added at the end, so から comes after です or ます, the opposite of English, where 'because' comes first. The から-clause normally precedes the result, and it can also stand alone as the whole answer to a どうして question.",
+      "formation": "どうして ＋ S ですか　／　S1から、S2　／　～からです",
+      "examples": [
+        [
+          "どうして きのう 休{やす}みましたか。……用事{ようじ}が ありましたから。",
+          "Why did you take yesterday off? — Because I had something to do."
+        ],
+        [
+          "時間{じかん}が ありませんから、新聞{しんぶん}を 読{よ}みません。",
+          "I don't read the newspaper, because I have no time."
+        ],
+        [
+          "どうして 来{き}ませんか。……あした 約束{やくそく}が ありますから。",
+          "Why won't you come? — Because I have an appointment tomorrow."
+        ],
+        [
+          "日本語{にほんご}が 好{す}きですから、毎日{まいにち} 勉強{べんきょう}します。",
+          "I study every day because I like Japanese."
+        ]
+      ],
+      "drills": [
+        [
+          "Why did you take yesterday off?",
+          "どうして きのう 休{やす}みましたか。",
+          ""
+        ],
+        [
+          "Because I had something to do.",
+          "用事{ようじ}が ありましたから。",
+          "から can stand alone as the whole answer"
+        ],
+        [
+          "I don't read the newspaper, because I have no time.",
+          "時間{じかん}が ありませんから、新聞{しんぶん}を 読{よ}みません。",
+          "The reason clause comes first in Japanese"
+        ],
+        [
+          "Why won't you come? — Because I have an appointment tomorrow.",
+          "どうして 来{き}ませんか。……あした 約束{やくそく}が ありますから。",
+          ""
+        ],
+        [
+          "I study every day because I like Japanese.",
+          "日本語{にほんご}が 好{す}きですから、毎日{まいにち} 勉強{べんきょう}します。",
+          "から attaches after です"
+        ],
+        [
+          "Why do you go to that shop?",
+          "どうして あの 店{みせ}へ 行{い}きますか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "よく／だいたい／たくさん／少{すこ}し／あまり／全然{ぜんぜん}",
+      "short": "degree adverbs",
+      "explain": "These adverbs go immediately before the verb or adjective they qualify. よく and だいたい say how thoroughly something is done, たくさん and すこし how much of it there is. あまり and ぜんぜん are different in kind, because they only work with a negative ending, giving 'not much' and 'not at all'. Pairing either of them with a positive verb is a common mistake and immediately noticeable to a Japanese ear.",
+      "formation": "よく／だいたい／たくさん／少{すこ}し ＋ V　／　あまり／全然{ぜんぜん} ＋ V ません",
+      "examples": [
+        [
+          "漢字{かんじ}が だいたい わかります。",
+          "I understand kanji more or less."
+        ],
+        [
+          "野菜{やさい}を たくさん 食{た}べます。",
+          "I eat a lot of vegetables."
+        ],
+        [
+          "お酒{さけ}は 全然{ぜんぜん} 飲{の}みません。",
+          "I don't drink alcohol at all."
+        ],
+        [
+          "あの 店{みせ}へ あまり 行{い}きません。",
+          "I don't go to that shop very often."
+        ]
+      ],
+      "drills": [
+        [
+          "I understand kanji more or less.",
+          "漢字{かんじ}が だいたい わかります。",
+          ""
+        ],
+        [
+          "I eat a lot of vegetables.",
+          "野菜{やさい}を たくさん 食{た}べます。",
+          "The adverb sits just before the verb"
+        ],
+        [
+          "I don't drink alcohol at all.",
+          "お酒{さけ}は 全然{ぜんぜん} 飲{の}みません。",
+          "全然{ぜんぜん} requires a negative"
+        ],
+        [
+          "I don't go to that shop very often.",
+          "あの 店{みせ}へ あまり 行{い}きません。",
+          ""
+        ],
+        [
+          "I understand a little Japanese.",
+          "日本語{にほんご}が 少{すこ}し わかります。",
+          ""
+        ],
+        [
+          "My child watches a lot of television, but doesn't read many books.",
+          "子{こ}どもは テレビを よく 見{み}ますが、本{ほん}を あまり 読{よ}みません。",
+          "が joins the two halves, as in Lesson 8"
+        ]
+      ]
+    }
+  ]
+}

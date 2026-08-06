@@ -1,0 +1,46 @@
+VOCAB
+つとめます II ［かいしゃに ～］|勤めます ［会社に ～］|work [for a company]
+やすみます I|休みます|go to bed, sleep
+かけます II ［いすに ～］|掛けます|sit on [a chair]
+すごします I|過ごします|spend (time), pass (time)
+よります I ［ぎんこうに ～］|寄ります ［銀行に ～］|drop into [a bank]
+いらっしゃいます I||be, go, come (respectful equivalent of います, いきます and きます)
+めしあがります I|召し上がります|eat, drink (respectful equivalent of たべます and のみます)
+おっしゃいます I||say (respectful equivalent of いいます)
+なさいます I||do (respectful equivalent of します)
+ごらんに なります I|ご覧に なります|see, look at (respectful equivalent of みます)
+ごぞんじです|ご存じです|know (respectful equivalent of しって います)
+あいさつ||greeting, address (～を します: greet, give an address)
+はいざら|灰皿|ashtray
+りょかん|旅館|Japanese-style hotel or inn
+かいじょう|会場|meeting place, hall
+バスてい|バス停|bus stop
+ぼうえき|貿易|trade
+～さま|～様|(respectful equivalent of ～さん)
+かえりに|帰りに|on the way back
+たまに||once in a while
+ちっとも||not at all (used with negatives)
+えんりょなく|遠慮なく|without reserve, without hesitation
+～ねん～くみ|～年～組|class - of -th grade
+では||well, then (polite equivalent of じゃ)
+だします I ［ねつを ～］|出します ［熱を ～］|run [a fever]
+よろしく おつたえ ください。|よろしく お伝え ください。|Give my best regards./Please say hello.
+しつれいいたします。|失礼いたします。|Good-bye. (humble equivalent of しつれいします)
+こうし|講師|lecturer
+おおくの ～|多くの ～|many ～, much ～
+さくひん|作品|work (of art, etc.)
+じゅしょうします III|受賞します|be awarded a prize
+せかいてきに|世界的に|world-wide
+さっか|作家|novelist, writer
+～で いらっしゃいます I||be (respectful equivalent of です)
+ちょうなん|長男|one's eldest son
+しょうがい|障害|handicap, defect
+おもちです|お持ちです|have (respectful way of saying もって います)
+さっきょく|作曲|composition (music)
+かつどう|活動|activity
+それでは||well, so (indicating an end or beginning)
+PROPER
+ひまわりしょうがっこう|ひまわり小学校|fictitious elementary school
+おおえ けんざぶろう|大江 健三郎|Japanese novelist (1935- )
+とうきょうだいがく|東京大学|Tokyo University
+ノーベルぶんがくしょう|ノーベル文学賞|Nobel Prize for literature

@@ -1,0 +1,284 @@
+{
+  "points": [
+    {
+      "pattern": "Nでした／Nじゃ ありませんでした",
+      "short": "past of です",
+      "explain": "Noun sentences form their past by changing です to でした, and the negative じゃ ありません to じゃ ありませんでした. Nothing else in the sentence moves: the topic, the particles and the word order all stay exactly as they were. In writing and in formal speech, じゃ becomes では, giving ではありませんでした.",
+      "formation": "N ＋ でした　／　N ＋ じゃ ありませんでした",
+      "examples": [
+        [
+          "きのうは 雨{あめ}でした。",
+          "It was rainy yesterday."
+        ],
+        [
+          "去年{きょねん}の 誕生日{たんじょうび}は 日曜日{にちようび}でした。",
+          "My birthday last year was a Sunday."
+        ],
+        [
+          "試験{しけん}は きのうじゃ ありませんでした。あしたです。",
+          "The examination wasn't yesterday. It's tomorrow."
+        ],
+        [
+          "きょうは いい 天気{てんき}でした。",
+          "The weather was fine today."
+        ]
+      ],
+      "drills": [
+        [
+          "It was rainy yesterday.",
+          "きのうは 雨{あめ}でした。",
+          "雨{あめ} is a noun, so it takes でした"
+        ],
+        [
+          "It wasn't snowy this morning.",
+          "けさは 雪{ゆき}じゃ ありませんでした。",
+          "Negative past of です"
+        ],
+        [
+          "The party was last Saturday.",
+          "パーティーは 先週{せんしゅう}の 土曜日{どようび}でした。",
+          ""
+        ],
+        [
+          "Was the weather good yesterday?",
+          "きのうは いい 天気{てんき}でしたか。",
+          ""
+        ],
+        [
+          "I wasn't a student last year.",
+          "去年{きょねん} わたしは 学生{がくせい}じゃ ありませんでした。",
+          ""
+        ],
+        [
+          "Yesterday's weather was cloudy.",
+          "きのうの 天気{てんき}は 曇{くも}りでした。",
+          "曇{くも}り is a noun too"
+        ]
+      ]
+    },
+    {
+      "pattern": "い-adj かったです ／ な-adj でした",
+      "short": "past of adjectives",
+      "explain": "い-adjectives carry their own past tense inside the word: 楽しいです becomes 楽しかったです, and the negative 楽しくないです becomes 楽しくなかったです. な-adjectives have no past of their own, so they simply borrow the copula and take でした, with じゃ ありませんでした in the negative. The one form worth drilling separately is いい, whose past is よかったです.",
+      "formation": "い-adj: ～い → ～かったです ／ ～く なかったです（いい → よかったです）　／　な-adj: ～でした ／ ～じゃ ありませんでした",
+      "examples": [
+        [
+          "山{やま}の 紅葉{もみじ}は とても きれいでした。",
+          "The autumn leaves in the mountains were very beautiful."
+        ],
+        [
+          "先週{せんしゅう}の 試験{しけん}は 難{むずか}しかったです。",
+          "Last week's examination was difficult."
+        ],
+        [
+          "パーティーは あまり 楽{たの}しく なかったです。",
+          "The party wasn't very enjoyable."
+        ],
+        [
+          "ホテルは 静{しず}かじゃ ありませんでした。",
+          "The hotel wasn't quiet."
+        ]
+      ],
+      "drills": [
+        [
+          "Yesterday's festival was enjoyable.",
+          "きのうの お祭{まつ}りは 楽{たの}しかったです。",
+          "い-adj → ～かったです"
+        ],
+        [
+          "The examination wasn't difficult.",
+          "試験{しけん}は 難{むずか}しく なかったです。",
+          "Negative past of an い-adjective"
+        ],
+        [
+          "The hotel was very clean.",
+          "ホテルは とても きれいでした。",
+          "きれい[な] is a な-adjective"
+        ],
+        [
+          "Was the sashimi delicious?",
+          "刺身{さしみ}は おいしかったですか。",
+          ""
+        ],
+        [
+          "The town wasn't lively.",
+          "町{まち}は にぎやかじゃ ありませんでした。",
+          "な-adjective negative past"
+        ],
+        [
+          "The weather was good, so it was warm.",
+          "天気{てんき}が よかったですから、暖{あたた}かかったです。",
+          "いい → よかったです"
+        ]
+      ]
+    },
+    {
+      "pattern": "N1は N2より adj です",
+      "short": "more than",
+      "explain": "より marks the yardstick you are measuring against and comes immediately after it, while the topic は names the thing that has more of the quality. Japanese adjectives never change shape for comparison, so 速いです serves both for 'is fast' and 'is faster'. ずっと in front of the adjective adds 'by far'.",
+      "formation": "N1は ＋ N2より ＋ [ずっと] ＋ adj です",
+      "examples": [
+        [
+          "新幹線{しんかんせん}は 電車{でんしゃ}より 速{はや}いです。",
+          "The Shinkansen is faster than an ordinary train."
+        ],
+        [
+          "飛行機{ひこうき}は 船{ふね}より ずっと 速{はや}いです。",
+          "A plane is far faster than a ship."
+        ],
+        [
+          "この かばんは あの かばんより 軽{かる}いです。",
+          "This bag is lighter than that one over there."
+        ],
+        [
+          "夏{なつ}は 春{はる}より 暑{あつ}いです。",
+          "Summer is hotter than spring."
+        ]
+      ],
+      "drills": [
+        [
+          "The Shinkansen is faster than an ordinary train.",
+          "新幹線{しんかんせん}は 電車{でんしゃ}より 速{はや}いです。",
+          "より marks what you compare with"
+        ],
+        [
+          "Summer is hotter than spring.",
+          "夏{なつ}は 春{はる}より 暑{あつ}いです。",
+          ""
+        ],
+        [
+          "This book is far more interesting than that one.",
+          "この 本{ほん}は その 本{ほん}より ずっと おもしろいです。",
+          "ずっと = by far"
+        ],
+        [
+          "Is Hong Kong hotter than Japan?",
+          "ホンコンは 日本{にほん}より 暑{あつ}いですか。",
+          ""
+        ],
+        [
+          "Kanji is more difficult than hiragana.",
+          "漢字{かんじ}は ひらがなより 難{むずか}しいです。",
+          ""
+        ],
+        [
+          "My car isn't newer than my elder brother's.",
+          "わたしの 車{くるま}は 兄{あに}の 車{くるま}より 新{あたら}しく ないです。",
+          "The adjective can be negative as well"
+        ]
+      ]
+    },
+    {
+      "pattern": "N1と N2と どちらが adj ですか",
+      "short": "which of two",
+      "explain": "This is the fixed question for comparing exactly two things: both nouns take と, and the question word is どちら even when the two things are objects rather than directions. The answer names the winner with のほうが and repeats the adjective. If neither one wins, the answer is どちらも with the adjective, which can be positive or negative.",
+      "formation": "N1と N2と どちらが adj ですか。　→　N1の ほうが adj です。　／　どちらも adj です。",
+      "examples": [
+        [
+          "夏{なつ}と 冬{ふゆ}と どちらが 好{す}きですか。……夏{なつ}の ほうが 好{す}きです。",
+          "Which do you like better, summer or winter? — I like summer better."
+        ],
+        [
+          "コーヒーと 紅茶{こうちゃ}と どちらが いいですか。……紅茶{こうちゃ}を お願{ねが}いします。",
+          "Which would you prefer, coffee or black tea? — Black tea, please."
+        ],
+        [
+          "電車{でんしゃ}と バスと どちらが 速{はや}いですか。……電車{でんしゃ}の ほうが 速{はや}いです。",
+          "Which is faster, the train or the bus? — The train is faster."
+        ],
+        [
+          "刺身{さしみ}と おすしと どちらが 好{す}きですか。……どちらも 好{す}きです。",
+          "Which do you like better, sashimi or sushi? — I like both."
+        ]
+      ],
+      "drills": [
+        [
+          "Which do you like better, summer or winter?",
+          "夏{なつ}と 冬{ふゆ}と どちらが 好{す}きですか。",
+          "Both nouns take と"
+        ],
+        [
+          "Which is faster, the train or the bus?",
+          "電車{でんしゃ}と バスと どちらが 速{はや}いですか。",
+          "どちら, never どれ, for two things"
+        ],
+        [
+          "Sukiyaki is the more delicious of the two.",
+          "すき焼{や}きの ほうが おいしいです。",
+          "のほうが answers a どちら question"
+        ],
+        [
+          "I like both.",
+          "どちらも 好{す}きです。",
+          "どちらも when neither one wins"
+        ],
+        [
+          "Which is heavier, this bag or that box?",
+          "この かばんと その 箱{はこ}と どちらが 重{おも}いですか。",
+          ""
+        ],
+        [
+          "Neither of them is expensive.",
+          "どちらも 高{たか}く ないです。",
+          "どちらも also works with a negative"
+        ]
+      ]
+    },
+    {
+      "pattern": "N[の中{なか}]で 何{なに}が 一番{いちばん} adj ですか",
+      "short": "the most",
+      "explain": "To ask about the top member of a group, name the group and mark it with で, adding の中 when the group is a set of things rather than a place. 一番 goes directly in front of the adjective. Choose the question word to match the group: 何 or どれ for things, どこ for places, だれ for people, いつ for times. The answer keeps 一番 and marks the winner with が.",
+      "formation": "N[の 中{なか}]で ＋ [何{なに}／どれ／どこ／だれ／いつ]が ＋ 一番{いちばん} ＋ adj ですか",
+      "examples": [
+        [
+          "季節{きせつ}の 中{なか}で いつが 一番{いちばん} 好{す}きですか。……秋{あき}が 一番{いちばん} 好{す}きです。",
+          "Which season do you like best? — I like autumn best."
+        ],
+        [
+          "日本{にほん}料理{りょうり}の 中{なか}で 何{なに}が 一番{いちばん} おいしいですか。",
+          "Which Japanese food is the most delicious?"
+        ],
+        [
+          "世界{せかい}で どこが 一番{いちばん} 暑{あつ}いですか。",
+          "Where is the hottest place in the world?"
+        ],
+        [
+          "家族{かぞく}の 中{なか}で だれが 一番{いちばん} 早{はや}く 起{お}きますか。",
+          "Who gets up earliest in your family?"
+        ]
+      ],
+      "drills": [
+        [
+          "Which season do you like best?",
+          "季節{きせつ}の 中{なか}で いつが 一番{いちばん} 好{す}きですか。",
+          "いつ, because seasons are times"
+        ],
+        [
+          "I like autumn best.",
+          "秋{あき}が 一番{いちばん} 好{す}きです。",
+          "The answer keeps 一番{いちばん} and takes が"
+        ],
+        [
+          "Where is the hottest place in the world?",
+          "世界{せかい}で どこが 一番{いちばん} 暑{あつ}いですか。",
+          "A place needs no 〜の中{なか}"
+        ],
+        [
+          "Who gets up earliest in your family?",
+          "家族{かぞく}の 中{なか}で だれが 一番{いちばん} 早{はや}く 起{お}きますか。",
+          ""
+        ],
+        [
+          "Which of these three is the most difficult?",
+          "この 3つの 中{なか}で どれが 一番{いちばん} 難{むずか}しいですか。",
+          "どれ for choosing among three or more"
+        ],
+        [
+          "Sushi is the most delicious of all Japanese food.",
+          "日本{にほん}料理{りょうり}の 中{なか}で おすしが 一番{いちばん} おいしいです。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

@@ -1,0 +1,340 @@
+{
+  "points": [
+    {
+      "pattern": "Vない form",
+      "short": "plain negative",
+      "explain": "The ない-form is the plain negative, and it is the stem that several important patterns are built on. It is not used to end a sentence in polite speech — ません is still what you say there — but you need it for 'please don't', 'you must' and 'you don't have to', all of which come in this lesson. Learn the three groups carefully now, because the same form returns in the lessons that follow. Watch the Group I verbs whose stem ends in い: they take わ, never あ.",
+      "formation": "Group I: 書{か}きます→書{か}かない、読{よ}みます→読{よ}まない、買{か}います→買{か}わない　／　Group II: 食{た}べます→食{た}べない　／　Group III: します→しない、来{き}ます→来{こ}ない",
+      "examples": [
+        [
+          "急{いそ}ぎます　→　急{いそ}がない",
+          "hurry → not hurry"
+        ],
+        [
+          "待{ま}ちます　→　待{ま}たない",
+          "wait → not wait"
+        ],
+        [
+          "忘{わす}れます　→　忘{わす}れない",
+          "forget → not forget"
+        ],
+        [
+          "します　→　しない、　来{き}ます　→　来{こ}ない",
+          "do → not do, come → not come"
+        ]
+      ],
+      "drills": [
+        [
+          "ない-form of 買{か}います (buy)",
+          "買{か}わない",
+          "Group I; the stem ends in い, so it takes わ"
+        ],
+        [
+          "ない-form of 急{いそ}ぎます (hurry)",
+          "急{いそ}がない",
+          "Group I"
+        ],
+        [
+          "ない-form of 忘{わす}れます (forget)",
+          "忘{わす}れない",
+          "Group II; just drop ます"
+        ],
+        [
+          "ない-form of 持{も}って 来{き}ます (bring)",
+          "持{も}って 来{こ}ない",
+          "Group III; the reading changes to こ"
+        ],
+        [
+          "ない-form of 心配{しんぱい}します (worry)",
+          "心配{しんぱい}しない",
+          "Group III"
+        ],
+        [
+          "ない-form of 払{はら}います (pay)",
+          "払{はら}わない",
+          "払{はら}わない, never 払{はら}あない"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vないで ください",
+      "short": "please don't",
+      "explain": "The negative counterpart of てください: it asks or tells someone not to do something. On its own it can sound rather direct, so in a real request it is usually softened with something like すみませんが or a reason ending in から. Compare it with なくてもいいです later in this lesson — that one says the action is unnecessary, whereas this one says it is not wanted.",
+      "formation": "V-ない ＋ で ください",
+      "examples": [
+        [
+          "ここで 写真{しゃしん}を 撮{と}らないで ください。",
+          "Please don't take photographs here."
+        ],
+        [
+          "心配{しんぱい}しないで ください。",
+          "Please don't worry."
+        ],
+        [
+          "病気{びょうき}ですから、お酒{さけ}を 飲{の}まないで ください。",
+          "You're ill, so please don't drink alcohol."
+        ],
+        [
+          "この 荷物{にもつ}は ここに 置{お}かないで ください。",
+          "Please don't put this baggage here."
+        ]
+      ],
+      "drills": [
+        [
+          "Please don't take photographs here.",
+          "ここで 写真{しゃしん}を 撮{と}らないで ください。",
+          "撮{と}ります → 撮{と}らない"
+        ],
+        [
+          "Please don't worry.",
+          "心配{しんぱい}しないで ください。",
+          "Group III"
+        ],
+        [
+          "It's dangerous, so please don't go in.",
+          "危{あぶ}ないですから、入{はい}らないで ください。",
+          ""
+        ],
+        [
+          "Please don't forget your health insurance card.",
+          "保険証{ほけんしょう}を 忘{わす}れないで ください。",
+          "Group II"
+        ],
+        [
+          "This room is no smoking, so please don't smoke.",
+          "この 部屋{へや}は 禁煙{きんえん}ですから、たばこを 吸{す}わないで ください。",
+          "吸{す}います → 吸{す}わない"
+        ],
+        [
+          "Please don't come tomorrow.",
+          "あしたは 来{こ}ないで ください。",
+          "来{き}ます → 来{こ}ない"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vなければ なりません",
+      "short": "must do",
+      "explain": "Says that something is obligatory. The literal sense is 'if you do not do it, it will not do', which is why the verb ends up negative even though the meaning is positive. It carries no hint of the speaker's own wishes — it is about a rule, a duty or a plain necessity — so it is not the way to say that you feel like doing something. In casual speech it is nearly always shortened, but the full form is what you write and what you say politely.",
+      "formation": "V-ない (drop い) ＋ ければ なりません　（飲{の}まない→飲{の}まなければ なりません）",
+      "examples": [
+        [
+          "薬{くすり}を 飲{の}まなければ なりません。",
+          "I have to take my medicine."
+        ],
+        [
+          "金曜日{きんようび}までに レポートを 出{だ}さなければ なりません。",
+          "I have to hand the report in by Friday."
+        ],
+        [
+          "うちで くつを 脱{ぬ}がなければ なりません。",
+          "You have to take your shoes off in the house."
+        ],
+        [
+          "きょうは 残業{ざんぎょう}しなければ なりません。",
+          "I have to work overtime today."
+        ]
+      ],
+      "drills": [
+        [
+          "I have to take medicine.",
+          "薬{くすり}を 飲{の}まなければ なりません。",
+          "Group I"
+        ],
+        [
+          "I must hand the report in by Friday.",
+          "金曜日{きんようび}までに レポートを 出{だ}さなければ なりません。",
+          "までに marks a deadline"
+        ],
+        [
+          "Do I have to pay now?",
+          "今{いま} 払{はら}わなければ なりませんか。",
+          "払{はら}わない → 払{はら}わなければ"
+        ],
+        [
+          "You have to take your shoes off here.",
+          "ここで くつを 脱{ぬ}がなければ なりません。",
+          ""
+        ],
+        [
+          "I have to work overtime today.",
+          "きょうは 残業{ざんぎょう}しなければ なりません。",
+          "Group III: しない → しなければ"
+        ],
+        [
+          "You have to memorise kanji every day.",
+          "毎日{まいにち} 漢字{かんじ}を 覚{おぼ}えなければ なりません。",
+          "Group II"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vなくても いいです",
+      "short": "don't have to",
+      "explain": "States that something is not necessary. It is built on the same ない-form: change the final い to くて, then add も いいです, exactly parallel to てもいいです for permission. Note the difference from ないでください — this does not forbid the action at all, it simply frees you from having to do it. As a question it is a polite way of checking whether you can skip something.",
+      "formation": "V-ない (drop い) ＋ くても いいです　（来{こ}ない→来{こ}なくても いいです）",
+      "examples": [
+        [
+          "あした 来{こ}なくても いいです。",
+          "You don't have to come tomorrow."
+        ],
+        [
+          "くつを 脱{ぬ}がなくても いいです。",
+          "You don't have to take your shoes off."
+        ],
+        [
+          "お金{かね}は 払{はら}わなくても いいです。",
+          "You don't have to pay."
+        ],
+        [
+          "心配{しんぱい}しなくても いいですよ。",
+          "There's no need to worry."
+        ]
+      ],
+      "drills": [
+        [
+          "You don't have to come tomorrow.",
+          "あした 来{こ}なくても いいです。",
+          ""
+        ],
+        [
+          "You don't have to take your shoes off.",
+          "くつを 脱{ぬ}がなくても いいです。",
+          ""
+        ],
+        [
+          "You don't need to bring your health insurance card.",
+          "保険証{ほけんしょう}を 持{も}って 来{こ}なくても いいです。",
+          "持{も}って 来{き}ます → 持{も}って 来{こ}ない"
+        ],
+        [
+          "Don't I have to pay today?",
+          "きょう 払{はら}わなくても いいですか。",
+          "A question checking that something is unnecessary"
+        ],
+        [
+          "You don't have to write your address.",
+          "住所{じゅうしょ}は 書{か}かなくても いいです。",
+          "The object is fronted with は"
+        ],
+        [
+          "I don't have to work on Saturday.",
+          "土曜日{どようび}は 働{はたら}かなくても いいです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "N(object)は",
+      "short": "object as topic",
+      "explain": "When you want to single out the object of the sentence — often to contrast it with other things — it moves to the front and を is replaced by は. Nothing else about the sentence changes. The effect is 'as for this one at least…', and the listener usually understands that other things may be different, which is why this so often turns up in pairs.",
+      "formation": "Nを V　→　Nは V（the object moves to the front and を becomes は）",
+      "examples": [
+        [
+          "パスポートは 見{み}せなければ なりません。",
+          "You do have to show your passport."
+        ],
+        [
+          "お酒{さけ}は 飲{の}まないで ください。",
+          "Please don't drink alcohol, whatever else you have."
+        ],
+        [
+          "名前{なまえ}は 書{か}かなくても いいです。",
+          "You don't need to write your name."
+        ],
+        [
+          "肉{にく}は 食{た}べますが、魚{さかな}は 食{た}べません。",
+          "I eat meat, but I don't eat fish."
+        ]
+      ],
+      "drills": [
+        [
+          "You must show your passport.",
+          "パスポートは 見{み}せなければ なりません。",
+          "Object fronted with は"
+        ],
+        [
+          "Please don't drink alcohol.",
+          "お酒{さけ}は 飲{の}まないで ください。",
+          ""
+        ],
+        [
+          "You don't have to write your name.",
+          "名前{なまえ}は 書{か}かなくても いいです。",
+          ""
+        ],
+        [
+          "I eat meat, but I don't eat fish.",
+          "肉{にく}は 食{た}べますが、魚{さかな}は 食{た}べません。",
+          "は on both objects sets up the contrast"
+        ],
+        [
+          "I've already handed the report in.",
+          "レポートは もう 出{だ}しました。",
+          ""
+        ],
+        [
+          "I don't have to take medicine, but I do have to rest.",
+          "薬{くすり}は 飲{の}まなくても いいですが、休{やす}まなければ なりません。",
+          "Two obligations contrasted"
+        ]
+      ]
+    },
+    {
+      "pattern": "N(time)までに V",
+      "short": "by a deadline",
+      "explain": "Marks the point in time by which something has to be finished. Keep it clearly apart from plain まで, which means 'up until' and describes an action carrying on over a stretch of time: 'I work until five' takes まで, while 'I go home by five' takes までに. It attaches to a time expression or to a noun naming an event, and the verb after it is normally a single completed action rather than a continuing one.",
+      "formation": "N(time)までに ＋ V　（compare N まで ＋ V, an action continuing up to that time）",
+      "examples": [
+        [
+          "会議{かいぎ}は 5時{じ}までに 終{お}わります。",
+          "The meeting will be over by five."
+        ],
+        [
+          "金曜日{きんようび}までに 本{ほん}を 返{かえ}さなければ なりません。",
+          "I have to return the book by Friday."
+        ],
+        [
+          "何時{なんじ}までに 行{い}かなければ なりませんか。",
+          "By what time do I have to be there?"
+        ],
+        [
+          "きのうの 晩{ばん} 9時{じ}まで 働{はたら}きました。",
+          "Last night I worked until nine."
+        ]
+      ],
+      "drills": [
+        [
+          "I have to return this book by Friday.",
+          "金曜日{きんようび}までに この 本{ほん}を 返{かえ}さなければ なりません。",
+          ""
+        ],
+        [
+          "The meeting will finish by five o'clock.",
+          "会議{かいぎ}は 5時{じ}までに 終{お}わります。",
+          ""
+        ],
+        [
+          "By what time do I have to pay?",
+          "何時{なんじ}までに 払{はら}わなければ なりませんか。",
+          ""
+        ],
+        [
+          "Last night I worked until nine.",
+          "きのうの 晩{ばん} 9時{じ}まで 働{はたら}きました。",
+          "まで, not までに — the action continues"
+        ],
+        [
+          "Please come by ten o'clock.",
+          "10時{じ}までに 来{き}て ください。",
+          ""
+        ],
+        [
+          "By when do I have to give it back?",
+          "いつまでに 返{かえ}さなければ なりませんか。",
+          "いつまでに for 'by when'"
+        ]
+      ]
+    }
+  ]
+}

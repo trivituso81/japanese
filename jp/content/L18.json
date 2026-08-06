@@ -1,0 +1,280 @@
+{
+  "points": [
+    {
+      "pattern": "辞書形{じしょけい}",
+      "short": "dictionary form",
+      "explain": "The dictionary form is the plain non-past form of a verb, the shape you would look up in a dictionary. Like the ない-form it does not end a sentence in polite speech, but a great many patterns attach to it, beginning with the two in this lesson. Group I verbs move the last syllable of the ます-stem to the う row, Group II verbs simply add る, and the two irregular verbs become する and くる.",
+      "formation": "Group I: 書{か}きます→書{か}く、飲{の}みます→飲{の}む　／　Group II: 食{た}べます→食{た}べる、見{み}ます→見{み}る　／　Group III: します→する、来{き}ます→来{く}る",
+      "examples": [
+        [
+          "買{か}います　→　買{か}う",
+          "buy"
+        ],
+        [
+          "泳{およ}ぎます　→　泳{およ}ぐ",
+          "swim"
+        ],
+        [
+          "集{あつ}めます　→　集{あつ}める",
+          "collect"
+        ],
+        [
+          "運転{うんてん}します　→　運転{うんてん}する、　来{き}ます　→　来{く}る",
+          "drive; come"
+        ]
+      ],
+      "drills": [
+        [
+          "dictionary form of 洗{あら}います (wash)",
+          "洗{あら}う",
+          "Group I"
+        ],
+        [
+          "dictionary form of 待{ま}ちます (wait)",
+          "待{ま}つ",
+          "Group I: ち → つ"
+        ],
+        [
+          "dictionary form of 捨{す}てます (throw away)",
+          "捨{す}てる",
+          "Group II"
+        ],
+        [
+          "dictionary form of 帰{かえ}ります (go home)",
+          "帰{かえ}る",
+          "Group I, in spite of looking like Group II"
+        ],
+        [
+          "dictionary form of 予約{よやく}します (reserve)",
+          "予約{よやく}する",
+          "Group III"
+        ],
+        [
+          "dictionary form of 来{き}ます (come)",
+          "来{く}る",
+          "Group III; the reading changes to く"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vる ことが できます ／ Nが できます",
+      "short": "ability",
+      "explain": "The standard way of saying that something can be done. A verb has to be turned into a noun phrase first by adding こと to the dictionary form, and the phrase then takes が. Nouns that already name an activity — driving, a reservation, a language — can drop the verb and take が できます directly. The pattern covers both personal skill and what is possible in a given place or situation, so it is what you use to ask whether a shop takes cards.",
+      "formation": "V-dictionary ＋ ことが できます　／　N ＋ が できます　（negative: できません）",
+      "examples": [
+        [
+          "わたしは ピアノを 弾{ひ}く ことが できます。",
+          "I can play the piano."
+        ],
+        [
+          "ミラーさんは 漢字{かんじ}を 読{よ}む ことが できます。",
+          "Mr Miller can read kanji."
+        ],
+        [
+          "ここで 車{くるま}を 止{と}める ことが できますか。",
+          "Can I park the car here?"
+        ],
+        [
+          "わたしは 日本語{にほんご}が 少{すこ}し できます。",
+          "I can speak a little Japanese."
+        ]
+      ],
+      "drills": [
+        [
+          "Can you read kanji?",
+          "漢字{かんじ}を 読{よ}む ことが できますか。",
+          "読{よ}みます → 読{よ}む"
+        ],
+        [
+          "I can play the piano.",
+          "わたしは ピアノを 弾{ひ}く ことが できます。",
+          ""
+        ],
+        [
+          "I can't drive a car.",
+          "わたしは 車{くるま}を 運転{うんてん}する ことが できません。",
+          "The negative is できません"
+        ],
+        [
+          "You can pay by card at this shop.",
+          "この 店{みせ}では カードで 払{はら}う ことが できます。",
+          "では marks the place as the topic"
+        ],
+        [
+          "Can I make a reservation by phone?",
+          "電話{でんわ}で 予約{よやく}する ことが できますか。",
+          ""
+        ],
+        [
+          "My younger brother can swim a hundred metres.",
+          "弟{おとうと}は 100メートル 泳{およ}ぐ ことが できます。",
+          "The quantity goes straight before the verb"
+        ]
+      ]
+    },
+    {
+      "pattern": "趣味{しゅみ}は Vる ことです",
+      "short": "hobby is doing",
+      "explain": "To name an activity as your hobby you cannot end with a verb, because the sentence needs a noun after は. Adding こと to the dictionary form turns the whole action into a noun phrase, and です then closes the sentence. The same nominalisation with こと works whenever you want to talk about an action as a thing rather than as something happening.",
+      "formation": "趣味{しゅみ}は ＋ V-dictionary ＋ ことです",
+      "examples": [
+        [
+          "わたしの 趣味{しゅみ}は 音楽{おんがく}を 聞{き}く ことです。",
+          "My hobby is listening to music."
+        ],
+        [
+          "父{ちち}の 趣味{しゅみ}は 古{ふる}い 切手{きって}を 集{あつ}める ことです。",
+          "My father's hobby is collecting old stamps."
+        ],
+        [
+          "わたしの 趣味{しゅみ}は 日記{にっき}を 書{か}く ことです。",
+          "My hobby is keeping a diary."
+        ]
+      ],
+      "drills": [
+        [
+          "My hobby is listening to music.",
+          "わたしの 趣味{しゅみ}は 音楽{おんがく}を 聞{き}く ことです。",
+          ""
+        ],
+        [
+          "My father's hobby is collecting old stamps.",
+          "父{ちち}の 趣味{しゅみ}は 古{ふる}い 切手{きって}を 集{あつ}める ことです。",
+          "Group II verb"
+        ],
+        [
+          "What is your hobby?",
+          "趣味{しゅみ}は 何{なん}ですか。",
+          "The question itself needs no こと"
+        ],
+        [
+          "My hobby is taking photographs.",
+          "わたしの 趣味{しゅみ}は 写真{しゃしん}を 撮{と}る ことです。",
+          ""
+        ],
+        [
+          "My elder sister's hobby is singing.",
+          "姉{あね}の 趣味{しゅみ}は 歌{うた}を 歌{うた}う ことです。",
+          ""
+        ],
+        [
+          "My hobby is travelling abroad.",
+          "わたしの 趣味{しゅみ}は 外国{がいこく}へ 旅行{りょこう}に 行{い}く ことです。",
+          "旅行{りょこう}に 行{い}きます from Lesson 13"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vる 前{まえ}に ／ Nの 前{まえ}に ／ 期間{きかん} 前{まえ}に",
+      "short": "before doing",
+      "explain": "Says that one thing happens before another. The verb in front of まえに is always in the dictionary form, no matter what the tense of the sentence is — the tense is carried only by the final verb, so a past sentence still has a dictionary form in the middle. Nouns join on with の, and a stretch of time joins directly with no particle at all, which gives you 'three years ago'.",
+      "formation": "V-dictionary ＋ 前{まえ}に　／　N ＋ の 前{まえ}に　／　期間{きかん} ＋ 前{まえ}に",
+      "examples": [
+        [
+          "日本{にほん}へ 来{く}る 前{まえ}に、日本語{にほんご}を 勉強{べんきょう}しました。",
+          "Before I came to Japan, I studied Japanese."
+        ],
+        [
+          "寝{ね}る 前{まえ}に、日記{にっき}を 書{か}きます。",
+          "I write my diary before I go to bed."
+        ],
+        [
+          "食事{しょくじ}の 前{まえ}に、手{て}を 洗{あら}います。",
+          "I wash my hands before a meal."
+        ],
+        [
+          "3年{ねん} 前{まえ}に 結婚{けっこん}しました。",
+          "I got married three years ago."
+        ]
+      ],
+      "drills": [
+        [
+          "Before I came to Japan, I studied Japanese for two months.",
+          "日本{にほん}へ 来{く}る 前{まえ}に、2か月{げつ} 日本語{にほんご}を 勉強{べんきょう}しました。",
+          "Dictionary form, even though the sentence is past"
+        ],
+        [
+          "I write in my diary before I go to bed.",
+          "寝{ね}る 前{まえ}に、日記{にっき}を 書{か}きます。",
+          ""
+        ],
+        [
+          "Please wash your hands before the meal.",
+          "食事{しょくじ}の 前{まえ}に、手{て}を 洗{あら}って ください。",
+          "Noun ＋ の 前{まえ}に"
+        ],
+        [
+          "I came to Japan three years ago.",
+          "3年{ねん} 前{まえ}に 日本{にほん}へ 来{き}ました。",
+          "A period of time takes no particle"
+        ],
+        [
+          "Do I have to book before I go?",
+          "行{い}く 前{まえ}に 予約{よやく}しなければ なりませんか。",
+          ""
+        ],
+        [
+          "I wash the car before I go out.",
+          "出{で}かける 前{まえ}に、車{くるま}を 洗{あら}います。",
+          "Group II verb"
+        ]
+      ]
+    },
+    {
+      "pattern": "なかなか ／ ぜひ",
+      "short": "two adverbs",
+      "explain": "Each of these two adverbs demands a particular kind of ending. なかなか goes with a negative and says that something does not happen easily or as quickly as you would like, often with a note of frustration. ぜひ goes with a wish or a request and adds the force of 'by all means' or 'do please' — it belongs with たいです and てください, never with a plain statement of fact.",
+      "formation": "なかなか ＋ V-negative　／　ぜひ ＋ V たいです ／ V て ください",
+      "examples": [
+        [
+          "漢字{かんじ}は なかなか 覚{おぼ}える ことが できません。",
+          "I just can't seem to memorise kanji."
+        ],
+        [
+          "忙{いそが}しいですから、なかなか 出{で}かける ことが できません。",
+          "I'm busy, so I hardly ever manage to get out."
+        ],
+        [
+          "ぜひ うちへ 遊{あそ}びに 来{き}て ください。",
+          "Do please come and visit us."
+        ],
+        [
+          "ぜひ その 会社{かいしゃ}を 見学{けんがく}したいです。",
+          "I would really like to visit that company and look round."
+        ]
+      ],
+      "drills": [
+        [
+          "I just can't manage to memorise kanji.",
+          "漢字{かんじ}は なかなか 覚{おぼ}える ことが できません。",
+          "なかなか needs a negative ending"
+        ],
+        [
+          "I'm busy, so I hardly ever get out.",
+          "忙{いそが}しいですから、なかなか 出{で}かける ことが できません。",
+          ""
+        ],
+        [
+          "Do please come to my house.",
+          "ぜひ うちへ 来{き}て ください。",
+          "ぜひ with a request"
+        ],
+        [
+          "I would really like to look round that company.",
+          "ぜひ その 会社{かいしゃ}を 見学{けんがく}したいです。",
+          "ぜひ with たいです"
+        ],
+        [
+          "The bus just won't come.",
+          "バスが なかなか 来{き}ません。",
+          ""
+        ],
+        [
+          "Do come with your family.",
+          "ぜひ ご家族{かぞく}と いっしょに 来{き}て ください。",
+          "ご家族{かぞく} from Lesson 15"
+        ]
+      ]
+    }
+  ]
+}

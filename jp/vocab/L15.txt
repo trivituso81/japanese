@@ -1,0 +1,30 @@
+VOCAB
+たちます Ⅰ|立ちます|stand up
+すわります Ⅰ|座ります|sit down
+つかいます Ⅰ|使います|use
+おきます Ⅰ|置きます|put
+つくります Ⅰ|作ります、造ります|make, produce
+うります Ⅰ|売ります|sell
+しります Ⅰ|知ります|get to know
+すみます Ⅰ|住みます|be going to live
+けんきゅうします Ⅲ|研究します|do research
+しって います|知って います|know
+すんで います ［おおさかに～］|住んで います ［大阪に～］|live [in Osaka]
+しりょう|資料|materials, data
+カタログ||catalog
+じこくひょう|時刻表|timetable
+ふく|服|clothes
+せいひん|製品|products
+ソフト||software
+せんもん|専門|speciality, field of study
+はいしゃ|歯医者|dentist, dentist's
+とこや|床屋|barber, barber's
+プレイガイド||(theater) ticket agency
+どくしん|独身|single, unmarried
+特に||especially
+思い出します Ⅰ||remember, recollect
+ご家族||your family
+いらっしゃいます Ⅰ||be (honorific equivalent of います)
+高校||senior high school
+PROPER
+にほんばし|日本橋|name of a shopping district in Osaka

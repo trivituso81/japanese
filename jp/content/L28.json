@@ -1,0 +1,328 @@
+{
+  "points": [
+    {
+      "pattern": "V₁ます-form ながら V₂",
+      "short": "at the same time",
+      "explain": "This says that one and the same person is doing two things at once. V₁ takes the ます-form with ます dropped and ながら added, and the important thing to remember is that V₂ is the main action — the one the sentence is really about. The pattern also stretches over longer periods, so 働{はたら}きながら 日本語{にほんご}を 勉強{べんきょう}して います describes a way of life rather than a single moment.",
+      "formation": "[V₁ます-form minus ます] ＋ ながら ＋ V₂",
+      "examples": [
+        [
+          "音楽{おんがく}を 聞{き}きながら 食事{しょくじ}します。",
+          "I listen to music while eating."
+        ],
+        [
+          "働{はたら}きながら 日本語{にほんご}を 勉強{べんきょう}して います。",
+          "I'm working and studying Japanese."
+        ],
+        [
+          "コーヒーを 飲{の}みながら 話{はな}しましょう。",
+          "Let's talk over a cup of coffee."
+        ],
+        [
+          "テレビを 見{み}ながら ごはんを 食{た}べます。",
+          "I eat my meals watching television."
+        ]
+      ],
+      "drills": [
+        [
+          "I have my meals while listening to music.",
+          "音楽{おんがく}を 聞{き}きながら 食事{しょくじ}します。",
+          "the main action comes second"
+        ],
+        [
+          "I'm studying Japanese while working.",
+          "働{はたら}きながら 日本語{にほんご}を 勉強{べんきょう}して います。",
+          "two things going on over a long period"
+        ],
+        [
+          "Let's talk over a cup of coffee.",
+          "コーヒーを 飲{の}みながら 話{はな}しましょう。",
+          ""
+        ],
+        [
+          "Please don't eat while walking.",
+          "歩{ある}きながら 食{た}べないで ください。",
+          ""
+        ],
+        [
+          "My daughter always studies while listening to the radio.",
+          "娘{むすめ}は いつも ラジオを 聞{き}きながら 勉強{べんきょう}します。",
+          ""
+        ],
+        [
+          "He chews gum while he drives.",
+          "彼{かれ}は 車{くるま}を 運転{うんてん}しながら ガムを かみます。",
+          "ながら attaches to the ます-stem, so 運転{うんてん}しながら"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vて-form います",
+      "short": "habitual action",
+      "explain": "You already know ～て います for an action going on now and for a state. Here it describes something you do again and again as a matter of habit, so it is usually accompanied by an expression of frequency such as 毎朝{まいあさ} or 毎日{まいにち}. To speak of a habit you used to have, put います into the past: ～て いました.",
+      "formation": "[V-て form] ＋ います（habit）　／　～て いました（a habit in the past）",
+      "examples": [
+        [
+          "毎朝{まいあさ} ジョギングを して います。",
+          "I jog every morning."
+        ],
+        [
+          "子{こ}どもの とき、毎晩{まいばん} 8時{じ}に 寝{ね}て いました。",
+          "I used to go to bed at eight every evening when I was a child."
+        ],
+        [
+          "毎日{まいにち} 日本語{にほんご}の 新聞{しんぶん}を 読{よ}んで います。",
+          "I read a Japanese newspaper every day."
+        ],
+        [
+          "姉{あね}は 自転車{じてんしゃ}で 大学{だいがく}に 通{かよ}って います。",
+          "My older sister goes to university by bicycle."
+        ]
+      ],
+      "drills": [
+        [
+          "I jog every morning.",
+          "毎朝{まいあさ} ジョギングを して います。",
+          "a habit, not something happening at this moment"
+        ],
+        [
+          "When I was a child I used to go to bed at eight every evening.",
+          "子{こ}どもの とき、毎晩{まいばん} 8時{じ}に 寝{ね}て いました。",
+          "～て いました for a past habit"
+        ],
+        [
+          "I read a Japanese newspaper every day.",
+          "毎日{まいにち} 日本語{にほんご}の 新聞{しんぶん}を 読{よ}んで います。",
+          ""
+        ],
+        [
+          "My older sister goes to university by bicycle.",
+          "姉{あね}は 自転車{じてんしゃ}で 大学{だいがく}に 通{かよ}って います。",
+          "通{かよ}います is the verb for going somewhere regularly"
+        ],
+        [
+          "Do you cook every day?",
+          "毎日{まいにち} 料理{りょうり}を して いますか。",
+          ""
+        ],
+        [
+          "When I was a child I used to swim in the sea every summer.",
+          "子{こ}どもの とき、夏{なつ}は いつも 海{うみ}で 泳{およ}いで いました。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} し、～",
+      "short": "listing reasons",
+      "explain": "し strings together two or more statements made from the same point of view — the merits of a person or a place, or a set of reasons for something. It carries the feeling of 'and what's more', and も frequently appears in the clauses to underline that the points are piling up. Even a single し hints that other reasons exist which you have not bothered to name, and that is something から never does; for the same reason the conclusion itself is often simply left off.",
+      "formation": "[普通形{ふつうけい}] ＋ し、[普通形{ふつうけい}] ＋ し、～　（な-adj and N add だ：熱心{ねっしん}だし、休{やす}みだし）",
+      "examples": [
+        [
+          "ワット先生{せんせい}は 熱心{ねっしん}だし、まじめだし、経験{けいけん}も あります。",
+          "Professor Watt is earnest and diligent and has experience."
+        ],
+        [
+          "駅{えき}から 近{ちか}いし、車{くるま}でも 来{こ}られるし、この 店{みせ}は とても 便利{べんり}です。",
+          "This shop is very convenient. It's near the station, and you can also come here by car."
+        ],
+        [
+          "色{いろ}も きれいだし、この 靴{くつ}を 買{か}います。",
+          "The colour is beautiful too, so I'll buy this pair of shoes."
+        ],
+        [
+          "出張{しゅっちょう}も 多{おお}いし、もうすぐ 日本語{にほんご}の 試験{しけん}も あるし……。",
+          "I often go on business trips, and I have a Japanese exam soon…"
+        ]
+      ],
+      "drills": [
+        [
+          "Professor Watt is earnest and serious, and he has experience too.",
+          "ワット先生{せんせい}は 熱心{ねっしん}だし、まじめだし、経験{けいけん}も あります。",
+          "な-adjectives add だ before し"
+        ],
+        [
+          "It's near the station and you can come by car, so this shop is very convenient.",
+          "駅{えき}から 近{ちか}いし、車{くるま}でも 来{こ}られるし、この 店{みせ}は とても 便利{べんり}です。",
+          "an い-adjective and a verb join し directly"
+        ],
+        [
+          "The colour is pretty too, so I'll buy these shoes.",
+          "色{いろ}も きれいだし、この 靴{くつ}を 買{か}います。",
+          "one し still implies there are other reasons"
+        ],
+        [
+          "He is kind and good at Japanese, so he is popular with the students.",
+          "彼{かれ}は やさしいし、日本語{にほんご}が 上手{じょうず}だし、学生{がくせい}に 人気{にんき}が あります。",
+          ""
+        ],
+        [
+          "I go on a lot of business trips, and I have a Japanese exam soon…",
+          "出張{しゅっちょう}も 多{おお}いし、もうすぐ 日本語{にほんご}の 試験{しけん}も あるし……。",
+          "the conclusion is left unsaid"
+        ],
+        [
+          "It's Sunday and the weather is good, so let's go to the park.",
+          "きょうは 日曜日{にちようび}だし、天気{てんき}も いいし、公園{こうえん}へ 行{い}きましょう。",
+          "a noun adds だ before し"
+        ]
+      ]
+    },
+    {
+      "pattern": "それに",
+      "short": "what's more",
+      "explain": "それに joins one more fact of the same kind onto what you have just said, in the way English uses 'and besides' or 'what's more'. It very often rounds off a run of し clauses, introducing the last and frequently the clinching point. Everything it adds must point the same way as what went before; it cannot introduce a contrast.",
+      "formation": "[reason]し、[reason]し、それに ＋ [one more reason]",
+      "examples": [
+        [
+          "あの 大学{だいがく}は いい 先生{せんせい}が 多{おお}いし、それに 家{いえ}から 近{ちか}いです。",
+          "That university has many good teachers, and besides, it's near my house."
+        ],
+        [
+          "この 店{みせ}は 品物{しなもの}が いいし、それに 値段{ねだん}も 安{やす}いです。",
+          "The goods in this shop are good, and what's more the prices are cheap."
+        ],
+        [
+          "彼女{かのじょ}は 歌{うた}が 上手{じょうず}だし、それに とても やさしいです。",
+          "She sings well, and what's more she is very kind."
+        ]
+      ],
+      "drills": [
+        [
+          "That university has many good teachers, and besides, it's near my house.",
+          "あの 大学{だいがく}は いい 先生{せんせい}が 多{おお}いし、それに 家{いえ}から 近{ちか}いです。",
+          "それに adds one more point of the same kind"
+        ],
+        [
+          "The goods in this shop are good, and what's more the prices are cheap.",
+          "この 店{みせ}は 品物{しなもの}が いいし、それに 値段{ねだん}も 安{やす}いです。",
+          ""
+        ],
+        [
+          "She sings well, and what's more she is very kind.",
+          "彼女{かのじょ}は 歌{うた}が 上手{じょうず}だし、それに とても やさしいです。",
+          ""
+        ],
+        [
+          "This flat is new, and besides it's quiet.",
+          "この アパートは 新{あたら}しいし、それに 静{しず}かです。",
+          ""
+        ],
+        [
+          "I'm busy today, and besides I don't feel well.",
+          "きょうは 忙{いそが}しいし、それに 気分{きぶん}も 悪{わる}いんです。",
+          ""
+        ],
+        [
+          "That restaurant is cheap, and the food is delicious too.",
+          "あの レストランは 安{やす}いし、それに 料理{りょうり}も おいしいです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "それで",
+      "short": "and so",
+      "explain": "それで marks what follows as the consequence of what was just said. It stands at the head of its own sentence, with the reason in the sentence before it, and in conversation it is very often used to take up the other person's remark and draw the obvious conclusion from it. Do not confuse it with それに, which adds another reason rather than a result.",
+      "formation": "[reason]。それで、[result]。",
+      "examples": [
+        [
+          "この 店{みせ}は 値段{ねだん}も 安{やす}いし、おいしいんです。…それで 人{ひと}が 多{おお}いんですね。",
+          "The food here is inexpensive and tasty. …And that's why it's crowded."
+        ],
+        [
+          "バスが 来{こ}ませんでした。それで 遅{おく}れました。",
+          "The bus didn't come, and so I was late."
+        ],
+        [
+          "熱{ねつ}が あります。それで きょうは 休{やす}みます。",
+          "I have a temperature, so I'm taking today off."
+        ]
+      ],
+      "drills": [
+        [
+          "The food here is cheap and tasty. — And that's why it's crowded.",
+          "この 店{みせ}は 値段{ねだん}も 安{やす}いし、おいしいんです。…それで 人{ひと}が 多{おお}いんですね。",
+          "それで takes up the reason just given"
+        ],
+        [
+          "The bus didn't come, and so I was late.",
+          "バスが 来{こ}ませんでした。それで 遅{おく}れました。",
+          ""
+        ],
+        [
+          "I have a temperature, so I'm taking today off.",
+          "熱{ねつ}が あります。それで きょうは 休{やす}みます。",
+          ""
+        ],
+        [
+          "I don't have much time, so I'll go by taxi.",
+          "時間{じかん}が ありません。それで タクシーで 行{い}きます。",
+          ""
+        ],
+        [
+          "He is kind, and that's why he's popular with the students.",
+          "彼{かれ}は やさしいです。それで 学生{がくせい}に 人気{にんき}が あります。",
+          ""
+        ],
+        [
+          "I used to live in Osaka, and so I speak Osaka dialect.",
+          "昔{むかし} 大阪{おおさか}に 住{す}んで いました。それで 大阪弁{おおさかべん}を 使{つか}います。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "よく この 喫茶店{きっさてん}に 来{く}るんですか",
+      "short": "に for destination",
+      "explain": "The point of interest in this sentence is に. Where Book I taught へ for the direction you move in, the same destination can be marked with に, and 行{い}きます、来{き}ます、帰{かえ}ります and 出張{しゅっちょう}します all accept either 「place へ」 or 「place に」. The sentence itself is a Lesson 26 んですか question, here used to ask about someone's habits, which is why the verb appears in its plain form 来{く}る before んですか.",
+      "formation": "[place] ＋ に ／ へ ＋ 行{い}きます・来{き}ます・帰{かえ}ります・出張{しゅっちょう}します",
+      "examples": [
+        [
+          "よく この 喫茶店{きっさてん}に 来{く}るんですか。",
+          "Do you often come to this coffee shop?"
+        ],
+        [
+          "来週{らいしゅう} 大阪{おおさか}に 出張{しゅっちょう}します。",
+          "I'm going to Osaka on business next week."
+        ],
+        [
+          "毎日{まいにち} 何時{なんじ}に うちに 帰{かえ}りますか。",
+          "What time do you go home every day?"
+        ]
+      ],
+      "drills": [
+        [
+          "Do you often come to this coffee shop?",
+          "よく この 喫茶店{きっさてん}に 来{く}るんですか。",
+          "に can stand in for へ with verbs of coming and going"
+        ],
+        [
+          "I'm going to Osaka on business next week.",
+          "来週{らいしゅう} 大阪{おおさか}に 出張{しゅっちょう}します。",
+          ""
+        ],
+        [
+          "What time do you go home every day?",
+          "毎日{まいにち} 何時{なんじ}に うちに 帰{かえ}りますか。",
+          ""
+        ],
+        [
+          "Do you go to that university every day?",
+          "毎日{まいにち} あの 大学{だいがく}に 通{かよ}って いるんですか。",
+          "通{かよ}います always takes に"
+        ],
+        [
+          "Are you going to Kyoto this Sunday?",
+          "今度{こんど}の 日曜日{にちようび} 京都{きょうと}に 行{い}くんですか。",
+          "京都{きょうと}へ would be equally correct"
+        ],
+        [
+          "Do you study Japanese every day?",
+          "毎日{まいにち} 日本語{にほんご}を 勉強{べんきょう}して いるんですか。",
+          "んですか asking about a habit"
+        ]
+      ]
+    }
+  ]
+}

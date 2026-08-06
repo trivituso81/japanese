@@ -1,0 +1,396 @@
+{
+  "points": [
+    {
+      "pattern": "可能動詞{かのうどうし}",
+      "short": "potential verbs",
+      "explain": "A potential verb says that something can be done. Group I verbs change the -i of the ます-form to -e, Group II verbs add られます, and the two Group III verbs are irregular: 来{き}ます becomes 来{こ}られます and します becomes できます. Whatever group the original verb belonged to, the potential verb itself is always a Group II verb, so it has the dictionary form, ない-form and て-form of a Group II verb. わかります already carries the sense of possibility, so it has no potential form.",
+      "formation": "Group I: -i ます → -e ます（書{か}きます→書{か}けます、買{か}います→買{か}えます）／Group II: ます → られます（食{た}べます→食{た}べられます）／Group III: 来{き}ます→来{こ}られます、します→できます",
+      "examples": [
+        [
+          "書{か}きます → 書{か}けます（書{か}ける・書{か}けない・書{か}けて）",
+          "write → can write; Group I changes -ki to -ke"
+        ],
+        [
+          "買{か}います → 買{か}えます（買{か}える・買{か}えない）",
+          "buy → can buy; -imasu becomes -emasu"
+        ],
+        [
+          "食{た}べます → 食{た}べられます（食{た}べられる・食{た}べられない）",
+          "eat → can eat; Group II adds られます"
+        ],
+        [
+          "来{き}ます → 来{こ}られます／します → できます",
+          "come → can come; do → can do"
+        ]
+      ],
+      "drills": [
+        [
+          "Give the potential form of 書{か}きます (write).",
+          "書{か}けます",
+          "Group I: the -i before ます becomes -e"
+        ],
+        [
+          "Give the potential form of 買{か}います (buy).",
+          "買{か}えます",
+          "-います → -えます"
+        ],
+        [
+          "Give the potential form of 食{た}べます (eat).",
+          "食{た}べられます",
+          "Group II simply adds られます"
+        ],
+        [
+          "Give the potential form of 来{き}ます (come).",
+          "来{こ}られます",
+          "Group III: 来{き}ます → 来{こ}られます, with the reading changing to こ"
+        ],
+        [
+          "Give the potential form of します (do).",
+          "できます",
+          "します has its own potential verb, できます"
+        ],
+        [
+          "Give the dictionary form and the ない-form of 書{か}けます.",
+          "書{か}ける、書{か}けない",
+          "every potential verb conjugates as a Group II verb"
+        ]
+      ]
+    },
+    {
+      "pattern": "可能動詞{かのうどうし}の 文{ぶん}",
+      "short": "potential sentences",
+      "explain": "A potential verb describes a state rather than an action, and that changes the particle: the を of a transitive verb normally becomes が, so 日本語を 話します turns into 日本語が 話せます. No other particle changes — へ、に、で and the rest stay exactly as they were. The pattern covers two things: a person's own ability, and a possibility that the circumstances allow.",
+      "formation": "N ＋ が ＋ [可能動詞{かのうどうし}]　（を → が；へ・に・で unchanged）",
+      "examples": [
+        [
+          "わたしは 日本語{にほんご}が 話{はな}せます。",
+          "I can speak Japanese."
+        ],
+        [
+          "一人{ひとり}で 病院{びょういん}へ 行{い}けますか。",
+          "Can you go to the hospital alone?"
+        ],
+        [
+          "田中{たなか}さんに 会{あ}えませんでした。",
+          "I couldn't see Mr Tanaka."
+        ],
+        [
+          "ミラーさんは 漢字{かんじ}が 読{よ}めます。",
+          "Mr Miller can read kanji."
+        ]
+      ],
+      "drills": [
+        [
+          "I can speak a little Japanese.",
+          "わたしは 日本語{にほんご}が 少{すこ}し 話{はな}せます。",
+          "を becomes が with a potential verb"
+        ],
+        [
+          "Can you go to the hospital alone?",
+          "一人{ひとり}で 病院{びょういん}へ 行{い}けますか。",
+          "へ does not change"
+        ],
+        [
+          "I couldn't meet Mr Tanaka.",
+          "田中{たなか}さんに 会{あ}えませんでした。",
+          "に stays as it is"
+        ],
+        [
+          "Mr Miller can read kanji.",
+          "ミラーさんは 漢字{かんじ}が 読{よ}めます。",
+          ""
+        ],
+        [
+          "You can use a card at this shop.",
+          "この 店{みせ}で カードが 使{つか}えます。",
+          "a possibility created by the situation, not personal ability"
+        ],
+        [
+          "My child can't swim yet.",
+          "子{こ}どもは まだ 泳{およ}げません。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "見{み}えます／聞{き}こえます",
+      "short": "spontaneous perception",
+      "explain": "見{み}えます and 聞{き}こえます are not the potential verbs of 見{み}ます and 聞{き}きます — those are 見{み}られます and 聞{き}けます. The potential forms say that your intention to look or listen can be carried out, whereas 見{み}えます and 聞{き}こえます say that something enters your eyes or ears whether you meant it to or not. In both, the thing seen or heard becomes the subject and takes が.",
+      "formation": "N ＋ が ＋ 見{み}えます／聞{き}こえます　（cf. potential 見{み}られます／聞{き}けます）",
+      "examples": [
+        [
+          "新幹線{しんかんせん}から 富士山{ふじさん}が 見{み}えます。",
+          "Mt Fuji can be seen from the Shinkansen."
+        ],
+        [
+          "ラジオの 音{おと}が 聞{き}こえます。",
+          "The sound of a radio can be heard."
+        ],
+        [
+          "わたしの 部屋{へや}から 海{うみ}が 見{み}えます。",
+          "The sea can be seen from my room."
+        ],
+        [
+          "新宿{しんじゅく}で 今{いま} その 映画{えいが}が 見{み}られます。",
+          "You can see that film in Shinjuku now."
+        ]
+      ],
+      "drills": [
+        [
+          "Mt Fuji can be seen from the Shinkansen.",
+          "新幹線{しんかんせん}から 富士山{ふじさん}が 見{み}えます。",
+          "the thing seen takes が"
+        ],
+        [
+          "The sound of the waves can be heard.",
+          "波{なみ}の 音{おと}が 聞{き}こえます。",
+          ""
+        ],
+        [
+          "The sea can be seen from my room.",
+          "わたしの 部屋{へや}から 海{うみ}が 見{み}えます。",
+          ""
+        ],
+        [
+          "You can see that film in Shinjuku now.",
+          "新宿{しんじゅく}で 今{いま} その 映画{えいが}が 見{み}られます。",
+          "the potential, because you choose to go and watch"
+        ],
+        [
+          "It was raining, so we couldn't see the fireworks.",
+          "雨{あめ}でしたから、花火{はなび}が 見{み}えませんでした。",
+          ""
+        ],
+        [
+          "I can't hear your voice very well.",
+          "声{こえ}が よく 聞{き}こえません。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "できます",
+      "short": "coming into being",
+      "explain": "Besides being the potential of します, できます has a second meaning that you meet here: something comes into being, is built, or is finished. A shop can できる in front of the station, a repair job can できる when the work is done, and a meal can できる when it is ready to eat. What comes into being takes が, or は when it is the topic.",
+      "formation": "N ＋ が ／ は ＋ できます　（be built, be completed, be ready）",
+      "examples": [
+        [
+          "駅{えき}の 前{まえ}に 大{おお}きい スーパーが できました。",
+          "A big supermarket has been built in front of the station."
+        ],
+        [
+          "時計{とけい}の 修理{しゅうり}は いつ できますか。",
+          "When can you fix this watch?"
+        ],
+        [
+          "来年{らいねん} 大阪{おおさか}に 新{あたら}しい 空港{くうこう}が できます。",
+          "A new airport will be built in Osaka next year."
+        ],
+        [
+          "昼{ひる}ごはんが できましたよ。",
+          "Lunch is ready."
+        ]
+      ],
+      "drills": [
+        [
+          "A big supermarket has been built in front of the station.",
+          "駅{えき}の 前{まえ}に 大{おお}きい スーパーが できました。",
+          "できます here means 'come into being'"
+        ],
+        [
+          "When can you fix this watch?",
+          "時計{とけい}の 修理{しゅうり}は いつ できますか。",
+          "the repair 'is completed'"
+        ],
+        [
+          "A new airport will be built in Osaka next year.",
+          "来年{らいねん} 大阪{おおさか}に 新{あたら}しい 空港{くうこう}が できます。",
+          ""
+        ],
+        [
+          "Lunch is ready.",
+          "昼{ひる}ごはんが できましたよ。",
+          ""
+        ],
+        [
+          "Is the report finished yet?",
+          "レポートは もう できましたか。",
+          ""
+        ],
+        [
+          "A Japanese class has been set up at the company.",
+          "会社{かいしゃ}に 日本語{にほんご}の 教室{きょうしつ}が できました。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "は",
+      "short": "marking contrast",
+      "explain": "は highlights a noun as the topic, and as you saw in Lessons 10, 17 and 26, it swallows が or を when it takes over from them. After other particles — で、に、へ、から — it is simply added on, giving では、には、へは、からは. One very common job for は is contrast: putting it on two nouns in turn sets one against the other, as in 'wine yes, beer no'.",
+      "formation": "が・を → は　／　で・に・へ・から ＋ は（では、には、へは、からは）",
+      "examples": [
+        [
+          "きのうは 山{やま}が 見{み}えましたが、きょうは 見{み}えません。",
+          "Yesterday we could see the mountains, but not today."
+        ],
+        [
+          "ワインは 飲{の}みますが、ビールは 飲{の}みません。",
+          "I drink wine, but not beer."
+        ],
+        [
+          "京都{きょうと}へは 行{い}きますが、大阪{おおさか}へは 行{い}きません。",
+          "I'll go to Kyoto, but not to Osaka."
+        ],
+        [
+          "わたしの 学校{がっこう}では 中国語{ちゅうごくご}が 習{なら}えます。",
+          "In my school we can learn Chinese."
+        ]
+      ],
+      "drills": [
+        [
+          "Yesterday we could see the mountains, but today we can't.",
+          "きのうは 山{やま}が 見{み}えましたが、きょうは 見{み}えません。",
+          "は on both halves points the contrast"
+        ],
+        [
+          "I drink wine, but I don't drink beer.",
+          "ワインは 飲{の}みますが、ビールは 飲{の}みません。",
+          "を is replaced by は"
+        ],
+        [
+          "I'll go to Kyoto, but not to Osaka.",
+          "京都{きょうと}へは 行{い}きますが、大阪{おおさか}へは 行{い}きません。",
+          "へ keeps its place and は follows it"
+        ],
+        [
+          "There is an American teacher at my school.",
+          "わたしの 学校{がっこう}には アメリカ人{じん}の 先生{せんせい}が います。",
+          "には, not に"
+        ],
+        [
+          "You can learn Chinese at my school.",
+          "わたしの 学校{がっこう}では 中国語{ちゅうごくご}が 習{なら}えます。",
+          "では, not で"
+        ],
+        [
+          "I can read hiragana, but I can't read kanji.",
+          "ひらがなは 読{よ}めますが、漢字{かんじ}は 読{よ}めません。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "も",
+      "short": "as well",
+      "explain": "も behaves just like the contrastive は in the way it fits into a sentence: it replaces が and を, and it is added after other particles, giving でも、にも、からも. With へ it may either be added or left out. What it says is that the statement holds of this item as well as the one already mentioned, and repeating it is a natural way of piling up examples.",
+      "formation": "が・を → も　／　で・に・から ＋ も（でも、にも、からも）；へ ＋ [も]",
+      "examples": [
+        [
+          "クララさんは 英語{えいご}が 話{はな}せます。フランス語{ご}も 話{はな}せます。",
+          "Klara can speak English. She can speak French, too."
+        ],
+        [
+          "去年{きょねん} アメリカへ 行{い}きました。メキシコへも 行{い}きました。",
+          "I went to America last year. I went to Mexico, too."
+        ],
+        [
+          "わたしの 部屋{へや}から 海{うみ}が 見{み}えます。弟{おとうと}の 部屋{へや}からも 見{み}えます。",
+          "The sea can be seen from my room, and also from my brother's room."
+        ],
+        [
+          "日曜日{にちようび}も 働{はたら}きます。",
+          "I work on Sundays too."
+        ]
+      ],
+      "drills": [
+        [
+          "Klara can speak English. She can speak French, too.",
+          "クララさんは 英語{えいご}が 話{はな}せます。フランス語{ご}も 話{はな}せます。",
+          "が becomes も"
+        ],
+        [
+          "I went to America last year. I went to Mexico, too.",
+          "去年{きょねん} アメリカへ 行{い}きました。メキシコへも 行{い}きました。",
+          "へも, or simply メキシコも"
+        ],
+        [
+          "The sea can be seen from my brother's room, too.",
+          "弟{おとうと}の 部屋{へや}からも 海{うみ}が 見{み}えます。",
+          "も follows から"
+        ],
+        [
+          "I work on Sundays too.",
+          "日曜日{にちようび}も 働{はたら}きます。",
+          ""
+        ],
+        [
+          "You can buy tickets at this shop too.",
+          "この 店{みせ}でも 切符{きっぷ}が 買{か}えます。",
+          "も follows で"
+        ],
+        [
+          "I told Mr Tanaka too.",
+          "田中{たなか}さんにも 話{はな}しました。",
+          "も follows に"
+        ]
+      ]
+    },
+    {
+      "pattern": "しか",
+      "short": "nothing but",
+      "explain": "しか attaches to a noun or a quantifier and always takes a negative predicate: it denies everything except the item it marks. Like も it replaces が and を and follows other particles. だけ says much the same thing with an affirmative verb, but しか carries a negative colouring — a sense that this is all there is, and that it is not much.",
+      "formation": "N／Quantifier ＋ しか ＋ [negative]　（cf. ～だけ ＋ affirmative）",
+      "examples": [
+        [
+          "ローマ字{じ}しか 書{か}けません。",
+          "I cannot write anything but Roman letters."
+        ],
+        [
+          "ローマ字{じ}だけ 書{か}けます。",
+          "I can only write Roman letters."
+        ],
+        [
+          "1000円{えん}しか ありません。",
+          "I only have 1,000 yen."
+        ],
+        [
+          "けさ パンしか 食{た}べませんでした。",
+          "I only ate bread this morning."
+        ]
+      ],
+      "drills": [
+        [
+          "I cannot write anything but Roman letters.",
+          "ローマ字{じ}しか 書{か}けません。",
+          "しか always takes a negative predicate"
+        ],
+        [
+          "I can only write Roman letters.",
+          "ローマ字{じ}だけ 書{か}けます。",
+          "だけ takes an affirmative and sounds neutral"
+        ],
+        [
+          "I only have 1,000 yen.",
+          "1000円{えん}しか ありません。",
+          "a quantifier takes しか too"
+        ],
+        [
+          "There is only one Japanese teacher at this school.",
+          "この 学校{がっこう}には 日本語{にほんご}の 先生{せんせい}が 一人{ひとり}しか いません。",
+          ""
+        ],
+        [
+          "I only ate bread this morning.",
+          "けさ パンしか 食{た}べませんでした。",
+          "しか replaces を"
+        ],
+        [
+          "I can only see her on Sundays.",
+          "日曜日{にちようび}しか 彼女{かのじょ}に 会{あ}えません。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

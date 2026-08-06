@@ -1,0 +1,224 @@
+{
+  "points": [
+    {
+      "pattern": "普通形{ふつうけい} ＋ N",
+      "short": "noun modifying",
+      "explain": "A whole clause can sit in front of a noun and describe it, the way an adjective does; English needs 'who', 'which' or 'that' but Japanese needs nothing at all. The clause goes into the plain form and ends immediately before the noun it modifies. The one trap is the subject inside the clause: it takes が, never は, because は belongs to the sentence as a whole.",
+      "formation": "[plain-form clause, its subject marked が] ＋ N",
+      "examples": [
+        [
+          "これは わたしが 撮{と}った 写真{しゃしん}です。",
+          "This is a photo I took."
+        ],
+        [
+          "ミラーさんが 住{す}んで いる うちは 大{おお}きいです。",
+          "The house Mr Miller lives in is big."
+        ],
+        [
+          "母{はは}が 作{つく}った ケーキは おいしかったです。",
+          "The cake my mother made was delicious."
+        ],
+        [
+          "あの 人{ひと}は 日本語{にほんご}を 教{おし}えて いる 先生{せんせい}です。",
+          "That person is the teacher who teaches Japanese."
+        ]
+      ],
+      "drills": [
+        [
+          "This is a photo I took.",
+          "これは わたしが 撮{と}った 写真{しゃしん}です。",
+          "the subject inside the clause takes が"
+        ],
+        [
+          "The house Mr Miller lives in is big.",
+          "ミラーさんが 住{す}んで いる うちは 大{おお}きいです。",
+          "て います goes plain: て いる"
+        ],
+        [
+          "The cake my mother made was delicious.",
+          "母{はは}が 作{つく}った ケーキは おいしかったです。",
+          ""
+        ],
+        [
+          "Do you know the man who is wearing a hat?",
+          "帽子{ぼうし}を かぶって いる 男{おとこ}の 人{ひと}を 知{し}って いますか。",
+          ""
+        ],
+        [
+          "The person wearing glasses is Mr Tanaka.",
+          "眼鏡{めがね}を かけて いる 人{ひと}は 田中{たなか}さんです。",
+          ""
+        ],
+        [
+          "That isn't the letter I wrote.",
+          "あれは わたしが 書{か}いた 手紙{てがみ}じゃ ありません。",
+          "the negative sits on the main sentence, not the clause"
+        ]
+      ]
+    },
+    {
+      "pattern": "Vる ／ Vた ／ Vない ＋ N",
+      "short": "tense inside the clause",
+      "explain": "The modifying clause carries its own tense, chosen for the noun it describes and quite independently of the main verb. Use the dictionary form for something still to come or habitual, the た-form for something already finished, and the ない-form for a negative. Because of this, a sentence can perfectly well have a past clause and a non-past ending, or the reverse.",
+      "formation": "Vる（still to come／habitual）／ Vた（finished）／ Vない（negative） ＋ N",
+      "examples": [
+        [
+          "あした 会{あ}う 人{ひと}は 山田{やまだ}さんです。",
+          "The person I'm meeting tomorrow is Mr Yamada."
+        ],
+        [
+          "きのう 買{か}った 本{ほん}は おもしろいです。",
+          "The book I bought yesterday is interesting."
+        ],
+        [
+          "わからない ことばは 辞書{じしょ}で 調{しら}べます。",
+          "I look up words I don't know in a dictionary."
+        ],
+        [
+          "京都{きょうと}へ 行{い}く 電車{でんしゃ}は どれですか。",
+          "Which is the train that goes to Kyoto?"
+        ]
+      ],
+      "drills": [
+        [
+          "The person I'm meeting tomorrow is Mr Yamada.",
+          "あした 会{あ}う 人{ひと}は 山田{やまだ}さんです。",
+          "dictionary form for a future event"
+        ],
+        [
+          "The book I bought yesterday was interesting.",
+          "きのう 買{か}った 本{ほん}は おもしろかったです。",
+          "た-form inside the clause"
+        ],
+        [
+          "Which is the train that goes to Kyoto?",
+          "京都{きょうと}へ 行{い}く 電車{でんしゃ}は どれですか。",
+          ""
+        ],
+        [
+          "I look up words I don't know in a dictionary.",
+          "わからない ことばは 辞書{じしょ}で 調{しら}べます。",
+          "the ない-form modifies a noun directly"
+        ],
+        [
+          "Is there anyone who isn't coming tomorrow?",
+          "あした 来{こ}ない 人{ひと}は いますか。",
+          "来{く}る → 来{こ}ない"
+        ],
+        [
+          "The shop where I bought this bag is near the station.",
+          "この かばんを 買{か}った 店{みせ}は 駅{えき}の 近{ちか}くです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Vる 時間{じかん}／約束{やくそく}／用事{ようじ}が あります",
+      "short": "time or errand to do",
+      "explain": "This is noun modification put to a very practical use: the dictionary form before 時間, 約束 or 用事 says what the time, the appointment or the errand is for. English says 'time to watch TV' with an infinitive, but Japanese simply places the plain verb in front of the noun. It is one of the most useful ways to explain why you cannot do something.",
+      "formation": "[V-dictionary] ＋ 時間{じかん}／約束{やくそく}／用事{ようじ}が あります／ありません",
+      "examples": [
+        [
+          "きょうは テレビを 見{み}る 時間{じかん}が ありません。",
+          "I don't have time to watch TV today."
+        ],
+        [
+          "今晩{こんばん} 友{とも}だちに 会{あ}う 約束{やくそく}が あります。",
+          "I've arranged to meet a friend this evening."
+        ],
+        [
+          "あしたは 銀行{ぎんこう}へ 行{い}く 用事{ようじ}が あります。",
+          "Tomorrow I have an errand at the bank."
+        ]
+      ],
+      "drills": [
+        [
+          "I don't have time to watch TV today.",
+          "きょうは テレビを 見{み}る 時間{じかん}が ありません。",
+          "dictionary form before 時間{じかん}"
+        ],
+        [
+          "I've arranged to meet a friend this evening.",
+          "今晩{こんばん} 友{とも}だちに 会{あ}う 約束{やくそく}が あります。",
+          ""
+        ],
+        [
+          "Tomorrow I have an errand at the post office.",
+          "あしたは 郵便局{ゆうびんきょく}へ 行{い}く 用事{ようじ}が あります。",
+          ""
+        ],
+        [
+          "Do you have time to eat lunch?",
+          "昼{ひる}ごはんを 食{た}べる 時間{じかん}が ありますか。",
+          ""
+        ],
+        [
+          "I had no time to do my homework yesterday.",
+          "きのうは 宿題{しゅくだい}を する 時間{じかん}が ありませんでした。",
+          "する, not します"
+        ],
+        [
+          "I have an appointment at the dentist on Saturday.",
+          "土曜日{どようび}は 歯医者{はいしゃ}へ 行{い}く 約束{やくそく}が あります。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Modified nouns as any role",
+      "short": "any role in the sentence",
+      "explain": "Once a noun has been described by a clause, the whole bundle behaves like an ordinary noun and can take any particle: it may be the topic, the object, a destination, or the place where something happens. Learners often stop at using modified nouns as topics, so it is worth practising them in the middle of a sentence as well. The clause always comes first and the particle attaches after the noun.",
+      "formation": "[clause ＋ N] ＋ は／が／を／へ／で …",
+      "examples": [
+        [
+          "わたしが 生{う}まれた 町{まち}は 静{しず}かな ところです。",
+          "The town where I was born is a quiet place."
+        ],
+        [
+          "兄{あに}が 働{はたら}いて いる 会社{かいしゃ}へ 行{い}きました。",
+          "I went to the company where my elder brother works."
+        ],
+        [
+          "母{はは}が 送{おく}った 荷物{にもつ}を あけました。",
+          "I opened the parcel my mother sent."
+        ],
+        [
+          "ミラーさんが 住{す}んで いる アパートで パーティーが あります。",
+          "There's a party at the apartment where Mr Miller lives."
+        ]
+      ],
+      "drills": [
+        [
+          "The town where I was born is a quiet place.",
+          "わたしが 生{う}まれた 町{まち}は 静{しず}かな ところです。",
+          "the modified noun is the topic here"
+        ],
+        [
+          "I went to the company where my elder brother works.",
+          "兄{あに}が 働{はたら}いて いる 会社{かいしゃ}へ 行{い}きました。",
+          "the modified noun takes へ"
+        ],
+        [
+          "I opened the parcel my mother sent.",
+          "母{はは}が 送{おく}った 荷物{にもつ}を あけました。",
+          "を marks it as the object"
+        ],
+        [
+          "There's a party at the apartment where Mr Miller lives.",
+          "ミラーさんが 住{す}んで いる アパートで パーティーが あります。",
+          "で for the place of an event"
+        ],
+        [
+          "The person wearing a coat is my father.",
+          "コートを 着{き}て いる 人{ひと}は 父{ちち}です。",
+          ""
+        ],
+        [
+          "The photos I took in Paris are in this box.",
+          "わたしが パリで 撮{と}った 写真{しゃしん}は この 箱{はこ}の 中{なか}に あります。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

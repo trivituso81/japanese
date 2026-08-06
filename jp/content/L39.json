@@ -1,0 +1,228 @@
+{
+  "points": [
+    {
+      "pattern": "Vて-form ／ Vない-form なくて ／ い-adj くて ／ な-adj で、～",
+      "short": "cause and effect",
+      "explain": "The て-form can join two clauses so that the first is the cause of the second, but this is a far more restricted way of giving a reason than から. What follows must be outside your control: a feeling such as びっくりしました or 寂{さび}しいです, a potential or a state such as 行{い}けません or わかりませんでした, or something that simply happened to you. If the second clause carries any will of your own — a request, an invitation, an order, an intention — から must be used instead. The cause must also come first in time, so a reason lying in the future cannot be expressed this way.",
+      "formation": "V て-form ／ V ない-form なくて ／ い-adj（〜い→〜くて）／ な-adj（〜［な］→〜で）＋ 、＋ [result you do not control]",
+      "examples": [
+        [
+          "ニュースを 聞{き}いて、びっくりしました。",
+          "I was surprised to hear the news."
+        ],
+        [
+          "家族{かぞく}に 会{あ}えなくて、寂{さび}しいです。",
+          "I can't see my family, so I miss them."
+        ],
+        [
+          "話{はなし}が 複雑{ふくざつ}で、よく わかりませんでした。",
+          "The story was complicated, so I could not understand it well."
+        ],
+        [
+          "事故{じこ}が あって、バスが 遅{おく}れて しまいました。",
+          "There was an accident, so the bus was delayed."
+        ]
+      ],
+      "drills": [
+        [
+          "I was surprised to hear the news.",
+          "ニュースを 聞{き}いて、びっくりしました。",
+          "the て-form gives the cause of a feeling"
+        ],
+        [
+          "I can't see my family, so I miss them.",
+          "家族{かぞく}に 会{あ}えなくて、寂{さび}しいです。",
+          "a negative verb becomes 〜なくて"
+        ],
+        [
+          "Saturday is inconvenient for me, so I cannot come.",
+          "土曜日{どようび}は 都合{つごう}が 悪{わる}くて、行{い}けません。",
+          "an い-adjective becomes 〜くて; the result is a potential"
+        ],
+        [
+          "The story was complicated, so I could not understand it well.",
+          "話{はなし}が 複雑{ふくざつ}で、よく わかりませんでした。",
+          "a な-adjective becomes 〜で"
+        ],
+        [
+          "It's dangerous, so please don't touch the machine.",
+          "危{あぶ}ないですから、機械{きかい}に 触{さわ}らないで ください。",
+          "a request follows, so から — 危{あぶ}なくて is not possible"
+        ],
+        [
+          "I was late for the lesson and was scolded by the teacher.",
+          "授業{じゅぎょう}に 遅{おく}れて、先生{せんせい}に しかられました。",
+          "a passive result: nothing here was willed"
+        ]
+      ]
+    },
+    {
+      "pattern": "Nで",
+      "short": "noun as cause",
+      "explain": "A single noun naming an event or a misfortune can carry the whole cause on its own, marked with で. This is the で of 地震{じしん}で、事故{じこ}で、火事{かじ}で and 病気{びょうき}で — earthquakes, accidents, fires and illness, things that happen to you rather than things you do. The same restriction applies as with the て-form: what follows cannot express your will, so 病気{びょうき}で あした 会社{かいしゃ}を 休{やす}みたいです is wrong.",
+      "formation": "N(event, misfortune)で ＋ [result you do not control]",
+      "examples": [
+        [
+          "地震{じしん}で ビルが 倒{たお}れました。",
+          "Because of the earthquake, a building collapsed."
+        ],
+        [
+          "病気{びょうき}で 会社{かいしゃ}を 休{やす}みました。",
+          "Because of illness, I took a day off work."
+        ],
+        [
+          "火事{かじ}で うちが 焼{や}けました。",
+          "The house burned down in the fire."
+        ],
+        [
+          "台風{たいふう}で 電車{でんしゃ}が 止{と}まりました。",
+          "The trains stopped because of the typhoon."
+        ]
+      ],
+      "drills": [
+        [
+          "Because of the earthquake, a building collapsed.",
+          "地震{じしん}で ビルが 倒{たお}れました。",
+          "で marks the event that brought it about"
+        ],
+        [
+          "Because of illness, I took a day off work.",
+          "病気{びょうき}で 会社{かいしゃ}を 休{やす}みました。",
+          "but 病気{びょうき}で 休{やす}みたいです is not possible"
+        ],
+        [
+          "The house burned down in the fire.",
+          "火事{かじ}で うちが 焼{や}けました。",
+          ""
+        ],
+        [
+          "The trains stopped because of the typhoon.",
+          "台風{たいふう}で 電車{でんしゃ}が 止{と}まりました。",
+          ""
+        ],
+        [
+          "I was late for the meeting because of an accident.",
+          "事故{じこ}で 会議{かいぎ}に 遅{おく}れました。",
+          ""
+        ],
+        [
+          "Because of the noise I could not study.",
+          "騒音{そうおん}で 勉強{べんきょう}できませんでした。",
+          "騒音{そうおん} was introduced in Lesson 37"
+        ]
+      ]
+    },
+    {
+      "pattern": "普通形{ふつうけい} ＋ ので、～",
+      "short": "because, softly",
+      "explain": "ので gives a reason just as から does, but it presents it as an objective, natural course of events rather than as your own justification. Because it makes a weaker claim on the listener, it is the softer choice when you are asking a favour, requesting permission or making an excuse. It attaches to the plain form, with な-adjectives and nouns taking な in place of だ, though the polite form is also possible when you want to sound especially formal. It cannot stand before an imperative or a prohibitive, where から is required.",
+      "formation": "[plain form] ＋ ので、～　（な-adj／N ＋ な：静{しず}かなので、病気{びょうき}なので）",
+      "examples": [
+        [
+          "日本語{にほんご}が わからないので、英語{えいご}で 話{はな}して いただけませんか。",
+          "I don't understand Japanese, so would you please speak in English?"
+        ],
+        [
+          "用事{ようじ}が あるので、お先{さき}に 失礼{しつれい}します。",
+          "I have something to do, so please excuse me for leaving first."
+        ],
+        [
+          "きょうは 病気{びょうき}なので、早{はや}く 帰{かえ}っても いいですか。",
+          "I'm ill today, so may I go home early?"
+        ],
+        [
+          "電車{でんしゃ}が 止{と}まって いるので、遅{おく}れて しまいました。",
+          "The trains have stopped, so I ended up being late."
+        ]
+      ],
+      "drills": [
+        [
+          "I don't understand Japanese, so would you please speak in English?",
+          "日本語{にほんご}が わからないので、英語{えいご}で 話{はな}して いただけませんか。",
+          "ので is softer than から when asking a favour"
+        ],
+        [
+          "I have something to do, so please excuse me for leaving first.",
+          "用事{ようじ}が あるので、お先{さき}に 失礼{しつれい}します。",
+          "the standard way of excusing yourself"
+        ],
+        [
+          "I'm ill today, so may I go home early?",
+          "きょうは 病気{びょうき}なので、早{はや}く 帰{かえ}っても いいですか。",
+          "a noun takes な before ので"
+        ],
+        [
+          "This room is quiet, so I can study well here.",
+          "この 部屋{へや}は 静{しず}かなので、よく 勉強{べんきょう}できます。",
+          "な-adjectives also take な"
+        ],
+        [
+          "The trains have stopped, so I ended up being late.",
+          "電車{でんしゃ}が 止{と}まって いるので、遅{おく}れて しまいました。",
+          ""
+        ],
+        [
+          "Don't touch the machine — it's dangerous.",
+          "危{あぶ}ないから、機械{きかい}に 触{さわ}るな。",
+          "only から can stand before an imperative or prohibitive"
+        ]
+      ]
+    },
+    {
+      "pattern": "途中{とちゅう}で",
+      "short": "partway through",
+      "explain": "途中{とちゅう}で marks a point partway through something already under way — on the way somewhere, or in the middle of an event that has begun but not finished. It follows either a verb in the dictionary form or a noun with の. What matters is that it refers to the middle stretch, not to the start or the end.",
+      "formation": "[V dictionary form] ＋ 途中{とちゅう}で　／　N ＋ の 途中{とちゅう}で",
+      "examples": [
+        [
+          "来{く}る 途中{とちゅう}で 事故{じこ}が あって、バスが 遅{おく}れて しまいました。",
+          "On the way here there was an accident, so the bus was delayed."
+        ],
+        [
+          "会議{かいぎ}の 途中{とちゅう}で 気分{きぶん}が 悪{わる}く なりました。",
+          "I felt ill partway through the meeting."
+        ],
+        [
+          "学校{がっこう}へ 行{い}く 途中{とちゅう}で 友{とも}だちに 会{あ}いました。",
+          "I met a friend on the way to school."
+        ],
+        [
+          "映画{えいが}の 途中{とちゅう}で 出{で}て しまいました。",
+          "I left partway through the film."
+        ]
+      ],
+      "drills": [
+        [
+          "On the way here there was an accident and the bus was delayed.",
+          "来{く}る 途中{とちゅう}で 事故{じこ}が あって、バスが 遅{おく}れて しまいました。",
+          "the dictionary form before 途中{とちゅう}で"
+        ],
+        [
+          "I felt ill partway through the meeting.",
+          "会議{かいぎ}の 途中{とちゅう}で 気分{きぶん}が 悪{わる}く なりました。",
+          "a noun takes の"
+        ],
+        [
+          "I met a friend on the way to school.",
+          "学校{がっこう}へ 行{い}く 途中{とちゅう}で 友{とも}だちに 会{あ}いました。",
+          ""
+        ],
+        [
+          "I left partway through the film.",
+          "映画{えいが}の 途中{とちゅう}で 出{で}て しまいました。",
+          ""
+        ],
+        [
+          "It rained on the way home.",
+          "うちへ 帰{かえ}る 途中{とちゅう}で 雨{あめ}が 降{ふ}りました。",
+          ""
+        ],
+        [
+          "Please buy some bread on the way to the office.",
+          "会社{かいしゃ}へ 行{い}く 途中{とちゅう}で パンを 買{か}って ください。",
+          "a request is fine here — this is not a reason clause"
+        ]
+      ]
+    }
+  ]
+}

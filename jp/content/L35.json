@@ -1,0 +1,284 @@
+{
+  "points": [
+    {
+      "pattern": "条件形{じょうけんけい}の 作{つく}り方{かた}",
+      "short": "conditional form",
+      "explain": "The conditional is one of the few forms that verbs, adjectives and nouns all share, so it is worth learning as a single set. Verbs end in ば, い-adjectives swap 〜い for 〜ければ, and な-adjectives and nouns simply take なら. The negative is built from the ない-form, which behaves exactly like an い-adjective: 行{い}かない becomes 行{い}かなければ, the same shape you already know from 〜なければ なりません in Lesson 17.",
+      "formation": "Group I: ます-form → え-line ＋ ば（行{い}きます→行{い}けば）／ Group II: ます-form ＋ れば（食{た}べます→食{た}べれば）／ します→すれば、来{き}ます→来{く}れば　／　い-adj: ～い→ければ（安{やす}い→安{やす}ければ）／ な-adj・N ＋ なら（暇{ひま}なら、雨{あめ}なら）",
+      "examples": [
+        [
+          "急{いそ}ぎます → 急{いそ}げば",
+          "hurry → if you hurry (Group I, ぎ→げ ＋ ば)"
+        ],
+        [
+          "食{た}べます → 食{た}べれば",
+          "eat → if you eat (Group II, ます-form ＋ れば)"
+        ],
+        [
+          "安{やす}い → 安{やす}ければ",
+          "cheap → if it's cheap (い-adjective)"
+        ],
+        [
+          "行{い}かない → 行{い}かなければ",
+          "not go → if you don't go (the ない-form behaves like an い-adjective)"
+        ]
+      ],
+      "drills": [
+        [
+          "Give the conditional form of 押{お}します (push).",
+          "押{お}せば",
+          "Group I: し→せ ＋ ば"
+        ],
+        [
+          "Give the conditional form of 見{み}ます (look).",
+          "見{み}れば",
+          "Group II: ます-form ＋ れば"
+        ],
+        [
+          "Give the conditional form of 来{き}ます (come).",
+          "来{く}れば",
+          "Group III: the reading changes to く"
+        ],
+        [
+          "Give the conditional form of 高{たか}い (expensive).",
+          "高{たか}ければ",
+          "い-adjective: ～い → ければ"
+        ],
+        [
+          "Give the conditional form of 暇{ひま}[な] (free).",
+          "暇{ひま}なら",
+          "a な-adjective drops な and takes なら"
+        ],
+        [
+          "Give the negative conditional of 行{い}きます (go).",
+          "行{い}かなければ",
+          "built from the ない-form 行{い}かない"
+        ]
+      ]
+    },
+    {
+      "pattern": "条件形{じょうけんけい}、～",
+      "short": "general conditional",
+      "explain": "The first half states the requirements under which the second half holds. The textbook gives it two jobs: describing what has to be the case for something to happen, and expressing a judgement about what the other person has just said. There is one restriction worth memorising — when both halves have the same subject and both verbs are volitional, ば cannot be used and you must fall back on たら. That is why 東京{とうきょう}へ 来{き}たら、ぜひ 連絡{れんらく}して ください is correct but the ば version is not.",
+      "formation": "[conditional form] ＋ 、～　（negative: [V-ない form] なければ、～）",
+      "examples": [
+        [
+          "ボタンを 押{お}せば、窓{まど}が 開{あ}きます。",
+          "If you push the button, the window will open."
+        ],
+        [
+          "彼{かれ}が 行{い}けば、わたしも 行{い}きます。",
+          "If he goes, I'll go too."
+        ],
+        [
+          "いい 天気{てんき}なら、向{む}こうに 島{しま}が 見{み}えます。",
+          "When it is fine, an island can be seen over there."
+        ],
+        [
+          "時間{じかん}が なければ、テレビを 見{み}ません。",
+          "If I don't have time, I won't watch television."
+        ]
+      ],
+      "drills": [
+        [
+          "If you press the button, the window will open.",
+          "ボタンを 押{お}せば、窓{まど}が 開{あ}きます。",
+          "a plain cause and effect"
+        ],
+        [
+          "If he goes, I'll go too.",
+          "彼{かれ}が 行{い}けば、わたしも 行{い}きます。",
+          "different subjects, so ば is fine"
+        ],
+        [
+          "If the weather is good, you can see an island over there.",
+          "いい 天気{てんき}なら、向{む}こうに 島{しま}が 見{み}えます。",
+          "a noun takes なら"
+        ],
+        [
+          "If I don't have time, I won't watch television.",
+          "時間{じかん}が なければ、テレビを 見{み}ません。",
+          "ない → なければ"
+        ],
+        [
+          "If it's cheap, I'll buy it.",
+          "安{やす}ければ、買{か}います。",
+          "い-adjective conditional"
+        ],
+        [
+          "If you have no other questions, let's finish here.",
+          "ほかに 質問{しつもん}が なければ、これで 終{お}わりましょう。",
+          "a judgement about the situation"
+        ]
+      ]
+    },
+    {
+      "pattern": "Nなら、～",
+      "short": "picking up a topic",
+      "explain": "Besides its plain conditional use, なら takes up something the other person has just raised and comments on it: 'if it's X you're asking about, then…'. This is the なら you reach for when answering a question with a recommendation, which makes it very common in advice and directions. Only the noun itself is repeated, with no particle attached to it.",
+      "formation": "[N] ＋ なら、＋ [your comment]",
+      "examples": [
+        [
+          "温泉{おんせん}に 行{い}きたいんですが、どこか いい 所{ところ} ありませんか。",
+          "I'd like to go to a hot spring. Do you know a good place anywhere?"
+        ],
+        [
+          "温泉{おんせん}なら、白馬{はくば}が いいですよ。",
+          "If it's hot springs you're talking about, Hakuba is good."
+        ],
+        [
+          "京都{きょうと}なら、春{はる}が いいですよ。",
+          "If you mean Kyoto, spring is the time to go."
+        ],
+        [
+          "パソコンなら、あの 店{みせ}が 安{やす}いです。",
+          "For computers, that shop is cheap."
+        ]
+      ],
+      "drills": [
+        [
+          "If it's hot springs you're asking about, Hakuba is good.",
+          "温泉{おんせん}なら、白馬{はくば}が いいですよ。",
+          "answering a question with a recommendation"
+        ],
+        [
+          "If it's Kyoto you're asking about, spring is best.",
+          "京都{きょうと}なら、春{はる}が いいです。",
+          ""
+        ],
+        [
+          "For computers, that shop is cheap.",
+          "パソコンなら、あの 店{みせ}が 安{やす}いです。",
+          "no particle after the noun"
+        ],
+        [
+          "If it's Japanese you mean, Mr Tanaka can teach you.",
+          "日本語{にほんご}なら、田中{たなか}さんが 教{おし}えられます。",
+          "the potential form from Lesson 27"
+        ],
+        [
+          "If it's tomorrow, I'm free.",
+          "あしたなら、暇{ひま}です。",
+          "a time noun taken up from the question"
+        ],
+        [
+          "If you mean Mr Tanaka, he has already gone home.",
+          "田中{たなか}さんなら、もう 帰{かえ}りました。",
+          "a person's name taken up as the topic"
+        ]
+      ]
+    },
+    {
+      "pattern": "疑問詞{ぎもんし} ＋ 条件形{じょうけんけい} いいですか",
+      "short": "asking what to do",
+      "explain": "A question word followed by the conditional and いいですか asks for instructions: what, where, how or when you should do something. The textbook points out that it is used in the same way as the 〜たら いいですか you learned in Lesson 26, so どう すれば いいですか and どう したら いいですか come to the same thing. The answer usually comes back in the same shape, 〜ば いいです.",
+      "formation": "[疑問詞{ぎもんし}] ＋ [conditional form] ＋ いいですか",
+      "examples": [
+        [
+          "本{ほん}を 借{か}りたいんですが、どう すれば いいですか。",
+          "I'd like to borrow some books. What should I do?"
+        ],
+        [
+          "どこで 買{か}えば いいですか。",
+          "Where should I buy it?"
+        ],
+        [
+          "何時{なんじ}に 来{く}れば いいですか。",
+          "What time should I come?"
+        ],
+        [
+          "何{なに}を 持{も}って 行{い}けば いいですか。",
+          "What should I take with me?"
+        ]
+      ],
+      "drills": [
+        [
+          "I'd like to borrow some books. What should I do?",
+          "本{ほん}を 借{か}りたいんですが、どう すれば いいですか。",
+          "the same as どう したら いいですか"
+        ],
+        [
+          "Where should I buy the ticket?",
+          "どこで 切符{きっぷ}を 買{か}えば いいですか。",
+          ""
+        ],
+        [
+          "What time should I come tomorrow?",
+          "あした 何時{なんじ}に 来{く}れば いいですか。",
+          "Group III: 来{き}ます→来{く}れば"
+        ],
+        [
+          "What should I take with me?",
+          "何{なに}を 持{も}って 行{い}けば いいですか。",
+          ""
+        ],
+        [
+          "Who should I ask?",
+          "だれに 聞{き}けば いいですか。",
+          ""
+        ],
+        [
+          "How long should I wait?",
+          "どのくらい 待{ま}てば いいですか。",
+          "Group I: ち→て ＋ ば"
+        ]
+      ]
+    },
+    {
+      "pattern": "条件形{じょうけんけい} ＋ ほど",
+      "short": "the more the more",
+      "explain": "To say that one thing scales with another, put a word into the conditional and then repeat that same word in its dictionary form in front of ほど. The two halves must use the same verb or adjective. い-adjectives take ければ and then the plain form; な-adjectives take なら and then the な form, as in 簡単{かんたん}なら 簡単{かんたん}な ほど.",
+      "formation": "[V-ば] ＋ [V-dictionary] ＋ ほど　／　[い-adj ければ] ＋ [い-adj] ＋ ほど　／　[な-adj なら] ＋ [な-adj な] ＋ ほど",
+      "examples": [
+        [
+          "この 音楽{おんがく}は 聞{き}けば 聞{き}く ほど 好{す}きに なります。",
+          "The more I listen to this music, the more I like it."
+        ],
+        [
+          "パソコンは 操作{そうさ}が 簡単{かんたん}なら 簡単{かんたん}な ほど いいです。",
+          "The easier the operation, the better the computer."
+        ],
+        [
+          "安{やす}ければ 安{やす}い ほど、いいです。",
+          "The cheaper the better."
+        ],
+        [
+          "練習{れんしゅう}すれば する ほど、上手{じょうず}に なります。",
+          "The more you practise, the better you get."
+        ]
+      ],
+      "drills": [
+        [
+          "The more you practise, the better you get.",
+          "練習{れんしゅう}すれば する ほど、上手{じょうず}に なります。",
+          "the same verb on both sides of ほど"
+        ],
+        [
+          "The cheaper it is, the better.",
+          "安{やす}ければ 安{やす}い ほど、いいです。",
+          "い-adjective: ければ ＋ plain form ＋ ほど"
+        ],
+        [
+          "The more you read, the more you understand.",
+          "読{よ}めば 読{よ}む ほど、わかります。",
+          ""
+        ],
+        [
+          "The easier the operation, the better.",
+          "操作{そうさ}は 簡単{かんたん}なら 簡単{かんたん}な ほど いいです。",
+          "な-adjective: なら ＋ な ＋ ほど"
+        ],
+        [
+          "The more I listen to this music, the more I like it.",
+          "この 音楽{おんがく}は 聞{き}けば 聞{き}く ほど 好{す}きに なります。",
+          ""
+        ],
+        [
+          "The newer it is, the more expensive it is.",
+          "新{あたら}しければ 新{あたら}しい ほど、高{たか}いです。",
+          ""
+        ]
+      ]
+    }
+  ]
+}

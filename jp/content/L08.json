@@ -1,0 +1,388 @@
+{
+  "points": [
+    {
+      "pattern": "い-adjective",
+      "short": "い-adjective forms",
+      "explain": "An い-adjective ends in the syllable い in its plain form, and in polite speech です is added straight after it: たかいです. For the negative, drop the final い and add くないです — たかくないです. When the adjective describes a noun it goes directly in front of it with nothing in between: たかい やま. The one irregular member of the class is いい, whose negative is よくないです.",
+      "formation": "高{たか}いです　／　高{たか}くないです　／　高{たか}い ＋ N",
+      "examples": [
+        [
+          "富士山{ふじさん}は 高{たか}いです。",
+          "Mt Fuji is high."
+        ],
+        [
+          "この 本{ほん}は おもしろくないです。",
+          "This book isn't interesting."
+        ],
+        [
+          "きのう 新{あたら}しい かばんを 買{か}いました。",
+          "I bought a new bag yesterday."
+        ],
+        [
+          "きょうは 暑{あつ}いですね。",
+          "It's hot today, isn't it?"
+        ]
+      ],
+      "drills": [
+        [
+          "This town is small.",
+          "この 町{まち}は 小{ちい}さいです。",
+          ""
+        ],
+        [
+          "Japanese is not difficult.",
+          "日本語{にほんご}は 難{むずか}しくないです。",
+          "い changes to くない for the negative"
+        ],
+        [
+          "I bought a new car.",
+          "新{あたら}しい 車{くるま}を 買{か}いました。",
+          "The adjective attaches straight to the noun"
+        ],
+        [
+          "Is that dictionary expensive?",
+          "その 辞書{じしょ}は 高{たか}いですか。",
+          "高{たか}い covers both 'expensive' and 'tall'"
+        ],
+        [
+          "This coffee isn't hot.",
+          "この コーヒーは 熱{あつ}くないです。",
+          "熱{あつ}い is hot to the touch, 暑{あつ}い is hot weather"
+        ],
+        [
+          "Are you busy? — No, I'm not busy.",
+          "忙{いそが}しいですか。……いいえ、忙{いそが}しくないです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "な-adjective",
+      "short": "な-adjective forms",
+      "explain": "な-adjectives behave grammatically like nouns. In the polite present they simply take です — げんきです — and the negative is じゃ ありません, exactly as for a noun sentence in Lesson 1. Their one distinctive feature is the な that appears when they modify a noun directly: げんきな ひと. Word lists write them as きれい［な］ to warn you that the word is not an い-adjective even when it happens to end in the sound い.",
+      "formation": "元気{げんき}です　／　元気{げんき}じゃ ありません　／　元気{げんき}な ＋ N",
+      "examples": [
+        [
+          "この 部屋{へや}は 静{しず}かです。",
+          "This room is quiet."
+        ],
+        [
+          "金閣寺{きんかくじ}は とても 有名{ゆうめい}です。",
+          "Kinkakuji is very famous."
+        ],
+        [
+          "あの 人{ひと}は 親切{しんせつ}な 人{ひと}です。",
+          "That person is a kind person."
+        ],
+        [
+          "わたしの 部屋{へや}は きれいじゃ ありません。",
+          "My room isn't clean."
+        ]
+      ],
+      "drills": [
+        [
+          "This room is quiet.",
+          "この 部屋{へや}は 静{しず}かです。",
+          ""
+        ],
+        [
+          "Mt Fuji is famous.",
+          "富士山{ふじさん}は 有名{ゆうめい}です。",
+          ""
+        ],
+        [
+          "This library isn't quiet.",
+          "この 図書館{としょかん}は 静{しず}かじゃ ありません。",
+          "な-adjectives take じゃ ありません, like nouns"
+        ],
+        [
+          "Osaka Castle Park is a lively place.",
+          "大阪城公園{おおさかじょうこうえん}は にぎやかな 所{ところ}です。",
+          "な appears before the noun"
+        ],
+        [
+          "Are you free tomorrow?",
+          "あした 暇{ひま}ですか。",
+          ""
+        ],
+        [
+          "The subway is convenient, isn't it?",
+          "地下鉄{ちかてつ}は 便利{べんり}ですね。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "とても／あまり",
+      "short": "intensity adverbs",
+      "explain": "Both adverbs stand immediately in front of the adjective they qualify. とても strengthens it: とても おいしいです. あまり weakens it, but it works only with a negative ending, so 'not very tasty' comes out as あまり おいしくないです. Learners often reach for あまり with a positive adjective on the model of English 'fairly' or 'quite'; that is not possible in Japanese and sounds badly wrong.",
+      "formation": "とても ＋ adj です　／　あまり ＋ adj くないです／じゃ ありません",
+      "examples": [
+        [
+          "この 食{た}べ物{もの}は とても おいしいです。",
+          "This food is very tasty."
+        ],
+        [
+          "日本語{にほんご}は あまり 難{むずか}しくないです。",
+          "Japanese is not very difficult."
+        ],
+        [
+          "あの 店{みせ}は とても 有名{ゆうめい}です。",
+          "That shop is very famous."
+        ],
+        [
+          "この 部屋{へや}は あまり きれいじゃ ありません。",
+          "This room isn't very clean."
+        ]
+      ],
+      "drills": [
+        [
+          "This food is very tasty.",
+          "この 食{た}べ物{もの}は とても おいしいです。",
+          ""
+        ],
+        [
+          "Japanese is not very difficult.",
+          "日本語{にほんご}は あまり 難{むずか}しくないです。",
+          "あまり always needs a negative ending"
+        ],
+        [
+          "That shop is very famous.",
+          "あの 店{みせ}は とても 有名{ゆうめい}です。",
+          ""
+        ],
+        [
+          "This town is not very lively.",
+          "この 町{まち}は あまり にぎやかじゃ ありません。",
+          "な-adjective, so the negative is じゃ ありません"
+        ],
+        [
+          "Mt Fuji is very high, isn't it?",
+          "富士山{ふじさん}は とても 高{たか}いですね。",
+          ""
+        ],
+        [
+          "I'm not very busy today.",
+          "きょうは あまり 忙{いそが}しくないです。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "Nは どうですか",
+      "short": "asking impressions",
+      "explain": "どうですか asks the listener for a personal impression of something they have direct experience of — how do you find it? The reply is normally an adjective sentence, often with とても or あまり. The same question also serves to offer something, as in おちゃは どうですか, where it amounts to 'how about some tea?'. For an impression of something now finished, the past どうでしたか is used, which Lesson 12 introduces.",
+      "formation": "N ＋ は ＋ どうですか",
+      "examples": [
+        [
+          "日本{にほん}の 生活{せいかつ}は どうですか。……とても 楽{たの}しいです。",
+          "How is life in Japan? — Very enjoyable."
+        ],
+        [
+          "新{あたら}しい 部屋{へや}は どうですか。",
+          "How is your new room?"
+        ],
+        [
+          "日本語{にほんご}の 勉強{べんきょう}は どうですか。……難{むずか}しいですが、おもしろいです。",
+          "How is your Japanese study going? — It's difficult, but interesting."
+        ]
+      ],
+      "drills": [
+        [
+          "How is life in Japan?",
+          "日本{にほん}の 生活{せいかつ}は どうですか。",
+          ""
+        ],
+        [
+          "How is your new car?",
+          "新{あたら}しい 車{くるま}は どうですか。",
+          ""
+        ],
+        [
+          "How is your work?",
+          "お仕事{しごと}は どうですか。",
+          "お仕事{しごと} when asking about someone else's work"
+        ],
+        [
+          "How is the food at that restaurant?",
+          "あの レストランの 食{た}べ物{もの}は どうですか。",
+          ""
+        ],
+        [
+          "How is your Japanese study going? — It's difficult, but interesting.",
+          "日本語{にほんご}の 勉強{べんきょう}は どうですか。……難{むずか}しいですが、おもしろいです。",
+          ""
+        ],
+        [
+          "How about some tea?",
+          "お茶{ちゃ}は どうですか。",
+          "どうですか also offers something to the listener"
+        ]
+      ]
+    },
+    {
+      "pattern": "Nは どんな Nですか",
+      "short": "what kind",
+      "explain": "どんな asks for a description and must always be followed by a noun; it cannot stand alone. The answer is an adjective plus that noun, or the adjective on its own. Keep it apart from どうですか: どんな まちですか asks what sort of town it is, while まちは どうですか asks how you personally find it.",
+      "formation": "N ＋ は ＋ どんな ＋ N ＋ ですか",
+      "examples": [
+        [
+          "ミラーさんは どんな 人{ひと}ですか。……とても 親切{しんせつ}な 人{ひと}です。",
+          "What kind of person is Mr Miller? — A very kind one."
+        ],
+        [
+          "日本{にほん}は どんな 国{くに}ですか。",
+          "What kind of country is Japan?"
+        ],
+        [
+          "どんな 車{くるま}を 買{か}いましたか。……白{しろ}い 車{くるま}を 買{か}いました。",
+          "What kind of car did you buy? — I bought a white car."
+        ],
+        [
+          "寮{りょう}は どんな 所{ところ}ですか。",
+          "What sort of place is the dormitory?"
+        ]
+      ],
+      "drills": [
+        [
+          "What kind of person is Mr Miller?",
+          "ミラーさんは どんな 人{ひと}ですか。",
+          ""
+        ],
+        [
+          "What kind of town is this? — It's a quiet town.",
+          "ここは どんな 町{まち}ですか。……静{しず}かな 町{まち}です。",
+          ""
+        ],
+        [
+          "What kind of car did you buy?",
+          "どんな 車{くるま}を 買{か}いましたか。",
+          "どんな can modify an object as well as a topic"
+        ],
+        [
+          "What kind of country is Japan?",
+          "日本{にほん}は どんな 国{くに}ですか。",
+          ""
+        ],
+        [
+          "What sort of book is that?",
+          "それは どんな 本{ほん}ですか。",
+          ""
+        ],
+        [
+          "What sort of place is your dormitory?",
+          "寮{りょう}は どんな 所{ところ}ですか。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "S1が、S2",
+      "short": "but",
+      "explain": "This が joins two complete sentences and signals that the second runs against what the first would lead you to expect — English 'but'. It attaches to the end of the first sentence, after です or ます, and a comma follows it. Unlike English 'but' it never begins a new sentence, and it should not be confused with the subject-marking が you will meet in Lesson 9. Compare そして, which simply adds a second sentence without any contrast.",
+      "formation": "S1です／ます ＋ が、＋ S2",
+      "examples": [
+        [
+          "日本語{にほんご}は 難{むずか}しいですが、おもしろいです。",
+          "Japanese is difficult, but it's interesting."
+        ],
+        [
+          "この 部屋{へや}は 古{ふる}いですが、きれいです。",
+          "This room is old, but it's clean."
+        ],
+        [
+          "あの レストランは 有名{ゆうめい}ですが、あまり おいしくないです。",
+          "That restaurant is famous, but it isn't very good."
+        ],
+        [
+          "きのう デパートへ 行{い}きましたが、何{なに}も 買{か}いませんでした。",
+          "I went to the department store yesterday, but I didn't buy anything."
+        ]
+      ],
+      "drills": [
+        [
+          "Japanese is difficult, but it's interesting.",
+          "日本語{にほんご}は 難{むずか}しいですが、おもしろいです。",
+          ""
+        ],
+        [
+          "This room is old, but it's clean.",
+          "この 部屋{へや}は 古{ふる}いですが、きれいです。",
+          ""
+        ],
+        [
+          "That restaurant is famous, but it isn't very good.",
+          "あの レストランは 有名{ゆうめい}ですが、あまり おいしくないです。",
+          ""
+        ],
+        [
+          "I went to the department store yesterday, but I didn't buy anything.",
+          "きのう デパートへ 行{い}きましたが、何{なに}も 買{か}いませんでした。",
+          "が also attaches after ます-form verbs"
+        ],
+        [
+          "My town is small, but it's lively.",
+          "わたしの 町{まち}は 小{ちい}さいですが、にぎやかです。",
+          ""
+        ],
+        [
+          "This bag is expensive, but I'm going to buy it.",
+          "この かばんは 高{たか}いですが、買{か}います。",
+          ""
+        ]
+      ]
+    },
+    {
+      "pattern": "どれ",
+      "short": "which one",
+      "explain": "どれ asks the listener to pick one item out of three or more, and like これ、それ and あれ it stands alone with no noun after it. The usual shape of the question makes the thing being identified the topic and どれ the predicate: ミラーさんの かさは どれですか. The answer is これ、それ or あれ, or a fuller noun phrase. For a choice between exactly two things Japanese uses どちら instead.",
+      "formation": "N ＋ は ＋ どれですか　→　これ／それ／あれです",
+      "examples": [
+        [
+          "ミラーさんの 傘{かさ}は どれですか。……あれです。",
+          "Which one is Mr Miller's umbrella? — That one over there."
+        ],
+        [
+          "あなたの かばんは どれですか。",
+          "Which one is your bag?"
+        ],
+        [
+          "新{あたら}しい 辞書{じしょ}は どれですか。……この 白{しろ}い 辞書{じしょ}です。",
+          "Which one is the new dictionary? — This white one."
+        ]
+      ],
+      "drills": [
+        [
+          "Which one is Mr Miller's umbrella?",
+          "ミラーさんの 傘{かさ}は どれですか。",
+          ""
+        ],
+        [
+          "Which one is your bag? — That one over there.",
+          "あなたの かばんは どれですか。……あれです。",
+          ""
+        ],
+        [
+          "Which one is the new dictionary?",
+          "新{あたら}しい 辞書{じしょ}は どれですか。",
+          ""
+        ],
+        [
+          "Excuse me, which one is the Japanese newspaper?",
+          "すみません、日本{にほん}の 新聞{しんぶん}は どれですか。",
+          ""
+        ],
+        [
+          "Which one is Mr Miller's watch? — This one.",
+          "ミラーさんの 時計{とけい}は どれですか。……これです。",
+          ""
+        ],
+        [
+          "Which one is the famous shop?",
+          "有名{ゆうめい}な 店{みせ}は どれですか。",
+          ""
+        ]
+      ]
+    }
+  ]
+}
