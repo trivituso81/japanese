@@ -278,6 +278,10 @@
     color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 2px; padding: 1px 5px; }
   .verdict .note { font-size: 13.5px; color: var(--text-soft); margin: 10px 0 0; line-height: 1.6; }
 
+  .focusnote { margin-top: 14px; padding: 10px 13px; background: var(--bg-soft);
+    border-left: 3px solid var(--now); line-height: 1.65; }
+  .focusnote b { font-family: var(--jp); font-weight: 600; color: var(--text); }
+
   .results { padding: 22px 20px; }
   .bigscore { font-size: 46px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
   .bd { width: 100%; border-collapse: collapse; margin: 14px 0 0; font-size: 13.5px; }
@@ -492,7 +496,7 @@ const LEARNED_BOX = 4;   // a word counts as learned once it reaches this Leitne
 const WINDOW = 20;       // grammar score reads the last this-many answers for a lesson
 const HISTORY_CAP = 60;
 
-const blank = () => ({ lessons: {}, cards: {}, drills: {} });
+const blank = () => ({ lessons: {}, cards: {}, drills: {}, asked: [] });
 let S = load();
 function load() {
   let s;
@@ -587,9 +591,75 @@ function points(n) {
 const authored = n => !!CONTENT[n];
 function drillBank(ns) {
   const out = [];
-  for (const n of ns) points(n).forEach((p, pi) => (p.drills || []).forEach(d =>
-    out.push({ en: d[0], jp: d[1], note: d[2] || "", pi, pattern: p.pattern, n })));
+  for (const n of ns) points(n).forEach((p, pi) => (p.drills || []).forEach((d, di) =>
+    out.push({ en: d[0], jp: d[1], note: d[2] || "", pi, di, id: `${n}:${pi}:${di}`,
+               pattern: p.pattern, n })));
   return out;
+}
+
+/* ============================================================
+   Grammar concepts
+
+   Drills are filed by lesson and by position within it, which says nothing
+   about what two points have in common. To follow a weakness across the
+   books each point is read for the grammar it actually exercises.
+
+   Structure is read from the sentences, where the grammar physically sits:
+   a point drilling the potential form will use it in most of its answers.
+   Particles are read from the pattern label instead — every Japanese
+   sentence contains は, so its presence proves nothing about what a point
+   is teaching, whereas a label reading "Nに" is a statement of intent.
+   ============================================================ */
+const STRUCTURE = {
+  "the passive":            /(られま|れます)/,
+  "the causative":          /させ/,
+  "the potential":          /(できま|られます)/,
+  "～ておきます":              /ておきま/,
+  "～てしまいます":            /てしまい/,
+  "～てみます":               /てみま/,
+  "～ています":               /ていま/,
+  "～てください":              /てくださ/,
+  "giving and receiving":   /(あげま|くれま|もらいま|いただ)/,
+  "conditional ～たら":       /たら/,
+  "conditional ～ば":         /(れば|ければ)/,
+  "conditional ～と":         /ると/,
+  "conditional ～なら":       /なら/,
+  "the volitional":         /(ましょう|ようと)/,
+  "～ように":                 /ように/,
+  "～ことができます":          /ことができ/,
+  "～つもり":                 /つもり/,
+  "～はず":                   /はず/,
+  "～そうです":               /そうで/,
+  "～らしい／みたい":          /(らしい|みたい)/,
+  "～でしょう":               /でしょう/,
+  "honorific and humble":   /(いらっしゃ|ござい|おっしゃ|なさいま)/,
+  "reported speech":        /と(いい|おも|きき)/,
+  "obligation and permission": /(なければ|なくても|てもいい|てはいけ)/
+};
+const PARTICLES = ["は", "が", "を", "に", "へ", "で", "と", "も", "から", "まで", "より"];
+
+/* plain() leaves a reading wedged inside its word (食{た}べる -> 食たべる), which
+   no grammar pattern will match. Sentences are read as pure kana instead, and
+   labels with the annotation simply removed. */
+const reading = s => String(s)
+  .replace(/([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g, "$2").replace(/[{}]/g, "");
+const bare = s => String(s).replace(/\{[^}]*\}/g, "");
+
+const _concepts = {};
+function conceptsOf(n, pi) {
+  const key = `${n}:${pi}`;
+  if (_concepts[key]) return _concepts[key];
+  const p = points(n)[pi];
+  if (!p) return (_concepts[key] = []);
+  const sents = (p.drills || []).map(d => reading(d[1]).replace(/\s/g, ""));
+  const need = Math.max(2, sents.length * 0.5);
+  const out = Object.keys(STRUCTURE)
+    .filter(k => sents.filter(s => STRUCTURE[k].test(s)).length >= need);
+  const label = bare(p.pattern);
+  PARTICLES.forEach(x => {
+    if (new RegExp(`(N|V|[0-9０-９])\\s?${x}(?![ぁ-ん])`).test(label)) out.push(`particle ${x}`);
+  });
+  return (_concepts[key] = out);
 }
 
 function grammarScore(n) {
@@ -1396,6 +1466,68 @@ function mixedQuestions(ns, bank, size) {
 }
 
 /* A single-lesson set spreads across that lesson's own patterns. */
+/* Which points a set of answers went wrong on, worst first. */
+function missedPoints(answers) {
+  const by = {};
+  answers.forEach(a => {
+    const k = `${a.q.n}:${a.q.pi}`;
+    const r = by[k] = by[k] || { n: a.q.n, pi: a.q.pi, pattern: a.q.pattern, wrong: 0, asked: 0 };
+    r.asked++; if (!a.ok) r.wrong++;
+  });
+  return Object.values(by).filter(r => r.wrong).sort((a, b) => b.wrong - a.wrong);
+}
+
+const ASKED_CAP = 400;
+function markAsked(qs) {
+  const seen = new Set(S.asked || []);
+  qs.forEach(q => { if (q.id) seen.add(q.id); });
+  S.asked = [...seen].slice(-ASKED_CAP);
+}
+
+/* Follow a weakness rather than repeat it. The points just missed name the
+   concepts to drill; every point sharing one is fair game, so a slip on
+   ～ています in Lesson 31 can be chased through the ten other lessons that
+   use it. Nothing beyond the lesson just sat is offered, since a sentence
+   built from grammar not yet met teaches nothing. Where a point has no
+   relatives — the textbook covers plenty of things exactly once — its
+   own lesson stands in. */
+function focusQuestions(missed, ceiling, size) {
+  if (!missed.length) return [];
+  const wanted = new Set();
+  missed.forEach(m => conceptsOf(m.n, m.pi).forEach(c => wanted.add(c)));
+  const lessons = LESSONS.map(l => l.n).filter(n => n <= ceiling && drillBank([n]).length);
+  const bank = drillBank(lessons);
+  const hit = new Set(missed.map(m => `${m.n}:${m.pi}`));
+
+  const related = bank.filter(q => hit.has(`${q.n}:${q.pi}`)
+    || conceptsOf(q.n, q.pi).some(c => wanted.has(c)));
+  // a point with no relatives falls back to the lessons the misses came from
+  const pool = related.length >= size
+    ? related
+    : bank.filter(q => new Set(missed.map(m => m.n)).has(q.n));
+
+  const fresh = new Set(S.asked || []);
+  const tiers = [
+    pool.filter(q => hit.has(`${q.n}:${q.pi}`) && !fresh.has(q.id)),
+    pool.filter(q => !hit.has(`${q.n}:${q.pi}`) && !fresh.has(q.id)),
+    pool.filter(q => fresh.has(q.id))
+  ];
+  const picked = [];
+  tiers.forEach(t => {
+    const byPoint = groupBy(shuffle(t), q => `${q.n}:${q.pi}`);
+    const keys = shuffle(Object.keys(byPoint));
+    while (picked.length < size) {
+      let added = false;
+      for (const k of keys) {
+        if (picked.length >= size) break;
+        if (byPoint[k].length) { picked.push(byPoint[k].shift()); added = true; }
+      }
+      if (!added) break;
+    }
+  });
+  return shuffle(picked);
+}
+
 function lessonQuestions(bank, size) {
   const byPoint = groupBy(bank, q => q.pi);
   const keys = shuffle(Object.keys(byPoint));
@@ -1437,14 +1569,15 @@ function groupBy(list, key) {
 }
 const pickOne = list => list.splice(Math.floor(Math.random() * list.length), 1)[0];
 
-function newDrill(scope, ns, bank, only, sweep) {
+function newDrill(scope, ns, bank, only, sweep, focus) {
   let qs;
   if (only && only.length) qs = shuffle(only).slice(0, Math.max(DRILL_SIZE, only.length));
   else if (sweep) qs = sweepQuestions(ns, bank.slice());
   else if (isRange(scope)) qs = mixedQuestions(ns, bank.slice(), DRILL_SIZE);
   else qs = lessonQuestions(bank.slice(), DRILL_SIZE);
-  DRILL = { scope, ns, bank, sweep: !!sweep, qs: sweep ? qs : shuffle(qs),
-            i: 0, typed: "", verdict: null, answers: [] };
+  DRILL = { scope, ns, bank, sweep: !!sweep, focus: focus || null,
+            qs: sweep ? qs : shuffle(qs), i: 0, typed: "", verdict: null, answers: [] };
+  markAsked(DRILL.qs);
   saveSession();
   drawDrill();
 }
@@ -1483,7 +1616,7 @@ function regradeLast(ok) {
 function saveSession() {
   if (!DRILL) return;
   if (DRILL.i >= DRILL.qs.length) return clearSession();
-  S.session = { scope: DRILL.scope, sweep: DRILL.sweep, qs: DRILL.qs,
+  S.session = { scope: DRILL.scope, sweep: DRILL.sweep, focus: DRILL.focus, qs: DRILL.qs,
                 i: DRILL.i, answers: DRILL.answers, ts: Date.now() };
   save();
 }
@@ -1497,17 +1630,20 @@ function resumeDrill() {
   crumbs(range
     ? [["#/", "All lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
     : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
-  DRILL = { scope: s.scope, ns, bank: drillBank(ns), sweep: s.sweep,
+  DRILL = { scope: s.scope, ns, bank: drillBank(ns), sweep: s.sweep, focus: s.focus || null,
             qs: s.qs, i: s.i, typed: "", verdict: null, answers: s.answers };
   drawDrill();
 }
 
 function drawDrill() {
   const { scope, qs, i, sweep } = DRILL;
-  const range = isRange(scope);
+  // a focused round is drawn like a range: its questions come from wherever
+  // the concept is taught, so each one has to say which lesson it is from
+  const range = isRange(scope) || !!DRILL.focus;
   const view = document.getElementById("view");
   const l = range ? null : lessonById(DRILL.ns[0]);
-  const heading = sweep ? `Diagnostic sweep · ${scopeLabel(scope)}`
+  const heading = DRILL.focus ? `Focused drill · ${DRILL.focus}`
+    : sweep ? `Diagnostic sweep · ${scopeLabel(scope)}`
     : range ? `Mixed drill · ${scopeLabel(scope)}`
     : `Grammar drill · Lesson ${DRILL.ns[0]}`;
 
@@ -1525,6 +1661,19 @@ function drawDrill() {
     clearSession();
 
     const missed = DRILL.answers.filter(a => !a.ok).map(a => a.q);
+    const weak = missedPoints(DRILL.answers);
+    const ceiling = Math.max.apply(null, DRILL.ns);
+    // built now rather than on the click, so the screen can say where the
+    // questions will actually come from instead of promising a reach it
+    // may not have
+    const focusQs = weak.length ? focusQuestions(weak, ceiling, DRILL_SIZE) : [];
+    const focusNs = [...new Set(focusQs.map(q => q.n))].sort((a, b) => a - b);
+    const focusFrom = focusNs.length > 1
+      ? `Lessons ${focusNs.slice(0, -1).join(", ")} and ${focusNs[focusNs.length - 1]}`
+      : `Lesson ${focusNs[0]}`;
+    const named = [...new Set(weak.flatMap(w => conceptsOf(w.n, w.pi)))];
+    const focusLabel = (named.length ? named.slice(0, 3).join(" · ")
+      : plain(weak.length ? weak[0].pattern : "").slice(0, 30)) || `Lesson ${DRILL.ns[0]}`;
     view.innerHTML = `
       <h2 class="view">${sweep ? "Sweep complete" : "Drill complete"} · ${range ? esc(scopeLabel(scope)) : `Lesson ${DRILL.ns[0]}`}</h2>
       <p class="viewsub">${range ? "Scores have been written back to each lesson." : esc(l.title)}</p>
@@ -1545,9 +1694,15 @@ function drawDrill() {
             <td class="c-pat j">${ruby(a.q.pattern)}</td>
             <td class="c-mark">${a.ok ? "✓" : "✗"}</td></tr>`).join("")}</tbody>
         </table>
+        ${focusQs.length ? `<p class="hintline focusnote">Went wrong on
+          ${weak.slice(0, 3).map(w => `<b>${ruby(w.pattern)}</b>`).join(" · ")}${weak.length > 3
+            ? ` and ${weak.length - 3} more` : ""}. A focused round asks ${focusQs.length}
+          questions you have not just seen on ${weak.length > 1 ? "those patterns" : "that pattern"},
+          from ${focusFrom}.</p>` : ""}
         <div class="rowacts">
-          <button class="btn primary" id="againAll">${sweep ? "Sweep again" : "Another ten"}</button>
-          ${missed.length ? `<button class="btn" id="againMissed">Retry the ${missed.length} missed</button>` : ""}
+          ${focusQs.length ? `<button class="btn primary" id="focus">Drill ${weak.length} weak point${weak.length > 1 ? "s" : ""}</button>` : ""}
+          <button class="btn${weak.length ? "" : " primary"}" id="againAll">${sweep ? "Sweep again" : "Another ten"}</button>
+          ${missed.length ? `<button class="btn" id="againMissed">Repeat the same ${missed.length}</button>` : ""}
           <button class="btn" data-go="${range ? "#/" : `#/lesson/${DRILL.ns[0]}`}">
             ${range ? "Back to dashboard" : "Back to lesson"}</button>
         </div>
@@ -1556,6 +1711,9 @@ function drawDrill() {
       newDrill(scope, DRILL.ns, DRILL.bank, null, sweep));
     const am = document.getElementById("againMissed");
     if (am) am.addEventListener("click", () => newDrill(scope, DRILL.ns, DRILL.bank, missed, false));
+    const fx = document.getElementById("focus");
+    if (fx) fx.addEventListener("click", () =>
+      newDrill(scope, focusNs, drillBank(focusNs), focusQs, false, focusLabel));
     return;
   }
 
