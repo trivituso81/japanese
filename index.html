@@ -278,6 +278,71 @@
     color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 2px; padding: 1px 5px; }
   .verdict .note { font-size: 13.5px; color: var(--text-soft); margin: 10px 0 0; line-height: 1.6; }
 
+  /* lessons whose word list has been replaced by hand */
+  /* its own line, so it never crowds the meter's caption */
+  .revised { display: flex; align-items: center; gap: 3px; margin-top: 3px;
+    font-size: 11px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--done); }
+  .revised svg { width: 11px; height: 11px; fill: none; stroke: var(--done);
+    stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+
+  /* verb drill */
+  .verbcta { display: flex; align-items: center; gap: 18px; justify-content: space-between;
+    margin: 22px 0; padding: 14px 16px; border: 1px solid var(--rule); background: var(--bg-soft);
+    line-height: 1.6; font-size: 14px; }
+  .verbcta .btn { flex: none; }
+  .vsetup { display: flex; flex-wrap: wrap; gap: 14px 22px; margin: 18px 0 20px;
+    padding: 14px 16px; border: 1px solid var(--rule); background: var(--bg-soft); }
+  .vsetup label { display: flex; flex-direction: column; gap: 5px; font-size: 12px;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--text-soft); }
+  .vsetup select { font-size: 16px; padding: 6px 8px; border: 1px solid var(--rule);
+    background: var(--bg); color: var(--text); }
+  .vsetup .btn { font-size: 14px; padding: 6px 10px; text-transform: none; letter-spacing: 0; }
+  /* Standalone rather than .board: the dashboard's small-screen rules map
+     specific columns and would scramble these. */
+  .vforms, .vmiss, .kmiss { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
+  .vforms th, .vmiss th, .kmiss th { text-align: left; font-size: 11px; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--text-faint); font-weight: 650;
+    padding: 0 10px 7px 0; border-bottom: 1px solid var(--rule-strong); }
+  .vforms td, .vmiss td, .kmiss td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--rule);
+    vertical-align: middle; font-size: 14px; }
+  .kmiss .m-you { color: var(--miss); }
+  .vmiss .m-v, .vmiss .m-a { font-size: 16px; }
+  .vmiss .m-you { color: var(--miss); font-family: var(--jp); }
+  .vmiss .m-t, .vmiss .m-en { color: var(--text-faint); font-size: 13px; }
+  .vf-n { width: 34px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .vf-l b { display: block; }
+  .vf-jp { font-family: var(--jp); font-size: 12.5px; color: var(--text-faint); }
+  .vf-e { font-family: var(--jp); font-size: 16px; }
+  .vf-c { width: 60px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .vf-go { width: 76px; text-align: right; }
+  .btn.small { padding: 5px 11px; font-size: 12.5px; }
+
+  .vcard { border: 1px solid var(--rule); padding: 26px 22px; text-align: center;
+    background: var(--bg-soft); }
+  .vask { font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--text-soft); }
+  .vword { font-family: var(--jp); font-size: 40px; line-height: 1.55; margin: 12px 0 4px; }
+  .vword.en { font-family: var(--ui); font-size: 27px; line-height: 1.3; }
+  /* At 40px the shared 0.5em reading would rival the word itself, and the line
+     needs headroom or the ruby rides up into the form name above it. */
+  .vword rt { font-size: 0.3em; }
+  .vgloss { color: var(--text-faint); font-size: 13.5px; }
+  .vgloss.big { font-size: 15px; margin-bottom: 6px; }
+  .vcard input { width: 100%; max-width: 340px; margin: 16px auto 4px; display: block;
+    font-family: var(--jp); font-size: 22px; text-align: center; padding: 10px 12px;
+    border: 1px solid var(--rule); background: var(--bg); color: var(--text); }
+  .vcard .rowacts { justify-content: center; }
+  .jpline { font-family: var(--jp); }
+  .jpline.big { font-size: 21px; }
+  .vstats, .vgroups { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
+  .vstats > div, .vgroups > div { flex: 1 1 130px; border: 1px solid var(--rule);
+    padding: 11px 13px; background: var(--bg-soft); }
+  .vgroups .val, .vstats .val { font-size: 24px; font-weight: 600; line-height: 1.2; }
+  .vgroups .k, .vstats .k { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-soft); }
+  .vgroups .sub, .vstats .sub { font-size: 12.5px; color: var(--text-faint); }
+
   .focusnote { margin-top: 14px; padding: 10px 13px; background: var(--bg-soft);
     border-left: 3px solid var(--now); line-height: 1.65; }
   .focusnote b { font-family: var(--jp); font-weight: 600; color: var(--text); }
@@ -291,6 +356,54 @@
   .bd tr.wrong td { background: #fdf6f4; }
   .c-mark { font-weight: 700; color: var(--done); }
   .wrong .c-mark { color: var(--miss); }
+
+  /* ---- kanji ---- */
+  .klevels { display: flex; gap: 8px; margin: 16px 0 6px; flex-wrap: wrap; }
+  .klev { font: inherit; font-size: 15px; font-weight: 600; padding: 8px 16px; cursor: pointer;
+    border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
+    display: flex; flex-direction: column; align-items: flex-start; gap: 1px; line-height: 1.2; }
+  .klev span { font-size: 11px; font-weight: 400; letter-spacing: .05em;
+    text-transform: uppercase; color: var(--text-faint); }
+  .klev.on { border-color: var(--text); color: var(--text); background: var(--bg-soft); }
+  .klev.off { opacity: .45; cursor: not-allowed; }
+  .kstrip { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 4px; }
+  .kstrip > div { flex: 1 1 130px; border: 1px solid var(--rule); padding: 11px 13px;
+    background: var(--bg-soft); }
+  .kstrip .k { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--text-soft); }
+  .kstrip .val { font-size: 24px; font-weight: 600; line-height: 1.2; }
+  .kstrip .of { font-size: 14px; color: var(--text-faint); font-weight: 400; }
+  .kstrip .sub { font-size: 12.5px; color: var(--text-faint); }
+
+  .ktable { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
+  .ktable th { text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 650; padding: 0 10px 7px 0;
+    border-bottom: 1px solid var(--rule-strong); }
+  .ktable td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule);
+    vertical-align: middle; font-size: 14px; }
+  .ktable .k-c { font-family: var(--jp); font-size: 30px; line-height: 1.1; width: 1%;
+    padding-right: 14px; }
+  .ktable .k-m { min-width: 110px; }
+  .ktable .k-on, .ktable .k-kun { font-family: var(--jp); font-size: 13.5px;
+    color: var(--text-soft); }
+  .ktable .k-ex .j { font-family: var(--jp); font-size: 15px; }
+  .ktable .k-exr, .ktable .k-exe { display: block; font-size: 12px; color: var(--text-faint); }
+  .ktable .k-exr { font-family: var(--jp); }
+  .ktable .k-l { white-space: nowrap; font-size: 13px; }
+  .ktable .k-s { text-align: right; white-space: nowrap; }
+  .k-tick { color: var(--done); font-weight: 700; }
+  .k-part { font-size: 12px; color: var(--now); font-variant-numeric: tabular-nums; }
+  .k-none { color: var(--text-faint); }
+  .ktable tr.k-known .k-c { color: var(--done); }
+
+  /* the character under test, and the one being explained after a miss */
+  .kbig { font-family: var(--jp); font-size: 96px; line-height: 1.1; margin: 6px 0 10px;
+    text-align: center; }
+  .verdict .kbig { font-size: 62px; margin: 0 0 10px; }
+  .kmean { font-size: 20px; font-weight: 600; }
+  .kmiss .m-k { font-family: var(--jp); font-size: 26px; width: 1%; padding-right: 12px; }
+  .kmiss .m-r, .kmiss .m-x { font-size: 13px; color: var(--text-soft); }
+  .kmiss .m-l { font-size: 12.5px; color: var(--text-faint); white-space: nowrap; }
 
   ruby { ruby-position: over; -webkit-ruby-position: before; }
   rt { font-size: 0.5em; color: var(--text-faint); font-weight: 400; }
@@ -340,8 +453,73 @@
     .strip > div { padding: 11px 13px; border-right: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule); }
     .strip > div:nth-child(2n) { border-right: none; }
-    .strip > div:nth-child(n+3) { border-bottom: none; }
+    .strip > div:nth-child(n+5) { border-bottom: none; }
     .strip .val { font-size: 20px; }
+
+    /* verb drill */
+    .verbcta { flex-direction: column; align-items: stretch; gap: 12px; }
+    .verbcta .btn { text-align: center; }
+    .vsetup { flex-direction: column; gap: 12px; }
+    .vsetup label { width: 100%; }
+    .vsetup select { width: 100%; }
+    .vword { font-size: 33px; }
+    .vword.en { font-size: 22px; }
+    .vcard { padding: 20px 14px; }
+    .vcard input { max-width: none; font-size: 20px; }
+    .vcard .rowacts .btn { flex: 1 1 0; }
+    .vstats > div, .vgroups > div { flex: 1 1 100px; padding: 10px 11px; }
+    .vgroups .val, .vstats .val { font-size: 20px; }
+
+    /* the form table keeps its lesson number; only the verb count goes */
+    .vforms th:nth-child(4), .vforms td:nth-child(4) { display: none; }
+
+    /* The kanji table has to lose its widest columns on a phone. Readings and
+       the example are reference material you can get from the drill itself;
+       the character, its meaning and whether you know it are the point. */
+    .ktable .k-on, .ktable .k-kun, .ktable .k-ex { display: none; }
+    .ktable .k-c { font-size: 26px; padding-right: 10px; }
+    .ktable td { font-size: 13.5px; }
+    .kstrip > div { flex: 1 1 100px; padding: 10px 11px; }
+    .kstrip .val { font-size: 20px; }
+    .klev { flex: 1 1 0; padding: 8px 12px; }
+    .kbig { font-size: 78px; }
+    .verdict .kbig { font-size: 52px; }
+
+    /* misses stack into cards, with the character kept large enough to study */
+    .kmiss, .kmiss tbody, .kmiss tr, .kmiss td { display: block; }
+    .kmiss thead { display: none; }
+    .kmiss tr { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px;
+      border: 1px solid #e0b3a6; background: #fdf6f4; border-radius: 4px;
+      padding: 10px 12px; margin: 0 0 9px; }
+    .kmiss td { border: none; padding: 0; }
+    .kmiss .m-k  { grid-area: 1 / 1 / 3 / 2; font-size: 42px; align-self: center; width: auto; }
+    .kmiss .m-en { grid-area: 1 / 2 / 2 / 3; }
+    .kmiss .m-you{ grid-area: 2 / 2 / 3 / 3; }
+    .kmiss .m-r  { grid-area: 3 / 1 / 4 / 3; margin-top: 4px; }
+    .kmiss .m-l  { grid-area: 4 / 1 / 5 / 3; }
+    .kmiss .m-x  { display: none; }
+    .kmiss .m-you::before { content: "you: "; color: var(--text-faint); font-size: 12px; }
+
+    .vforms td, .vforms th { padding-right: 6px; }
+    .vf-e { font-size: 15px; }
+    .vf-go { width: 62px; }
+
+    /* five columns of Japanese will not fit, so misses stack */
+    .vmiss, .vmiss tbody, .vmiss tr, .vmiss td { display: block; }
+    .vmiss thead { display: none; }
+    .vmiss tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
+      border: 1px solid #e0b3a6; background: #fdf6f4; border-radius: 4px;
+      padding: 10px 12px; margin: 0 0 9px; }
+    .vmiss td { border: none; padding: 0; }
+    .vmiss .m-v  { grid-area: 1 / 1 / 2 / 2; font-weight: 600; }
+    .vmiss .m-t  { grid-area: 1 / 2 / 2 / 3; justify-self: end; font-size: 12px; }
+    .vmiss .m-en { grid-area: 2 / 1 / 3 / 3; }
+    .vmiss .m-you{ grid-area: 3 / 1 / 4 / 3; margin-top: 4px; }
+    .vmiss .m-a  { grid-area: 4 / 1 / 5 / 3; }
+    .vmiss .m-you::before { content: "you: "; font-family: var(--ui);
+      color: var(--text-faint); font-size: 12px; }
+    .vmiss .m-a::before { content: "answer: "; font-family: var(--ui);
+      color: var(--text-faint); font-size: 12px; }
 
     .rhead { padding: 12px 13px; }
     .rscopes { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
@@ -498,6 +676,8 @@ const HISTORY_CAP = 60;
 
 const blank = () => ({ lessons: {}, cards: {}, drills: {}, asked: [] });
 let S = load();
+// migrateCards runs inside load(), before S exists, so it cannot save itself
+if (S.vocabRemapped) save();
 function load() {
   let s;
   try { s = Object.assign(blank(), JSON.parse(localStorage.getItem(KEY)) || {}); }
@@ -516,7 +696,32 @@ function load() {
       delete d.attempts;
     }
   }
+  migrateCards(s);
   return s;
+}
+
+/* Rewriting a lesson's word list shifts every position after the change, and
+   flashcard boxes are stored against position. This walks the saved cards of
+   each rewritten lesson onto their word's new slot, and drops the boxes of
+   words the list no longer contains. It runs once and leaves a marker. */
+function migrateCards(s) {
+  if (typeof VOCAB_REMAP !== "object" || s.vocabRemapped) return;
+  const cards = s.cards || {};
+  Object.keys(VOCAB_REMAP).forEach(n => {
+    const to = {};
+    VOCAB_REMAP[n].forEach(([from, dest]) => to[from] = dest);
+    const moved = {};
+    Object.keys(cards).forEach(id => {
+      const m = id.match(new RegExp(`^${n}:v:(\\d+)$`));
+      if (!m) return;
+      const dest = to[+m[1]];
+      if (dest !== undefined) moved[`${n}:v:${dest}`] = cards[id];
+      delete cards[id];
+    });
+    Object.assign(cards, moved);
+  });
+  s.cards = cards;
+  s.vocabRemapped = true;
 }
 function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
 function lessonState(n) {
@@ -803,6 +1008,12 @@ function vmeter(v) {
 /* Rows are built on their own so that typing in the search box can replace the
    table body alone. Re-rendering the whole dashboard would drop focus, which on
    a phone means the keyboard closes after every keystroke. */
+/* Lessons whose word list has been replaced with the one actually being
+   taught, rather than the book's printed list */
+const isRevised = n => typeof VOCAB_REVISED !== "undefined" && VOCAB_REVISED.includes(+n);
+const revisedTick = () => `<span class="revised" title="Word list replaced with your own">` +
+  `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-7.5"/></svg>own list</span>`;
+
 function boardRows() {
   const q = query.trim().toLowerCase();
   let rows = "", book = null;
@@ -830,7 +1041,7 @@ function boardRows() {
         ${OVERALL.map(o => `<option value="${o.id}" ${o.id === st.overall ? "selected" : ""}>${o.label}</option>`).join("")}
       </select></td>
       <td class="mcol">${v
-        ? vmeter(v)
+        ? vmeter(v) + (isRevised(l.n) ? revisedTick() : "")
         : `<span class="none">no word list yet</span>`}</td>
       <td class="mcol">${g
         ? meter(g.pct, `${g.pct}% · ${g.answered} answer${g.answered > 1 ? "s" : ""}`, g.pct < 80 ? "part" : "")
@@ -875,9 +1086,40 @@ function renderDashboard() {
         <div class="sub">grammar sets completed</div></div>
       <div><div class="k">Write-ups ready</div><div class="val">${authoredCount}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
         <div class="sub">explanations, examples, drills</div></div>
+      <div><div class="k">Verb drill</div><div class="val">${verbAccuracy() === null
+        ? "—" : verbAccuracy() + "%"}</div>
+        <div class="sub">${verbSub()}</div></div>
+      <div><div class="k">Kanji known</div><div class="val">${kanjiKnown("N5")}<span style="font-size:14px;color:var(--text-faint)"> / ${kanjiAt("N5").length}</span></div>
+        <div class="sub">N5 · ${kanjiAccuracy() === null
+          ? "not started" : kanjiAccuracy() + "% recent"}</div></div>
     </div>
 
     ${reviewPanel()}
+
+    <div class="verbcta">
+      <div>
+        <b>Verb drill</b> — conjugation practice that is not tied to a lesson.
+        Pick how far you have got and a form to work on; ${verbs().length} verbs are indexed.
+      </div>
+      <a class="btn primary" href="#/verbs">Open verb drill</a>
+    </div>
+    ${S.vsession ? `<div class="resume"><div><b>An unfinished verb round is waiting.</b>
+      ${S.vsession.i} of ${S.vsession.ids.length} answered.</div>
+      <div class="rowacts"><a class="btn primary" href="#/verbs/resume">Pick it up</a>
+        <button class="btn" id="dropVerbs">Discard</button></div></div>` : ""}
+
+    <div class="verbcta">
+      <div>
+        <b>Kanji</b> — recognition practice, also outside the lessons. ${kanjiAt("N5").length} N5
+        characters with readings and an example each; the drill shows the kanji and you type
+        what it means.
+      </div>
+      <a class="btn primary" href="#/kanji">Open kanji</a>
+    </div>
+    ${S.ksession ? `<div class="resume"><div><b>An unfinished kanji round is waiting.</b>
+      ${S.ksession.i} of ${S.ksession.chars.length} answered.</div>
+      <div class="rowacts"><a class="btn primary" href="#/kanji/resume">Pick it up</a>
+        <button class="btn" id="dropKanji">Discard</button></div></div>` : ""}
 
     <div class="toolbar">
       <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
@@ -905,10 +1147,27 @@ function renderDashboard() {
     b.addEventListener("click", () => { setScope(b.dataset.scope); renderDashboard(); }));
   const drop = document.getElementById("dropSession");
   if (drop) drop.addEventListener("click", () => { clearSession(); renderDashboard(); });
+  const dropV = document.getElementById("dropVerbs");
+  if (dropV) dropV.addEventListener("click", () => { clearVerbSession(); renderDashboard(); });
+  const dropK = document.getElementById("dropKanji");
+  if (dropK) dropK.addEventListener("click", () => { clearKanjiSession(); renderDashboard(); });
   wireFurigana();
   document.getElementById("exportBtn").addEventListener("click", exportProgress);
   document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
   document.getElementById("importFile").addEventListener("change", importProgress);
+}
+
+function verbAccuracy() {
+  const st = S.verbs;
+  if (!st || !st.history || !st.history.length) return null;
+  const recent = st.history.slice(-WINDOW);
+  return pct(recent.reduce((a, x) => a + x, 0), recent.length);
+}
+function verbSub() {
+  const st = S.verbs;
+  if (!st || !st.history || !st.history.length) return "not started";
+  const weak = weakTypes(3);
+  return weak.length ? `weakest: ${typeLabel(weak[0].t)}` : `${st.runs || 0} rounds · no weak spots`;
 }
 
 function exportProgress() {
@@ -1841,16 +2100,880 @@ document.addEventListener("keydown", e => {
   else if (e.key === "ArrowLeft") { e.preventDefault(); commitCard(false); }
 });
 
+/* ============================================================
+   Verb drill
+
+   Not tied to a lesson: pick how far through the book you have got, pick a
+   conjugation, and the drill builds a round from every verb taught up to
+   that point. Groups are read from the textbook's own markers where it
+   prints them and supplied by hand for the lessons before it starts.
+   ============================================================ */
+const U_ROW = { い:"う", き:"く", ぎ:"ぐ", し:"す", ち:"つ", に:"ぬ", ひ:"ふ", び:"ぶ", み:"む", り:"る" };
+const A_ROW = { い:"わ", き:"か", ぎ:"が", し:"さ", ち:"た", に:"な", ひ:"は", び:"ば", み:"ま", り:"ら" };
+const E_ROW = { い:"え", き:"け", ぎ:"げ", し:"せ", ち:"て", に:"ね", ひ:"へ", び:"べ", み:"め", り:"れ" };
+const O_ROW = { い:"お", き:"こ", ぎ:"ご", し:"そ", ち:"と", に:"の", ひ:"ほ", び:"ぼ", み:"も", り:"ろ" };
+const TE_ROW = { い:"って", ち:"って", り:"って", み:"んで", び:"んで", に:"んで",
+                 き:"いて", ぎ:"いで", し:"して" };
+const taRow = m => TE_ROW[m].replace(/て$/, "た").replace(/で$/, "だ");
+
+const GMARK = /[\s\u3000](\u2160|\u2161|\u2162|I{1,3})(?=[\s\u3000]|$|[\u005b\uff3b])/;
+const vClean = s => String(s).replace(GMARK, "").replace(/[\u005b\uff3b].*$/, "")
+  .replace(/[\s\u3000]+/g, "").trim();
+function vMark(s) {
+  const m = String(s).match(GMARK);
+  if (!m) return 0;
+  const t = m[1];
+  return t === "\u2160" ? 1 : t === "\u2161" ? 2 : t === "\u2162" ? 3 : t.length;
+}
+
+let _verbs = null;
+function verbs() {
+  if (_verbs) return _verbs;
+  const by = new Map();
+  for (let n = 1; n <= 50; n++) ((VOCAB[n] && VOCAB[n].v) || []).forEach(e => {
+    const ms = vClean(e[0]);
+    if (!/ます$/.test(ms) || VERB_SKIP.includes(ms)) return;
+    // some entries offer alternative spellings — 作ります、造ります — and only the
+    // first can be conjugated, since the ending belongs to one word
+    const kanji = vClean(e[1]).split(/[、,\u3001\uff0f\u002f]/)[0].trim();
+    const g = vMark(e[0]);
+    const key = `${ms}|${kanji}`;
+    const rec = by.get(key) || { ms, kanji, en: e[2], n, g: 0 };
+    if (g && !rec.g) rec.g = g;
+    if (n < rec.n) rec.n = n;
+    by.set(key, rec);
+  });
+  // an entry transcribed without kanji folds into its kanji twin, but only
+  // where there is exactly one twin — otherwise the reading covers two verbs,
+  // as きます does for 来ます and 着ます
+  const out = [], byReading = {};
+  [...by.values()].forEach(r => (byReading[r.ms] = byReading[r.ms] || []).push(r));
+  Object.values(byReading).forEach(list => {
+    const withK = list.filter(r => r.kanji), bare = list.filter(r => !r.kanji);
+    if (withK.length === 1 && bare.length) {
+      const m = withK[0];
+      m.n = Math.min(m.n, ...bare.map(b => b.n));
+      m.g = m.g || (bare.find(b => b.g) || {}).g || 0;
+      out.push(m);
+    } else list.forEach(r => out.push(r));
+  });
+  out.forEach(r => { if (!r.g) r.g = VERB_GROUPS[`${r.ms}|${r.kanji}`] || VERB_GROUPS[r.ms] || 0; });
+  _verbs = out.filter(r => r.g).sort((a, b) => a.n - b.n || a.ms.localeCompare(b.ms));
+  return _verbs;
+}
+
+/* Group 1's te and ta forms turn on the mora before ます, so that mora is the
+   unit the summary reports on: -ります behaves differently from -きます. */
+function verbType(v) {
+  if (v.g === 1) return "g1:" + v.ms.replace(/ます$/, "").slice(-1);
+  if (v.g === 3) return /き$/.test(v.ms.replace(/ます$/, "")) ? "g3:くる" : "g3:する";
+  return "g2";
+}
+function typeLabel(t) {
+  if (t === "g2") return "Group 2";
+  if (t === "g3:する") return "Group 3 (～します)";
+  if (t === "g3:くる") return "Group 3 (～きます)";
+  return `Group 1 (-${t.slice(3)}ます)`;
+}
+/* Used where the group has already been named, so the label does not repeat it */
+function shortType(t) {
+  if (t === "g2") return "Group 2";
+  if (t.startsWith("g3")) return `～${t.slice(3)}`;
+  return `-${t.slice(3)}ます`;
+}
+const groupOf = t => t === "g2" ? 2 : t.startsWith("g3") ? 3 : 1;
+
+/* One spelling of one form. The same operations run over the kana and the
+   kanji, because every change happens in the trailing kana. */
+function conjugateOne(word, v, form) {
+  const stem = word.replace(/ます$/, "");
+  const meta = VERB_FORMS.find(f => f.id === form);
+  if (meta && meta.keigo) {
+    if (v.g === 3 || VERB_KEIGO_SPECIAL.includes(v.ms)) return null;
+    return form === "honorific" ? `お${stem}になります` : `お${stem}します`;
+  }
+  if (form === "stem") return stem;
+  if (form === "masu_past") return stem + "ました";
+  if (form === "masu_neg") return stem + "ません";
+
+  if (v.g === 3) {
+    /* くる or する is settled by the reading, never by the spelling in hand: the
+       mora that changes can sit inside a kanji. きます drops its き and takes the
+       whole ending, but 来ます keeps 来 and takes only the okurigana after it, so
+       来る・来て・来られます. し behaves the other way — it vanishes from べんきょうし
+       and was never written in 勉強, so both just gain する. */
+    const kuru = /きます$/.test(v.ms);
+    const S3 = kuru
+      ? { dict:"くる", nai:"こない", te:"きて", ta:"きた", tara:"きたら", nakatta:"こなかった",
+          potential:"こられます", volitional:"こよう", imperative:"こい", prohibit:"くるな",
+          ba:"くれば", passive:"こられます", causative:"こさせます" }
+      : { dict:"する", nai:"しない", te:"して", ta:"した", tara:"したら", nakatta:"しなかった",
+          potential:"できます", volitional:"しよう", imperative:"しろ", prohibit:"するな",
+          ba:"すれば", passive:"されます", causative:"させます" };
+    const end = S3[form];
+    if (!end) return null;
+    if (kuru) return /き$/.test(stem) ? stem.slice(0, -1) + end : stem + end.slice(1);
+    return stem.replace(/し$/, "") + end;
+  }
+  if (v.g === 2) {
+    const S2 = { dict:"る", nai:"ない", te:"て", ta:"た", tara:"たら", nakatta:"なかった",
+                 potential:"られます", volitional:"よう", imperative:"ろ", prohibit:"るな",
+                 ba:"れば", passive:"られます", causative:"させます" };
+    return S2[form] !== undefined ? stem + S2[form] : null;
+  }
+  const last = stem.slice(-1), head = stem.slice(0, -1);
+  if (!U_ROW[last]) return null;
+  const irr = VERB_TE_EXCEPTION.test.test(v.ms) ? VERB_TE_EXCEPTION : null;
+  const swap = (map, tail) => head + map[last] + tail;
+  switch (form) {
+    case "dict":       return swap(U_ROW, "");
+    case "nai":        return v.ms === "あります" ? "ない" : swap(A_ROW, "ない");
+    case "nakatta":    return v.ms === "あります" ? "なかった" : swap(A_ROW, "なかった");
+    case "te":         return head + (irr ? irr.te : TE_ROW[last]);
+    case "ta":         return head + (irr ? irr.ta : taRow(last));
+    case "tara":       return head + (irr ? irr.ta : taRow(last)) + "ら";
+    case "potential":  return swap(E_ROW, "ます");
+    case "volitional": return swap(O_ROW, "う");
+    case "imperative": return swap(E_ROW, "");
+    case "prohibit":   return swap(U_ROW, "な");
+    case "ba":         return swap(E_ROW, "ば");
+    case "passive":    return swap(A_ROW, "れます");
+    case "causative":  return swap(A_ROW, "せます");
+  }
+  return null;
+}
+function conjugate(v, form) {
+  const kana = conjugateOne(v.ms, v, form);
+  if (kana === null) return null;
+  const kanji = v.kanji ? conjugateOne(v.kanji, v, form) : null;
+  return { kana, kanji: kanji && kanji !== kana ? kanji : null };
+}
+
+/* Furigana for a conjugated verb. The word is only stored as a kanji spelling
+   and a reading, so the two are aligned here: every kanji run becomes a lazy
+   wildcard and the kana between them has to match literally, which pins each
+   run to its reading. 連れて行って against つれていって gives 連{つ}れて行{い}って.
+   If the two cannot be aligned the kanji is returned bare rather than guessed. */
+const HAS_KANJI = /[\u4e00-\u9fff\u3005\u3006\u30f6]/;
+function furiganaOf(kanji, kana) {
+  if (!kanji || kanji === kana) return kanji || kana || "";
+  const runs = kanji.match(/[\u4e00-\u9fff\u3005\u3006\u30f6]+|[^\u4e00-\u9fff\u3005\u3006\u30f6]+/g);
+  if (!runs) return kanji;
+  const pattern = runs.map(r => HAS_KANJI.test(r)
+    ? "(.+?)" : r.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("");
+  let m = null;
+  try { m = kana.match(new RegExp("^" + pattern + "$")); } catch (e) { m = null; }
+  if (!m) return kanji;
+  let out = "", g = 1;
+  runs.forEach(r => { out += HAS_KANJI.test(r) ? `${r}{${m[g++]}}` : r; });
+  return out;
+}
+/* ready-to-print ruby for one conjugated form */
+const vRuby = c => c ? ruby(furiganaOf(c.kanji || c.kana, c.kanji ? c.kana : "")) : "";
+
+const VERB_COUNTS = [5, 10, 20, 50];
+const VERB_PROMPTS = [
+  ["en",     "English",         "the meaning"],
+  ["polite", "ます-form",        "the polite form"],
+  ["dict",   "Dictionary form", "the plain form"]
+];
+const vOpts = () => Object.assign({ ceiling: 50, prompt: "polite", count: 10 }, S.vopts || {});
+function setVOpts(patch) { S.vopts = Object.assign(vOpts(), patch); save(); }
+
+const verbPool = (ceiling, form) =>
+  verbs().filter(v => v.n <= ceiling && conjugate(v, form) !== null);
+
+/* Rounds are dealt group by group so all three are always represented, then
+   topped up from whatever is left if one group cannot fill its share. */
+function pickVerbs(pool, count, types) {
+  let src = pool;
+  if (types && types.length) {
+    const want = new Set(types);
+    const narrowed = pool.filter(v => want.has(verbType(v)));
+    if (narrowed.length) src = narrowed;
+  }
+  const byGroup = { 1: [], 2: [], 3: [] };
+  shuffle(src.slice()).forEach(v => byGroup[v.g].push(v));
+  const share = Math.floor(count / 3), picked = [];
+  [1, 2, 3].forEach(g => picked.push(...byGroup[g].splice(0, share)));
+  const rest = shuffle([...byGroup[1], ...byGroup[2], ...byGroup[3]]);
+  while (picked.length < count && rest.length) picked.push(rest.shift());
+  return shuffle(picked).slice(0, count);
+}
+
+let VERB = null;
+
+function renderVerbs() {
+  crumbs([["#/", "All lessons"], [null, "Verb drill"]]);
+  const o = vOpts();
+  const view = document.getElementById("view");
+  const sample = verbs().find(v => v.ms === "かきます") || verbs()[0];
+  const forms = VERB_FORMS.filter(f => f.n <= o.ceiling);
+  const rows = forms.map(f => {
+    const ex = sample && conjugate(sample, f.id);
+    const pool = verbPool(o.ceiling, f.id).length;
+    return `<tr>
+      <td class="vf-n">${f.n}</td>
+      <td class="vf-l"><b>${esc(f.label)}</b><span class="vf-jp">${esc(f.jp)}</span></td>
+      <td class="vf-e">${ex ? vRuby(ex) : "—"}</td>
+      <td class="vf-c">${pool}</td>
+      <td class="vf-go"><button class="btn small go" data-form="${f.id}"
+        ${pool ? "" : "disabled"}>Drill</button></td>
+    </tr>`;
+  }).join("");
+
+  view.innerHTML = `
+    <h2 class="view">Verb drill</h2>
+    <p class="viewsub">Conjugation practice across the whole book. Choose how far you have got,
+      then pick a form. ${verbs().length} verbs are indexed; the round always mixes all three groups.</p>
+
+    <div class="vsetup">
+      <label>Verbs taught up to
+        <select id="vceil">${LESSONS.map(l =>
+          `<option value="${l.n}"${l.n === o.ceiling ? " selected" : ""}>Lesson ${l.n}</option>`).join("")}</select>
+      </label>
+      <label>Show me
+        <select id="vprompt">${VERB_PROMPTS.map(([id, label]) =>
+          `<option value="${id}"${id === o.prompt ? " selected" : ""}>${label}</option>`).join("")}</select>
+      </label>
+      <label>Questions
+        <select id="vcount">${VERB_COUNTS.map(c =>
+          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>
+      </label>
+      <label>Readings
+        <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
+      </label>
+    </div>
+
+    <table class="vforms">
+      <thead><tr><th>L</th><th>Form</th><th>書きます becomes</th>
+        <th class="vf-c">Verbs</th><th></th></tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    ${forms.length < VERB_FORMS.length
+      ? `<p class="hintline">${VERB_FORMS.length - forms.length} more forms appear once you raise the
+         lesson limit — the book introduces them later.</p>` : ""}
+    ${verbStats()}`;
+
+  document.getElementById("vceil").addEventListener("change", e => {
+    setVOpts({ ceiling: +e.target.value }); renderVerbs();
+  });
+  document.getElementById("vprompt").addEventListener("change", e => setVOpts({ prompt: e.target.value }));
+  document.getElementById("vcount").addEventListener("change", e => setVOpts({ count: +e.target.value }));
+  wireFurigana();
+  view.querySelectorAll("button.go").forEach(b =>
+    b.addEventListener("click", () => startVerbs(b.dataset.form)));
+}
+
+function verbStats() {
+  const st = S.verbs;
+  if (!st || !st.history || !st.history.length) return "";
+  const recent = st.history.slice(-WINDOW);
+  const right = recent.reduce((a, x) => a + x, 0);
+  const weak = weakTypes(3);
+  return `<div class="vstats">
+    <div><div class="k">Recent accuracy</div><div class="val">${pct(right, recent.length)}%</div>
+      <div class="sub">last ${recent.length} answers · ${st.runs || 0} rounds</div></div>
+    <div><div class="k">Weakest so far</div><div class="val" style="font-size:17px">${
+      weak.length ? esc(typeLabel(weak[0].t)) : "—"}</div>
+      <div class="sub">${weak.length ? `${weak[0].ok} of ${weak[0].n} right` : "no misses yet"}</div></div>
+  </div>`;
+}
+
+/* Types the answers say you are worst at. Only types tried enough times to
+   mean something are ranked, worst accuracy first. */
+function weakTypes(min) {
+  const by = (S.verbs && S.verbs.byType) || {};
+  return Object.keys(by).map(t => ({ t, ok: by[t].ok, n: by[t].n }))
+    .filter(x => x.n >= (min || 2) && x.ok < x.n)
+    .sort((a, b) => (a.ok / a.n) - (b.ok / b.n) || b.n - a.n);
+}
+
+function recordVerb(ok, type) {
+  const st = S.verbs = S.verbs || { history: [], byType: {}, runs: 0 };
+  st.history.push(ok ? 1 : 0);
+  if (st.history.length > HISTORY_CAP) st.history = st.history.slice(-HISTORY_CAP);
+  const t = st.byType[type] = st.byType[type] || { ok: 0, n: 0 };
+  t.n++; if (ok) t.ok++;
+}
+
+function startVerbs(form, types) {
+  const o = vOpts();
+  const pool = verbPool(o.ceiling, form);
+  if (!pool.length) return renderVerbs();
+  const picked = pickVerbs(pool, o.count, types);
+  VERB = { form, ceiling: o.ceiling, prompt: o.prompt, list: picked,
+           i: 0, typed: "", verdict: null, answers: [], focus: types || null };
+  saveVerbSession();
+  drawVerb();
+}
+
+function saveVerbSession() {
+  if (!VERB) return;
+  if (VERB.i >= VERB.list.length) return clearVerbSession();
+  S.vsession = { form: VERB.form, ceiling: VERB.ceiling, prompt: VERB.prompt,
+    ids: VERB.list.map(v => `${v.ms}|${v.kanji}`), i: VERB.i,
+    answers: VERB.answers, focus: VERB.focus, ts: Date.now() };
+  save();
+}
+function clearVerbSession() { delete S.vsession; save(); }
+function resumeVerbs() {
+  const s = S.vsession;
+  if (!s) return renderVerbs();
+  const idx = {}; verbs().forEach(v => idx[`${v.ms}|${v.kanji}`] = v);
+  const list = s.ids.map(id => idx[id]).filter(Boolean);
+  if (!list.length) { clearVerbSession(); return renderVerbs(); }
+  VERB = { form: s.form, ceiling: s.ceiling, prompt: s.prompt, list,
+           i: s.i, typed: "", verdict: null, answers: s.answers || [], focus: s.focus || null };
+  drawVerb();
+}
+
+/* `main` is plain text for grading and titles; `html` carries the furigana */
+const verbPrompt = (v, style) => {
+  if (style === "en") return { main: v.en, html: esc(v.en), sub: "" };
+  const c = style === "dict" ? conjugate(v, "dict") : { kana: v.ms, kanji: v.kanji || null };
+  return { main: c.kanji || c.kana, html: vRuby(c), sub: v.en };
+};
+
+/* Strict: the kana spelling or the kanji spelling, nothing else. Only spaces
+   and a trailing full stop are forgiven. */
+function judgeVerb(typed, answer) {
+  const t = String(typed).replace(/[\s\u3000。]/g, "");
+  if (!t) return false;
+  return t === answer.kana || t === answer.kanji;
+}
+
+function drawVerb() {
+  const view = document.getElementById("view");
+  const meta = VERB_FORMS.find(f => f.id === VERB.form);
+  const total = VERB.list.length;
+  crumbs([["#/", "All lessons"], ["#/verbs", "Verb drill"], [null, meta.label]]);
+
+  if (VERB.verdict) {
+    const { v, ok, typed, answer } = VERB.verdict;
+    const p = verbPrompt(v, VERB.prompt);
+    view.innerHTML = `
+      <h2 class="view">${esc(meta.label)}</h2>
+      <p class="viewsub">Question ${VERB.i} of ${total}</p>
+      <div class="verdict ${ok ? "ok" : "no"}">
+        <div class="vhead">${ok ? "Correct" : "Not quite"}</div>
+        <div class="vrow"><span class="vtag">prompt</span>
+          <span class="jpline">${p.html}</span> <span class="vgloss">${esc(v.en)}</span></div>
+        <div class="vrow"><span class="vtag">you</span><span class="jpline">${esc(typed || "—")}</span></div>
+        ${ok ? "" : `<div class="vrow"><span class="vtag">answer</span>
+          <span class="jpline big">${vRuby(answer)}</span>${answer.kanji
+            ? `<span class="vgloss">${esc(answer.kana)}</span>` : ""}</div>
+          <div class="vrow"><span class="vtag">type</span>
+            <span class="vgloss">${esc(typeLabel(verbType(v)))} · introduced Lesson ${v.n}</span></div>`}
+      </div>
+      <div class="rowacts">
+        <button class="btn primary" id="vnext">${VERB.i >= total ? "See results" : "Next verb"}</button>
+      </div>`;
+    document.getElementById("vnext").addEventListener("click", () => { VERB.verdict = null; drawVerb(); });
+    return;
+  }
+
+  if (VERB.i >= total) return drawVerbEnd(view, meta);
+
+  const v = VERB.list[VERB.i];
+  const p = verbPrompt(v, VERB.prompt);
+  view.innerHTML = `
+    <h2 class="view">${esc(meta.label)}</h2>
+    <p class="viewsub">Question ${VERB.i + 1} of ${total} · verbs to Lesson ${VERB.ceiling}
+      ${VERB.focus ? " · focused round" : ""}</p>
+    <div class="vcard">
+      <div class="vask">Give the <b>${esc(meta.label)}</b></div>
+      <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
+      ${p.sub ? `<div class="vgloss big">${esc(p.sub)}</div>` : ""}
+      <input type="text" id="vin" autocomplete="off" autocapitalize="off" autocorrect="off"
+        spellcheck="false" placeholder="Type the ${esc(meta.label)}">
+      <div class="rowacts">
+        <button class="btn primary" id="vgo">Submit</button>
+        <button class="btn" id="vskip">Skip</button>
+      </div>
+      <p class="hintline">Enter to submit · kana or kanji both count</p>
+    </div>
+    <div class="prog"><i style="width:${pct(VERB.i, total)}%"></i></div>`;
+
+  const input = document.getElementById("vin");
+  input.focus();
+  const send = () => submitVerb(input.value);
+  document.getElementById("vgo").addEventListener("click", send);
+  document.getElementById("vskip").addEventListener("click", () => submitVerb(""));
+  input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); send(); } });
+}
+
+function submitVerb(typed) {
+  const v = VERB.list[VERB.i];
+  if (!v) return;
+  const answer = conjugate(v, VERB.form);
+  const ok = judgeVerb(typed, answer);
+  const type = verbType(v);
+  recordVerb(ok, type);
+  VERB.answers.push({ ms: v.ms, kanji: v.kanji, en: v.en, n: v.n, type, ok,
+                      typed: String(typed).trim(), answer });
+  VERB.i++;
+  VERB.verdict = { v, ok, typed: String(typed).trim(), answer };
+  saveVerbSession();
+  // a right answer needs no ceremony; only a miss is worth stopping for
+  if (ok) { VERB.verdict = null; drawVerb(); } else drawVerb();
+}
+
+function drawVerbEnd(view, meta) {
+  const st = S.verbs = S.verbs || { history: [], byType: {}, runs: 0 };
+  if (!VERB.counted) { st.runs = (st.runs || 0) + 1; VERB.counted = true; save(); }
+  clearVerbSession();
+
+  const total = VERB.answers.length;
+  const right = VERB.answers.filter(a => a.ok).length;
+  const byType = {};
+  VERB.answers.forEach(a => {
+    const r = byType[a.type] = byType[a.type] || { ok: 0, n: 0 };
+    r.n++; if (a.ok) r.ok++;
+  });
+  const byGroup = { 1: { ok: 0, n: 0 }, 2: { ok: 0, n: 0 }, 3: { ok: 0, n: 0 } };
+  Object.keys(byType).forEach(t => {
+    const g = byGroup[groupOf(t)];
+    g.ok += byType[t].ok; g.n += byType[t].n;
+  });
+  const missedTypes = Object.keys(byType).filter(t => byType[t].ok < byType[t].n)
+    .sort((a, b) => (byType[a].ok / byType[a].n) - (byType[b].ok / byType[b].n));
+  // only worth naming a group if it really is worse than the others; when
+  // everything scored the same there is no single culprit to point at
+  const ranked = [1, 2, 3].filter(g => byGroup[g].n && byGroup[g].ok < byGroup[g].n)
+    .sort((a, b) => (byGroup[a].ok / byGroup[a].n) - (byGroup[b].ok / byGroup[b].n));
+  const rate = g => byGroup[g].ok / byGroup[g].n;
+  const worstGroup = ranked.length && (ranked.length === 1 || rate(ranked[0]) < rate(ranked[1]))
+    ? ranked[0] : null;
+
+  const missed = VERB.answers.filter(a => !a.ok);
+  view.innerHTML = `
+    <h2 class="view">Round complete</h2>
+    <p class="viewsub">${esc(meta.label)} · verbs to Lesson ${VERB.ceiling}</p>
+    <div class="score"><div class="big">${right}/${total}</div>
+      <div class="sub">${pct(right, total)}%${missed.length
+        ? ` · ${missed.length} to work on` : " · nothing missed"}</div></div>
+
+    <div class="vgroups">
+      ${[1, 2, 3].map(g => byGroup[g].n ? `<div><div class="k">Group ${g}</div>
+        <div class="val">${byGroup[g].ok}/${byGroup[g].n}</div>
+        <div class="sub">${pct(byGroup[g].ok, byGroup[g].n)}%</div></div>` : "").join("")}
+    </div>
+
+    ${missedTypes.length ? (() => {
+      // the endings can be named on their own only while they all sit in the
+      // group just called out; once the misses spread, each needs its group
+      const spread = new Set(missedTypes.map(groupOf)).size > 1;
+      const listed = missedTypes.slice(0, 4).map(t =>
+        `<b>${esc(spread ? typeLabel(t) : shortType(t))}</b> (${byType[t].ok}/${byType[t].n})`);
+      const more = missedTypes.length - listed.length;
+      return `<p class="hintline focusnote">${worstGroup
+        ? `<b>Group ${worstGroup}</b> is costing you most. ` : ""}A focused round draws from
+        what you missed: ${listed.join(" · ")}${more ? ` and ${more} more` : ""}.</p>`;
+    })() : ""}
+
+    ${missed.length ? `<table class="vmiss"><thead><tr>
+        <th>Verb</th><th>Meaning</th><th>You wrote</th><th>Answer</th><th>Type</th>
+      </tr></thead><tbody>${missed.map(a => `<tr>
+        <td class="m-v jpline">${vRuby({ kana: a.ms, kanji: a.kanji || null })}</td>
+        <td class="m-en">${esc(a.en)}</td>
+        <td class="m-you">${esc(a.typed || "—")}</td>
+        <td class="m-a jpline">${vRuby(a.answer)}</td>
+        <td class="m-t">${esc(typeLabel(a.type))}</td></tr>`).join("")}</tbody></table>` : ""}
+
+    <div class="rowacts">
+      ${missedTypes.length ? `<button class="btn primary" id="vfocus">Drill ${
+        missedTypes.length > 1 ? "those types" : typeLabel(missedTypes[0])}</button>` : ""}
+      <button class="btn${missedTypes.length ? "" : " primary"}" id="vagain">Another ${VERB.list.length}</button>
+      <button class="btn" data-go="#/verbs">Pick another form</button>
+      <button class="btn" data-go="#/">Back to dashboard</button>
+    </div>`;
+
+  document.getElementById("vagain").addEventListener("click", () => startVerbs(VERB.form));
+  const fx = document.getElementById("vfocus");
+  if (fx) fx.addEventListener("click", () => startVerbs(VERB.form, missedTypes));
+}
+
+/* ============================================================
+   Kanji
+
+   A second drill that stands outside the lessons, like the verbs. The
+   character is shown and you type what it means. Levels are kept as data
+   rather than baked into the screens, so N4 arrives by adding entries and
+   flipping a flag — nothing here needs to know how many levels exist.
+   ============================================================ */
+const KANJI_COUNTS = [5, 10, 20, 50];
+const KANJI_KNOWN = 2;              // right this many times running to count as known
+const KANJI_DEFAULTS = { level: "N5", count: 10, from: "all" };
+const KANJI_SOURCES = [
+  ["all",     "Everything"],
+  ["unknown", "Ones I have not learned"],
+  ["missed",  "Ones I have missed before"],
+];
+
+const kOpts = () => Object.assign({}, KANJI_DEFAULTS, S.kopts || {});
+function setKOpts(patch) { S.kopts = Object.assign(kOpts(), patch); save(); }
+const kanjiAt = lv => KANJI.filter(k => k.lv === lv);
+const kanjiBy = c => KANJI.find(k => k.c === c);
+
+/* The first lesson whose vocabulary writes each kanji. Worked out from the
+   vocabulary rather than stored, so it stays true when a lesson's list is
+   replaced, and cached because it walks every word in the book. */
+let KLESSONS = null;
+function kanjiLessons() {
+  if (KLESSONS) return KLESSONS;
+  KLESSONS = {};
+  LESSONS.slice().sort((a, b) => a.n - b.n).forEach(l => {
+    const v = VOCAB[l.n];
+    if (!v) return;
+    const text = [...(v.v || []), ...(v.p || [])].map(e => (e[1] || "") + (e[0] || "")).join("");
+    for (const ch of text) {
+      if (/[\u4e00-\u9fff]/.test(ch) && KLESSONS[ch] === undefined) KLESSONS[ch] = l.n;
+    }
+  });
+  return KLESSONS;
+}
+
+const kStats = () => (S.kanji = S.kanji || { history: [], by: {}, runs: 0 });
+function recordKanji(ok, ch) {
+  const st = kStats();
+  st.history.push(ok ? 1 : 0);
+  if (st.history.length > HISTORY_CAP) st.history = st.history.slice(-HISTORY_CAP);
+  const e = st.by[ch] = st.by[ch] || { n: 0, ok: 0, streak: 0 };
+  e.n++;
+  if (ok) { e.ok++; e.streak++; } else e.streak = 0;
+}
+const kRecord = c => (S.kanji && S.kanji.by && S.kanji.by[c]) || null;
+function kState(c) {
+  const e = kRecord(c);
+  if (!e || !e.n) return "new";
+  return e.streak >= KANJI_KNOWN ? "known" : "learning";
+}
+const kanjiKnown = lv => kanjiAt(lv).filter(k => kState(k.c) === "known").length;
+function kanjiAccuracy() {
+  const st = S.kanji;
+  if (!st || !st.history || !st.history.length) return null;
+  const recent = st.history.slice(-WINDOW);
+  return pct(recent.reduce((a, x) => a + x, 0), recent.length);
+}
+
+/* Case, spacing, articles and the "to" on a verb are all noise: someone who
+   writes "To Buy" for 買 knows the character. */
+function normMeaning(s) {
+  return String(s).toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\b(a|an|the|to|be)\b/g, " ")
+    .replace(/\s+/g, " ").trim();
+}
+/* every meaning in the whole set, used to tell a typo from a mix-up */
+let KMEANINGS = null;
+function allMeanings() {
+  if (KMEANINGS) return KMEANINGS;
+  KMEANINGS = new Set();
+  KANJI.forEach(k => k.ok.forEach(m => { const n = normMeaning(m); if (n) KMEANINGS.add(n); }));
+  return KMEANINGS;
+}
+const singular = s => s.replace(/s$/, "");
+
+function judgeKanji(typed, k) {
+  const t = normMeaning(typed);
+  if (!t) return false;
+  const want = k.ok.map(normMeaning).filter(Boolean);
+  if (want.includes(t) || want.some(w => singular(w) === singular(t))) return true;
+  /* "three" for 木 is a mix-up with 三, not a slip of the finger, so an answer
+     that belongs to some other kanji never earns the benefit of the doubt */
+  if (allMeanings().has(t)) return false;
+  return want.some(w => {
+    const tol = w.length >= 8 ? 2 : w.length >= 4 ? 1 : 0;
+    return tol > 0 && editDistance(t, w) <= tol;
+  });
+}
+
+let KDRILL = null;
+
+function kanjiPool(o) {
+  const all = kanjiAt(o.level);
+  if (o.from === "unknown") {
+    const left = all.filter(k => kState(k.c) !== "known");
+    return left.length ? left : all;
+  }
+  if (o.from === "missed") {
+    const missed = all.filter(k => { const e = kRecord(k.c); return e && e.ok < e.n; });
+    return missed.length ? missed : all;
+  }
+  return all;
+}
+
+function pickKanji(pool, count) {
+  const bag = pool.slice();
+  for (let i = bag.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [bag[i], bag[j]] = [bag[j], bag[i]];
+  }
+  return bag.slice(0, Math.min(count, bag.length));
+}
+
+const kReadings = k => [k.on.join("、"), k.kun.join("、")].filter(Boolean).join("  /  ");
+
+function renderKanji() {
+  crumbs([["#/", "All lessons"], [null, "Kanji"]]);
+  const o = kOpts();
+  const view = document.getElementById("view");
+  const level = KANJI_LEVELS.find(l => l.id === o.level) || KANJI_LEVELS[0];
+  const set = kanjiAt(level.id);
+  const lessons = kanjiLessons();
+  const known = set.filter(k => kState(k.c) === "known").length;
+  const learning = set.filter(k => kState(k.c) === "learning").length;
+
+  const rows = set.map(k => {
+    const st = kState(k.c);
+    const rec = kRecord(k.c);
+    const n = lessons[k.c];
+    return `<tr class="k-${st}">
+      <td class="k-c">${esc(k.c)}</td>
+      <td class="k-m"><b>${esc(k.en)}</b></td>
+      <td class="k-on">${esc(k.on.join("、") || "—")}</td>
+      <td class="k-kun">${esc(k.kun.join("、") || "—")}</td>
+      <td class="k-ex"><span class="j">${esc(k.ex.w)}</span>
+        <span class="k-exr">${esc(k.ex.r)}</span>
+        <span class="k-exe">${esc(k.ex.en)}</span></td>
+      <td class="k-l">${n ? `<a href="#/lesson/${n}">L${n}</a>` : "—"}</td>
+      <td class="k-s">${st === "known" ? `<span class="k-tick">✓</span>`
+        : st === "learning" ? `<span class="k-part">${rec.ok}/${rec.n}</span>`
+        : `<span class="k-none">—</span>`}</td>
+    </tr>`;
+  }).join("");
+
+  view.innerHTML = `
+    <h2 class="view">Kanji</h2>
+    <p class="viewsub">Recognition practice on its own track. You are shown the character and
+      type what it means; anything reasonable counts, and a typo will not fail you.</p>
+
+    <div class="klevels">
+      ${KANJI_LEVELS.map(l => l.ready
+        ? `<button class="klev${l.id === level.id ? " on" : ""}" data-lv="${l.id}">${esc(l.label)}
+             <span>${kanjiAt(l.id).length} kanji</span></button>`
+        : `<button class="klev off" disabled title="${esc(l.note)}">${esc(l.label)}
+             <span>later</span></button>`).join("")}
+    </div>
+    <p class="hintline">${esc(level.note)}</p>
+
+    <div class="kstrip">
+      <div><div class="k">Known</div><div class="val">${known}<span class="of"> / ${set.length}</span></div>
+        <div class="sub">right ${KANJI_KNOWN} times running</div></div>
+      <div><div class="k">Still shaky</div><div class="val">${learning}</div>
+        <div class="sub">seen but not secure</div></div>
+      <div><div class="k">Untouched</div><div class="val">${set.length - known - learning}</div>
+        <div class="sub">not yet drilled</div></div>
+      <div><div class="k">Recent accuracy</div><div class="val">${
+        kanjiAccuracy() === null ? "—" : kanjiAccuracy() + "%"}</div>
+        <div class="sub">${(S.kanji && S.kanji.runs) || 0} rounds</div></div>
+    </div>
+
+    <div class="vsetup">
+      <label>Draw from
+        <select id="kfrom">${KANJI_SOURCES.map(([id, label]) =>
+          `<option value="${id}"${id === o.from ? " selected" : ""}>${label}</option>`).join("")}</select>
+      </label>
+      <label>Questions
+        <select id="kcount">${KANJI_COUNTS.map(c =>
+          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>
+      </label>
+      <label>&nbsp;
+        <button class="btn primary" id="kstart">Start drill</button>
+      </label>
+    </div>
+
+    <table class="ktable">
+      <thead><tr>
+        <th>Kanji</th><th>Meaning</th><th class="k-on">On</th><th class="k-kun">Kun</th>
+        <th class="k-ex">Example</th><th class="k-l">Lesson</th><th class="k-s">You</th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table>
+    <p class="hintline">Lesson shows where the character first turns up in your
+      vocabulary lists, so you can see which ones the book has already given you.</p>`;
+
+  view.querySelectorAll("button.klev[data-lv]").forEach(b =>
+    b.addEventListener("click", () => { setKOpts({ level: b.dataset.lv }); renderKanji(); }));
+  document.getElementById("kfrom").addEventListener("change", e => setKOpts({ from: e.target.value }));
+  document.getElementById("kcount").addEventListener("change", e => setKOpts({ count: +e.target.value }));
+  document.getElementById("kstart").addEventListener("click", () => startKanji());
+}
+
+function startKanji(only) {
+  const o = kOpts();
+  const pool = only && only.length ? only.map(kanjiBy).filter(Boolean) : kanjiPool(o);
+  if (!pool.length) return renderKanji();
+  const list = only && only.length ? pickKanji(pool, pool.length) : pickKanji(pool, o.count);
+  KDRILL = { level: o.level, list, i: 0, verdict: null, answers: [], focus: !!(only && only.length) };
+  saveKanjiSession();
+  drawKanji();
+}
+
+function saveKanjiSession() {
+  if (!KDRILL) return;
+  if (KDRILL.i >= KDRILL.list.length) return clearKanjiSession();
+  S.ksession = { level: KDRILL.level, chars: KDRILL.list.map(k => k.c), i: KDRILL.i,
+                 answers: KDRILL.answers, focus: KDRILL.focus, ts: Date.now() };
+  save();
+}
+function clearKanjiSession() { delete S.ksession; save(); }
+function resumeKanji() {
+  const s = S.ksession;
+  if (!s) return renderKanji();
+  const list = s.chars.map(kanjiBy).filter(Boolean);
+  if (!list.length) { clearKanjiSession(); return renderKanji(); }
+  KDRILL = { level: s.level, list, i: s.i, verdict: null,
+             answers: s.answers || [], focus: s.focus || false };
+  drawKanji();
+}
+
+function drawKanji() {
+  const view = document.getElementById("view");
+  const total = KDRILL.list.length;
+  crumbs([["#/", "All lessons"], ["#/kanji", "Kanji"], [null, "Drill"]]);
+
+  if (KDRILL.verdict) {
+    const { k, typed } = KDRILL.verdict;
+    const n = kanjiLessons()[k.c];
+    view.innerHTML = `
+      <h2 class="view">Not quite</h2>
+      <p class="viewsub">Question ${KDRILL.i} of ${total}</p>
+      <div class="verdict no">
+        <div class="kbig">${esc(k.c)}</div>
+        <div class="vrow"><span class="vtag">means</span>
+          <span class="kmean">${esc(k.en)}</span></div>
+        <div class="vrow"><span class="vtag">you</span>
+          <span class="vgloss">${esc(typed || "—")}</span></div>
+        <div class="vrow"><span class="vtag">readings</span>
+          <span class="jpline">${esc(kReadings(k) || "—")}</span></div>
+        <div class="vrow"><span class="vtag">as in</span>
+          <span class="jpline">${esc(k.ex.w)}</span>
+          <span class="vgloss">${esc(k.ex.r)} · ${esc(k.ex.en)}</span></div>
+        ${k.ok.length > 1 ? `<div class="vrow"><span class="vtag">also</span>
+          <span class="vgloss">${esc(k.ok.slice(0, 6).join(", "))}</span></div>` : ""}
+        ${n ? `<div class="vrow"><span class="vtag">book</span>
+          <span class="vgloss">first appears in Lesson ${n}</span></div>` : ""}
+      </div>
+      <div class="rowacts">
+        <button class="btn primary" id="knext">${KDRILL.i >= total ? "See results" : "Next kanji"}</button>
+      </div>`;
+    const nx = document.getElementById("knext");
+    nx.focus();
+    nx.addEventListener("click", () => { KDRILL.verdict = null; drawKanji(); });
+    return;
+  }
+
+  if (KDRILL.i >= total) return drawKanjiEnd(view);
+
+  const k = KDRILL.list[KDRILL.i];
+  view.innerHTML = `
+    <h2 class="view">What does this mean?</h2>
+    <p class="viewsub">Question ${KDRILL.i + 1} of ${total} · ${esc(KDRILL.level)}${
+      KDRILL.focus ? " · focused round" : ""}</p>
+    <div class="vcard">
+      <div class="kbig">${esc(k.c)}</div>
+      <input type="text" id="kin" autocomplete="off" autocapitalize="off" autocorrect="off"
+        spellcheck="false" placeholder="Meaning in English">
+      <div class="rowacts">
+        <button class="btn primary" id="kgo">Submit</button>
+        <button class="btn" id="kskip">Skip</button>
+      </div>
+      <p class="hintline">Enter to submit · one meaning is enough</p>
+    </div>
+    <div class="prog"><i style="width:${pct(KDRILL.i, total)}%"></i></div>`;
+
+  const input = document.getElementById("kin");
+  input.focus();
+  const send = () => submitKanji(input.value);
+  document.getElementById("kgo").addEventListener("click", send);
+  document.getElementById("kskip").addEventListener("click", () => submitKanji(""));
+  input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); send(); } });
+}
+
+function submitKanji(typed) {
+  const k = KDRILL.list[KDRILL.i];
+  if (!k) return;
+  const ok = judgeKanji(typed, k);
+  recordKanji(ok, k.c);
+  KDRILL.answers.push({ c: k.c, en: k.en, ok, typed: String(typed).trim() });
+  KDRILL.i++;
+  saveKanjiSession();
+  // right answers need no ceremony; only a miss is worth stopping for
+  KDRILL.verdict = ok ? null : { k, typed: String(typed).trim() };
+  drawKanji();
+}
+
+function drawKanjiEnd(view) {
+  const st = kStats();
+  if (!KDRILL.counted) { st.runs = (st.runs || 0) + 1; KDRILL.counted = true; save(); }
+  clearKanjiSession();
+
+  const total = KDRILL.answers.length;
+  const right = KDRILL.answers.filter(a => a.ok).length;
+  const missed = KDRILL.answers.filter(a => !a.ok);
+  const set = kanjiAt(KDRILL.level);
+  const lessons = kanjiLessons();
+
+  view.innerHTML = `
+    <h2 class="view">Round complete</h2>
+    <p class="viewsub">${esc(KDRILL.level)} kanji${KDRILL.focus ? " · focused round" : ""}</p>
+    <div class="score"><div class="big">${right}/${total}</div>
+      <div class="sub">${pct(right, total)}%${missed.length
+        ? ` · ${missed.length} to work on` : " · nothing missed"}</div></div>
+
+    <div class="kstrip">
+      <div><div class="k">Known overall</div>
+        <div class="val">${kanjiKnown(KDRILL.level)}<span class="of"> / ${set.length}</span></div>
+        <div class="sub">across every round</div></div>
+      <div><div class="k">Recent accuracy</div><div class="val">${kanjiAccuracy()}%</div>
+        <div class="sub">last ${Math.min(WINDOW, st.history.length)} answers</div></div>
+    </div>
+
+    ${missed.length ? `<table class="kmiss"><thead><tr>
+        <th>Kanji</th><th>Means</th><th>You wrote</th><th>Readings</th><th>As in</th><th>L</th>
+      </tr></thead><tbody>${missed.map(a => {
+        const k = kanjiBy(a.c);
+        return `<tr>
+          <td class="m-k">${esc(a.c)}</td>
+          <td class="m-en"><b>${esc(k.en)}</b></td>
+          <td class="m-you">${esc(a.typed || "—")}</td>
+          <td class="m-r jpline">${esc(kReadings(k))}</td>
+          <td class="m-x jpline">${esc(k.ex.w)} <span class="vgloss">${esc(k.ex.en)}</span></td>
+          <td class="m-l">${lessons[a.c] ? "L" + lessons[a.c] : "—"}</td></tr>`;
+      }).join("")}</tbody></table>` : ""}
+
+    <div class="rowacts">
+      ${missed.length ? `<button class="btn primary" id="kfocus">Drill those ${
+        missed.length} again</button>` : ""}
+      <button class="btn${missed.length ? "" : " primary"}" id="kagain">Another ${KDRILL.list.length}</button>
+      <button class="btn" data-go="#/kanji">Back to the table</button>
+      <button class="btn" data-go="#/">Back to dashboard</button>
+    </div>`;
+
+  document.getElementById("kagain").addEventListener("click", () => startKanji());
+  const fx = document.getElementById("kfocus");
+  if (fx) fx.addEventListener("click", () => startKanji(missed.map(a => a.c)));
+}
+
 function route() {
   const h = location.hash || "#/";
   const m = h.match(/^#\/(lesson|cards|drill|sweep)\/(all|\d+(?:-\d+)?)$/);
   CARD = m && m[1] === "cards" ? CARD : null;
+  if (!/^#\/verbs/.test(h)) VERB = null;
+  if (!/^#\/kanji/.test(h)) KDRILL = null;
   window.scrollTo(0, 0);
   // the masthead is an introduction, not something to re-read every session;
   // on a phone it costs a third of the screen, so views other than the
   // dashboard collapse it (see the small-screen rules)
-  document.body.dataset.view = h === "#/resume" ? "drill" : m ? m[1] : "dash";
+  document.body.dataset.view = h === "#/resume" ? "drill"
+    : /^#\/verbs/.test(h) ? "verbs" : /^#\/kanji/.test(h) ? "kanji" : m ? m[1] : "dash";
   if (h === "#/resume") return resumeDrill();
+  if (h === "#/verbs") { VERB = null; return renderVerbs(); }
+  if (h === "#/verbs/resume") return resumeVerbs();
+  if (h === "#/kanji") { KDRILL = null; return renderKanji(); }
+  if (h === "#/kanji/resume") return resumeKanji();
   if (!m) return renderDashboard();
   const [, kind, scope] = m;
   if (kind === "lesson") return renderLesson(+scope);
