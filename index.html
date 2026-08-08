@@ -2313,6 +2313,95 @@ function acceptedForms(jp) {
   return out.map(clean);
 }
 
+/* In speech the topic is often left out once it is clear — especially わたしは
+   at the start of a self-introduction. The model answer keeps it because the
+   textbook is teaching the full pattern, but dropping it is not wrong. */
+const TOPIC_MARK = /^(わたしは|あなたは|ぼくは|わたくしは)/;
+/* Kanji and kana both appear once furigana variants are unfolded. */
+const TIME_THEN_TOPIC = /^(きのう|昨日|きょう|今日|あした|明日|おととい|一昨日|あさって|明後日|さっき|けさ|今朝|きょねん|去年|ことし|今年|らいねん|来年|せんげつ|先月|こんげつ|今月|よる|夜|あさ|朝|ひる|昼|ばん|晩)(わたしは|あなたは|ぼくは|わたくしは)/;
+
+function topicVariants(form) {
+  const out = new Set([form]);
+  if (TOPIC_MARK.test(form)) out.add(form.replace(TOPIC_MARK, ""));
+  const m = form.match(TIME_THEN_TOPIC);
+  if (m) out.add(form.slice(0, m[1].length) + form.slice(m[1].length + m[2].length));
+  return [...out];
+}
+
+/* Polite/plain pairs the textbook lists as equivalent (e.g. おいくつ ↔ 何歳). */
+const PHRASE_SWAP = [
+  ["おいくつ", ["何歳", "なんさい"]],
+  ["何歳", ["おいくつ", "なんさい"]],
+  ["なんさい", ["おいくつ", "何歳"]]
+];
+
+function phraseVariants(form) {
+  const out = new Set([form]);
+  PHRASE_SWAP.forEach(([from, tos]) => {
+    if (!form.includes(from)) return;
+    tos.forEach(to => out.add(form.split(from).join(to)));
+  });
+  return [...out];
+}
+
+/* Hiragana in model answers that also have a common kanji spelling. The
+   textbook often writes place names in kana (さくら大学) but learners may
+   use kanji (桜大学). Furigana notation handles most words; this catches
+   kana-only segments the data has not marked up yet. */
+const KANA_KANJI = [
+  ["さくら", "桜"],
+  ["ふじ", "富士"],
+  ["かばん", "カバン"]
+];
+
+function kanaKanjiVariants(form) {
+  const out = new Set([form]);
+  KANA_KANJI.forEach(([kana, kanji]) => {
+    [...out].forEach(f => {
+      if (f.includes(kana)) out.add(f.split(kana).join(kanji));
+      if (f.includes(kanji)) out.add(f.split(kanji).join(kana));
+    });
+  });
+  return [...out];
+}
+
+function answerVariants(form) {
+  const out = new Set();
+  topicVariants(form).forEach(f => {
+    phraseVariants(f).forEach(v => kanaKanjiVariants(v).forEach(x => out.add(x)));
+  });
+  return [...out];
+}
+
+/* When the model uses これは あなたのですか (noun omitted after の) but the English
+   names the thing — "Is this key yours?" — naming it explicitly is fine. */
+const EN_NOUN = {
+  key: ["鍵", "かぎ"], umbrella: ["傘", "かさ"], bag: ["かばん"], notebook: ["ノート"],
+  book: ["本", "ほん"], magazine: ["雑誌", "ざっし"], car: ["自動車", "じどうしゃ"],
+  dictionary: ["辞書", "じしょ"], newspaper: ["新聞", "しんぶん"], pen: ["ペン"],
+  watch: ["時計", "とけい"], photo: ["写真", "しゃしん"]
+};
+const DEMON_KORE = /^これは/;
+
+function englishHeadNoun(en) {
+  if (!en) return null;
+  let m = en.match(/\bis this (?:the )?(\w+)/i);
+  if (m) return m[1].toLowerCase();
+  m = en.match(/\bthis (\w+) (?:is|yours|mine|his|hers|theirs)/i);
+  return m ? m[1].toLowerCase() : null;
+}
+
+function demonstrativeVariants(form, en) {
+  const out = new Set();
+  if (!en || !DEMON_KORE.test(form) || !/の(です|ですか|じゃ)/.test(form)) return [...out];
+  const head = englishHeadNoun(en);
+  const nouns = head && EN_NOUN[head];
+  if (!nouns) return [...out];
+  const rest = form.slice(3); /* after これは */
+  nouns.forEach(n => out.add("この" + n + "は" + rest));
+  return [...out];
+}
+
 function editDistance(a, b) {
   if (a === b) return 0;
   if (!a.length || !b.length) return Math.max(a.length, b.length);
@@ -2331,10 +2420,12 @@ function editDistance(a, b) {
 
 const NEAR_MISS = 2;
 
-function judgeAnswer(typed, jp) {
+function judgeAnswer(typed, jp, en) {
   const you = normJa(typed);
   if (!you) return { verdict: "blank", ok: false, off: 0 };
-  const forms = acceptedForms(jp).map(normJa);
+  let forms = acceptedForms(jp).map(normJa).flatMap(answerVariants);
+  if (en) forms = forms.concat(forms.flatMap(f => demonstrativeVariants(f, en)));
+  forms = [...new Set(forms)];
   if (forms.indexOf(you) >= 0) return { verdict: "correct", ok: true, off: 0 };
   let off = Infinity;
   forms.forEach(f => { off = Math.min(off, editDistance(you, f)); });
@@ -2523,7 +2614,7 @@ function newDrill(scope, ns, bank, only, sweep, focus) {
    session is parked alongside it so the rest can be picked up later. */
 function submitAnswer(q) {
   const typed = DRILL.typed || "";
-  const j = judgeAnswer(typed, q.jp);
+  const j = judgeAnswer(typed, q.jp, q.en);
   DRILL.answers.push({ q, ok: j.ok, verdict: j.verdict, off: j.off, yours: typed });
   recordAnswer(q.n, j.ok, q.pi);
   DRILL.typed = ""; DRILL.i++; DRILL.verdict = j;

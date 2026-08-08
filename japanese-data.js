@@ -3177,12 +3177,12 @@ const CONTENT = {
     examples: [
       ["わたしは IMCの 社員{しゃいん}です。", "I am an employee of IMC."],
       ["ミラーさんは パワー電気{でんき}の 社員{しゃいん}です。", "Mr. Miller is an employee of Power Electric."],
-      ["ワットさんは さくら大学{だいがく}の 先生{せんせい}です。", "Mr. Watt is a teacher at Sakura University."],
+      ["ワットさんは 桜{さくら}大学{だいがく}の 先生{せんせい}です。", "Mr. Watt is a teacher at Sakura University."],
       ["田中{たなか}さんは 神戸病院{こうべびょういん}の 医者{いしゃ}です。", "Mr. Tanaka is a doctor at Kobe Hospital."],
     ],
     drills: [
       ["I am an employee of IMC.", "わたしは IMCの 社員{しゃいん}です。", "の links the organisation to the role"],
-      ["Mr. Watt is a teacher at Sakura University.", "ワットさんは さくら大学{だいがく}の 先生{せんせい}です。", ""],
+      ["Mr. Watt is a teacher at Sakura University.", "ワットさんは 桜{さくら}大学{だいがく}の 先生{せんせい}です。", ""],
       ["Ms. Karina is a student at Fuji University.", "カリナさんは 富士大学{ふじだいがく}の 学生{がくせい}です。", ""],
       ["Is Mr. Santos an employee of Brazil Air?", "サントスさんは ブラジルエアーの 社員{しゃいん}ですか。", ""],
       ["That person is a doctor at Kobe Hospital.", "あの 人{ひと}は 神戸病院{こうべびょういん}の 医者{いしゃ}です。", ""],
@@ -3246,7 +3246,7 @@ const CONTENT = {
     drills: [
       ["This book is my book.", "この 本{ほん}は わたしの 本{ほん}です。", "この attaches to a noun; これ stands alone"],
       ["Is that notebook Mr. Miller's notebook?", "その ノートは ミラーさんの ノートですか。", ""],
-      ["That person over there is a teacher at Sakura University.", "あの 人{ひと}は さくら大学{だいがく}の 先生{せんせい}です。", "あの 人{ひと} is the standard way to say 'he' or 'she'"],
+      ["That person over there is a teacher at Sakura University.", "あの 人{ひと}は 桜{さくら}大学{だいがく}の 先生{せんせい}です。", "あの 人{ひと} is the standard way to say 'he' or 'she'"],
       ["This magazine is not an English magazine.", "この 雑誌{ざっし}は 英語{えいご}の 雑誌{ざっし}じゃ ありません。", ""],
       ["Whose umbrella is that?", "その 傘{かさ}は だれの 傘{かさ}ですか。", "だれの asks whose"],
       ["This desk is Ms. Sato's desk too.", "この 机{つくえ}も 佐藤{さとう}さんの 机{つくえ}です。", "も replaces は here as well"],
