@@ -1,48 +1,34 @@
 VOCAB
-さきます I ［はなが ～］|咲きます ［花が ～］|[flowers] bloom
-かわります I ［いろが ～］|変わります ［色が ～］|[the color] change
-こまります I|困ります|be in trouble, have a problem
-つけます II ［まるを ～］|付けます ［丸を ～］|draw [a circle], mark [with a circle]
-ひろいます I|拾います|pick up
-かかります I ［でんわが ～］|かかります ［電話が ～］|get through [on the telephone], have [a phone call]
-らく[な]|楽[な]|comfortable, easy
-ただしい|正しい|correct, right
-めずらしい|珍しい|rare, uncommon
-かた|方|person (respectful equivalent of ひと)
-むこう|向こう|over there, the other side
+さきます I|咲きます|bloom
+かわります I|変わります|change
+こまります I|困ります|have trouble
+つけます II|付けます|mark
+なおります I|治ります／直ります|get better
+クリックします III||click
+にゅうりょくします III|入力します|input
+ただしい|正しい|correct
+むこう|向こう|over there
 しま|島|island
-むら|村|village
-みなと|港|port, harbor
-きんじょ|近所|neighborhood, vicinity
+みなと|港|port
+きんじょ|近所|neighborhood
 おくじょう|屋上|rooftop
 かいがい|海外|overseas
 やまのぼり|山登り|mountain climbing
-ハイキング||hiking
-きかい|機会|chance, opportunity
+れきし|歴史|history
+きかい|機会|opportunity
 きょか|許可|permission
 まる|丸|circle
-そうさ|操作|operation
-ほうほう|方法|method
-せつび|設備|equipment, facilities
+ふりがな／かんじ|ふりがな／漢字|furigana / kanji
+せつび|設備|facilities
+レバー||lever
+キー／かぎ||key
 カーテン||curtain
 ひも||string
-ふた||lid, cover, cap
+すいはんき|炊飯器|rice cooker
 は|葉|leaf
-きょく|曲|a piece of music
-たのしみ|楽しみ|pleasure, enjoyment, expectation
+むかし|昔|in the past
 もっと||more
-はじめに|初めに|first
-これで おわります。|これで 終わります。|We'll finish now.
-それなら||in that case
-やこうバス|夜行バス|night bus
-りょこうしゃ|旅行社|travel agency
-くわしい|詳しい|detailed
-スキーじょう|スキー場|ski resort, ski ground
-しゅ|朱|red
-まじわります I|交わります|keep company with
-ことわざ||proverb
-なかよく します III|仲よく します|be on good terms with
-ひつよう[な]|必要[な]|necessary, essential
+これでおわりましょう。|これで終わりましょう。|Let's finish here.
 PROPER
 はこね|箱根|resort in Kanagawa Prefecture
 にっこう|日光|tourist spot in Tochigi Prefecture

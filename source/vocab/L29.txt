@@ -1,49 +1,33 @@
 VOCAB
-あきます I ［ドアが ～］|開きます|[a door] open
-しまります I ［ドアが ～］|閉まります|[a door] close, shut
-つきます I ［でんきが ～］|つきます ［電気が ～］|[a light] come on
-きえます II ［でんきが ～］|消えます ［電気が ～］|[a light] go off, disappear
-こみます I ［みちが ～］|込みます ［道が ～］|[a road] get crowded
-すきます I ［みちが ～］|すきます ［道が ～］|[a road] get empty
-こわれます II ［いすが ～］|壊れます|[a chair] break
-われます II ［コップが ～］|割れます|[a glass] break, smash
-おれます II ［きが ～］|折れます ［木が ～］|[a tree] break, snap
-やぶれます II ［かみが ～］|破れます ［紙が ～］|[the paper] tear
-よごれます II ［ふくが ～］|汚れます ［服が ～］|[the clothes] get dirty
-つきます I ［ポケットが ～］|付きます|[a pocket] be attached
-はずれます II ［ボタンが ～］|外れます|[a button] be undone
-とまります I ［エレベーターが ～］|止まります|[an elevator] stop
-まちがえます II||make a mistake
-おとします I|落とします|drop, lose
-かかります I ［かぎが ～］|掛かります|be locked
-［お］さら|［お］皿|plate, dish
-［お］ちゃわん||rice bowl
-コップ||glass (vessel)
-ガラス||glass (material)
+ひらきます I|開きます|open (intransitive)
+しまります I|閉まります|close (intransitive)
+つきます I||turn on (intransitive)
+きえます II|消えます|turn off (intransitive)
+こわれます II|壊れます|break (intransitive)
+われます II|割れます|break, shatter (intransitive)
+おれます II|折れます|break, snap (intransitive)
+やぶれます II|破れます|tear, rip (intransitive)
+よごれます II|汚れます|get dirty (intransitive)
+つきます I|付きます|attach (intransitive)
+はずれます II|外れます|come off, detach (intransitive)
+とまります I|止まります|stop (intransitive)
+まちがえます II|間違えます|make a mistake
+おとします I|落とします|drop
+かかります I|掛かります|lock (intransitive)
+ふきます I||wipe
+とりかえます II|取り替えます|replace
+かたづけます II|片付けます|clean up
+おさら|お皿|dishes
+おちゃわん||rice bowl
+コップ||cup, glass
+ガラス||glass
 ふくろ|袋|bag
-さいふ|財布|wallet, purse
-えだ|枝|branch, twig
-えきいん|駅員|station employee
-この へん|この 辺|this neighborhood, around here
-～へん|～辺|the place around ～
-このくらい||about this size
-おさきに どうぞ。|お先に どうぞ。|After you./Go ahead, please.
-［ああ、］よかった。||Thank goodness! (used to express a feeling of relief)
-いまの でんしゃ|今の 電車|the train which has just left
-わすれもの|忘れ物|things left behind, lost property
-～がわ|～側|～ side
-ポケット||pocket
-おぼえて いません。|覚えて いません。|I don't remember.
-あみだな|網棚|rack
-たしか|確か|I suppose, if I am correct
-じしん|地震|earthquake
-かべ|壁|wall
-はり|針|hands (of a clock)
-さします I|指します|point
-えきまえ|駅前|the area in front of a station
-たおれます II|倒れます|fall down
-にし|西|west
-ほう|方|direction
+しょるい／しりょう|書類／資料|documents / materials
+えだ|枝|branch
+えきいん|駅員|station staff
+こうばん|交番|police box
+スピーチ||speech
+へんじ|返事|response
 PROPER
 よつや|四ツ谷|name of a station in Tokyo
 さんのみや|三宮|name of a place in Kobe

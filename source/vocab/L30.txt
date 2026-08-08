@@ -1,57 +1,36 @@
 VOCAB
-はります I||put up, post, paste
-かけます II|掛けます|hang
-かざります I|飾ります|display, decorate
-ならべます II|並べます|arrange, line up
+はります I||stick
+かけます II||hang
+かざります I|飾ります|decorate
+ならべます II|並べます|arrange
 うえます II|植えます|plant
-もどします I|戻します|return, put ～ back
-まとめます II||put ～ together, put ～ in shape, sum up
-かたづけます II|片づけます|put things in order, tidy up
-しまいます I||put things in their proper place
+もどします I|戻します|return (something)
+まとめます II||put together
+しまいます I||put away
 きめます II|決めます|decide
-しらせます II|知らせます|inform
-そうだんします III|相談します|consult, discuss
-よしゅうします III|予習します|prepare one's lesson
-ふくしゅうします III|復習します|review one's lesson
-そのままに します III||leave things as they are
-おこさん|お子さん|(someone else's) child
-じゅぎょう|授業|class
+よしゅうします III|予習します|prepare for class
+ふくしゅうします III|復習します|review
+そのままにします III||leave as it is
+じゅぎょう|授業|lesson, class
 こうぎ|講義|lecture
 ミーティング||meeting
-よてい|予定|plan, schedule
-おしらせ|お知らせ|notice
-あんないしょ|案内書|guide book
+よてい|予定|plan
+おしらせ|お知らせ|announcement
+ガイドブック||guidebook
 カレンダー||calendar
 ポスター||poster
-ごみばこ|ごみ箱|trash can, dustbin
+よていひょう|予定表|schedule chart
+ごみばこ|ゴミ箱|trash box
 にんぎょう|人形|doll
 かびん|花瓶|vase
 かがみ|鏡|mirror
 ひきだし|引き出し|drawer
-げんかん|玄関|front door, porch, entrance hall
-ろうか|廊下|corridor, hallway
+げんかん|玄関|entrance
+ろうか|廊下|hallway
 かべ|壁|wall
 いけ|池|pond
-こうばん|交番|police box
-もとの ところ|元の 所|original place
-まわり|周り|round, around
-まんなか|真ん中|center
+まわり|周り|around
+まんなか|真ん中|middle
 すみ|隅|corner
-まだ||still
-～ほど||about ～
-よていひょう|予定表|schedule
-ごくろうさま。|ご苦労さま。|Thank you for your hard work. (used by a superior or older person to express appreciation for a subordinate's work)
-きぼう|希望|hope, request
-なにか ごきぼうが ありますか。|何か ご希望が ありますか。|Do you have any requests?
-ミュージカル||musical
-それは いいですね。||That's a good idea./That sounds nice.
-まるい|丸い|round
-つき|月|moon
-ある ～||one ～, a certain ～
-ちきゅう|地球|earth
-うれしい||glad, happy
-いや［な］|嫌［な］|hateful, disagreeable
-すると||and, then
-めが さめます II|目が 覚めます|wake up
 PROPER
 ブロードウェイ||Broadway

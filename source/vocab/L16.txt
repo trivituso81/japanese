@@ -1,50 +1,43 @@
 VOCAB
-のります [でんしゃに～]|乗ります [電車に～]|ride, get on [a train]
-おります [でんしゃを～]|降ります [電車を～]|get off [a train]
-のりかえます|乗り換えます|change (trains, etc.)
-あびます [シャワーを～]|浴びます|take [a shower]
-いれます|入れます|put in, insert
-だします|出します|take out, withdraw
-はいります [だいがくに～]|入ります [大学に～]|enter [university]
-でます [だいがくを～]|出ます [大学を～]|graduate from [university]
-やめます [かいしゃを～]|やめます [会社を～]|quit or retire from [a company], stop, give up
-おします|押します|push, press
+のります I|乗ります|get on
+おります I|降ります|get off
+のりかえます II|乗り換えます|change, transfer
+あびます II|浴びます|take (a shower)
+いれます II|入れます|pour, put in
+だします I|出します|take out
+おろします I|下ろします|put down
+はいります I|入ります|enter, join
+でます II|出ます|leave, go out
+おします I|押します|push
+のみます I|飲みます|drink
+はじめます II|始めます|start
+けんがくします III|見学します|tour, observe
+でんわします III|電話します|call
 わかい|若い|young
 ながい|長い|long
 みじかい|短い|short
-あかるい|明るい|bright, light
+あかるい|明るい|bright
 くらい|暗い|dark
-せがたかい|背が高い|tall (referring to person)
-あたまがいい|頭がいい|clever, smart
 からだ|体|body
 あたま|頭|head
 かみ|髪|hair
 かお|顔|face
-め|目|eye
+め|目|eyes
 みみ|耳|ear
+はな|鼻|nose
 くち|口|mouth
 は|歯|tooth
 おなか||stomach
-あし|足|leg, foot
+あし|足|foot, leg
+せなか|背中|back
 サービス||service
-ジョギング||jogging (～をします: jog)
+ジョギング||jogging
 シャワー||shower
-みどり|緑|green, greenery
-[お]てら|[お]寺|Buddhist temple
-じんじゃ|神社|Shinto shrine
-りゅうがくせい|留学生|foreign student
-―ばん|―番|number ―
-どうやって||in what way, how
-どの～||which ～ (used for three or more)
-[いいえ、]まだまだです。||[No,] I still have a long way to go.
-おひきだしですか。|お引き出しですか。|Are you making a withdrawal?
-まず||first of all
-キャッシュカード||cash dispensing card
-あんしょうばんごう|暗証番号|personal identification number, PIN
-つぎに|次に|next, as a next step
-きんがく|金額|amount of money
-かくにん|確認|confirmation (～します: confirm)
-ボタン||button
+みどり|緑|green
+おてら|お寺|temple
+じんじゃ|神社|shrine
+～ばん|～番|No. ~
+どうやって||how
 PROPER
 JR||Japan Railway
 アジア||Asia

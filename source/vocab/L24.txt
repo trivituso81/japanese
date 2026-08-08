@@ -1,21 +1,21 @@
 VOCAB
-くれます II||give (me)
-つれて いきます I|連れて 行きます|take (someone)
-つれて きます III|連れて 来ます|bring (someone)
-おくります I ［ひとを ～］|送ります ［人を ～］|escort [someone], go with
+くれます II||give (to me)
+なおします I|直します|fix
+つれていきます I|連れて行きます|take (a person along)
+つれてきます III|連れて来ます|bring (a person along)
+おくります I|送ります|send
 しょうかいします III|紹介します|introduce
-あんないします III|案内します|show around, show the way
+あんないします III|案内します|guide, show around
 せつめいします III|説明します|explain
-いれます II ［コーヒーを ～］||make [coffee]
-おじいさん／おじいちゃん||grandfather, old man
-おばあさん／おばあちゃん||grandmother, old woman
-じゅんび|準備|preparation (～します: prepare)
-いみ|意味|meaning
-[お]かし|[お]菓子|sweets, snacks
-ぜんぶ|全部|all
-じぶんで|自分で|by oneself
-ほかに||besides
-ワゴン車||station wagon
-[お]弁当||box lunch
+おじいさん||grandfather
+おじいちゃん||grandpa
+おばあさん||grandmother
+おばあちゃん||grandma
+じゅんび|準備|preparation
+ひっこし|引っ越し|move (relocate)
+おかし|お菓子|sweets, candy
+ホームステイ||homestay
+ぜんぶ|全部|all, everything
+じぶんで|自分で|by myself
 PROPER
 ははの ひ|母の 日|Mother's Day

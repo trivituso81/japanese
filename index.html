@@ -6,410 +6,628 @@
 <meta name="robots" content="noindex, nofollow">
 <title>Japanese Study Guide · Minna no Nihongo I &amp; II</title>
 <style>
+  /* ============================================================
+     和 — a washi-paper palette in traditional dye names.
+
+     Nothing here is pure black or pure white: sumi ink sits warm on
+     unbleached paper, rules are brushed rather than drawn, and the one
+     loud colour is the vermilion of a hanko seal, spent sparingly.
+     ============================================================ */
   :root {
-    --bg: #ffffff;
-    --bg-soft: #f7f6f3;
-    --bg-inset: #f0efec;
-    --text: #1a1a18;
-    --text-soft: #55534e;
-    --text-faint: #8a8781;
-    --rule: #e2e0db;
-    --rule-strong: #c9c6bf;
-    --accent: #3b4f8f;
-    --done: #2b6141;
-    --now: #a35a12;
-    --miss: #a3341f;
-    --maxw: 1000px;
+    --washi: #f4f0e6;          /* 生成り  unbleached paper, the page itself */
+    --bg: #fbf8f1;             /* 白練    silk white, anything laid on the page */
+    --bg-soft: #f2eee2;        /* a shade sunk into the paper */
+    --bg-inset: #e9e3d4;       /* sunk further still */
+    --text: #23201b;           /* 墨      sumi ink */
+    --text-soft: #55503f;      /* 消炭    charcoal */
+    --text-faint: #8f8875;     /* 鈍色    dulled grey */
+    --rule: #ded7c4;           /* hairline, the width of a fine brush */
+    --rule-strong: #c3b9a0;
+    --accent: #2f4f6f;         /* 縹      hanada, the indigo of dyed cloth */
+    --accent-soft: #e2e7ec;
+    --seal: #9c3b2e;           /* 朱      vermilion, the ink of a name seal */
+    --seal-deep: #82301f;
+    --done: #45613f;           /* 松葉    pine needle */
+    --now: #9a6a1e;            /* 黄土    ochre */
+    --miss: var(--seal);
+    --ok-bg: #edf1e7;
+    --ok-line: #b9c6ac;
+    --warn-bg: #f7f0dd;
+    --warn-line: #d9c395;
+    --miss-bg: #f7eae5;
+    --miss-line: #d5b0a4;
+    --cur-bg: #f6efdd;
+    --cur-line: #d8c295;
+    --maxw: 1020px;
+    --ui: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
     --jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
+    --jp-mincho: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", "MS Mincho", serif;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  body { margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 30px 22px 100px;
+  /* the faint cross-weave of paper fibre, well below the threshold of notice */
+  body { margin: 0; color: var(--text); font: 16px/1.72 var(--ui);
+    background-color: var(--washi);
+    background-image:
+      repeating-linear-gradient(90deg, rgba(90,70,40,.020) 0 1px, transparent 1px 3px),
+      repeating-linear-gradient(0deg,  rgba(90,70,40,.016) 0 1px, transparent 1px 4px); }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 46px 26px 120px;
     overflow-wrap: break-word; }
-  a { color: var(--accent); }
+  a { color: var(--accent); text-underline-offset: 2px; }
 
   /* masthead + nav */
-  header.masthead { border-bottom: 2px solid var(--text); padding-bottom: 16px; }
-  .kicker { font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase;
-    color: var(--text-faint); margin: 0 0 10px; font-weight: 600; }
-  h1 { font-size: 27px; line-height: 1.2; letter-spacing: -0.016em; margin: 0 0 8px; font-weight: 650; }
-  h1 .jp { font-family: var(--jp); }
-  .standfirst { font-size: 15.5px; color: var(--text-soft); margin: 0; max-width: 74ch; }
-  .standfirst b { color: var(--text); font-weight: 650; }
+  header.masthead { position: relative; padding-bottom: 26px; border-bottom: 1px solid var(--rule-strong); }
+  /* 青海波 — the wave pattern, breaking along the foot of the rule */
+  header.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
+    height: 14px; pointer-events: none; opacity: .5;
+    background-image: repeating-radial-gradient(circle at 50% 100%,
+      transparent 0 9px, var(--rule-strong) 9px 10px, transparent 10px 13px);
+    background-size: 26px 13px; }
+  /* 円相 — the ensō, drawn in one breath and left open */
+  .enso { position: absolute; top: -8px; right: -4px; width: 108px; height: 108px;
+    opacity: .13; pointer-events: none; }
+  .enso path { fill: none; stroke: var(--text); stroke-width: 5.5; stroke-linecap: round; }
+  .kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    color: var(--text-faint); margin: 0 0 14px; font-weight: 600; }
+  h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: 0.005em;
+    margin: 0 0 14px; font-weight: 400; }
+  h1 .jp { font-family: var(--jp-mincho); font-weight: 400; margin-left: 6px;
+    color: var(--seal); letter-spacing: 0.06em; }
+  .standfirst { font-family: var(--serif); font-size: 16.5px; line-height: 1.75;
+    color: var(--text-soft); margin: 0; max-width: 68ch; }
+  .standfirst b { color: var(--text); font-weight: 600; }
 
-  .crumbs { margin: 20px 0 0; font-size: 13px; color: var(--text-faint); }
-  .crumbs a { text-decoration: none; }
-  .crumbs a:hover { text-decoration: underline; }
+  /* The tracks. Clear of the wave breaking under the masthead, and marked
+     with the same short seal stroke the section headings carry. */
+  .topnav { display: flex; flex-wrap: wrap; margin: 22px 0 0;
+    border-bottom: 1px solid var(--rule); }
+  .topnav a { position: relative; display: flex; align-items: center; min-height: 40px;
+    padding: 0 16px; text-decoration: none; font-family: var(--ui); font-size: 11.5px;
+    font-weight: 600; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--text-faint); white-space: nowrap;
+    transition: color .16s, background .16s; }
+  .topnav a:first-child { padding-left: 0; }
+  .topnav a:hover { color: var(--text); }
+  .topnav a[aria-current="page"] { color: var(--text); }
+  .topnav a[aria-current="page"]::after { content: ""; position: absolute;
+    left: 16px; right: 16px; bottom: -1px; height: 2px; background: var(--seal); }
+  .topnav a:first-child[aria-current="page"]::after { left: 0; }
 
-  /* buttons */
-  .btn { font: inherit; font-size: 13px; font-weight: 600; padding: 7px 13px; cursor: pointer;
+  .crumbs { margin: 20px 0 0; font-size: 12.5px; color: var(--text-faint);
+    letter-spacing: .04em; }
+  .crumbs a { text-decoration: none; color: var(--text-soft); }
+  .crumbs a:hover { color: var(--seal); text-decoration: underline; }
+
+  /* buttons — squared off like a wooden block, the primary one stamped in seal ink */
+  .btn { font: inherit; font-family: var(--ui); font-size: 12.5px; font-weight: 600;
+    padding: 8px 15px; cursor: pointer; letter-spacing: .03em;
     border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
-    border-radius: 3px; white-space: nowrap; }
-  .btn:hover:not(:disabled) { border-color: var(--text-faint); color: var(--text); }
-  .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-  .btn.primary { background: var(--text); border-color: var(--text); color: #fff; }
-  .btn.primary:hover { background: #000; color: #fff; }
+    border-radius: 0; white-space: nowrap; transition: border-color .16s, color .16s, background .16s; }
+  .btn:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text); background: var(--bg-soft); }
+  .btn:disabled { opacity: 0.36; cursor: not-allowed; }
+  .btn.primary { background: var(--seal); border-color: var(--seal); color: #fdf8f1;
+    letter-spacing: .05em; }
+  .btn.primary:hover:not(:disabled) { background: var(--seal-deep); border-color: var(--seal-deep);
+    color: #fdf8f1; }
   .btn.good { color: var(--done); border-color: var(--done); }
   .btn.bad { color: var(--miss); border-color: var(--miss); }
-  .btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: #fff; }
-  .btn.sm { font-size: 12px; padding: 5px 9px; }
+  .btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--washi); }
+  .btn.sm { font-size: 11.5px; padding: 6px 10px; }
 
-  /* summary strip */
-  .strip { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    border: 1px solid var(--rule-strong); margin: 22px 0 0; }
-  .strip > div { padding: 12px 15px; border-right: 1px solid var(--rule); }
-  .strip > div:last-child { border-right: none; }
-  .strip .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; }
-  .strip .val { font-size: 22px; font-weight: 650; letter-spacing: -0.01em; margin-top: 2px;
-    font-variant-numeric: tabular-nums; }
-  .strip .sub { font-size: 12px; color: var(--text-faint); }
+  /* ============================================================
+     Stat grids
+
+     A caption, a figure, and a line of detail under it. Four components
+     used to say that same thing at four sizes in four places; one now,
+     with three presentations — separate tiles by default, `joined` for the
+     single ruled box across the top of the dashboard, and `bare` for
+     figures set straight onto a panel that is already a box.
+     ============================================================ */
+  .statgrid { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 4px; }
+  .statgrid .stat { flex: 1 1 130px; border: 1px solid var(--rule-strong);
+    padding: 14px 16px; background: var(--bg); }
+  .statgrid .k { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; }
+  .statgrid .val { font-family: var(--serif); font-size: 27px; font-weight: 400;
+    line-height: 1.2; font-variant-numeric: tabular-nums; }
+  .statgrid .sub { font-size: 12.5px; color: var(--text-faint); }
+
+  .statgrid.joined { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0; border: 1px solid var(--rule-strong); background: var(--bg); margin: 30px 0 0; }
+  .statgrid.joined .stat { flex: none; border: none; border-right: 1px solid var(--rule);
+    padding: 16px 18px; }
+  .statgrid.joined .stat:last-child { border-right: none; }
+  .statgrid.joined .val { margin-top: 5px; line-height: 1.15; }
+  .statgrid.joined .sub { font-size: 12px; margin-top: 3px; }
+
+  /* a box inside the review panel would be one box too many */
+  .statgrid.bare { gap: 12px 32px; margin: 0 0 14px; }
+  .statgrid.bare .stat { flex: 0 1 auto; border: none; padding: 0; background: none; }
+  .statgrid.bare .val { font-size: 24px; }
+  .statgrid.bare .of { font-size: 13px; }
+  .statgrid.bare .sub { font-size: 11.5px; }
+
+  /* the "/ total" trailing a tally, kept subordinate to the figure it qualifies */
+  .of { font-family: var(--ui); font-size: 14px; font-weight: 400; letter-spacing: 0;
+    color: var(--text-faint); }
+  /* a tile whose value is a phrase rather than a number */
+  .val.txt { font-size: 17px; line-height: 1.35; }
+
+  /* The one thing worth doing next. The seal stroke marks it as the page's
+     own recommendation — distinct from the indigo of a standing invitation
+     and the ochre of something left unfinished. */
+  .next { display: flex; align-items: center; gap: 18px; justify-content: space-between;
+    margin: 26px 0 0; padding: 17px 19px; border: 1px solid var(--rule-strong);
+    border-left: 3px solid var(--seal); background: var(--bg); }
+  .next .k { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; }
+  .next p { font-family: var(--serif); font-size: 15px; line-height: 1.7;
+    margin: 4px 0 0; color: var(--text-soft); max-width: 70ch; }
+  .next .btn { flex: none; }
 
   /* review panel */
-  .review { margin: 22px 0 0; border: 1px solid var(--text); }
+  .review { margin: 30px 0 0; border: 1px solid var(--rule-strong); background: var(--bg); }
   .rhead { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
-    padding: 12px 16px; background: var(--bg-inset); border-bottom: 1px solid var(--rule-strong); }
-  .rhead .k { font-size: 11px; letter-spacing: 0.09em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; }
-  .rhead h3 { margin: 2px 0 0; font-size: 17px; font-weight: 650; letter-spacing: -0.012em; }
-  .rscopes { display: flex; gap: 6px; }
-  .rbody { padding: 15px 16px 16px; }
+    padding: 15px 18px; background: var(--bg-soft); border-bottom: 1px solid var(--rule-strong); }
+  .rhead .k { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; }
+  .rhead h3 { font-family: var(--serif); margin: 4px 0 0; font-size: 19px; font-weight: 400; }
+  .rbody { padding: 18px 18px 20px; }
   .resume { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
-    justify-content: space-between; margin: 0 0 15px; padding: 11px 13px;
-    background: #fdf6ec; border: 1px solid #e6cfa8; border-left: 3px solid var(--now); }
+    justify-content: space-between; margin: 0 0 16px; padding: 13px 15px;
+    background: var(--warn-bg); border: 1px solid var(--warn-line); border-left: 3px solid var(--now); }
   .resume b { font-size: 13.5px; display: block; }
   .resume span { font-size: 12.5px; color: var(--text-soft); }
-  .rstats { display: flex; flex-wrap: wrap; gap: 10px 28px; margin-bottom: 12px; }
-  .rstats .rv { font-size: 21px; font-weight: 650; font-variant-numeric: tabular-nums;
-    letter-spacing: -0.01em; }
-  .rstats .rv i { font-style: normal; font-size: 13px; color: var(--text-faint); font-weight: 400; }
-  .rstats .rk { display: block; font-size: 11.5px; color: var(--text-faint); }
-  .rlead { margin: 0 0 14px; font-size: 14px; color: var(--text-soft); max-width: 72ch; }
-  .weak { margin-top: 16px; padding-top: 13px; border-top: 1px solid var(--rule); }
-  .weak .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; margin-bottom: 8px; }
+  .rlead { font-family: var(--serif); margin: 0 0 15px; font-size: 15px; color: var(--text-soft);
+    max-width: 70ch; }
+  .weak { margin-top: 18px; padding-top: 15px; border-top: 1px solid var(--rule); }
+  .weak .k { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; margin-bottom: 9px; }
   .wlist { display: flex; flex-wrap: wrap; gap: 6px; }
   .wchip { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none;
-    font-size: 12.5px; color: var(--text-soft); border: 1px solid var(--rule-strong);
-    border-radius: 3px; padding: 4px 8px; }
-  .wchip:hover { border-color: var(--text-faint); background: var(--bg-soft); }
+    font-size: 12.5px; color: var(--text-soft); border: 1px solid var(--rule);
+    background: var(--bg); border-radius: 0; padding: 5px 9px; }
+  .wchip:hover { border-color: var(--seal); background: var(--bg-soft); }
   .wchip b { color: var(--text); font-variant-numeric: tabular-nums; }
-  .wchip i { font-style: normal; font-weight: 650; color: var(--now); font-variant-numeric: tabular-nums; }
+  .wchip i { font-style: normal; font-weight: 700; color: var(--now); font-variant-numeric: tabular-nums; }
   .wchip i.bad { color: var(--miss); }
 
   /* sweep result map */
-  .map { margin: 4px 0 18px; padding: 13px 15px; background: var(--bg-soft); border: 1px solid var(--rule); }
-  .map .k { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; margin-bottom: 9px; }
-  .cells { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; }
+  .map { margin: 4px 0 20px; padding: 15px 17px; background: var(--bg-soft); border: 1px solid var(--rule); }
+  .map .k { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; margin-bottom: 10px; }
+  .cells { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
   .cell { display: inline-flex; align-items: center; justify-content: center; min-width: 30px;
-    height: 28px; padding: 0 5px; font-size: 12.5px; font-weight: 650; text-decoration: none;
-    font-variant-numeric: tabular-nums; border: 1px solid var(--rule-strong); border-radius: 3px; }
-  .cell.ok { color: var(--done); border-color: #b9d3c3; background: #f1f7f3; }
-  .cell.no { color: #fff; background: var(--miss); border-color: var(--miss); }
+    height: 28px; padding: 0 5px; font-size: 12.5px; font-weight: 600; text-decoration: none;
+    font-variant-numeric: tabular-nums; border: 1px solid var(--rule-strong); border-radius: 0;
+    background: var(--bg); }
+  .cell.ok { color: var(--done); border-color: var(--ok-line); background: var(--ok-bg); }
+  .cell.no { color: #fdf8f1; background: var(--miss); border-color: var(--miss); }
   .map .hintline { margin: 0; }
 
   /* toolbar */
-  .toolbar { margin: 20px 0 0; padding: 13px 0; border-top: 1px solid var(--rule);
+  .toolbar { margin: 26px 0 0; padding: 15px 0; border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 9px 12px; align-items: center; }
   .toolbar input[type=search] { flex: 1 1 220px; min-width: 0; font: inherit; font-size: 14px;
-    padding: 7px 11px; border: 1px solid var(--rule-strong); border-radius: 3px; }
-  .toolbar input[type=search]:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
+    padding: 8px 12px; border: 1px solid var(--rule-strong); border-radius: 0; background: var(--bg);
+    color: var(--text); }
+  .toolbar input[type=search]:focus { outline: 1px solid var(--accent); outline-offset: 1px;
+    border-color: var(--accent); }
 
   /* dashboard table */
-  .board { width: 100%; border-collapse: collapse; margin: 8px 0 0; }
-  .board thead th { position: sticky; top: 0; background: var(--bg); z-index: 2;
-    text-align: left; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; padding: 10px 8px; border-bottom: 2px solid var(--text); }
-  .board td { padding: 9px 8px; border-bottom: 1px solid var(--rule); vertical-align: middle; font-size: 14px; }
-  .board tr.current td { background: #fdf8f2; }
+  .board { width: 100%; border-collapse: collapse; margin: 10px 0 0; }
+  .board thead th { position: sticky; top: 0; background: var(--washi); z-index: 2;
+    text-align: left; font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; padding: 12px 9px;
+    border-bottom: 1px solid var(--text-soft); }
+  .board td { padding: 11px 9px; border-bottom: 1px solid var(--rule); vertical-align: middle; font-size: 14px; }
+  .board tr.current td { background: var(--cur-bg); }
   .board tr:hover td { background: var(--bg-soft); }
-  .board tr.current:hover td { background: #fbf2e6; }
-  .bnum { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 12.5px;
+  .board tr.current:hover td { background: #f1e7cf; }
+  .bnum { font-variant-numeric: tabular-nums; font-weight: 600; font-size: 12.5px;
     color: var(--text-faint); white-space: nowrap; }
   .btitle { font-weight: 600; }
   .btitle small { display: block; font-weight: 400; font-size: 12px; color: var(--text-faint);
-    font-family: var(--jp); }
-  .bookrow td { background: var(--bg-inset) !important; font-size: 11px; letter-spacing: 0.09em;
-    text-transform: uppercase; font-weight: 700; color: var(--text-soft); padding: 8px; }
+    font-family: var(--jp-mincho); letter-spacing: .04em; }
+  .bookrow td { background: var(--bg-inset) !important; font-size: 10.5px; letter-spacing: 0.18em;
+    text-transform: uppercase; font-weight: 700; color: var(--text-soft); padding: 10px 9px; }
 
-  /* meters */
-  .meter { display: flex; width: 100%; max-width: 130px; height: 7px; background: var(--bg-inset);
+  /* meters — ink soaking along a strip of paper */
+  /* On to the next lesson, or back to the last. Two sheets set either side of
+     the page, the label above the title as on a colophon. */
+  .lnav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;
+    margin: 34px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); }
+  .lnav a { flex: 0 1 47%; padding: 12px 15px; text-decoration: none;
+    border: 1px solid var(--rule-strong); background: var(--bg); }
+  .lnav a:hover { border-color: var(--seal); background: var(--bg-soft); }
+  .lnav .lk { display: block; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; margin-bottom: 3px; }
+  .lnav .lt { display: block; font-family: var(--serif); font-size: 15px; line-height: 1.4;
+    color: var(--text); }
+  .lnav .lnav-prev { text-align: left; }
+  .lnav .lnav-next { margin-left: auto; text-align: right; }
+
+  /* Nothing here yet, said plainly and with the way out of it. Laid on the
+     page like a sheet set down rather than a warning: sunk paper, a hairline
+     rule, and the sentence itself in the reading face. */
+  .empty { margin: 20px 0 0; padding: 24px 22px; border: 1px solid var(--rule-strong);
+    background: var(--bg-soft); font-family: var(--serif); font-size: 15px;
+    line-height: 1.75; color: var(--text-soft); }
+  .empty b { color: var(--text); font-weight: 600; }
+  .empty code { font-family: var(--ui); font-size: 13px; color: var(--text); }
+  .empty .rowacts { margin-top: 14px; }
+
+  .meter { display: flex; width: 100%; max-width: 130px; height: 6px; background: var(--bg-inset);
     border: 1px solid var(--rule); }
   .meter i { display: block; flex: none; height: 100%; background: var(--done); }
   .meter i.part { background: var(--now); }
-  .mlabel { font-size: 11.5px; color: var(--text-faint); margin-top: 3px;
+  .mlabel { font-size: 11.5px; color: var(--text-faint); margin-top: 4px;
     font-variant-numeric: tabular-nums; }
   .none { color: var(--text-faint); font-size: 12px; font-style: italic; }
 
-  select.status { font: inherit; font-size: 12.5px; padding: 4px 6px; border: 1px solid var(--rule-strong);
-    border-radius: 3px; background: var(--bg); color: var(--text-soft); max-width: 130px; }
-  select.status[data-v="confident"] { color: var(--done); border-color: var(--done); }
-  select.status[data-v="learning"] { color: var(--now); border-color: var(--now); }
+  /* A note to yourself about what has been taught, sitting in the same row as
+     two meters that were earned. It is quieter than they are on purpose: the
+     hairline border and the absence of a coloured edge keep it an annotation
+     rather than a third score. */
+  select.status { font: inherit; font-size: 12.5px; padding: 5px 7px;
+    border: 1px solid var(--rule); border-radius: 0; background: var(--bg);
+    color: var(--text-faint); max-width: 130px; }
+  select.status:hover, select.status:focus { border-color: var(--rule-strong); }
+  select.status[data-v="confident"] { color: var(--done); }
+  select.status[data-v="learning"] { color: var(--now); }
+  select.status[data-v="reviewed"] { color: var(--text-soft); }
 
   .acts { display: flex; gap: 5px; justify-content: flex-end; }
 
   /* lesson view */
-  h2.view { font-size: 22px; margin: 22px 0 4px; font-weight: 650; letter-spacing: -0.014em; }
-  h2.view .jp { font-family: var(--jp); font-weight: 600; }
-  .viewsub { color: var(--text-soft); margin: 0 0 18px; font-size: 14.5px; }
-  .gap { margin: 18px 0 0; padding: 13px 15px; border: 1px dashed var(--rule-strong);
-    background: var(--bg-soft); font-size: 14px; color: var(--text-soft); }
+  h2.view { font-family: var(--serif); font-size: 26px; margin: 34px 0 6px; font-weight: 400;
+    letter-spacing: 0.004em; position: relative; padding-left: 16px; }
+  /* a short brushed stroke standing in the left margin, as a seal-mark would */
+  h2.view::before { content: ""; position: absolute; left: 0; top: .28em; bottom: .28em;
+    width: 3px; background: var(--seal); opacity: .8; }
+  h2.view .jp { font-family: var(--jp-mincho); font-weight: 400; letter-spacing: .05em; }
+  /* section headings inside a lesson: the same hand, a quieter mark */
+  h2.view.minor { font-size: 19px; margin-top: 38px; }
+  h2.view.minor::before { width: 2px; background: var(--rule-strong); }
+  .viewsub { font-family: var(--serif); color: var(--text-soft); margin: 0 0 24px; font-size: 15px;
+    max-width: 70ch; padding-left: 16px; }
+  .viewsub.minor { font-size: 13.5px; margin-bottom: 14px; }
+  .viewsub .jp { font-family: var(--jp-mincho); letter-spacing: .04em; }
+  .gap { margin: 20px 0 0; padding: 15px 17px; border: 1px solid var(--rule-strong);
+    border-left: 3px solid var(--rule-strong); background: var(--bg-soft); font-size: 14px;
+    color: var(--text-soft); }
   .gap b { color: var(--text); }
 
-  .point { border: 1px solid var(--rule-strong); margin: 16px 0 0; }
-  .point > h3 { margin: 0; padding: 11px 15px; background: var(--bg-inset);
-    border-bottom: 1px solid var(--rule-strong); font-size: 17px; font-family: var(--jp); font-weight: 650; }
-  .point > h3 span { font-family: -apple-system, sans-serif; font-size: 11px; font-weight: 700;
-    letter-spacing: 0.07em; text-transform: uppercase; color: var(--text-faint); margin-left: 10px; }
-  .point .body { padding: 14px 15px; }
-  .point p { margin: 0 0 11px; font-size: 14.5px; }
-  .point .form { font-size: 13.5px; background: var(--bg-inset); border-left: 3px solid var(--accent);
-    padding: 9px 12px; margin: 0 0 12px; font-family: var(--jp); }
+  .point { border: 1px solid var(--rule-strong); background: var(--bg); margin: 20px 0 0; }
+  .point > h3 { margin: 0; padding: 14px 18px; background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule-strong); font-size: 18px; font-family: var(--jp-mincho);
+    font-weight: 500; letter-spacing: .03em; }
+  .point > h3 span { font-family: var(--ui); font-size: 10.5px; font-weight: 600;
+    letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-faint); margin-left: 12px; }
+  .point .body { padding: 18px; }
+  .point p { font-family: var(--serif); margin: 0 0 13px; font-size: 15px; line-height: 1.75; }
+  .point .form { font-size: 14px; background: var(--accent-soft); border-left: 3px solid var(--accent);
+    padding: 11px 14px; margin: 0 0 14px; font-family: var(--jp); }
   .ex { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
-  .ex li { padding: 8px 0; border-bottom: 1px dotted var(--rule); }
+  .ex li { padding: 12px 0; border-bottom: 1px solid var(--rule); }
   .ex li:last-child { border-bottom: none; }
-  .ex .j { font-family: var(--jp); font-size: 16px; line-height: 2; }
-  .ex .t { display: block; font-size: 13.5px; color: var(--text-soft); }
+  .ex .j { font-family: var(--jp-mincho); font-size: 17px; line-height: 2.05; letter-spacing: .02em; }
+  .ex .t { display: block; font-family: var(--serif); font-size: 14px; color: var(--text-soft);
+    margin-top: 2px; }
 
   /* vocabulary block */
   .vlist { display: grid; grid-template-columns: minmax(170px, 38%) 1fr;
-    border: 1px solid var(--rule-strong); margin: 8px 0 0; }
-  .vlist > div { padding: 7px 12px; border-top: 1px solid var(--rule); }
+    border: 1px solid var(--rule-strong); background: var(--bg); margin: 10px 0 0; }
+  .vlist > div { padding: 9px 14px; border-top: 1px solid var(--rule); }
   .vlist > div:nth-child(1), .vlist > div:nth-child(2) { border-top: none; }
-  .vj { font-family: var(--jp); font-size: 15.5px; }
+  .vj { font-family: var(--jp-mincho); font-size: 16.5px; letter-spacing: .02em; }
   .vr { display: block; font-family: var(--jp); font-size: 12px; color: var(--text-faint); }
   body.no-furi .vr, body.no-furi rt { display: none; }
   .ve2 { font-size: 13.5px; color: var(--text-soft); }
-  .vhead { grid-column: 1 / -1; background: var(--bg-soft); font-size: 11px; letter-spacing: 0.08em;
-    text-transform: uppercase; color: var(--text-faint); font-weight: 650; }
+  .vhead { grid-column: 1 / -1; background: var(--bg-soft); font-size: 10.5px; letter-spacing: 0.16em;
+    text-transform: uppercase; color: var(--text-faint); font-weight: 600; }
   .vbox { font-size: 10px; font-weight: 700; color: var(--text-faint); float: right;
-    border: 1px solid var(--rule-strong); padding: 0 5px; border-radius: 2px; }
+    border: 1px solid var(--rule-strong); padding: 0 5px; border-radius: 0; }
   .vbox.learned { color: var(--done); border-color: var(--done); }
 
   /* card + drill stage */
-  .stage { border: 1px solid var(--rule-strong); margin: 18px 0 0; }
+  .stage { border: 1px solid var(--rule-strong); background: var(--bg); margin: 22px 0 0; }
   .stagehead { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
-    justify-content: space-between; padding: 11px 15px; background: var(--bg-inset);
-    border-bottom: 1px solid var(--rule-strong); font-size: 12.5px; color: var(--text-soft); }
+    justify-content: space-between; padding: 13px 17px; background: var(--bg-soft);
+    border-bottom: 1px solid var(--rule-strong); font-size: 12px; color: var(--text-soft);
+    letter-spacing: .04em; }
   .stagehead b { color: var(--text); font-variant-numeric: tabular-nums; }
-  .card { padding: 44px 24px; text-align: center; min-height: 250px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; }
-  .prompt { font-size: 30px; line-height: 1.5; font-weight: 600; }
-  .prompt.jp { font-family: var(--jp); font-size: 34px; }
+  .card { padding: 56px 26px; text-align: center; min-height: 270px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; }
+  .prompt { font-family: var(--serif); font-size: 31px; line-height: 1.5; font-weight: 400; }
+  .prompt.jp { font-family: var(--jp-mincho); font-size: 38px; letter-spacing: .04em; }
   .prompt .rd { display: block; font-size: 15px; color: var(--text-faint); font-weight: 400;
-    font-family: var(--jp); margin-top: 6px; }
-  .answer { font-size: 22px; line-height: 1.6; padding-top: 14px; border-top: 1px solid var(--rule);
-    width: 100%; max-width: 620px; }
-  .answer.jp { font-family: var(--jp); font-size: 26px; }
+    font-family: var(--jp); margin-top: 9px; letter-spacing: .04em; }
+  .answer { font-family: var(--serif); font-size: 23px; line-height: 1.6; padding-top: 18px;
+    border-top: 1px solid var(--rule); width: 100%; max-width: 620px; }
+  .answer.jp { font-family: var(--jp-mincho); font-size: 28px; letter-spacing: .03em; }
   .answer .rd { display: block; font-size: 14px; color: var(--text-faint); font-family: var(--jp); }
   .hintline { font-size: 13px; color: var(--text-faint); }
-  .grades { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; padding: 0 0 6px; }
   .keys { font-size: 11.5px; color: var(--text-faint); }
   .taphint { display: none; font-size: 12px; color: var(--text-faint); margin: 0; }
   .t-narrow { display: none; }
 
+  /* One shell for all four drills: counter left, running state right, bar
+     beneath. The verb and kanji cards supply their own padding, so inside the
+     shell they drop the border and ground they used to draw for themselves. */
+  .drillstage .vcard { border: 0; background: none; }
+  .drillstage .verdict { margin: 0; }
+  /* the answer just cleared, kept on screen rather than stopping the loop */
+  .tick { margin: 0 0 14px; font-size: 13px; color: var(--done);
+    border-bottom: 1px solid var(--rule); padding-bottom: 12px; }
+  .tick .jpline { font-size: 17px; margin-right: 4px; }
+
   /* swipeable card */
-  .prog { height: 4px; background: var(--bg-inset); border-bottom: 1px solid var(--rule); }
-  .prog i { display: block; height: 100%; background: var(--done); transition: width .25s ease; }
+  .prog { height: 3px; background: var(--bg-inset); border-bottom: 1px solid var(--rule); }
+  .prog i { display: block; height: 100%; background: var(--seal); transition: width .25s ease; }
   .deck { position: relative; overflow: hidden; }
   .deck .card { position: relative; touch-action: pan-y; user-select: none;
     -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
   .deck .card.live { cursor: grab; }
   .deck .card.live:active { cursor: grabbing; }
-  .swipetag { position: absolute; top: 14px; z-index: 2; padding: 5px 10px; font-size: 11.5px;
-    font-weight: 800; letter-spacing: 0.09em; text-transform: uppercase; background: var(--bg);
-    border: 2px solid; border-radius: 4px; opacity: 0; pointer-events: none; }
+  .swipetag { position: absolute; top: 14px; z-index: 2; padding: 6px 12px; font-size: 11px;
+    font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; background: var(--bg);
+    border: 2px solid; border-radius: 0; opacity: 0; pointer-events: none; }
   .tag-yes { right: 14px; color: var(--done); border-color: var(--done); transform: rotate(9deg); }
   .tag-no { left: 14px; color: var(--miss); border-color: var(--miss); transform: rotate(-9deg); }
-  .rep { color: var(--now); font-weight: 650; }
+  .rep { color: var(--now); font-weight: 600; }
   .cardacts { display: flex; gap: 9px; flex-wrap: wrap; justify-content: center;
-    padding: 16px 16px 0; }
+    padding: 18px 18px 0; }
   .btn.wide { min-width: 150px; }
   .cardmeta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
-    justify-content: center; padding: 11px 16px 16px; }
+    justify-content: center; padding: 13px 18px 18px; }
 
+  /* the Leitner boxes ripen from bare earth through ochre to pine */
   .boxbar { display: flex; height: 6px; width: 150px; background: var(--bg-inset); border: 1px solid var(--rule); }
   .boxbar i { display: block; height: 100%; }
   .boxbar i.b0 { background: var(--rule-strong); }
-  .boxbar i.b1 { background: #d8b48a; }
-  .boxbar i.b2 { background: #c9a05e; }
-  .boxbar i.b3 { background: #7fa383; }
-  .boxbar i.b4 { background: #4f7f5e; }
+  .boxbar i.b1 { background: #cdae7c; }
+  .boxbar i.b2 { background: #bb9450; }
+  .boxbar i.b3 { background: #8a9a6a; }
+  .boxbar i.b4 { background: #5f7a4e; }
   .boxbar i.b5 { background: var(--done); }
 
   /* drill */
-  .qbox { padding: 22px 20px; }
-  .qnum { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; }
-  .qen { font-size: 21px; line-height: 1.45; margin: 8px 0 16px; font-weight: 600; max-width: 60ch; }
-  textarea.jp { width: 100%; min-height: 76px; font-family: var(--jp); font-size: 19px; line-height: 1.7;
-    padding: 11px 13px; border: 1px solid var(--rule-strong); border-radius: 3px; resize: vertical; }
-  textarea.jp:focus { outline: 2px solid var(--accent); outline-offset: -1px; }
-  .model { margin: 14px 0 0; padding: 13px 15px; background: var(--bg-soft); border: 1px solid var(--rule); }
-  .model .lab { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; margin-bottom: 5px; }
-  .model .j { font-family: var(--jp); font-size: 21px; line-height: 2; }
-  .model .note { font-size: 13px; color: var(--text-soft); margin-top: 6px; }
-  .yours { font-family: var(--jp); font-size: 17px; color: var(--text-soft); margin-top: 8px;
-    padding-top: 8px; border-top: 1px dotted var(--rule-strong); }
-  .rowacts { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0 0; align-items: center; }
+  .qbox { padding: 26px 24px; }
+  .qnum { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; }
+  .qen { font-family: var(--serif); font-size: 22px; line-height: 1.5; margin: 12px 0 20px;
+    font-weight: 400; max-width: 58ch; }
+  textarea.jp { width: 100%; min-height: 82px; font-family: var(--jp-mincho); font-size: 20px;
+    line-height: 1.8; padding: 13px 15px; border: 1px solid var(--rule-strong); border-radius: 0;
+    resize: vertical; background: var(--bg); color: var(--text); }
+  textarea.jp:focus { outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  /* your answer sits beside the model answer, so it must be set in the same
+     face — a difference in typeface would read as a difference in the Japanese */
+  .yours { font-family: var(--jp-mincho); font-size: 17px; color: var(--text-soft);
+    margin-top: 10px; padding-top: 10px; border-top: 1px solid var(--rule); }
+  .rowacts { display: flex; gap: 8px; flex-wrap: wrap; margin: 18px 0 0; align-items: center; }
 
-  /* marked answer */
-  .verdict { border-left: 3px solid var(--rule-strong); }
-  .verdict.ok { border-left-color: var(--done); background: #f7fbf8; }
-  .verdict.near { border-left-color: #b8873c; background: #fdfaf3; }
-  .verdict.no { border-left-color: var(--miss); background: #fdf7f5; }
-  .verdict .vhead { font-size: 12px; letter-spacing: 0.09em; text-transform: uppercase;
-    font-weight: 700; margin-bottom: 10px; display: flex; gap: 8px; align-items: center; }
+  /* marked answer.
+     The padding belongs to the verdict itself, not to whatever happens to be
+     wrapping it: the verb and kanji rounds do not sit inside a .qbox, and
+     leaving the inset to the wrapper had their tinted panels running flush
+     to the text on all four sides. */
+  .verdict { padding: 22px 24px; border-left: 3px solid var(--rule-strong); }
+  .verdict.ok { border-left-color: var(--done); background: var(--ok-bg); }
+  .verdict.near { border-left-color: var(--now); background: var(--warn-bg); }
+  .verdict.no { border-left-color: var(--miss); background: var(--miss-bg); }
+  .verdict .vhead { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 12px; display: flex; gap: 8px; align-items: center; }
   .verdict.ok .vhead b { color: var(--done); }
-  .verdict.near .vhead b { color: #966a22; }
+  .verdict.near .vhead b { color: var(--now); }
   .verdict.no .vhead b { color: var(--miss); }
-  .verdict .qen { font-size: 18px; margin: 0 0 14px; }
-  .vrow { margin-top: 10px; padding: 11px 13px; background: var(--bg); border: 1px solid var(--rule); }
-  .vrow .lab { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; margin-bottom: 5px; }
-  .vrow .j { font-family: var(--jp); font-size: 21px; line-height: 2; }
+  .verdict .qen { font-size: 19px; margin: 0 0 16px; }
+  .vrow { margin-top: 11px; padding: 13px 15px; background: var(--bg); border: 1px solid var(--rule); }
+  .vrow .lab { font-size: 10.5px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; margin-bottom: 6px; }
+  .vrow .j { font-family: var(--jp-mincho); font-size: 22px; line-height: 2.05; letter-spacing: .02em; }
   .vrow .j.yours { margin: 0; padding: 0; border-top: 0; color: var(--text); font-size: 20px; }
   .verdict.no .vrow .j.yours, .verdict.near .vrow .j.yours { color: var(--miss); }
-  .vtag { font-size: 10.5px; letter-spacing: 0.06em; text-transform: uppercase; font-weight: 650;
-    color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 2px; padding: 1px 5px; }
-  .verdict .note { font-size: 13.5px; color: var(--text-soft); margin: 10px 0 0; line-height: 1.6; }
+  .vtag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
+    color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 0; padding: 2px 6px; }
+  .verdict .note { font-family: var(--serif); font-size: 14px; color: var(--text-soft);
+    margin: 12px 0 0; line-height: 1.65; }
 
   /* lessons whose word list has been replaced by hand */
   /* its own line, so it never crowds the meter's caption */
   .revised { display: flex; align-items: center; gap: 3px; margin-top: 3px;
-    font-size: 11px; font-weight: 650; letter-spacing: .04em; text-transform: uppercase;
+    font-size: 10.5px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
     color: var(--done); }
   .revised svg { width: 11px; height: 11px; fill: none; stroke: var(--done);
     stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 
   /* verb drill */
   .verbcta { display: flex; align-items: center; gap: 18px; justify-content: space-between;
-    margin: 22px 0; padding: 14px 16px; border: 1px solid var(--rule); background: var(--bg-soft);
-    line-height: 1.6; font-size: 14px; }
-  .verbcta .btn { flex: none; }
-  .vsetup { display: flex; flex-wrap: wrap; gap: 14px 22px; margin: 18px 0 20px;
-    padding: 14px 16px; border: 1px solid var(--rule); background: var(--bg-soft); }
-  .vsetup label { display: flex; flex-direction: column; gap: 5px; font-size: 12px;
-    letter-spacing: .06em; text-transform: uppercase; color: var(--text-soft); }
-  .vsetup select { font-size: 16px; padding: 6px 8px; border: 1px solid var(--rule);
+    margin: 26px 0; padding: 17px 19px; border: 1px solid var(--rule-strong);
+    border-left: 3px solid var(--accent); background: var(--bg);
+    line-height: 1.7; font-size: 14.5px; font-family: var(--serif); }
+  .verbcta .btn { flex: none; font-family: var(--ui); }
+  /* ============================================================
+     Options
+
+     Choosing what a round will be. Four tracks used to do this four ways —
+     rows of toggles with no start control at all, selects with the start
+     buried eighteen rows down a table, tabs that were not buttons. One
+     panel now: labelled groups, segmented choices marked with aria-pressed
+     as everywhere else in the app, and the single primary control that
+     begins the round always last and always on the right.
+     ============================================================ */
+  .options { display: flex; flex-wrap: wrap; gap: 16px 26px; align-items: flex-end;
+    margin: 22px 0 24px; padding: 17px 19px;
+    border: 1px solid var(--rule-strong); background: var(--bg-soft); }
+  .opt { display: flex; flex-direction: column; gap: 6px; }
+  .optk { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; }
+  .opt select { font-family: var(--ui); font-size: 16px; padding: 7px 9px;
+    border: 1px solid var(--rule-strong); border-radius: 0;
     background: var(--bg); color: var(--text); }
-  .vsetup .btn { font-size: 14px; padding: 6px 10px; text-transform: none; letter-spacing: 0; }
+  .opt .btn { font-size: 13px; padding: 8px 14px; text-transform: none; letter-spacing: .03em; }
+  /* a group of choices where exactly one is taken */
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  /* a switch reads across rather than down, and its label belongs beside it */
+  .opt.check { flex-direction: row; align-items: center; gap: 8px; padding-bottom: 7px; }
+  .opt.check label { display: flex; align-items: center; gap: 8px; cursor: pointer;
+    user-select: none; font-size: 14px; color: var(--text); }
+  .opt.check input { width: 16px; height: 16px; margin: 0; cursor: pointer; }
+  /* the one control that starts things, held to the right so the eye always
+     finds it in the same place */
+  .opt.start { margin-left: auto; }
   /* Standalone rather than .board: the dashboard's small-screen rules map
      specific columns and would scramble these. */
-  .vforms, .vmiss, .kmiss { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
-  .vforms th, .vmiss th, .kmiss th { text-align: left; font-size: 11px; letter-spacing: .07em;
-    text-transform: uppercase; color: var(--text-faint); font-weight: 650;
-    padding: 0 10px 7px 0; border-bottom: 1px solid var(--rule-strong); }
-  .vforms td, .vmiss td, .kmiss td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--rule);
+  .vforms { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
+  .vforms th { text-align: left; font-size: 10.5px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--text-faint); font-weight: 600;
+    padding: 0 10px 9px 0; border-bottom: 1px solid var(--text-soft); }
+  .vforms td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--rule);
     vertical-align: middle; font-size: 14px; }
-  .kmiss .m-you { color: var(--miss); }
-  .vmiss .m-v, .vmiss .m-a { font-size: 16px; }
-  .vmiss .m-you { color: var(--miss); font-family: var(--jp); }
-  .vmiss .m-t, .vmiss .m-en { color: var(--text-faint); font-size: 13px; }
   .vf-n { width: 34px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   .vf-l b { display: block; }
   .vf-jp { font-family: var(--jp); font-size: 12.5px; color: var(--text-faint); }
-  .vf-e { font-family: var(--jp); font-size: 16px; }
+  .vf-e { font-family: var(--jp-mincho); font-size: 16px; }
   .vf-c { width: 60px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   .vf-go { width: 76px; text-align: right; }
   .btn.small { padding: 5px 11px; font-size: 12.5px; }
 
-  .vcard { border: 1px solid var(--rule); padding: 26px 22px; text-align: center;
-    background: var(--bg-soft); }
-  .vask { font-size: 12px; letter-spacing: .07em; text-transform: uppercase;
-    color: var(--text-soft); }
-  .vword { font-family: var(--jp); font-size: 40px; line-height: 1.55; margin: 12px 0 4px; }
-  .vword.en { font-family: var(--ui); font-size: 27px; line-height: 1.3; }
-  /* At 40px the shared 0.5em reading would rival the word itself, and the line
-     needs headroom or the ruby rides up into the form name above it. */
+  .vcard { border: 1px solid var(--rule-strong); padding: 34px 24px; text-align: center;
+    background: var(--bg); }
+  .vask { font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; }
+  .vword { font-family: var(--jp-mincho); font-size: 44px; line-height: 1.55; margin: 16px 0 6px;
+    letter-spacing: .04em; }
+  .vword.en { font-family: var(--serif); font-size: 29px; line-height: 1.3; letter-spacing: 0; }
+  /* At this size the shared 0.5em reading would rival the word itself, and the
+     line needs headroom or the ruby rides up into the form name above it. */
   .vword rt { font-size: 0.3em; }
   .vgloss { color: var(--text-faint); font-size: 13.5px; }
   .vgloss.big { font-size: 15px; margin-bottom: 6px; }
-  .vcard input { width: 100%; max-width: 340px; margin: 16px auto 4px; display: block;
-    font-family: var(--jp); font-size: 22px; text-align: center; padding: 10px 12px;
-    border: 1px solid var(--rule); background: var(--bg); color: var(--text); }
+  .vcard input { width: 100%; max-width: 340px; margin: 20px auto 4px; display: block;
+    font-family: var(--jp-mincho); font-size: 23px; text-align: center; padding: 11px 13px;
+    border: 1px solid var(--rule-strong); border-radius: 0; background: var(--bg); color: var(--text); }
+  .vcard input:focus { outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
   .vcard .rowacts { justify-content: center; }
-  .jpline { font-family: var(--jp); }
-  .jpline.big { font-size: 21px; }
-  .vstats, .vgroups { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0; }
-  .vstats > div, .vgroups > div { flex: 1 1 130px; border: 1px solid var(--rule);
-    padding: 11px 13px; background: var(--bg-soft); }
-  .vgroups .val, .vstats .val { font-size: 24px; font-weight: 600; line-height: 1.2; }
-  .vgroups .k, .vstats .k { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--text-soft); }
-  .vgroups .sub, .vstats .sub { font-size: 12.5px; color: var(--text-faint); }
+  .jpline { font-family: var(--jp-mincho); letter-spacing: .02em; }
+  .jpline.big { font-size: 22px; }
+  .focusnote { font-family: var(--serif); margin-top: 16px; padding: 13px 16px;
+    background: var(--warn-bg); border-left: 3px solid var(--now); line-height: 1.7; }
+  .focusnote b { font-family: var(--jp-mincho); font-weight: 500; color: var(--text); }
 
-  .focusnote { margin-top: 14px; padding: 10px 13px; background: var(--bg-soft);
-    border-left: 3px solid var(--now); line-height: 1.65; }
-  .focusnote b { font-family: var(--jp); font-weight: 600; color: var(--text); }
+  .results { padding: 26px 24px; }
+  .bigscore { font-family: var(--serif); font-size: 52px; font-weight: 400; letter-spacing: 0;
+    font-variant-numeric: tabular-nums; line-height: 1.1; }
+  /* Every round now closes in the same panel, so the tally has one treatment
+     rather than one per track. */
+  .results .boxbar { width: 280px; margin: 16px 0 4px; }
+  .results .statgrid { margin: 18px 0 4px; }
+  .bigscore .of { font-size: 20px; }
 
-  .results { padding: 22px 20px; }
-  .bigscore { font-size: 46px; font-weight: 650; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-  .bd { width: 100%; border-collapse: collapse; margin: 14px 0 0; font-size: 13.5px; }
-  .bd th, .bd td { text-align: left; padding: 7px 9px; border-bottom: 1px solid var(--rule); }
-  .bd th { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); }
-  .bd .j { font-family: var(--jp); font-size: 15px; }
-  .bd tr.wrong td { background: #fdf6f4; }
-  .c-mark { font-weight: 700; color: var(--done); }
-  .wrong .c-mark { color: var(--miss); }
+  /* ============================================================
+     The miss table
+
+     Every round ends by setting what you wrote against what was wanted.
+     The grammar quiz, the verb round and the kanji round each used to do
+     that with their own table and their own twenty lines of small-screen
+     rules. One table now: each cell names the part it plays, and the phone
+     layout is written once, against those parts rather than against the
+     columns of any one of them.
+
+       key     a short identifier down the left  (L7)
+       lead    the item under test               (the verb, the character)
+       gloss   what it means in English
+       yours   what you wrote
+       answer  what was wanted
+       meta    supporting reference              (readings, the pattern)
+       tag     a short marker up the right       (the type, the lesson)
+       mark    the tick or the cross
+       drop    desktop only — the first thing a phone cannot afford
+     ============================================================ */
+  .misstable { width: 100%; border-collapse: collapse; margin: 16px 0 4px; }
+  .misstable th { text-align: left; font-size: 10.5px; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--text-faint); font-weight: 600;
+    padding: 0 10px 9px 0; border-bottom: 1px solid var(--text-soft); }
+  .misstable td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--rule);
+    vertical-align: middle; font-size: 14px; }
+  .misstable tr.wrong td { background: var(--miss-bg); }
+  /* your answer and the correct one are read against each other, so both are
+     set in the same face and size; only the colour separates them */
+  .misstable .jp { font-family: var(--jp-mincho); font-size: 17px; }
+  .misstable [data-col="key"] { font-size: 12.5px; white-space: nowrap;
+    font-variant-numeric: tabular-nums; }
+  .misstable [data-col="lead"] { font-family: var(--jp-mincho); font-size: 17px; }
+  .misstable.big-lead [data-col="lead"] { font-size: 28px; width: 1%;
+    padding-right: 12px; white-space: nowrap; }
+  .misstable [data-col="gloss"] { font-size: 13.5px; color: var(--text-soft); }
+  .misstable [data-col="gloss"] b { color: var(--text); }
+  .misstable [data-col="yours"] { color: var(--miss); }
+  .misstable [data-col="meta"] { font-size: 13px; color: var(--text-soft); }
+  .misstable [data-col="tag"] { font-size: 12.5px; color: var(--text-faint); white-space: nowrap; }
+  .misstable [data-col="mark"] { font-weight: 700; color: var(--done); text-align: right; }
+  .misstable tr.wrong [data-col="mark"] { color: var(--miss); }
+  /* inside a results row the rule above "yours" would double the row's own */
+  .misstable .yours { font-size: 14px; margin-top: 5px; padding-top: 0; border-top: 0; }
 
   /* ---- kanji ---- */
-  .klevels { display: flex; gap: 8px; margin: 16px 0 6px; flex-wrap: wrap; }
-  .klev { font: inherit; font-size: 15px; font-weight: 600; padding: 8px 16px; cursor: pointer;
-    border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
-    display: flex; flex-direction: column; align-items: flex-start; gap: 1px; line-height: 1.2; }
-  .klev span { font-size: 11px; font-weight: 400; letter-spacing: .05em;
-    text-transform: uppercase; color: var(--text-faint); }
-  .klev.on { border-color: var(--text); color: var(--text); background: var(--bg-soft); }
-  .klev.off { opacity: .45; cursor: not-allowed; }
-  .kstrip { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 4px; }
-  .kstrip > div { flex: 1 1 130px; border: 1px solid var(--rule); padding: 11px 13px;
-    background: var(--bg-soft); }
-  .kstrip .k { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase;
-    color: var(--text-soft); }
-  .kstrip .val { font-size: 24px; font-weight: 600; line-height: 1.2; }
-  .kstrip .of { font-size: 14px; color: var(--text-faint); font-weight: 400; }
-  .kstrip .sub { font-size: 12.5px; color: var(--text-faint); }
-
-  .ktable { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
-  .ktable th { text-align: left; font-size: 11px; letter-spacing: .07em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 650; padding: 0 10px 7px 0;
-    border-bottom: 1px solid var(--rule-strong); }
-  .ktable td { padding: 8px 10px 8px 0; border-bottom: 1px solid var(--rule);
+  /* The level tabs are ordinary buttons — so they take the same selected
+     treatment, and the same thumb-sized target on a touch screen, as every
+     other choice in the app — with the count set under the name. */
+  .seg .btn.lev { display: inline-flex; flex-direction: column; align-items: flex-start;
+    gap: 2px; line-height: 1.2; padding: 9px 16px; font-size: 15px; font-weight: 400;
+    font-family: var(--serif); text-transform: none; letter-spacing: 0; }
+  .btn.lev span { font-family: var(--ui); font-size: 10px; font-weight: 600;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--text-faint); }
+  .btn.lev[aria-pressed="true"] span { color: var(--washi); }
+  .ktable { width: 100%; border-collapse: collapse; margin: 16px 0 4px; }
+  .ktable th { text-align: left; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 600; padding: 0 10px 9px 0;
+    border-bottom: 1px solid var(--text-soft); }
+  .ktable td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--rule);
     vertical-align: middle; font-size: 14px; }
-  .ktable .k-c { font-family: var(--jp); font-size: 30px; line-height: 1.1; width: 1%;
-    padding-right: 14px; }
+  .ktable .k-c { font-family: var(--jp-mincho); font-size: 32px; line-height: 1.1; width: 1%;
+    padding-right: 16px; padding-left: 10px; white-space: nowrap; }
+  /* 苔 — a character you have learnt settles under a wash of moss. A character
+     still in hand gets the ochre edge only: one wash in the table is enough. */
+  .ktable tr.k-known td { background: var(--ok-bg); }
+  .ktable tr.k-known .k-c { box-shadow: inset 3px 0 0 var(--done); }
+  .ktable tr.k-learning .k-c { box-shadow: inset 3px 0 0 var(--now); }
   .ktable .k-m { min-width: 110px; }
   .ktable .k-on, .ktable .k-kun { font-family: var(--jp); font-size: 13.5px;
     color: var(--text-soft); }
-  .ktable .k-ex .j { font-family: var(--jp); font-size: 15px; }
+  .ktable .k-ex .j { font-family: var(--jp-mincho); font-size: 16px; }
   .ktable .k-exr, .ktable .k-exe { display: block; font-size: 12px; color: var(--text-faint); }
   .ktable .k-exr { font-family: var(--jp); }
   .ktable .k-l { white-space: nowrap; font-size: 13px; }
   .ktable .k-s { text-align: right; white-space: nowrap; }
-  .k-tick { color: var(--done); font-weight: 700; }
+  /* On a wide screen the readings have columns of their own, so neither the
+     disclosure nor the row it opens is wanted. */
+  .ktable tr.k-detail { display: none; }
+  .k-more { display: none; }
   .k-part { font-size: 12px; color: var(--now); font-variant-numeric: tabular-nums; }
   .k-none { color: var(--text-faint); }
-  .ktable tr.k-known .k-c { color: var(--done); }
-
+  .k-unmark { padding: 1px 6px; font-size: 12px; vertical-align: middle;
+    color: var(--text-faint); border-color: var(--rule); }
+  .k-unmark:hover { color: var(--text); border-color: var(--rule-strong); }
   /* the character under test, and the one being explained after a miss */
-  .kbig { font-family: var(--jp); font-size: 96px; line-height: 1.1; margin: 6px 0 10px;
-    text-align: center; }
-  .verdict .kbig { font-size: 62px; margin: 0 0 10px; }
-  .kmean { font-size: 20px; font-weight: 600; }
-  .kmiss .m-k { font-family: var(--jp); font-size: 26px; width: 1%; padding-right: 12px; }
-  .kmiss .m-r, .kmiss .m-x { font-size: 13px; color: var(--text-soft); }
-  .kmiss .m-l { font-size: 12.5px; color: var(--text-faint); white-space: nowrap; }
+  .kbig { font-family: var(--jp-mincho); font-size: 104px; line-height: 1.1; margin: 10px 0 14px;
+    text-align: center; letter-spacing: .04em; }
+  .verdict .kbig { font-size: 66px; margin: 0 0 12px; }
+  .kmean { font-family: var(--serif); font-size: 21px; font-weight: 400; }
 
   ruby { ruby-position: over; -webkit-ruby-position: before; }
-  rt { font-size: 0.5em; color: var(--text-faint); font-weight: 400; }
+  rt { font-size: 0.5em; color: var(--text-faint); font-weight: 400; font-family: var(--jp); }
 
-  footer.foot { margin: 46px 0 0; padding-top: 16px; border-top: 1px solid var(--rule);
-    font-size: 13px; color: var(--text-faint); }
+  footer.foot { position: relative; margin: 64px 0 0; padding-top: 26px;
+    border-top: 1px solid var(--rule); font-family: var(--serif); font-size: 13.5px;
+    line-height: 1.8; color: var(--text-faint); }
+  /* 山 — a low range of hills closing the page */
+  footer.foot::before { content: ""; position: absolute; top: -1px; left: 0; width: 68px; height: 1px;
+    background: var(--seal); opacity: .6; }
+  footer.foot a { color: var(--text-soft); }
 
   /* ============================================================
      Touch and small screens
@@ -424,11 +642,14 @@
     .btn.sm { font-size: 13px; padding: 8px 10px; min-height: 40px; }
     .wchip { font-size: 13px; padding: 9px 11px; }
     .cell { min-width: 40px; height: 40px; font-size: 13.5px; }
+    .topnav a { min-height: 46px; }
     .board tr:hover td, .board tr.current:hover td { background: inherit; }
   }
 
   @media (max-width: 900px) {
-    .wrap { padding: 26px 18px 90px; }
+    .wrap { padding: 34px 20px 100px; }
+    h1 { font-size: 29px; }
+    .enso { width: 84px; height: 84px; }
   }
 
   @media (max-width: 720px) {
@@ -437,96 +658,133 @@
     .toolbar input[type=search] { font-size: 16px; flex: 1 1 100%; }
     select.status { font-size: 16px; width: 100%; max-width: none; }
 
-    h2.view { font-size: 20px; margin-top: 16px; }
-    .viewsub { font-size: 14px; margin-bottom: 14px; }
+    h2.view { font-size: 22px; margin-top: 22px; padding-left: 13px; }
+    .viewsub { font-size: 14.5px; margin-bottom: 18px; padding-left: 13px; }
     rt { font-size: 0.55em; }
 
     /* Off the dashboard the masthead is just a title bar, and the screen is
        better spent on the card or question you came here for. */
     body:not([data-view="dash"]) .kicker,
-    body:not([data-view="dash"]) .standfirst { display: none; }
-    body:not([data-view="dash"]) header.masthead { padding-bottom: 10px; border-bottom-width: 1px; }
-    body:not([data-view="dash"]) h1 { font-size: 19px; margin: 0; }
-    body:not([data-view="dash"]) .crumbs { margin-top: 12px; }
+    body:not([data-view="dash"]) .standfirst,
+    body:not([data-view="dash"]) .enso { display: none; }
+    body:not([data-view="dash"]) header.masthead { padding-bottom: 12px; }
+    body:not([data-view="dash"]) header.masthead::after { display: none; }
+    body:not([data-view="dash"]) h1 { font-size: 20px; margin: 0; }
+    body:not([data-view="dash"]) .topnav { margin-top: 12px; }
+    .crumbs { margin-top: 14px; }
 
-    .strip { grid-template-columns: 1fr 1fr; }
-    .strip > div { padding: 11px 13px; border-right: 1px solid var(--rule);
+    /* The tracks stay put on a phone; if they will not fit they scroll
+       sideways rather than wrapping into a second bar. */
+    .topnav { flex-wrap: nowrap; overflow-x: auto; margin-top: 16px;
+      -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .topnav::-webkit-scrollbar { display: none; }
+    .topnav a { padding: 0 14px; font-size: 11px; letter-spacing: .14em; }
+    .topnav a[aria-current="page"]::after { left: 14px; right: 14px; }
+    .topnav a:first-child[aria-current="page"]::after { left: 0; }
+
+    .enso { width: 68px; height: 68px; top: -2px; }
+    h1 { font-size: 25px; }
+    .standfirst { font-size: 15.5px; }
+
+    .statgrid .stat { flex: 1 1 100px; padding: 10px 11px; }
+    .statgrid .val { font-size: 20px; }
+    .statgrid.joined { grid-template-columns: 1fr 1fr; }
+    .statgrid.joined .stat { padding: 13px 15px; border-right: 1px solid var(--rule);
       border-bottom: 1px solid var(--rule); }
-    .strip > div:nth-child(2n) { border-right: none; }
-    .strip > div:nth-child(n+5) { border-bottom: none; }
-    .strip .val { font-size: 20px; }
+    .statgrid.joined .stat:nth-child(2n) { border-right: none; }
+    .statgrid.joined .stat:nth-child(n+5) { border-bottom: none; }
+    .statgrid.joined .val { font-size: 23px; }
+    .statgrid.bare { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 10px; }
+    .statgrid.bare .val { font-size: 19px; }
+
+    .next { flex-direction: column; align-items: stretch; gap: 12px; padding: 15px 16px; }
+    .next .btn { text-align: center; }
 
     /* verb drill */
     .verbcta { flex-direction: column; align-items: stretch; gap: 12px; }
     .verbcta .btn { text-align: center; }
-    .vsetup { flex-direction: column; gap: 12px; }
-    .vsetup label { width: 100%; }
-    .vsetup select { width: 100%; }
+    /* the options stack, and every control takes the full width */
+    .options { flex-direction: column; align-items: stretch; gap: 12px; }
+    .opt { width: 100%; }
+    .opt select { width: 100%; }
+    .seg .btn { flex: 1 1 0; }
+    .opt.start { margin-left: 0; }
+    .opt.start .btn { width: 100%; }
     .vword { font-size: 33px; }
     .vword.en { font-size: 22px; }
-    .vcard { padding: 20px 14px; }
+    .vcard { padding: 24px 15px; }
     .vcard input { max-width: none; font-size: 20px; }
     .vcard .rowacts .btn { flex: 1 1 0; }
-    .vstats > div, .vgroups > div { flex: 1 1 100px; padding: 10px 11px; }
-    .vgroups .val, .vstats .val { font-size: 20px; }
 
     /* the form table keeps its lesson number; only the verb count goes */
     .vforms th:nth-child(4), .vforms td:nth-child(4) { display: none; }
 
-    /* The kanji table has to lose its widest columns on a phone. Readings and
-       the example are reference material you can get from the drill itself;
-       the character, its meaning and whether you know it are the point. */
+    /* The kanji table has to lose its widest columns on a phone. They are not
+       optional, though — a character whose readings you cannot look up cannot
+       be studied — so each row opens onto them instead. */
     .ktable .k-on, .ktable .k-kun, .ktable .k-ex { display: none; }
     .ktable .k-c { font-size: 26px; padding-right: 10px; }
     .ktable td { font-size: 13.5px; }
-    .kstrip > div { flex: 1 1 100px; padding: 10px 11px; }
-    .kstrip .val { font-size: 20px; }
-    .klev { flex: 1 1 0; padding: 8px 12px; }
+    .k-more { display: inline-flex; margin-left: 8px; vertical-align: middle;
+      font-size: 11.5px; padding: 4px 10px; min-height: 32px; }
+    .ktable tr.k-detail.open { display: table-row; }
+    .ktable tr.k-detail td { padding: 0 0 12px 10px; border-bottom: 1px solid var(--rule);
+      background: var(--bg-soft); }
+    .kd-r, .kd-x { display: block; font-size: 13px; color: var(--text-soft);
+      line-height: 1.8; }
+    .kd-r b, .kd-x b { display: inline-block; min-width: 42px; font-family: var(--ui);
+      font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--text-faint); font-weight: 600; }
+    .kd-r span, .kd-x span { font-family: var(--jp); }
+    .kd-x .j { font-family: var(--jp-mincho); font-size: 16px; }
+    .seg .btn.lev { flex: 1 1 0; padding: 8px 12px; }
     .kbig { font-size: 78px; }
     .verdict .kbig { font-size: 52px; }
-
-    /* misses stack into cards, with the character kept large enough to study */
-    .kmiss, .kmiss tbody, .kmiss tr, .kmiss td { display: block; }
-    .kmiss thead { display: none; }
-    .kmiss tr { display: grid; grid-template-columns: auto 1fr; gap: 2px 12px;
-      border: 1px solid #e0b3a6; background: #fdf6f4; border-radius: 4px;
-      padding: 10px 12px; margin: 0 0 9px; }
-    .kmiss td { border: none; padding: 0; }
-    .kmiss .m-k  { grid-area: 1 / 1 / 3 / 2; font-size: 42px; align-self: center; width: auto; }
-    .kmiss .m-en { grid-area: 1 / 2 / 2 / 3; }
-    .kmiss .m-you{ grid-area: 2 / 2 / 3 / 3; }
-    .kmiss .m-r  { grid-area: 3 / 1 / 4 / 3; margin-top: 4px; }
-    .kmiss .m-l  { grid-area: 4 / 1 / 5 / 3; }
-    .kmiss .m-x  { display: none; }
-    .kmiss .m-you::before { content: "you: "; color: var(--text-faint); font-size: 12px; }
 
     .vforms td, .vforms th { padding-right: 6px; }
     .vf-e { font-size: 15px; }
     .vf-go { width: 62px; }
 
-    /* five columns of Japanese will not fit, so misses stack */
-    .vmiss, .vmiss tbody, .vmiss tr, .vmiss td { display: block; }
-    .vmiss thead { display: none; }
-    .vmiss tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
-      border: 1px solid #e0b3a6; background: #fdf6f4; border-radius: 4px;
+    /* Five columns of Japanese will not fit on a phone, so every miss table
+       becomes a stack of cards. Written once, against the cell roles, so it
+       holds for the grammar quiz, the verbs and the kanji alike. */
+    .misstable, .misstable tbody, .misstable tr, .misstable td { display: block; }
+    .misstable thead { display: none; }
+    .misstable tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
+      border: 1px solid var(--rule); background: var(--bg); border-radius: 0;
       padding: 10px 12px; margin: 0 0 9px; }
-    .vmiss td { border: none; padding: 0; }
-    .vmiss .m-v  { grid-area: 1 / 1 / 2 / 2; font-weight: 600; }
-    .vmiss .m-t  { grid-area: 1 / 2 / 2 / 3; justify-self: end; font-size: 12px; }
-    .vmiss .m-en { grid-area: 2 / 1 / 3 / 3; }
-    .vmiss .m-you{ grid-area: 3 / 1 / 4 / 3; margin-top: 4px; }
-    .vmiss .m-a  { grid-area: 4 / 1 / 5 / 3; }
-    .vmiss .m-you::before { content: "you: "; font-family: var(--ui);
+    /* a table of nothing but misses tints every card; a results table that
+       mixes the two tints only the ones you got wrong */
+    .misstable tr.wrong, .misstable.allwrong tr {
+      border-color: var(--miss-line); background: var(--miss-bg); }
+    .misstable td, .misstable tr.wrong td { border: none; padding: 0; background: none; }
+    .misstable [data-col="key"] { grid-column: 1; font-size: 12px; font-weight: 700; }
+    .misstable [data-col="lead"] { grid-column: 1; font-weight: 600; }
+    .misstable [data-col="tag"],
+    .misstable [data-col="mark"] { grid-column: 2; justify-self: end; }
+    .misstable [data-col="gloss"],
+    .misstable [data-col="yours"],
+    .misstable [data-col="answer"],
+    .misstable [data-col="meta"] { grid-column: 1 / -1; }
+    .misstable [data-col="yours"],
+    .misstable [data-col="meta"] { margin-top: 4px; }
+    .misstable [data-col="drop"] { display: none; }
+    .misstable [data-col="yours"]::before { content: "you: "; font-family: var(--ui);
       color: var(--text-faint); font-size: 12px; }
-    .vmiss .m-a::before { content: "answer: "; font-family: var(--ui);
+    .misstable [data-col="answer"]::before { content: "answer: "; font-family: var(--ui);
       color: var(--text-faint); font-size: 12px; }
 
+    /* the character stays large enough to study, with its meaning beside it */
+    .misstable.big-lead tr { grid-template-columns: auto 1fr; gap: 2px 12px; }
+    .misstable.big-lead [data-col="lead"] { grid-column: 1; grid-row: 1 / span 2;
+      font-size: 42px; align-self: center; width: auto; padding-right: 0; }
+    .misstable.big-lead [data-col="gloss"],
+    .misstable.big-lead [data-col="yours"] { grid-column: 2; margin-top: 0; }
+
     .rhead { padding: 12px 13px; }
-    .rscopes { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
-    .rscopes .btn { width: 100%; }
+    .rhead .seg { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .rhead .seg .btn { width: 100%; }
     .rbody { padding: 13px; }
-    .rstats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px 10px; }
-    .rstats .rv { font-size: 19px; }
     .resume { flex-direction: column; align-items: stretch; gap: 10px; }
     .resume .rowacts { margin: 0; }
     .resume .rowacts .btn { flex: 1 1 0; }
@@ -536,9 +794,9 @@
     .board, .board tbody, .board tr, .board td { display: block; }
     .board thead { display: none; }
     .board tr:not(.bookrow) { display: grid; grid-template-columns: 1fr 1fr;
-      gap: 11px 12px; border: 1px solid var(--rule-strong); border-radius: 4px;
-      padding: 12px; margin: 0 0 9px; }
-    .board tr.current { border-color: #e0b681; background: #fdf8f2; }
+      gap: 11px 12px; border: 1px solid var(--rule-strong); border-radius: 0;
+      background: var(--bg); padding: 13px; margin: 0 0 10px; }
+    .board tr.current { border-color: var(--cur-line); background: var(--cur-bg); }
     .board td, .board tr:hover td, .board tr.current td { background: none;
       border: none; padding: 0; font-size: 14px; }
     .board tr:not(.bookrow) td:nth-child(1):not([colspan]) { display: none; }
@@ -551,48 +809,39 @@
     .btitle { font-size: 15px; }
     .btitle::before { content: attr(data-n) " · "; color: var(--text-faint);
       font-weight: 700; font-variant-numeric: tabular-nums; }
-    .bookrow td { margin: 16px 0 9px; border-radius: 3px; }
+    .bookrow td { margin: 18px 0 9px; border-radius: 0; }
     .meter { max-width: none; }
     .acts { gap: 6px; }
     .acts .btn { flex: 1 1 0; }
 
-    /* Results stop being a table: five columns of Japanese will not fit. */
-    .bd, .bd tbody, .bd tr, .bd td { display: block; }
-    .bd thead { display: none; }
-    .bd tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
-      border: 1px solid var(--rule); border-radius: 4px; padding: 10px 12px; margin: 0 0 9px; }
-    .bd td, .bd tr.wrong td { border: none; padding: 0; background: none; }
-    .bd tr.wrong { border-color: #e0b3a6; background: #fdf6f4; }
-    .c-lesson { grid-area: 1 / 1 / 2 / 2; font-size: 12px; font-weight: 700; }
-    .c-mark   { grid-area: 1 / 2 / 2 / 3; justify-self: end; }
-    .c-en     { grid-area: 2 / 1 / 3 / 3; font-weight: 600; }
-    .c-jp     { grid-area: 3 / 1 / 4 / 3; margin-top: 4px; }
-    .c-pat    { grid-area: 4 / 1 / 5 / 3; margin-top: 4px; font-size: 13px; color: var(--text-faint); }
-
-    .card { padding: 26px 16px; min-height: 210px; }
-    .prompt { font-size: 24px; } .prompt.jp { font-size: 28px; }
-    .answer { font-size: 19px; } .answer.jp { font-size: 22px; }
-    .grades { width: 100%; }
-    .grades .btn { flex: 1 1 0; }
+    .card { padding: 32px 16px; min-height: 220px; gap: 14px; }
+    .prompt { font-size: 25px; } .prompt.jp { font-size: 30px; }
+    .answer { font-size: 20px; } .answer.jp { font-size: 23px; }
     .boxbar { width: 100% !important; }
     .cardacts { padding: 13px 13px 0; gap: 8px; }
     .cardacts .btn { flex: 1 1 0; min-width: 0; }
     .cardmeta { padding: 9px 13px 14px; }
 
-    .qbox { padding: 16px 14px; }
-    .qen { font-size: 18px; }
-    .model { padding: 12px 13px; }
-    .model .j { font-size: 19px; line-height: 1.95; }
-    .verdict .qen { font-size: 16px; margin-bottom: 12px; }
-    .vrow { padding: 10px 12px; }
-    .vrow .j, .vrow .j.yours { font-size: 19px; line-height: 1.95; }
-    .results { padding: 16px 14px; }
-    .bigscore { font-size: 38px; }
-    .map { padding: 12px 13px; }
+    /* Two lesson titles will not sit side by side on a phone */
+    .lnav { flex-direction: column; gap: 9px; }
+    .lnav a { flex: 1 1 auto; }
+    .lnav .lnav-next { margin-left: 0; text-align: left; }
 
-    .point > h3 { font-size: 16px; padding: 10px 12px; }
-    .point .body { padding: 12px; }
-    .gap { padding: 12px 13px; }
+    .qbox, .verdict { padding: 18px 15px; }
+    .qen { font-size: 19px; margin-bottom: 16px; }
+    .verdict .qen { font-size: 17px; margin-bottom: 13px; }
+    .vrow { padding: 11px 13px; }
+    .vrow .j, .vrow .j.yours { font-size: 20px; line-height: 1.95; }
+    .results { padding: 18px 15px; }
+    .bigscore { font-size: 42px; }
+    .results .boxbar { width: 100%; }
+    .map { padding: 13px 14px; }
+
+    .point > h3 { font-size: 17px; padding: 12px 14px; }
+    .point .body { padding: 14px; }
+    .gap { padding: 13px 14px; }
+    .verbcta { padding: 15px 16px; }
+    .options { padding: 15px 16px; }
   }
 
   @media (max-width: 560px) {
@@ -600,17 +849,17 @@
       padding-left: calc(14px + env(safe-area-inset-left, 0px));
       padding-right: calc(14px + env(safe-area-inset-right, 0px));
       padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
-    .kicker { font-size: 11px; margin-bottom: 8px; }
-    h1 { font-size: 22px; }
-    .standfirst { font-size: 14px; }
-    .rstats { grid-template-columns: 1fr 1fr; }
+    .kicker { font-size: 10px; letter-spacing: .18em; margin-bottom: 10px; }
+    h1 { font-size: 23px; }
+    .standfirst { font-size: 14.5px; }
+    .enso { width: 56px; height: 56px; top: 0; right: -2px; }
+    .statgrid.bare { grid-template-columns: 1fr 1fr; }
     .rowacts .btn { flex: 1 1 100%; }
     .board tr:not(.bookrow) td.bstatus { grid-area: 3 / 1 / 4 / 3; }
 
     /* Shorter control labels so the session options stay on two rows */
     .t-wide { display: none; }
     .t-narrow { display: inline; }
-    .tlabel { display: none; }
     .toolbar { gap: 7px 8px; padding: 11px 0; }
     .toolbar .btn { flex: 1 1 auto; }
 
@@ -626,10 +875,16 @@
 
   /* Phone in landscape: almost no height, so give it back to the card */
   @media (max-height: 560px) and (orientation: landscape) {
-    .standfirst { display: none; }
+    .standfirst, .enso { display: none; }
     header.masthead { padding-bottom: 10px; }
-    .card { min-height: 0; padding: 16px 14px; gap: 10px; }
-    .prompt { font-size: 21px; } .prompt.jp { font-size: 24px; }
+    header.masthead::after { display: none; }
+    .card { min-height: 0; padding: 18px 14px; gap: 10px; }
+    .prompt { font-size: 22px; } .prompt.jp { font-size: 25px; }
+  }
+
+  /* A page this quiet should not lurch when it moves. */
+  @media (prefers-reduced-motion: reduce) {
+    * { transition: none !important; animation: none !important; }
   }
 </style>
 </head>
@@ -637,6 +892,10 @@
 <div class="wrap">
 
 <header class="masthead">
+  <!-- 円相: one stroke, left open where the brush lifted -->
+  <svg class="enso" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+    <path d="M64 15 A38 38 0 1 0 88 56" />
+  </svg>
   <p class="kicker">Preply · Nao san · Minna no Nihongo I &amp; II</p>
   <h1>Japanese Study Guide <span class="jp">勉強ノート</span></h1>
   <p class="standfirst">
@@ -646,6 +905,15 @@
     from those sessions, not self-declared.
   </p>
 </header>
+
+<!-- The tracks, always in reach. Verbs and kanji used to be reachable only
+     from a block halfway down the dashboard. -->
+<nav class="topnav" id="topnav" aria-label="Sections">
+  <a href="#/">Home</a>
+  <a href="#/lessons">Lessons</a>
+  <a href="#/verbs">Verbs</a>
+  <a href="#/kanji">Kanji</a>
+</nav>
 
 <nav class="crumbs" id="crumbs"></nav>
 <main id="view"></main>
@@ -675,6 +943,22 @@ const WINDOW = 20;       // grammar score reads the last this-many answers for a
 const HISTORY_CAP = 60;
 
 const blank = () => ({ lessons: {}, cards: {}, drills: {}, asked: [] });
+
+/* Where you have got to. The data file carries a hand-set `current` flag, but
+   a flag written by hand goes stale the moment you move on, and this is the
+   one row on a fifty-row table you most need to find. So it is derived — the
+   furthest lesson you have touched at all — and the flag only stands in for a
+   browser with no progress in it yet. Cached, and dropped on every save. */
+let _current = null;
+function forgetCurrent() { _current = null; }
+function currentLesson() {
+  if (_current !== null) return _current;
+  const touched = LESSONS.map(l => l.n).filter(n =>
+    lessonState(n).overall !== "todo" || grammarScore(n) || (vocabScore(n) || {}).seen);
+  const flagged = (LESSONS.find(l => l.current) || {}).n || null;
+  return (_current = touched.length ? Math.max(...touched) : flagged);
+}
+
 let S = load();
 // migrateCards runs inside load(), before S exists, so it cannot save itself
 if (S.vocabRemapped) save();
@@ -682,6 +966,14 @@ function load() {
   let s;
   try { s = Object.assign(blank(), JSON.parse(localStorage.getItem(KEY)) || {}); }
   catch (e) { return blank(); }
+  return migrate(s);
+}
+
+/* Every migration a saved state might still need, in one place.
+   Import runs this too: a backup taken before a schema change is exactly the
+   case the migrations exist for, and reading one without them was silently
+   leaving flashcard boxes attached to the wrong words. */
+function migrate(s) {
   // earlier versions stored whole attempts; scores now read individual answers so
   // that mixed review sessions can feed the same per-lesson figures
   for (const n of Object.keys(s.drills || {})) {
@@ -723,7 +1015,10 @@ function migrateCards(s) {
   s.cards = cards;
   s.vocabRemapped = true;
 }
-function save() { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} }
+function save() {
+  forgetCurrent();   // any saved answer can move where "you are up to" points
+  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+}
 function lessonState(n) {
   if (!S.lessons[n]) S.lessons[n] = { overall: "todo", note: "" };
   return S.lessons[n];
@@ -899,21 +1194,243 @@ let query = "";
 let reviewScope = localStorage.getItem(KEY + ":scope") || "1-25";
 function setScope(s) { reviewScope = s; localStorage.setItem(KEY + ":scope", s); }
 
-function resumeBanner() {
-  const s = S.session;
-  if (!s || !s.qs || s.i >= s.qs.length) return "";
-  const left = s.qs.length - s.i;
-  return `<div class="resume">
+/* ============================================================
+   The end of a round
+
+   All four tracks close the same way and should look and read the same way.
+   They did not: four containers, two treatments of the score, and four
+   orders for what are the same four or five choices. Order is fixed here so
+   the button you want is always in the same place — chase what you got
+   wrong, run the same set again, deal a new one, then leave.
+   ============================================================ */
+/* A row of choices. Shared by the summaries and the empty states, so a
+   button reads and sits the same wherever it is offered. */
+function actionRow(list) {
+  return `<div class="rowacts">${list.filter(Boolean).map(a =>
+    `<button class="btn${a.primary ? " primary" : ""}"` +
+    `${a.id ? ` id="${a.id}"` : ""}${a.go ? ` data-go="${a.go}"` : ""}>${a.label}</button>`
+  ).join("")}</div>`;
+}
+
+/* A setup panel. Each group is `{ k, seg }` for a labelled row of choices,
+   `{ k, html }` for a control of its own, `{ check }` for a switch, or
+   `{ start }` for the one primary button that begins the round. */
+function optionsPanel(groups) {
+  return `<div class="options">${groups.filter(Boolean).map(g =>
+    g.start ? `<div class="opt start">${g.start}</div>`
+    : g.check ? `<div class="opt check">${g.check}</div>`
+    : `<div class="opt">${g.k ? `<span class="optk">${g.k}</span>` : ""}${
+        g.seg ? `<div class="seg">${g.seg}</div>` : g.html}</div>`
+  ).join("")}</div>`;
+}
+
+/* A grid of figures. `of` is the "/ total" qualifying a tally, `txt` says the
+   value is a phrase rather than a number, and `mod` picks the presentation:
+   nothing for separate tiles, "joined" for one ruled box, "bare" for figures
+   set straight onto a panel. */
+function statGrid(items, mod) {
+  return `<div class="statgrid${mod ? " " + mod : ""}">${items.filter(Boolean).map(s =>
+    `<div class="stat">${s.k ? `<div class="k">${s.k}</div>` : ""}` +
+    `<div class="val${s.txt ? " txt" : ""}">${s.val}${
+      s.of === undefined ? "" : `<span class="of"> / ${s.of}</span>`}</div>` +
+    `${s.sub ? `<div class="sub">${s.sub}</div>` : ""}</div>`).join("")}</div>`;
+}
+
+/* ============================================================
+   Nothing here yet
+
+   Block-level: a sentence saying what is missing and, where there is one,
+   the way out of it. The inline `.none` is a different thing and stays —
+   it marks a single absent figure inside a table cell, where a panel of
+   prose would break the row.
+   ============================================================ */
+function emptyState(o) {
+  return `<div class="empty">${o.title ? `<b>${o.title}</b> ` : ""}${o.say || ""}${
+    o.actions && o.actions.filter(Boolean).length ? actionRow(o.actions) : ""}</div>`;
+}
+
+/* The panel alone, for callers that already have a heading on the page. */
+function summaryPanel(o) {
+  return `<div class="stage"><div class="results">
+    <div class="bigscore">${o.right}<span class="of"> / ${o.total}</span></div>
+    <p class="hintline">${o.lead}</p>
+    ${o.body || ""}
+    ${actionRow(o.actions)}
+    ${o.footnote ? `<p class="hintline">${o.footnote}</p>` : ""}
+  </div></div>`;
+}
+
+function summaryScreen(o) {
+  return `<h2 class="view">${o.title}</h2>
+    <p class="viewsub">${o.sub}</p>` + summaryPanel(o);
+}
+
+/* ============================================================
+   Unfinished sessions
+
+   Three tracks can park a round. They used to announce it in three places,
+   in three shapes, with three sets of words — and never on the section that
+   owned it, so a reload in the middle of a verb round looked like the round
+   had gone. One description, one pair of choices, rendered both on the
+   dashboard and on the track it belongs to.
+   ============================================================ */
+const RESUMABLE = {
+  grammar: {
+    read() {
+      const s = S.session;
+      if (!s || !s.qs || s.i >= s.qs.length) return null;
+      return { what: `${s.sweep ? "diagnostic sweep" : "grammar drill"} · ${scopeLabel(s.scope)}`,
+               done: s.i, total: s.qs.length, href: "#/drill/resume" };
+    },
+    drop: clearSession
+  },
+  verbs: {
+    read() {
+      const s = S.vsession;
+      if (!s || !s.ids || s.i >= s.ids.length) return null;
+      const meta = VERB_FORMS.find(f => f.id === s.form);
+      return { what: `verb round · ${meta ? meta.label : s.form}`,
+               done: s.i, total: s.ids.length, href: "#/verbs/resume" };
+    },
+    drop: clearVerbSession
+  },
+  kanji: {
+    read() {
+      const s = S.ksession;
+      if (!s || !s.chars || s.i >= s.chars.length) return null;
+      return { what: `kanji round · ${s.level}`,
+               done: s.i, total: s.chars.length, href: "#/kanji/resume" };
+    },
+    drop: clearKanjiSession
+  }
+};
+const RESUME_KINDS = ["grammar", "verbs", "kanji"];
+
+function resumeCards(kinds) {
+  return (kinds || RESUME_KINDS).map(k => {
+    const r = RESUMABLE[k].read();
+    if (!r) return "";
+    const left = r.total - r.done;
+    return `<div class="resume">
+      <div>
+        <b>Unfinished ${esc(r.what)}</b>
+        <span>${r.done} of ${r.total} answered${r.done ? " and already scored" : ""} ·
+          ${left} question${left > 1 ? "s" : ""} left</span>
+      </div>
+      <div class="rowacts">
+        <button class="btn sm primary" data-go="${r.href}">Pick it up</button>
+        <button class="btn sm" data-drop="${k}">Discard</button>
+      </div>
+    </div>`;
+  }).join("");
+}
+
+/* "Pick it up" is a plain data-go; only discarding needs wiring. */
+function wireResume(redraw) {
+  document.querySelectorAll("[data-drop]").forEach(b =>
+    b.addEventListener("click", () => {
+      RESUMABLE[b.dataset.drop].drop();
+      (redraw || route)();
+    }));
+}
+
+/* ============================================================
+   What to study next
+
+   The dashboard reports a dozen figures and offers a dozen buttons, and
+   nothing ranked them. This picks exactly one thing and says why. An
+   unfinished round always wins; then anything untested, since a guess about
+   what is rusty is worth less than five minutes of finding out; then
+   whichever track is furthest behind, normalised so a percentage and a
+   proportion can be compared at all.
+   ============================================================ */
+function nextUp() {
+  const parked = RESUME_KINDS.map(k => RESUMABLE[k].read()).filter(Boolean)[0];
+  if (parked) return {
+    kind: "resume",
+    k: "Pick up where you left off",
+    say: `You have an unfinished ${parked.what}, ${parked.done} of ${parked.total} answered.`,
+    go: parked.href, label: "Resume"
+  };
+
+  const cur = currentLesson();
+  const ns = scopeOf(reviewScope);
+  const untested = ns.filter(n => !grammarScore(n) && drillBank([n]).length);
+
+  // the lesson you are actually on, before anything further afield
+  if (cur && !grammarScore(cur) && drillBank([cur]).length) return {
+    k: "Test the lesson you are on",
+    say: `Lesson ${cur} has never been drilled. Ten sentences will say whether it has stuck.`,
+    go: `#/drill/${cur}`, label: `Drill lesson ${cur}`
+  };
+
+  if (untested.length > 2) return {
+    k: "Find out what has gone rusty",
+    say: `${untested.length} lessons in ${scopeLabel(reviewScope)} have never been tested.
+      The sweep asks one question from each and hands back a map.`,
+    go: `#/sweep/${reviewScope}`, label: `Sweep ${untested.length} lessons`
+  };
+
+  /* Nothing is untested, so compare the tracks. Each reduces to a fraction of
+     the way there; the lowest is the one that needs the hour. */
+  const scored = ns.map(n => grammarScore(n)).filter(Boolean);
+  const words = deck(ns.filter(n => VOCAB[n]), false);
+  const learned = words.filter(c => boxOf(c.id) >= LEARNED_BOX).length;
+  const worstLesson = ns.map(n => ({ n, g: grammarScore(n) })).filter(x => x.g)
+    .sort((a, b) => a.g.pct - b.g.pct)[0];
+  const kSet = kanjiAt(kOpts().level);
+  const vAcc = verbAccuracy();
+
+  const tracks = [
+    scored.length && worstLesson && {
+      score: worstLesson.g.pct / 100,
+      k: "Shore up your weakest lesson",
+      say: `Lesson ${worstLesson.n} is scoring ${worstLesson.g.pct}%, the lowest in
+        ${scopeLabel(reviewScope)}.`,
+      go: `#/drill/${worstLesson.n}`, label: `Drill lesson ${worstLesson.n}`
+    },
+    words.length && {
+      score: learned / words.length,
+      k: "Work on the vocabulary",
+      say: `${learned} of ${words.length} words in ${scopeLabel(reviewScope)} have reached
+        box ${LEARNED_BOX}.`,
+      go: `#/cards/${reviewScope}`, label: "Mixed flashcards"
+    },
+    {
+      score: vAcc === null ? 0 : vAcc / 100,
+      k: "Work on the conjugations",
+      say: vAcc === null
+        ? `The verb drill has never been run. It is the fastest way to find out which
+           group is costing you marks.`
+        : `Verb conjugation is running at ${vAcc}%${weakTypes(3).length
+            ? `, weakest on ${typeLabel(weakTypes(3)[0].t)}` : ""}.`,
+      go: "#/verbs", label: "Verb drill"
+    },
+    kSet.length && {
+      score: kanjiKnown(kOpts().level) / kSet.length,
+      k: "Work on the kanji",
+      say: `${kanjiKnown(kOpts().level)} of ${kSet.length} ${kOpts().level} characters are
+        known. A round of ten takes a couple of minutes.`,
+      go: "#/kanji", label: "Kanji drill"
+    }
+  ].filter(Boolean).sort((a, b) => a.score - b.score);
+
+  return tracks[0] || null;
+}
+
+/* An unfinished round is already announced, in more detail and with a way to
+   throw it away, by the resume card directly below. Saying it twice would
+   just be noise. */
+function nextUpPanel() {
+  const n = nextUp();
+  if (!n || n.kind === "resume") return "";
+  return `<section class="next">
     <div>
-      <b>Unfinished ${s.sweep ? "diagnostic sweep" : "drill"} · ${esc(scopeLabel(s.scope))}</b>
-      <span>${s.i} of ${s.qs.length} answered${s.i ? " and already scored" : ""} ·
-        ${left} question${left > 1 ? "s" : ""} left</span>
+      <div class="k">${esc(n.k)}</div>
+      <p>${n.say}</p>
     </div>
-    <div class="rowacts">
-      <button class="btn sm primary" data-go="#/resume">Resume</button>
-      <button class="btn sm" id="dropSession">Discard</button>
-    </div>
-  </div>`;
+    <button class="btn primary" data-go="${n.go}">${esc(n.label)}</button>
+  </section>`;
 }
 
 /* The review panel: cumulative practice across a whole book, which is what
@@ -945,22 +1462,19 @@ function reviewPanel() {
         <div class="k">Review</div>
         <h3>${scopeLabel(reviewScope)}</h3>
       </div>
-      <div class="rscopes">
+      <div class="seg">
         ${scopes.map(([id, label]) =>
           `<button class="btn sm scope" data-scope="${id}" aria-pressed="${id === reviewScope}">${label}</button>`).join("")}
       </div>
     </div>
 
     <div class="rbody">
-      ${resumeBanner()}
-      <div class="rstats">
-        <div><span class="rv">${overall === null ? "—" : overall + "%"}</span>
-          <span class="rk">grammar, recent answers</span></div>
-        <div><span class="rv">${swept}<i>/${withDrills.length}</i></span>
-          <span class="rk">lessons tested</span></div>
-        <div><span class="rv">${learned}<i>/${words.length}</i></span>
-          <span class="rk">words at box ${LEARNED_BOX}${started ? ` · ${started} started` : ""}</span></div>
-      </div>
+      ${statGrid([
+        { val: overall === null ? "—" : overall + "%", sub: "grammar, recent answers" },
+        { val: swept, of: withDrills.length, sub: "lessons tested" },
+        { val: learned, of: words.length,
+          sub: `words at box ${LEARNED_BOX}${started ? ` · ${started} started` : ""}` }
+      ], "bare")}
 
       <p class="rlead">${untested.length === withDrills.length
         ? `Nothing here has been tested yet. The sweep asks one question from every lesson in
@@ -1016,6 +1530,7 @@ const revisedTick = () => `<span class="revised" title="Word list replaced with 
 
 function boardRows() {
   const q = query.trim().toLowerCase();
+  const cur = currentLesson();
   let rows = "", book = null;
   LESSONS.forEach(l => {
     if (q) {
@@ -1033,11 +1548,11 @@ function boardRows() {
     const v = vocabScore(l.n);
     const g = grammarScore(l.n);
     const bank = drillBank([l.n]).length;
-    rows += `<tr class="${l.current ? "current" : ""}">
+    rows += `<tr class="${l.n === cur ? "current" : ""}" data-n="${l.n}">
       <td class="bnum">L${l.n}</td>
       <td class="btitle" data-n="L${l.n}">${esc(l.title)}<small>${ruby(l.jp)}</small></td>
       <td class="bstatus"><select class="status" data-n="${l.n}" data-v="${st.overall}"
-        aria-label="Status for lesson ${l.n}">
+        aria-label="How far lesson ${l.n} has been covered in class">
         ${OVERALL.map(o => `<option value="${o.id}" ${o.id === st.overall ? "selected" : ""}>${o.label}</option>`).join("")}
       </select></td>
       <td class="mcol">${v
@@ -1053,7 +1568,29 @@ function boardRows() {
       </div></td>
     </tr>`;
   });
-  return rows || `<tr><td colspan="6" class="none" style="padding:24px 8px">No lessons match.</td></tr>`;
+  return rows || `<tr><td colspan="6">${emptyState({
+    title: "No lessons match that search.",
+    say: `Try a lesson number, a word from a title, or part of a grammar pattern.`,
+    actions: [{ id: "clearq", label: "Clear the search" }]
+  })}</td></tr>`;
+}
+
+/* The table body is replaced on its own as you type — re-rendering the whole
+   dashboard would drop focus, which on a phone closes the keyboard — so
+   anything inside it has to be wired again each time. */
+function redrawRows() {
+  document.getElementById("rows").innerHTML = boardRows();
+  wireRows();
+}
+function wireRows() {
+  wireStatusSelects();
+  const clear = document.getElementById("clearq");
+  if (clear) clear.addEventListener("click", () => {
+    query = "";
+    const q = document.getElementById("q");
+    if (q) { q.value = ""; q.focus(); }
+    redrawRows();
+  });
 }
 
 function wireStatusSelects() {
@@ -1064,37 +1601,56 @@ function wireStatusSelects() {
     }));
 }
 
-function renderDashboard() {
+/* Home answers "how am I doing and what next"; the fifty-row table answers
+   "where is lesson 31", and is a page of its own. Kept together, the table won
+   — on a phone it pushed the standing, the recommendation and any unfinished
+   round several screens down. */
+function renderHome() {
   document.getElementById("crumbs").innerHTML = "";
 
   const done = LESSONS.filter(l => ["reviewed", "confident"].includes(lessonState(l.n).overall)).length;
+  /* An earned figure leads. The dropdown beside each lesson is a note to
+     yourself about what has been taught, not a score, and it had no business
+     being the first and largest number on a page whose standfirst promises
+     that scores are earned from sessions rather than declared. */
+  const solid = LESSONS.filter(l => {
+    const g = grammarScore(l.n);
+    return g && g.pct >= 80;
+  }).length;
   const vocabLessons = LESSONS.map(l => vocabScore(l.n)).filter(Boolean);
   const wordsLearned = vocabLessons.reduce((a, v) => a + v.learned, 0);
   const wordsTotal = vocabLessons.reduce((a, v) => a + v.total, 0);
   const wordsStarted = vocabLessons.reduce((a, v) => a + v.seen, 0) - wordsLearned;
   const drilled = LESSONS.filter(l => grammarScore(l.n)).length;
-  const authoredCount = Object.keys(CONTENT).length;
 
   document.getElementById("view").innerHTML = `
-    <div class="strip">
-      <div><div class="k">Lessons covered</div><div class="val">${done}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
-        <div class="sub">marked reviewed or confident</div></div>
-      <div><div class="k">Words learned</div><div class="val">${wordsLearned}<span style="font-size:14px;color:var(--text-faint)"> / ${wordsTotal}</span></div>
-        <div class="sub">reached box ${LEARNED_BOX} of 5${wordsStarted
-          ? ` · ${wordsStarted} more started` : ""}</div></div>
-      <div><div class="k">Lessons drilled</div><div class="val">${drilled}</div>
-        <div class="sub">grammar sets completed</div></div>
-      <div><div class="k">Write-ups ready</div><div class="val">${authoredCount}<span style="font-size:14px;color:var(--text-faint)"> / ${LESSONS.length}</span></div>
-        <div class="sub">explanations, examples, drills</div></div>
-      <div><div class="k">Verb drill</div><div class="val">${verbAccuracy() === null
-        ? "—" : verbAccuracy() + "%"}</div>
-        <div class="sub">${verbSub()}</div></div>
-      <div><div class="k">Kanji known</div><div class="val">${kanjiKnown("N5")}<span style="font-size:14px;color:var(--text-faint)"> / ${kanjiAt("N5").length}</span></div>
-        <div class="sub">N5 · ${kanjiAccuracy() === null
-          ? "not started" : kanjiAccuracy() + "% recent"}</div></div>
-    </div>
+    ${statGrid([
+      { k: "Lessons solid", val: solid, of: LESSONS.length,
+        sub: "grammar scoring 80% or better" },
+      { k: "Words learned", val: wordsLearned, of: wordsTotal,
+        sub: `reached box ${LEARNED_BOX} of 5${wordsStarted ? ` · ${wordsStarted} more started` : ""}` },
+      { k: "Lessons drilled", val: drilled, sub: "grammar sets completed" },
+      { k: "Covered in class", val: done, of: LESSONS.length,
+        sub: "your own note, not a score" },
+      { k: "Verb drill", val: verbAccuracy() === null ? "—" : verbAccuracy() + "%",
+        sub: verbSub() },
+      { k: "Kanji known", val: kanjiKnown("N5"), of: kanjiAt("N5").length,
+        sub: `N5 · ${kanjiAccuracy() === null ? "not started" : kanjiAccuracy() + "% recent"}` }
+    ], "joined")}
+
+    ${nextUpPanel()}
+
+    ${resumeCards()}
 
     ${reviewPanel()}
+
+    <div class="verbcta">
+      <div>
+        <b>The lessons</b> — all ${LESSONS.length} of them, with what you know of each one's
+        vocabulary and grammar, and a way into either.
+      </div>
+      <a class="btn primary" href="#/lessons">Open the lessons</a>
+    </div>
 
     <div class="verbcta">
       <div>
@@ -1103,10 +1659,6 @@ function renderDashboard() {
       </div>
       <a class="btn primary" href="#/verbs">Open verb drill</a>
     </div>
-    ${S.vsession ? `<div class="resume"><div><b>An unfinished verb round is waiting.</b>
-      ${S.vsession.i} of ${S.vsession.ids.length} answered.</div>
-      <div class="rowacts"><a class="btn primary" href="#/verbs/resume">Pick it up</a>
-        <button class="btn" id="dropVerbs">Discard</button></div></div>` : ""}
 
     <div class="verbcta">
       <div>
@@ -1116,22 +1668,49 @@ function renderDashboard() {
       </div>
       <a class="btn primary" href="#/kanji">Open kanji</a>
     </div>
-    ${S.ksession ? `<div class="resume"><div><b>An unfinished kanji round is waiting.</b>
-      ${S.ksession.i} of ${S.ksession.chars.length} answered.</div>
-      <div class="rowacts"><a class="btn primary" href="#/kanji/resume">Pick it up</a>
-        <button class="btn" id="dropKanji">Discard</button></div></div>` : ""}
 
     <div class="toolbar">
-      <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
       <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
       <button class="btn" id="exportBtn">Export</button>
       <button class="btn" id="importBtn">Import</button>
       <input type="file" id="importFile" accept="application/json" hidden>
+    </div>`;
+
+  document.querySelectorAll("button.scope").forEach(b =>
+    b.addEventListener("click", () => { setScope(b.dataset.scope); renderHome(); }));
+  wireResume(renderHome);
+  wireFurigana();
+  wireExport();
+}
+
+function wireExport() {
+  const ex = document.getElementById("exportBtn");
+  if (!ex) return;
+  ex.addEventListener("click", exportProgress);
+  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
+  document.getElementById("importFile").addEventListener("change", importProgress);
+}
+
+function renderLessons() {
+  crumbs([["#/", "Home"], [null, "Lessons"]]);
+  /* Fifty rows is a long scroll on a phone, and the row you want is nearly
+     always the one you are on. The jump is derived from your progress, not
+     from a flag in the data. */
+  const cur = currentLesson();
+  document.getElementById("view").innerHTML = `
+    <h2 class="view">The lessons</h2>
+    <p class="viewsub">Minna no Nihongo I &amp; II. Vocabulary is earned from flashcards and
+      grammar from drills; the note beside each lesson is your own.</p>
+
+    <div class="toolbar">
+      <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
+      ${cur ? `<button class="btn" id="jump">Jump to Lesson ${cur}</button>` : ""}
+      <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
     </div>
 
     <table class="board">
       <thead><tr>
-        <th>#</th><th>Lesson</th><th>Status</th>
+        <th>#</th><th>Lesson</th><th>Covered</th>
         <th class="mcol">Vocabulary</th><th class="mcol">Grammar</th><th></th>
       </tr></thead>
       <tbody id="rows">${boardRows()}</tbody>
@@ -1139,22 +1718,15 @@ function renderDashboard() {
 
   document.getElementById("q").addEventListener("input", e => {
     query = e.target.value;
-    document.getElementById("rows").innerHTML = boardRows();
-    wireStatusSelects();
+    redrawRows();
   });
-  wireStatusSelects();
-  document.querySelectorAll("button.scope").forEach(b =>
-    b.addEventListener("click", () => { setScope(b.dataset.scope); renderDashboard(); }));
-  const drop = document.getElementById("dropSession");
-  if (drop) drop.addEventListener("click", () => { clearSession(); renderDashboard(); });
-  const dropV = document.getElementById("dropVerbs");
-  if (dropV) dropV.addEventListener("click", () => { clearVerbSession(); renderDashboard(); });
-  const dropK = document.getElementById("dropKanji");
-  if (dropK) dropK.addEventListener("click", () => { clearKanjiSession(); renderDashboard(); });
+  const jump = document.getElementById("jump");
+  if (jump) jump.addEventListener("click", () => {
+    const row = document.querySelector(`tr[data-n="${cur}"]`);
+    if (row && row.scrollIntoView) row.scrollIntoView({ block: "center" });
+  });
+  wireRows();
   wireFurigana();
-  document.getElementById("exportBtn").addEventListener("click", exportProgress);
-  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
-  document.getElementById("importFile").addEventListener("change", importProgress);
 }
 
 function verbAccuracy() {
@@ -1177,13 +1749,50 @@ function exportProgress() {
   a.download = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
   a.click(); URL.revokeObjectURL(a.href);
 }
+/* A one-line census of a saved state, so the import confirmation can say what
+   is about to be replaced and what with, rather than asking blind. */
+function describeProgress(s) {
+  const lessons = Object.keys(s.lessons || {}).filter(n => (s.lessons[n] || {}).overall !== "todo").length;
+  const cards = Object.keys(s.cards || {}).length;
+  const answers = Object.keys(s.drills || {})
+    .reduce((a, n) => a + (((s.drills[n] || {}).history || []).length), 0);
+  const kanji = Object.keys((s.kanji && s.kanji.by) || {}).length;
+  const bits = [];
+  bits.push(`${lessons} lesson${lessons === 1 ? "" : "s"} marked`);
+  bits.push(`${cards} flashcard${cards === 1 ? "" : "s"} started`);
+  bits.push(`${answers} grammar answer${answers === 1 ? "" : "s"}`);
+  bits.push(`${kanji} kanji seen`);
+  return bits.join(", ");
+}
+
 function importProgress(e) {
-  const f = e.target.files[0];
+  const input = e.target;
+  const f = input.files[0];
   if (!f) return;
   const r = new FileReader();
   r.onload = () => {
-    try { S = Object.assign(blank(), JSON.parse(r.result)); save(); route(); }
-    catch (err) { alert("That file could not be read as saved progress."); }
+    let incoming;
+    try { incoming = JSON.parse(r.result); }
+    catch (err) { incoming = null; }
+    // picking the same file twice in a row must fire change again
+    try { input.value = ""; } catch (err) {}
+    if (!incoming || typeof incoming !== "object" || Array.isArray(incoming))
+      return alert("That file could not be read as saved progress.");
+
+    /* Migrations normally run in load(). An import is precisely the case they
+       exist for — a backup can predate any schema change — so it goes through
+       the same path rather than straight into S. */
+    const next = migrate(Object.assign(blank(), incoming));
+
+    if (!confirm(
+      `Replace the progress in this browser?\n\n` +
+      `Now:      ${describeProgress(S)}\n` +
+      `The file: ${describeProgress(next)}\n\n` +
+      `This cannot be undone. Export first if you are not sure.`)) return;
+
+    S = next;
+    save();
+    route();
   };
   r.readAsText(f);
 }
@@ -1193,8 +1802,8 @@ function importProgress(e) {
    ============================================================ */
 function renderLesson(n) {
   const l = lessonById(n);
-  if (!l) return renderDashboard();
-  crumbs([["#/", "All lessons"], [null, `Lesson ${n}`]]);
+  if (!l) return notFound();          // #/lesson/99 is a bad address, not a redirect
+  crumbs([["#/lessons", "Lessons"], [null, `Lesson ${n}`]]);
 
   const pts = points(n);
   const v = VOCAB[n];
@@ -1202,7 +1811,7 @@ function renderLesson(n) {
 
   const head = `
     <h2 class="view">Lesson ${n} · ${esc(l.title)}</h2>
-    <p class="viewsub"><span class="jp" style="font-family:var(--jp)">${ruby(l.jp)}</span></p>
+    <p class="viewsub"><span class="jp">${ruby(l.jp)}</span></p>
     <div class="toolbar">
       <button class="btn primary" data-go="#/cards/${n}" ${v ? "" : "disabled"}>
         Flashcards${v ? ` · ${v.v.length} words` : ""}</button>
@@ -1232,17 +1841,30 @@ function renderLesson(n) {
     </div>`).join("");
 
   const vocab = v ? `
-    <h2 class="view" style="font-size:18px">Vocabulary</h2>
-    <p class="viewsub" style="font-size:13.5px">${v.v.length} words${v.p ? ` · ${v.p.length} proper nouns` : ""}.
+    <h2 class="view minor">Vocabulary</h2>
+    <p class="viewsub minor">${v.v.length} words${v.p ? ` · ${v.p.length} proper nouns` : ""}.
       The box number shows how far each word has climbed in the flashcard rotation.</p>
     <div class="vlist">
       ${v.v.map((e, i) => vocabRow(e, `${n}:v:${i}`)).join("")}
-      ${v.p && v.p.length ? `<div class="vhead" style="padding:8px 12px">Proper nouns</div>` +
+      ${v.p && v.p.length ? `<div class="vhead">Proper nouns</div>` +
         v.p.map((e, i) => vocabRow(e, `${n}:p:${i}`)).join("") : ""}
     </div>` : "";
 
+  /* Working through the book in order should not mean going back out to a
+     fifty-row table between every lesson. */
+  const prev = lessonById(n - 1), next = lessonById(n + 1);
+  const lnav = (prev || next) ? `
+    <nav class="lnav">
+      ${prev ? `<a class="lnav-prev" href="#/lesson/${prev.n}">
+        <span class="lk">← Lesson ${prev.n}</span>
+        <span class="lt">${esc(prev.title)}</span></a>` : ""}
+      ${next ? `<a class="lnav-next" href="#/lesson/${next.n}">
+        <span class="lk">Lesson ${next.n} →</span>
+        <span class="lt">${esc(next.title)}</span></a>` : ""}
+    </nav>` : "";
+
   document.getElementById("view").innerHTML = head + gapNote +
-    `<h2 class="view" style="font-size:18px;margin-top:26px">Grammar points</h2>` + grammar + vocab;
+    `<h2 class="view minor">Grammar points</h2>` + grammar + vocab + lnav;
   wireFurigana();
 }
 
@@ -1273,12 +1895,12 @@ const reduceMotion = () => !!(window.matchMedia &&
 
 function renderCards(scope) {
   const ns = scopeOf(scope).filter(n => VOCAB[n]);
-  if (!ns.length) return renderDashboard();
+  if (!ns.length) return notFound();   // no word list in range: a dead address
   const range = isRange(scope);
   const l = range ? null : lessonById(ns[0]);
   crumbs(range
-    ? [["#/", "All lessons"], [null, "Flashcards"]]
-    : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Flashcards"]]);
+    ? [["#/lessons", "Lessons"], [null, "Flashcards"]]
+    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Flashcards"]]);
   const total = deck(ns, false).length;
   const size = range ? 30 : 20;
   CARD = { scope, ns, dir: "jp-en", order: "weak", proper: false, size,
@@ -1289,43 +1911,53 @@ function renderCards(scope) {
     <p class="viewsub">${range
       ? `${total} words across ${ns.length} lessons.`
       : esc(l.title)}</p>
-    <div class="toolbar">
-      <span class="qnum tlabel">Direction</span>
-      <button class="btn dir" data-dir="jp-en" aria-pressed="true" aria-label="Japanese to English">
-        <span class="t-wide">Japanese → English</span><span class="t-narrow">JA → EN</span></button>
-      <button class="btn dir" data-dir="en-jp" aria-label="English to Japanese">
-        <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
-      <button class="btn dir" data-dir="mixed">Mixed</button>
-    </div>
-    <div class="toolbar">
-      <span class="qnum tlabel">Order</span>
-      ${ORDERS.map(([id, wide, narrow]) =>
-        `<button class="btn ord" data-ord="${id}" ${id === "weak" ? 'aria-pressed="true"' : ""}>
-          <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("")}
-      <span class="qnum tlabel" style="margin-left:10px">Session</span>
-      ${(range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
-        `<button class="btn size" data-size="${s}" ${s === size ? 'aria-pressed="true"' : ""}>${s || "All"}</button>`).join("")}
-      <button class="btn" id="proper" aria-pressed="false" aria-label="Include proper nouns">
-        <span class="t-wide">Include proper nouns</span><span class="t-narrow">+ Proper nouns</span></button>
-    </div>
+    ${optionsPanel([
+      { k: "Direction", seg: `
+        <button class="btn dir" data-dir="jp-en" aria-pressed="true" aria-label="Japanese to English">
+          <span class="t-wide">Japanese → English</span><span class="t-narrow">JA → EN</span></button>
+        <button class="btn dir" data-dir="en-jp" aria-pressed="false" aria-label="English to Japanese">
+          <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
+        <button class="btn dir" data-dir="mixed" aria-pressed="false">Mixed</button>` },
+      { k: "Order", seg: ORDERS.map(([id, wide, narrow]) =>
+        `<button class="btn ord" data-ord="${id}" aria-pressed="${id === "weak"}">
+          <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("") },
+      { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
+        `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
+      { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>` },
+      { start: `<button class="btn primary" id="deal">New round</button>` }
+    ])}
     <div id="stage"></div>`;
 
+  /* Settings no longer deal a new round the instant they are touched. Each
+     answer's box is banked as it is given, so the record always survives, but
+     your place in the deck does not — and losing it to a stray tap on a
+     setting halfway through a deck is a nasty surprise. Nothing happens until
+     the one primary button is pressed, and it says what it is about to do. */
   const group = (sel, apply) => document.querySelectorAll(sel).forEach(b =>
     b.addEventListener("click", () => {
       apply(b);
-      document.querySelectorAll(sel).forEach(x => x.setAttribute("aria-pressed", x === b));
-      startSession();
+      document.querySelectorAll(sel).forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+      CARD.stale = true;
+      refreshDeal();
     }));
   group(".btn.dir",  b => CARD.dir = b.dataset.dir);
   group(".btn.ord",  b => CARD.order = b.dataset.ord);
   group(".btn.size", b => CARD.size = +b.dataset.size);
-  const pb = document.getElementById("proper");
-  pb.addEventListener("click", () => {
-    CARD.proper = !CARD.proper;
-    pb.setAttribute("aria-pressed", String(CARD.proper));
-    startSession();
+  document.getElementById("proper").addEventListener("change", e => {
+    CARD.proper = e.target.checked;
+    CARD.stale = true;
+    refreshDeal();
   });
+  document.getElementById("deal").addEventListener("click", () => startSession());
   startSession();
+}
+
+/* The start control says which of the two things it will do. */
+function refreshDeal() {
+  const b = document.getElementById("deal");
+  if (!b || !CARD) return;
+  const underway = CARD.total && (CARD.pass > 1 || CARD.passDone > 0) && CARD.round.length;
+  b.textContent = CARD.stale && underway ? "Restart with these settings" : "New round";
 }
 
 /* Order decides both which cards make the cut and the sequence they arrive in. */
@@ -1364,6 +1996,7 @@ function startSession(only) {
   CARD.i = 0; CARD.shown = false; CARD.firstTry = 0;
   CARD.missed = new Set(); CARD.graded = new Set(); CARD.attempts = {};
   CARD.prev = null; CARD.animating = false;
+  CARD.stale = false;   // this round now matches the settings on screen
   drawCard();
 }
 
@@ -1441,10 +2074,40 @@ function undoCard() {
   drawCard();
 }
 
+/* Every drill screen is drawn in this shell: a counter on the left of the head,
+   the running state on the right, and the progress bar directly beneath them.
+   The four flows were written months apart and had drifted into four
+   arrangements — verbs and kanji hung the bar below the card and then dropped
+   it on the verdict, so it flickered in and out of the page. */
+function drillStage({ heading, sub, left, right, done, total, body }) {
+  return `${heading ? `<h2 class="view">${heading}</h2>` : ""}
+    ${sub ? `<p class="viewsub">${sub}</p>` : ""}
+    <div class="stage drillstage">
+      <div class="stagehead"><span>${left}</span><span>${right || ""}</span></div>
+      <div class="prog"><i style="width:${pct(done, total)}%"></i></div>
+      ${body}
+    </div>`;
+}
+
+/* "3 of 8 right" once anything has been marked. Every flow shows it in the
+   same corner, so the number never has to be hunted for. */
+function runningScore(answers, idle) {
+  return answers.length
+    ? `<b>${answers.filter(a => a.ok).length}</b> of <b>${answers.length}</b> right`
+    : (idle || "one attempt each");
+}
+
 function drawCard() {
   const stage = document.getElementById("stage");
   if (!CARD.total) {
-    stage.innerHTML = `<div class="stage"><div class="card"><p class="none">No cards in this deck.</p></div></div>`;
+    stage.innerHTML = emptyState({
+      title: "No cards in this deck.",
+      say: `Every word in range is filtered out by the settings above — widen the
+        session size, or turn the proper nouns back on.`,
+      actions: [isRange(CARD.scope)
+        ? { go: "#/", label: "Back to dashboard" }
+        : { go: `#/lesson/${CARD.ns[0]}`, label: "Back to lesson" }]
+    });
     return;
   }
   if (!CARD.round.length) return drawSessionEnd(stage);
@@ -1460,14 +2123,13 @@ function drawCard() {
     ? `<span class="rd">${esc(reading)}</span>` : ""}</div>`;
   const enAns = `<div class="answer">${esc(en)}</div>`;
 
-  stage.innerHTML = `<div class="stage">
-    <div class="stagehead">
-      <span>${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
-        <b>${CARD.passSize}</b> done · <b>${CARD.round.length}</b> left</span>
-      <span>${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b> of 5${
-        again ? ` · <span class="rep">seen again</span>` : ""}</span>
-    </div>
-    <div class="prog"><i style="width:${pct(CARD.passDone, CARD.passSize)}%"></i></div>
+  stage.innerHTML = drillStage({
+    left: `${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
+      <b>${CARD.passSize}</b> done · <b>${CARD.round.length}</b> left`,
+    right: `${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b> of 5${
+      again ? ` · <span class="rep">seen again</span>` : ""}`,
+    done: CARD.passDone, total: CARD.passSize,
+    body: `
     <div class="deck">
       <span class="swipetag tag-no">Don't know</span>
       <span class="swipetag tag-yes">Know</span>
@@ -1489,9 +2151,10 @@ function drawCard() {
       <span class="taphint">${CARD.shown
         ? "Swipe left if you don't know it, right if you do"
         : "Swipe it now if you know it, or tap to flip"}</span>
-    </div>
-  </div>`;
+    </div>`
+  });
 
+  refreshDeal();
   const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("click", fn); };
   on("reveal", revealCard);
   on("no", () => commitCard(false));
@@ -1506,31 +2169,32 @@ function drawSessionEnd(stage) {
   d.forEach(c => dist[boxOf(c.id)]++);
   const missed = CARD.missed.size;
   const repeat = CARD.pass > 1;
-  const back = isRange(CARD.scope)
-    ? `<button class="btn" data-go="#/">Back to dashboard</button>`
-    : `<button class="btn" data-go="#/lesson/${CARD.ns[0]}">Back to lesson</button>`;
-  stage.innerHTML = `<div class="stage">
-    <div class="stagehead"><span>${repeat ? `Repeat ${CARD.pass - 1} finished` : "Stack cleared"}</span>
-      <span><b>${CARD.passSize}</b> card${CARD.passSize > 1 ? "s" : ""} answered</span></div>
-    <div class="card">
-      <div class="prompt">${CARD.firstTry}<span style="color:var(--text-faint)"> / ${CARD.total}</span></div>
-      <p class="hintline">known first time${repeat
-        ? " · your score is set by the first pass" : missed
-        ? ` · ${missed} to look at again` : " · nothing missed"}</p>
-      ${repeat && missed ? `<p class="hintline">${missed} still missed on this repeat.</p>` : ""}
-      <div class="boxbar" style="width:280px">${dist.map((c, b) =>
+  const atBox = dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0);
+  const climbing = dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0);
+
+  // the deck's own heading is still on the page above, so only the panel
+  stage.innerHTML = summaryPanel({
+    right: CARD.firstTry,
+    total: CARD.total,
+    lead: `known first time · ${repeat ? `repeat ${CARD.pass - 1} finished, and your score is
+      set by the first pass` : "stack cleared"}${repeat && missed
+        ? ` · ${missed} still missed on this repeat`
+        : missed ? ` · ${missed} to look at again` : " · nothing missed"}`,
+    body: `
+      <div class="boxbar">${dist.map((c, b) =>
         c ? `<i class="b${b}" style="width:${c / d.length * 100}%"></i>` : "").join("")}</div>
-      <p class="hintline">${dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0)} of ${d.length}
-        words in this deck have reached box ${LEARNED_BOX}${dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0)
-        ? `, and ${dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0)} are on their way there` : ""}.</p>
-      <div class="grades">
-        ${missed ? `<button class="btn primary" id="redo">Run the ${missed} you missed again</button>` : ""}
-        <button class="btn${missed ? "" : " primary"}" id="again">New round</button>
-        ${back}
-      </div>
-      ${missed && !repeat ? `<p class="hintline">A repeat drills the words you missed without
-        touching the score or the boxes. Start a new round to be scored afresh.</p>` : ""}
-    </div></div>`;
+      <p class="hintline">${atBox} of ${d.length} words in this deck have reached box
+        ${LEARNED_BOX}${climbing ? `, and ${climbing} are on their way there` : ""}.</p>`,
+    actions: [
+      missed && { id: "redo", primary: true, label: `Run the ${missed} you missed again` },
+      { id: "again", primary: !missed, label: "New round" },
+      isRange(CARD.scope)
+        ? { go: "#/", label: "Back to dashboard" }
+        : { go: `#/lesson/${CARD.ns[0]}`, label: "Back to lesson" }
+    ],
+    footnote: missed && !repeat ? `A repeat drills the words you missed without touching the
+      score or the boxes. Start a new round to be scored afresh.` : ""
+  });
   document.getElementById("again").addEventListener("click", () => startSession());
   const redo = document.getElementById("redo");
   if (redo) redo.addEventListener("click", () => nextPass());
@@ -1686,11 +2350,23 @@ const DRILL_SIZE = 10;
 function renderDrill(scope, sweep) {
   const ns = scopeOf(scope).filter(n => drillBank([n]).length);
   const bank = drillBank(ns);
-  if (!bank.length) return renderDashboard();
+  if (!bank.length) return notFound();
   const range = isRange(scope);
   crumbs(range
-    ? [["#/", "All lessons"], [null, sweep ? "Diagnostic sweep" : "Mixed drill"]]
-    : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
+    ? [["#/lessons", "Lessons"], [null, sweep ? "Diagnostic sweep" : "Mixed drill"]]
+    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
+
+  /* A set parked at this very address is picked up rather than thrown away.
+     Answers are banked question by question, so dealing a fresh set over the
+     top of a half-finished one would strand the rest of it — which is what a
+     reload in the middle of a drill used to do. A focused round is left out:
+     it is a thing you opted into, so it is picked up from its own card
+     rather than by asking for an ordinary drill. */
+  const s = S.session;
+  if (s && s.qs && s.i > 0 && s.i < s.qs.length && !s.focus
+      && s.scope === scope && !!s.sweep === !!sweep)
+    return resumeDrill();
+
   newDrill(scope, ns, bank, null, sweep);
 }
 
@@ -1883,12 +2559,12 @@ function clearSession() { delete S.session; save(); }
 
 function resumeDrill() {
   const s = S.session;
-  if (!s || !s.qs || s.i >= s.qs.length) return renderDashboard();
+  if (!s || !s.qs || s.i >= s.qs.length) return goto("#/");
   const ns = scopeOf(s.scope).filter(n => drillBank([n]).length);
   const range = isRange(s.scope);
   crumbs(range
-    ? [["#/", "All lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
-    : [["#/", "All lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
+    ? [["#/lessons", "Lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
+    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
   DRILL = { scope: s.scope, ns, bank: drillBank(ns), sweep: s.sweep, focus: s.focus || null,
             qs: s.qs, i: s.i, typed: "", verdict: null, answers: s.answers };
   drawDrill();
@@ -1908,15 +2584,19 @@ function drawDrill() {
 
   // a freshly marked answer is shown before anything else, including the
   // score, so the last question of a quiz still gets its feedback
-  if (DRILL.verdict) return drawVerdict(view, heading, range,
-    `<span>${DRILL.answers.filter(a => a.ok).length} of ${DRILL.answers.length} right</span>`);
+  if (DRILL.verdict) return drawVerdict(view, heading, range, runningScore(DRILL.answers));
 
   if (i >= qs.length) {
     const correct = DRILL.answers.filter(a => a.ok).length;
-    new Set(DRILL.answers.map(a => a.q.n)).forEach(n => {
-      const d = S.drills[n];
-      if (d) d.runs = (d.runs || 0) + 1;
-    });
+    // guarded like the verb and kanji rounds: this screen must never be able
+    // to bank a second run for the same set if it is drawn twice
+    if (!DRILL.counted) {
+      DRILL.counted = true;
+      new Set(DRILL.answers.map(a => a.q.n)).forEach(n => {
+        const d = S.drills[n];
+        if (d) d.runs = (d.runs || 0) + 1;
+      });
+    }
     clearSession();
 
     const missed = DRILL.answers.filter(a => !a.ok).map(a => a.q);
@@ -1933,39 +2613,42 @@ function drawDrill() {
     const named = [...new Set(weak.flatMap(w => conceptsOf(w.n, w.pi)))];
     const focusLabel = (named.length ? named.slice(0, 3).join(" · ")
       : plain(weak.length ? weak[0].pattern : "").slice(0, 30)) || `Lesson ${DRILL.ns[0]}`;
-    view.innerHTML = `
-      <h2 class="view">${sweep ? "Sweep complete" : "Drill complete"} · ${range ? esc(scopeLabel(scope)) : `Lesson ${DRILL.ns[0]}`}</h2>
-      <p class="viewsub">${range ? "Scores have been written back to each lesson." : esc(l.title)}</p>
-      <div class="stage"><div class="results">
-        <div class="bigscore">${correct}<span style="font-size:20px;color:var(--text-faint)"> / ${qs.length}</span></div>
-        <p class="hintline">${Math.round(correct / qs.length * 100)}% · ${correct === qs.length
-          ? "Clean sweep." : `${qs.length - correct} to look at again.`}</p>
+    view.innerHTML = summaryScreen({
+      title: `${sweep ? "Sweep complete" : "Drill complete"} · ${range
+        ? esc(scopeLabel(scope)) : `Lesson ${DRILL.ns[0]}`}`,
+      sub: range ? "Scores have been written back to each lesson." : esc(l.title),
+      right: correct,
+      total: qs.length,
+      lead: `${Math.round(correct / qs.length * 100)}% · ${correct === qs.length
+        ? "Clean sweep." : `${qs.length - correct} to look at again.`}`,
+      body: `
         ${sweep ? sweepMap(DRILL.answers) : ""}
-        <table class="bd">
+        <table class="misstable">
           <thead><tr>${range ? "<th>#</th>" : ""}<th>Prompt</th><th>Model answer</th><th>Pattern</th><th></th></tr></thead>
           <tbody>${DRILL.answers.map(a => `<tr class="${a.ok ? "" : "wrong"}">
-            ${range ? `<td class="c-lesson"><a href="#/lesson/${a.q.n}">L${a.q.n}</a></td>` : ""}
-            <td class="c-en">${ruby(a.q.en)}</td>
-            <td class="c-jp j">${ruby(a.q.jp)}${a.yours
-              ? `<div class="yours" style="font-size:14px">you: ${esc(a.yours)}${a.verdict === "near"
+            ${range ? `<td data-col="key"><a href="#/lesson/${a.q.n}">L${a.q.n}</a></td>` : ""}
+            <td data-col="gloss"><b>${ruby(a.q.en)}</b></td>
+            <td data-col="answer" class="jp">${ruby(a.q.jp)}${a.yours
+              ? `<div class="yours">you: ${esc(a.yours)}${a.verdict === "near"
                   ? ` <span class="vtag">${a.off} off</span>` : ""}</div>`
-              : `<div class="yours" style="font-size:14px">skipped</div>`}</td>
-            <td class="c-pat j">${ruby(a.q.pattern)}</td>
-            <td class="c-mark">${a.ok ? "✓" : "✗"}</td></tr>`).join("")}</tbody>
+              : `<div class="yours">skipped</div>`}</td>
+            <td data-col="meta" class="jp">${ruby(a.q.pattern)}</td>
+            <td data-col="mark">${a.ok ? "✓" : "✗"}</td></tr>`).join("")}</tbody>
         </table>
         ${focusQs.length ? `<p class="hintline focusnote">Went wrong on
           ${weak.slice(0, 3).map(w => `<b>${ruby(w.pattern)}</b>`).join(" · ")}${weak.length > 3
             ? ` and ${weak.length - 3} more` : ""}. A focused round asks ${focusQs.length}
           questions you have not just seen on ${weak.length > 1 ? "those patterns" : "that pattern"},
-          from ${focusFrom}.</p>` : ""}
-        <div class="rowacts">
-          ${focusQs.length ? `<button class="btn primary" id="focus">Drill ${weak.length} weak point${weak.length > 1 ? "s" : ""}</button>` : ""}
-          <button class="btn${weak.length ? "" : " primary"}" id="againAll">${sweep ? "Sweep again" : "Another ten"}</button>
-          ${missed.length ? `<button class="btn" id="againMissed">Repeat the same ${missed.length}</button>` : ""}
-          <button class="btn" data-go="${range ? "#/" : `#/lesson/${DRILL.ns[0]}`}">
-            ${range ? "Back to dashboard" : "Back to lesson"}</button>
-        </div>
-      </div></div>`;
+          from ${focusFrom}.</p>` : ""}`,
+      actions: [
+        focusQs.length && { id: "focus", primary: true,
+          label: `Drill ${weak.length} weak point${weak.length > 1 ? "s" : ""}` },
+        missed.length && { id: "againMissed", label: `Repeat the same ${missed.length}` },
+        { id: "againAll", primary: !weak.length, label: sweep ? "Sweep again" : "Another ten" },
+        range ? { go: "#/", label: "Back to dashboard" }
+              : { go: `#/lesson/${DRILL.ns[0]}`, label: "Back to lesson" }
+      ]
+    });
     document.getElementById("againAll").addEventListener("click", () =>
       newDrill(scope, DRILL.ns, DRILL.bank, null, sweep));
     const am = document.getElementById("againMissed");
@@ -1976,18 +2659,21 @@ function drawDrill() {
     return;
   }
 
-  const score = `<span>${DRILL.answers.filter(a => a.ok).length} of ${DRILL.answers.length} right</span>`;
+  const score = runningScore(DRILL.answers);
   const q = qs[i];
-  view.innerHTML = `
-    <h2 class="view">${esc(heading)}</h2>
-    <p class="viewsub">${sweep
+  /* A sweep of all fifty lessons is a long sitting, and its whole output is
+     the lesson map. Once enough of it is answered to be worth reading, you
+     can stop and have the map for what you did. */
+  const stopEarly = sweep && DRILL.answers.length >= 5;
+  view.innerHTML = drillStage({
+    heading: esc(heading),
+    sub: sweep
       ? "One question from every lesson in range. One attempt each — the misses become your study map."
-      : "Translate into Japanese, then submit. One attempt per question; the score feeds the dashboard."}</p>
-    <div class="stage">
-      <div class="stagehead">
-        <span>Question <b>${i + 1}</b> of <b>${qs.length}</b></span>
-        ${DRILL.answers.length ? score : "<span>one attempt each</span>"}
-      </div>
+      : "Translate into Japanese, then submit. One attempt per question; the score feeds the dashboard.",
+    left: `Question <b>${i + 1}</b> of <b>${qs.length}</b>`,
+    right: score,
+    done: i, total: qs.length,
+    body: `
       <div class="qbox">
         <div class="qnum">English</div>
         <p class="qen">${ruby(q.en)}</p>
@@ -1995,10 +2681,11 @@ function drawDrill() {
         <div class="rowacts">
           <button class="btn primary" id="submit" disabled>Submit answer</button>
           <button class="btn" id="skip">Skip</button>
+          ${stopEarly ? `<button class="btn" id="stopSweep">Finish here</button>` : ""}
           <span class="keys">Ctrl+Enter to submit</span>
         </div>
-      </div>
-    </div>`;
+      </div>`
+  });
 
   const ta = document.getElementById("ans");
   const go = document.getElementById("submit");
@@ -2017,6 +2704,12 @@ function drawDrill() {
     DRILL.typed = "";
     submitAnswer(q);
   });
+  if (stopEarly) document.getElementById("stopSweep").addEventListener("click", () => {
+    // the questions not reached simply leave the set; the answers stand
+    DRILL.qs = DRILL.qs.slice(0, DRILL.i);
+    DRILL.typed = "";
+    drawDrill();
+  });
 }
 
 const VERDICTS = {
@@ -2029,18 +2722,23 @@ const VERDICTS = {
 function drawVerdict(view, heading, range, score) {
   const a = DRILL.answers[DRILL.answers.length - 1];
   const q = a.q;
-  const v = VERDICTS[a.verdict] || VERDICTS.wrong;
+  /* Overturning a verdict has to repaint the panel, not just its heading:
+     leaving the miss tint on an answer you have just marked correct says the
+     opposite of what the words above it say. */
+  const v = a.ok ? VERDICTS.correct : (VERDICTS[a.verdict] || VERDICTS.wrong);
   const done = DRILL.i >= DRILL.qs.length;
   const say = a.verdict === "near"
     ? `Only ${a.off} character${a.off > 1 ? "s" : ""} away from the model answer — check it closely, a single character is usually a particle.`
     : v.say;
 
-  view.innerHTML = `
-    <h2 class="view">${esc(heading)}</h2>
-    <p class="viewsub">Question ${DRILL.i} of ${DRILL.qs.length} · one attempt each</p>
-    <div class="stage">
-      <div class="stagehead"><span>Marked</span>${score}</div>
-      <div class="qbox verdict ${v.cls}${a.overridden ? " over" : ""}">
+  view.innerHTML = drillStage({
+    heading: esc(heading),
+    sub: "One attempt each — read the model answer before moving on.",
+    left: `Question <b>${DRILL.i}</b> of <b>${DRILL.qs.length}</b>`,
+    right: score,
+    done: DRILL.i, total: DRILL.qs.length,
+    body: `
+      <div class="qbox verdict ${v.cls}">
         <div class="vhead"><b>${a.ok ? "Correct" : v.head}</b>
           ${a.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
         <p class="qen">${ruby(q.en)}</p>
@@ -2056,8 +2754,8 @@ function drawVerdict(view, heading, range, score) {
             ? "Count as wrong" : "My answer was right"}</button>
           <span class="keys">Enter for the next question</span>
         </div>
-      </div>
-    </div>`;
+      </div>`
+  });
 
   const next = document.getElementById("next");
   next.addEventListener("click", () => { DRILL.verdict = null; drawDrill(); });
@@ -2085,9 +2783,22 @@ function wireFurigana() {
   });
 }
 
+/* The one way to move between screens. A link to the hash you are already on
+   fires no hashchange, so the view would simply never redraw; every navigation
+   goes through here so that case is always covered. */
+function goto(dest) {
+  if (location.hash === dest) route();
+  else location.hash = dest;
+}
+
 document.addEventListener("click", e => {
   const g = e.target.closest("[data-go]");
-  if (g) { location.hash = g.dataset.go; }
+  if (g) return goto(g.dataset.go);
+  /* Real anchors too — breadcrumbs, weak-lesson chips, sweep-map cells and the
+     kanji table's lesson links are all plain hrefs, and any of them can point
+     at the hash already in the bar. */
+  const a = e.target.closest('a[href^="#/"]');
+  if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); route(); }
 });
 
 document.addEventListener("keydown", e => {
@@ -2277,7 +2988,8 @@ const VERB_PROMPTS = [
   ["polite", "ます-form",        "the polite form"],
   ["dict",   "Dictionary form", "the plain form"]
 ];
-const vOpts = () => Object.assign({ ceiling: 50, prompt: "polite", count: 10 }, S.vopts || {});
+const vOpts = () => Object.assign({ ceiling: 50, prompt: "polite", count: 10, form: "te" },
+  S.vopts || {});
 function setVOpts(patch) { S.vopts = Object.assign(vOpts(), patch); save(); }
 
 const verbPool = (ceiling, form) =>
@@ -2304,11 +3016,16 @@ function pickVerbs(pool, count, types) {
 let VERB = null;
 
 function renderVerbs() {
-  crumbs([["#/", "All lessons"], [null, "Verb drill"]]);
+  crumbs([["#/", "Home"], [null, "Verb drill"]]);
   const o = vOpts();
   const view = document.getElementById("view");
   const sample = verbs().find(v => v.ms === "かきます") || verbs()[0];
   const forms = VERB_FORMS.filter(f => f.n <= o.ceiling);
+  /* The form the Start button will use. The saved choice stands as long as the
+     lesson ceiling still reaches it; otherwise the latest form it does reach,
+     which is the one you have most recently been taught. */
+  const form = forms.some(f => f.id === o.form) ? o.form
+    : (forms.length ? forms[forms.length - 1].id : null);
   const rows = forms.map(f => {
     const ex = sample && conjugate(sample, f.id);
     const pool = verbPool(o.ceiling, f.id).length;
@@ -2327,23 +3044,20 @@ function renderVerbs() {
     <p class="viewsub">Conjugation practice across the whole book. Choose how far you have got,
       then pick a form. ${verbs().length} verbs are indexed; the round always mixes all three groups.</p>
 
-    <div class="vsetup">
-      <label>Verbs taught up to
-        <select id="vceil">${LESSONS.map(l =>
-          `<option value="${l.n}"${l.n === o.ceiling ? " selected" : ""}>Lesson ${l.n}</option>`).join("")}</select>
-      </label>
-      <label>Show me
-        <select id="vprompt">${VERB_PROMPTS.map(([id, label]) =>
-          `<option value="${id}"${id === o.prompt ? " selected" : ""}>${label}</option>`).join("")}</select>
-      </label>
-      <label>Questions
-        <select id="vcount">${VERB_COUNTS.map(c =>
-          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>
-      </label>
-      <label>Readings
-        <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
-      </label>
-    </div>
+    ${resumeCards(["verbs"])}
+
+    ${optionsPanel([
+      { k: "Verbs taught up to", html: `<select id="vceil">${LESSONS.map(l =>
+          `<option value="${l.n}"${l.n === o.ceiling ? " selected" : ""}>Lesson ${l.n}</option>`).join("")}</select>` },
+      { k: "Form", html: `<select id="vform">${forms.map(f =>
+          `<option value="${f.id}"${f.id === form ? " selected" : ""}>${esc(f.label)}</option>`).join("")}</select>` },
+      { k: "Show me", html: `<select id="vprompt">${VERB_PROMPTS.map(([id, label]) =>
+          `<option value="${id}"${id === o.prompt ? " selected" : ""}>${label}</option>`).join("")}</select>` },
+      { k: "Questions", html: `<select id="vcount">${VERB_COUNTS.map(c =>
+          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` },
+      { k: "Readings", html: `<button class="btn" id="furi" aria-pressed="true">Furigana on</button>` },
+      { start: `<button class="btn primary" id="vstart"${form ? "" : " disabled"}>Start drill</button>` }
+    ])}
 
     <table class="vforms">
       <thead><tr><th>L</th><th>Form</th><th>書きます becomes</th>
@@ -2358,26 +3072,38 @@ function renderVerbs() {
   document.getElementById("vceil").addEventListener("change", e => {
     setVOpts({ ceiling: +e.target.value }); renderVerbs();
   });
+  document.getElementById("vform").addEventListener("change", e => setVOpts({ form: e.target.value }));
   document.getElementById("vprompt").addEventListener("change", e => setVOpts({ prompt: e.target.value }));
   document.getElementById("vcount").addEventListener("change", e => setVOpts({ count: +e.target.value }));
   wireFurigana();
+  wireResume(renderVerbs);
+  const start = document.getElementById("vstart");
+  if (form) start.addEventListener("click", () => startVerbs(vOpts().form || form));
+  // the table keeps its per-row shortcut, which also settles the form
   view.querySelectorAll("button.go").forEach(b =>
-    b.addEventListener("click", () => startVerbs(b.dataset.form)));
+    b.addEventListener("click", () => {
+      setVOpts({ form: b.dataset.form });
+      startVerbs(b.dataset.form);
+    }));
 }
 
+/* Shown whether or not anything has been drilled. Returning nothing at all
+   left the page a different shape before the first round than after it, and
+   an em dash reads as "not yet" just as well here as it does on the kanji
+   screen, which has always done it this way. */
 function verbStats() {
   const st = S.verbs;
-  if (!st || !st.history || !st.history.length) return "";
-  const recent = st.history.slice(-WINDOW);
+  const has = !!(st && st.history && st.history.length);
+  const recent = has ? st.history.slice(-WINDOW) : [];
   const right = recent.reduce((a, x) => a + x, 0);
-  const weak = weakTypes(3);
-  return `<div class="vstats">
-    <div><div class="k">Recent accuracy</div><div class="val">${pct(right, recent.length)}%</div>
-      <div class="sub">last ${recent.length} answers · ${st.runs || 0} rounds</div></div>
-    <div><div class="k">Weakest so far</div><div class="val" style="font-size:17px">${
-      weak.length ? esc(typeLabel(weak[0].t)) : "—"}</div>
-      <div class="sub">${weak.length ? `${weak[0].ok} of ${weak[0].n} right` : "no misses yet"}</div></div>
-  </div>`;
+  const weak = has ? weakTypes(3) : [];
+  return statGrid([
+    { k: "Recent accuracy", val: has ? pct(right, recent.length) + "%" : "—",
+      sub: has ? `last ${recent.length} answers · ${st.runs || 0} rounds` : "no rounds yet" },
+    { k: "Weakest so far", txt: true, val: weak.length ? esc(typeLabel(weak[0].t)) : "—",
+      sub: has ? (weak.length ? `${weak[0].ok} of ${weak[0].n} right` : "no misses yet")
+        : "nothing drilled yet" }
+  ]);
 }
 
 /* Types the answers say you are worst at. Only types tried enough times to
@@ -2397,14 +3123,26 @@ function recordVerb(ok, type) {
   t.n++; if (ok) t.ok++;
 }
 
+/* Deals the round, then hands over to the router. The drill has its own
+   address, so the breadcrumb back to the setup table is a real link, the
+   browser's back button behaves, and a form can be bookmarked. */
 function startVerbs(form, types) {
   const o = vOpts();
   const pool = verbPool(o.ceiling, form);
-  if (!pool.length) return renderVerbs();
+  if (!pool.length) return goto("#/verbs");
   const picked = pickVerbs(pool, o.count, types);
   VERB = { form, ceiling: o.ceiling, prompt: o.prompt, list: picked,
            i: 0, typed: "", verdict: null, answers: [], focus: types || null };
   saveVerbSession();
+  goto(verbDrillHash(form));
+}
+const verbDrillHash = form => `#/verbs/drill/${form}`;
+
+/* Reached cold — a reload, a bookmark, or the back button — there is no round
+   in hand, so one is dealt for the form named in the address. */
+function verbDrillRoute(form) {
+  if (!VERB_FORMS.some(f => f.id === form)) return notFound();
+  if (!VERB || VERB.form !== form) return startVerbs(form);
   drawVerb();
 }
 
@@ -2417,15 +3155,17 @@ function saveVerbSession() {
   save();
 }
 function clearVerbSession() { delete S.vsession; save(); }
+/* Rebuilds the parked round and then redirects onto the drill's own address,
+   so the bar reads the same during a resumed round as during a fresh one. */
 function resumeVerbs() {
   const s = S.vsession;
-  if (!s) return renderVerbs();
+  if (!s) return goto("#/verbs");
   const idx = {}; verbs().forEach(v => idx[`${v.ms}|${v.kanji}`] = v);
   const list = s.ids.map(id => idx[id]).filter(Boolean);
-  if (!list.length) { clearVerbSession(); return renderVerbs(); }
+  if (!list.length) { clearVerbSession(); return goto("#/verbs"); }
   VERB = { form: s.form, ceiling: s.ceiling, prompt: s.prompt, list,
            i: s.i, typed: "", verdict: null, answers: s.answers || [], focus: s.focus || null };
-  drawVerb();
+  goto(verbDrillHash(s.form));
 }
 
 /* `main` is plain text for grading and titles; `html` carries the furigana */
@@ -2447,16 +3187,23 @@ function drawVerb() {
   const view = document.getElementById("view");
   const meta = VERB_FORMS.find(f => f.id === VERB.form);
   const total = VERB.list.length;
-  crumbs([["#/", "All lessons"], ["#/verbs", "Verb drill"], [null, meta.label]]);
+  crumbs([["#/", "Home"], ["#/verbs", "Verb drill"], [null, meta.label]]);
 
   if (VERB.verdict) {
-    const { v, ok, typed, answer } = VERB.verdict;
+    const { v, typed, answer } = VERB.verdict;
+    const last = VERB.answers[VERB.answers.length - 1] || {};
+    const ok = !!last.ok;
     const p = verbPrompt(v, VERB.prompt);
-    view.innerHTML = `
-      <h2 class="view">${esc(meta.label)}</h2>
-      <p class="viewsub">Question ${VERB.i} of ${total}</p>
+    view.innerHTML = drillStage({
+      heading: esc(meta.label),
+      sub: "One attempt each — kana or the kanji spelling both count.",
+      left: `Question <b>${VERB.i}</b> of <b>${total}</b>`,
+      right: runningScore(VERB.answers),
+      done: VERB.i, total,
+      body: `
       <div class="verdict ${ok ? "ok" : "no"}">
-        <div class="vhead">${ok ? "Correct" : "Not quite"}</div>
+        <div class="vhead"><b>${ok ? "Correct" : "Not quite"}</b>
+          ${last.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
         <div class="vrow"><span class="vtag">prompt</span>
           <span class="jpline">${p.html}</span> <span class="vgloss">${esc(v.en)}</span></div>
         <div class="vrow"><span class="vtag">you</span><span class="jpline">${esc(typed || "—")}</span></div>
@@ -2465,11 +3212,19 @@ function drawVerb() {
             ? `<span class="vgloss">${esc(answer.kana)}</span>` : ""}</div>
           <div class="vrow"><span class="vtag">type</span>
             <span class="vgloss">${esc(typeLabel(verbType(v)))} · introduced Lesson ${v.n}</span></div>`}
-      </div>
-      <div class="rowacts">
-        <button class="btn primary" id="vnext">${VERB.i >= total ? "See results" : "Next verb"}</button>
-      </div>`;
-    document.getElementById("vnext").addEventListener("click", () => { VERB.verdict = null; drawVerb(); });
+        <div class="rowacts">
+          <button class="btn primary" id="vnext">${VERB.i >= total ? "See results" : "Next verb"}</button>
+          ${ok ? "" : `<button class="btn good" id="vflip">My answer was right</button>`}
+          <span class="keys">Enter for the next verb</span>
+        </div>
+      </div>`
+    });
+    const vn = document.getElementById("vnext");
+    // the round is a typing loop; without this the hand has to leave the keyboard
+    vn.focus();
+    vn.addEventListener("click", () => { VERB.verdict = null; drawVerb(); });
+    const vf = document.getElementById("vflip");
+    if (vf) vf.addEventListener("click", () => regradeVerb(true));
     return;
   }
 
@@ -2477,11 +3232,16 @@ function drawVerb() {
 
   const v = VERB.list[VERB.i];
   const p = verbPrompt(v, VERB.prompt);
-  view.innerHTML = `
-    <h2 class="view">${esc(meta.label)}</h2>
-    <p class="viewsub">Question ${VERB.i + 1} of ${total} · verbs to Lesson ${VERB.ceiling}
-      ${VERB.focus ? " · focused round" : ""}</p>
+  const lastOk = VERB.lastOk;
+  view.innerHTML = drillStage({
+    heading: esc(meta.label),
+    sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus ? " · focused round" : ""}`,
+    left: `Question <b>${VERB.i + 1}</b> of <b>${total}</b>`,
+    right: runningScore(VERB.answers),
+    done: VERB.i, total,
+    body: `
     <div class="vcard">
+      ${lastOk ? `<p class="tick">${vRuby(lastOk.answer)} — correct</p>` : ""}
       <div class="vask">Give the <b>${esc(meta.label)}</b></div>
       <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
       ${p.sub ? `<div class="vgloss big">${esc(p.sub)}</div>` : ""}
@@ -2492,8 +3252,8 @@ function drawVerb() {
         <button class="btn" id="vskip">Skip</button>
       </div>
       <p class="hintline">Enter to submit · kana or kanji both count</p>
-    </div>
-    <div class="prog"><i style="width:${pct(VERB.i, total)}%"></i></div>`;
+    </div>`
+  });
 
   const input = document.getElementById("vin");
   input.focus();
@@ -2501,6 +3261,24 @@ function drawVerb() {
   document.getElementById("vgo").addEventListener("click", send);
   document.getElementById("vskip").addEventListener("click", () => submitVerb(""));
   input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); send(); } });
+}
+
+/* The matcher takes the kana or the kanji spelling and nothing else, which
+   will reject a perfectly good alternative now and then. As in the grammar
+   drill, the verdict can be overturned once, on the answer just given. */
+function regradeVerb(ok) {
+  const a = VERB.answers[VERB.answers.length - 1];
+  if (!a || a.ok === ok) return;
+  const st = S.verbs;
+  if (st && st.history.length) {
+    st.history[st.history.length - 1] = ok ? 1 : 0;
+    const t = st.byType[a.type];
+    if (t) t.ok += ok ? 1 : -1;
+  }
+  a.ok = ok; a.overridden = true;
+  saveVerbSession();
+  save();
+  drawVerb();
 }
 
 function submitVerb(typed) {
@@ -2515,7 +3293,10 @@ function submitVerb(typed) {
   VERB.i++;
   VERB.verdict = { v, ok, typed: String(typed).trim(), answer };
   saveVerbSession();
-  // a right answer needs no ceremony; only a miss is worth stopping for
+  /* A right answer needs no ceremony — stopping the loop to confirm one would
+     halve the pace. It is still worth a line on the next card, so the form you
+     just produced can be read back rather than merely assumed. */
+  VERB.lastOk = ok ? { answer } : null;
   if (ok) { VERB.verdict = null; drawVerb(); } else drawVerb();
 }
 
@@ -2547,47 +3328,46 @@ function drawVerbEnd(view, meta) {
     ? ranked[0] : null;
 
   const missed = VERB.answers.filter(a => !a.ok);
-  view.innerHTML = `
-    <h2 class="view">Round complete</h2>
-    <p class="viewsub">${esc(meta.label)} · verbs to Lesson ${VERB.ceiling}</p>
-    <div class="score"><div class="big">${right}/${total}</div>
-      <div class="sub">${pct(right, total)}%${missed.length
-        ? ` · ${missed.length} to work on` : " · nothing missed"}</div></div>
+  view.innerHTML = summaryScreen({
+    title: "Round complete",
+    sub: `${esc(meta.label)} · verbs to Lesson ${VERB.ceiling}`,
+    right, total,
+    lead: `${pct(right, total)}%${missed.length
+      ? ` · ${missed.length} to work on` : " · nothing missed"}`,
+    body: `
+      ${statGrid([1, 2, 3].map(g => byGroup[g].n && {
+        k: `Group ${g}`, val: byGroup[g].ok, of: byGroup[g].n,
+        sub: `${pct(byGroup[g].ok, byGroup[g].n)}%`
+      }))}
 
-    <div class="vgroups">
-      ${[1, 2, 3].map(g => byGroup[g].n ? `<div><div class="k">Group ${g}</div>
-        <div class="val">${byGroup[g].ok}/${byGroup[g].n}</div>
-        <div class="sub">${pct(byGroup[g].ok, byGroup[g].n)}%</div></div>` : "").join("")}
-    </div>
+      ${missedTypes.length ? (() => {
+        // the endings can be named on their own only while they all sit in the
+        // group just called out; once the misses spread, each needs its group
+        const spread = new Set(missedTypes.map(groupOf)).size > 1;
+        const listed = missedTypes.slice(0, 4).map(t =>
+          `<b>${esc(spread ? typeLabel(t) : shortType(t))}</b> (${byType[t].ok}/${byType[t].n})`);
+        const more = missedTypes.length - listed.length;
+        return `<p class="hintline focusnote">${worstGroup
+          ? `<b>Group ${worstGroup}</b> is costing you most. ` : ""}A focused round draws from
+          what you missed: ${listed.join(" · ")}${more ? ` and ${more} more` : ""}.</p>`;
+      })() : ""}
 
-    ${missedTypes.length ? (() => {
-      // the endings can be named on their own only while they all sit in the
-      // group just called out; once the misses spread, each needs its group
-      const spread = new Set(missedTypes.map(groupOf)).size > 1;
-      const listed = missedTypes.slice(0, 4).map(t =>
-        `<b>${esc(spread ? typeLabel(t) : shortType(t))}</b> (${byType[t].ok}/${byType[t].n})`);
-      const more = missedTypes.length - listed.length;
-      return `<p class="hintline focusnote">${worstGroup
-        ? `<b>Group ${worstGroup}</b> is costing you most. ` : ""}A focused round draws from
-        what you missed: ${listed.join(" · ")}${more ? ` and ${more} more` : ""}.</p>`;
-    })() : ""}
-
-    ${missed.length ? `<table class="vmiss"><thead><tr>
-        <th>Verb</th><th>Meaning</th><th>You wrote</th><th>Answer</th><th>Type</th>
-      </tr></thead><tbody>${missed.map(a => `<tr>
-        <td class="m-v jpline">${vRuby({ kana: a.ms, kanji: a.kanji || null })}</td>
-        <td class="m-en">${esc(a.en)}</td>
-        <td class="m-you">${esc(a.typed || "—")}</td>
-        <td class="m-a jpline">${vRuby(a.answer)}</td>
-        <td class="m-t">${esc(typeLabel(a.type))}</td></tr>`).join("")}</tbody></table>` : ""}
-
-    <div class="rowacts">
-      ${missedTypes.length ? `<button class="btn primary" id="vfocus">Drill ${
-        missedTypes.length > 1 ? "those types" : typeLabel(missedTypes[0])}</button>` : ""}
-      <button class="btn${missedTypes.length ? "" : " primary"}" id="vagain">Another ${VERB.list.length}</button>
-      <button class="btn" data-go="#/verbs">Pick another form</button>
-      <button class="btn" data-go="#/">Back to dashboard</button>
-    </div>`;
+      ${missed.length ? `<table class="misstable allwrong"><thead><tr>
+          <th>Verb</th><th>Meaning</th><th>You wrote</th><th>Answer</th><th>Type</th>
+        </tr></thead><tbody>${missed.map(a => `<tr>
+          <td data-col="lead">${vRuby({ kana: a.ms, kanji: a.kanji || null })}</td>
+          <td data-col="gloss">${esc(a.en)}</td>
+          <td data-col="yours" class="jp">${esc(a.typed || "—")}</td>
+          <td data-col="answer" class="jp">${vRuby(a.answer)}</td>
+          <td data-col="tag">${esc(typeLabel(a.type))}</td></tr>`).join("")}</tbody></table>` : ""}`,
+    actions: [
+      missedTypes.length && { id: "vfocus", primary: true, label: `Drill ${
+        missedTypes.length > 1 ? "those types" : typeLabel(missedTypes[0])}` },
+      { id: "vagain", primary: !missedTypes.length, label: `Another ${vOpts().count}` },
+      { go: "#/verbs", label: "Back to verb forms" },
+      { go: "#/", label: "Back to dashboard" }
+    ]
+  });
 
   document.getElementById("vagain").addEventListener("click", () => startVerbs(VERB.form));
   const fx = document.getElementById("vfocus");
@@ -2604,14 +3384,17 @@ function drawVerbEnd(view, meta) {
    ============================================================ */
 const KANJI_COUNTS = [5, 10, 20, 50];
 const KANJI_KNOWN = 2;              // right this many times running to count as known
-const KANJI_DEFAULTS = { level: "N5", count: 10, from: "all" };
-const KANJI_SOURCES = [
-  ["all",     "Everything"],
-  ["unknown", "Ones I have not learned"],
-  ["missed",  "Ones I have missed before"],
-];
+const KANJI_DEFAULTS = { level: "N5", count: 10, includeKnown: false };
 
-const kOpts = () => Object.assign({}, KANJI_DEFAULTS, S.kopts || {});
+const kOpts = () => {
+  const o = Object.assign({}, KANJI_DEFAULTS, S.kopts || {});
+  /* older saves used a three-way "from" picker; fold that into the boolean */
+  if ("from" in o && !("includeKnown" in (S.kopts || {}))) {
+    o.includeKnown = o.from === "all";
+    delete o.from;
+  }
+  return o;
+};
 function setKOpts(patch) { S.kopts = Object.assign(kOpts(), patch); save(); }
 const kanjiAt = lv => KANJI.filter(k => k.lv === lv);
 const kanjiBy = c => KANJI.find(k => k.c === c);
@@ -2649,6 +3432,14 @@ function kState(c) {
   if (!e || !e.n) return "new";
   return e.streak >= KANJI_KNOWN ? "known" : "learning";
 }
+/* One-way only: you can demote a character you marked known, not promote one
+   you have not earned. Resets the streak so it drops out of the known count. */
+function unknowKanji(c) {
+  const e = kRecord(c);
+  if (!e || kState(c) !== "known") return;
+  e.streak = 0;
+  save();
+}
 const kanjiKnown = lv => kanjiAt(lv).filter(k => kState(k.c) === "known").length;
 function kanjiAccuracy() {
   const st = S.kanji;
@@ -2665,12 +3456,20 @@ function normMeaning(s) {
     .replace(/\b(a|an|the|to|be)\b/g, " ")
     .replace(/\s+/g, " ").trim();
 }
+/* What counts as knowing this character. `ok` lists the meanings one at a
+   time; `en` is the headline gloss the table, the verdict and the miss list
+   all print — often a pair, "above, up" — and being marked wrong for typing
+   back the very answer the screen just gave you is indefensible. */
+const kAccept = k => k.ok.concat(k.en);
+
 /* every meaning in the whole set, used to tell a typo from a mix-up */
 let KMEANINGS = null;
 function allMeanings() {
   if (KMEANINGS) return KMEANINGS;
   KMEANINGS = new Set();
-  KANJI.forEach(k => k.ok.forEach(m => { const n = normMeaning(m); if (n) KMEANINGS.add(n); }));
+  KANJI.forEach(k => kAccept(k).forEach(m => {
+    const n = normMeaning(m); if (n) KMEANINGS.add(n);
+  }));
   return KMEANINGS;
 }
 const singular = s => s.replace(/s$/, "");
@@ -2678,7 +3477,7 @@ const singular = s => s.replace(/s$/, "");
 function judgeKanji(typed, k) {
   const t = normMeaning(typed);
   if (!t) return false;
-  const want = k.ok.map(normMeaning).filter(Boolean);
+  const want = kAccept(k).map(normMeaning).filter(Boolean);
   if (want.includes(t) || want.some(w => singular(w) === singular(t))) return true;
   /* "three" for 木 is a mix-up with 三, not a slip of the finger, so an answer
      that belongs to some other kanji never earns the benefit of the doubt */
@@ -2693,15 +3492,9 @@ let KDRILL = null;
 
 function kanjiPool(o) {
   const all = kanjiAt(o.level);
-  if (o.from === "unknown") {
-    const left = all.filter(k => kState(k.c) !== "known");
-    return left.length ? left : all;
-  }
-  if (o.from === "missed") {
-    const missed = all.filter(k => { const e = kRecord(k.c); return e && e.ok < e.n; });
-    return missed.length ? missed : all;
-  }
-  return all;
+  if (o.includeKnown) return all;
+  const left = all.filter(k => kState(k.c) !== "known");
+  return left.length ? left : all;
 }
 
 function pickKanji(pool, count) {
@@ -2716,7 +3509,7 @@ function pickKanji(pool, count) {
 const kReadings = k => [k.on.join("、"), k.kun.join("、")].filter(Boolean).join("  /  ");
 
 function renderKanji() {
-  crumbs([["#/", "All lessons"], [null, "Kanji"]]);
+  crumbs([["#/", "Home"], [null, "Kanji"]]);
   const o = kOpts();
   const view = document.getElementById("view");
   const level = KANJI_LEVELS.find(l => l.id === o.level) || KANJI_LEVELS[0];
@@ -2724,23 +3517,42 @@ function renderKanji() {
   const lessons = kanjiLessons();
   const known = set.filter(k => kState(k.c) === "known").length;
   const learning = set.filter(k => kState(k.c) === "learning").length;
+  /* A level not loaded yet explains itself in the page. It used to say so in
+     a title attribute, which a touch screen has no way to show. */
+  const pending = KANJI_LEVELS.filter(l => !l.ready);
 
   const rows = set.map(k => {
     const st = kState(k.c);
     const rec = kRecord(k.c);
     const n = lessons[k.c];
+    /* The readings and the example lose their columns on a phone — six
+       columns of Japanese will not fit — but they are not decoration, and
+       with the drill only showing them after a wrong answer there was no way
+       to study a character's readings on a phone at all. So each row opens. */
     return `<tr class="k-${st}">
       <td class="k-c">${esc(k.c)}</td>
-      <td class="k-m"><b>${esc(k.en)}</b></td>
+      <td class="k-m"><b>${esc(k.en)}</b>
+        <button class="btn small k-more" data-c="${esc(k.c)}" aria-expanded="false"
+          aria-controls="kd-${esc(k.c)}">readings</button></td>
       <td class="k-on">${esc(k.on.join("、") || "—")}</td>
       <td class="k-kun">${esc(k.kun.join("、") || "—")}</td>
       <td class="k-ex"><span class="j">${esc(k.ex.w)}</span>
         <span class="k-exr">${esc(k.ex.r)}</span>
         <span class="k-exe">${esc(k.ex.en)}</span></td>
       <td class="k-l">${n ? `<a href="#/lesson/${n}">L${n}</a>` : "—"}</td>
-      <td class="k-s">${st === "known" ? `<span class="k-tick">✓</span>`
+      <td class="k-s">${st === "known"
+        ? `<button class="btn small k-unmark" data-c="${esc(k.c)}"
+            title="Mark as not known">↩</button>`
         : st === "learning" ? `<span class="k-part">${rec.ok}/${rec.n}</span>`
         : `<span class="k-none">—</span>`}</td>
+    </tr>
+    <tr class="k-detail" id="kd-${esc(k.c)}">
+      <td colspan="7">
+        <span class="kd-r"><b>on</b><span>${esc(k.on.join("、") || "—")}</span></span>
+        <span class="kd-r"><b>kun</b><span>${esc(k.kun.join("、") || "—")}</span></span>
+        <span class="kd-x"><b>as in</b><span class="j">${esc(k.ex.w)}</span>
+          <span>${esc(k.ex.r)}</span> · ${esc(k.ex.en)}</span>
+      </td>
     </tr>`;
   }).join("");
 
@@ -2749,40 +3561,34 @@ function renderKanji() {
     <p class="viewsub">Recognition practice on its own track. You are shown the character and
       type what it means; anything reasonable counts, and a typo will not fail you.</p>
 
-    <div class="klevels">
+    ${resumeCards(["kanji"])}
+
+    <div class="seg">
       ${KANJI_LEVELS.map(l => l.ready
-        ? `<button class="klev${l.id === level.id ? " on" : ""}" data-lv="${l.id}">${esc(l.label)}
+        ? `<button class="btn lev" data-lv="${l.id}" aria-pressed="${l.id === level.id}">${esc(l.label)}
              <span>${kanjiAt(l.id).length} kanji</span></button>`
-        : `<button class="klev off" disabled title="${esc(l.note)}">${esc(l.label)}
+        : `<button class="btn lev" disabled aria-pressed="false">${esc(l.label)}
              <span>later</span></button>`).join("")}
     </div>
     <p class="hintline">${esc(level.note)}</p>
+    ${pending.length ? `<p class="hintline">${pending.map(l =>
+      `<b>${esc(l.label)}</b> — ${esc(l.note)}`).join(" ")}</p>` : ""}
 
-    <div class="kstrip">
-      <div><div class="k">Known</div><div class="val">${known}<span class="of"> / ${set.length}</span></div>
-        <div class="sub">right ${KANJI_KNOWN} times running</div></div>
-      <div><div class="k">Still shaky</div><div class="val">${learning}</div>
-        <div class="sub">seen but not secure</div></div>
-      <div><div class="k">Untouched</div><div class="val">${set.length - known - learning}</div>
-        <div class="sub">not yet drilled</div></div>
-      <div><div class="k">Recent accuracy</div><div class="val">${
-        kanjiAccuracy() === null ? "—" : kanjiAccuracy() + "%"}</div>
-        <div class="sub">${(S.kanji && S.kanji.runs) || 0} rounds</div></div>
-    </div>
+    ${statGrid([
+      { k: "Known", val: known, of: set.length, sub: `right ${KANJI_KNOWN} times running` },
+      { k: "Still shaky", val: learning, sub: "seen but not secure" },
+      { k: "Untouched", val: set.length - known - learning, sub: "not yet drilled" },
+      { k: "Recent accuracy", val: kanjiAccuracy() === null ? "—" : kanjiAccuracy() + "%",
+        sub: `${(S.kanji && S.kanji.runs) || 0} rounds` }
+    ])}
 
-    <div class="vsetup">
-      <label>Draw from
-        <select id="kfrom">${KANJI_SOURCES.map(([id, label]) =>
-          `<option value="${id}"${id === o.from ? " selected" : ""}>${label}</option>`).join("")}</select>
-      </label>
-      <label>Questions
-        <select id="kcount">${KANJI_COUNTS.map(c =>
-          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>
-      </label>
-      <label>&nbsp;
-        <button class="btn primary" id="kstart">Start drill</button>
-      </label>
-    </div>
+    ${optionsPanel([
+      { k: "Questions", html: `<select id="kcount">${KANJI_COUNTS.map(c =>
+          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` },
+      { check: `<label><input type="checkbox" id="kinc"${o.includeKnown ? " checked" : ""}>
+          Include known kanji</label>` },
+      { start: `<button class="btn primary" id="kstart">Start drill</button>` }
+    ])}
 
     <table class="ktable">
       <thead><tr>
@@ -2794,20 +3600,37 @@ function renderKanji() {
     <p class="hintline">Lesson shows where the character first turns up in your
       vocabulary lists, so you can see which ones the book has already given you.</p>`;
 
-  view.querySelectorAll("button.klev[data-lv]").forEach(b =>
+  view.querySelectorAll("button.lev[data-lv]").forEach(b =>
     b.addEventListener("click", () => { setKOpts({ level: b.dataset.lv }); renderKanji(); }));
-  document.getElementById("kfrom").addEventListener("change", e => setKOpts({ from: e.target.value }));
   document.getElementById("kcount").addEventListener("change", e => setKOpts({ count: +e.target.value }));
+  document.getElementById("kinc").addEventListener("change", e => setKOpts({ includeKnown: e.target.checked }));
+  view.querySelectorAll("button.k-unmark").forEach(b =>
+    b.addEventListener("click", () => { unknowKanji(b.dataset.c); renderKanji(); }));
+  view.querySelectorAll("button.k-more").forEach(b =>
+    b.addEventListener("click", () => {
+      const row = document.getElementById("kd-" + b.dataset.c);
+      if (!row) return;
+      const open = row.classList.toggle("open");
+      b.setAttribute("aria-expanded", String(open));
+      b.textContent = open ? "hide" : "readings";
+    }));
+  wireResume(renderKanji);
   document.getElementById("kstart").addEventListener("click", () => startKanji());
 }
 
+/* As with the verbs: deal the round, then let the router draw it, so the
+   drill has an address of its own and the way back is a working link. */
 function startKanji(only) {
   const o = kOpts();
   const pool = only && only.length ? only.map(kanjiBy).filter(Boolean) : kanjiPool(o);
-  if (!pool.length) return renderKanji();
+  if (!pool.length) return goto("#/kanji");
   const list = only && only.length ? pickKanji(pool, pool.length) : pickKanji(pool, o.count);
   KDRILL = { level: o.level, list, i: 0, verdict: null, answers: [], focus: !!(only && only.length) };
   saveKanjiSession();
+  goto("#/kanji/drill");
+}
+function kanjiDrillRoute() {
+  if (!KDRILL) return startKanji();
   drawKanji();
 }
 
@@ -2821,26 +3644,34 @@ function saveKanjiSession() {
 function clearKanjiSession() { delete S.ksession; save(); }
 function resumeKanji() {
   const s = S.ksession;
-  if (!s) return renderKanji();
+  if (!s) return goto("#/kanji");
   const list = s.chars.map(kanjiBy).filter(Boolean);
-  if (!list.length) { clearKanjiSession(); return renderKanji(); }
+  if (!list.length) { clearKanjiSession(); return goto("#/kanji"); }
   KDRILL = { level: s.level, list, i: s.i, verdict: null,
              answers: s.answers || [], focus: s.focus || false };
-  drawKanji();
+  goto("#/kanji/drill");
 }
 
 function drawKanji() {
   const view = document.getElementById("view");
   const total = KDRILL.list.length;
-  crumbs([["#/", "All lessons"], ["#/kanji", "Kanji"], [null, "Drill"]]);
+  crumbs([["#/", "Home"], ["#/kanji", "Kanji"], [null, "Drill"]]);
 
   if (KDRILL.verdict) {
     const { k, typed } = KDRILL.verdict;
+    const last = KDRILL.answers[KDRILL.answers.length - 1] || {};
+    const ok = !!last.ok;
     const n = kanjiLessons()[k.c];
-    view.innerHTML = `
-      <h2 class="view">Not quite</h2>
-      <p class="viewsub">Question ${KDRILL.i} of ${total}</p>
-      <div class="verdict no">
+    view.innerHTML = drillStage({
+      heading: "Kanji",
+      sub: `${esc(KDRILL.level)} · one attempt each`,
+      left: `Question <b>${KDRILL.i}</b> of <b>${total}</b>`,
+      right: runningScore(KDRILL.answers),
+      done: KDRILL.i, total,
+      body: `
+      <div class="verdict ${ok ? "ok" : "no"}">
+        <div class="vhead"><b>${ok ? "Correct" : "Not quite"}</b>
+          ${last.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
         <div class="kbig">${esc(k.c)}</div>
         <div class="vrow"><span class="vtag">means</span>
           <span class="kmean">${esc(k.en)}</span></div>
@@ -2855,24 +3686,35 @@ function drawKanji() {
           <span class="vgloss">${esc(k.ok.slice(0, 6).join(", "))}</span></div>` : ""}
         ${n ? `<div class="vrow"><span class="vtag">book</span>
           <span class="vgloss">first appears in Lesson ${n}</span></div>` : ""}
-      </div>
-      <div class="rowacts">
-        <button class="btn primary" id="knext">${KDRILL.i >= total ? "See results" : "Next kanji"}</button>
-      </div>`;
+        <div class="rowacts">
+          <button class="btn primary" id="knext">${KDRILL.i >= total ? "See results" : "Next kanji"}</button>
+          ${ok ? "" : `<button class="btn good" id="kflip">My answer was right</button>`}
+          <span class="keys">Enter for the next kanji</span>
+        </div>
+      </div>`
+    });
     const nx = document.getElementById("knext");
     nx.focus();
     nx.addEventListener("click", () => { KDRILL.verdict = null; drawKanji(); });
+    const kf = document.getElementById("kflip");
+    if (kf) kf.addEventListener("click", () => regradeKanji(true));
     return;
   }
 
   if (KDRILL.i >= total) return drawKanjiEnd(view);
 
   const k = KDRILL.list[KDRILL.i];
-  view.innerHTML = `
-    <h2 class="view">What does this mean?</h2>
-    <p class="viewsub">Question ${KDRILL.i + 1} of ${total} · ${esc(KDRILL.level)}${
-      KDRILL.focus ? " · focused round" : ""}</p>
+  const lastOk = KDRILL.lastOk;
+  view.innerHTML = drillStage({
+    heading: "What does this mean?",
+    sub: `${esc(KDRILL.level)}${KDRILL.focus ? " · focused round" : ""}`,
+    left: `Question <b>${KDRILL.i + 1}</b> of <b>${total}</b>`,
+    right: runningScore(KDRILL.answers),
+    done: KDRILL.i, total,
+    body: `
     <div class="vcard">
+      ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
+        ${esc(lastOk.en)} — correct</p>` : ""}
       <div class="kbig">${esc(k.c)}</div>
       <input type="text" id="kin" autocomplete="off" autocapitalize="off" autocorrect="off"
         spellcheck="false" placeholder="Meaning in English">
@@ -2881,8 +3723,8 @@ function drawKanji() {
         <button class="btn" id="kskip">Skip</button>
       </div>
       <p class="hintline">Enter to submit · one meaning is enough</p>
-    </div>
-    <div class="prog"><i style="width:${pct(KDRILL.i, total)}%"></i></div>`;
+    </div>`
+  });
 
   const input = document.getElementById("kin");
   input.focus();
@@ -2896,12 +3738,39 @@ function submitKanji(typed) {
   const k = KDRILL.list[KDRILL.i];
   if (!k) return;
   const ok = judgeKanji(typed, k);
+  // a miss zeroes the streak, so its old value is kept in case the verdict
+  // is overturned and the streak has to be put back
+  const before = kRecord(k.c);
+  const wasStreak = before ? before.streak : 0;
   recordKanji(ok, k.c);
-  KDRILL.answers.push({ c: k.c, en: k.en, ok, typed: String(typed).trim() });
+  KDRILL.answers.push({ c: k.c, en: k.en, ok, typed: String(typed).trim(), wasStreak });
   KDRILL.i++;
   saveKanjiSession();
-  // right answers need no ceremony; only a miss is worth stopping for
+  // right answers need no ceremony; only a miss is worth stopping for, but the
+  // character just cleared is still worth a line on the next card
   KDRILL.verdict = ok ? null : { k, typed: String(typed).trim() };
+  KDRILL.lastOk = ok ? { c: k.c, en: k.en } : null;
+  drawKanji();
+}
+
+/* The meaning matcher forgives typos but refuses an answer that belongs to
+   some other character, which will occasionally reject a fair synonym. The
+   verdict can be overturned once, on the answer just given. */
+function regradeKanji(ok) {
+  const a = KDRILL.answers[KDRILL.answers.length - 1];
+  if (!a || a.ok === ok) return;
+  const st = S.kanji;
+  if (st && st.history.length) {
+    st.history[st.history.length - 1] = ok ? 1 : 0;
+    const e = st.by[a.c];
+    if (e) {
+      e.ok += ok ? 1 : -1;
+      e.streak = ok ? (a.wasStreak || 0) + 1 : 0;
+    }
+  }
+  a.ok = ok; a.overridden = true;
+  saveKanjiSession();
+  save();
   drawKanji();
 }
 
@@ -2916,50 +3785,121 @@ function drawKanjiEnd(view) {
   const set = kanjiAt(KDRILL.level);
   const lessons = kanjiLessons();
 
-  view.innerHTML = `
-    <h2 class="view">Round complete</h2>
-    <p class="viewsub">${esc(KDRILL.level)} kanji${KDRILL.focus ? " · focused round" : ""}</p>
-    <div class="score"><div class="big">${right}/${total}</div>
-      <div class="sub">${pct(right, total)}%${missed.length
-        ? ` · ${missed.length} to work on` : " · nothing missed"}</div></div>
+  view.innerHTML = summaryScreen({
+    title: "Round complete",
+    sub: `${esc(KDRILL.level)} kanji${KDRILL.focus ? " · focused round" : ""}`,
+    right, total,
+    lead: `${pct(right, total)}%${missed.length
+      ? ` · ${missed.length} to work on` : " · nothing missed"}`,
+    body: `
+      ${statGrid([
+        { k: "Known overall", val: kanjiKnown(KDRILL.level), of: set.length,
+          sub: "across every round" },
+        { k: "Recent accuracy", val: kanjiAccuracy() + "%",
+          sub: `last ${Math.min(WINDOW, st.history.length)} answers` }
+      ])}
 
-    <div class="kstrip">
-      <div><div class="k">Known overall</div>
-        <div class="val">${kanjiKnown(KDRILL.level)}<span class="of"> / ${set.length}</span></div>
-        <div class="sub">across every round</div></div>
-      <div><div class="k">Recent accuracy</div><div class="val">${kanjiAccuracy()}%</div>
-        <div class="sub">last ${Math.min(WINDOW, st.history.length)} answers</div></div>
-    </div>
-
-    ${missed.length ? `<table class="kmiss"><thead><tr>
-        <th>Kanji</th><th>Means</th><th>You wrote</th><th>Readings</th><th>As in</th><th>L</th>
-      </tr></thead><tbody>${missed.map(a => {
-        const k = kanjiBy(a.c);
-        return `<tr>
-          <td class="m-k">${esc(a.c)}</td>
-          <td class="m-en"><b>${esc(k.en)}</b></td>
-          <td class="m-you">${esc(a.typed || "—")}</td>
-          <td class="m-r jpline">${esc(kReadings(k))}</td>
-          <td class="m-x jpline">${esc(k.ex.w)} <span class="vgloss">${esc(k.ex.en)}</span></td>
-          <td class="m-l">${lessons[a.c] ? "L" + lessons[a.c] : "—"}</td></tr>`;
-      }).join("")}</tbody></table>` : ""}
-
-    <div class="rowacts">
-      ${missed.length ? `<button class="btn primary" id="kfocus">Drill those ${
-        missed.length} again</button>` : ""}
-      <button class="btn${missed.length ? "" : " primary"}" id="kagain">Another ${KDRILL.list.length}</button>
-      <button class="btn" data-go="#/kanji">Back to the table</button>
-      <button class="btn" data-go="#/">Back to dashboard</button>
-    </div>`;
+      ${missed.length ? `<table class="misstable allwrong big-lead"><thead><tr>
+          <th>Kanji</th><th>Means</th><th>You wrote</th><th>Readings</th><th>As in</th><th>L</th>
+        </tr></thead><tbody>${missed.map(a => {
+          const k = kanjiBy(a.c);
+          return `<tr>
+            <td data-col="lead">${esc(a.c)}</td>
+            <td data-col="gloss"><b>${esc(k.en)}</b></td>
+            <td data-col="yours">${esc(a.typed || "—")}</td>
+            <td data-col="meta" class="jpline">${esc(kReadings(k))}</td>
+            <td data-col="drop" class="jpline">${esc(k.ex.w)}
+              <span class="vgloss">${esc(k.ex.en)}</span></td>
+            <td data-col="tag">${lessons[a.c] ? "L" + lessons[a.c] : "—"}</td></tr>`;
+        }).join("")}</tbody></table>` : ""}`,
+    actions: [
+      missed.length && { id: "kfocus", primary: true, label: `Drill those ${missed.length} again` },
+      { id: "kagain", primary: !missed.length, label: `Another ${kOpts().count}` },
+      { go: "#/kanji", label: "Back to kanji table" },
+      { go: "#/", label: "Back to dashboard" }
+    ]
+  });
 
   document.getElementById("kagain").addEventListener("click", () => startKanji());
   const fx = document.getElementById("kfocus");
   if (fx) fx.addEventListener("click", () => startKanji(missed.map(a => a.c)));
 }
 
+/* ============================================================
+   Routes
+
+     #/                      dashboard
+     #/lesson/<n>            one lesson
+     #/cards/<scope>         flashcards
+     #/drill/<scope>         grammar drill
+     #/sweep/<scope>         diagnostic sweep
+     #/drill/resume          pick up a parked grammar set (#/resume still works)
+     #/verbs                 verb setup
+     #/verbs/drill/<form>    a verb round
+     #/verbs/resume          redirects onto the round it rebuilds
+     #/kanji                 kanji table
+     #/kanji/drill           a kanji round
+     #/kanji/resume          redirects onto the round it rebuilds
+
+   Every drill has an address of its own. That is what makes the breadcrumb
+   back to its setup screen a working link rather than a link to the page you
+   are already on, and it lets the back button and a reload behave.
+   ============================================================ */
+const SCOPE_RE = /^#\/(lesson|cards|drill|sweep)\/(all|\d+(?:-\d+)?)$/;
+const VDRILL_RE = /^#\/verbs\/drill\/([a-z_]+)$/;
+
+/* Which face the masthead wears. Bail-outs redirect rather than drawing the
+   dashboard in place, so this is always the view actually on screen. */
+function viewName(h, m) {
+  if (h === "#/resume" || h === "#/drill/resume") return "drill";
+  if (/^#\/verbs/.test(h)) return "verbs";
+  if (/^#\/kanji/.test(h)) return "kanji";
+  if (h === "#/lessons") return "lessons";
+  return m ? m[1] : "dash";
+}
+
+/* Which track a hash belongs to, so the nav can mark it. Anything hanging off a
+   lesson — the lesson itself, its cards, its drill — belongs to Lessons; only
+   the dashboard marks Home. */
+function navSection(h) {
+  if (/^#\/verbs/.test(h)) return "#/verbs";
+  if (/^#\/kanji/.test(h)) return "#/kanji";
+  if (h === "#/" || h === "#" || h === "") return "#/";
+  if (/^#\/(lessons|lesson|cards|drill|sweep|resume)/.test(h)) return "#/lessons";
+  return null;
+}
+function paintNav(section) {
+  const nav = document.getElementById("topnav");
+  if (!nav) return;
+  nav.querySelectorAll("a").forEach(a => {
+    if (a.getAttribute("href") === section) a.setAttribute("aria-current", "page");
+    else a.removeAttribute("aria-current");
+  });
+}
+
+function notFound() {
+  crumbs([["#/", "Home"], [null, "Not found"]]);
+  document.body.dataset.view = "dash";
+  paintNav(null);   // a bad address belongs to no track
+  document.getElementById("view").innerHTML = `
+    <h2 class="view">Nothing at that address</h2>
+    <p class="viewsub">The link <code>${esc(location.hash || "#/")}</code> does not name a screen
+      in this guide. It may be an old bookmark from before a section was renamed.</p>
+    ${emptyState({
+      title: "Try one of these instead.",
+      actions: [
+        { primary: true, go: "#/", label: "Home" },
+        { go: "#/lessons", label: "The lessons" },
+        { go: "#/verbs", label: "Verb drill" },
+        { go: "#/kanji", label: "Kanji" }
+      ]
+    })}`;
+}
+
 function route() {
   const h = location.hash || "#/";
-  const m = h.match(/^#\/(lesson|cards|drill|sweep)\/(all|\d+(?:-\d+)?)$/);
+  const m = h.match(SCOPE_RE);
+  const vd = h.match(VDRILL_RE);
   CARD = m && m[1] === "cards" ? CARD : null;
   if (!/^#\/verbs/.test(h)) VERB = null;
   if (!/^#\/kanji/.test(h)) KDRILL = null;
@@ -2967,14 +3907,19 @@ function route() {
   // the masthead is an introduction, not something to re-read every session;
   // on a phone it costs a third of the screen, so views other than the
   // dashboard collapse it (see the small-screen rules)
-  document.body.dataset.view = h === "#/resume" ? "drill"
-    : /^#\/verbs/.test(h) ? "verbs" : /^#\/kanji/.test(h) ? "kanji" : m ? m[1] : "dash";
-  if (h === "#/resume") return resumeDrill();
+  document.body.dataset.view = viewName(h, m);
+  paintNav(navSection(h));
+
+  if (h === "#/" || h === "#" || h === "") return renderHome();
+  if (h === "#/lessons") return renderLessons();
+  if (h === "#/resume" || h === "#/drill/resume") return resumeDrill();
   if (h === "#/verbs") { VERB = null; return renderVerbs(); }
   if (h === "#/verbs/resume") return resumeVerbs();
+  if (vd) return verbDrillRoute(vd[1]);
   if (h === "#/kanji") { KDRILL = null; return renderKanji(); }
   if (h === "#/kanji/resume") return resumeKanji();
-  if (!m) return renderDashboard();
+  if (h === "#/kanji/drill") return kanjiDrillRoute();
+  if (!m) return notFound();
   const [, kind, scope] = m;
   if (kind === "lesson") return renderLesson(+scope);
   if (kind === "cards") return renderCards(scope);

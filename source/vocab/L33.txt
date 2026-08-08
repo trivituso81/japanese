@@ -1,55 +1,34 @@
 VOCAB
 にげます II|逃げます|run away
-さわぎます I|騒ぎます|make a noise
-あきらめます II||give up
+さわぎます I|騒ぎます|make noise
+あきらめます II|諦めます|give up
 なげます II|投げます|throw
-まもります I|守ります|keep, follow, obey
-あげます II|上げます|raise, lift up
-さげます II|下げます|lower, pull down
-つたえます II|伝えます|convey (a message)
-ちゅういします III ［くるまに ～］|注意します ［車に ～］|be careful [of the cars]
-はずします I ［せきを ～］|外します ［席を ～］|be away [from one's desk]
-だめ[な]||no good, not permitted, impossible
+まもります I|守ります|protect
+はじめます II|始めます|start
+しゅっせきします III|出席します|attend
+つたえます II|伝えます|inform
+ちゅういします III|注意します|be careful
+はずします I|外します|leave one's seat
+もどります I|戻ります|return
+あります I||there is
+リサイクルします III||recycle
+だめな||no good, not allowed
+おなじ|同じ|same
+けいさつ|警察|police
 せき|席|seat
-ファイト||fight
-マーク||mark
+マーク||mark, sign, symbol
 ボール||ball
-せんたくき|洗濯機|washing machine
-～き|～機|～ machine
-きそく|規則|regulation, rule
-しようきんし|使用禁止|Do not use.
-たちいりきんし|立入禁止|Keep out.
+しめきり|締め切り|deadline
+きそく|規則|rule
+きけん|危険|danger
+しようきんし|使用禁止|do not use
+たちいりきんし|立入禁止|no entry
+じょこう|徐行|slow down
 いりぐち|入口|entrance
 でぐち|出口|exit
 ひじょうぐち|非常口|emergency exit
-むりょう|無料|free of charge
-ほんじつきゅうぎょう|本日休業|closed today
-えいぎょうちゅう|営業中|open for business
-しようちゅう|使用中|in use
-～ちゅう|～中|～ ing
-どういう ～||what kind of ～
-もう||(not) any longer (used with negatives)
-あと ～||～ left
-ちゅうしゃいはん|駐車違反|parking violation
-そりゃあ||well
-～いない|～以内|within ～
-けいさつ|警察|police station
-ばっきん|罰金|fine
-でんぽう|電報|telegram
-ひとびと|人々|people
-きゅうよう|急用|urgent business
-うちます I ［でんぽうを ～］|打ちます ［電報を ～］|send [a telegram]
-でんぽうだい|電報代|telegram charge
-できるだけ||as much as possible
-みじかく|短く|shortly, briefly
-また||and
-たとえば|例えば|for example
-キトク|危篤|in a critical condition
-おもい びょうき|重い 病気|serious illness
-あす|明日|tomorrow
-るす|留守|absence
-るすばん|留守番|looking after a house during the owner's absence
-[お]いわい|[お]祝い|celebration
-なくなります I|亡くなります|pass away, die
-かなしみ|悲しみ|sorrow, sadness
-りようします III|利用します|use
+むりょう|無料|free (of charge)
+わりびき|割引|discount
+のみほうだい|飲み放題|all-you-can-drink
+しようちゅう|使用中|in use, occupied
+ぼしゅうちゅう|募集中|now hiring

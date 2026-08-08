@@ -1,53 +1,28 @@
 VOCAB
-みがきます I ［はを ～］|磨きます ［歯を ～］|brush [one's teeth], polish
+みがきます I|磨きます|brush
 くみたてます II|組み立てます|assemble
-おります I|折ります|bend, fold, break, snap
-きが つきます I ［わすれものに ～］|気が つきます ［忘れ物に ～］|notice, become aware of [things left behind]
-つけます II ［しょうゆを ～］||put [in soy sauce]
-みつかります I ［かぎが ～］|見つかります|[a key] be found
-します III ［ネクタイを ～］||put on, wear [a tie]
+おります I|折ります|fold
+きがつきます I|気がつきます|notice
+つけます II||dip
 しつもんします III|質問します|ask a question
-ほそい|細い|thin (of small diameter)
-ふとい|太い|thick (of large diameter)
-ぼんおどり|盆踊り|Bon Festival dance
+みつかります I|見つかります|be found
+さします I||put up (an umbrella)
 スポーツクラブ||sports club
-かぐ|家具|furniture
-キー||key
-シートベルト||seat belt
-せつめいしょ|説明書|explanatory pamphlet, instruction book
-ず|図|figure, drawing
+おしろ|お城|castle
+せつめいしょ|説明書|instruction manual
+ず|図|diagram
 せん|線|line
-やじるし|矢印|arrow (sign)
-くろ|黒|black (noun)
-しろ|白|white (noun)
-あか|赤|red (noun)
-あお|青|blue (noun)
-こん|紺|navy blue, dark blue (noun)
-きいろ|黄色|yellow (noun)
-ちゃいろ|茶色|brown (noun)
-しょうゆ||soya, soy sauce
-ソース||sauce, Worcestershire sauce
-～か ～||～ or ～
-ゆうべ||last night
-さっき||a short while ago
-さどう|茶道|tea ceremony
-おちゃを たてます II|お茶を たてます|make green tea
-さきに|先に|first (when doing something before something else)
-のせます II|載せます|place on, load onto
-これで いいですか。||Is this all right?
-にがい|苦い|bitter
-おやこどんぶり|親子どんぶり|a bowl of cooked rice with chicken and egg
-ざいりょう|材料|material, ingredient
-～ぶん|～分|portion for ～ (used for indicating quantity)
-とりにく|鳥肉|chicken
-～グラム||～ gram
-～こ|～個|(counter for small objects)
-たまねぎ||onion
-よんぶんの いち|4分の1（1/4）|one fourth
-ちょうみりょう|調味料|seasoning, flavoring
-なべ||pan, pot
-ひ|火|fire, heating
-ひに かけます II|火に かけます|put on the stove
-にます II|煮ます|cook, boil
-にえます II|煮えます|be cooked, be boiled
-どんぶり||ceramic bowl
+やじるし|矢印|arrow
+くろ|黒|black
+しろ|白|white
+あか|赤|red
+あお|青|blue
+こん|紺|navy / purple
+きいろ|黄色|yellow
+ちゃいろ|茶色|brown
+しょうゆ||soy sauce
+ソース||sauce
+おきゃくさん|お客さん|customer
+～か、～||either ~ or ~
+ゆうべ|昨夜|last night
+さっき||a little while ago, just now
