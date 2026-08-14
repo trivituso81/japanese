@@ -4,6 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
+<!-- same-origin so Google Translate TTS is not sent a github.io Referer
+     (that endpoint 404s any non-Google referrer). -->
+<meta name="referrer" content="same-origin">
 <title>Japanese Study Guide · Minna no Nihongo I &amp; II</title>
 <style>
   /* ============================================================
@@ -1107,44 +1110,38 @@ function speakViaWebSpeech(text) {
   return true;
 }
 
+let speakToken = 0;   // ignore stale async replies when the card changes
+
 function speakJapanese(reading, kanji) {
   const text = speakSource(reading, kanji);
   if (!text) return false;
   stopSpeaking();
   setSpeakBusy(true);
+  const token = ++speakToken;
 
-  // Google Translate TTS via <audio> — same voice as the Translate site.
-  // Audio elements can play this cross-origin without a CORS fetch.
+  // Play Google Translate TTS directly. The page meta referrer=same-origin
+  // keeps a github.io Referer off the request (that would 404). Fetch cannot
+  // be used — the endpoint has no CORS headers.
   if (typeof Audio !== "undefined") {
     const audio = new Audio();
     speakAudio = audio;
     let settled = false;
-    let loadTimer = null;
     const fallback = () => {
-      if (settled || speakAudio !== audio) return;
+      if (settled || token !== speakToken) return;
       settled = true;
-      if (loadTimer) clearTimeout(loadTimer);
-      try { audio.pause(); } catch (e) {}
-      if (speakAudio === audio) speakAudio = null;
       speakViaWebSpeech(text);
     };
-    audio.addEventListener("playing", () => {
-      if (speakAudio === audio) settled = true;
-      if (loadTimer) clearTimeout(loadTimer);
-    });
+    audio.addEventListener("playing", () => { settled = true; });
     audio.addEventListener("ended", () => {
-      if (loadTimer) clearTimeout(loadTimer);
-      if (speakAudio === audio) { settled = true; setSpeakBusy(false); }
+      if (token === speakToken) setSpeakBusy(false);
     });
     audio.addEventListener("error", fallback);
-    audio.preload = "auto";
     audio.src = googleTtsUrl(text);
     const play = audio.play();
     if (play && typeof play.then === "function") play.catch(fallback);
-    // If nothing starts within a couple of seconds, use the browser voice.
-    loadTimer = setTimeout(() => {
-      if (settled || speakAudio !== audio) return;
-      if (audio.readyState < 2 /* HAVE_CURRENT_DATA */) fallback();
+    setTimeout(() => {
+      if (settled || token !== speakToken) return;
+      if (audio.readyState < 2) fallback();
     }, 2500);
     return true;
   }
@@ -1153,6 +1150,7 @@ function speakJapanese(reading, kanji) {
 }
 
 function stopSpeaking() {
+  speakToken++;
   if (canSpeakBrowser) {
     try { speechSynthesis.cancel(); } catch (e) {}
   }
