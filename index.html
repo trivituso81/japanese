@@ -2088,9 +2088,9 @@ let CARD = null;
 const SWIPE_MIN = 90;        // pixels of drag before a swipe counts as an answer
 
 const ORDERS = [
+  ["random", "Random",        "Random"],
   ["weak",   "Weakest first", "Weakest"],
-  ["book",   "Textbook",      "Book"],
-  ["random", "Random",        "Random"]
+  ["book",   "Textbook",      "Book"]
 ];
 const reduceMotion = () => !!(window.matchMedia &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches);
@@ -2105,7 +2105,7 @@ function renderCards(scope) {
     : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Flashcards"]]);
   const total = deck(ns, false).length;
   const size = range ? 30 : 20;
-  CARD = { scope, ns, dir: "jp-en", order: "weak", proper: false, size,
+  CARD = { scope, ns, dir: "jp-en", order: "random", proper: false, size,
            round: [], i: 0, shown: false, total: 0, retired: 0, firstTry: 0,
            missed: new Set(), attempts: {}, prev: null, animating: false };
   document.getElementById("view").innerHTML = `
@@ -2121,7 +2121,7 @@ function renderCards(scope) {
           <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
         <button class="btn dir" data-dir="mixed" aria-pressed="false">Mixed</button>` },
       { k: "Order", seg: ORDERS.map(([id, wide, narrow]) =>
-        `<button class="btn ord" data-ord="${id}" aria-pressed="${id === "weak"}">
+        `<button class="btn ord" data-ord="${id}" aria-pressed="${id === "random"}">
           <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("") },
       { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
         `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
@@ -2162,7 +2162,8 @@ function refreshDeal() {
   b.textContent = CARD.stale && underway ? "Restart with these settings" : "New round";
 }
 
-/* Order decides both which cards make the cut and the sequence they arrive in. */
+/* Order decides which cards make the cut. The sitting itself is always
+   shuffled, so a new round is never the same sequence as the last. */
 function buildRound(only) {
   const d = deck(CARD.ns, CARD.proper);
   let pool;
@@ -2177,9 +2178,10 @@ function buildRound(only) {
     d.forEach(c => { const b = boxOf(c.id); (bands[b] = bands[b] || []).push(c); });
     pool = [];
     Object.keys(bands).map(Number).sort((a, b) => a - b)
-      .forEach(b => pool.push(...shuffle(bands[b])));
+      .forEach(b => pool.push(...bands[b]));
   }
-  const round = (CARD.size && !only) ? pool.slice(0, CARD.size) : pool;
+  const cut = (CARD.size && !only) ? pool.slice(0, CARD.size) : pool;
+  const round = shuffle(cut);
   // fix each card's direction now so a card does not change sides when it returns
   round.forEach(c => {
     c.dir = CARD.dir === "mixed" ? (Math.random() < 0.5 ? "jp-en" : "en-jp") : CARD.dir;
