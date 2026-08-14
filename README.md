@@ -9,8 +9,8 @@ No build step, no dependencies, no server. Three files and a browser.
 ## What is in it
 
 - **Flashcards** for every word in the books, with a Leitner box behind each one.
-  Press **Listen** (or **P**) to hear the Japanese reading aloud — the browser's
-  built-in speech engine, no account or API key.
+  Press **Listen** (or **P**) to hear the Japanese reading aloud via Google
+  Translate’s voice (falls back to the browser’s speech engine offline).
 - **Grammar drills**: English sentences to translate, marked strictly, with a
   focused round that chases whichever patterns you got wrong.
 - **Verb drill**: conjugation practice that is not tied to a lesson. Choose how
