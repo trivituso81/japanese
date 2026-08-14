@@ -69,7 +69,7 @@ wipes the lot, so export occasionally.
 | `japanese.html` | The earlier, simpler progress tracker. Linked from the footer; safe to delete if you never use it. |
 | `source/vocab/` | The raw vocabulary transcriptions the data file was built from. Not used at runtime — kept so the wordlists can be checked against the books. |
 
-## Running it locally
+## On an iPhone
 
-Open `index.html` by double-clicking it. That is all — it works straight off the
-filesystem, offline, with no server.
+Open the site in **Safari**, tap **Share → Add to Home Screen**. It uses the
+red **和** seal as its icon and opens without the Safari chrome.
