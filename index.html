@@ -1056,27 +1056,112 @@ const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 /* ============================================================
    Pronunciation
 
-   The browser's own speech engine reads the kana. Chrome often ships a
-   Google Japanese voice; Safari and Edge bring their own. No API key, no
-   network round-trip, and the page stays a static three-file site.
+   Prefer Google Translate's TTS — the same natural Japanese voice as
+   translate.google.com. Vocab words are short enough for that endpoint,
+   and no API key is needed. If the network request fails (offline,
+   blocked, etc.), fall back to the browser's speechSynthesis engine.
    ============================================================ */
-const canSpeak = typeof window !== "undefined" && "speechSynthesis" in window;
+const canSpeakBrowser = typeof window !== "undefined" && "speechSynthesis" in window;
+const canSpeak = true;   // Listen always offered; Google TTS needs network
 let jaVoice = null;
+let speakAudio = null;
 
 function pickJaVoice() {
-  if (!canSpeak) return null;
+  if (!canSpeakBrowser) return null;
   const voices = speechSynthesis.getVoices() || [];
   const ja = voices.filter(v => /^ja([-_]|$)/i.test(v.lang) || /japanese/i.test(v.name));
   if (!ja.length) return null;
-  // Prefer a Google voice when the browser exposes one (Chrome / Edge).
   return ja.find(v => /google/i.test(v.name))
     || ja.find(v => /neural|premium|enhanced/i.test(v.name))
     || ja[0];
 }
 
-if (canSpeak) {
+if (canSpeakBrowser) {
   jaVoice = pickJaVoice();
   speechSynthesis.addEventListener("voiceschanged", () => { jaVoice = pickJaVoice(); });
+}
+
+function googleTtsUrl(text) {
+  return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q="
+    + encodeURIComponent(text);
+}
+
+function setSpeakBusy(on) {
+  const btn = document.getElementById("speak");
+  if (!btn) return;
+  if (on) btn.setAttribute("aria-busy", "true");
+  else btn.removeAttribute("aria-busy");
+}
+
+function speakViaWebSpeech(text) {
+  if (!canSpeakBrowser) { setSpeakBusy(false); return false; }
+  try { speechSynthesis.cancel(); } catch (e) {}
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  u.rate = 0.92;
+  const voice = jaVoice || pickJaVoice();
+  if (voice) { jaVoice = voice; u.voice = voice; }
+  u.addEventListener("end", () => setSpeakBusy(false));
+  u.addEventListener("error", () => setSpeakBusy(false));
+  speechSynthesis.speak(u);
+  return true;
+}
+
+function speakJapanese(reading, kanji) {
+  const text = speakSource(reading, kanji);
+  if (!text) return false;
+  stopSpeaking();
+  setSpeakBusy(true);
+
+  // Google Translate TTS via <audio> — same voice as the Translate site.
+  // Audio elements can play this cross-origin without a CORS fetch.
+  if (typeof Audio !== "undefined") {
+    const audio = new Audio();
+    speakAudio = audio;
+    let settled = false;
+    let loadTimer = null;
+    const fallback = () => {
+      if (settled || speakAudio !== audio) return;
+      settled = true;
+      if (loadTimer) clearTimeout(loadTimer);
+      try { audio.pause(); } catch (e) {}
+      if (speakAudio === audio) speakAudio = null;
+      speakViaWebSpeech(text);
+    };
+    audio.addEventListener("playing", () => {
+      if (speakAudio === audio) settled = true;
+      if (loadTimer) clearTimeout(loadTimer);
+    });
+    audio.addEventListener("ended", () => {
+      if (loadTimer) clearTimeout(loadTimer);
+      if (speakAudio === audio) { settled = true; setSpeakBusy(false); }
+    });
+    audio.addEventListener("error", fallback);
+    audio.preload = "auto";
+    audio.src = googleTtsUrl(text);
+    const play = audio.play();
+    if (play && typeof play.then === "function") play.catch(fallback);
+    // If nothing starts within a couple of seconds, use the browser voice.
+    loadTimer = setTimeout(() => {
+      if (settled || speakAudio !== audio) return;
+      if (audio.readyState < 2 /* HAVE_CURRENT_DATA */) fallback();
+    }, 2500);
+    return true;
+  }
+
+  return speakViaWebSpeech(text);
+}
+
+function stopSpeaking() {
+  if (canSpeakBrowser) {
+    try { speechSynthesis.cancel(); } catch (e) {}
+  }
+  if (speakAudio) {
+    const a = speakAudio;
+    speakAudio = null;
+    try { a.pause(); a.removeAttribute("src"); a.load(); } catch (e) {}
+  }
+  setSpeakBusy(false);
 }
 
 /* Minna marks verb groups after the reading (たべます II / たべます Ⅱ) and
@@ -1115,40 +1200,11 @@ function speakSource(reading, kanji) {
   return s;
 }
 
-function speakJapanese(reading, kanji) {
-  if (!canSpeak) return false;
-  const text = speakSource(reading, kanji);
-  if (!text) return false;
-  stopSpeaking();
-  const u = new SpeechSynthesisUtterance(text);
-  u.lang = "ja-JP";
-  u.rate = 0.92;
-  const voice = jaVoice || pickJaVoice();
-  if (voice) { jaVoice = voice; u.voice = voice; }
-  const btn = document.getElementById("speak");
-  if (btn) {
-    btn.setAttribute("aria-busy", "true");
-    const clear = () => btn.removeAttribute("aria-busy");
-    u.addEventListener("end", clear);
-    u.addEventListener("error", clear);
-  }
-  speechSynthesis.speak(u);
-  return true;
-}
-
-function stopSpeaking() {
-  if (!canSpeak) return;
-  try { speechSynthesis.cancel(); } catch (e) {}
-  const btn = document.getElementById("speak");
-  if (btn) btn.removeAttribute("aria-busy");
-}
-
 const SPEAK_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
   <path fill="currentColor" d="M3 9v6h4l5 4V5L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
 </svg>`;
 
 function speakButton() {
-  if (!canSpeak) return "";
   return `<button type="button" class="speak" id="speak" aria-label="Pronounce">
     ${SPEAK_SVG}<span class="speak-lab">Listen</span></button>`;
 }
