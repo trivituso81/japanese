@@ -1111,6 +1111,21 @@ function speakViaWebSpeech(text) {
 }
 
 let speakToken = 0;   // ignore stale async replies when the card changes
+let ttsUnlocked = false;
+
+/* Browsers block audible Autoplay until the page has a user gesture. A silent
+   play on the first tap unlocks later auto-speaks after swipe animations. */
+function unlockTts() {
+  if (ttsUnlocked || typeof Audio === "undefined") return;
+  ttsUnlocked = true;
+  try {
+    const a = new Audio(
+      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=");
+    a.volume = 0;
+    const p = a.play();
+    if (p && typeof p.then === "function") p.then(() => { try { a.pause(); } catch (e) {} }).catch(() => {});
+  } catch (e) {}
+}
 
 function speakJapanese(reading, kanji) {
   const text = speakSource(reading, kanji);
@@ -1213,7 +1228,7 @@ function wireSpeak(reading, kanji) {
   // Keep the listen tap off the swipe / flip handlers on #face.
   const stop = e => e.stopPropagation();
   ["pointerdown", "pointerup", "click"].forEach(ev => btn.addEventListener(ev, stop));
-  btn.addEventListener("click", () => speakJapanese(reading, kanji));
+  btn.addEventListener("click", () => { unlockTts(); speakJapanese(reading, kanji); });
 }
 
 /* Render the Japanese face without baking the verb-group numeral into the
@@ -2150,7 +2165,7 @@ function renderCards(scope) {
     CARD.stale = true;
     refreshDeal();
   });
-  document.getElementById("deal").addEventListener("click", () => startSession());
+  document.getElementById("deal").addEventListener("click", () => { unlockTts(); startSession(); });
   startSession();
 }
 
@@ -2361,12 +2376,19 @@ function drawCard() {
   });
 
   refreshDeal();
-  const on = (id, fn) => { const el = document.getElementById(id); if (el) el.addEventListener("click", fn); };
+  const on = (id, fn) => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", () => { unlockTts(); fn(); });
+  };
   on("reveal", revealCard);
   on("no", () => commitCard(false));
   on("yes", () => commitCard(true));
   on("undo", undoCard);
-  if (showSpeak) wireSpeak(reading, kanji);
+  if (showSpeak) {
+    wireSpeak(reading, kanji);
+    // As soon as Japanese is on the card — front or flipped answer — speak it.
+    speakJapanese(reading, kanji);
+  }
   wireSwipe(document.getElementById("face"));
 }
 
@@ -2402,9 +2424,9 @@ function drawSessionEnd(stage) {
     footnote: missed && !repeat ? `A repeat drills the words you missed without touching the
       score or the boxes. Start a new round to be scored afresh.` : ""
   });
-  document.getElementById("again").addEventListener("click", () => startSession());
+  document.getElementById("again").addEventListener("click", () => { unlockTts(); startSession(); });
   const redo = document.getElementById("redo");
-  if (redo) redo.addEventListener("click", () => nextPass());
+  if (redo) redo.addEventListener("click", () => { unlockTts(); nextPass(); });
   save();
 }
 
@@ -2427,6 +2449,7 @@ function wireSwipe(face) {
 
   face.addEventListener("pointerdown", e => {
     if (CARD.animating) return;
+    unlockTts();
     dragging = true; decided = false; dx = 0;
     x0 = e.clientX; y0 = e.clientY;
     face.style.transition = "none";
@@ -3102,7 +3125,7 @@ document.addEventListener("click", e => {
 document.addEventListener("keydown", e => {
   if (!CARD || !location.hash.startsWith("#/cards/")) return;
   if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
-  if (e.key === "u" || e.key === "U") { e.preventDefault(); return undoCard(); }
+  if (e.key === "u" || e.key === "U") { e.preventDefault(); unlockTts(); return undoCard(); }
   if (!CARD.round || !CARD.round.length) return;
   if ((e.key === "p" || e.key === "P") && canSpeak) {
     const c = CARD.round[CARD.i];
@@ -3111,13 +3134,14 @@ document.addEventListener("keydown", e => {
     // Only when the Japanese is on screen — same rule as the Listen button.
     if (dir === "jp-en" || CARD.shown) {
       e.preventDefault();
+      unlockTts();
       const [reading, kanji] = c.e;
       return speakJapanese(reading, kanji);
     }
   }
-  if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); return revealCard(); }
-  if (e.key === "ArrowRight") { e.preventDefault(); commitCard(true); }
-  else if (e.key === "ArrowLeft") { e.preventDefault(); commitCard(false); }
+  if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); unlockTts(); return revealCard(); }
+  if (e.key === "ArrowRight") { e.preventDefault(); unlockTts(); commitCard(true); }
+  else if (e.key === "ArrowLeft") { e.preventDefault(); unlockTts(); commitCard(false); }
 });
 
 /* ============================================================
