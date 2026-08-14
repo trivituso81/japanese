@@ -73,3 +73,8 @@ wipes the lot, so export occasionally.
 
 Open the site in **Safari**, tap **Share → Add to Home Screen**. It uses the
 red **和** seal as its icon and opens without the Safari chrome.
+
+## Running it locally
+
+Open `index.html` by double-clicking it. That is all — it works straight off the
+filesystem, offline, with no server.
