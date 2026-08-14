@@ -8845,7 +8845,7 @@ const KANJI = [
     ex: { w: "魚", r: "さかな", en: "fish" } },
   { c: "悪", lv: "N4", s: 11, en: "bad, evil",
     ok: ["bad", "evil", "vice", "wrong", "false"],
-    on: ["アク", "オ"], kun: ["わる"],
+    on: ["アク", "オ"], kun: ["わる・い"],
     ex: { w: "悪い", r: "わるい", en: "bad" } },
   { c: "暗", lv: "N4", s: 13, en: "dark",
     ok: ["dark", "darkness"],
