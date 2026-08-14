@@ -1112,6 +1112,7 @@ function speakViaWebSpeech(text) {
 
 let speakToken = 0;   // ignore stale async replies when the card changes
 let ttsUnlocked = false;
+let pendingSpeak = null;   // [reading, kanji] waiting for a user gesture
 
 /* Browsers block audible Autoplay until the page has a user gesture. A silent
    play on the first tap unlocks later auto-speaks after swipe animations. */
@@ -1127,12 +1128,23 @@ function unlockTts() {
   } catch (e) {}
 }
 
+/* If the first card was blocked by autoplay (refresh / arriving from another
+   screen), speak it now that we have a gesture. */
+function flushPendingSpeak() {
+  if (!pendingSpeak) return;
+  const args = pendingSpeak;
+  pendingSpeak = null;
+  speakJapanese(args[0], args[1]);
+}
+
 function speakJapanese(reading, kanji) {
   const text = speakSource(reading, kanji);
   if (!text) return false;
   stopSpeaking();
+  pendingSpeak = null;
   setSpeakBusy(true);
   const token = ++speakToken;
+  const hold = [reading, kanji];
 
   // Play Google Translate TTS directly. The page meta referrer=same-origin
   // keeps a github.io Referer off the request (that would 404). Fetch cannot
@@ -1146,6 +1158,13 @@ function speakJapanese(reading, kanji) {
       settled = true;
       speakViaWebSpeech(text);
     };
+    const blocked = () => {
+      if (settled || token !== speakToken) return;
+      settled = true;
+      // Remember this word; the next tap unlocks audio and plays it.
+      pendingSpeak = hold;
+      setSpeakBusy(false);
+    };
     audio.addEventListener("playing", () => { settled = true; });
     audio.addEventListener("ended", () => {
       if (token === speakToken) setSpeakBusy(false);
@@ -1153,7 +1172,12 @@ function speakJapanese(reading, kanji) {
     audio.addEventListener("error", fallback);
     audio.src = googleTtsUrl(text);
     const play = audio.play();
-    if (play && typeof play.then === "function") play.catch(fallback);
+    if (play && typeof play.then === "function") {
+      play.catch(err => {
+        if (err && err.name === "NotAllowedError") blocked();
+        else fallback();
+      });
+    }
     setTimeout(() => {
       if (settled || token !== speakToken) return;
       if (audio.readyState < 2) fallback();
@@ -1166,6 +1190,7 @@ function speakJapanese(reading, kanji) {
 
 function stopSpeaking() {
   speakToken++;
+  pendingSpeak = null;
   if (canSpeakBrowser) {
     try { speechSynthesis.cancel(); } catch (e) {}
   }
@@ -2317,9 +2342,9 @@ function runningScore(answers, idle) {
 }
 
 function drawCard() {
-  stopSpeaking();
   const stage = document.getElementById("stage");
   if (!CARD.total) {
+    stopSpeaking();
     stage.innerHTML = emptyState({
       title: "No cards in this deck.",
       say: `Every word in range is filtered out by the settings above — widen the
@@ -2330,13 +2355,22 @@ function drawCard() {
     });
     return;
   }
-  if (!CARD.round.length) return drawSessionEnd(stage);
+  if (!CARD.round.length) {
+    stopSpeaking();
+    return drawSessionEnd(stage);
+  }
 
   const c = CARD.round[CARD.i];
   const [reading, kanji, en] = c.e;
   const dir = c.dir || "jp-en";
   const again = (CARD.attempts[c.id] || 0) > 0;
   const showSpeak = canSpeak && (dir === "jp-en" || CARD.shown);
+  // Speak when Japanese newly appears: front of JA→EN, or flip of EN→JA.
+  const jpJustAppeared = (dir === "jp-en" && !CARD.shown) || (dir === "en-jp" && CARD.shown);
+  // Do not cancel audio when flipping JA→EN — that would cut off a first-load
+  // speak that just started from the same tap.
+  if (jpJustAppeared || !showSpeak) stopSpeaking();
+
   const jpFace = jpCardHtml(reading, kanji, "prompt");
   const enFace = `<span class="prompt">${esc(en)}</span>`;
   const jpAns = jpCardHtml(reading, kanji, "answer");
@@ -2376,18 +2410,21 @@ function drawCard() {
   });
 
   refreshDeal();
-  const on = (id, fn) => {
+  const on = (id, fn, flush) => {
     const el = document.getElementById(id);
-    if (el) el.addEventListener("click", () => { unlockTts(); fn(); });
+    if (el) el.addEventListener("click", () => {
+      unlockTts();
+      if (flush) flushPendingSpeak();
+      fn();
+    });
   };
-  on("reveal", revealCard);
+  on("reveal", revealCard, true);
   on("no", () => commitCard(false));
   on("yes", () => commitCard(true));
   on("undo", undoCard);
   if (showSpeak) {
     wireSpeak(reading, kanji);
-    // As soon as Japanese is on the card — front or flipped answer — speak it.
-    speakJapanese(reading, kanji);
+    if (jpJustAppeared) speakJapanese(reading, kanji);
   }
   wireSwipe(document.getElementById("face"));
 }
@@ -2450,6 +2487,7 @@ function wireSwipe(face) {
   face.addEventListener("pointerdown", e => {
     if (CARD.animating) return;
     unlockTts();
+    flushPendingSpeak();
     dragging = true; decided = false; dx = 0;
     x0 = e.clientX; y0 = e.clientY;
     face.style.transition = "none";
@@ -3107,9 +3145,19 @@ function wireFurigana() {
 /* The one way to move between screens. A link to the hash you are already on
    fires no hashchange, so the view would simply never redraw; every navigation
    goes through here so that case is always covered. */
+let ignoreHashchange = false;
 function goto(dest) {
-  if (location.hash === dest) route();
-  else location.hash = dest;
+  if (location.hash === dest) return route();
+  // Flashcards need to draw inside the click gesture so auto-speak is allowed.
+  if (/^#\/cards\//.test(dest)) {
+    unlockTts();
+    ignoreHashchange = true;
+    location.hash = dest;
+    route();
+    queueMicrotask(() => { ignoreHashchange = false; });
+    return;
+  }
+  location.hash = dest;
 }
 
 document.addEventListener("click", e => {
@@ -3119,13 +3167,22 @@ document.addEventListener("click", e => {
      kanji table's lesson links are all plain hrefs, and any of them can point
      at the hash already in the bar. */
   const a = e.target.closest('a[href^="#/"]');
-  if (a && a.getAttribute("href") === location.hash) { e.preventDefault(); route(); }
+  if (!a) return;
+  const href = a.getAttribute("href") || "";
+  // Intercept flashcard links so TTS unlock + first speak share the tap.
+  if (/^#\/cards\//.test(href)) {
+    e.preventDefault();
+    return goto(href);
+  }
+  if (href === location.hash) { e.preventDefault(); route(); }
 });
 
 document.addEventListener("keydown", e => {
   if (!CARD || !location.hash.startsWith("#/cards/")) return;
   if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
-  if (e.key === "u" || e.key === "U") { e.preventDefault(); unlockTts(); return undoCard(); }
+  if (e.key === "u" || e.key === "U") {
+    e.preventDefault(); unlockTts(); flushPendingSpeak(); return undoCard();
+  }
   if (!CARD.round || !CARD.round.length) return;
   if ((e.key === "p" || e.key === "P") && canSpeak) {
     const c = CARD.round[CARD.i];
@@ -3135,13 +3192,16 @@ document.addEventListener("keydown", e => {
     if (dir === "jp-en" || CARD.shown) {
       e.preventDefault();
       unlockTts();
+      pendingSpeak = null;
       const [reading, kanji] = c.e;
       return speakJapanese(reading, kanji);
     }
   }
-  if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); unlockTts(); return revealCard(); }
-  if (e.key === "ArrowRight") { e.preventDefault(); unlockTts(); commitCard(true); }
-  else if (e.key === "ArrowLeft") { e.preventDefault(); unlockTts(); commitCard(false); }
+  if (e.code === "Space" || e.code === "Enter") {
+    e.preventDefault(); unlockTts(); flushPendingSpeak(); return revealCard();
+  }
+  if (e.key === "ArrowRight") { e.preventDefault(); unlockTts(); flushPendingSpeak(); commitCard(true); }
+  else if (e.key === "ArrowLeft") { e.preventDefault(); unlockTts(); flushPendingSpeak(); commitCard(false); }
 });
 
 /* ============================================================
@@ -4259,7 +4319,7 @@ function route() {
   if (kind === "drill") return renderDrill(scope, false);
   if (kind === "sweep") return renderDrill(scope, true);
 }
-window.addEventListener("hashchange", route);
+window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
 route();
 </script>
 </body>
