@@ -1883,8 +1883,11 @@ function renderHome() {
         sub: "your own note, not a score" },
       { k: "Verb drill", val: verbAccuracy() === null ? "—" : verbAccuracy() + "%",
         sub: verbSub() },
-      { k: "Kanji known", val: kanjiKnown("N5"), of: kanjiAt("N5").length,
-        sub: `N5 · ${kanjiAccuracy() === null ? "not started" : kanjiAccuracy() + "% recent"}` }
+      { k: "Kanji known",
+        val: KANJI_LEVELS.filter(l => l.ready).reduce((n, l) => n + kanjiKnown(l.id), 0),
+        of: KANJI_LEVELS.filter(l => l.ready).reduce((n, l) => n + kanjiAt(l.id).length, 0),
+        sub: `${KANJI_LEVELS.filter(l => l.ready).map(l => l.id).join(" · ")} · ${
+          kanjiAccuracy() === null ? "not started" : kanjiAccuracy() + "% recent"}` }
     ], "joined")}
 
     ${nextUpPanel()}
@@ -1911,7 +1914,9 @@ function renderHome() {
 
     <div class="verbcta">
       <div>
-        <b>Kanji</b> — recognition practice, also outside the lessons. ${kanjiAt("N5").length} N5
+        <b>Kanji</b> — recognition practice, also outside the lessons.
+        ${KANJI_LEVELS.filter(l => l.ready).map(l =>
+          `${kanjiAt(l.id).length} ${l.id}`).join(" and ")}
         characters with readings and an example each; the drill shows the kanji and you type
         what it means.
       </div>

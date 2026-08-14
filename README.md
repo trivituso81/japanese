@@ -18,13 +18,12 @@ No build step, no dependencies, no server. Three files and a browser.
   passive, causative and eleven others — and the round mixes all three verb
   groups. The summary says which group and which Group 1 ending is costing you
   marks, and can deal a new round from just those.
-- **Kanji**: the 103 characters expected at JLPT N5, each with its readings, an
-  example word and the lesson where the book first uses it. The drill shows a
-  character and you type what it means; sensible synonyms count and a typo will
-  not fail you, though an answer belonging to a different kanji will. A
-  character counts as known once you have had it right twice running. N4 is
-  planned for and appears greyed out until its characters are added — the
-  screens read the levels as data and need no changes to take it.
+- **Kanji**: the 103 characters expected at JLPT N5 and the 181 at N4, each with
+  its readings, an example word and the lesson where the book first uses it.
+  The drill shows a character and you type what it means; sensible synonyms
+  count and a typo will not fail you, though an answer belonging to a different
+  kanji will. A character counts as known once you have had it right twice
+  running.
 
 ## Put it online
 
