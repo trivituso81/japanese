@@ -383,6 +383,19 @@
   .cardmeta { display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
     justify-content: center; padding: 13px 18px 18px; }
 
+  /* Pronounce — sits under the Japanese on the card, clear of the swipe face */
+  .speak { display: inline-flex; align-items: center; gap: 7px; margin-top: 4px;
+    font: inherit; font-family: var(--ui); font-size: 12px; font-weight: 600;
+    letter-spacing: .04em; padding: 7px 12px; cursor: pointer;
+    border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
+    border-radius: 0; transition: border-color .16s, color .16s, background .16s; }
+  .speak:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text);
+    background: var(--bg-soft); }
+  .speak:disabled { opacity: 0.36; cursor: not-allowed; }
+  .speak[aria-busy="true"] { color: var(--accent); border-color: var(--accent); }
+  .speak svg { width: 14px; height: 14px; flex: 0 0 auto; }
+  .speak .speak-lab { letter-spacing: .08em; text-transform: uppercase; font-size: 10.5px; }
+
   /* the Leitner boxes ripen from bare earth through ochre to pine */
   .boxbar { display: flex; height: 6px; width: 150px; background: var(--bg-inset); border: 1px solid var(--rule); }
   .boxbar i { display: block; height: 100%; }
@@ -640,6 +653,7 @@
     .card.tappable { cursor: pointer; -webkit-tap-highlight-color: transparent; }
     .btn { font-size: 14px; padding: 10px 14px; min-height: 44px; }
     .btn.sm { font-size: 13px; padding: 8px 10px; min-height: 40px; }
+    .speak { font-size: 13px; padding: 9px 12px; min-height: 40px; }
     .wchip { font-size: 13px; padding: 9px 11px; }
     .cell { min-width: 40px; height: 40px; font-size: 13.5px; }
     .topnav a { min-height: 46px; }
@@ -1032,6 +1046,93 @@ const ruby = s => esc(s).replace(/([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g, "<ru
 const plain = s => String(s).replace(/[{}]/g, "");
 const lessonById = n => LESSONS.find(l => l.n === +n);
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+
+/* ============================================================
+   Pronunciation
+
+   The browser's own speech engine reads the kana. Chrome often ships a
+   Google Japanese voice; Safari and Edge bring their own. No API key, no
+   network round-trip, and the page stays a static three-file site.
+   ============================================================ */
+const canSpeak = typeof window !== "undefined" && "speechSynthesis" in window;
+let jaVoice = null;
+
+function pickJaVoice() {
+  if (!canSpeak) return null;
+  const voices = speechSynthesis.getVoices() || [];
+  const ja = voices.filter(v => /^ja([-_]|$)/i.test(v.lang) || /japanese/i.test(v.name));
+  if (!ja.length) return null;
+  // Prefer a Google voice when the browser exposes one (Chrome / Edge).
+  return ja.find(v => /google/i.test(v.name))
+    || ja.find(v => /neural|premium|enhanced/i.test(v.name))
+    || ja[0];
+}
+
+if (canSpeak) {
+  jaVoice = pickJaVoice();
+  speechSynthesis.addEventListener("voiceschanged", () => { jaVoice = pickJaVoice(); });
+}
+
+/* Strip textbook markup so the engine hears a word, not a pattern. Prefer the
+   kana reading — TTS handles せんせい more reliably than 先生 alone. */
+function speakSource(reading, kanji) {
+  let s = String(reading || kanji || "").trim();
+  if (!s) return "";
+  s = s.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "");
+  if (s.includes("／")) s = s.split("／")[0];
+  s = s.replace(/[～〜]/g, "")
+       .replace(/[「」『』【】［\]\[\]]/g, "")
+       .replace(/\s+/g, " ")
+       .trim();
+  return s;
+}
+
+function speakJapanese(reading, kanji) {
+  if (!canSpeak) return false;
+  const text = speakSource(reading, kanji);
+  if (!text) return false;
+  stopSpeaking();
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  u.rate = 0.92;
+  const voice = jaVoice || pickJaVoice();
+  if (voice) { jaVoice = voice; u.voice = voice; }
+  const btn = document.getElementById("speak");
+  if (btn) {
+    btn.setAttribute("aria-busy", "true");
+    const clear = () => btn.removeAttribute("aria-busy");
+    u.addEventListener("end", clear);
+    u.addEventListener("error", clear);
+  }
+  speechSynthesis.speak(u);
+  return true;
+}
+
+function stopSpeaking() {
+  if (!canSpeak) return;
+  try { speechSynthesis.cancel(); } catch (e) {}
+  const btn = document.getElementById("speak");
+  if (btn) btn.removeAttribute("aria-busy");
+}
+
+const SPEAK_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+  <path fill="currentColor" d="M3 9v6h4l5 4V5L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+</svg>`;
+
+function speakButton() {
+  if (!canSpeak) return "";
+  return `<button type="button" class="speak" id="speak" aria-label="Pronounce">
+    ${SPEAK_SVG}<span class="speak-lab">Listen</span></button>`;
+}
+
+function wireSpeak(reading, kanji) {
+  const btn = document.getElementById("speak");
+  if (!btn) return;
+  // Keep the listen tap off the swipe / flip handlers on #face.
+  const stop = e => e.stopPropagation();
+  ["pointerdown", "pointerup", "click"].forEach(ev => btn.addEventListener(ev, stop));
+  btn.addEventListener("click", () => speakJapanese(reading, kanji));
+}
 
 function shuffle(a) {
   const x = a.slice();
@@ -2098,6 +2199,7 @@ function runningScore(answers, idle) {
 }
 
 function drawCard() {
+  stopSpeaking();
   const stage = document.getElementById("stage");
   if (!CARD.total) {
     stage.innerHTML = emptyState({
@@ -2116,6 +2218,7 @@ function drawCard() {
   const [reading, kanji, en] = c.e;
   const dir = c.dir || "jp-en";
   const again = (CARD.attempts[c.id] || 0) > 0;
+  const showSpeak = canSpeak && (dir === "jp-en" || CARD.shown);
   const jpFace = `<span class="prompt jp">${esc(kanji || reading)}${kanji && reading
     ? `<span class="rd">${esc(reading)}</span>` : ""}</span>`;
   const enFace = `<span class="prompt">${esc(en)}</span>`;
@@ -2135,7 +2238,9 @@ function drawCard() {
       <span class="swipetag tag-yes">Know</span>
       <div class="card${CARD.shown ? " live" : " tappable"}" id="face">
         ${dir === "jp-en" ? jpFace : enFace}
+        ${dir === "jp-en" && showSpeak ? speakButton() : ""}
         ${CARD.shown ? (dir === "jp-en" ? enAns : jpAns) : ""}
+        ${dir === "en-jp" && CARD.shown && showSpeak ? speakButton() : ""}
       </div>
     </div>
     <div class="cardacts">
@@ -2146,8 +2251,8 @@ function drawCard() {
       <button class="btn sm" id="undo" ${CARD.prev ? "" : "disabled"}>Undo</button>
       ${CARD.shown ? "" : `<button class="btn sm" id="reveal">Show answer</button>`}
       <span class="keys">${CARD.shown
-        ? "← don't know · → know · U to undo"
-        : "← / → to answer · space to flip · U to undo"}</span>
+        ? `← don't know · → know · U to undo${showSpeak ? " · P to listen" : ""}`
+        : `← / → to answer · space to flip · U to undo${showSpeak ? " · P to listen" : ""}`}</span>
       <span class="taphint">${CARD.shown
         ? "Swipe left if you don't know it, right if you do"
         : "Swipe it now if you know it, or tap to flip"}</span>
@@ -2160,6 +2265,7 @@ function drawCard() {
   on("no", () => commitCard(false));
   on("yes", () => commitCard(true));
   on("undo", undoCard);
+  if (showSpeak) wireSpeak(reading, kanji);
   wireSwipe(document.getElementById("face"));
 }
 
@@ -2897,6 +3003,17 @@ document.addEventListener("keydown", e => {
   if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
   if (e.key === "u" || e.key === "U") { e.preventDefault(); return undoCard(); }
   if (!CARD.round || !CARD.round.length) return;
+  if ((e.key === "p" || e.key === "P") && canSpeak) {
+    const c = CARD.round[CARD.i];
+    if (!c) return;
+    const dir = c.dir || "jp-en";
+    // Only when the Japanese is on screen — same rule as the Listen button.
+    if (dir === "jp-en" || CARD.shown) {
+      e.preventDefault();
+      const [reading, kanji] = c.e;
+      return speakJapanese(reading, kanji);
+    }
+  }
   if (e.code === "Space" || e.code === "Enter") { e.preventDefault(); return revealCard(); }
   if (e.key === "ArrowRight") { e.preventDefault(); commitCard(true); }
   else if (e.key === "ArrowLeft") { e.preventDefault(); commitCard(false); }
