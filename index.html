@@ -344,6 +344,12 @@
   .prompt.jp { font-family: var(--jp-mincho); font-size: 38px; letter-spacing: .04em; }
   .prompt .rd { display: block; font-size: 15px; color: var(--text-faint); font-weight: 400;
     font-family: var(--jp); margin-top: 9px; letter-spacing: .04em; }
+  .prompt .vgroup, .answer .vgroup { display: inline-block; margin-left: 8px;
+    font-family: var(--ui); font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    color: var(--text-faint); vertical-align: middle; border: 1px solid var(--rule-strong);
+    padding: 1px 6px; line-height: 1.4; }
+  .prompt .rd .vgroup, .answer .rd .vgroup { margin-left: 7px; font-size: 10.5px;
+    vertical-align: 1px; }
   .answer { font-family: var(--serif); font-size: 23px; line-height: 1.6; padding-top: 18px;
     border-top: 1px solid var(--rule); width: 100%; max-width: 620px; }
   .answer.jp { font-family: var(--jp-mincho); font-size: 28px; letter-spacing: .03em; }
@@ -1073,10 +1079,32 @@ if (canSpeak) {
   speechSynthesis.addEventListener("voiceschanged", () => { jaVoice = pickJaVoice(); });
 }
 
+/* Minna marks verb groups after the reading (たべます II / たべます Ⅱ) and
+   sometimes a usage note in brackets (［はしを ～］). Neither belongs in the
+   spoken form — TTS will otherwise say “two” or read the note aloud. */
+function splitVocabReading(reading) {
+  let s = String(reading || "").trim();
+  let note = "";
+  const noteM = s.match(/\s*[［\[]([^］\]]*)[］\]]\s*$/);
+  if (noteM) {
+    note = noteM[1].trim();
+    s = s.slice(0, noteM.index).trim();
+  }
+  let group = "";
+  const groupM = s.match(/\s*([ⅠⅡⅢⅣ]|IV|III|II|I)\s*$/);
+  if (groupM) {
+    group = groupM[1]
+      .replace("Ⅰ", "I").replace("Ⅱ", "II").replace("Ⅲ", "III").replace("Ⅳ", "IV");
+    s = s.slice(0, groupM.index).trim();
+  }
+  return { word: s, group, note };
+}
+
 /* Strip textbook markup so the engine hears a word, not a pattern. Prefer the
    kana reading — TTS handles せんせい more reliably than 先生 alone. */
 function speakSource(reading, kanji) {
-  let s = String(reading || kanji || "").trim();
+  let s = splitVocabReading(reading).word;
+  if (!s) s = splitVocabReading(kanji).word;
   if (!s) return "";
   s = s.replace(/（[^）]*）/g, "").replace(/\([^)]*\)/g, "");
   if (s.includes("／")) s = s.split("／")[0];
@@ -1132,6 +1160,25 @@ function wireSpeak(reading, kanji) {
   const stop = e => e.stopPropagation();
   ["pointerdown", "pointerup", "click"].forEach(ev => btn.addEventListener(ev, stop));
   btn.addEventListener("click", () => speakJapanese(reading, kanji));
+}
+
+/* Render the Japanese face without baking the verb-group numeral into the
+   reading line — that marker is textbook metadata, shown as a small badge. */
+function jpCardHtml(reading, kanji, kind) {
+  const r = splitVocabReading(reading);
+  const k = splitVocabReading(kanji);
+  const head = k.word || r.word;
+  const showRd = !!(k.word && r.word);
+  const group = r.group || k.group;
+  const groupHtml = group
+    ? `<span class="vgroup" title="Group ${esc(group)} verb">${esc(group)}</span>`
+    : "";
+  const body = showRd
+    ? `${esc(head)}<span class="rd">${esc(r.word)}${groupHtml}</span>`
+    : `${esc(head)}${groupHtml}`;
+  return kind === "answer"
+    ? `<div class="answer jp">${body}</div>`
+    : `<span class="prompt jp">${body}</span>`;
 }
 
 function shuffle(a) {
@@ -2219,11 +2266,9 @@ function drawCard() {
   const dir = c.dir || "jp-en";
   const again = (CARD.attempts[c.id] || 0) > 0;
   const showSpeak = canSpeak && (dir === "jp-en" || CARD.shown);
-  const jpFace = `<span class="prompt jp">${esc(kanji || reading)}${kanji && reading
-    ? `<span class="rd">${esc(reading)}</span>` : ""}</span>`;
+  const jpFace = jpCardHtml(reading, kanji, "prompt");
   const enFace = `<span class="prompt">${esc(en)}</span>`;
-  const jpAns = `<div class="answer jp">${esc(kanji || reading)}${kanji && reading
-    ? `<span class="rd">${esc(reading)}</span>` : ""}</div>`;
+  const jpAns = jpCardHtml(reading, kanji, "answer");
   const enAns = `<div class="answer">${esc(en)}</div>`;
 
   stage.innerHTML = drillStage({
