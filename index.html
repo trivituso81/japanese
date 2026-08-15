@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815f">
+<link rel="manifest" href="site.webmanifest?v=20260815g">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815f";
+window.__BUILD__ = "20260815g";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -311,6 +311,38 @@ window.__BUILD__ = "20260815f";
   .home-progress button:hover,
   .home-progress label:hover { text-decoration: underline; }
   .home-progress input[type="file"] { display: none; }
+
+  .backup-sheet {
+    position: fixed; inset: 0; z-index: 80;
+    background: rgba(40, 32, 24, .45);
+    display: flex; align-items: flex-end; justify-content: center;
+    padding: 12px; padding-bottom: max(12px, env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+  }
+  .backup-sheet[hidden] { display: none !important; }
+  .backup-card {
+    width: min(440px, 100%); max-height: min(88dvh, 640px);
+    background: var(--washi); color: var(--text);
+    border: 1px solid var(--rule-strong);
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 16px 14px 14px; box-sizing: border-box;
+  }
+  .backup-card h2 {
+    margin: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+  }
+  .backup-card .backup-help {
+    margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-soft);
+  }
+  .backup-card textarea {
+    flex: 1 1 auto; min-height: 180px; width: 100%; box-sizing: border-box;
+    font-family: ui-monospace, Menlo, monospace; font-size: 11px;
+    line-height: 1.35; padding: 10px; border: 1px solid var(--rule-strong);
+    background: var(--bg); color: var(--text); resize: none;
+  }
+  .backup-card .backup-acts {
+    display: flex; flex-wrap: wrap; gap: 8px;
+  }
+  .backup-card .backup-acts .btn { flex: 1 1 40%; min-height: 44px; }
 
   @media (prefers-reduced-motion: reduce) {
     .viz-enso .ink { animation: none; }
@@ -1607,8 +1639,21 @@ window.__BUILD__ = "20260815f";
 </nav>
 
 <div class="k-type-frame" id="kframe" hidden></div>
+<div class="backup-sheet" id="backupSheet" hidden>
+  <div class="backup-card" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
+    <h2 id="backupTitle">Progress backup</h2>
+    <p class="backup-help" id="backupHelp"></p>
+    <textarea id="backupText" spellcheck="false" autocomplete="off"></textarea>
+    <div class="backup-acts">
+      <button type="button" class="btn primary" id="backupSelect">Select all</button>
+      <button type="button" class="btn" id="backupShare">Share</button>
+      <button type="button" class="btn" id="backupRestore">Restore from text</button>
+      <button type="button" class="btn" id="backupClose">Close</button>
+    </div>
+  </div>
+</div>
 
-<script src="japanese-data.js?v=20260815f"></script>
+<script src="japanese-data.js?v=20260815g"></script>
 <script>
 /* ============================================================
    State
@@ -2751,19 +2796,17 @@ function renderHome() {
       <div class="home-progress">
         <div class="hp-row">
           <span class="hp-status">${esc(savedAtLabel())}</span>
-          <button type="button" id="exp">Share backup</button>
-          <button type="button" id="expcopy">Copy backup</button>
-          <label for="imp">Import<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
+          <button type="button" id="exp">Save backup</button>
+          <label for="imp">Import file<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
         </div>
-        <p class="hp-note">On iPhone: <b>Share backup</b> → <b>Save to Files</b>.
-          To restore: Import → <b>Browse</b> (not Recents) → On My iPhone / iCloud Drive.
-          <b>Copy backup</b> pastes into Notes if sharing fails.</p>
+        <p class="hp-note">You do <b>not</b> need a file to keep progress on this phone.
+          <b>Save backup</b> only makes a spare copy you can paste into Notes.
+          Re-adding the home icon keeps your progress as long as you don’t clear Safari website data.</p>
       </div>
     </section>`;
 
   wireResume(renderHome);
-  document.getElementById("exp").addEventListener("click", () => exportProgress());
-  document.getElementById("expcopy").addEventListener("click", () => copyProgressBackup());
+  document.getElementById("exp").addEventListener("click", () => openBackupSheet("export"));
   document.getElementById("imp").addEventListener("change", importProgress);
 }
 
@@ -2823,37 +2866,49 @@ function progressBackupPayload() {
   return { name, text };
 }
 
-function isAppleTouch() {
-  return /iPad|iPhone|iPod/.test(navigator.userAgent)
-    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
-    || navigator.standalone === true
-    || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+function closeBackupSheet() {
+  const sheet = document.getElementById("backupSheet");
+  if (!sheet) return;
+  sheet.hidden = true;
 }
 
-async function copyProgressBackup() {
-  const { text } = progressBackupPayload();
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(text);
-      alert(
-        "Backup copied.\n\n" +
-        "1. Open Notes and paste\n" +
-        "2. Tap Share → Save to Files\n" +
-        "3. Later: Import → Browse (not Recents) and pick that file"
-      );
+function openBackupSheet(mode) {
+  const sheet = document.getElementById("backupSheet");
+  const ta = document.getElementById("backupText");
+  const help = document.getElementById("backupHelp");
+  if (!sheet || !ta || !help) return;
+  const { name, text } = progressBackupPayload();
+  ta.value = text;
+  help.innerHTML = mode === "import"
+    ? "Paste a backup here, then tap <b>Restore from text</b>."
+    : `Tap <b>Select all</b>, then Copy. Paste into Notes (or Share → Save to Files as <b>${esc(name)}</b>).`;
+  sheet.hidden = false;
+  requestAnimationFrame(() => {
+    ta.focus();
+    ta.setSelectionRange(0, ta.value.length);
+  });
+}
+
+function wireBackupSheet() {
+  const sheet = document.getElementById("backupSheet");
+  if (!sheet || sheet.dataset.wired) return;
+  sheet.dataset.wired = "1";
+  document.getElementById("backupClose").addEventListener("click", closeBackupSheet);
+  sheet.addEventListener("click", e => { if (e.target === sheet) closeBackupSheet(); });
+  document.getElementById("backupSelect").addEventListener("click", () => {
+    const ta = document.getElementById("backupText");
+    ta.focus();
+    ta.setSelectionRange(0, ta.value.length);
+  });
+  document.getElementById("backupShare").addEventListener("click", async () => {
+    const ta = document.getElementById("backupText");
+    const text = ta.value || progressBackupPayload().text;
+    const name = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
+    const file = new File([text], name, { type: "text/plain" });
+    if (!navigator.share) {
+      alert("Sharing isn’t available here — use Select all → Copy instead.");
       return;
     }
-  } catch (e) {}
-  prompt("Select all and copy this backup:", text);
-}
-
-async function exportProgress() {
-  const { name, text } = progressBackupPayload();
-  /* text/plain shares more reliably on iOS than application/json */
-  const file = new File([text], name, { type: "text/plain" });
-  const apple = isAppleTouch();
-
-  if (navigator.share) {
     try {
       if (!navigator.canShare || navigator.canShare({ files: [file] })) {
         await navigator.share({ files: [file], title: "Study progress backup" });
@@ -2864,28 +2919,40 @@ async function exportProgress() {
     }
     try {
       await navigator.share({ title: name, text });
-      return;
     } catch (e) {
-      if (e && e.name === "AbortError") return;
+      if (e && e.name !== "AbortError") {
+        alert("Couldn’t share — use Select all → Copy, then paste into Notes.");
+      }
     }
-  }
-
-  if (apple) {
-    /* Do not trigger Safari’s Download prompt — it does not show up in Recents
-       and is easy to lose. Copy instead. */
-    return copyProgressBackup();
-  }
-
-  const blob = new Blob([text], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = name;
-  a.rel = "noopener";
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+  });
+  document.getElementById("backupRestore").addEventListener("click", () => {
+    const raw = document.getElementById("backupText").value.trim();
+    if (!raw) return alert("Paste a backup into the box first.");
+    let incoming;
+    try { incoming = JSON.parse(raw); }
+    catch (err) { incoming = null; }
+    if (!incoming || typeof incoming !== "object" || Array.isArray(incoming))
+      return alert("That text is not a valid progress backup.");
+    applyImportedProgress(incoming);
+  });
 }
+
+function applyImportedProgress(incoming) {
+  const next = migrate(Object.assign(blank(), incoming));
+  if (!confirm(
+    `Replace the progress on this phone?\n\n` +
+    `Now:      ${describeProgress(S)}\n` +
+    `Backup:   ${describeProgress(next)}\n\n` +
+    `This cannot be undone.`)) return;
+  S = next;
+  save({ force: true });
+  closeBackupSheet();
+  route();
+}
+
+/* Kept as a thin alias for older wiring / README wording. */
+function exportProgress() { openBackupSheet("export"); }
+function copyProgressBackup() { openBackupSheet("export"); }
 /* A one-line census of a saved state, so the import confirmation can say what
    is about to be replaced and what with, rather than asking blind. */
 function describeProgress(s) {
@@ -2911,25 +2978,10 @@ function importProgress(e) {
     let incoming;
     try { incoming = JSON.parse(r.result); }
     catch (err) { incoming = null; }
-    // picking the same file twice in a row must fire change again
     try { input.value = ""; } catch (err) {}
     if (!incoming || typeof incoming !== "object" || Array.isArray(incoming))
       return alert("That file could not be read as saved progress.");
-
-    /* Migrations normally run in load(). An import is precisely the case they
-       exist for — a backup can predate any schema change — so it goes through
-       the same path rather than straight into S. */
-    const next = migrate(Object.assign(blank(), incoming));
-
-    if (!confirm(
-      `Replace the progress in this browser?\n\n` +
-      `Now:      ${describeProgress(S)}\n` +
-      `The file: ${describeProgress(next)}\n\n` +
-      `This cannot be undone. Export first if you are not sure.`)) return;
-
-    S = next;
-    save({ force: true });
-    route();
+    applyImportedProgress(incoming);
   };
   r.readAsText(f);
 }
@@ -5512,6 +5564,7 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
 wireFurigana();
 wireBotnavScroll();
 wireKanjiKeyboard();
+wireBackupSheet();
 route();
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the

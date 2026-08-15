@@ -50,9 +50,10 @@ opened from. A site served from `github.io` is a different address from a file
 opened off your disk, so **the two do not share progress**, and neither do two
 different browsers or a laptop and a phone.
 
-The home screen shows **Export** and **Import**. Export downloads a JSON backup
-you can keep in Files (or AirDrop). Import restores it. The app also keeps a
-second on-device copy and refuses to overwrite a good backup with an empty one.
+The home screen shows **Save backup** and **Import file**. Save backup opens
+a box of your progress text — tap Select all, Copy, paste into Notes (or Share).
+To restore without Files, paste that text back and tap Restore from text.
+Re-adding the home icon does not erase progress by itself.
 
 If you have been studying from the local copy, carry it over once:
 
