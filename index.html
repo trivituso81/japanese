@@ -105,8 +105,8 @@
   .botnav a {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 2px; min-height: var(--botnav-h); padding: 4px 2px; text-decoration: none;
-    font-family: var(--ui); font-size: 10px; font-weight: 700;
-    letter-spacing: .12em; text-transform: uppercase; color: var(--text-faint);
+    font-family: var(--ui); font-size: 11px; font-weight: 700;
+    letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint);
     -webkit-tap-highlight-color: transparent;
   }
   .botnav a:hover { color: var(--text); }
@@ -123,64 +123,71 @@
 
   /* Home landing — one composition above the bottom bar on a phone */
   .home-landing {
-    display: flex; flex-direction: column; justify-content: center;
+    display: flex; flex-direction: column; justify-content: flex-start;
     flex: 1 1 auto; min-height: 0;
-    padding: 4px 0; gap: 16px;
+    padding: 10px 0 6px; gap: 18px;
   }
-  .home-brand { text-align: center; padding: 0 8px; }
+  .home-brand { text-align: center; padding: 2px 8px 0; }
   .home-brand .brand {
-    font-family: var(--jp-mincho); font-size: clamp(2rem, 8.5vw, 2.75rem);
-    line-height: 1.12; letter-spacing: .08em; color: var(--seal);
-    margin: 0 0 6px; font-weight: 400;
+    font-family: var(--jp-mincho); font-size: clamp(2.35rem, 10vw, 3.1rem);
+    line-height: 1.1; letter-spacing: .08em; color: var(--seal);
+    margin: 0 0 8px; font-weight: 400;
   }
   .home-brand .tag {
-    font-family: var(--serif); font-size: 14px; line-height: 1.4;
-    color: var(--text-soft); margin: 0; max-width: 26ch; margin-inline: auto;
+    font-family: var(--serif); font-size: 16px; line-height: 1.4;
+    font-style: italic; color: var(--text-soft); margin: 0;
+    max-width: 28ch; margin-inline: auto;
   }
   .home-stats {
     display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
     border: 1px solid var(--rule-strong); background: var(--rule);
-    overflow: hidden;
+    overflow: hidden; flex: 0 0 auto;
   }
   .home-stats .stat {
-    background: var(--bg); padding: 14px 12px 12px; text-align: center;
+    background: var(--bg); padding: 18px 14px 16px; text-align: center;
   }
   .home-stats .k {
-    font-size: 10px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 700;
+    font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-soft); font-weight: 700;
   }
   .home-stats .val {
-    font-family: var(--serif); font-size: clamp(1.45rem, 6.5vw, 2rem);
-    font-weight: 400; line-height: 1.12; margin-top: 5px;
+    font-family: var(--serif); font-size: clamp(1.85rem, 8vw, 2.45rem);
+    font-weight: 400; line-height: 1.1; margin-top: 8px;
     font-variant-numeric: tabular-nums; color: var(--text);
   }
-  .home-stats .of { font-size: 12px; color: var(--text-faint); }
+  .home-stats .of {
+    font-size: 15px; color: var(--text-soft); font-weight: 400;
+  }
   .home-stats .sub {
-    font-size: 11px; color: var(--text-faint); margin-top: 3px; line-height: 1.3;
+    font-family: var(--serif); font-size: 13px; color: var(--text-soft);
+    margin-top: 6px; line-height: 1.35;
   }
   .home-next {
-    text-align: center; padding: 0 4px;
+    text-align: center; padding: 2px 4px 0;
   }
   .home-next .say {
-    font-family: var(--serif); font-size: 14px; line-height: 1.35;
-    color: var(--text-soft); margin: 0 0 10px;
+    font-family: var(--serif); font-size: 16.5px; line-height: 1.35;
+    color: var(--text); margin: 0 0 12px; font-weight: 400;
   }
-  .home-next .btn { min-width: 168px; }
+  .home-next .btn {
+    min-width: 200px; font-size: 15px; padding: 12px 18px; min-height: 48px;
+  }
   .home-utils {
-    display: flex; flex-wrap: wrap; gap: 6px 14px; justify-content: center;
-    font-size: 12px; color: var(--text-faint);
+    display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center;
+    margin-top: auto; padding-top: 4px;
+    font-size: 13.5px; color: var(--text-faint);
   }
   .home-utils button, .home-utils .linkish {
-    font: inherit; font-size: 12px; font-weight: 600; letter-spacing: .04em;
+    font: inherit; font-size: 13.5px; font-weight: 600; letter-spacing: .03em;
     color: var(--text-soft); background: none; border: 0; padding: 0;
-    cursor: pointer; text-decoration: underline; text-underline-offset: 2px;
+    cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
   }
   .home-utils button:hover, .home-utils .linkish:hover { color: var(--seal); }
 
   /* Dash fills the viewport above the bar; masthead/footer stay out of the way */
   body[data-view="dash"] .wrap {
     min-height: 100dvh;
-    padding-top: max(12px, env(safe-area-inset-top, 0px));
+    padding-top: max(14px, env(safe-area-inset-top, 0px));
     padding-bottom: calc(var(--botnav-h, 58px) + 10px + env(safe-area-inset-bottom, 0px));
     display: flex; flex-direction: column;
   }
@@ -199,18 +206,24 @@
   }
 
   @media (max-height: 700px) {
-    .home-landing { gap: 12px; }
-    .home-brand .brand { font-size: clamp(1.7rem, 7.5vw, 2.2rem); margin-bottom: 4px; }
-    .home-brand .tag { font-size: 13px; }
-    .home-stats .stat { padding: 10px 10px 9px; }
-    .home-stats .val { font-size: clamp(1.3rem, 5.5vw, 1.7rem); margin-top: 3px; }
-    .home-stats .sub { font-size: 10.5px; }
-    .home-next .say { font-size: 13px; margin-bottom: 8px; }
+    .home-landing { gap: 14px; padding-top: 6px; }
+    .home-brand .brand { font-size: clamp(2rem, 9vw, 2.5rem); margin-bottom: 6px; }
+    .home-brand .tag { font-size: 14.5px; }
+    .home-stats .stat { padding: 14px 12px 13px; }
+    .home-stats .k { font-size: 11px; }
+    .home-stats .val { font-size: clamp(1.6rem, 7vw, 2.1rem); margin-top: 6px; }
+    .home-stats .of { font-size: 14px; }
+    .home-stats .sub { font-size: 12px; margin-top: 4px; }
+    .home-next .say { font-size: 15px; margin-bottom: 10px; }
+    .home-next .btn { font-size: 14px; min-height: 44px; padding: 10px 16px; }
+    .home-utils { font-size: 13px; }
+    .home-utils button, .home-utils .linkish { font-size: 13px; }
   }
   @media (max-height: 560px) {
-    .home-landing { gap: 10px; justify-content: flex-start; padding-top: 4px; }
+    .home-landing { gap: 10px; padding-top: 4px; }
     .home-brand .tag { display: none; }
     .home-stats .sub { display: none; }
+    .home-stats .stat { padding: 12px 10px; }
     .home-utils { display: none; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
