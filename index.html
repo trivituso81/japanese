@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<!-- same-origin so Google Translate TTS is not sent a github.io Referer
-     (that endpoint 404s any non-Google referrer). -->
-<meta name="referrer" content="same-origin">
+<!-- no-referrer: Safari (esp. home-screen) still attaches a github.io Referer
+     to media requests under same-origin, and translate_tts 404s on that. -->
+<meta name="referrer" content="no-referrer">
 <meta name="theme-color" content="#9c3b2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260816d">
+<link rel="manifest" href="site.webmanifest?v=20260816e">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260816d";
+window.__BUILD__ = "20260816e";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1701,6 +1701,10 @@ window.__BUILD__ = "20260816d";
 </style>
 </head>
 <body>
+<!-- Persistent TTS player. iOS unlocks per element; keep one node for the
+     whole session, with playsinline + no-referrer so Google TTS can load. -->
+<audio id="tts-el" playsinline webkit-playsinline preload="auto"
+  referrerpolicy="no-referrer" hidden></audio>
 <div class="wrap">
 
 <header class="masthead">
@@ -1771,7 +1775,7 @@ window.__BUILD__ = "20260816d";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260816d"></script>
+<script src="japanese-data.js?v=20260816e"></script>
 <script>
 /* ============================================================
    State
@@ -1997,9 +2001,8 @@ const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 const canSpeakBrowser = typeof window !== "undefined" && "speechSynthesis" in window;
 const canSpeak = true;   // Listen always offered; Google TTS needs network
 let jaVoice = null;
-/* One shared Audio element for the whole page. iOS Safari unlocks playback
-   per element, not per document — creating a fresh Audio() for each word
-   makes the first play work (still inside the tap) and every later play silent. */
+/* One shared <audio id="tts-el"> for the whole page. iOS Safari unlocks
+   playback per element — a fresh Audio() each time makes later plays silent. */
 let speakAudio = null;
 let speakAudioGen = 0;   // bump to ignore stale playing/ended/error handlers
 
@@ -2021,18 +2024,21 @@ if (canSpeakBrowser) {
 }
 
 function googleTtsUrl(text) {
-  /* Cache-bust so Safari does not reuse a failed/empty response for the same q=
-     (replaying a model sentence used to produce silence after the first play). */
+  /* Cache-bust so Safari does not reuse a failed/empty response for the same q=. */
   return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q="
     + encodeURIComponent(text) + "&_=" + Date.now();
 }
 
 function ensureSpeakAudio() {
   if (speakAudio) return speakAudio;
-  if (typeof Audio === "undefined") return null;
-  const a = new Audio();
+  const el = typeof document !== "undefined" ? document.getElementById("tts-el") : null;
+  const a = el || (typeof Audio !== "undefined" ? new Audio() : null);
+  if (!a) return null;
   try { a.referrerPolicy = "no-referrer"; } catch (e) {}
-  a.setAttribute("referrerpolicy", "no-referrer");
+  try { a.setAttribute("referrerpolicy", "no-referrer"); } catch (e) {}
+  try { a.setAttribute("playsinline", ""); } catch (e) {}
+  try { a.setAttribute("webkit-playsinline", ""); } catch (e) {}
+  try { a.playsInline = true; } catch (e) {}
   a.preload = "auto";
   speakAudio = a;
   return a;
@@ -2068,29 +2074,35 @@ let ttsUnlocked = false;
 let pendingSpeak = null;   // [reading, kanji] waiting for a user gesture
 let speakBusyEl = null;    // which Listen button is currently playing
 
+function detachSpeakHandlers() {
+  if (!speakAudio) return;
+  try {
+    if (typeof speakAudio._ttsCleanup === "function") speakAudio._ttsCleanup();
+    speakAudio._ttsCleanup = null;
+  } catch (e) {}
+}
+
 /* Browsers block audible Autoplay until the page has a user gesture. Play a
    silent clip on the SHARED element inside that gesture so later auto-speaks
    (verdict screen, next card) can reuse the same unlocked element. */
 function unlockTts() {
-  if (ttsUnlocked || typeof Audio === "undefined") return;
+  if (typeof Audio === "undefined") return;
+  const a = ensureSpeakAudio();
+  if (!a) return;
+  if (ttsUnlocked) return;
   ttsUnlocked = true;
   try {
-    const a = ensureSpeakAudio();
-    if (!a) return;
+    detachSpeakHandlers();
     a.src = SILENT_WAV;
-    a.volume = 0;
     const p = a.play();
     if (p && typeof p.then === "function") {
       p.then(() => {
         try {
-          if ((a.currentSrc || a.src || "").indexOf("data:") === 0) {
-            a.pause();
-            a.volume = 1;
-          }
+          /* Only pause if we are still on the silent clip — speakJapanese may
+             already have swapped in the real Google URL. */
+          if ((a.currentSrc || a.src || "").indexOf("data:") === 0) a.pause();
         } catch (e) {}
-      }).catch(() => { try { a.volume = 1; } catch (e) {} });
-    } else {
-      a.volume = 1;
+      }).catch(() => {});
     }
   } catch (e) {}
 }
@@ -2107,21 +2119,28 @@ function flushPendingSpeak() {
 function speakJapanese(reading, kanji) {
   const text = speakSource(reading, kanji);
   if (!text) return false;
-  stopSpeaking();
+
+  /* Stop prior playback without destroying the shared unlocked element. */
+  speakToken++;
   pendingSpeak = null;
+  speakAudioGen++;
+  if (canSpeakBrowser) {
+    try { speechSynthesis.cancel(); } catch (e) {}
+  }
+  detachSpeakHandlers();
+  const audio = ensureSpeakAudio();
+  if (audio) {
+    try { audio.pause(); } catch (e) {}
+  }
   setSpeakBusy(true);
-  const token = ++speakToken;
+
+  const token = speakToken;
   const hold = [reading, kanji];
-  const gen = ++speakAudioGen;
+  const gen = speakAudioGen;
 
   // Play Google Translate TTS on the shared Audio element. Fetch cannot be
-  // used — the endpoint has no CORS headers — so we load it as Audio.
-  // Explicit no-referrer is required: Safari has been observed sending the
-  // github.io page as Referer on media requests even with
-  // <meta name="referrer" content="same-origin">, and that Referer makes
-  // translate_tts 404 (then we used to fall back to the robotic Web Speech
-  // voice).
-  const audio = ensureSpeakAudio();
+  // used — the endpoint has no CORS headers. Any Referer makes translate_tts
+  // 404; the page meta and this element's referrerpolicy must stay no-referrer.
   if (audio) {
     let settled = false;
     const fallback = () => {
@@ -2132,14 +2151,12 @@ function speakJapanese(reading, kanji) {
     const blocked = () => {
       if (settled || token !== speakToken || gen !== speakAudioGen) return;
       settled = true;
-      // Remember this word; the next tap unlocks audio and plays it.
       pendingSpeak = hold;
       setSpeakBusy(false);
     };
     const onPlaying = () => {
       if (gen !== speakAudioGen) return;
       settled = true;
-      try { audio.volume = 1; } catch (e) {}
     };
     const onEnded = () => {
       if (gen === speakAudioGen && token === speakToken) setSpeakBusy(false);
@@ -2151,7 +2168,6 @@ function speakJapanese(reading, kanji) {
     audio.addEventListener("playing", onPlaying);
     audio.addEventListener("ended", onEnded);
     audio.addEventListener("error", onError);
-    /* Drop handlers on the next stop/speak so they cannot fire after reuse. */
     audio._ttsCleanup = () => {
       try {
         audio.removeEventListener("playing", onPlaying);
@@ -2159,7 +2175,6 @@ function speakJapanese(reading, kanji) {
         audio.removeEventListener("error", onError);
       } catch (e) {}
     };
-    try { audio.volume = 1; } catch (e) {}
     audio.src = googleTtsUrl(text);
     const play = audio.play();
     if (play && typeof play.then === "function") {
@@ -2171,9 +2186,6 @@ function speakJapanese(reading, kanji) {
         } else fallback();
       });
     }
-    // Only fall back if Google never starts — give mobile networks time.
-    // Do not use readyState alone: Safari often sits below HAVE_CURRENT_DATA
-    // for a while even while a good stream is on the way.
     setTimeout(() => {
       if (settled || token !== speakToken || gen !== speakAudioGen) return;
       if (audio.error || (audio.paused && audio.currentTime === 0 && audio.readyState < 2)) {
@@ -2193,15 +2205,9 @@ function stopSpeaking() {
   if (canSpeakBrowser) {
     try { speechSynthesis.cancel(); } catch (e) {}
   }
+  detachSpeakHandlers();
   if (speakAudio) {
-    const a = speakAudio;
-    try {
-      if (typeof a._ttsCleanup === "function") a._ttsCleanup();
-      a._ttsCleanup = null;
-      a.pause();
-      /* Keep src intact — clearing + load() races error handlers and, on iOS,
-         can leave the shared element unable to play again. */
-    } catch (e) {}
+    try { speakAudio.pause(); } catch (e) {}
   }
   setSpeakBusy(false);
 }
