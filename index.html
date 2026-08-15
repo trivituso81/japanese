@@ -12,10 +12,28 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="トムさんの勉強ガイド">
 <meta name="application-name" content="トムさんの勉強ガイド">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest">
+<link rel="manifest" href="site.webmanifest?v=20260815c">
 <title>トムさんの勉強ガイド</title>
+<script>
+/* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
+   Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
+window.__BUILD__ = "20260815c";
+(function () {
+  var standalone = (window.navigator.standalone === true)
+    || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+  if (!standalone) return;
+  try {
+    var u = new URL(location.href);
+    if (u.searchParams.get("v") === window.__BUILD__) return;
+    u.searchParams.set("v", window.__BUILD__);
+    location.replace(u.href);
+  } catch (e) {}
+})();
+</script>
 <style>
   /* ============================================================
      和 — a washi-paper palette in traditional dye names.
@@ -1582,7 +1600,7 @@
 
 <div class="k-type-frame" id="kframe" hidden></div>
 
-<script src="japanese-data.js"></script>
+<script src="japanese-data.js?v=20260815c"></script>
 <script>
 /* ============================================================
    State

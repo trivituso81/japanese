@@ -80,6 +80,10 @@ name is **トムさんの勉強ガイド**, it uses the red **和** seal as its 
 opens without the Safari chrome. If an older icon is already there, delete it
 and add the site again so iOS picks up the new name.
 
+The home-screen app caches hard — closing it does **not** pull updates. After a
+site change, open the same URL once in Safari (pull to refresh), or delete the
+home-screen icon and add it again.
+
 ## Running it locally
 
 Open `index.html` by double-clicking it. That is all — it works straight off the
