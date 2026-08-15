@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815h">
+<link rel="manifest" href="site.webmanifest?v=20260815i">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815h";
+window.__BUILD__ = "20260815i";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -2883,17 +2883,12 @@ function openBackupSheet(mode) {
   if (restoring) {
     ta.value = "";
     help.innerHTML =
-      "If the home-screen app looks empty after you re-added it, progress is probably still in Safari.<br><br>" +
-      "1. Open this site in <b>Safari</b> (not the icon)<br>" +
-      "2. Tap <b>Save backup</b> → <b>Select all</b> → Copy<br>" +
-      "3. Return here, paste into the box, tap <b>Restore from text</b>";
+      "Paste a backup copied from Safari, then tap <b>Restore from text</b>.";
   } else {
-    const { name, text } = progressBackupPayload();
+    const { text } = progressBackupPayload();
     ta.value = text;
     help.innerHTML =
-      "On iPhone the home-screen app does <b>not</b> share saves with Safari. " +
-      "Before you re-add the icon, tap <b>Select all</b> → Copy, keep it in Notes, " +
-      `then Restore after installing. (File name: <b>${esc(name)}</b>)`;
+      "Tap <b>Select all</b> → Copy, then paste into Notes or into Restore on the home-screen app.";
   }
   sheet.hidden = false;
   requestAnimationFrame(() => {
