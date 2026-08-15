@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<!-- This document must never send a Referer. Google translate_tts 404s any
+     non-Google Referer; Safari often attaches github.io even when the parent
+     page asked for no-referrer on an <audio> element. -->
+<meta name="referrer" content="no-referrer">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TTS</title>
+</head>
+<body>
+<script>
+(function () {
+  function tell(type, extra) {
+    try {
+      if (parent && parent !== window) {
+        parent.postMessage(Object.assign({ type: type }, extra || {}), "*");
+      }
+    } catch (e) {}
+  }
+
+  var q = "";
+  try { q = new URLSearchParams(location.search).get("q") || ""; } catch (e) {}
+  if (!q) { tell("tts-error", { reason: "empty" }); return; }
+
+  var a = document.createElement("audio");
+  a.setAttribute("playsinline", "");
+  a.setAttribute("webkit-playsinline", "");
+  try { a.playsInline = true; } catch (e) {}
+  a.preload = "auto";
+  a.src = "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q="
+    + encodeURIComponent(q) + "&_=" + Date.now();
+
+  var settled = false;
+  function fail(reason) {
+    if (settled) return;
+    settled = true;
+    tell("tts-error", { reason: reason || "error" });
+    /* Last resort inside this no-referrer document. */
+    if (!("speechSynthesis" in window)) return;
+    try {
+      speechSynthesis.cancel();
+      var u = new SpeechSynthesisUtterance(q);
+      u.lang = "ja-JP";
+      u.rate = 0.92;
+      speechSynthesis.speak(u);
+    } catch (e) {}
+  }
+
+  a.addEventListener("playing", function () {
+    if (settled) return;
+    settled = true;
+    tell("tts-playing");
+  });
+  a.addEventListener("ended", function () { tell("tts-ended"); });
+  a.addEventListener("error", function () { fail("media-error"); });
+
+  document.body.appendChild(a);
+  var p = a.play();
+  if (p && typeof p.then === "function") {
+    p.then(function () { tell("tts-playing"); settled = true; })
+     .catch(function (err) {
+       fail(err && err.name ? err.name : "play-rejected");
+     });
+  }
+
+  setTimeout(function () {
+    if (settled) return;
+    if (a.error || (a.paused && a.currentTime === 0)) fail("timeout");
+  }, 6000);
+})();
+</script>
+</body>
+</html>
