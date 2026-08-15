@@ -53,6 +53,7 @@
     --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
     --jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
     --jp-mincho: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", "MS Mincho", serif;
+    --botnav-h: 58px;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
@@ -94,7 +95,6 @@
 
   /* Fixed bottom bar — Home / Lessons / Kanji / Verbs */
   .botnav {
-    --botnav-h: 58px;
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     display: grid; grid-template-columns: repeat(4, 1fr);
     background: var(--bg);
