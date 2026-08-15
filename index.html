@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815v">
+<link rel="manifest" href="site.webmanifest?v=20260815ipad">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815v";
+window.__BUILD__ = "20260815ipad";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1673,6 +1673,286 @@ window.__BUILD__ = "20260815v";
     }
   }
 
+  /* ============================================================
+     Largest iPad (Pro 12.9″ / 13″)
+     Portrait ≈1024×1366 · Landscape ≈1366×1024
+
+     Phone-first shells stretch into billboards here. Recompose for a
+     study sheet: roomier type, a centred play card, and a home that
+     uses the tablet's height (portrait) or width (landscape).
+     ============================================================ */
+  @media (min-width: 900px) and (max-width: 1400px) {
+    :root {
+      --maxw: 1080px;
+      --botnav-h: 64px;
+      --ipad-play-w: 680px;
+    }
+    body { font-size: 17px; line-height: 1.7; }
+    .wrap { padding: 42px 36px 128px; }
+    /* Stop Safari zooming inputs on focus */
+    input, select, textarea { font-size: 16px; }
+
+    .botnav {
+      padding: 4px 16px calc(4px + env(safe-area-inset-bottom, 0px));
+    }
+    .botnav a {
+      font-size: 12px; gap: 4px; letter-spacing: .12em;
+      min-height: var(--botnav-h); padding: 6px 4px;
+    }
+    .botnav .navico { width: 24px; height: 24px; }
+
+    header.masthead { padding-bottom: 28px; }
+    .kicker { font-size: 12px; letter-spacing: .2em; margin-bottom: 16px; }
+    h1 { font-size: 36px; }
+    .standfirst { font-size: 17.5px; max-width: 62ch; }
+    .enso { width: 120px; height: 120px; top: -10px; right: 0; }
+
+    /* Home — fill the tall portrait fold without phone stretch */
+    body[data-view="dash"] .wrap {
+      max-width: 920px;
+      margin-left: auto; margin-right: auto;
+      padding-left: max(36px, env(safe-area-inset-left, 0px));
+      padding-right: max(36px, env(safe-area-inset-right, 0px));
+    }
+    .home-landing { gap: 18px; padding: 14px 0 8px; }
+    .home-brand { padding: 18px 12px 10px; }
+    .home-brand .brand {
+      font-size: clamp(2.15rem, 4vw, 2.8rem);
+    }
+    .home-stats {
+      min-height: min(54vh, 560px);
+      flex: 1 1 auto;
+    }
+    .home-stats .stat { padding: 22px 20px 18px; gap: 12px; }
+    .home-stats .k { font-size: 11.5px; letter-spacing: .16em; }
+    .home-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
+    .home-stats .sub { font-size: 14px; }
+    .viz-enso { width: min(128px, 16vw); }
+    .viz-enso .pct { font-size: 18px; }
+    .viz-brush { max-width: 200px; height: 38px; }
+    .viz-pillars { max-width: 240px; gap: 20px; }
+    .viz-pillars .shaft { min-height: 96px; }
+    .viz-pillars .ppct { font-size: 13px; }
+    .viz-pillars .plab { font-size: 11px; }
+    .viz-pillars .pcnt { font-size: 11px; }
+    .viz-wave { max-width: 200px; height: 80px; }
+    .home-next { padding-top: 6px; }
+    .home-next .btn {
+      max-width: 440px; margin: 0 auto;
+      font-size: 16.5px; min-height: 56px; padding: 16px 24px;
+    }
+    .home-progress {
+      font-size: 13px; gap: 8px 14px; padding-top: 8px;
+    }
+    .home-progress button,
+    .home-progress label { font-size: 13px; }
+
+    /* Flashcard / kanji setup */
+    body[data-view="cards"] .wrap,
+    body[data-view="kanji"] .wrap {
+      padding-left: max(36px, env(safe-area-inset-left, 0px));
+      padding-right: max(36px, env(safe-area-inset-right, 0px));
+    }
+    .cards-setup {
+      max-width: 560px; width: 100%; margin: 0 auto;
+      gap: 22px;
+      min-height: calc(100dvh - var(--botnav-h) - 72px);
+    }
+    .cards-setup .cards-title {
+      font-size: clamp(1.9rem, 3.4vw, 2.4rem);
+    }
+    .cards-setup .cards-kicker { font-size: 12px; letter-spacing: .18em; }
+    .cards-setup .options { padding: 22px 24px; }
+    .cards-setup .opt.start .btn {
+      font-size: 16.5px; min-height: 56px;
+    }
+
+    /* Active round — a centred study card, not edge-to-edge chrome */
+    body[data-view="cards-play"] .wrap,
+    body[data-view="kanji-play"] .wrap {
+      align-items: center;
+      padding-left: max(28px, env(safe-area-inset-left, 0px));
+      padding-right: max(28px, env(safe-area-inset-right, 0px));
+    }
+    body[data-view="cards-play"] #view,
+    body[data-view="kanji-play"] #view,
+    .card-play {
+      width: 100%;
+      max-width: var(--ipad-play-w);
+    }
+    .card-play .stagehead { font-size: 13.5px; padding: 10px 6px 12px; }
+    .card-play .prompt { font-size: clamp(2rem, 3vw, 2.65rem); }
+    .card-play .prompt.jp { font-size: clamp(2.4rem, 3.8vw, 3.25rem); }
+    .card-play .answer { font-size: clamp(1.55rem, 2.4vw, 1.95rem); }
+    .card-play .answer.jp { font-size: clamp(1.75rem, 2.8vw, 2.3rem); }
+    .card-play .kbig-face { font-size: clamp(6.5rem, 14vw, 9.5rem); }
+    .card-play .kin {
+      max-width: 480px; font-size: 18px; padding: 14px 16px; min-height: 52px;
+    }
+    .card-play .cardacts .btn {
+      min-height: 56px; font-size: 16px; padding: 14px 18px;
+    }
+    .card-play .k-ans-mean { font-size: clamp(1.4rem, 2.4vw, 1.75rem); }
+    .card-play .k-ans-jp { font-size: clamp(1.55rem, 2.6vw, 2rem); }
+    .k-type-frame {
+      padding: 14px 28px 16px;
+    }
+    .k-type-frame .kbig-face {
+      font-size: var(--k-glyph, clamp(4rem, 16vmin, 8rem));
+    }
+    .k-type-frame .kin { max-width: 520px; width: 100%; }
+    .k-type-frame .k-type-acts {
+      max-width: 520px; width: 100%; margin: 0 auto;
+    }
+    .k-type-frame .k-type-acts .btn { min-height: 52px; font-size: 16px; }
+
+    /* Lesson, grammar, vocab, drills */
+    h2.view { font-size: 28px; margin-top: 36px; }
+    h2.view.minor { font-size: 21px; }
+    .viewsub { font-size: 16px; }
+    .next { padding: 20px 22px; gap: 22px; }
+    .next p { font-size: 16px; }
+    .options { padding: 20px 22px; gap: 18px 28px; }
+    .opt select { min-height: 44px; padding: 9px 12px; }
+    .seg .btn { min-height: 44px; padding: 10px 16px; font-size: 14px; }
+    .opt .btn { font-size: 14px; padding: 10px 16px; min-height: 44px; }
+    .btn { font-size: 13.5px; padding: 10px 16px; }
+    .btn.sm { font-size: 12.5px; padding: 8px 12px; }
+
+    .board thead th { padding: 14px 12px; font-size: 11px; }
+    .board td { padding: 13px 12px; font-size: 15px; }
+    .btitle small { font-size: 13px; }
+    .meter { max-width: 150px; height: 7px; }
+    select.status { max-width: 150px; font-size: 13.5px; padding: 7px 9px; }
+
+    .point > h3 { font-size: 19px; padding: 15px 20px; }
+    .point .body { padding: 22px; }
+    .point p { font-size: 16px; }
+    .ex .j { font-size: 18px; }
+    .ex .t { font-size: 15px; }
+
+    .vlist { grid-template-columns: minmax(220px, 36%) 1fr; }
+    .vj { font-size: 17.5px; }
+    .ve2 { font-size: 14.5px; }
+
+    .qbox, .verdict { padding: 28px 28px; }
+    .qen { font-size: 24px; max-width: 48ch; }
+    textarea.jp { font-size: 22px; min-height: 100px; padding: 14px 16px; }
+    .vrow .j { font-size: 24px; }
+    .vrow .j.yours { font-size: 22px; }
+    .results { padding: 30px 28px; }
+    .bigscore { font-size: 58px; }
+
+    .verbcta { padding: 20px 22px; font-size: 15.5px; }
+    .vcard { padding: 40px 32px; }
+    .vword { font-size: 48px; }
+    .vword.en { font-size: 32px; }
+    .vcard input { max-width: 400px; font-size: 24px; min-height: 52px; }
+    .kbig { font-size: 100px; }
+    .verdict .kbig { font-size: 64px; }
+
+    .ktable .k-c { font-size: 28px; }
+    .k-browse-page .k-browse-head h1 {
+      font-size: clamp(1.6rem, 2.4vw, 2rem);
+    }
+    .k-browse-page .k-browse-seg .btn { flex: 0 1 auto; min-width: 100px; }
+    .k-code { max-width: 560px; }
+    .k-code-glyph { font-size: clamp(6rem, 12vw, 8rem); }
+    .k-code-acts .btn { min-height: 52px; font-size: 15px; }
+
+    .stagehead { padding: 15px 20px; font-size: 13px; }
+    .card { min-height: 320px; }
+    .prompt { font-size: 34px; }
+    .prompt.jp { font-size: 42px; }
+    .answer { font-size: 25px; }
+    .answer.jp { font-size: 30px; }
+    .cardacts .btn { min-height: 48px; }
+    .speak { font-size: 13px; padding: 9px 14px; min-height: 42px; }
+
+    .backup-sheet {
+      align-items: center;
+      padding: 28px;
+      padding-bottom: max(28px, env(safe-area-inset-bottom, 0px));
+    }
+    .backup-card {
+      width: min(540px, 100%);
+      max-height: min(78dvh, 720px);
+      padding: 24px 22px 18px;
+      gap: 12px;
+    }
+    .backup-card h2 { font-size: 1.4rem; }
+    .backup-card .backup-help { font-size: 14px; }
+    .backup-card textarea { min-height: 220px; font-size: 12px; }
+    .backup-card .backup-acts .btn { min-height: 48px; }
+
+    .lnav a { padding: 14px 18px; }
+    .lnav .lt { font-size: 16px; }
+    footer.foot { margin-top: 72px; font-size: 14.5px; }
+  }
+
+  /* Landscape on the large iPad — trade height for a two-pane home */
+  @media (min-width: 1100px) and (max-width: 1400px) and (orientation: landscape) {
+    :root { --ipad-play-w: 720px; }
+
+    body[data-view="dash"] .wrap {
+      max-width: 1180px;
+      padding-top: max(10px, env(safe-area-inset-top, 0px));
+    }
+    .home-landing {
+      display: grid;
+      grid-template-columns: minmax(260px, 0.9fr) minmax(0, 1.35fr);
+      grid-template-rows: auto 1fr auto;
+      gap: 14px 32px;
+      align-items: stretch;
+      padding: 6px 0 4px;
+      min-height: 0;
+    }
+    .home-brand {
+      grid-column: 1; grid-row: 1;
+      text-align: left; padding: 4px 0 0;
+      align-self: end;
+    }
+    .home-brand .brand {
+      text-align: left;
+      font-size: clamp(1.85rem, 2.8vw, 2.35rem);
+    }
+    .home-stats {
+      grid-column: 2; grid-row: 1 / 3;
+      min-height: 0;
+      height: 100%;
+    }
+    .home-stats .stat { padding: 14px 14px 12px; gap: 8px; }
+    .viz-enso { width: min(96px, 12vw); }
+    .viz-pillars { max-width: 200px; gap: 14px; }
+    .viz-pillars .shaft { min-height: 56px; }
+    .viz-wave { height: 56px; max-width: 160px; }
+    .viz-brush { max-width: 160px; height: 30px; }
+    .home-next {
+      grid-column: 1; grid-row: 2;
+      text-align: left; margin-top: 0; padding-top: 0;
+      align-self: start;
+    }
+    .home-next .btn { margin: 0; max-width: none; width: 100%; }
+    .home-progress {
+      grid-column: 1 / -1; grid-row: 3;
+      justify-content: flex-start; padding-top: 4px;
+    }
+
+    .cards-setup {
+      max-width: 680px;
+      min-height: calc(100dvh - var(--botnav-h) - 48px);
+      justify-content: center;
+    }
+    .card-play .kbig-face {
+      font-size: clamp(5.25rem, 18vh, 8rem);
+    }
+    body[data-view="kanji-play"] .card-play .card-face { bottom: 7.5em; }
+    body[data-view="kanji-play"] .card-play .card-reveal { height: 7.5em; }
+
+    .k-code { max-width: 640px; }
+    .k-code-glyph { font-size: clamp(5rem, 14vh, 7rem); }
+  }
+
   /* A page this quiet should not lurch when it moves. */
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
@@ -1750,7 +2030,7 @@ window.__BUILD__ = "20260815v";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815v"></script>
+<script src="japanese-data.js?v=20260815ipad"></script>
 <script>
 /* ============================================================
    State
