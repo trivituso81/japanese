@@ -7,7 +7,7 @@
 <!-- no-referrer: Safari (esp. home-screen) still attaches a github.io Referer
      to media requests under same-origin, and translate_tts 404s on that. -->
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#9c3b2e">
+<meta name="theme-color" content="#e63e6d">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="トムさんの勉強ガイド">
@@ -16,12 +16,15 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260816u">
+<link rel="manifest" href="site.webmanifest?v=20260816v">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260816u";
+window.__BUILD__ = "20260816v";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -34,76 +37,81 @@ window.__BUILD__ = "20260816u";
 </script>
 <style>
   /* ============================================================
-     和 — a washi-paper palette in traditional dye names.
+     Anime / manga panel — fun, fresh, modern, still polished.
 
-     Nothing here is pure black or pure white: sumi ink sits warm on
-     unbleached paper, rules are brushed rather than drawn, and the one
-     loud colour is the vermilion of a hanko seal, spent sparingly.
+     Cool ink on bright paper, coral magenta as the punch colour,
+     aqua as the secondary accent. Rounded panels, geometric Latin,
+     soft rounded Japanese — magazine-clean, not temple-quiet.
      ============================================================ */
   :root {
-    --washi: #f4f0e6;          /* 生成り  unbleached paper, the page itself */
-    --bg: #fbf8f1;             /* 白練    silk white, anything laid on the page */
-    --bg-soft: #f2eee2;        /* a shade sunk into the paper */
-    --bg-inset: #e9e3d4;       /* sunk further still */
-    --text: #23201b;           /* 墨      sumi ink */
-    --text-soft: #55503f;      /* 消炭    charcoal */
-    --text-faint: #8f8875;     /* 鈍色    dulled grey */
-    --rule: #ded7c4;           /* hairline, the width of a fine brush */
-    --rule-strong: #c3b9a0;
-    --accent: #2f4f6f;         /* 縹      hanada, the indigo of dyed cloth */
-    --accent-soft: #e2e7ec;
-    --seal: #9c3b2e;           /* 朱      vermilion, the ink of a name seal */
-    --seal-deep: #82301f;
-    --done: #45613f;           /* 松葉    pine needle */
-    --now: #9a6a1e;            /* 黄土    ochre */
+    --washi: #f3f6fb;          /* cool manga paper */
+    --bg: #ffffff;             /* panel white */
+    --bg-soft: #eef3fa;        /* soft sky wash */
+    --bg-inset: #e1e9f4;       /* recessed panel */
+    --text: #16181d;           /* deep ink */
+    --text-soft: #4a5160;
+    --text-faint: #8b93a5;
+    --rule: #d5dde9;
+    --rule-strong: #b8c4d6;
+    --accent: #0d9bb5;         /* anime sky / aqua */
+    --accent-soft: #d5f1f7;
+    --seal: #e63e6d;           /* coral magenta — the star colour */
+    --seal-deep: #c92d58;
+    --done: #1a9e6e;
+    --now: #e08a1a;
     --miss: var(--seal);
-    --ok-bg: #edf1e7;
-    --ok-line: #b9c6ac;
-    --warn-bg: #f7f0dd;
-    --warn-line: #d9c395;
-    --miss-bg: #f7eae5;
-    --miss-line: #d5b0a4;
-    --cur-bg: #f6efdd;
-    --cur-line: #d8c295;
+    --ok-bg: #e7f8f0;
+    --ok-line: #95d4b6;
+    --warn-bg: #fff3e3;
+    --warn-line: #efc98a;
+    --miss-bg: #ffe8ef;
+    --miss-line: #f0a8bc;
+    --cur-bg: #e6f6fb;
+    --cur-line: #9ad0df;
     --maxw: 1020px;
-    --ui: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-    --jp: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Meiryo", sans-serif;
-    --jp-mincho: "Hiragino Mincho ProN", "Yu Mincho", YuMincho, "Noto Serif JP", "MS Mincho", serif;
+    --radius: 14px;
+    --radius-sm: 10px;
+    --radius-lg: 20px;
+    --ui: "Outfit", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    --serif: "Outfit", "Hiragino Sans", "Yu Gothic", sans-serif;
+    --jp: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+    --jp-mincho: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --botnav-h: 58px;
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  /* the faint cross-weave of paper fibre, well below the threshold of notice */
+  /* soft sky washes + faint manga halftone */
   body { margin: 0; color: var(--text); font: 16px/1.72 var(--ui);
     background-color: var(--washi);
     background-image:
-      repeating-linear-gradient(90deg, rgba(90,70,40,.020) 0 1px, transparent 1px 3px),
-      repeating-linear-gradient(0deg,  rgba(90,70,40,.016) 0 1px, transparent 1px 4px); }
+      radial-gradient(ellipse 110% 70% at 100% -8%, rgba(230, 62, 109, .10), transparent 52%),
+      radial-gradient(ellipse 90% 55% at -5% 105%, rgba(13, 155, 181, .09), transparent 48%),
+      radial-gradient(rgba(22, 24, 29, .04) 1.1px, transparent 1.2px);
+    background-size: auto, auto, 11px 11px; }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 46px 26px 120px;
     overflow-wrap: break-word; }
   a { color: var(--accent); text-underline-offset: 2px; }
 
   /* masthead */
   header.masthead { position: relative; padding-bottom: 26px; border-bottom: 1px solid var(--rule-strong); }
-  /* 青海波 — the wave pattern, breaking along the foot of the rule */
-  header.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px;
-    height: 14px; pointer-events: none; opacity: .5;
-    background-image: repeating-radial-gradient(circle at 50% 100%,
-      transparent 0 9px, var(--rule-strong) 9px 10px, transparent 10px 13px);
-    background-size: 26px 13px; }
-  /* 円相 — the ensō, drawn in one breath and left open */
+  /* accent speed-bar under the masthead rule */
+  header.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
+    height: 3px; pointer-events: none; border-radius: 2px;
+    background: linear-gradient(90deg,
+      transparent 0%, var(--seal) 18%, var(--accent) 50%, var(--seal) 82%, transparent 100%);
+    opacity: .9; }
+  /* decorative open ring — manga panel flourish */
   .enso { position: absolute; top: -8px; right: -4px; width: 108px; height: 108px;
-    opacity: .13; pointer-events: none; }
-  .enso path { fill: none; stroke: var(--text); stroke-width: 5.5; stroke-linecap: round; }
-  .kicker { font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+    opacity: .16; pointer-events: none; }
+  .enso path { fill: none; stroke: var(--seal); stroke-width: 6; stroke-linecap: round; }
+  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--text-faint); margin: 0 0 14px; font-weight: 600; }
-  h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: 0.005em;
-    margin: 0 0 14px; font-weight: 400; }
-  h1 .jp { font-family: var(--jp-mincho); font-weight: 400; margin-left: 6px;
-    color: var(--seal); letter-spacing: 0.06em; }
+  h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: -0.01em;
+    margin: 0 0 14px; font-weight: 700; }
+  h1 .jp { font-family: var(--jp-mincho); font-weight: 700; margin-left: 6px;
+    color: var(--seal); letter-spacing: 0.04em; }
   .standfirst { font-family: var(--serif); font-size: 16.5px; line-height: 1.75;
-    color: var(--text-soft); margin: 0; max-width: 68ch; }
+    color: var(--text-soft); margin: 0; max-width: 68ch; font-weight: 400; }
   .standfirst b { color: var(--text); font-weight: 600; }
 
   /* Top tracks retired in favour of the bottom bar — kept in the DOM for
@@ -116,10 +124,12 @@ window.__BUILD__ = "20260816u";
   .botnav {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     display: grid; grid-template-columns: repeat(4, 1fr);
-    background: var(--bg);
+    background: rgba(255, 255, 255, .92);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid var(--rule-strong);
     padding: 2px 4px calc(2px + env(safe-area-inset-bottom, 0px));
-    box-shadow: 0 -6px 18px rgba(35, 32, 27, .04);
+    box-shadow: 0 -8px 24px rgba(22, 24, 29, .06);
     transition: transform .28s ease;
     will-change: transform;
   }
@@ -129,6 +139,7 @@ window.__BUILD__ = "20260816u";
   }
   @media (prefers-reduced-motion: reduce) {
     .botnav { transition: none; }
+    .home-brand .brand { animation: none; }
   }
   .botnav a {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -161,15 +172,20 @@ window.__BUILD__ = "20260816u";
   }
   .home-brand .brand {
     font-family: var(--jp-mincho); font-size: clamp(1.65rem, 7.2vw, 2.35rem);
-    line-height: 1.2; letter-spacing: .06em; color: var(--seal);
-    margin: 0; font-weight: 400;
+    line-height: 1.2; letter-spacing: .04em; color: var(--seal);
+    margin: 0; font-weight: 700;
+    animation: brand-in .55s ease-out both;
+  }
+  @keyframes brand-in {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: none; }
   }
 
   .home-stats {
     display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
     gap: 1px; flex: 1 1 auto; min-height: 280px;
     border: 1px solid var(--rule-strong); background: var(--rule-strong);
-    overflow: hidden;
+    overflow: hidden; border-radius: var(--radius-lg);
   }
   .home-stats .stat {
     background: var(--bg);
@@ -190,7 +206,7 @@ window.__BUILD__ = "20260816u";
   }
   .home-stats .val {
     font-family: var(--serif); font-size: clamp(1.15rem, 4.6vw, 1.45rem);
-    font-weight: 400; line-height: 1.15;
+    font-weight: 600; line-height: 1.15;
     font-variant-numeric: tabular-nums; color: var(--text);
   }
   .home-stats .of { font-size: .72em; color: var(--text-soft); }
@@ -210,11 +226,11 @@ window.__BUILD__ = "20260816u";
   }
   .home-filter select {
     font-family: var(--ui); font-size: 14px; padding: 6px 8px;
-    border: 1px solid var(--rule-strong); border-radius: 0;
+    border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
     background: var(--bg); color: var(--text); max-width: min(100%, 220px);
   }
 
-  /* 円相 — brush circle for vocabulary */
+  /* Progress ring for vocabulary */
   .viz-enso { width: min(148px, 46vw); height: auto; display: block; }
   .viz-enso .track {
     fill: none; stroke: var(--rule-strong); stroke-width: 14;
@@ -233,13 +249,13 @@ window.__BUILD__ = "20260816u";
     from { stroke-dashoffset: 240; opacity: .35; }
   }
 
-  /* 一筆 — single brush stroke for lessons */
+  /* Lesson progress bar */
   .viz-brush { width: 100%; max-width: 168px; height: 44px; display: block; }
   .viz-brush .track { fill: var(--bg-inset); }
   .viz-brush .ink { fill: var(--done); }
   .viz-brush .tip { fill: var(--done); opacity: .85; }
 
-  /* 算木 — level meters for kanji (track + fill, with % and counts) */
+  /* Level meters for kanji */
   .viz-pillars {
     display: flex; align-items: stretch; justify-content: center;
     gap: 14px; height: 100%; width: 100%; max-width: 168px;
@@ -261,6 +277,7 @@ window.__BUILD__ = "20260816u";
     border: 1px solid var(--rule-strong);
     display: flex; align-items: flex-end;
     box-sizing: border-box;
+    border-radius: var(--radius-sm); overflow: hidden;
   }
   .viz-pillars .fill {
     width: 100%; background: var(--seal);
@@ -280,7 +297,7 @@ window.__BUILD__ = "20260816u";
     color: var(--text-soft); line-height: 1;
   }
 
-  /* 青海波 sparkline — recent verb answers as a quiet wave */
+  /* Sparkline — recent verb answers */
   .viz-wave { width: 100%; max-width: 180px; height: 88px; display: block; }
   .viz-wave .sea { fill: var(--accent); fill-opacity: .12; }
   .viz-wave .line {
@@ -460,6 +477,7 @@ window.__BUILD__ = "20260816u";
     flex: 1 1 auto; min-height: 0;
     background: var(--bg);
     border: 1px solid var(--rule-strong);
+    border-radius: var(--radius);
   }
   .card-play .card-face { bottom: 8.75em; padding: 16px 14px 10px; }
   .card-play .card-reveal {
@@ -506,7 +524,7 @@ window.__BUILD__ = "20260816u";
   }
   .card-play .kin {
     width: 100%; max-width: 420px; font: inherit; font-size: 17px;
-    padding: 12px 14px; border: 1px solid var(--rule-strong); border-radius: 0;
+    padding: 12px 14px; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
     background: var(--bg); color: var(--text); text-align: center;
     box-sizing: border-box;
   }
@@ -838,18 +856,19 @@ window.__BUILD__ = "20260816u";
     .home-next { display: none; }
   }
 
-  /* buttons — squared off like a wooden block, the primary one stamped in seal ink */
+  /* buttons — soft manga-panel corners; primary in coral magenta */
   .btn { font: inherit; font-family: var(--ui); font-size: 12.5px; font-weight: 600;
     padding: 8px 15px; cursor: pointer; letter-spacing: .03em;
     border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
-    border-radius: 0; white-space: nowrap; text-decoration: none;
-    transition: border-color .16s, color .16s, background .16s; }
-  .btn:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text); background: var(--bg-soft); }
+    border-radius: var(--radius-sm); white-space: nowrap; text-decoration: none;
+    transition: border-color .16s, color .16s, background .16s, transform .16s ease; }
+  .btn:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text); background: var(--bg-soft);
+    transform: translateY(-1px); }
   .btn:disabled { opacity: 0.36; cursor: not-allowed; }
-  .btn.primary { background: var(--seal); border-color: var(--seal); color: #fdf8f1;
-    letter-spacing: .05em; }
+  .btn.primary { background: var(--seal); border-color: var(--seal); color: #fff;
+    letter-spacing: .04em; }
   .btn.primary:hover:not(:disabled) { background: var(--seal-deep); border-color: var(--seal-deep);
-    color: #fdf8f1; }
+    color: #fff; }
   .btn.good { color: var(--done); border-color: var(--done); }
   .btn.bad { color: var(--miss); border-color: var(--miss); }
   .btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--washi); }
@@ -866,17 +885,18 @@ window.__BUILD__ = "20260816u";
      ============================================================ */
   .statgrid { display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0 4px; }
   .statgrid .stat { flex: 1 1 130px; border: 1px solid var(--rule-strong);
-    padding: 14px 16px; background: var(--bg); }
+    padding: 14px 16px; background: var(--bg); border-radius: var(--radius); }
   .statgrid .k { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 600; }
-  .statgrid .val { font-family: var(--serif); font-size: 27px; font-weight: 400;
+  .statgrid .val { font-family: var(--serif); font-size: 27px; font-weight: 600;
     line-height: 1.2; font-variant-numeric: tabular-nums; }
   .statgrid .sub { font-size: 12.5px; color: var(--text-faint); }
 
   .statgrid.joined { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0; border: 1px solid var(--rule-strong); background: var(--bg); margin: 30px 0 0; }
+    gap: 0; border: 1px solid var(--rule-strong); background: var(--bg); margin: 30px 0 0;
+    border-radius: var(--radius); overflow: hidden; }
   .statgrid.joined .stat { flex: none; border: none; border-right: 1px solid var(--rule);
-    padding: 16px 18px; }
+    padding: 16px 18px; border-radius: 0; }
   .statgrid.joined .stat:last-child { border-right: none; }
   .statgrid.joined .val { margin-top: 5px; line-height: 1.15; }
   .statgrid.joined .sub { font-size: 12px; margin-top: 3px; }
@@ -894,12 +914,10 @@ window.__BUILD__ = "20260816u";
   /* a tile whose value is a phrase rather than a number */
   .val.txt { font-size: 17px; line-height: 1.35; }
 
-  /* The one thing worth doing next. The seal stroke marks it as the page's
-     own recommendation — distinct from the indigo of a standing invitation
-     and the ochre of something left unfinished. */
+  /* Spotlight next action — coral accent bar */
   .next { display: flex; align-items: center; gap: 18px; justify-content: space-between;
     margin: 26px 0 0; padding: 17px 19px; border: 1px solid var(--rule-strong);
-    border-left: 3px solid var(--seal); background: var(--bg); }
+    border-left: 3px solid var(--seal); background: var(--bg); border-radius: var(--radius); }
   .next .k { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 600; }
   .next p { font-family: var(--serif); font-size: 15px; line-height: 1.7;
@@ -907,16 +925,18 @@ window.__BUILD__ = "20260816u";
   .next .btn { flex: none; }
 
   /* review panel */
-  .review { margin: 30px 0 0; border: 1px solid var(--rule-strong); background: var(--bg); }
+  .review { margin: 30px 0 0; border: 1px solid var(--rule-strong); background: var(--bg);
+    border-radius: var(--radius); overflow: hidden; }
   .rhead { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; justify-content: space-between;
     padding: 15px 18px; background: var(--bg-soft); border-bottom: 1px solid var(--rule-strong); }
   .rhead .k { font-size: 10.5px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 600; }
-  .rhead h3 { font-family: var(--serif); margin: 4px 0 0; font-size: 19px; font-weight: 400; }
+  .rhead h3 { font-family: var(--serif); margin: 4px 0 0; font-size: 19px; font-weight: 600; }
   .rbody { padding: 18px 18px 20px; }
   .resume { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center;
     justify-content: space-between; margin: 0 0 16px; padding: 13px 15px;
-    background: var(--warn-bg); border: 1px solid var(--warn-line); border-left: 3px solid var(--now); }
+    background: var(--warn-bg); border: 1px solid var(--warn-line); border-left: 3px solid var(--now);
+    border-radius: var(--radius-sm); }
   .resume b { font-size: 13.5px; display: block; }
   .resume span { font-size: 12.5px; color: var(--text-soft); }
   .rlead { font-family: var(--serif); margin: 0 0 15px; font-size: 15px; color: var(--text-soft);
@@ -927,7 +947,7 @@ window.__BUILD__ = "20260816u";
   .wlist { display: flex; flex-wrap: wrap; gap: 6px; }
   .wchip { display: inline-flex; align-items: baseline; gap: 6px; text-decoration: none;
     font-size: 12.5px; color: var(--text-soft); border: 1px solid var(--rule);
-    background: var(--bg); border-radius: 0; padding: 5px 9px; }
+    background: var(--bg); border-radius: var(--radius-sm); padding: 5px 9px; }
   .wchip:hover { border-color: var(--seal); background: var(--bg-soft); }
   .wchip b { color: var(--text); font-variant-numeric: tabular-nums; }
   .wchip i { font-style: normal; font-weight: 700; color: var(--now); font-variant-numeric: tabular-nums; }
@@ -940,7 +960,7 @@ window.__BUILD__ = "20260816u";
   .cells { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
   .cell { display: inline-flex; align-items: center; justify-content: center; min-width: 30px;
     height: 28px; padding: 0 5px; font-size: 12.5px; font-weight: 600; text-decoration: none;
-    font-variant-numeric: tabular-nums; border: 1px solid var(--rule-strong); border-radius: 0;
+    font-variant-numeric: tabular-nums; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
     background: var(--bg); }
   .cell.ok { color: var(--done); border-color: var(--ok-line); background: var(--ok-bg); }
   .cell.no { color: #fdf8f1; background: var(--miss); border-color: var(--miss); }
@@ -950,7 +970,7 @@ window.__BUILD__ = "20260816u";
   .toolbar { margin: 26px 0 0; padding: 15px 0; border-top: 1px solid var(--rule);
     border-bottom: 1px solid var(--rule); display: flex; flex-wrap: wrap; gap: 9px 12px; align-items: center; }
   .toolbar input[type=search] { flex: 1 1 220px; min-width: 0; font: inherit; font-size: 14px;
-    padding: 8px 12px; border: 1px solid var(--rule-strong); border-radius: 0; background: var(--bg);
+    padding: 8px 12px; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm); background: var(--bg);
     color: var(--text); }
   .toolbar input[type=search]:focus { outline: 1px solid var(--accent); outline-offset: 1px;
     border-color: var(--accent); }
@@ -979,7 +999,7 @@ window.__BUILD__ = "20260816u";
   .lnav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: space-between;
     margin: 34px 0 0; padding-top: 20px; border-top: 1px solid var(--rule); }
   .lnav a { flex: 0 1 47%; padding: 12px 15px; text-decoration: none;
-    border: 1px solid var(--rule-strong); background: var(--bg); }
+    border: 1px solid var(--rule-strong); background: var(--bg); border-radius: var(--radius-sm); }
   .lnav a:hover { border-color: var(--seal); background: var(--bg-soft); }
   .lnav .lk { display: block; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 600; margin-bottom: 3px; }
@@ -993,13 +1013,13 @@ window.__BUILD__ = "20260816u";
      rule, and the sentence itself in the reading face. */
   .empty { margin: 20px 0 0; padding: 24px 22px; border: 1px solid var(--rule-strong);
     background: var(--bg-soft); font-family: var(--serif); font-size: 15px;
-    line-height: 1.75; color: var(--text-soft); }
+    line-height: 1.75; color: var(--text-soft); border-radius: var(--radius); }
   .empty b { color: var(--text); font-weight: 600; }
   .empty code { font-family: var(--ui); font-size: 13px; color: var(--text); }
   .empty .rowacts { margin-top: 14px; }
 
   .meter { display: flex; width: 100%; max-width: 130px; height: 6px; background: var(--bg-inset);
-    border: 1px solid var(--rule); }
+    border: 1px solid var(--rule); border-radius: var(--radius-sm); overflow: hidden; }
   .meter i { display: block; flex: none; height: 100%; background: var(--done); }
   .meter i.part { background: var(--now); }
   .mlabel { font-size: 11.5px; color: var(--text-faint); margin-top: 4px;
@@ -1011,7 +1031,7 @@ window.__BUILD__ = "20260816u";
      hairline border and the absence of a coloured edge keep it an annotation
      rather than a third score. */
   select.status { font: inherit; font-size: 12.5px; padding: 5px 7px;
-    border: 1px solid var(--rule); border-radius: 0; background: var(--bg);
+    border: 1px solid var(--rule); border-radius: var(--radius-sm); background: var(--bg);
     color: var(--text-faint); max-width: 130px; }
   select.status:hover, select.status:focus { border-color: var(--rule-strong); }
   select.status[data-v="confident"] { color: var(--done); }
@@ -1021,12 +1041,12 @@ window.__BUILD__ = "20260816u";
   .acts { display: flex; gap: 5px; justify-content: flex-end; }
 
   /* lesson view */
-  h2.view { font-family: var(--serif); font-size: 26px; margin: 34px 0 6px; font-weight: 400;
-    letter-spacing: 0.004em; position: relative; padding-left: 16px; }
-  /* a short brushed stroke standing in the left margin, as a seal-mark would */
+  h2.view { font-family: var(--serif); font-size: 26px; margin: 34px 0 6px; font-weight: 700;
+    letter-spacing: -0.01em; position: relative; padding-left: 16px; }
+  /* coral accent bar beside headings */
   h2.view::before { content: ""; position: absolute; left: 0; top: .28em; bottom: .28em;
-    width: 3px; background: var(--seal); opacity: .8; }
-  h2.view .jp { font-family: var(--jp-mincho); font-weight: 400; letter-spacing: .05em; }
+    width: 3px; background: var(--seal); opacity: .9; border-radius: 2px; }
+  h2.view .jp { font-family: var(--jp-mincho); font-weight: 700; letter-spacing: .04em; }
   /* section headings inside a lesson: the same hand, a quieter mark */
   h2.view.minor { font-size: 19px; margin-top: 38px; }
   h2.view.minor::before { width: 2px; background: var(--rule-strong); }
@@ -1036,10 +1056,11 @@ window.__BUILD__ = "20260816u";
   .viewsub .jp { font-family: var(--jp-mincho); letter-spacing: .04em; }
   .gap { margin: 20px 0 0; padding: 15px 17px; border: 1px solid var(--rule-strong);
     border-left: 3px solid var(--rule-strong); background: var(--bg-soft); font-size: 14px;
-    color: var(--text-soft); }
+    color: var(--text-soft); border-radius: var(--radius-sm); }
   .gap b { color: var(--text); }
 
-  .point { border: 1px solid var(--rule-strong); background: var(--bg); margin: 20px 0 0; }
+  .point { border: 1px solid var(--rule-strong); background: var(--bg); margin: 20px 0 0;
+    border-radius: var(--radius); overflow: hidden; }
   .point > h3 { margin: 0; padding: 14px 18px; background: var(--bg-soft);
     border-bottom: 1px solid var(--rule-strong); font-size: 18px; font-family: var(--jp-mincho);
     font-weight: 500; letter-spacing: .03em; }
@@ -1058,7 +1079,8 @@ window.__BUILD__ = "20260816u";
 
   /* vocabulary block */
   .vlist { display: grid; grid-template-columns: minmax(170px, 38%) 1fr;
-    border: 1px solid var(--rule-strong); background: var(--bg); margin: 10px 0 0; }
+    border: 1px solid var(--rule-strong); background: var(--bg); margin: 10px 0 0;
+    border-radius: var(--radius); overflow: hidden; }
   .vlist > div { padding: 9px 14px; border-top: 1px solid var(--rule); }
   .vlist > div:nth-child(1), .vlist > div:nth-child(2) { border-top: none; }
   .vj { font-family: var(--jp-mincho); font-size: 16.5px; letter-spacing: .02em; }
@@ -1068,11 +1090,12 @@ window.__BUILD__ = "20260816u";
   .vhead { grid-column: 1 / -1; background: var(--bg-soft); font-size: 10.5px; letter-spacing: 0.16em;
     text-transform: uppercase; color: var(--text-faint); font-weight: 600; }
   .vbox { font-size: 10px; font-weight: 700; color: var(--text-faint); float: right;
-    border: 1px solid var(--rule-strong); padding: 0 5px; border-radius: 0; }
+    border: 1px solid var(--rule-strong); padding: 0 5px; border-radius: var(--radius-sm); }
   .vbox.learned { color: var(--done); border-color: var(--done); }
 
   /* card + drill stage */
-  .stage { border: 1px solid var(--rule-strong); background: var(--bg); margin: 22px 0 0; }
+  .stage { border: 1px solid var(--rule-strong); background: var(--bg); margin: 22px 0 0;
+    border-radius: var(--radius); overflow: hidden; }
   .stagehead { display: flex; flex-wrap: nowrap; gap: 10px 12px; align-items: center;
     justify-content: space-between; padding: 13px 17px; background: var(--bg-soft);
     border-bottom: 1px solid var(--rule-strong); font-size: 12px; color: var(--text-soft);
@@ -1105,7 +1128,7 @@ window.__BUILD__ = "20260816u";
     overflow: auto; box-sizing: border-box;
   }
   .card-reveal.is-open { border-top-color: var(--rule); }
-  .prompt { font-family: var(--serif); font-size: 31px; line-height: 1.5; font-weight: 400; }
+  .prompt { font-family: var(--serif); font-size: 31px; line-height: 1.5; font-weight: 600; }
   .prompt.jp { font-family: var(--jp-mincho); font-size: 38px; letter-spacing: .04em; }
   .prompt .rd { display: block; font-size: 15px; color: var(--text-faint); font-weight: 400;
     font-family: var(--jp); margin-top: 9px; letter-spacing: .04em; }
@@ -1144,7 +1167,7 @@ window.__BUILD__ = "20260816u";
   .deck .card.live:active { cursor: grabbing; }
   .swipetag { position: absolute; top: 14px; z-index: 2; padding: 6px 12px; font-size: 11px;
     font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; background: var(--bg);
-    border: 2px solid; border-radius: 0; opacity: 0; pointer-events: none; }
+    border: 2px solid; border-radius: var(--radius-sm); opacity: 0; pointer-events: none; }
   .tag-yes { right: 14px; color: var(--done); border-color: var(--done); transform: rotate(9deg); }
   .tag-no { left: 14px; color: var(--miss); border-color: var(--miss); transform: rotate(-9deg); }
   .rep { color: var(--now); font-weight: 600; }
@@ -1159,7 +1182,7 @@ window.__BUILD__ = "20260816u";
     font: inherit; font-family: var(--ui); font-size: 12px; font-weight: 600;
     letter-spacing: .04em; padding: 7px 12px; cursor: pointer;
     border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
-    border-radius: 0; transition: border-color .16s, color .16s, background .16s; }
+    border-radius: var(--radius-sm); transition: border-color .16s, color .16s, background .16s; }
   .speak:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text);
     background: var(--bg-soft); }
   .speak:disabled { opacity: 0.36; cursor: not-allowed; }
@@ -1195,7 +1218,7 @@ window.__BUILD__ = "20260816u";
   .qen { font-family: var(--serif); font-size: 22px; line-height: 1.5; margin: 12px 0 20px;
     font-weight: 400; max-width: 58ch; }
   textarea.jp { width: 100%; min-height: 82px; font-family: var(--jp-mincho); font-size: 20px;
-    line-height: 1.8; padding: 13px 15px; border: 1px solid var(--rule-strong); border-radius: 0;
+    line-height: 1.8; padding: 13px 15px; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
     resize: vertical; background: var(--bg); color: var(--text); }
   textarea.jp:focus { outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
   /* your answer sits beside the model answer, so it must be set in the same
@@ -1209,7 +1232,8 @@ window.__BUILD__ = "20260816u";
      wrapping it: the verb and kanji rounds do not sit inside a .qbox, and
      leaving the inset to the wrapper had their tinted panels running flush
      to the text on all four sides. */
-  .verdict { padding: 22px 24px; border-left: 3px solid var(--rule-strong); }
+  .verdict { padding: 22px 24px; border-left: 3px solid var(--rule-strong);
+    border-radius: var(--radius-sm); }
   .verdict.ok { border-left-color: var(--done); background: var(--ok-bg); }
   .verdict.near { border-left-color: var(--now); background: var(--warn-bg); }
   .verdict.no { border-left-color: var(--miss); background: var(--miss-bg); }
@@ -1236,7 +1260,7 @@ window.__BUILD__ = "20260816u";
   .vrow .j-speak .speak .speak-lab { display: none; }
   .vrow .j-speak .speak svg { width: 16px; height: 16px; }
   .vtag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
-    color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 0; padding: 2px 6px; }
+    color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: var(--radius-sm); padding: 2px 6px; }
   .verdict .note { font-family: var(--serif); font-size: 14px; color: var(--text-soft);
     margin: 12px 0 0; line-height: 1.65; }
 
@@ -1271,7 +1295,7 @@ window.__BUILD__ = "20260816u";
   .optk { font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 600; }
   .opt select { font-family: var(--ui); font-size: 16px; padding: 7px 9px;
-    border: 1px solid var(--rule-strong); border-radius: 0;
+    border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
     background: var(--bg); color: var(--text); }
   .opt .btn { font-size: 13px; padding: 8px 14px; text-transform: none; letter-spacing: .03em; }
   /* a group of choices where exactly one is taken */
@@ -1325,7 +1349,7 @@ window.__BUILD__ = "20260816u";
   .vgloss.big { font-size: 15px; margin-bottom: 6px; }
   .vcard input { width: 100%; max-width: 340px; margin: 20px auto 4px; display: block;
     font-family: var(--jp-mincho); font-size: 23px; text-align: center; padding: 11px 13px;
-    border: 1px solid var(--rule-strong); border-radius: 0; background: var(--bg); color: var(--text); }
+    border: 1px solid var(--rule-strong); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); }
   .vcard input:focus { outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
   .vcard .rowacts { justify-content: center; }
   .jpline { font-family: var(--jp-mincho); letter-spacing: .02em; }
@@ -1335,7 +1359,7 @@ window.__BUILD__ = "20260816u";
   .focusnote b { font-family: var(--jp-mincho); font-weight: 500; color: var(--text); }
 
   .results { padding: 26px 24px; }
-  .bigscore { font-family: var(--serif); font-size: 52px; font-weight: 400; letter-spacing: 0;
+  .bigscore { font-family: var(--serif); font-size: 52px; font-weight: 700; letter-spacing: 0;
     font-variant-numeric: tabular-nums; line-height: 1.1; }
   /* Every round now closes in the same panel, so the tally has one treatment
      rather than one per track. */
@@ -1558,7 +1582,7 @@ window.__BUILD__ = "20260816u";
     .misstable, .misstable tbody, .misstable tr, .misstable td { display: block; }
     .misstable thead { display: none; }
     .misstable tr { display: grid; grid-template-columns: 1fr auto; gap: 2px 10px;
-      border: 1px solid var(--rule); background: var(--bg); border-radius: 0;
+      border: 1px solid var(--rule); background: var(--bg); border-radius: var(--radius-sm);
       padding: 10px 12px; margin: 0 0 9px; }
     /* a table of nothing but misses tints every card; a results table that
        mixes the two tints only the ones you got wrong */
@@ -1601,7 +1625,7 @@ window.__BUILD__ = "20260816u";
     .board, .board tbody, .board tr, .board td { display: block; }
     .board thead { display: none; }
     .board tr:not(.bookrow) { display: grid; grid-template-columns: 1fr 1fr;
-      gap: 11px 12px; border: 1px solid var(--rule-strong); border-radius: 0;
+      gap: 11px 12px; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
       background: var(--bg); padding: 13px; margin: 0 0 10px; }
     .board tr.current { border-color: var(--cur-line); background: var(--cur-bg); }
     .board td, .board tr:hover td, .board tr.current td { background: none;
@@ -1616,7 +1640,7 @@ window.__BUILD__ = "20260816u";
     .btitle { font-size: 15px; }
     .btitle::before { content: attr(data-n) " · "; color: var(--text-faint);
       font-weight: 700; font-variant-numeric: tabular-nums; }
-    .bookrow td { margin: 18px 0 9px; border-radius: 0; }
+    .bookrow td { margin: 18px 0 9px; border-radius: var(--radius-sm); }
     .meter { max-width: none; }
     .acts { gap: 6px; }
     .acts .btn { flex: 1 1 0; }
@@ -1726,7 +1750,7 @@ window.__BUILD__ = "20260816u";
 <div class="wrap">
 
 <header class="masthead">
-  <!-- 円相: one stroke, left open where the brush lifted -->
+  <!-- decorative open ring -->
   <svg class="enso" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
@@ -1793,7 +1817,7 @@ window.__BUILD__ = "20260816u";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260816u"></script>
+<script src="japanese-data.js?v=20260816v"></script>
 <script>
 /* ============================================================
    State
