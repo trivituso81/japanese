@@ -93,7 +93,9 @@
      paintNav, but never shown. */
   .topnav { display: none !important; }
 
-  /* Fixed bottom bar — Home / Lessons / Kanji / Verbs */
+  /* Fixed bottom bar — Home / Lessons / Kanji / Verbs.
+     Hides on scroll-down so long pages and the card face keep the room;
+     returns on scroll-up. Always mounted, every view. */
   .botnav {
     position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
     display: grid; grid-template-columns: repeat(4, 1fr);
@@ -101,6 +103,15 @@
     border-top: 1px solid var(--rule-strong);
     padding: 2px 4px calc(2px + env(safe-area-inset-bottom, 0px));
     box-shadow: 0 -6px 18px rgba(35, 32, 27, .04);
+    transition: transform .28s ease;
+    will-change: transform;
+  }
+  body.botnav-away .botnav {
+    transform: translateY(calc(100% + 8px));
+    pointer-events: none;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .botnav { transition: none; }
   }
   .botnav a {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -266,6 +277,96 @@
   }
   body:not([data-view="dash"]) footer.foot {
     margin-bottom: 12px;
+  }
+
+  /* Flashcard settings landing — title + controls, nothing else */
+  .cards-setup {
+    display: flex; flex-direction: column; gap: 18px;
+    padding: 8px 0 12px; min-height: calc(100dvh - var(--botnav-h) - 48px);
+  }
+  .cards-setup .cards-title {
+    font-family: var(--jp-mincho); font-size: clamp(1.55rem, 6.5vw, 2rem);
+    line-height: 1.2; letter-spacing: .04em; color: var(--seal);
+    margin: 0; font-weight: 400; text-align: center;
+  }
+  .cards-setup .cards-kicker {
+    font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 700; text-align: center; margin: 0 0 6px;
+  }
+  .cards-setup .options { margin: 0; flex: 1 1 auto; }
+  .cards-setup .opt.start { margin-top: auto; padding-top: 12px; }
+  .cards-setup .opt.start .btn {
+    width: 100%; font-size: 15.5px; padding: 14px 18px; min-height: 50px;
+  }
+
+  body[data-view="cards"] .wrap {
+    min-height: 100dvh;
+    padding-top: max(14px, env(safe-area-inset-top, 0px));
+    padding-bottom: calc(var(--botnav-h, 58px) + 12px + env(safe-area-inset-bottom, 0px));
+    display: flex; flex-direction: column;
+  }
+  body[data-view="cards"] header.masthead,
+  body[data-view="cards"] .topnav,
+  body[data-view="cards"] .crumbs,
+  body[data-view="cards"] footer.foot { display: none !important; }
+  body[data-view="cards"] #view {
+    flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+  }
+
+  /* Active flashcard round — one card owns the phone viewport */
+  body[data-view="cards-play"] .wrap {
+    min-height: 100dvh;
+    max-width: none;
+    padding: max(6px, env(safe-area-inset-top, 0px)) 12px
+      calc(var(--botnav-h, 58px) + 6px + env(safe-area-inset-bottom, 0px));
+    display: flex; flex-direction: column;
+  }
+  body[data-view="cards-play"] header.masthead,
+  body[data-view="cards-play"] .topnav,
+  body[data-view="cards-play"] .crumbs,
+  body[data-view="cards-play"] footer.foot { display: none !important; }
+  body[data-view="cards-play"] #view {
+    flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+  }
+  .card-play {
+    flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+  }
+  .card-play .drillstage {
+    flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+    margin: 0; border: none; background: transparent;
+  }
+  .card-play .stagehead {
+    flex: 0 0 auto; padding: 8px 4px 10px; background: transparent;
+    border-bottom: none; font-size: 12.5px;
+  }
+  .card-play .prog { flex: 0 0 auto; height: 3px; border: none; margin: 0 0 4px; }
+  .card-play .deck {
+    flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+    position: relative;
+  }
+  .card-play .card {
+    flex: 1 1 auto; min-height: 0;
+    padding: 28px 16px;
+    gap: 20px;
+    background: var(--bg);
+    border: 1px solid var(--rule-strong);
+  }
+  .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
+  .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
+  .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); padding-top: 22px; }
+  .card-play .answer.jp { font-size: clamp(1.55rem, 6vw, 2.1rem); }
+  .card-play .cardacts {
+    flex: 0 0 auto; padding: 14px 0 0; gap: 10px;
+  }
+  .card-play .cardacts .btn {
+    flex: 1 1 0; min-height: 52px; font-size: 15px; padding: 12px 14px;
+  }
+  .card-play .cardmeta {
+    flex: 0 0 auto; padding: 10px 0 0;
+  }
+  .card-play .results {
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: 24px 8px;
   }
 
   @media (max-height: 700px) {
@@ -1018,6 +1119,13 @@
     .card { padding: 32px 16px; min-height: 220px; gap: 14px; }
     .prompt { font-size: 25px; } .prompt.jp { font-size: 30px; }
     .answer { font-size: 20px; } .answer.jp { font-size: 23px; }
+    body[data-view="cards-play"] .card-play .card {
+      padding: 28px 16px; min-height: 0; gap: 20px;
+    }
+    body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
+    body[data-view="cards-play"] .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
+    body[data-view="cards-play"] .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
+    body[data-view="cards-play"] .card-play .answer.jp { font-size: clamp(1.55rem, 6vw, 2.1rem); }
     .boxbar { width: 100% !important; }
     .cardacts { padding: 13px 13px 0; gap: 8px; }
     .cardacts .btn { flex: 1 1 0; min-width: 0; }
@@ -2389,36 +2497,37 @@ function renderCards(scope) {
   const ns = scopeOf(scope).filter(n => VOCAB[n]);
   if (!ns.length) return notFound();   // no word list in range: a dead address
   const range = isRange(scope);
-  const l = range ? null : lessonById(ns[0]);
-  crumbs(range
-    ? [["#/lessons", "Lessons"], [null, "Flashcards"]]
-    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Flashcards"]]);
-  const total = deck(ns, false).length;
+  document.getElementById("crumbs").innerHTML = "";
+  document.body.dataset.view = "cards";
+  showBotnav();
   const size = range ? 30 : 20;
   CARD = { scope, ns, dir: "jp-en", order: "random", proper: false, size,
            round: [], i: 0, shown: false, total: 0, retired: 0, firstTry: 0,
-           missed: new Set(), attempts: {}, prev: null, animating: false };
+           missed: new Set(), attempts: {}, prev: null, animating: false,
+           playing: false };
+  const title = range ? scopeLabel(scope) : `Lesson ${ns[0]}`;
   document.getElementById("view").innerHTML = `
-    <h2 class="view">Flashcards · ${range ? esc(scopeLabel(scope)) : `Lesson ${ns[0]}`}</h2>
-    <p class="viewsub">${range
-      ? `${total} words across ${ns.length} lessons.`
-      : esc(l.title)}</p>
-    ${optionsPanel([
-      { k: "Direction", seg: `
-        <button class="btn dir" data-dir="jp-en" aria-pressed="true" aria-label="Japanese to English">
-          <span class="t-wide">Japanese → English</span><span class="t-narrow">JA → EN</span></button>
-        <button class="btn dir" data-dir="en-jp" aria-pressed="false" aria-label="English to Japanese">
-          <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
-        <button class="btn dir" data-dir="mixed" aria-pressed="false">Mixed</button>` },
-      { k: "Order", seg: ORDERS.map(([id, wide, narrow]) =>
-        `<button class="btn ord" data-ord="${id}" aria-pressed="${id === "random"}">
-          <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("") },
-      { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
-        `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
-      { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>` },
-      { start: `<button class="btn primary" id="deal">New round</button>` }
-    ])}
-    <div id="stage"></div>`;
+    <section class="cards-setup">
+      <div>
+        <p class="cards-kicker">Flashcards</p>
+        <h1 class="cards-title">${esc(title)}</h1>
+      </div>
+      ${optionsPanel([
+        { k: "Direction", seg: `
+          <button class="btn dir" data-dir="jp-en" aria-pressed="true" aria-label="Japanese to English">
+            <span class="t-wide">Japanese → English</span><span class="t-narrow">JA → EN</span></button>
+          <button class="btn dir" data-dir="en-jp" aria-pressed="false" aria-label="English to Japanese">
+            <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
+          <button class="btn dir" data-dir="mixed" aria-pressed="false">Mixed</button>` },
+        { k: "Order", seg: ORDERS.map(([id, wide, narrow]) =>
+          `<button class="btn ord" data-ord="${id}" aria-pressed="${id === "random"}">
+            <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("") },
+        { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
+          `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
+        { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>` },
+        { start: `<button class="btn primary" id="deal">Start</button>` }
+      ])}
+    </section>`;
 
   /* Settings no longer deal a new round the instant they are touched. Each
      answer's box is banked as it is given, so the record always survives, but
@@ -2441,15 +2550,23 @@ function renderCards(scope) {
     refreshDeal();
   });
   document.getElementById("deal").addEventListener("click", () => { unlockTts(); startSession(); });
-  startSession();
+}
+
+/* Enter the full-viewport play shell once a round begins. */
+function enterCardPlay() {
+  CARD.playing = true;
+  document.body.dataset.view = "cards-play";
+  document.getElementById("crumbs").innerHTML = "";
+  showBotnav();
+  document.getElementById("view").innerHTML = `<section class="card-play" id="stage"></section>`;
 }
 
 /* The start control says which of the two things it will do. */
 function refreshDeal() {
   const b = document.getElementById("deal");
   if (!b || !CARD) return;
-  const underway = CARD.total && (CARD.pass > 1 || CARD.passDone > 0) && CARD.round.length;
-  b.textContent = CARD.stale && underway ? "Restart with these settings" : "New round";
+  const underway = CARD.playing && CARD.total && (CARD.pass > 1 || CARD.passDone > 0) && CARD.round.length;
+  b.textContent = CARD.stale && underway ? "Restart with these settings" : "Start";
 }
 
 /* Order decides which cards make the cut. The sitting itself is always
@@ -2484,6 +2601,7 @@ function buildRound(only) {
    be run through again afterwards, but those repeats are practice: the score
    belongs to the first pass, and only a new session sets a new one. */
 function startSession(only) {
+  enterCardPlay();
   CARD.round = buildRound(only);
   CARD.total = CARD.round.length;
   CARD.pass = 1; CARD.passSize = CARD.round.length; CARD.passDone = 0;
@@ -2497,6 +2615,7 @@ function startSession(only) {
 function nextPass() {
   const ids = new Set(CARD.missed);
   if (!ids.size) return;
+  if (!CARD.playing) enterCardPlay();
   CARD.round = buildRound(ids);
   CARD.pass++; CARD.passSize = CARD.round.length; CARD.passDone = 0;
   CARD.i = 0; CARD.shown = false; CARD.missed = new Set();
@@ -2593,16 +2712,21 @@ function runningScore(answers, idle) {
 
 function drawCard() {
   const stage = document.getElementById("stage");
+  if (!stage) return;
   if (!CARD.total) {
     stopSpeaking();
     stage.innerHTML = emptyState({
       title: "No cards in this deck.",
-      say: `Every word in range is filtered out by the settings above — widen the
-        session size, or turn the proper nouns back on.`,
-      actions: [isRange(CARD.scope)
-        ? { go: "#/", label: "Back to dashboard" }
-        : { go: `#/lesson/${CARD.ns[0]}`, label: "Back to lesson" }]
+      say: `Widen the session size, or turn proper nouns back on.`,
+      actions: [
+        { id: "settings", primary: true, label: "Settings" },
+        isRange(CARD.scope)
+          ? { go: "#/", label: "Home" }
+          : { go: `#/lesson/${CARD.ns[0]}`, label: "Back to lesson" }
+      ]
     });
+    const set = document.getElementById("settings");
+    if (set) set.addEventListener("click", () => renderCards(CARD.scope));
     return;
   }
   if (!CARD.round.length) {
@@ -2628,9 +2752,9 @@ function drawCard() {
 
   stage.innerHTML = drillStage({
     left: `${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
-      <b>${CARD.passSize}</b> done · <b>${CARD.round.length}</b> left`,
-    right: `${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b> of 5${
-      again ? ` · <span class="rep">seen again</span>` : ""}`,
+      <b>${CARD.passSize}</b> · <b>${CARD.round.length}</b> left`,
+    right: `${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b>${
+      again ? ` · <span class="rep">again</span>` : ""}`,
     done: CARD.passDone, total: CARD.passSize,
     body: `
     <div class="deck">
@@ -2659,7 +2783,6 @@ function drawCard() {
     </div>`
   });
 
-  refreshDeal();
   const on = (id, fn, flush) => {
     const el = document.getElementById(id);
     if (el) el.addEventListener("click", () => {
@@ -2688,7 +2811,7 @@ function drawSessionEnd(stage) {
   const atBox = dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0);
   const climbing = dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0);
 
-  // the deck's own heading is still on the page above, so only the panel
+  // the play shell is already the page; only the panel
   stage.innerHTML = summaryPanel({
     right: CARD.firstTry,
     total: CARD.total,
@@ -2704,8 +2827,9 @@ function drawSessionEnd(stage) {
     actions: [
       missed && { id: "redo", primary: true, label: `Run the ${missed} you missed again` },
       { id: "again", primary: !missed, label: "New round" },
+      { id: "settings", label: "Settings" },
       isRange(CARD.scope)
-        ? { go: "#/", label: "Back to dashboard" }
+        ? { go: "#/", label: "Home" }
         : { go: `#/lesson/${CARD.ns[0]}`, label: "Back to lesson" }
     ],
     footnote: missed && !repeat ? `A repeat drills the words you missed without touching the
@@ -2714,6 +2838,7 @@ function drawSessionEnd(stage) {
   document.getElementById("again").addEventListener("click", () => { unlockTts(); startSession(); });
   const redo = document.getElementById("redo");
   if (redo) redo.addEventListener("click", () => { unlockTts(); nextPass(); });
+  document.getElementById("settings").addEventListener("click", () => renderCards(CARD.scope));
   save();
 }
 
@@ -4537,6 +4662,7 @@ function route() {
   if (!/^#\/verbs/.test(h)) VERB = null;
   if (!/^#\/kanji/.test(h)) KDRILL = null;
   window.scrollTo(0, 0);
+  showBotnav();
   // the masthead is an introduction, not something to re-read every session;
   // on a phone it costs a third of the screen, so views other than the
   // dashboard collapse it (see the small-screen rules)
@@ -4561,7 +4687,35 @@ function route() {
 }
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
 wireFurigana();
+wireBotnavScroll();
 route();
+
+/* Bottom bar: hide while the user scrolls down, show again on scroll up —
+   the usual phone pattern so long pages and the card face keep the room. */
+function showBotnav() { document.body.classList.remove("botnav-away"); }
+function hideBotnav() { document.body.classList.add("botnav-away"); }
+function wireBotnavScroll() {
+  let lastY = window.scrollY || 0;
+  let ticking = false;
+  const onScroll = () => {
+    const y = window.scrollY || 0;
+    const dy = y - lastY;
+    if (dy > 6 && y > 24) hideBotnav();
+    else if (dy < -6) showBotnav();
+    lastY = y;
+    ticking = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(onScroll);
+    }
+  }, { passive: true });
+  window.addEventListener("focus", showBotnav);
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) showBotnav();
+  });
+}
 </script>
 </body>
 </html>
