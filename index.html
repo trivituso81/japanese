@@ -592,6 +592,20 @@
   .k-code-block p {
     margin: 0; font-size: 14px; line-height: 1.55; color: var(--text-soft);
   }
+  .k-code-story .story {
+    font-family: var(--serif); font-size: clamp(1.05rem, 3.8vw, 1.2rem);
+    line-height: 1.55; color: var(--text);
+  }
+  .k-code-reading {
+    margin: 0 0 6px; font-size: 15px; color: var(--text); line-height: 1.45;
+  }
+  .k-code-reading:last-child { margin-bottom: 0; }
+  .k-code-reading b {
+    display: inline-block; min-width: 2.4em; font-size: 10.5px;
+    letter-spacing: .14em; text-transform: uppercase; color: var(--text-faint);
+    font-weight: 700; vertical-align: middle;
+  }
+  .k-code-reading span { font-family: var(--jp-mincho); font-size: 1.25rem; }
   .k-code-parts {
     display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 8px;
   }
@@ -4735,12 +4749,39 @@ function kanjiParts(c) {
   return (typeof KANJI_PARTS === "object" && KANJI_PARTS[c]) || null;
 }
 
-function kanjiSoundFamily(k, limit) {
-  const lim = limit || 10;
-  const ons = new Set(k.on);
-  return KANJI.filter(o => o.c !== k.c && o.on.some(r => ons.has(r)))
-    .sort((a, b) => a.s - b.s || a.c.localeCompare(b.c))
-    .slice(0, lim);
+/* Peers that share the same phonetic component (true Kanji Code “sound clue”),
+   not every character that happens to list the same ON string. */
+function kanjiPhoneticPeers(k, limit) {
+  const lim = limit || 12;
+  const parts = kanjiParts(k.c);
+  const key = parts && parts.phonetic && parts.phonetic.c;
+  if (!key) return { key: null, peers: [] };
+  const peers = [];
+  const seen = new Set([k.c]);
+  const root = kanjiBy(key);
+  if (root && !seen.has(root.c)) { peers.push(root); seen.add(root.c); }
+  KANJI.forEach(o => {
+    if (seen.has(o.c)) return;
+    const p = kanjiParts(o.c);
+    if (p && p.phonetic && p.phonetic.c === key) {
+      peers.push(o);
+      seen.add(o.c);
+    }
+  });
+  peers.sort((a, b) => a.s - b.s || a.c.localeCompare(b.c));
+  return { key, peers: peers.slice(0, lim) };
+}
+
+function kanjiStory(k) {
+  const p = kanjiParts(k.c);
+  if (p && p.tip) return p.tip;
+  const on = k.on.length ? k.on.join("・") : null;
+  const kun = k.kun.length ? k.kun.join("・") : null;
+  let s = `${k.c} means “${k.en}.”`;
+  if (on) s += ` ON ${on}.`;
+  if (kun) s += ` Kun ${kun}.`;
+  if (k.ex) s += ` Anchor it with ${k.ex.w} (${k.ex.r}) — ${k.ex.en}.`;
+  return s;
 }
 
 function renderKanji() {
@@ -4873,7 +4914,7 @@ function renderKanjiDetail(raw) {
   if (!k) return notFound();
 
   const parts = kanjiParts(k.c);
-  const family = kanjiSoundFamily(k, 12);
+  const { key: phonKey, peers } = kanjiPhoneticPeers(k, 12);
   const lessons = kanjiLessons();
   const n = lessons[k.c];
   const st = kState(k.c);
@@ -4892,31 +4933,32 @@ function renderKanjiDetail(raw) {
 
   const onShow = k.on.length ? k.on.join(" · ") : "—";
   const kunShow = k.kun.length ? k.kun.join(" · ") : "—";
+  const story = kanjiStory(k);
 
-  let formSound = "";
+  let partsHtml = "";
   if (parts && (parts.radical || parts.phonetic)) {
-    formSound = `<div class="k-code-parts">
-      ${parts.radical ? `<div class="k-code-part">
-        <span class="pk">Meaning clue</span>
-        <span class="pc">${esc(parts.radical.c)}</span>
-        <span class="pe">${esc(parts.radical.en || "")}</span>
-      </div>` : `<div class="k-code-part"><span class="pk">Meaning clue</span>
-        <span class="pe">built into the whole form</span></div>`}
-      ${parts.phonetic ? `<div class="k-code-part">
-        <span class="pk">Sound clue</span>
-        <span class="pc">${esc(parts.phonetic.c)}</span>
-        <span class="pe">${esc(parts.phonetic.en || "")}${
-          parts.phonetic.sound ? ` · ${esc(parts.phonetic.sound)}` : ""}</span>
-      </div>` : `<div class="k-code-part"><span class="pk">Sound clue</span>
-        <span class="pe">${esc(onShow)}</span></div>`}
-    </div>`;
+    partsHtml = `<section class="k-code-block">
+      <h2>Why it looks this way</h2>
+      <div class="k-code-parts">
+        ${parts.radical ? `<div class="k-code-part">
+          <span class="pk">Meaning side</span>
+          <span class="pc">${esc(parts.radical.c)}</span>
+          <span class="pe">${esc(parts.radical.en || "")}</span>
+        </div>` : ""}
+        ${parts.phonetic ? `<div class="k-code-part">
+          <span class="pk">Sound clue</span>
+          <span class="pc">${esc(parts.phonetic.c)}</span>
+          <span class="pe">${esc(parts.phonetic.en || "")}${
+            parts.phonetic.sound ? ` · ${esc(parts.phonetic.sound)}` : ""}</span>
+        </div>` : ""}
+      </div>
+      <p>The meaning side hints at the idea; the sound clue is why the ON reading is ${esc(onShow)}.</p>
+    </section>`;
   }
 
-  const tip = parts && parts.tip
-    ? `<p>${esc(parts.tip)}</p>`
-    : `<p>${k.s <= 4
-      ? "Early kanji are often pictographs or simple marks — learn this one as a whole shape, then watch for it inside bigger characters."
-      : "Many Joyo kanji are form-sound compounds: one part hints at meaning, another at the ON reading. Use the sound clue below when you meet this character in compounds."}</p>`;
+  const peerSound = parts && parts.phonetic && parts.phonetic.sound
+    ? parts.phonetic.sound
+    : onShow;
 
   document.getElementById("view").innerHTML = `
     <article class="k-code">
@@ -4931,30 +4973,26 @@ function renderKanjiDetail(raw) {
             : st === "learning" && rec ? ` · learning ${rec.ok}/${rec.n}` : ""}</p>
       </header>
 
-      <section class="k-code-block">
-        <h2>Sound clue · ON</h2>
-        <p class="lead" lang="ja">${esc(onShow)}</p>
-        <p>In compounds, start from the ON reading — the “sound clue” side of form-sound kanji. When another character shares this reading, you are often looking at the same phonetic family.</p>
+      <section class="k-code-block k-code-story">
+        <h2>Remember this</h2>
+        <p class="story">${esc(story)}</p>
       </section>
 
       <section class="k-code-block">
-        <h2>Meaning clue · kun &amp; sense</h2>
-        <p class="lead" lang="ja">${esc(kunShow)}</p>
-        <p class="lead roma">${esc(k.en)}</p>
-        <p>Kun readings are the native Japanese words for this idea. Use them when the character stands alone or leads a native word; lean on ON inside Sino-Japanese compounds.</p>
+        <h2>Readings</h2>
+        <p class="k-code-reading"><b>ON</b> <span lang="ja">${esc(onShow)}</span></p>
+        <p class="k-code-reading"><b>kun</b> <span lang="ja">${esc(kunShow)}</span></p>
       </section>
 
-      <section class="k-code-block">
-        <h2>Form &amp; sound</h2>
-        ${formSound}
-        ${tip}
-      </section>
+      ${partsHtml}
 
-      ${family.length ? `<section class="k-code-block">
-        <h2>Same sound family</h2>
-        <p>Other characters in this guide that share an ON reading with ${esc(k.c)}. Comparing them trains the phonetic habit from <i>The Kanji Code</i>.</p>
+      ${peers.length ? `<section class="k-code-block">
+        <h2>Same sound clue · ${esc(phonKey)}</h2>
+        <p>These share the phonetic piece <span lang="ja">${esc(phonKey)}</span>
+          (sound family around ${esc(peerSound)}) — not every character that
+          merely lists a similar ON.</p>
         <div class="k-code-family">
-          ${family.map(o => `<a href="${kanjiLearnHref(o.c)}">
+          ${peers.map(o => `<a href="${kanjiLearnHref(o.c)}">
             <span class="fc" lang="ja">${esc(o.c)}</span>
             <span class="fe">${esc(o.en)}</span>
           </a>`).join("")}
