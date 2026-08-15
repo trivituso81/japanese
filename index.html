@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815e">
+<link rel="manifest" href="site.webmanifest?v=20260815f">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815e";
+window.__BUILD__ = "20260815f";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1608,7 +1608,7 @@ window.__BUILD__ = "20260815e";
 
 <div class="k-type-frame" id="kframe" hidden></div>
 
-<script src="japanese-data.js?v=20260815e"></script>
+<script src="japanese-data.js?v=20260815f"></script>
 <script>
 /* ============================================================
    State
@@ -2751,17 +2751,19 @@ function renderHome() {
       <div class="home-progress">
         <div class="hp-row">
           <span class="hp-status">${esc(savedAtLabel())}</span>
-          <button type="button" id="exp">Export backup</button>
-          <label for="imp">Import<input type="file" id="imp" accept="application/json,.json"></label>
+          <button type="button" id="exp">Share backup</button>
+          <button type="button" id="expcopy">Copy backup</button>
+          <label for="imp">Import<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
         </div>
-        <p class="hp-note">Export opens a share sheet on iPhone — choose
-          <b>Save to Files</b>. To bring it back, tap Import → <b>Browse</b>
-          and pick that file. Progress itself stays on this phone.</p>
+        <p class="hp-note">On iPhone: <b>Share backup</b> → <b>Save to Files</b>.
+          To restore: Import → <b>Browse</b> (not Recents) → On My iPhone / iCloud Drive.
+          <b>Copy backup</b> pastes into Notes if sharing fails.</p>
       </div>
     </section>`;
 
   wireResume(renderHome);
-  document.getElementById("exp").addEventListener("click", exportProgress);
+  document.getElementById("exp").addEventListener("click", () => exportProgress());
+  document.getElementById("expcopy").addEventListener("click", () => copyProgressBackup());
   document.getElementById("imp").addEventListener("change", importProgress);
 }
 
@@ -2814,69 +2816,75 @@ function verbSub() {
   return weak.length ? `weakest: ${typeLabel(weak[0].t)}` : `${st.runs || 0} rounds · no weak spots`;
 }
 
-function exportProgress() {
+function progressBackupPayload() {
   save();
   const name = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
   const text = JSON.stringify(S, null, 2);
-  const blob = new Blob([text], { type: "application/json" });
-  const file = new File([blob], name, { type: "application/json" });
+  return { name, text };
+}
 
-  const shareFile = async () => {
-    if (!navigator.share || !navigator.canShare) return false;
-    try {
-      if (!navigator.canShare({ files: [file] })) return false;
-      await navigator.share({ files: [file], title: "Study progress backup" });
-      return true;
-    } catch (e) {
-      if (e && e.name === "AbortError") return true; // user cancelled — stop
-      return false;
+function isAppleTouch() {
+  return /iPad|iPhone|iPod/.test(navigator.userAgent)
+    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1)
+    || navigator.standalone === true
+    || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+}
+
+async function copyProgressBackup() {
+  const { text } = progressBackupPayload();
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      await navigator.clipboard.writeText(text);
+      alert(
+        "Backup copied.\n\n" +
+        "1. Open Notes and paste\n" +
+        "2. Tap Share → Save to Files\n" +
+        "3. Later: Import → Browse (not Recents) and pick that file"
+      );
+      return;
     }
-  };
+  } catch (e) {}
+  prompt("Select all and copy this backup:", text);
+}
 
-  const downloadFile = () => {
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = name;
-    a.rel = "noopener";
-    document.body.appendChild(a);
-    a.click();
-    a.remove();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1500);
-  };
+async function exportProgress() {
+  const { name, text } = progressBackupPayload();
+  /* text/plain shares more reliably on iOS than application/json */
+  const file = new File([text], name, { type: "text/plain" });
+  const apple = isAppleTouch();
 
-  const copyFallback = async () => {
+  if (navigator.share) {
     try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(text);
-        alert(
-          "Backup copied to the clipboard.\n\n" +
-          "Open Notes → paste → Share → Save to Files.\n" +
-          "Later, Import → Browse and pick that file."
-        );
+      if (!navigator.canShare || navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: "Study progress backup" });
         return;
       }
-    } catch (e) {}
-    prompt("Copy this backup text and save it somewhere safe:", text);
-  };
-
-  /* iPhone (especially the home-screen app) often ignores <a download>.
-     Prefer the share sheet so you can tap Save to Files. */
-  Promise.resolve(shareFile()).then(shared => {
-    if (shared) return;
-    downloadFile();
-    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent)
-      || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    const standalone = navigator.standalone === true
-      || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
-    if (ios || standalone) {
-      const wantCopy = confirm(
-        "On iPhone, Export should open a share sheet.\n\n" +
-        "If you saw it: choose “Save to Files”, then Import → Browse to find it.\n\n" +
-        "If nothing appeared, tap OK to copy the backup instead."
-      );
-      if (wantCopy) copyFallback();
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
     }
-  });
+    try {
+      await navigator.share({ title: name, text });
+      return;
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+  }
+
+  if (apple) {
+    /* Do not trigger Safari’s Download prompt — it does not show up in Recents
+       and is easy to lose. Copy instead. */
+    return copyProgressBackup();
+  }
+
+  const blob = new Blob([text], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = name;
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1500);
 }
 /* A one-line census of a saved state, so the import confirmation can say what
    is about to be replaced and what with, rather than asking blind. */
