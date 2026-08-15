@@ -70,8 +70,10 @@ wipes the lot, so export occasionally.
 
 ## On an iPhone
 
-Open the site in **Safari**, tap **Share → Add to Home Screen**. It uses the
-red **和** seal as its icon and opens without the Safari chrome.
+Open the site in **Safari**, tap **Share → Add to Home Screen**. The home-screen
+name is **トムさんの勉強ガイド**, it uses the red **和** seal as its icon, and it
+opens without the Safari chrome. If an older icon is already there, delete it
+and add the site again so iOS picks up the new name.
 
 ## Running it locally
 
