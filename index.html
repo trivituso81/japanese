@@ -269,6 +269,22 @@
     font-size: 15.5px; padding: 14px 18px; min-height: 50px;
     letter-spacing: .06em;
   }
+  .home-progress {
+    flex: 0 0 auto;
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 6px 10px; padding: 4px 4px 0;
+    font-size: 11.5px; color: var(--text-soft); letter-spacing: .02em;
+  }
+  .home-progress .hp-status { color: var(--text-faint); }
+  .home-progress button,
+  .home-progress label {
+    font: inherit; font-size: 11.5px; font-weight: 600;
+    color: var(--seal); background: none; border: none;
+    padding: 0; margin: 0; cursor: pointer; letter-spacing: .04em;
+  }
+  .home-progress button:hover,
+  .home-progress label:hover { text-decoration: underline; }
+  .home-progress input[type="file"] { display: none; }
 
   @media (prefers-reduced-motion: reduce) {
     .viz-enso .ink { animation: none; }
@@ -1438,6 +1454,8 @@
    State
    ============================================================ */
 const KEY = "mnn-study-v1";
+const KEY_BAK = KEY + ":bak";
+const KEY_SAVED = KEY + ":savedAt";
 const OVERALL = [
   { id: "todo",       label: "Not started" },
   { id: "learning",   label: "Learning" },
@@ -1465,14 +1483,47 @@ function currentLesson() {
   return (_current = touched.length ? Math.max(...touched) : flagged);
 }
 
+/* How much a saved state is "worth" — used to pick primary vs backup and to
+   refuse quietly overwriting a rich backup with an empty shell. */
+function progressWeight(s) {
+  if (!s || typeof s !== "object") return 0;
+  const lessons = Object.keys(s.lessons || {}).filter(n =>
+    (s.lessons[n] || {}).overall && s.lessons[n].overall !== "todo").length;
+  const cards = Object.keys(s.cards || {}).length;
+  const drills = Object.keys(s.drills || {}).reduce(
+    (a, n) => a + (((s.drills[n] || {}).history || []).length), 0);
+  const kanji = Object.keys((s.kanji && s.kanji.by) || {}).length;
+  const verbs = ((s.verbs && s.verbs.history) || []).length;
+  return lessons + cards + drills + kanji * 2 + verbs;
+}
+
+function parseProgress(raw) {
+  if (!raw) return null;
+  try {
+    const obj = JSON.parse(raw);
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) return null;
+    return migrate(Object.assign(blank(), obj));
+  } catch (e) {
+    return null;
+  }
+}
+
 let S = load();
-// migrateCards runs inside load(), before S exists, so it cannot save itself
-if (S.vocabRemapped) save();
+/* Rewrite both slots after load so a recovered backup becomes the primary,
+   and the vocab remap marker is persisted. */
+if (S.vocabRemapped || progressWeight(S) > 0) save();
+requestPersistentStorage();
+
 function load() {
-  let s;
-  try { s = Object.assign(blank(), JSON.parse(localStorage.getItem(KEY)) || {}); }
-  catch (e) { return blank(); }
-  return migrate(s);
+  const primary = parseProgress(localStorage.getItem(KEY));
+  const backup = parseProgress(localStorage.getItem(KEY_BAK));
+  if (primary && backup) {
+    /* Prefer whichever copy still holds more progress — a half-written or
+       wiped primary should not beat a good backup after a bad refresh. */
+    const pick = progressWeight(backup) > progressWeight(primary) ? backup : primary;
+    return pick;
+  }
+  return primary || backup || blank();
 }
 
 /* Every migration a saved state might still need, in one place.
@@ -1521,10 +1572,60 @@ function migrateCards(s) {
   s.cards = cards;
   s.vocabRemapped = true;
 }
-function save() {
+
+let _saveWarned = false;
+function save(opts) {
   forgetCurrent();   // any saved answer can move where "you are up to" points
-  try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {}
+  const force = !!(opts && opts.force);
+  const weight = progressWeight(S);
+  try {
+    const existingBak = parseProgress(localStorage.getItem(KEY_BAK));
+    if (!force && weight === 0 && progressWeight(existingBak) > 4) {
+      /* Never clobber a real backup with a blank state — that is how a
+         transient load glitch turns into permanent data loss. */
+      return false;
+    }
+    const raw = JSON.stringify(S);
+    localStorage.setItem(KEY, raw);
+    localStorage.setItem(KEY_BAK, raw);
+    localStorage.setItem(KEY_SAVED, String(Date.now()));
+    return true;
+  } catch (e) {
+    if (!_saveWarned) {
+      _saveWarned = true;
+      try {
+        alert("Progress could not be saved in this browser. Use Export on the home screen and keep the file.");
+      } catch (err) {}
+    }
+    return false;
+  }
 }
+
+function savedAtLabel() {
+  const t = +localStorage.getItem(KEY_SAVED) || 0;
+  if (!t) return progressWeight(S) ? "saved on this phone" : "nothing saved yet";
+  const mins = Math.round((Date.now() - t) / 60000);
+  if (mins < 1) return "saved just now";
+  if (mins < 60) return `saved ${mins}m ago`;
+  const hrs = Math.round(mins / 60);
+  if (hrs < 48) return `saved ${hrs}h ago`;
+  return `saved ${new Date(t).toLocaleDateString()}`;
+}
+
+function requestPersistentStorage() {
+  try {
+    if (navigator.storage && navigator.storage.persist) {
+      navigator.storage.persist().catch(() => {});
+    }
+  } catch (e) {}
+}
+
+/* Flush on background / close — iOS Safari is eager to suspend tabs. */
+window.addEventListener("pagehide", () => { save(); });
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "hidden") save();
+});
+
 function lessonState(n) {
   if (!S.lessons[n]) S.lessons[n] = { overall: "todo", note: "" };
   return S.lessons[n];
@@ -2488,9 +2589,17 @@ function renderHome() {
       ${next ? `<div class="home-next">
         <a class="btn primary" href="${next.go}">${esc(next.label || "Continue")}</a>
       </div>` : ""}
+
+      <div class="home-progress">
+        <span class="hp-status">${esc(savedAtLabel())}</span>
+        <button type="button" id="exp">Export</button>
+        <label for="imp">Import<input type="file" id="imp" accept="application/json,.json"></label>
+      </div>
     </section>`;
 
   wireResume(renderHome);
+  document.getElementById("exp").addEventListener("click", exportProgress);
+  document.getElementById("imp").addEventListener("change", importProgress);
 }
 
 function renderLessons() {
@@ -2591,7 +2700,7 @@ function importProgress(e) {
       `This cannot be undone. Export first if you are not sure.`)) return;
 
     S = next;
-    save();
+    save({ force: true });
     route();
   };
   r.readAsText(f);

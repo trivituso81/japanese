@@ -50,14 +50,19 @@ opened from. A site served from `github.io` is a different address from a file
 opened off your disk, so **the two do not share progress**, and neither do two
 different browsers or a laptop and a phone.
 
+The home screen shows **Export** and **Import**. Export downloads a JSON backup
+you can keep in Files (or AirDrop). Import restores it. The app also keeps a
+second on-device copy and refuses to overwrite a good backup with an empty one.
+
 If you have been studying from the local copy, carry it over once:
 
-1. Open the local `index.html`, press **Export** on the dashboard, and keep the
+1. Open the local `index.html`, press **Export** on the home screen, and keep the
    JSON file it saves.
 2. Open the published site and press **Import**, then pick that file.
 
-That same Export file is your only backup. Clearing site data in your browser
-wipes the lot, so export occasionally.
+That same Export file is your real backup across updates. Clearing Safari
+website data still wipes on-device storage, so export every so often — especially
+before switching phones.
 
 ## Files
 
