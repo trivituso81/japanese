@@ -344,27 +344,29 @@
     flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
     position: relative;
   }
+  .card-play .stagehead {
+    padding: 8px 4px 10px; gap: 8px;
+  }
   .card-play .card {
     flex: 1 1 auto; min-height: 0;
-    padding: 16px 16px 14px;
-    gap: 0;
-    grid-template-rows: 1fr 7em;
     background: var(--bg);
     border: 1px solid var(--rule-strong);
   }
+  .card-play .card-face { bottom: 6.25em; padding: 16px 14px 10px; }
+  .card-play .card-reveal { height: 6.25em; padding: 10px 14px 12px; }
   .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
   .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
   .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
   .card-play .answer.jp { font-size: clamp(1.55rem, 6vw, 2.1rem); }
   .card-play .cardacts {
-    flex: 0 0 auto; padding: 14px 0 0; gap: 10px;
+    flex: 0 0 auto; padding: 12px 0 0; gap: 10px;
   }
   .card-play .cardacts .btn {
     flex: 1 1 0; min-height: 52px; font-size: 15px; padding: 12px 14px;
   }
   .card-play .cardmeta {
-    flex: 0 0 auto; padding: 10px 0 0;
-    min-height: 44px;
+    flex: 0 0 auto; padding: 8px 0 0;
+    justify-content: center; min-height: 0;
   }
   .card-play .results {
     flex: 1; display: flex; flex-direction: column; justify-content: center;
@@ -627,27 +629,36 @@
 
   /* card + drill stage */
   .stage { border: 1px solid var(--rule-strong); background: var(--bg); margin: 22px 0 0; }
-  .stagehead { display: flex; flex-wrap: wrap; gap: 10px 14px; align-items: center;
+  .stagehead { display: flex; flex-wrap: nowrap; gap: 10px 12px; align-items: center;
     justify-content: space-between; padding: 13px 17px; background: var(--bg-soft);
     border-bottom: 1px solid var(--rule-strong); font-size: 12px; color: var(--text-soft);
     letter-spacing: .04em; }
+  .stagehead > span:first-child { min-width: 0; }
+  .stagehead-end {
+    display: flex; flex-wrap: nowrap; align-items: center; gap: 8px;
+    flex: 0 0 auto; white-space: nowrap;
+  }
+  .stagehead .stage-undo {
+    flex: 0 0 auto; margin: 0; min-height: 32px; padding: 4px 10px; font-size: 12px;
+  }
   .stagehead b { color: var(--text); font-variant-numeric: tabular-nums; }
-  .card { padding: 28px 26px 22px; text-align: center; min-height: 270px;
-    display: grid; grid-template-rows: 1fr 6.5em; align-items: stretch; gap: 0; }
-  /* Front stays put on reveal — the answer band is a fixed row, so showing
-     the back never recenters or shoves the prompt. */
+  .card {
+    position: relative; text-align: center; min-height: 270px;
+    padding: 0; overflow: hidden;
+  }
+  /* Face and answer share a fixed card box — the back sits in a bottom band
+     so revealing never resizes the card or moves the front. */
   .card-face {
-    min-height: 0;
+    position: absolute; left: 0; right: 0; top: 0; bottom: 5.75em;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 14px; padding: 12px 0;
+    gap: 14px; padding: 18px 20px 12px;
   }
   .card-reveal {
-    min-height: 0;
+    position: absolute; left: 0; right: 0; bottom: 0; height: 5.75em;
     display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 8px; width: 100%;
-    padding: 12px 4px 2px;
+    gap: 8px; padding: 10px 16px 14px;
     border-top: 1px solid transparent;
-    overflow: auto;
+    overflow: auto; box-sizing: border-box;
   }
   .card-reveal.is-open { border-top-color: var(--rule); }
   .prompt { font-family: var(--serif); font-size: 31px; line-height: 1.5; font-weight: 400; }
@@ -1134,12 +1145,16 @@
     .acts { gap: 6px; }
     .acts .btn { flex: 1 1 0; }
 
-    .card { padding: 18px 16px 14px; min-height: 220px; gap: 0; grid-template-rows: 1fr 5.5em; }
+    .card { min-height: 220px; padding: 0; }
+    .card-face { bottom: 5.25em; padding: 14px 14px 8px; }
+    .card-reveal { height: 5.25em; }
     .prompt { font-size: 25px; } .prompt.jp { font-size: 30px; }
     .answer { font-size: 20px; } .answer.jp { font-size: 23px; }
     body[data-view="cards-play"] .card-play .card {
-      padding: 14px 16px 12px; min-height: 0; gap: 0; grid-template-rows: 1fr 6.5em;
+      padding: 0; min-height: 0;
     }
+    body[data-view="cards-play"] .card-play .card-face { bottom: 6em; }
+    body[data-view="cards-play"] .card-play .card-reveal { height: 6em; }
     body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
     body[data-view="cards-play"] .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
     body[data-view="cards-play"] .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
@@ -1205,7 +1220,9 @@
     .standfirst, .enso { display: none; }
     header.masthead { padding-bottom: 10px; }
     header.masthead::after { display: none; }
-    .card { min-height: 0; padding: 18px 14px; gap: 10px; }
+    .card { min-height: 0; padding: 0; }
+    .card-face { bottom: 4.75em; padding: 12px 12px 8px; gap: 10px; }
+    .card-reveal { height: 4.75em; }
     .prompt { font-size: 22px; } .prompt.jp { font-size: 25px; }
   }
 
@@ -2725,7 +2742,7 @@ function drillStage({ heading, sub, left, right, done, total, body }) {
   return `${heading ? `<h2 class="view">${heading}</h2>` : ""}
     ${sub ? `<p class="viewsub">${sub}</p>` : ""}
     <div class="stage drillstage">
-      <div class="stagehead"><span>${left}</span><span>${right || ""}</span></div>
+      <div class="stagehead"><span>${left}</span><span class="stagehead-end">${right || ""}</span></div>
       <div class="prog"><i style="width:${pct(done, total)}%"></i></div>
       ${body}
     </div>`;
@@ -2789,7 +2806,8 @@ function drawCard() {
     left: `${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
       <b>${CARD.passSize}</b> · <b>${CARD.round.length}</b> left`,
     right: `${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b>${
-      again ? ` · <span class="rep">again</span>` : ""}`,
+      again ? ` · <span class="rep">again</span>` : ""}
+      <button type="button" class="btn sm stage-undo" id="undo" ${CARD.prev ? "" : "disabled"}>Undo</button>`,
     done: CARD.passDone, total: CARD.passSize,
     body: `
     <div class="deck">
@@ -2808,16 +2826,12 @@ function drawCard() {
       <button class="btn good wide" id="yes">Know →</button>
     </div>
     <div class="cardmeta">
-      <button class="btn sm" id="undo" ${CARD.prev ? "" : "disabled"}>Undo</button>
-      ${CARD.shown
-        ? `<button class="btn sm" disabled aria-hidden="true" tabindex="-1" style="visibility:hidden">Show answer</button>`
-        : `<button class="btn sm" id="reveal">Show answer</button>`}
       <span class="keys">${CARD.shown
         ? `← don't know · → know · U to undo${showSpeak ? " · P to listen" : ""}`
         : `← / → to answer · space to flip · U to undo${showSpeak ? " · P to listen" : ""}`}</span>
       <span class="taphint">${CARD.shown
         ? "Swipe left if you don't know it, right if you do"
-        : "Swipe it now if you know it, or tap to flip"}</span>
+        : "Tap to flip · swipe if you already know it"}</span>
     </div>`
   });
 
@@ -2829,7 +2843,6 @@ function drawCard() {
       fn();
     });
   };
-  on("reveal", revealCard, true);
   on("no", () => commitCard(false));
   on("yes", () => commitCard(true));
   on("undo", undoCard);
