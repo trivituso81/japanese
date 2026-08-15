@@ -389,8 +389,31 @@
 
   /* Kanji drill uses the same play shell; the face is one big character and
      the bottom band holds the meaning input (or the revealed gloss). */
+  body[data-view="kanji-play"] {
+    --play-h: 100dvh;
+  }
+  body[data-view="kanji-play"] .wrap {
+    min-height: var(--play-h);
+    height: var(--play-h);
+    max-height: var(--play-h);
+    overflow: hidden;
+    box-sizing: border-box;
+  }
   body[data-view="kanji-play"] .card-play .card-face { bottom: 7.5em; }
   body[data-view="kanji-play"] .card-play .card-reveal { height: 7.5em; }
+  /* Typing dock: input + Skip/Check live in the reveal band so the keyboard
+     only has to keep one compact strip visible — the character stays above. */
+  body[data-view="kanji-play"] .card-play .card:has(.kanji-type) {
+    display: flex; flex-direction: column;
+  }
+  body[data-view="kanji-play"] .card-play .card:has(.kanji-type) .card-face {
+    position: relative; inset: auto; flex: 1 1 auto; min-height: 0;
+    bottom: auto;
+  }
+  body[data-view="kanji-play"] .card-play .card-reveal.kanji-type {
+    position: relative; inset: auto; height: auto; flex: 0 0 auto;
+    min-height: 0; padding: 10px 12px 12px; gap: 8px;
+  }
   .card-play .kbig-face {
     font-family: var(--jp-mincho); font-weight: 400;
     font-size: clamp(4.5rem, 26vw, 7.5rem); line-height: 1;
@@ -400,9 +423,16 @@
     width: 100%; max-width: 420px; font: inherit; font-size: 17px;
     padding: 12px 14px; border: 1px solid var(--rule-strong); border-radius: 0;
     background: var(--bg); color: var(--text); text-align: center;
+    box-sizing: border-box;
   }
   .card-play .kin:focus {
     outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .card-play .k-type-acts {
+    display: flex; gap: 8px; width: 100%; max-width: 420px;
+  }
+  .card-play .k-type-acts .btn {
+    flex: 1 1 0; min-height: 48px; font-size: 15px; padding: 10px 12px;
   }
   .card-play .k-ans-mean {
     font-family: var(--serif); font-size: clamp(1.25rem, 4.5vw, 1.6rem);
@@ -410,6 +440,45 @@
   }
   .card-play .k-ans-meta {
     font-size: 12.5px; color: var(--text-soft); line-height: 1.4;
+  }
+
+  /* Keyboard open — fit to the visual viewport, hide chrome, shrink the glyph
+     so 是 (etc.) stays fully readable above the typing dock. */
+  body.kb-open[data-view="kanji-play"] .wrap {
+    position: fixed;
+    top: var(--vv-top, 0px);
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: none;
+    padding-bottom: 6px;
+    z-index: 5;
+  }
+  body.kb-open[data-view="kanji-play"] .botnav {
+    visibility: hidden; pointer-events: none;
+  }
+  body.kb-open[data-view="kanji-play"] .card-play .stagehead {
+    padding: 4px 2px 6px; font-size: 11px;
+  }
+  body.kb-open[data-view="kanji-play"] .card-play .prog { margin-bottom: 2px; }
+  body.kb-open[data-view="kanji-play"] .card-play .cardmeta { display: none; }
+  body.kb-open[data-view="kanji-play"] .card-play .kbig-face {
+    font-size: clamp(2.6rem, 14vmin, 4.2rem);
+  }
+  body.kb-open[data-view="kanji-play"] .card-play .card:has(.kanji-type) .card-face {
+    padding: 8px 10px 6px;
+  }
+  body.kb-open[data-view="kanji-play"] .card-play .card-reveal.kanji-type {
+    padding: 8px 10px 10px; gap: 6px;
+  }
+  body.kb-open[data-view="kanji-play"] .card-play .kin {
+    font-size: 16px; padding: 10px 12px;
+  }
+  body.kb-open[data-view="kanji-play"] .card-play .k-type-acts .btn {
+    min-height: 44px; padding: 8px 10px; font-size: 14px;
+  }
+  body.kb-open {
+    overflow: hidden;
   }
   .kanji-browse {
     margin-top: 8px; font-size: 13px; color: var(--text-soft);
@@ -1207,6 +1276,12 @@
     body[data-view="cards-play"] .card-play .card-reveal { height: 6em; }
     body[data-view="kanji-play"] .card-play .card-face { bottom: 7em; }
     body[data-view="kanji-play"] .card-play .card-reveal { height: 7em; }
+    body[data-view="kanji-play"] .card-play .card:has(.kanji-type) .card-face {
+      bottom: auto;
+    }
+    body[data-view="kanji-play"] .card-play .card-reveal.kanji-type {
+      height: auto;
+    }
     body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
     body[data-view="cards-play"] .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
     body[data-view="cards-play"] .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
@@ -4510,6 +4585,7 @@ function enterKanjiPlay() {
   if (!document.querySelector(".card-play#stage")) {
     document.getElementById("view").innerHTML = `<section class="card-play" id="stage"></section>`;
   }
+  syncKanjiKeyboard();
 }
 
 function saveKanjiSession() {
@@ -4596,16 +4672,16 @@ function drawKanji() {
             ${esc(lastOk.en)}</p>` : ""}
           <div class="kbig-face">${esc(k.c)}</div>
         </div>
-        <div class="card-reveal is-open">
+        <div class="card-reveal is-open kanji-type">
           <input type="text" class="kin" id="kin" autocomplete="off" autocapitalize="off"
             autocorrect="off" spellcheck="false" placeholder="Meaning in English"
             enterkeyhint="done">
+          <div class="k-type-acts">
+            <button class="btn bad wide" id="kskip" type="button">Skip</button>
+            <button class="btn primary wide" id="kgo" type="button">Check</button>
+          </div>
         </div>
       </div>
-    </div>
-    <div class="cardacts">
-      <button class="btn bad wide" id="kskip">Skip</button>
-      <button class="btn primary wide" id="kgo">Check</button>
     </div>
     <div class="cardmeta">
       <span class="taphint">Type the meaning · Enter to check</span>
@@ -4613,13 +4689,27 @@ function drawKanji() {
   });
 
   const input = document.getElementById("kin");
-  input.focus();
+  const pinViewport = () => {
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+    syncKanjiKeyboard();
+  };
+  /* Focus after layout so iOS sizes the visual viewport against the dock,
+     then pin scroll so the character is not shoved off-screen. */
+  requestAnimationFrame(() => {
+    input.focus({ preventScroll: true });
+    pinViewport();
+  });
   const send = () => submitKanji(input.value);
   document.getElementById("kgo").addEventListener("click", send);
   document.getElementById("kskip").addEventListener("click", () => submitKanji(""));
   document.getElementById("kundo").addEventListener("click", undoKanji);
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") { e.preventDefault(); send(); }
+  });
+  input.addEventListener("focus", () => {
+    requestAnimationFrame(pinViewport);
   });
 }
 
@@ -4833,7 +4923,54 @@ function route() {
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
 wireFurigana();
 wireBotnavScroll();
+wireKanjiKeyboard();
 route();
+
+/* Keep the kanji character in the visible area when iOS raises the keyboard.
+   visualViewport shrinks; we match the play shell to that height and toggle a
+   compact typing mode instead of letting Safari scroll the glyph off-screen. */
+function syncKanjiKeyboard() {
+  const vv = window.visualViewport;
+  const playing = document.body.dataset.view === "kanji-play";
+  if (!playing) {
+    document.body.classList.remove("kb-open");
+    document.documentElement.style.removeProperty("--play-h");
+    document.documentElement.style.removeProperty("--vv-top");
+    return;
+  }
+  const layoutH = window.innerHeight || document.documentElement.clientHeight;
+  const visibleH = vv ? vv.height : layoutH;
+  const offset = vv ? vv.offsetTop : 0;
+  const inset = Math.max(0, layoutH - visibleH - offset);
+  const open = inset > 80;
+  document.body.classList.toggle("kb-open", open);
+  if (open) {
+    document.documentElement.style.setProperty("--play-h", `${Math.round(visibleH)}px`);
+    document.documentElement.style.setProperty("--vv-top", `${Math.round(offset)}px`);
+    window.scrollTo(0, 0);
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+  } else {
+    document.documentElement.style.setProperty("--play-h", "100dvh");
+    document.documentElement.style.removeProperty("--vv-top");
+  }
+}
+function wireKanjiKeyboard() {
+  const sync = () => syncKanjiKeyboard();
+  const vv = window.visualViewport;
+  if (vv) {
+    vv.addEventListener("resize", sync);
+    vv.addEventListener("scroll", sync);
+  }
+  window.addEventListener("resize", sync);
+  window.addEventListener("orientationchange", () => setTimeout(sync, 100));
+  document.addEventListener("focusin", e => {
+    if (e.target && e.target.id === "kin") requestAnimationFrame(sync);
+  });
+  document.addEventListener("focusout", () => setTimeout(sync, 80));
+  window.addEventListener("hashchange", () => setTimeout(sync, 0));
+  sync();
+}
 
 /* Bottom bar: hide while the user scrolls down, show again on scroll up —
    the usual phone pattern so long pages and the card face keep the room. */
