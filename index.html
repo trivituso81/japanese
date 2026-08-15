@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815ipad">
+<link rel="manifest" href="site.webmanifest?v=20260816ipad">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815ipad";
+window.__BUILD__ = "20260816ipad";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1209,6 +1209,16 @@ window.__BUILD__ = "20260815ipad";
   .vrow .j { font-family: var(--jp-mincho); font-size: 22px; line-height: 2.05; letter-spacing: .02em; }
   .vrow .j.yours { margin: 0; padding: 0; border-top: 0; color: var(--text); font-size: 20px; }
   .verdict.no .vrow .j.yours, .verdict.near .vrow .j.yours { color: var(--miss); }
+  .vrow .j-speak {
+    display: flex; align-items: flex-start; gap: 10px;
+  }
+  .vrow .j-speak .j { flex: 1 1 auto; min-width: 0; }
+  .vrow .j-speak .speak {
+    margin-top: 4px; padding: 6px; min-width: 36px; min-height: 36px;
+    justify-content: center; flex: 0 0 auto;
+  }
+  .vrow .j-speak .speak .speak-lab { display: none; }
+  .vrow .j-speak .speak svg { width: 16px; height: 16px; }
   .vtag { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600;
     color: var(--text-faint); border: 1px solid var(--rule-strong); border-radius: 0; padding: 2px 6px; }
   .verdict .note { font-family: var(--serif); font-size: 14px; color: var(--text-soft);
@@ -1281,6 +1291,17 @@ window.__BUILD__ = "20260815ipad";
   .vword { font-family: var(--jp-mincho); font-size: 44px; line-height: 1.55; margin: 16px 0 6px;
     letter-spacing: .04em; }
   .vword.en { font-family: var(--serif); font-size: 29px; line-height: 1.3; letter-spacing: 0; }
+  .vword-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin: 16px 0 6px;
+  }
+  .vword-row .vword { margin: 0; }
+  .vword-row .speak {
+    margin-top: 0; padding: 6px; min-width: 36px; min-height: 36px;
+    justify-content: center; flex: 0 0 auto;
+  }
+  .vword-row .speak .speak-lab { display: none; }
+  .vword-row .speak svg { width: 16px; height: 16px; }
   /* At this size the shared 0.5em reading would rival the word itself, and the
      line needs headroom or the ruby rides up into the form name above it. */
   .vword rt { font-size: 0.3em; }
@@ -2030,7 +2051,7 @@ window.__BUILD__ = "20260815ipad";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815ipad"></script>
+<script src="japanese-data.js?v=20260816ipad"></script>
 <script>
 /* ============================================================
    State
@@ -2219,6 +2240,27 @@ function lessonState(n) {
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;" }[c]));
 const ruby = s => esc(s).replace(/([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g, "<ruby>$1<rt>$2</rt></ruby>");
 const plain = s => String(s).replace(/[{}]/g, "");
+
+/* Split textbook furigana markup into plain text runs and kanji{reading} pairs. */
+function parseFuriParts(jp) {
+  const parts = [];
+  const re = /([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g;
+  let last = 0, m;
+  const s = String(jp == null ? "" : jp);
+  while ((m = re.exec(s))) {
+    if (m.index > last) parts.push({ t: s.slice(last, m.index) });
+    parts.push({ k: m[1], y: m[2] });
+    last = m.index + m[0].length;
+  }
+  if (last < s.length) parts.push({ t: s.slice(last) });
+  return parts;
+}
+
+/* All-kana (or as-marked) reading of a model sentence for TTS. */
+function speakableFromFuri(jp) {
+  return parseFuriParts(jp).map(p => p.y || p.t).join("").replace(/[{}]/g, "");
+}
+
 const lessonById = n => LESSONS.find(l => l.n === +n);
 const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 
@@ -3917,6 +3959,39 @@ const KANA_FOLD = [
   [/丁度/g, "ちょうど"]
 ];
 
+/* Copy readings from the model onto matching kanji in a typed answer so the
+   verdict can show furigana even when the learner did not type {…} markup. */
+function annotateWithModelFuri(typed, modelJp) {
+  const s = String(typed == null ? "" : typed);
+  if (!s) return "";
+  const map = new Map();
+  parseFuriParts(modelJp).forEach(p => { if (p.k) map.set(p.k, p.y); });
+  /* Common kanji the marker folds to kana also get a reading if the model
+     left them unmarked. */
+  KANA_FOLD.forEach(([re, yomi]) => {
+    const k = re.source.replace(/\\/g, "");
+    if (k && !map.has(k)) map.set(k, yomi);
+  });
+  if (!map.size) return s;
+  const keys = [...map.keys()].sort((a, b) => b.length - a.length);
+  let out = "", i = 0;
+  while (i < s.length) {
+    let hit = null;
+    for (let k = 0; k < keys.length; k++) {
+      const key = keys[k];
+      if (s.startsWith(key, i)) { hit = key; break; }
+    }
+    if (hit) {
+      out += `${hit}{${map.get(hit)}}`;
+      i += hit.length;
+    } else {
+      out += s[i];
+      i++;
+    }
+  }
+  return out;
+}
+
 function normJa(s) {
   let x = String(s == null ? "" : s);
   KANA_FOLD.forEach(([re, to]) => { x = x.replace(re, to); });
@@ -3929,15 +4004,7 @@ function normJa(s) {
 /* Every readable spelling of the model sentence. With at most seven kanji
    words in a drill answer the full set stays small. */
 function acceptedForms(jp) {
-  const parts = [];
-  const re = /([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g;
-  let last = 0, m;
-  while ((m = re.exec(jp))) {
-    if (m.index > last) parts.push({ t: jp.slice(last, m.index) });
-    parts.push({ k: m[1], y: m[2] });
-    last = m.index + m[0].length;
-  }
-  if (last < jp.length) parts.push({ t: jp.slice(last) });
+  const parts = parseFuriParts(jp);
   const words = parts.filter(p => p.k).length;
   const clean = s => s.replace(/[{}]/g, "");
   if (!words) return [clean(jp)];
@@ -4253,6 +4320,7 @@ function newDrill(scope, ns, bank, only, sweep, focus) {
    abandoned at question 20 still counts for those twenty lessons, and the
    session is parked alongside it so the rest can be picked up later. */
 function submitAnswer(q) {
+  unlockTts();
   const typed = DRILL.typed || "";
   const j = judgeAnswer(typed, q.jp, q.en);
   DRILL.answers.push({ q, ok: j.ok, verdict: j.verdict, off: j.off, yours: typed });
@@ -4360,7 +4428,7 @@ function drawDrill() {
             ${range ? `<td data-col="key"><a href="#/lesson/${a.q.n}">L${a.q.n}</a></td>` : ""}
             <td data-col="gloss"><b>${ruby(a.q.en)}</b></td>
             <td data-col="answer" class="jp">${ruby(a.q.jp)}${a.yours
-              ? `<div class="yours">you: ${esc(a.yours)}${a.verdict === "near"
+              ? `<div class="yours">you: ${ruby(annotateWithModelFuri(a.yours, a.q.jp))}${a.verdict === "near"
                   ? ` <span class="vtag">${a.off} off</span>` : ""}</div>`
               : `<div class="yours">skipped</div>`}</td>
             <td data-col="meta" class="jp">${ruby(a.q.pattern)}</td>
@@ -4461,7 +4529,13 @@ function drawVerdict(view, heading, range, score) {
   const say = a.verdict === "near"
     ? `Only ${a.off} character${a.off > 1 ? "s" : ""} away from the model answer — check it closely, a single character is usually a particle.`
     : v.say;
+  const yoursHtml = a.yours
+    ? ruby(annotateWithModelFuri(a.yours, q.jp))
+    : "";
+  const speakReading = speakableFromFuri(q.jp);
+  const speakKanji = plain(q.jp);
 
+  stopSpeaking();
   view.innerHTML = drillStage({
     heading: esc(heading),
     sub: "One attempt each — read the model answer before moving on.",
@@ -4474,9 +4548,12 @@ function drawVerdict(view, heading, range, score) {
           ${a.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
         <p class="qen">${ruby(q.en)}</p>
         ${a.yours ? `<div class="vrow"><div class="lab">Your answer</div>
-          <div class="j yours">${esc(a.yours)}</div></div>` : ""}
+          <div class="j yours">${yoursHtml}</div></div>` : ""}
         <div class="vrow"><div class="lab">Model answer · ${plain(q.pattern)}${range ? ` · Lesson ${q.n}` : ""}</div>
-          <div class="j">${ruby(q.jp)}</div></div>
+          <div class="j-speak">
+            <div class="j">${ruby(q.jp)}</div>
+            ${speakButton({ icon: true, label: false, id: "gspeak" })}
+          </div></div>
         ${say ? `<p class="note">${esc(say)}</p>` : ""}
         ${q.note ? `<p class="note">${ruby(q.note)}</p>` : ""}
         <div class="rowacts">
@@ -4489,9 +4566,16 @@ function drawVerdict(view, heading, range, score) {
   });
 
   const next = document.getElementById("next");
-  next.addEventListener("click", () => { DRILL.verdict = null; drawDrill(); });
+  next.addEventListener("click", () => {
+    unlockTts();
+    flushPendingSpeak();
+    DRILL.verdict = null;
+    drawDrill();
+  });
   next.focus();
   document.getElementById("flip").addEventListener("click", () => regradeLast(!a.ok));
+  wireSpeak(speakReading, speakKanji, "gspeak");
+  if (speakReading || speakKanji) speakJapanese(speakReading, speakKanji);
 }
 
 /* ============================================================
@@ -4674,7 +4758,7 @@ function conjugateOne(word, v, form) {
     if (v.g === 3 || VERB_KEIGO_SPECIAL.includes(v.ms)) return null;
     return form === "honorific" ? `お${stem}になります` : `お${stem}します`;
   }
-  if (form === "stem") return stem;
+  if (form === "masu") return /ます$/.test(word) ? word : null;
   if (form === "masu_past") return stem + "ました";
   if (form === "masu_neg") return stem + "ません";
 
@@ -4759,9 +4843,23 @@ const VERB_PROMPTS = [
   ["polite", "ます-form",        "the polite form"],
   ["dict",   "Dictionary form", "the plain form"]
 ];
-const vOpts = () => Object.assign({ ceiling: 50, prompt: "polite", count: 10, form: "te" },
-  S.vopts || {});
+const vOpts = () => {
+  const o = Object.assign({ ceiling: 50, prompt: "polite", count: 10, form: "te" },
+    S.vopts || {});
+  /* ます-stem drill was removed; map any saved choice onto dictionary form. */
+  if (o.form === "stem") o.form = "dict";
+  return o;
+};
 function setVOpts(patch) { S.vopts = Object.assign(vOpts(), patch); save(); }
+
+/* Avoid trivial prompts: don't show ます when the answer is ます, or dictionary
+   when the answer is dictionary — flip to the other Japanese face instead. */
+function effectiveVerbPrompt(form, style) {
+  if (style === "en") return "en";
+  if (form === "masu" && style !== "dict") return "dict";
+  if (form === "dict" && style === "dict") return "polite";
+  return style;
+}
 
 const verbPool = (ceiling, form) =>
   verbs().filter(v => v.n <= ceiling && conjugate(v, form) !== null);
@@ -4896,6 +4994,7 @@ function recordVerb(ok, type) {
    address, so the breadcrumb back to the setup table is a real link, the
    browser's back button behaves, and a form can be bookmarked. */
 function startVerbs(form, types) {
+  unlockTts();
   const o = vOpts();
   const pool = verbPool(o.ceiling, form);
   if (!pool.length) return goto("#/verbs");
@@ -4929,6 +5028,10 @@ function clearVerbSession() { delete S.vsession; save(); }
 function resumeVerbs() {
   const s = S.vsession;
   if (!s) return goto("#/verbs");
+  if (s.form === "stem" || !VERB_FORMS.some(f => f.id === s.form)) {
+    clearVerbSession();
+    return goto("#/verbs");
+  }
   const idx = {}; verbs().forEach(v => idx[`${v.ms}|${v.kanji}`] = v);
   const list = s.ids.map(id => idx[id]).filter(Boolean);
   if (!list.length) { clearVerbSession(); return goto("#/verbs"); }
@@ -4943,6 +5046,14 @@ const verbPrompt = (v, style) => {
   const c = style === "dict" ? conjugate(v, "dict") : { kana: v.ms, kanji: v.kanji || null };
   return { main: c.kanji || c.kana, html: vRuby(c), sub: v.en };
 };
+
+/* Kana (+ kanji) for TTS when the prompt itself is Japanese. */
+function verbPromptSpeak(v, style) {
+  if (!v || style === "en") return null;
+  const c = style === "dict" ? conjugate(v, "dict") : { kana: v.ms, kanji: v.kanji || null };
+  if (!c || !c.kana) return null;
+  return { reading: c.kana, kanji: c.kanji || c.kana };
+}
 
 /* Strict: the kana spelling or the kanji spelling, nothing else. Only spaces
    and a trailing full stop are forgiven. */
@@ -4962,7 +5073,7 @@ function drawVerb() {
     const { v, typed, answer } = VERB.verdict;
     const last = VERB.answers[VERB.answers.length - 1] || {};
     const ok = !!last.ok;
-    const p = verbPrompt(v, VERB.prompt);
+    const p = verbPrompt(v, effectiveVerbPrompt(VERB.form, VERB.prompt));
     view.innerHTML = drillStage({
       heading: esc(meta.label),
       sub: "One attempt each — kana or the kanji spelling both count.",
@@ -4991,7 +5102,12 @@ function drawVerb() {
     const vn = document.getElementById("vnext");
     // the round is a typing loop; without this the hand has to leave the keyboard
     vn.focus();
-    vn.addEventListener("click", () => { VERB.verdict = null; drawVerb(); });
+    vn.addEventListener("click", () => {
+      unlockTts();
+      flushPendingSpeak();
+      VERB.verdict = null;
+      drawVerb();
+    });
     const vf = document.getElementById("vflip");
     if (vf) vf.addEventListener("click", () => regradeVerb(true));
     return;
@@ -5000,8 +5116,11 @@ function drawVerb() {
   if (VERB.i >= total) return drawVerbEnd(view, meta);
 
   const v = VERB.list[VERB.i];
-  const p = verbPrompt(v, VERB.prompt);
+  const promptStyle = effectiveVerbPrompt(VERB.form, VERB.prompt);
+  const p = verbPrompt(v, promptStyle);
+  const speakSrc = verbPromptSpeak(v, promptStyle);
   const lastOk = VERB.lastOk;
+  stopSpeaking();
   view.innerHTML = drillStage({
     heading: esc(meta.label),
     sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus ? " · focused round" : ""}`,
@@ -5012,7 +5131,10 @@ function drawVerb() {
     <div class="vcard">
       ${lastOk ? `<p class="tick">${vRuby(lastOk.answer)} — correct</p>` : ""}
       <div class="vask">Give the <b>${esc(meta.label)}</b></div>
-      <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
+      <div class="vword-row">
+        <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
+        ${speakSrc ? speakButton({ icon: true, label: false }) : ""}
+      </div>
       ${p.sub ? `<div class="vgloss big">${esc(p.sub)}</div>` : ""}
       <input type="text" id="vin" autocomplete="off" autocapitalize="off" autocorrect="off"
         spellcheck="false" placeholder="Type the ${esc(meta.label)}">
@@ -5026,10 +5148,24 @@ function drawVerb() {
 
   const input = document.getElementById("vin");
   input.focus();
-  const send = () => submitVerb(input.value);
+  const send = () => { unlockTts(); flushPendingSpeak(); submitVerb(input.value); };
   document.getElementById("vgo").addEventListener("click", send);
-  document.getElementById("vskip").addEventListener("click", () => submitVerb(""));
-  input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); send(); } });
+  document.getElementById("vskip").addEventListener("click", () => {
+    unlockTts();
+    flushPendingSpeak();
+    submitVerb("");
+  });
+  input.addEventListener("pointerdown", () => {
+    unlockTts();
+    flushPendingSpeak();
+  }, { once: true });
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); send(); }
+  });
+  if (speakSrc) {
+    wireSpeak(speakSrc.reading, speakSrc.kanji);
+    speakJapanese(speakSrc.reading, speakSrc.kanji);
+  }
 }
 
 /* The matcher takes the kana or the kanji spelling and nothing else, which

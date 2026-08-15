@@ -2931,10 +2931,10 @@ const VERB_KEIGO_SPECIAL = [
 const VERB_FORMS = [
   { id: "masu_past",  label: "ます-form, past",        jp: "～ました",   n: 4,  polite: true },
   { id: "masu_neg",   label: "ます-form, negative",    jp: "～ません",   n: 4,  polite: true },
-  { id: "stem",       label: "ます-stem",              jp: "～",        n: 13 },
   { id: "te",         label: "て-form",                jp: "～て",      n: 14 },
   { id: "nai",        label: "ない-form",              jp: "～ない",    n: 17 },
   { id: "dict",       label: "dictionary form",        jp: "辞書形",     n: 18 },
+  { id: "masu",       label: "ます-form (polite)",     jp: "～ます",    n: 18, polite: true },
   { id: "ta",         label: "た-form",                jp: "～た",      n: 19 },
   { id: "nakatta",    label: "plain negative past",    jp: "～なかった", n: 20 },
   { id: "tara",       label: "たら-conditional",       jp: "～たら",    n: 25 },
