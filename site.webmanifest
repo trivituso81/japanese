@@ -2,10 +2,10 @@
   "name": "トムさんの勉強ガイド",
   "short_name": "トムさんの勉強ガイド",
   "description": "Minna no Nihongo vocabulary flashcards and drills",
-  "start_url": "./index.html?v=20260816v",
+  "start_url": "./index.html?v=20260816w",
   "display": "standalone",
-  "background_color": "#f3f6fb",
-  "theme_color": "#e63e6d",
+  "background_color": "#eef2f8",
+  "theme_color": "#0891b2",
   "icons": [
     {
       "src": "icon-192.png",

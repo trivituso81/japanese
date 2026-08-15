@@ -7,16 +7,16 @@
 <!-- no-referrer: Safari (esp. home-screen) still attaches a github.io Referer
      to media requests under same-origin, and translate_tts 404s on that. -->
 <meta name="referrer" content="no-referrer">
-<meta name="theme-color" content="#e63e6d">
+<meta name="theme-color" content="#0d9bb5">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
 <meta name="apple-mobile-web-app-title" content="トムさんの勉強ガイド">
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260816v">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260816w">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260816w">
+<link rel="manifest" href="site.webmanifest?v=20260816w">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260816v";
+window.__BUILD__ = "20260816w";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -37,79 +37,79 @@ window.__BUILD__ = "20260816v";
 </script>
 <style>
   /* ============================================================
-     Anime / manga panel — fun, fresh, modern, still polished.
+     Anime / manga panel — dual tone with depth.
 
-     Cool ink on bright paper, coral magenta as the punch colour,
-     aqua as the secondary accent. Rounded panels, geometric Latin,
-     soft rounded Japanese — magazine-clean, not temple-quiet.
+     Coral + aqua share the page (neither monopolises). Ink outlines,
+     tinted panels, and offset “print” shadows give magazine depth.
      ============================================================ */
   :root {
-    --washi: #f3f6fb;          /* cool manga paper */
-    --bg: #ffffff;             /* panel white */
-    --bg-soft: #eef3fa;        /* soft sky wash */
-    --bg-inset: #e1e9f4;       /* recessed panel */
-    --text: #16181d;           /* deep ink */
-    --text-soft: #4a5160;
-    --text-faint: #8b93a5;
-    --rule: #d5dde9;
-    --rule-strong: #b8c4d6;
-    --accent: #0d9bb5;         /* anime sky / aqua */
-    --accent-soft: #d5f1f7;
-    --seal: #e63e6d;           /* coral magenta — the star colour */
-    --seal-deep: #c92d58;
-    --done: #1a9e6e;
-    --now: #e08a1a;
+    --washi: #eef2f8;          /* cool page */
+    --bg: #ffffff;
+    --bg-soft: #e8eef7;
+    --bg-inset: #d9e3f0;
+    --text: #12141a;
+    --text-soft: #445064;
+    --text-faint: #8490a3;
+    --rule: #cfd8e6;
+    --rule-strong: #aebcd0;
+    --accent: #0891b2;         /* aqua */
+    --accent-soft: #d0f0f7;
+    --accent-deep: #0e7490;
+    --seal: #e11d5a;           /* coral — punch, used sparingly */
+    --seal-deep: #be1248;
+    --seal-soft: #ffe4ec;
+    --done: #0f9f6e;
+    --now: #d97706;
     --miss: var(--seal);
-    --ok-bg: #e7f8f0;
-    --ok-line: #95d4b6;
-    --warn-bg: #fff3e3;
+    --ok-bg: #e6f9f0;
+    --ok-line: #8fd4b4;
+    --warn-bg: #fff4e5;
     --warn-line: #efc98a;
     --miss-bg: #ffe8ef;
     --miss-line: #f0a8bc;
-    --cur-bg: #e6f6fb;
-    --cur-line: #9ad0df;
+    --cur-bg: #e5f6fb;
+    --cur-line: #8fcfe0;
     --maxw: 1020px;
-    --radius: 14px;
-    --radius-sm: 10px;
-    --radius-lg: 20px;
+    --radius: 16px;
+    --radius-sm: 11px;
+    --radius-lg: 22px;
     --ui: "Outfit", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --serif: "Outfit", "Hiragino Sans", "Yu Gothic", sans-serif;
     --jp: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --jp-mincho: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --botnav-h: 58px;
+    --shadow-ink: rgba(18, 20, 26, .12);
   }
   * { box-sizing: border-box; }
   html { -webkit-text-size-adjust: 100%; }
-  /* soft sky washes + faint manga halftone */
+  /* layered washes + soft diagonal speed grain */
   body { margin: 0; color: var(--text); font: 16px/1.72 var(--ui);
     background-color: var(--washi);
     background-image:
-      radial-gradient(ellipse 110% 70% at 100% -8%, rgba(230, 62, 109, .10), transparent 52%),
-      radial-gradient(ellipse 90% 55% at -5% 105%, rgba(13, 155, 181, .09), transparent 48%),
-      radial-gradient(rgba(22, 24, 29, .04) 1.1px, transparent 1.2px);
-    background-size: auto, auto, 11px 11px; }
+      radial-gradient(ellipse 90% 55% at 100% 0%, rgba(225, 29, 90, .11), transparent 55%),
+      radial-gradient(ellipse 80% 50% at 0% 100%, rgba(8, 145, 178, .14), transparent 50%),
+      radial-gradient(ellipse 50% 40% at 50% 40%, rgba(255, 255, 255, .55), transparent 70%),
+      repeating-linear-gradient(-18deg, transparent 0 11px, rgba(18, 20, 26, .018) 11px 12px);
+    background-attachment: fixed; }
   .wrap { max-width: var(--maxw); margin: 0 auto; padding: 46px 26px 120px;
     overflow-wrap: break-word; }
-  a { color: var(--accent); text-underline-offset: 2px; }
+  a { color: var(--accent-deep); text-underline-offset: 2px; }
 
   /* masthead */
-  header.masthead { position: relative; padding-bottom: 26px; border-bottom: 1px solid var(--rule-strong); }
-  /* accent speed-bar under the masthead rule */
-  header.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -2px;
-    height: 3px; pointer-events: none; border-radius: 2px;
-    background: linear-gradient(90deg,
-      transparent 0%, var(--seal) 18%, var(--accent) 50%, var(--seal) 82%, transparent 100%);
-    opacity: .9; }
-  /* decorative open ring — manga panel flourish */
+  header.masthead { position: relative; padding-bottom: 26px; border-bottom: 2px solid var(--text); }
+  header.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px;
+    height: 4px; pointer-events: none;
+    background: linear-gradient(90deg, var(--seal) 0%, var(--accent) 100%);
+    opacity: .95; }
   .enso { position: absolute; top: -8px; right: -4px; width: 108px; height: 108px;
-    opacity: .16; pointer-events: none; }
-  .enso path { fill: none; stroke: var(--seal); stroke-width: 6; stroke-linecap: round; }
+    opacity: .14; pointer-events: none; }
+  .enso path { fill: none; stroke: var(--accent); stroke-width: 6; stroke-linecap: round; }
   .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
     color: var(--text-faint); margin: 0 0 14px; font-weight: 600; }
   h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: -0.01em;
     margin: 0 0 14px; font-weight: 700; }
   h1 .jp { font-family: var(--jp-mincho); font-weight: 700; margin-left: 6px;
-    color: var(--seal); letter-spacing: 0.04em; }
+    color: var(--accent-deep); letter-spacing: 0.04em; }
   .standfirst { font-family: var(--serif); font-size: 16.5px; line-height: 1.75;
     color: var(--text-soft); margin: 0; max-width: 68ch; font-weight: 400; }
   .standfirst b { color: var(--text); font-weight: 600; }
@@ -139,7 +139,8 @@ window.__BUILD__ = "20260816v";
   }
   @media (prefers-reduced-motion: reduce) {
     .botnav { transition: none; }
-    .home-brand .brand { animation: none; }
+    .home-brand .brand,
+    .home-brand .brand::after { animation: none; }
   }
   .botnav a {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -149,7 +150,7 @@ window.__BUILD__ = "20260816v";
     -webkit-tap-highlight-color: transparent;
   }
   .botnav a:hover { color: var(--text); }
-  .botnav a[aria-current="page"] { color: var(--seal); }
+  .botnav a[aria-current="page"] { color: var(--accent-deep); }
   .botnav .navico {
     width: 22px; height: 22px; display: block;
   }
@@ -158,51 +159,100 @@ window.__BUILD__ = "20260816v";
   .crumbs { margin: 20px 0 0; font-size: 12.5px; color: var(--text-faint);
     letter-spacing: .04em; }
   .crumbs a { text-decoration: none; color: var(--text-soft); }
-  .crumbs a:hover { color: var(--seal); text-decoration: underline; }
+  .crumbs a:hover { color: var(--accent-deep); text-decoration: underline; }
 
   /* Home landing — brand · stats grid · CTA, sized for a phone fold */
   .home-landing {
     display: flex; flex-direction: column;
     flex: 1 1 auto; min-height: 0;
-    padding: 6px 0 4px; gap: 12px;
+    padding: 6px 0 4px; gap: 14px;
   }
   .home-brand {
-    text-align: center; padding: 8px 6px 4px;
-    flex: 0 0 auto;
+    text-align: center; padding: 10px 6px 8px;
+    flex: 0 0 auto; position: relative;
   }
   .home-brand .brand {
     font-family: var(--jp-mincho); font-size: clamp(1.65rem, 7.2vw, 2.35rem);
-    line-height: 1.2; letter-spacing: .04em; color: var(--seal);
+    line-height: 1.2; letter-spacing: .04em; color: var(--text);
     margin: 0; font-weight: 700;
     animation: brand-in .55s ease-out both;
+  }
+  .home-brand .brand::after {
+    content: ""; display: block; width: min(9.5rem, 42%); height: 4px;
+    margin: 10px auto 0; border-radius: 2px;
+    background: linear-gradient(90deg, var(--seal), var(--accent));
+    animation: bar-in .7s .15s ease-out both;
   }
   @keyframes brand-in {
     from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: none; }
   }
+  @keyframes bar-in {
+    from { opacity: 0; transform: scaleX(.35); }
+    to { opacity: 1; transform: none; }
+  }
 
   .home-stats {
     display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-    gap: 1px; flex: 1 1 auto; min-height: 280px;
-    border: 1px solid var(--rule-strong); background: var(--rule-strong);
-    overflow: hidden; border-radius: var(--radius-lg);
+    gap: 12px; flex: 1 1 auto; min-height: 280px;
+    border: none; background: transparent;
+    overflow: visible;
   }
   .home-stats .stat {
     background: var(--bg);
     display: flex; flex-direction: column; align-items: center;
     justify-content: space-between;
-    padding: 12px 10px 11px; text-align: center; min-height: 0; gap: 6px;
+    padding: 14px 12px 12px; text-align: center; min-height: 0; gap: 6px;
+    border: 2px solid var(--text);
+    border-radius: var(--radius);
+    box-shadow: 5px 5px 0 var(--shadow-ink);
+    position: relative;
+    overflow: hidden;
+  }
+  .home-stats .stat::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
+    background: radial-gradient(ellipse 80% 60% at 100% 0%, transparent 40%, transparent 100%);
+  }
+  /* Alternate coral / aqua panel washes so magenta never owns the grid */
+  .home-stats .stat:nth-child(1) {
+    background:
+      radial-gradient(ellipse 90% 70% at 0% 100%, rgba(225, 29, 90, .10), transparent 55%),
+      linear-gradient(165deg, #fff 0%, #fff5f8 100%);
+    box-shadow: 5px 5px 0 #7a1838;
+  }
+  .home-stats .stat:nth-child(2) {
+    background:
+      radial-gradient(ellipse 90% 70% at 100% 0%, rgba(8, 145, 178, .12), transparent 55%),
+      linear-gradient(165deg, #fff 0%, #f0fafc 100%);
+    box-shadow: 5px 5px 0 #0a4f5f;
+  }
+  .home-stats .stat:nth-child(3) {
+    background:
+      radial-gradient(ellipse 90% 70% at 0% 0%, rgba(8, 145, 178, .10), transparent 55%),
+      linear-gradient(195deg, #fff 0%, #f3fafc 100%);
+    box-shadow: 5px 5px 0 #0c5a6c;
+  }
+  .home-stats .stat:nth-child(4) {
+    background:
+      radial-gradient(ellipse 90% 70% at 100% 100%, rgba(225, 29, 90, .09), transparent 55%),
+      linear-gradient(195deg, #fff 0%, #fff6f9 100%);
+    box-shadow: 5px 5px 0 #6e1a36;
   }
   .home-stats .k {
-    font-size: clamp(1.35rem, 5.8vw, 2rem); letter-spacing: .04em; text-transform: uppercase;
+    font-size: clamp(1.2rem, 5.2vw, 1.75rem); letter-spacing: .06em; text-transform: uppercase;
     color: var(--text); font-weight: 700; flex: 0 0 auto; line-height: 1.1;
+    position: relative; z-index: 1;
   }
+  .home-stats .stat:nth-child(1) .k,
+  .home-stats .stat:nth-child(4) .k { color: var(--seal-deep); }
+  .home-stats .stat:nth-child(2) .k,
+  .home-stats .stat:nth-child(3) .k { color: var(--accent-deep); }
   .home-stats .viz {
     flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
-    min-height: 0; width: 100%; position: relative;
+    min-height: 0; width: 100%; position: relative; z-index: 1;
   }
   .home-stats .meta {
-    flex: 0 0 auto; width: 100%;
+    flex: 0 0 auto; width: 100%; position: relative; z-index: 1;
   }
   .home-stats .val {
     font-family: var(--serif); font-size: clamp(1.15rem, 4.6vw, 1.45rem);
@@ -243,17 +293,17 @@ window.__BUILD__ = "20260816v";
     animation: enso-draw .9s ease-out both;
   }
   .viz-enso .pct {
-    font-family: var(--jp-mincho); font-size: 14px; fill: var(--text);
+    font-family: var(--jp-mincho); font-size: 14px; fill: var(--text); font-weight: 700;
   }
   @keyframes enso-draw {
     from { stroke-dashoffset: 240; opacity: .35; }
   }
 
-  /* Lesson progress bar */
+  /* Lesson progress bar — aqua */
   .viz-brush { width: 100%; max-width: 168px; height: 44px; display: block; }
   .viz-brush .track { fill: var(--bg-inset); }
-  .viz-brush .ink { fill: var(--done); }
-  .viz-brush .tip { fill: var(--done); opacity: .85; }
+  .viz-brush .ink { fill: var(--accent); }
+  .viz-brush .tip { fill: var(--accent-deep); opacity: .9; }
 
   /* Level meters for kanji */
   .viz-pillars {
@@ -280,12 +330,12 @@ window.__BUILD__ = "20260816v";
     border-radius: var(--radius-sm); overflow: hidden;
   }
   .viz-pillars .fill {
-    width: 100%; background: var(--seal);
+    width: 100%; background: var(--accent);
     transition: height .6s ease-out;
     min-height: 0;
   }
-  .viz-pillars .pillar:nth-child(2) .fill { background: var(--now); }
-  .viz-pillars .pillar:nth-child(3) .fill { background: var(--accent); }
+  .viz-pillars .pillar:nth-child(2) .fill { background: var(--seal); }
+  .viz-pillars .pillar:nth-child(3) .fill { background: var(--accent-deep); }
   .viz-pillars .plab {
     flex: 0 0 auto;
     font-size: 10px; font-weight: 700; letter-spacing: .08em;
@@ -310,12 +360,14 @@ window.__BUILD__ = "20260816v";
   }
 
   .home-next {
-    text-align: center; padding: 2px 0 0; flex: 0 0 auto; margin-top: auto;
+    text-align: center; padding: 4px 0 0; flex: 0 0 auto; margin-top: auto;
   }
   .home-next .btn {
     display: block; width: 100%; max-width: none;
     font-size: 15.5px; padding: 14px 18px; min-height: 50px;
     letter-spacing: .06em;
+    border-width: 2px; border-color: var(--text);
+    box-shadow: 4px 4px 0 #0d5566;
   }
   .home-progress {
     flex: 0 0 auto;
@@ -327,7 +379,7 @@ window.__BUILD__ = "20260816v";
   .home-progress button,
   .home-progress label {
     font: inherit; font-size: 11.5px; font-weight: 600;
-    color: var(--seal); background: none; border: none;
+    color: var(--accent-deep); background: none; border: none;
     padding: 0; margin: 0; cursor: pointer; letter-spacing: .04em;
   }
   .home-progress button:hover,
@@ -856,19 +908,25 @@ window.__BUILD__ = "20260816v";
     .home-next { display: none; }
   }
 
-  /* buttons — soft manga-panel corners; primary in coral magenta */
+  /* buttons — manga panels; primary is coral→aqua so neither colour owns the CTA */
   .btn { font: inherit; font-family: var(--ui); font-size: 12.5px; font-weight: 600;
     padding: 8px 15px; cursor: pointer; letter-spacing: .03em;
-    border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
+    border: 1.5px solid var(--text); background: var(--bg); color: var(--text-soft);
     border-radius: var(--radius-sm); white-space: nowrap; text-decoration: none;
-    transition: border-color .16s, color .16s, background .16s, transform .16s ease; }
-  .btn:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text); background: var(--bg-soft);
-    transform: translateY(-1px); }
-  .btn:disabled { opacity: 0.36; cursor: not-allowed; }
-  .btn.primary { background: var(--seal); border-color: var(--seal); color: #fff;
-    letter-spacing: .04em; }
-  .btn.primary:hover:not(:disabled) { background: var(--seal-deep); border-color: var(--seal-deep);
-    color: #fff; }
+    box-shadow: 2px 2px 0 var(--shadow-ink);
+    transition: border-color .16s, color .16s, background .16s, transform .16s ease, box-shadow .16s; }
+  .btn:hover:not(:disabled) { border-color: var(--text); color: var(--text); background: var(--bg-soft);
+    transform: translateY(-1px); box-shadow: 3px 3px 0 var(--shadow-ink); }
+  .btn:disabled { opacity: 0.36; cursor: not-allowed; box-shadow: none; }
+  .btn.primary {
+    background: linear-gradient(135deg, var(--seal) 0%, var(--accent) 100%);
+    border-color: var(--text); color: #fff;
+    letter-spacing: .04em;
+    box-shadow: 3px 3px 0 #0e5c6e;
+  }
+  .btn.primary:hover:not(:disabled) {
+    background: linear-gradient(135deg, var(--seal-deep) 0%, var(--accent-deep) 100%);
+    border-color: var(--text); color: #fff; }
   .btn.good { color: var(--done); border-color: var(--done); }
   .btn.bad { color: var(--miss); border-color: var(--miss); }
   .btn[aria-pressed="true"] { background: var(--text); border-color: var(--text); color: var(--washi); }
@@ -1045,7 +1103,7 @@ window.__BUILD__ = "20260816v";
     letter-spacing: -0.01em; position: relative; padding-left: 16px; }
   /* coral accent bar beside headings */
   h2.view::before { content: ""; position: absolute; left: 0; top: .28em; bottom: .28em;
-    width: 3px; background: var(--seal); opacity: .9; border-radius: 2px; }
+    width: 4px; background: linear-gradient(180deg, var(--seal), var(--accent)); opacity: 1; border-radius: 2px; }
   h2.view .jp { font-family: var(--jp-mincho); font-weight: 700; letter-spacing: .04em; }
   /* section headings inside a lesson: the same hand, a quieter mark */
   h2.view.minor { font-size: 19px; margin-top: 38px; }
@@ -1059,8 +1117,9 @@ window.__BUILD__ = "20260816v";
     color: var(--text-soft); border-radius: var(--radius-sm); }
   .gap b { color: var(--text); }
 
-  .point { border: 1px solid var(--rule-strong); background: var(--bg); margin: 20px 0 0;
-    border-radius: var(--radius); overflow: hidden; }
+  .point { border: 2px solid var(--text); background: var(--bg); margin: 20px 0 0;
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: 4px 4px 0 var(--shadow-ink); }
   .point > h3 { margin: 0; padding: 14px 18px; background: var(--bg-soft);
     border-bottom: 1px solid var(--rule-strong); font-size: 18px; font-family: var(--jp-mincho);
     font-weight: 500; letter-spacing: .03em; }
@@ -1094,8 +1153,9 @@ window.__BUILD__ = "20260816v";
   .vbox.learned { color: var(--done); border-color: var(--done); }
 
   /* card + drill stage */
-  .stage { border: 1px solid var(--rule-strong); background: var(--bg); margin: 22px 0 0;
-    border-radius: var(--radius); overflow: hidden; }
+  .stage { border: 2px solid var(--text); background: var(--bg); margin: 22px 0 0;
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: 4px 4px 0 var(--shadow-ink); }
   .stagehead { display: flex; flex-wrap: nowrap; gap: 10px 12px; align-items: center;
     justify-content: space-between; padding: 13px 17px; background: var(--bg-soft);
     border-bottom: 1px solid var(--rule-strong); font-size: 12px; color: var(--text-soft);
@@ -1159,7 +1219,9 @@ window.__BUILD__ = "20260816v";
 
   /* swipeable card */
   .prog { height: 3px; background: var(--bg-inset); border-bottom: 1px solid var(--rule); }
-  .prog i { display: block; height: 100%; background: var(--seal); transition: width .25s ease; }
+  .prog i { display: block; height: 100%;
+    background: linear-gradient(90deg, var(--seal), var(--accent));
+    transition: width .25s ease; }
   .deck { position: relative; overflow: hidden; }
   .deck .card { position: relative; touch-action: pan-y; user-select: none;
     -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
@@ -1817,7 +1879,7 @@ window.__BUILD__ = "20260816v";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260816v"></script>
+<script src="japanese-data.js?v=20260816w"></script>
 <script>
 /* ============================================================
    State
