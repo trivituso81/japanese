@@ -1700,9 +1700,11 @@ window.__BUILD__ = "20260816t3";
 </head>
 <body>
 <!-- Persistent TTS player. iOS unlocks per element; keep one node for the
-     whole session, with playsinline + no-referrer so Google TTS can load. -->
+     whole session, with playsinline + no-referrer so Google TTS can load.
+     Not display:none / hidden — iOS skips media in fully hidden nodes. -->
 <audio id="tts-el" playsinline webkit-playsinline preload="auto"
-  referrerpolicy="no-referrer" hidden></audio>
+  referrerpolicy="no-referrer"
+  style="position:fixed;left:0;top:0;width:1px;height:1px;opacity:0.01;pointer-events:none;z-index:-1;"></audio>
 <div class="wrap">
 
 <header class="masthead">
@@ -2130,17 +2132,21 @@ function speakViaTtsFrame(text, token, gen) {
   const f = ensureSpeakFrame();
   if (!f) return false;
   const msgGen = ++speakMsgGen;
+  let frameSettled = false;
   const onMsg = ev => {
     const d = ev && ev.data;
     if (!d || typeof d !== "object") return;
     if (msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
     if (d.type === "tts-playing") {
+      frameSettled = true;
       window.removeEventListener("message", onMsg);
       setSpeakBusy(true);
     } else if (d.type === "tts-ended") {
+      frameSettled = true;
       window.removeEventListener("message", onMsg);
       setSpeakBusy(false);
     } else if (d.type === "tts-error") {
+      frameSettled = true;
       window.removeEventListener("message", onMsg);
       /* Fall back to in-page audio, then Web Speech. */
       if (!speakViaAudioElement(text, token, gen)) speakViaWebSpeech(text);
@@ -2154,7 +2160,7 @@ function speakViaTtsFrame(text, token, gen) {
   f.src = u.href;
   /* If the iframe never phones home, fall back. */
   setTimeout(() => {
-    if (msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
+    if (frameSettled || msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
     window.removeEventListener("message", onMsg);
     if (!speakViaAudioElement(text, token, gen)) speakViaWebSpeech(text);
   }, 7000);
