@@ -289,19 +289,11 @@ window.__BUILD__ = "20260815h";
   }
   .home-progress {
     flex: 0 0 auto;
-    display: flex; flex-direction: column; align-items: center;
-    gap: 6px; padding: 6px 4px 0;
-    font-size: 11.5px; color: var(--text-soft); letter-spacing: .02em;
-    text-align: center;
-  }
-  .home-progress .hp-row {
     display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-    gap: 6px 10px;
+    gap: 6px 10px; padding: 4px 4px 0;
+    font-size: 11.5px; color: var(--text-soft); letter-spacing: .02em;
   }
   .home-progress .hp-status { color: var(--text-faint); }
-  .home-progress .hp-note {
-    max-width: 22em; line-height: 1.4; color: var(--text-faint); font-size: 11px;
-  }
   .home-progress button,
   .home-progress label {
     font: inherit; font-size: 11.5px; font-weight: 600;
@@ -2794,15 +2786,10 @@ function renderHome() {
       </div>` : ""}
 
       <div class="home-progress">
-        <div class="hp-row">
-          <span class="hp-status">${esc(savedAtLabel())}</span>
-          <button type="button" id="exp">Save backup</button>
-          <button type="button" id="exprestore">Restore progress</button>
-          <label for="imp">Import file<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
-        </div>
-        <p class="hp-note">On iPhone, the <b>home-screen app stores progress separately from Safari</b>.
-          Re-adding the icon starts empty — before you do that, tap <b>Save backup</b> → Select all → Copy.
-          After re-adding, open the icon and tap <b>Restore progress</b> → paste → Restore from text.</p>
+        <span class="hp-status">${esc(savedAtLabel())}</span>
+        <button type="button" id="exp">Save backup</button>
+        <button type="button" id="exprestore">Restore</button>
+        <label for="imp">Import<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
       </div>
     </section>`;
 
