@@ -518,13 +518,133 @@
   .kanji-browse {
     margin-top: 8px; font-size: 13px; color: var(--text-soft);
   }
-  .kanji-browse > summary {
-    cursor: pointer; list-style: none; font-weight: 600; letter-spacing: .04em;
-    color: var(--text-soft); text-align: center; padding: 8px;
+  .kanji-browse-link {
+    display: block; text-align: center; padding: 12px 8px;
+    font-weight: 600; letter-spacing: .04em; color: var(--seal);
+    text-decoration: none; border-top: 1px solid var(--rule);
   }
-  .kanji-browse > summary::-webkit-details-marker { display: none; }
-  .kanji-browse[open] > summary { color: var(--seal); margin-bottom: 10px; }
-  .kanji-browse .ktable { margin-top: 4px; }
+  .kanji-browse-link:hover { text-decoration: underline; }
+
+  /* Full browse + character study pages — phone-first scrolling real estate */
+  body[data-view="kanji-study"] header.masthead,
+  body[data-view="kanji-study"] .topnav,
+  body[data-view="kanji-study"] footer.foot { display: none !important; }
+  body[data-view="kanji-study"] .wrap {
+    padding-top: max(10px, env(safe-area-inset-top, 0px));
+  }
+  .k-study-back {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13px; font-weight: 600; color: var(--seal);
+    text-decoration: none; letter-spacing: .03em; margin-bottom: 10px;
+  }
+  .k-study-back:hover { text-decoration: underline; }
+  .k-browse-page .k-browse-head {
+    display: flex; flex-wrap: wrap; align-items: baseline;
+    justify-content: space-between; gap: 8px 14px; margin-bottom: 12px;
+  }
+  .k-browse-page .k-browse-head h1 {
+    font-family: var(--serif); font-size: clamp(1.35rem, 5vw, 1.7rem);
+    font-weight: 400; margin: 0; color: var(--text);
+  }
+  .k-browse-page .k-browse-head .sub {
+    font-size: 13px; color: var(--text-soft); width: 100%; margin: 0;
+  }
+  .k-browse-page .k-browse-seg { display: flex; gap: 6px; margin: 0 0 14px; }
+  .k-browse-page .k-browse-seg .btn { flex: 1 1 0; }
+  .k-browse-page .ktable { margin-top: 0; }
+  .k-browse-page .ktable tr.k-hit { cursor: pointer; }
+  .k-browse-page .ktable tr.k-hit:active { background: var(--bg-soft); }
+
+  .k-code {
+    max-width: 420px; margin: 0 auto; padding: 0 0 28px;
+  }
+  .k-code-hero {
+    text-align: center; padding: 8px 0 18px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .k-code-glyph {
+    font-family: var(--jp-mincho); font-weight: 400;
+    font-size: clamp(5rem, 28vw, 7rem); line-height: 1;
+    letter-spacing: .04em; color: var(--text); margin: 0;
+  }
+  .k-code-mean {
+    font-family: var(--serif); font-size: clamp(1.25rem, 4.5vw, 1.55rem);
+    margin: 10px 0 6px; color: var(--text);
+  }
+  .k-code-meta {
+    font-size: 12.5px; color: var(--text-soft); letter-spacing: .04em;
+  }
+  .k-code-meta a { color: var(--seal); }
+  .k-code-block {
+    padding: 16px 0; border-bottom: 1px solid var(--rule);
+  }
+  .k-code-block h2 {
+    margin: 0 0 8px; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .16em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .k-code-block .lead {
+    font-family: var(--jp-mincho); font-size: clamp(1.35rem, 5vw, 1.7rem);
+    line-height: 1.35; margin: 0 0 6px; color: var(--text);
+  }
+  .k-code-block .lead.roma {
+    font-family: var(--serif); font-size: clamp(1.15rem, 4vw, 1.4rem);
+  }
+  .k-code-block p {
+    margin: 0; font-size: 14px; line-height: 1.55; color: var(--text-soft);
+  }
+  .k-code-parts {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 8px;
+  }
+  .k-code-part {
+    background: var(--bg); border: 1px solid var(--rule-strong);
+    padding: 12px 10px; text-align: center;
+  }
+  .k-code-part .pc {
+    display: block; font-family: var(--jp-mincho); font-size: 2rem; line-height: 1.1;
+    color: var(--text); margin-bottom: 4px;
+  }
+  .k-code-part .pk {
+    display: block; font-size: 10px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--seal); margin-bottom: 2px;
+  }
+  .k-code-part .pe {
+    font-size: 12.5px; color: var(--text-soft); line-height: 1.35;
+  }
+  .k-code-family {
+    display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+  }
+  .k-code-family a {
+    display: inline-flex; flex-direction: column; align-items: center;
+    gap: 2px; min-width: 52px; padding: 8px 6px;
+    border: 1px solid var(--rule-strong); background: var(--bg);
+    text-decoration: none; color: var(--text);
+  }
+  .k-code-family a .fc {
+    font-family: var(--jp-mincho); font-size: 1.55rem; line-height: 1;
+  }
+  .k-code-family a .fe {
+    font-size: 10.5px; color: var(--text-soft); text-align: center; max-width: 72px;
+    line-height: 1.25;
+  }
+  .k-code-ex {
+    font-family: var(--jp-mincho); font-size: 1.5rem; margin: 0 0 4px;
+  }
+  .k-code-ex .r { display: block; font-family: var(--jp); font-size: 13px;
+    color: var(--text-faint); margin-top: 2px; }
+  .k-code-acts {
+    display: flex; flex-direction: column; gap: 8px; margin-top: 18px;
+  }
+  .k-code-acts .btn { width: 100%; min-height: 48px; }
+  .k-learn {
+    display: inline-block; font-size: 12.5px; font-weight: 600;
+    letter-spacing: .04em; color: var(--seal); text-decoration: none;
+    padding: 6px 0;
+  }
+  .k-learn:hover { text-decoration: underline; }
+  .k-type-frame .k-learn {
+    align-self: center; margin-top: 2px; margin-bottom: 2px;
+  }
+  .cardmeta .k-learn { display: block; text-align: center; margin-top: 4px; }
 
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
@@ -4590,48 +4710,50 @@ function pickKanji(pool, count) {
 
 const kReadings = k => [k.on.join("、"), k.kun.join("、")].filter(Boolean).join("  /  ");
 
+function kanjiReturnTo() {
+  try { return sessionStorage.getItem("kanjiReturn") || ""; }
+  catch (e) { return ""; }
+}
+function rememberKanjiReturn() {
+  try { sessionStorage.setItem("kanjiReturn", location.hash || "#/kanji"); }
+  catch (e) {}
+}
+function clearKanjiReturn() {
+  try { sessionStorage.removeItem("kanjiReturn"); }
+  catch (e) {}
+}
+function kanjiLearnHref(c) {
+  return `#/kanji/c/${encodeURIComponent(c)}`;
+}
+function goKanjiLearn(c) {
+  leaveKanjiTyping();
+  rememberKanjiReturn();
+  goto(kanjiLearnHref(c));
+}
+
+function kanjiParts(c) {
+  return (typeof KANJI_PARTS === "object" && KANJI_PARTS[c]) || null;
+}
+
+function kanjiSoundFamily(k, limit) {
+  const lim = limit || 10;
+  const ons = new Set(k.on);
+  return KANJI.filter(o => o.c !== k.c && o.on.some(r => ons.has(r)))
+    .sort((a, b) => a.s - b.s || a.c.localeCompare(b.c))
+    .slice(0, lim);
+}
+
 function renderKanji() {
   document.getElementById("crumbs").innerHTML = "";
   document.body.dataset.view = "kanji";
   showBotnav();
+  clearKanjiReturn();
   const o = kOpts();
   const level = KANJI_LEVELS.find(l => l.id === o.level) || KANJI_LEVELS[0];
   const set = kanjiAt(level.id);
-  const lessons = kanjiLessons();
   const known = set.filter(k => kState(k.c) === "known").length;
   const learning = set.filter(k => kState(k.c) === "learning").length;
   const pending = KANJI_LEVELS.filter(l => !l.ready);
-
-  const rows = set.map(k => {
-    const st = kState(k.c);
-    const rec = kRecord(k.c);
-    const n = lessons[k.c];
-    return `<tr class="k-${st}">
-      <td class="k-c">${esc(k.c)}</td>
-      <td class="k-m"><b>${esc(k.en)}</b>
-        <button class="btn small k-more" data-c="${esc(k.c)}" aria-expanded="false"
-          aria-controls="kd-${esc(k.c)}">readings</button></td>
-      <td class="k-on">${esc(k.on.join("、") || "—")}</td>
-      <td class="k-kun">${esc(k.kun.join("、") || "—")}</td>
-      <td class="k-ex"><span class="j">${esc(k.ex.w)}</span>
-        <span class="k-exr">${esc(k.ex.r)}</span>
-        <span class="k-exe">${esc(k.ex.en)}</span></td>
-      <td class="k-l">${n ? `<a href="#/lesson/${n}">L${n}</a>` : "—"}</td>
-      <td class="k-s">${st === "known"
-        ? `<button class="btn small k-unmark" data-c="${esc(k.c)}"
-            title="Mark as not known">↩</button>`
-        : st === "learning" ? `<span class="k-part">${rec.ok}/${rec.n}</span>`
-        : `<span class="k-none">—</span>`}</td>
-    </tr>
-    <tr class="k-detail" id="kd-${esc(k.c)}">
-      <td colspan="7">
-        <span class="kd-r"><b>on</b><span>${esc(k.on.join("、") || "—")}</span></span>
-        <span class="kd-r"><b>kun</b><span>${esc(k.kun.join("、") || "—")}</span></span>
-        <span class="kd-x"><b>as in</b><span class="j">${esc(k.ex.w)}</span>
-          <span>${esc(k.ex.r)}</span> · ${esc(k.ex.en)}</span>
-      </td>
-    </tr>`;
-  }).join("");
 
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
@@ -4656,16 +4778,7 @@ function renderKanji() {
       ${pending.length ? `<p class="hintline">${pending.map(l =>
         `<b>${esc(l.label)}</b> — ${esc(l.note)}`).join(" ")}</p>` : ""}
 
-      <details class="kanji-browse">
-        <summary>Browse characters</summary>
-        <table class="ktable">
-          <thead><tr>
-            <th>Kanji</th><th>Meaning</th><th class="k-on">On</th><th class="k-kun">Kun</th>
-            <th class="k-ex">Example</th><th class="k-l">Lesson</th><th class="k-s">You</th>
-          </tr></thead>
-          <tbody>${rows}</tbody>
-        </table>
-      </details>
+      <a class="kanji-browse-link" href="#/kanji/browse">Browse characters</a>
     </section>`;
 
   document.querySelectorAll("button.lev[data-lv]").forEach(b =>
@@ -4678,18 +4791,201 @@ function renderKanji() {
     }));
   document.getElementById("kinc").addEventListener("change", e =>
     setKOpts({ includeKnown: e.target.checked }));
-  document.querySelectorAll("button.k-unmark").forEach(b =>
-    b.addEventListener("click", () => { unknowKanji(b.dataset.c); renderKanji(); }));
-  document.querySelectorAll("button.k-more").forEach(b =>
-    b.addEventListener("click", () => {
-      const row = document.getElementById("kd-" + b.dataset.c);
-      if (!row) return;
-      const open = row.classList.toggle("open");
-      b.setAttribute("aria-expanded", String(open));
-      b.textContent = open ? "hide" : "readings";
-    }));
   wireResume(renderKanji);
   document.getElementById("kstart").addEventListener("click", () => startKanji());
+}
+
+function renderKanjiBrowse(levelId) {
+  leaveKanjiTyping();
+  document.body.dataset.view = "kanji-study";
+  showBotnav();
+  const o = kOpts();
+  const want = levelId || o.level;
+  const level = KANJI_LEVELS.find(l => l.id === want && l.ready)
+    || KANJI_LEVELS.find(l => l.ready) || KANJI_LEVELS[0];
+  if (level.id !== o.level) setKOpts({ level: level.id });
+  const set = kanjiAt(level.id);
+  const lessons = kanjiLessons();
+  crumbs([["#/kanji", "Kanji"], [null, "Browse"]]);
+
+  const rows = set.map(k => {
+    const st = kState(k.c);
+    const rec = kRecord(k.c);
+    const n = lessons[k.c];
+    const href = kanjiLearnHref(k.c);
+    return `<tr class="k-${st} k-hit" data-href="${href}" tabindex="0" role="link"
+      aria-label="${esc(k.c)} ${esc(k.en)}">
+      <td class="k-c">${esc(k.c)}</td>
+      <td class="k-m"><b>${esc(k.en)}</b></td>
+      <td class="k-on">${esc(k.on.join("、") || "—")}</td>
+      <td class="k-kun">${esc(k.kun.join("、") || "—")}</td>
+      <td class="k-ex"><span class="j">${esc(k.ex.w)}</span>
+        <span class="k-exr">${esc(k.ex.r)}</span>
+        <span class="k-exe">${esc(k.ex.en)}</span></td>
+      <td class="k-l">${n ? `L${n}` : "—"}</td>
+      <td class="k-s">${st === "known"
+        ? `<span class="k-part">known</span>`
+        : st === "learning" ? `<span class="k-part">${rec.ok}/${rec.n}</span>`
+        : `<span class="k-none">—</span>`}</td>
+    </tr>`;
+  }).join("");
+
+  document.getElementById("view").innerHTML = `
+    <section class="k-browse-page">
+      <a class="k-study-back" href="#/kanji">← Kanji drill</a>
+      <div class="k-browse-head">
+        <h1>Browse characters</h1>
+        <p class="sub">${set.length} in ${esc(level.label)} · tap a row to study it</p>
+      </div>
+      <div class="k-browse-seg seg" role="group" aria-label="Level">
+        ${KANJI_LEVELS.map(l => l.ready
+          ? `<a class="btn lev" href="#/kanji/browse/${l.id}"
+              aria-pressed="${l.id === level.id}">${esc(l.label)}</a>`
+          : `<button class="btn lev" disabled>${esc(l.label)}</button>`).join("")}
+      </div>
+      <table class="ktable">
+        <thead><tr>
+          <th>Kanji</th><th>Meaning</th><th class="k-on">On</th><th class="k-kun">Kun</th>
+          <th class="k-ex">Example</th><th class="k-l">Lesson</th><th class="k-s">You</th>
+        </tr></thead>
+        <tbody>${rows}</tbody>
+      </table>
+    </section>`;
+
+  document.querySelectorAll("tr.k-hit").forEach(tr => {
+    const go = () => {
+      rememberKanjiReturn();
+      goto(tr.dataset.href);
+    };
+    tr.addEventListener("click", go);
+    tr.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); }
+    });
+  });
+}
+
+function renderKanjiDetail(raw) {
+  leaveKanjiTyping();
+  document.body.dataset.view = "kanji-study";
+  showBotnav();
+  const c = decodeURIComponent(raw || "");
+  const k = kanjiBy(c);
+  if (!k) return notFound();
+
+  const parts = kanjiParts(k.c);
+  const family = kanjiSoundFamily(k, 12);
+  const lessons = kanjiLessons();
+  const n = lessons[k.c];
+  const st = kState(k.c);
+  const rec = kRecord(k.c);
+  const back = kanjiReturnTo();
+  const backHref = (back && back !== location.hash) ? back : "#/kanji/browse";
+  const backLabel = /^#\/kanji\/drill/.test(backHref) ? "← Back to drill"
+    : /^#\/kanji\/browse/.test(backHref) ? "← Browse characters"
+    : "← Kanji";
+
+  crumbs([
+    ["#/kanji", "Kanji"],
+    ["#/kanji/browse", "Browse"],
+    [null, k.c]
+  ]);
+
+  const onShow = k.on.length ? k.on.join(" · ") : "—";
+  const kunShow = k.kun.length ? k.kun.join(" · ") : "—";
+
+  let formSound = "";
+  if (parts && (parts.radical || parts.phonetic)) {
+    formSound = `<div class="k-code-parts">
+      ${parts.radical ? `<div class="k-code-part">
+        <span class="pk">Meaning clue</span>
+        <span class="pc">${esc(parts.radical.c)}</span>
+        <span class="pe">${esc(parts.radical.en || "")}</span>
+      </div>` : `<div class="k-code-part"><span class="pk">Meaning clue</span>
+        <span class="pe">built into the whole form</span></div>`}
+      ${parts.phonetic ? `<div class="k-code-part">
+        <span class="pk">Sound clue</span>
+        <span class="pc">${esc(parts.phonetic.c)}</span>
+        <span class="pe">${esc(parts.phonetic.en || "")}${
+          parts.phonetic.sound ? ` · ${esc(parts.phonetic.sound)}` : ""}</span>
+      </div>` : `<div class="k-code-part"><span class="pk">Sound clue</span>
+        <span class="pe">${esc(onShow)}</span></div>`}
+    </div>`;
+  }
+
+  const tip = parts && parts.tip
+    ? `<p>${esc(parts.tip)}</p>`
+    : `<p>${k.s <= 4
+      ? "Early kanji are often pictographs or simple marks — learn this one as a whole shape, then watch for it inside bigger characters."
+      : "Many Joyo kanji are form-sound compounds: one part hints at meaning, another at the ON reading. Use the sound clue below when you meet this character in compounds."}</p>`;
+
+  document.getElementById("view").innerHTML = `
+    <article class="k-code">
+      <a class="k-study-back" href="${esc(backHref)}">${esc(backLabel)}</a>
+
+      <header class="k-code-hero">
+        <p class="k-code-glyph" lang="ja">${esc(k.c)}</p>
+        <h1 class="k-code-mean">${esc(k.en)}</h1>
+        <p class="k-code-meta">${esc(k.lv)} · ${k.s} stroke${k.s === 1 ? "" : "s"}${
+          n ? ` · <a href="#/lesson/${n}">Lesson ${n}</a>` : ""}${
+          st === "known" ? " · known"
+            : st === "learning" && rec ? ` · learning ${rec.ok}/${rec.n}` : ""}</p>
+      </header>
+
+      <section class="k-code-block">
+        <h2>Sound clue · ON</h2>
+        <p class="lead" lang="ja">${esc(onShow)}</p>
+        <p>In compounds, start from the ON reading — the “sound clue” side of form-sound kanji. When another character shares this reading, you are often looking at the same phonetic family.</p>
+      </section>
+
+      <section class="k-code-block">
+        <h2>Meaning clue · kun &amp; sense</h2>
+        <p class="lead" lang="ja">${esc(kunShow)}</p>
+        <p class="lead roma">${esc(k.en)}</p>
+        <p>Kun readings are the native Japanese words for this idea. Use them when the character stands alone or leads a native word; lean on ON inside Sino-Japanese compounds.</p>
+      </section>
+
+      <section class="k-code-block">
+        <h2>Form &amp; sound</h2>
+        ${formSound}
+        ${tip}
+      </section>
+
+      ${family.length ? `<section class="k-code-block">
+        <h2>Same sound family</h2>
+        <p>Other characters in this guide that share an ON reading with ${esc(k.c)}. Comparing them trains the phonetic habit from <i>The Kanji Code</i>.</p>
+        <div class="k-code-family">
+          ${family.map(o => `<a href="${kanjiLearnHref(o.c)}">
+            <span class="fc" lang="ja">${esc(o.c)}</span>
+            <span class="fe">${esc(o.en)}</span>
+          </a>`).join("")}
+        </div>
+      </section>` : ""}
+
+      <section class="k-code-block">
+        <h2>As in</h2>
+        <p class="k-code-ex" lang="ja">${esc(k.ex.w)}
+          <span class="r">${esc(k.ex.r)}</span></p>
+        <p>${esc(k.ex.en)}</p>
+      </section>
+
+      <div class="k-code-acts">
+        <button type="button" class="btn primary" id="kdrill1">Drill this character</button>
+        ${st === "known"
+          ? `<button type="button" class="btn" id="kunmark">Mark as not known</button>`
+          : ""}
+        <a class="btn" href="#/kanji/browse">All characters</a>
+      </div>
+    </article>`;
+
+  document.getElementById("kdrill1").addEventListener("click", () => {
+    clearKanjiReturn();
+    startKanji([k.c]);
+  });
+  const um = document.getElementById("kunmark");
+  if (um) um.addEventListener("click", () => {
+    unknowKanji(k.c);
+    renderKanjiDetail(k.c);
+  });
 }
 
 /* As with the verbs: deal the round, then let the router draw it, so the
@@ -4789,6 +5085,7 @@ function drawKanji() {
       </div>
       <div class="cardmeta">
         <span class="taphint">${ok ? "Correct" : "Not quite"} · Enter for next</span>
+        <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
       </div>`
     });
     document.getElementById("knext").addEventListener("click", () => {
@@ -4797,6 +5094,10 @@ function drawKanji() {
     const kf = document.getElementById("kflip");
     if (kf) kf.addEventListener("click", () => regradeKanji(true));
     document.getElementById("kundo").addEventListener("click", undoKanji);
+    document.getElementById("klearn").addEventListener("click", e => {
+      e.preventDefault();
+      goKanjiLearn(k.c);
+    });
     return;
   }
 
@@ -4827,6 +5128,7 @@ function drawKanji() {
         <button class="btn bad wide" id="kskip" type="button">Skip</button>
         <button class="btn primary wide" id="kgo" type="button">Check</button>
       </div>
+      <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
     </div>`;
   document.body.classList.add("kanji-typing");
   syncKanjiKeyboard();
@@ -4836,6 +5138,10 @@ function drawKanji() {
   document.getElementById("kgo").addEventListener("click", send);
   document.getElementById("kskip").addEventListener("click", () => submitKanji(""));
   document.getElementById("kundo").addEventListener("click", undoKanji);
+  document.getElementById("klearn").addEventListener("click", e => {
+    e.preventDefault();
+    goKanjiLearn(k.c);
+  });
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") { e.preventDefault(); send(); }
   });
@@ -4971,7 +5277,9 @@ function drawKanjiEnd(stage) {
      #/verbs                 verb setup
      #/verbs/drill/<form>    a verb round
      #/verbs/resume          redirects onto the round it rebuilds
-     #/kanji                 kanji table
+     #/kanji                 kanji drill setup
+     #/kanji/browse[/N5]     character list (own scrolling page)
+     #/kanji/c/<char>        Kanji Code–style study card
      #/kanji/drill           a kanji round
      #/kanji/resume          redirects onto the round it rebuilds
 
@@ -4988,6 +5296,7 @@ function viewName(h, m) {
   if (h === "#/resume" || h === "#/drill/resume") return "drill";
   if (/^#\/verbs/.test(h)) return "verbs";
   if (/^#\/kanji\/(drill|resume)/.test(h)) return "kanji-play";
+  if (/^#\/kanji\/(browse|c\/)/.test(h)) return "kanji-study";
   if (/^#\/kanji/.test(h)) return "kanji";
   if (h === "#/lessons") return "lessons";
   return m ? m[1] : "dash";
@@ -5051,6 +5360,11 @@ function route() {
   if (h === "#/verbs/resume") return resumeVerbs();
   if (vd) return verbDrillRoute(vd[1]);
   if (h === "#/kanji") { KDRILL = null; return renderKanji(); }
+  if (h === "#/kanji/browse") return renderKanjiBrowse();
+  const kb = h.match(/^#\/kanji\/browse\/([A-Z0-9]+)$/);
+  if (kb) return renderKanjiBrowse(kb[1]);
+  const kc = h.match(/^#\/kanji\/c\/(.+)$/);
+  if (kc) return renderKanjiDetail(kc[1]);
   if (h === "#/kanji/resume") return resumeKanji();
   if (h === "#/kanji/drill") return kanjiDrillRoute();
   if (!m) return notFound();
