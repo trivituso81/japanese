@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260816w">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260816w">
-<link rel="manifest" href="site.webmanifest?v=20260816w">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260816x">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260816x">
+<link rel="manifest" href="site.webmanifest?v=20260816x">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260816w";
+window.__BUILD__ = "20260816x";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -96,7 +96,7 @@ window.__BUILD__ = "20260816w";
   a { color: var(--accent-deep); text-underline-offset: 2px; }
 
   /* masthead */
-  header.masthead { position: relative; padding-bottom: 26px; border-bottom: 2px solid var(--text); }
+  header.masthead { position: relative; padding-bottom: 18px; border-bottom: 2px solid var(--text); }
   header.masthead::after { content: ""; position: absolute; left: 0; right: 0; bottom: -5px;
     height: 4px; pointer-events: none;
     background: linear-gradient(90deg, var(--seal) 0%, var(--accent) 100%);
@@ -104,15 +104,18 @@ window.__BUILD__ = "20260816w";
   .enso { position: absolute; top: -8px; right: -4px; width: 108px; height: 108px;
     opacity: .14; pointer-events: none; }
   .enso path { fill: none; stroke: var(--accent); stroke-width: 6; stroke-linecap: round; }
-  .kicker { font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase;
-    color: var(--text-faint); margin: 0 0 14px; font-weight: 600; }
+  .masthead-inner {
+    display: flex; align-items: center; gap: 12px; min-height: 0;
+  }
+  .masthead-inner .mascot-face {
+    flex: none; height: 2.55em; width: auto; max-height: 52px;
+    object-fit: contain; object-position: bottom center;
+    pointer-events: none; user-select: none;
+  }
   h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: -0.01em;
-    margin: 0 0 14px; font-weight: 700; }
+    margin: 0; font-weight: 700; flex: 1 1 auto; min-width: 0; }
   h1 .jp { font-family: var(--jp-mincho); font-weight: 700; margin-left: 6px;
     color: var(--accent-deep); letter-spacing: 0.04em; }
-  .standfirst { font-family: var(--serif); font-size: 16.5px; line-height: 1.75;
-    color: var(--text-soft); margin: 0; max-width: 68ch; font-weight: 400; }
-  .standfirst b { color: var(--text); font-weight: 600; }
 
   /* Top tracks retired in favour of the bottom bar — kept in the DOM for
      paintNav, but never shown. */
@@ -145,16 +148,20 @@ window.__BUILD__ = "20260816w";
   .botnav a {
     display: flex; flex-direction: column; align-items: center; justify-content: center;
     gap: 2px; min-height: var(--botnav-h); padding: 4px 2px; text-decoration: none;
-    font-family: var(--ui); font-size: 11px; font-weight: 700;
-    letter-spacing: .1em; text-transform: uppercase; color: var(--text-faint);
+    font-family: var(--ui); font-size: 13px; font-weight: 700;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint);
     -webkit-tap-highlight-color: transparent;
   }
   .botnav a:hover { color: var(--text); }
   .botnav a[aria-current="page"] { color: var(--accent-deep); }
   .botnav .navico {
-    width: 22px; height: 22px; display: block;
+    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
   }
   .botnav .navico svg { width: 100%; height: 100%; display: block; }
+  .botnav .navico-jp {
+    font-family: var(--jp-mincho); font-size: 20px; font-weight: 700;
+    line-height: 1; letter-spacing: 0;
+  }
 
   .crumbs { margin: 20px 0 0; font-size: 12.5px; color: var(--text-faint);
     letter-spacing: .04em; }
@@ -170,16 +177,22 @@ window.__BUILD__ = "20260816w";
   .home-brand {
     text-align: center; padding: 10px 6px 8px;
     flex: 0 0 auto; position: relative;
+    display: flex; align-items: flex-end; justify-content: center; gap: 10px;
+  }
+  .home-brand .mascot-full {
+    flex: none; height: clamp(52px, 16vw, 72px); width: auto;
+    object-fit: contain; object-position: bottom center;
+    pointer-events: none; user-select: none;
   }
   .home-brand .brand {
     font-family: var(--jp-mincho); font-size: clamp(1.65rem, 7.2vw, 2.35rem);
     line-height: 1.2; letter-spacing: .04em; color: var(--text);
-    margin: 0; font-weight: 700;
+    margin: 0; font-weight: 700; text-align: left;
     animation: brand-in .55s ease-out both;
   }
   .home-brand .brand::after {
     content: ""; display: block; width: min(9.5rem, 42%); height: 4px;
-    margin: 10px auto 0; border-radius: 2px;
+    margin: 10px 0 0; border-radius: 2px;
     background: linear-gradient(90deg, var(--seal), var(--accent));
     animation: bar-in .7s .15s ease-out both;
   }
@@ -457,6 +470,9 @@ window.__BUILD__ = "20260816w";
   .cards-setup .cards-kicker {
     font-size: 11px; letter-spacing: .16em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 700; text-align: center; margin: 0 0 6px;
+  }
+  .cards-setup > h2.view {
+    margin-top: 0; padding-left: 16px;
   }
   .cards-setup .options { margin: 0; flex: 1 1 auto; }
   .cards-setup .opt.start { margin-top: auto; padding-top: 12px; }
@@ -1099,7 +1115,7 @@ window.__BUILD__ = "20260816w";
   .acts { display: flex; gap: 5px; justify-content: flex-end; }
 
   /* lesson view */
-  h2.view { font-family: var(--serif); font-size: 26px; margin: 34px 0 6px; font-weight: 700;
+  h2.view { font-family: var(--serif); font-size: 26px; margin: 22px 0 16px; font-weight: 700;
     letter-spacing: -0.01em; position: relative; padding-left: 16px; }
   /* coral accent bar beside headings */
   h2.view::before { content: ""; position: absolute; left: 0; top: .28em; bottom: .28em;
@@ -1567,17 +1583,15 @@ window.__BUILD__ = "20260816w";
 
     /* Off the dashboard the masthead is just a title bar, and the screen is
        better spent on the card or question you came here for. */
-    body:not([data-view="dash"]) .kicker,
-    body:not([data-view="dash"]) .standfirst,
     body:not([data-view="dash"]) .enso { display: none; }
-    body:not([data-view="dash"]) header.masthead { padding-bottom: 12px; }
+    body:not([data-view="dash"]) header.masthead { padding-bottom: 10px; }
     body:not([data-view="dash"]) header.masthead::after { display: none; }
-    body:not([data-view="dash"]) h1 { font-size: 20px; margin: 0; }
+    body:not([data-view="dash"]) h1 { font-size: 18px; margin: 0; }
+    body:not([data-view="dash"]) .masthead-inner .mascot-face { max-height: 40px; height: 2.2em; }
     .crumbs { margin-top: 14px; }
 
     .enso { width: 68px; height: 68px; top: -2px; }
     h1 { font-size: 25px; }
-    .standfirst { font-size: 15.5px; }
 
     .statgrid .stat { flex: 1 1 100px; padding: 10px 11px; }
     .statgrid .val { font-size: 20px; }
@@ -1756,9 +1770,7 @@ window.__BUILD__ = "20260816w";
       padding-left: calc(14px + env(safe-area-inset-left, 0px));
       padding-right: calc(14px + env(safe-area-inset-right, 0px));
       padding-bottom: calc(72px + env(safe-area-inset-bottom, 0px)); }
-    .kicker { font-size: 10px; letter-spacing: .18em; margin-bottom: 10px; }
     h1 { font-size: 23px; }
-    .standfirst { font-size: 14.5px; }
     .enso { width: 56px; height: 56px; top: 0; right: -2px; }
     .statgrid.bare { grid-template-columns: 1fr 1fr; }
     .rowacts .btn { flex: 1 1 100%; }
@@ -1782,7 +1794,7 @@ window.__BUILD__ = "20260816w";
 
   /* Phone in landscape: almost no height, so give it back to the card */
   @media (max-height: 560px) and (orientation: landscape) {
-    .standfirst, .enso { display: none; }
+    .enso { display: none; }
     header.masthead { padding-bottom: 10px; }
     header.masthead::after { display: none; }
     .card { min-height: 0; padding: 0; }
@@ -1816,14 +1828,11 @@ window.__BUILD__ = "20260816w";
   <svg class="enso" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
-  <p class="kicker">Preply · Nao san · Minna no Nihongo I &amp; II</p>
-  <h1>トムさんの勉強ガイド <span class="jp">Minna no Nihongo</span></h1>
-  <p class="standfirst">
-    Know the <b>vocabulary</b>, know the <b>grammar</b>, then prove both. Vocabulary is drilled with
-    flashcards, grammar with English sentences you translate into Japanese. Work a single lesson to
-    prepare for it, or <b>review a whole book</b> to find out what has gone rusty. Scores are earned
-    from those sessions, not self-declared.
-  </p>
+  <div class="masthead-inner">
+    <img class="mascot-face" src="mascot-face.png?v=20260816x" alt="" width="80" height="75"
+      decoding="async" aria-hidden="true">
+    <h1>トムさんの勉強ガイド <span class="jp">みんなの日本語</span></h1>
+  </div>
 </header>
 
 <!-- Top tracks kept for paintNav compatibility; visually replaced by .botnav. -->
@@ -1855,11 +1864,11 @@ window.__BUILD__ = "20260816w";
     Lessons
   </a>
   <a href="#/kanji">
-    <span class="navico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="1.5"/><path d="M8 9h8M8 12h8M8 15h5"/></svg></span>
+    <span class="navico navico-jp" aria-hidden="true">漢</span>
     Kanji
   </a>
   <a href="#/verbs">
-    <span class="navico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4h7l3 3v13H7z"/><path d="M14 4v3h3M9 12h6M9 16h4"/></svg></span>
+    <span class="navico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="14.5" cy="5" r="2"/><path d="M8.5 21 11 13l2.2 2.4L16 21"/><path d="m11 13 4.5-3.2 2.8 1.2"/><path d="M6.5 12.5 11 13"/><path d="M4 9.5h3.2"/></svg></span>
     Verbs
   </a>
 </nav>
@@ -1879,7 +1888,7 @@ window.__BUILD__ = "20260816w";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260816w"></script>
+<script src="japanese-data.js?v=20260816x"></script>
 <script>
 /* ============================================================
    State
@@ -3206,6 +3215,8 @@ function renderHome() {
   document.getElementById("view").innerHTML = `
     <section class="home-landing">
       <div class="home-brand">
+        <img class="mascot-full" src="mascot-full.png?v=20260816x" alt="" width="72" height="235"
+          decoding="async" aria-hidden="true">
         <h1 class="brand">トムさんの勉強ガイド</h1>
       </div>
 
@@ -3253,15 +3264,13 @@ function renderHome() {
 }
 
 function renderLessons() {
-  crumbs([["#/", "Home"], [null, "Lessons"]]);
+  document.getElementById("crumbs").innerHTML = "";
   /* Fifty rows is a long scroll on a phone, and the row you want is nearly
      always the one you are on. The jump is derived from your progress, not
      from a flag in the data. */
   const cur = currentLesson();
   document.getElementById("view").innerHTML = `
-    <h2 class="view">The lessons</h2>
-    <p class="viewsub">Minna no Nihongo I &amp; II. Vocabulary is earned from flashcards and
-      grammar from drills; the note beside each lesson is your own.</p>
+    <h2 class="view">Lessons</h2>
 
     <div class="toolbar">
       <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
@@ -4900,7 +4909,7 @@ function pickVerbs(pool, count, types) {
 let VERB = null;
 
 function renderVerbs() {
-  crumbs([["#/", "Home"], [null, "Verb drill"]]);
+  document.getElementById("crumbs").innerHTML = "";
   const o = vOpts();
   const view = document.getElementById("view");
   const sample = verbs().find(v => v.ms === "かきます") || verbs()[0];
@@ -4924,9 +4933,7 @@ function renderVerbs() {
   }).join("");
 
   view.innerHTML = `
-    <h2 class="view">Verb drill</h2>
-    <p class="viewsub">Conjugation practice across the whole book. Choose how far you have got,
-      then pick a form. ${verbs().length} verbs are indexed; the round always mixes all three groups.</p>
+    <h2 class="view">Verbs</h2>
 
     ${resumeCards(["verbs"])}
 
@@ -5082,7 +5089,7 @@ function drawVerb() {
   const view = document.getElementById("view");
   const meta = VERB_FORMS.find(f => f.id === VERB.form);
   const total = VERB.list.length;
-  crumbs([["#/", "Home"], ["#/verbs", "Verb drill"], [null, meta.label]]);
+  crumbs([["#/", "Home"], ["#/verbs", "Verbs"], [null, meta.label]]);
 
   if (VERB.verdict) {
     const { v, typed, answer } = VERB.verdict;
@@ -5627,10 +5634,7 @@ function renderKanji() {
 
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
-      <div>
-        <p class="cards-kicker">Kanji</p>
-        <h1 class="cards-title">${esc(level.label)}</h1>
-      </div>
+      <h2 class="view">Kanji</h2>
 
       ${resumeCards(["kanji"])}
 
@@ -6207,8 +6211,8 @@ function notFound() {
       title: "Try one of these instead.",
       actions: [
         { primary: true, go: "#/", label: "Home" },
-        { go: "#/lessons", label: "The lessons" },
-        { go: "#/verbs", label: "Verb drill" },
+        { go: "#/lessons", label: "Lessons" },
+        { go: "#/verbs", label: "Verbs" },
         { go: "#/kanji", label: "Kanji" }
       ]
     })}`;
