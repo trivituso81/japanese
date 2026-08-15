@@ -1978,7 +1978,9 @@ function parseFuriParts(jp) {
 
 /* All-kana (or as-marked) reading of a model sentence for TTS. */
 function speakableFromFuri(jp) {
-  return parseFuriParts(jp).map(p => p.y || p.t).join("").replace(/[{}]/g, "");
+  return parseFuriParts(jp).map(p => p.y || p.t).join("")
+    .replace(/[{}]/g, "")
+    .replace(/\s+/g, "");
 }
 
 const lessonById = n => LESSONS.find(l => l.n === +n);
@@ -1995,7 +1997,13 @@ const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
 const canSpeakBrowser = typeof window !== "undefined" && "speechSynthesis" in window;
 const canSpeak = true;   // Listen always offered; Google TTS needs network
 let jaVoice = null;
+/* One shared Audio element for the whole page. iOS Safari unlocks playback
+   per element, not per document — creating a fresh Audio() for each word
+   makes the first play work (still inside the tap) and every later play silent. */
 let speakAudio = null;
+let speakAudioGen = 0;   // bump to ignore stale playing/ended/error handlers
+
+const SILENT_WAV = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
 
 function pickJaVoice() {
   if (!canSpeakBrowser) return null;
@@ -2013,12 +2021,26 @@ if (canSpeakBrowser) {
 }
 
 function googleTtsUrl(text) {
+  /* Cache-bust so Safari does not reuse a failed/empty response for the same q=
+     (replaying a model sentence used to produce silence after the first play). */
   return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q="
-    + encodeURIComponent(text);
+    + encodeURIComponent(text) + "&_=" + Date.now();
+}
+
+function ensureSpeakAudio() {
+  if (speakAudio) return speakAudio;
+  if (typeof Audio === "undefined") return null;
+  const a = new Audio();
+  try { a.referrerPolicy = "no-referrer"; } catch (e) {}
+  a.setAttribute("referrerpolicy", "no-referrer");
+  a.preload = "auto";
+  speakAudio = a;
+  return a;
 }
 
 function setSpeakBusy(on) {
-  const btn = speakBusyEl || document.getElementById("speak");
+  const btn = speakBusyEl || document.getElementById("speak")
+    || document.getElementById("gspeak");
   if (!btn) return;
   if (on) btn.setAttribute("aria-busy", "true");
   else btn.removeAttribute("aria-busy");
@@ -2034,7 +2056,10 @@ function speakViaWebSpeech(text) {
   if (voice) { jaVoice = voice; u.voice = voice; }
   u.addEventListener("end", () => setSpeakBusy(false));
   u.addEventListener("error", () => setSpeakBusy(false));
-  speechSynthesis.speak(u);
+  /* Chrome sometimes drops utterances issued in the same turn as cancel(). */
+  setTimeout(() => {
+    try { speechSynthesis.speak(u); } catch (e) { setSpeakBusy(false); }
+  }, 0);
   return true;
 }
 
@@ -2043,17 +2068,30 @@ let ttsUnlocked = false;
 let pendingSpeak = null;   // [reading, kanji] waiting for a user gesture
 let speakBusyEl = null;    // which Listen button is currently playing
 
-/* Browsers block audible Autoplay until the page has a user gesture. A silent
-   play on the first tap unlocks later auto-speaks after swipe animations. */
+/* Browsers block audible Autoplay until the page has a user gesture. Play a
+   silent clip on the SHARED element inside that gesture so later auto-speaks
+   (verdict screen, next card) can reuse the same unlocked element. */
 function unlockTts() {
   if (ttsUnlocked || typeof Audio === "undefined") return;
   ttsUnlocked = true;
   try {
-    const a = new Audio(
-      "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=");
+    const a = ensureSpeakAudio();
+    if (!a) return;
+    a.src = SILENT_WAV;
     a.volume = 0;
     const p = a.play();
-    if (p && typeof p.then === "function") p.then(() => { try { a.pause(); } catch (e) {} }).catch(() => {});
+    if (p && typeof p.then === "function") {
+      p.then(() => {
+        try {
+          if ((a.currentSrc || a.src || "").indexOf("data:") === 0) {
+            a.pause();
+            a.volume = 1;
+          }
+        } catch (e) {}
+      }).catch(() => { try { a.volume = 1; } catch (e) {} });
+    } else {
+      a.volume = 1;
+    }
   } catch (e) {}
 }
 
@@ -2074,50 +2112,70 @@ function speakJapanese(reading, kanji) {
   setSpeakBusy(true);
   const token = ++speakToken;
   const hold = [reading, kanji];
+  const gen = ++speakAudioGen;
 
-  // Play Google Translate TTS directly. Fetch cannot be used — the endpoint
-  // has no CORS headers — so we load it as Audio. Explicit no-referrer is
-  // required: Safari has been observed sending the github.io page as Referer
-  // on media requests even with <meta name="referrer" content="same-origin">,
-  // and that Referer makes translate_tts 404 (then we used to fall back to
-  // the robotic Web Speech voice).
-  if (typeof Audio !== "undefined") {
-    const audio = new Audio();
-    speakAudio = audio;
+  // Play Google Translate TTS on the shared Audio element. Fetch cannot be
+  // used — the endpoint has no CORS headers — so we load it as Audio.
+  // Explicit no-referrer is required: Safari has been observed sending the
+  // github.io page as Referer on media requests even with
+  // <meta name="referrer" content="same-origin">, and that Referer makes
+  // translate_tts 404 (then we used to fall back to the robotic Web Speech
+  // voice).
+  const audio = ensureSpeakAudio();
+  if (audio) {
     let settled = false;
     const fallback = () => {
-      if (settled || token !== speakToken) return;
+      if (settled || token !== speakToken || gen !== speakAudioGen) return;
       settled = true;
       speakViaWebSpeech(text);
     };
     const blocked = () => {
-      if (settled || token !== speakToken) return;
+      if (settled || token !== speakToken || gen !== speakAudioGen) return;
       settled = true;
       // Remember this word; the next tap unlocks audio and plays it.
       pendingSpeak = hold;
       setSpeakBusy(false);
     };
-    try { audio.referrerPolicy = "no-referrer"; } catch (e) {}
-    audio.setAttribute("referrerpolicy", "no-referrer");
-    audio.preload = "auto";
-    audio.addEventListener("playing", () => { settled = true; });
-    audio.addEventListener("ended", () => {
-      if (token === speakToken) setSpeakBusy(false);
-    });
-    audio.addEventListener("error", fallback);
+    const onPlaying = () => {
+      if (gen !== speakAudioGen) return;
+      settled = true;
+      try { audio.volume = 1; } catch (e) {}
+    };
+    const onEnded = () => {
+      if (gen === speakAudioGen && token === speakToken) setSpeakBusy(false);
+    };
+    const onError = () => {
+      if (gen !== speakAudioGen) return;
+      fallback();
+    };
+    audio.addEventListener("playing", onPlaying);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("error", onError);
+    /* Drop handlers on the next stop/speak so they cannot fire after reuse. */
+    audio._ttsCleanup = () => {
+      try {
+        audio.removeEventListener("playing", onPlaying);
+        audio.removeEventListener("ended", onEnded);
+        audio.removeEventListener("error", onError);
+      } catch (e) {}
+    };
+    try { audio.volume = 1; } catch (e) {}
     audio.src = googleTtsUrl(text);
     const play = audio.play();
     if (play && typeof play.then === "function") {
       play.catch(err => {
+        if (gen !== speakAudioGen || token !== speakToken) return;
         if (err && err.name === "NotAllowedError") blocked();
-        else fallback();
+        else if (err && err.name === "AbortError") {
+          /* A newer speak replaced this one; ignore. */
+        } else fallback();
       });
     }
     // Only fall back if Google never starts — give mobile networks time.
     // Do not use readyState alone: Safari often sits below HAVE_CURRENT_DATA
     // for a while even while a good stream is on the way.
     setTimeout(() => {
-      if (settled || token !== speakToken) return;
+      if (settled || token !== speakToken || gen !== speakAudioGen) return;
       if (audio.error || (audio.paused && audio.currentTime === 0 && audio.readyState < 2)) {
         fallback();
       }
@@ -2131,13 +2189,19 @@ function speakJapanese(reading, kanji) {
 function stopSpeaking() {
   speakToken++;
   pendingSpeak = null;
+  speakAudioGen++;
   if (canSpeakBrowser) {
     try { speechSynthesis.cancel(); } catch (e) {}
   }
   if (speakAudio) {
     const a = speakAudio;
-    speakAudio = null;
-    try { a.pause(); a.removeAttribute("src"); a.load(); } catch (e) {}
+    try {
+      if (typeof a._ttsCleanup === "function") a._ttsCleanup();
+      a._ttsCleanup = null;
+      a.pause();
+      /* Keep src intact — clearing + load() races error handlers and, on iOS,
+         can leave the shared element unable to play again. */
+    } catch (e) {}
   }
   setSpeakBusy(false);
 }
@@ -2199,6 +2263,9 @@ function wireSpeak(reading, kanji, btnOrId) {
   // Keep the listen tap off the swipe / flip handlers on #face.
   const stop = e => e.stopPropagation();
   ["pointerdown", "pointerup", "click"].forEach(ev => btn.addEventListener(ev, stop));
+  /* Unlock on pointerdown so the shared element is primed before click fires
+     speak — helps iOS keep the gesture attached to the same Audio node. */
+  btn.addEventListener("pointerdown", () => { unlockTts(); });
   btn.addEventListener("click", () => {
     unlockTts();
     speakBusyEl = btn;
@@ -4295,6 +4362,7 @@ function drawVerdict(view, heading, range, score) {
   next.focus();
   document.getElementById("flip").addEventListener("click", () => regradeLast(!a.ok));
   wireSpeak(speakReading, speakKanji, "gspeak");
+  speakBusyEl = document.getElementById("gspeak");
   if (speakReading || speakKanji) speakJapanese(speakReading, speakKanji);
 }
 
