@@ -8217,8 +8217,8 @@ const CONTENT = {
       ["The department chief made Mr Kato go to Osaka on business.", "部長{ぶちょう}は 加藤{かとう}さんを 大阪{おおさか}へ 出張{しゅっちょう}させました。", "compulsion: the senior person decides"],
       ["My mother let me study abroad.", "母{はは}は わたしを 留学{りゅうがく}させました。", "permission, in exactly the same form"],
       ["When you arrive at the station, please call me. I'll send a member of our staff to meet you.", "駅{えき}に 着{つ}いたら、電話{でんわ}を ください。うちの 者{もの}を 迎{むか}えに 行{い}かせますから。", "to an outsider, rank inside your own group does not matter"],
-      ["I had the department chief explain it to me.", "わたしは 部長{ぶちょう}に 説明{せつめい}して いただきました。", "never the causative of a senior person"],
-      ["I had my friend explain it to me.", "わたしは 友{とも}だちに 説明{せつめい}して もらいました。", "with an equal, ～て もらいます"],
+      ["The teacher made the students wait in the corridor.", "先生{せんせい}は 学生{がくせい}を 廊下{ろうか}で 待{ま}たせました。", "senior makes junior wait — real causative"],
+      ["I let my child eat cake.", "わたしは 子{こ}どもに ケーキを 食{た}べさせました。", "permission with a transitive verb: child takes に"],
       ["When I was a child I was often ill and worried my mother.", "子{こ}どもの とき、よく 病気{びょうき}を して、母{はは}を 心配{しんぱい}させました。", "verbs of feeling let a junior be the subject"],
     ]
   },
@@ -8238,7 +8238,7 @@ const CONTENT = {
       ["Would you let me use this computer?", "この パソコンを 使{つか}わせて いただけませんか。", ""],
       ["I'd like to go to the hospital tomorrow, so would you let me take the day off?", "あした 病院{びょういん}へ 行{い}きたいので、休{やす}ませて いただけませんか。", ""],
       ["Would you let me copy these materials?", "この 資料{しりょう}を コピーさせて いただけませんか。", "する verbs give させて"],
-      ["Would you copy these materials for me?", "この 資料{しりょう}を コピーして いただけませんか。", "no causative — here the listener does it (Lesson 26)"],
+      ["Would you let me make a quick phone call?", "少{すこ}し 電話{でんわ}を させて いただけませんか。", "causative て-form ＋ いただけませんか"],
       ["Would you let me go home a little early today?", "きょうは 少{すこ}し 早{はや}く 帰{かえ}らせて いただけませんか。", ""],
     ]
   },
