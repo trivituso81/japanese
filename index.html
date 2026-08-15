@@ -5461,7 +5461,6 @@ function drawKanji() {
         autocorrect="off" spellcheck="false" placeholder="Meaning in English"
         enterkeyhint="done">
       <div class="k-type-acts">
-        <button class="btn bad wide" id="kskip" type="button">Skip</button>
         <button class="btn primary wide" id="kgo" type="button">Check</button>
       </div>
     </div>`;
@@ -5471,7 +5470,6 @@ function drawKanji() {
   const input = document.getElementById("kin");
   const send = () => submitKanji(input.value);
   document.getElementById("kgo").addEventListener("click", send);
-  document.getElementById("kskip").addEventListener("click", () => submitKanji(""));
   document.getElementById("kundo").addEventListener("click", undoKanji);
   document.getElementById("klearn").addEventListener("click", e => {
     e.preventDefault();
