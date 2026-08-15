@@ -10,11 +10,11 @@
 <meta name="theme-color" content="#9c3b2e">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="勉強ノート">
+<meta name="apple-mobile-web-app-title" content="トムさんの勉強ガイド">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="manifest" href="site.webmanifest">
-<title>Japanese Study Guide · Minna no Nihongo I &amp; II</title>
+<title>トムさんの勉強ガイド · Minna no Nihongo</title>
 <style>
   /* ============================================================
      和 — a washi-paper palette in traditional dye names.
@@ -128,18 +128,13 @@
     padding: 6px 0 4px; gap: 12px;
   }
   .home-brand {
-    text-align: center; padding: 4px 8px 2px;
+    text-align: center; padding: 8px 6px 4px;
     flex: 0 0 auto;
   }
   .home-brand .brand {
-    font-family: var(--jp-mincho); font-size: clamp(2.5rem, 11vw, 3.35rem);
-    line-height: 1.08; letter-spacing: .1em; color: var(--seal);
+    font-family: var(--jp-mincho); font-size: clamp(1.65rem, 7.2vw, 2.35rem);
+    line-height: 1.2; letter-spacing: .06em; color: var(--seal);
     margin: 0; font-weight: 400;
-  }
-  .home-brand .tag {
-    font-family: var(--serif); font-size: 14px; line-height: 1.35;
-    font-style: italic; color: var(--text-soft); margin: 8px 0 0;
-    max-width: 28ch; margin-inline: auto;
   }
 
   .home-stats {
@@ -239,24 +234,13 @@
   }
 
   .home-next {
-    text-align: center; padding: 2px 0 0; flex: 0 0 auto;
+    text-align: center; padding: 2px 0 0; flex: 0 0 auto; margin-top: auto;
   }
   .home-next .btn {
     display: block; width: 100%; max-width: none;
     font-size: 15.5px; padding: 14px 18px; min-height: 50px;
     letter-spacing: .06em;
   }
-  .home-utils {
-    display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center;
-    flex: 0 0 auto; padding-top: 2px;
-    font-size: 13px; color: var(--text-faint);
-  }
-  .home-utils button, .home-utils .linkish {
-    font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .03em;
-    color: var(--text-soft); background: none; border: 0; padding: 0;
-    cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
-  }
-  .home-utils button:hover, .home-utils .linkish:hover { color: var(--seal); }
 
   @media (prefers-reduced-motion: reduce) {
     .viz-enso .ink { animation: none; }
@@ -286,8 +270,7 @@
 
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
-    .home-brand .brand { font-size: clamp(2.1rem, 9vw, 2.7rem); }
-    .home-brand .tag { font-size: 13px; margin-top: 5px; }
+    .home-brand .brand { font-size: clamp(1.45rem, 6.5vw, 2rem); }
     .home-stats { min-height: 180px; }
     .home-stats .stat { padding: 10px 8px 9px; gap: 4px; }
     .viz-enso { width: min(78px, 30vw); }
@@ -298,10 +281,8 @@
   }
   @media (max-height: 560px) {
     .home-landing { gap: 8px; }
-    .home-brand .tag { display: none; }
     .home-stats .sub { display: none; }
     .home-stats { min-height: 150px; }
-    .home-utils { display: none; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
     .home-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 1fr; min-height: 120px; }
@@ -1117,7 +1098,7 @@
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <p class="kicker">Preply · Nao san · Minna no Nihongo I &amp; II</p>
-  <h1>Japanese Study Guide <span class="jp">勉強ノート</span></h1>
+  <h1>トムさんの勉強ガイド <span class="jp">Minna no Nihongo</span></h1>
   <p class="standfirst">
     Know the <b>vocabulary</b>, know the <b>grammar</b>, then prove both. Vocabulary is drilled with
     flashcards, grammar with English sentences you translate into Japanese. Work a single lesson to
@@ -1138,7 +1119,7 @@
 <main id="view"></main>
 
 <footer class="foot">
-  Progress lives in this browser only. Use <b>Export</b> on the dashboard for a backup.
+  Progress lives in this browser only.
   Keep <code>japanese-data.js</code> in the same folder as this file.
   The reference tracker is at <a href="japanese.html">japanese.html</a>.
 </footer>
@@ -2178,8 +2159,7 @@ function renderHome() {
   document.getElementById("view").innerHTML = `
     <section class="home-landing">
       <div class="home-brand">
-        <h1 class="brand">勉強ノート</h1>
-        <p class="tag">Minna no Nihongo · your standing at a glance</p>
+        <h1 class="brand">トムさんの勉強ガイド</h1>
       </div>
 
       <div class="home-stats">
@@ -2202,26 +2182,9 @@ function renderHome() {
       ${next ? `<div class="home-next">
         <a class="btn primary" href="${next.go}">${esc(next.label || "Continue")}</a>
       </div>` : ""}
-
-      <div class="home-utils">
-        <button type="button" id="furi" aria-pressed="true">Furigana on</button>
-        <button type="button" id="exportBtn">Export</button>
-        <button type="button" id="importBtn">Import</button>
-        <input type="file" id="importFile" accept="application/json" hidden>
-      </div>
     </section>`;
 
   wireResume(renderHome);
-  wireFurigana();
-  wireExport();
-}
-
-function wireExport() {
-  const ex = document.getElementById("exportBtn");
-  if (!ex) return;
-  ex.addEventListener("click", exportProgress);
-  document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
-  document.getElementById("importFile").addEventListener("change", importProgress);
 }
 
 function renderLessons() {
@@ -2238,7 +2201,6 @@ function renderLessons() {
     <div class="toolbar">
       <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
       ${cur ? `<button class="btn" id="jump">Jump to Lesson ${cur}</button>` : ""}
-      <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
     </div>
 
     <table class="board">
@@ -2259,7 +2221,6 @@ function renderLessons() {
     if (row && row.scrollIntoView) row.scrollIntoView({ block: "center" });
   });
   wireRows();
-  wireFurigana();
 }
 
 function verbAccuracy() {
@@ -2350,7 +2311,6 @@ function renderLesson(n) {
         Flashcards${v ? ` · ${v.v.length} words` : ""}</button>
       <button class="btn primary" data-go="#/drill/${n}" ${bank ? "" : "disabled"}>
         Grammar drill${bank ? ` · ${bank} in bank` : ""}</button>
-      <button class="btn" id="furi" aria-pressed="true">Furigana on</button>
     </div>`;
 
   const gaps = [];
@@ -2398,7 +2358,6 @@ function renderLesson(n) {
 
   document.getElementById("view").innerHTML = head + gapNote +
     `<h2 class="view minor">Grammar points</h2>` + grammar + vocab + lnav;
-  wireFurigana();
 }
 
 function vocabRow([reading, kanji, en], id) {
@@ -3422,15 +3381,9 @@ function crumbs(parts) {
 }
 
 function wireFurigana() {
-  const b = document.getElementById("furi");
-  if (!b) return;
-  b.setAttribute("aria-pressed", String(!document.body.classList.contains("no-furi")));
-  b.textContent = document.body.classList.contains("no-furi") ? "Furigana off" : "Furigana on";
-  b.addEventListener("click", () => {
-    const off = document.body.classList.toggle("no-furi");
-    b.textContent = off ? "Furigana off" : "Furigana on";
-    b.setAttribute("aria-pressed", String(!off));
-  });
+  /* Furigana stays on — the old toggle is gone. Clear any leftover off-state
+     from an earlier session that flipped body.no-furi. */
+  document.body.classList.remove("no-furi");
 }
 
 /* The one way to move between screens. A link to the hash you are already on
@@ -3739,7 +3692,6 @@ function renderVerbs() {
           `<option value="${id}"${id === o.prompt ? " selected" : ""}>${label}</option>`).join("")}</select>` },
       { k: "Questions", html: `<select id="vcount">${VERB_COUNTS.map(c =>
           `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` },
-      { k: "Readings", html: `<button class="btn" id="furi" aria-pressed="true">Furigana on</button>` },
       { start: `<button class="btn primary" id="vstart"${form ? "" : " disabled"}>Start drill</button>` }
     ])}
 
@@ -3759,7 +3711,6 @@ function renderVerbs() {
   document.getElementById("vform").addEventListener("change", e => setVOpts({ form: e.target.value }));
   document.getElementById("vprompt").addEventListener("change", e => setVOpts({ prompt: e.target.value }));
   document.getElementById("vcount").addEventListener("change", e => setVOpts({ count: +e.target.value }));
-  wireFurigana();
   wireResume(renderVerbs);
   const start = document.getElementById("vstart");
   if (form) start.addEventListener("click", () => startVerbs(vOpts().form || form));
@@ -4609,6 +4560,7 @@ function route() {
   if (kind === "sweep") return renderDrill(scope, true);
 }
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
+wireFurigana();
 route();
 </script>
 </body>
