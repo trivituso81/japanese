@@ -4405,7 +4405,7 @@ function conjugateOne(word, v, form) {
     if (v.g === 3 || VERB_KEIGO_SPECIAL.includes(v.ms)) return null;
     return form === "honorific" ? `お${stem}になります` : `お${stem}します`;
   }
-  if (form === "stem") return stem;
+  if (form === "masu") return /ます$/.test(word) ? word : null;
   if (form === "masu_past") return stem + "ました";
   if (form === "masu_neg") return stem + "ません";
 
@@ -4490,9 +4490,23 @@ const VERB_PROMPTS = [
   ["polite", "ます-form",        "the polite form"],
   ["dict",   "Dictionary form", "the plain form"]
 ];
-const vOpts = () => Object.assign({ ceiling: 50, prompt: "polite", count: 10, form: "te" },
-  S.vopts || {});
+const vOpts = () => {
+  const o = Object.assign({ ceiling: 50, prompt: "polite", count: 10, form: "te" },
+    S.vopts || {});
+  /* ます-stem drill was removed; map any saved choice onto dictionary form. */
+  if (o.form === "stem") o.form = "dict";
+  return o;
+};
 function setVOpts(patch) { S.vopts = Object.assign(vOpts(), patch); save(); }
+
+/* Avoid trivial prompts: don't show ます when the answer is ます, or dictionary
+   when the answer is dictionary — flip to the other Japanese face instead. */
+function effectiveVerbPrompt(form, style) {
+  if (style === "en") return "en";
+  if (form === "masu" && style !== "dict") return "dict";
+  if (form === "dict" && style === "dict") return "polite";
+  return style;
+}
 
 const verbPool = (ceiling, form) =>
   verbs().filter(v => v.n <= ceiling && conjugate(v, form) !== null);
@@ -4661,6 +4675,10 @@ function clearVerbSession() { delete S.vsession; save(); }
 function resumeVerbs() {
   const s = S.vsession;
   if (!s) return goto("#/verbs");
+  if (s.form === "stem" || !VERB_FORMS.some(f => f.id === s.form)) {
+    clearVerbSession();
+    return goto("#/verbs");
+  }
   const idx = {}; verbs().forEach(v => idx[`${v.ms}|${v.kanji}`] = v);
   const list = s.ids.map(id => idx[id]).filter(Boolean);
   if (!list.length) { clearVerbSession(); return goto("#/verbs"); }
@@ -4702,7 +4720,7 @@ function drawVerb() {
     const { v, typed, answer } = VERB.verdict;
     const last = VERB.answers[VERB.answers.length - 1] || {};
     const ok = !!last.ok;
-    const p = verbPrompt(v, VERB.prompt);
+    const p = verbPrompt(v, effectiveVerbPrompt(VERB.form, VERB.prompt));
     view.innerHTML = drillStage({
       heading: esc(meta.label),
       sub: "One attempt each — kana or the kanji spelling both count.",
@@ -4745,8 +4763,9 @@ function drawVerb() {
   if (VERB.i >= total) return drawVerbEnd(view, meta);
 
   const v = VERB.list[VERB.i];
-  const p = verbPrompt(v, VERB.prompt);
-  const speakSrc = verbPromptSpeak(v, VERB.prompt);
+  const promptStyle = effectiveVerbPrompt(VERB.form, VERB.prompt);
+  const p = verbPrompt(v, promptStyle);
+  const speakSrc = verbPromptSpeak(v, promptStyle);
   const lastOk = VERB.lastOk;
   stopSpeaking();
   view.innerHTML = drillStage({
