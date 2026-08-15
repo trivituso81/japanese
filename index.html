@@ -769,7 +769,6 @@ window.__BUILD__ = "20260815r";
     padding: 6px 0;
   }
   .k-learn:hover { text-decoration: underline; }
-  .k-type-frame .k-type-glyph .k-learn,
   .card-play .card-face .k-learn {
     margin-top: 10px; padding: 4px 8px;
   }
@@ -5454,7 +5453,6 @@ function drawKanji() {
       ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
         ${esc(lastOk.en)}</p>` : ""}
       <div class="kbig-face">${esc(k.c)}</div>
-      <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
     </div>
     <div class="k-type-dock">
       <input type="text" class="kin" id="kin" autocomplete="off" autocapitalize="off"
@@ -5471,10 +5469,6 @@ function drawKanji() {
   const send = () => submitKanji(input.value);
   document.getElementById("kgo").addEventListener("click", send);
   document.getElementById("kundo").addEventListener("click", undoKanji);
-  document.getElementById("klearn").addEventListener("click", e => {
-    e.preventDefault();
-    goKanjiLearn(k.c);
-  });
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") { e.preventDefault(); send(); }
   });
