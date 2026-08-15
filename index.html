@@ -5508,19 +5508,28 @@ function drawKanji() {
         autocorrect="off" spellcheck="false" placeholder="Meaning in English"
         enterkeyhint="done">
       <div class="k-type-acts">
-        <button class="btn primary wide" id="kgo" type="button">Check</button>
+        <button class="btn bad wide" id="kgo" type="button">Don't know</button>
       </div>
     </div>`;
   document.body.classList.add("kanji-typing");
   syncKanjiKeyboard();
 
   const input = document.getElementById("kin");
+  const go = document.getElementById("kgo");
+  const syncGo = () => {
+    const has = !!String(input.value || "").trim();
+    go.textContent = has ? "Check" : "Don't know";
+    go.classList.toggle("primary", has);
+    go.classList.toggle("bad", !has);
+  };
   const send = () => submitKanji(input.value);
-  document.getElementById("kgo").addEventListener("click", send);
+  go.addEventListener("click", send);
   document.getElementById("kundo").addEventListener("click", undoKanji);
+  input.addEventListener("input", syncGo);
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") { e.preventDefault(); send(); }
   });
+  syncGo();
   /* Focus without scrolling; keep pinning through the keyboard animation. */
   const focusIn = () => {
     try { input.focus({ preventScroll: true }); }
