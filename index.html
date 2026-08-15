@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815m">
+<link rel="manifest" href="site.webmanifest?v=20260815n">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815m";
+window.__BUILD__ = "20260815n";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1697,7 +1697,7 @@ window.__BUILD__ = "20260815m";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815m"></script>
+<script src="japanese-data.js?v=20260815n"></script>
 <script>
 /* ============================================================
    State
@@ -5033,8 +5033,6 @@ function kanjiInsideCards(k) {
 function kanjiInsideHtml(k, onShow) {
   const cards = kanjiInsideCards(k);
   if (!cards.length) return "";
-  const parts = kanjiParts(k.c);
-  const hasPair = parts && parts.radical && parts.phonetic;
   const body = cards.map(card => {
     const sound = card.sound ? ` · <span lang="ja">${esc(card.sound)}</span>` : "";
     const where = card.where
@@ -5054,17 +5052,9 @@ function kanjiInsideHtml(k, onShow) {
       ${detail}
     </div>`;
   }).join("");
-  const blurb = hasPair
-    ? `<p>The meaning radical points at the idea; the sound clue is why the ON reading is ${esc(onShow)}.</p>`
-    : cards[0].role === "This is a radical"
-      ? `<p>This character itself is used as a meaning radical inside other kanji — learn its shape once, then spot it again.</p>`
-      : cards.some(c => c.role === "Meaning radical" || c.role === "Component")
-        ? `<p>Read the pieces left-to-right or top-to-bottom; the radical’s usual meaning is the memory hook for the whole character.</p>`
-        : `<p>Some characters are mostly a whole-shape memory — use the story below until the shape sticks.</p>`;
   return `<section class="k-code-block">
     <h2>Inside the character</h2>
     <div class="k-code-parts${cards.length === 1 ? " one" : ""}">${body}</div>
-    ${blurb}
   </section>`;
 }
 
@@ -5252,12 +5242,7 @@ function renderKanjiDetail(raw) {
 
   const onShow = k.on.length ? k.on.join(" · ") : "—";
   const kunShow = k.kun.length ? k.kun.join(" · ") : "—";
-  const story = kanjiStory(k);
-  const insideCards = kanjiInsideCards(k);
   const partsHtml = kanjiInsideHtml(k, onShow);
-  const storyDup = insideCards.length === 1
-    && insideCards[0].detail === story
-    && /Picture mark|Shape story|How to see it/.test(insideCards[0].role || "");
 
   const peerSound = parts && parts.phonetic && parts.phonetic.sound
     ? parts.phonetic.sound
@@ -5278,17 +5263,18 @@ function renderKanjiDetail(raw) {
             : st === "learning" && rec ? ` · learning ${rec.ok}/${rec.n}` : ""}</p>
       </header>
 
-      ${partsHtml}
-
-      ${storyDup ? "" : `<section class="k-code-block k-code-story">
-        <h2>Remember this</h2>
-        <p class="story">${esc(story)}</p>
-      </section>`}
-
       <section class="k-code-block">
         <h2>Readings</h2>
         <p class="k-code-reading"><b>ON</b> <span lang="ja">${esc(onShow)}</span></p>
         <p class="k-code-reading"><b>kun</b> <span lang="ja">${esc(kunShow)}</span></p>
+      </section>
+
+      ${partsHtml}
+
+      <section class="k-code-block">
+        <h2>As in</h2>
+        <p class="k-code-ex" lang="ja">${kExampleRuby(k) || esc(k.ex.w)}</p>
+        <p>${esc(k.ex.en)}</p>
       </section>
 
       ${peers.length ? `<section class="k-code-block">
@@ -5303,12 +5289,6 @@ function renderKanjiDetail(raw) {
           </a>`).join("")}
         </div>
       </section>` : ""}
-
-      <section class="k-code-block">
-        <h2>As in</h2>
-        <p class="k-code-ex" lang="ja">${kExampleRuby(k) || esc(k.ex.w)}</p>
-        <p>${esc(k.ex.en)}</p>
-      </section>
 
       <div class="k-code-acts">
         <button type="button" class="btn primary" id="kdrill1">Drill this character</button>
