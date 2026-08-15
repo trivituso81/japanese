@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815c">
+<link rel="manifest" href="site.webmanifest?v=20260815d">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815c";
+window.__BUILD__ = "20260815d";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -289,11 +289,19 @@ window.__BUILD__ = "20260815c";
   }
   .home-progress {
     flex: 0 0 auto;
-    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-    gap: 6px 10px; padding: 4px 4px 0;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 6px; padding: 6px 4px 0;
     font-size: 11.5px; color: var(--text-soft); letter-spacing: .02em;
+    text-align: center;
+  }
+  .home-progress .hp-row {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+    gap: 6px 10px;
   }
   .home-progress .hp-status { color: var(--text-faint); }
+  .home-progress .hp-note {
+    max-width: 22em; line-height: 1.4; color: var(--text-faint); font-size: 11px;
+  }
   .home-progress button,
   .home-progress label {
     font: inherit; font-size: 11.5px; font-weight: 600;
@@ -1600,7 +1608,7 @@ window.__BUILD__ = "20260815c";
 
 <div class="k-type-frame" id="kframe" hidden></div>
 
-<script src="japanese-data.js?v=20260815c"></script>
+<script src="japanese-data.js?v=20260815d"></script>
 <script>
 /* ============================================================
    State
@@ -2741,9 +2749,13 @@ function renderHome() {
       </div>` : ""}
 
       <div class="home-progress">
-        <span class="hp-status">${esc(savedAtLabel())}</span>
-        <button type="button" id="exp">Export</button>
-        <label for="imp">Import<input type="file" id="imp" accept="application/json,.json"></label>
+        <div class="hp-row">
+          <span class="hp-status">${esc(savedAtLabel())}</span>
+          <button type="button" id="exp">Export backup</button>
+          <label for="imp">Import<input type="file" id="imp" accept="application/json,.json"></label>
+        </div>
+        <p class="hp-note">Progress stays on this phone if you refresh or re-add the home icon.
+          Export a backup first if you want a spare copy in Files.</p>
       </div>
     </section>`;
 

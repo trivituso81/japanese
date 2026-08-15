@@ -84,6 +84,10 @@ The home-screen app caches hard — closing it does **not** pull updates. After 
 site change, open the same URL once in Safari (pull to refresh), or delete the
 home-screen icon and add it again.
 
+Re-adding the icon does **not** erase progress: it is stored for the website,
+not inside the icon. Still tap **Export backup** on the home screen first if you
+want a spare JSON file in Files.
+
 ## Running it locally
 
 Open `index.html` by double-clicking it. That is all — it works straight off the
