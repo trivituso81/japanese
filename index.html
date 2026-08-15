@@ -77,7 +77,7 @@ window.__BUILD__ = "20260816x";
     --serif: "Outfit", "Hiragino Sans", "Yu Gothic", sans-serif;
     --jp: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
     --jp-mincho: "M PLUS Rounded 1c", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
-    --botnav-h: 58px;
+    --botnav-h: 0px;
     --shadow-ink: rgba(18, 20, 26, .12);
   }
   * { box-sizing: border-box; }
@@ -91,7 +91,7 @@ window.__BUILD__ = "20260816x";
       radial-gradient(ellipse 50% 40% at 50% 40%, rgba(255, 255, 255, .55), transparent 70%),
       repeating-linear-gradient(-18deg, transparent 0 11px, rgba(18, 20, 26, .018) 11px 12px);
     background-attachment: fixed; }
-  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 46px 26px 120px;
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 46px 26px 48px;
     overflow-wrap: break-word; }
   a { color: var(--accent-deep); text-underline-offset: 2px; }
 
@@ -117,50 +117,24 @@ window.__BUILD__ = "20260816x";
   h1 .jp { font-family: var(--jp-mincho); font-weight: 700; margin-left: 6px;
     color: var(--accent-deep); letter-spacing: 0.04em; }
 
-  /* Top tracks retired in favour of the bottom bar — kept in the DOM for
-     paintNav, but never shown. */
-  .topnav { display: none !important; }
+  .back-home {
+    flex: none; display: inline-flex; align-items: center; gap: 6px;
+    margin-left: auto; padding: 8px 10px; text-decoration: none;
+    color: var(--text); font-family: var(--ui); font-size: 13px; font-weight: 700;
+    letter-spacing: .02em; border: 1.5px solid var(--text); border-radius: var(--radius-sm);
+    background: var(--bg); box-shadow: 2px 2px 0 var(--shadow-ink);
+    -webkit-tap-highlight-color: transparent; white-space: nowrap;
+  }
+  .back-home:hover { background: var(--bg-soft); color: var(--text); }
+  .back-home .bh-arrow { font-size: 14px; line-height: 1; }
+  .back-home .bh-ico { width: 18px; height: 18px; display: block; flex: none; }
+  .back-home .bh-ico svg { width: 100%; height: 100%; display: block; }
 
-  /* Fixed bottom bar — Home / Lessons / Kanji / Verbs.
-     Hides on scroll-down so long pages and the card face keep the room;
-     returns on scroll-up. Always mounted, every view. */
-  .botnav {
-    position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    background: rgba(255, 255, 255, .92);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-top: 1px solid var(--rule-strong);
-    padding: 2px 4px calc(2px + env(safe-area-inset-bottom, 0px));
-    box-shadow: 0 -8px 24px rgba(22, 24, 29, .06);
-    transition: transform .28s ease;
-    will-change: transform;
-  }
-  body.botnav-away .botnav {
-    transform: translateY(calc(100% + 8px));
-    pointer-events: none;
-  }
+  /* Top tracks + bottom bar retired — home quadrants + Back home replace them. */
+  .topnav, .botnav { display: none !important; }
   @media (prefers-reduced-motion: reduce) {
-    .botnav { transition: none; }
     .home-brand .brand,
     .home-brand .brand::after { animation: none; }
-  }
-  .botnav a {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 2px; min-height: var(--botnav-h); padding: 4px 2px; text-decoration: none;
-    font-family: var(--ui); font-size: 13px; font-weight: 700;
-    letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint);
-    -webkit-tap-highlight-color: transparent;
-  }
-  .botnav a:hover { color: var(--text); }
-  .botnav a[aria-current="page"] { color: var(--accent-deep); }
-  .botnav .navico {
-    width: 24px; height: 24px; display: flex; align-items: center; justify-content: center;
-  }
-  .botnav .navico svg { width: 100%; height: 100%; display: block; }
-  .botnav .navico-jp {
-    font-family: var(--jp-mincho); font-size: 20px; font-weight: 700;
-    line-height: 1; letter-spacing: 0;
   }
 
   .crumbs { margin: 20px 0 0; font-size: 12.5px; color: var(--text-faint);
@@ -168,16 +142,20 @@ window.__BUILD__ = "20260816x";
   .crumbs a { text-decoration: none; color: var(--text-soft); }
   .crumbs a:hover { color: var(--accent-deep); text-decoration: underline; }
 
-  /* Home landing — brand · stats grid · CTA, sized for a phone fold */
+  /* Home landing — brand/settings · lesson picker · full-bleed tappable quads */
   .home-landing {
     display: flex; flex-direction: column;
     flex: 1 1 auto; min-height: 0;
-    padding: 6px 0 4px; gap: 14px;
+    padding: 4px 0 0; gap: 12px;
+  }
+  .home-top {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 10px; flex: 0 0 auto; padding: 4px 2px 2px;
+    position: relative;
   }
   .home-brand {
-    text-align: center; padding: 10px 6px 8px;
-    flex: 0 0 auto; position: relative;
-    display: flex; align-items: flex-end; justify-content: center; gap: 10px;
+    display: flex; align-items: flex-end; justify-content: flex-start; gap: 10px;
+    min-width: 0; flex: 1 1 auto; padding: 0;
   }
   .home-brand .mascot-full {
     flex: none; height: clamp(52px, 16vw, 72px); width: auto;
@@ -185,7 +163,7 @@ window.__BUILD__ = "20260816x";
     pointer-events: none; user-select: none;
   }
   .home-brand .brand {
-    font-family: var(--jp-mincho); font-size: clamp(1.65rem, 7.2vw, 2.35rem);
+    font-family: var(--jp-mincho); font-size: clamp(1.55rem, 6.5vw, 2.2rem);
     line-height: 1.2; letter-spacing: .04em; color: var(--text);
     margin: 0; font-weight: 700; text-align: left;
     animation: brand-in .55s ease-out both;
@@ -205,9 +183,41 @@ window.__BUILD__ = "20260816x";
     to { opacity: 1; transform: none; }
   }
 
+  .home-settings { position: relative; flex: none; align-self: flex-start; }
+  .home-settings-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 42px; height: 42px; padding: 0; cursor: pointer;
+    border: 1.5px solid var(--text); border-radius: var(--radius-sm);
+    background: var(--bg); color: var(--text);
+    box-shadow: 2px 2px 0 var(--shadow-ink);
+  }
+  .home-settings-btn:hover { background: var(--bg-soft); }
+  .home-settings-btn svg { width: 22px; height: 22px; display: block; }
+  .home-settings-menu {
+    position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
+    min-width: 210px; padding: 10px 12px;
+    background: var(--bg); border: 2px solid var(--text);
+    border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--shadow-ink);
+    display: none; flex-direction: column; gap: 8px;
+  }
+  .home-settings.open .home-settings-menu { display: flex; }
+  .home-settings-menu .hp-status {
+    font-size: 12px; color: var(--text-faint); line-height: 1.35;
+  }
+  .home-settings-menu button,
+  .home-settings-menu label {
+    font: inherit; font-size: 14px; font-weight: 600; text-align: left;
+    color: var(--accent-deep); background: none; border: none;
+    padding: 6px 0; cursor: pointer;
+  }
+  .home-settings-menu button:hover,
+  .home-settings-menu label:hover { text-decoration: underline; }
+  .home-settings-menu input[type="file"] { display: none; }
+
   .home-stats {
     display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-    gap: 12px; flex: 1 1 auto; min-height: 280px;
+    gap: 12px; flex: 1 1 auto; min-height: 0;
+    width: 100%;
     border: none; background: transparent;
     overflow: visible;
   }
@@ -221,7 +231,17 @@ window.__BUILD__ = "20260816x";
     box-shadow: 5px 5px 0 var(--shadow-ink);
     position: relative;
     overflow: hidden;
+    text-decoration: none; color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    transition: transform .14s ease, box-shadow .14s ease;
   }
+  .home-stats a.stat:hover,
+  .home-stats a.stat:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+  }
+  .home-stats a.stat:active { transform: translateY(1px); }
   .home-stats .stat::before {
     content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
     background: radial-gradient(ellipse 80% 60% at 100% 0%, transparent 40%, transparent 100%);
@@ -278,20 +298,28 @@ window.__BUILD__ = "20260816x";
     margin-top: 2px; line-height: 1.3;
   }
 
-  /* Lesson filter for the top vocabulary + grammar quadrants */
+  /* Lesson picker for the top vocabulary + grammar quadrants */
   .home-filter {
     display: flex; align-items: center; justify-content: center;
-    gap: 8px; flex: 0 0 auto; padding: 0 4px;
+    gap: 12px; flex: 0 0 auto; padding: 2px 4px; flex-wrap: wrap;
   }
   .home-filter label {
-    font-size: 11px; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--text-faint); font-weight: 600;
+    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--text-faint); font-weight: 700;
   }
   .home-filter select {
-    font-family: var(--ui); font-size: 14px; padding: 6px 8px;
-    border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
-    background: var(--bg); color: var(--text); max-width: min(100%, 220px);
+    font-family: var(--ui); font-size: 18px; font-weight: 700;
+    padding: 10px 14px; min-width: 5.5rem; min-height: 48px;
+    border: 2px solid var(--text); border-radius: var(--radius-sm);
+    background: var(--bg); color: var(--text);
+    box-shadow: 2px 2px 0 var(--shadow-ink);
   }
+  .home-filter .all-lessons {
+    font-size: 15px; font-weight: 700; text-decoration: none;
+    color: var(--accent-deep); padding: 8px 4px;
+    white-space: nowrap;
+  }
+  .home-filter .all-lessons:hover { text-decoration: underline; }
 
   /* Progress ring for vocabulary */
   .viz-enso { width: min(148px, 46vw); height: auto; display: block; }
@@ -492,7 +520,6 @@ window.__BUILD__ = "20260816x";
   body[data-view="cards"] .topnav,
   body[data-view="cards"] .crumbs,
   body[data-view="cards"] footer.foot,
-  body[data-view="kanji"] header.masthead,
   body[data-view="kanji"] .topnav,
   body[data-view="kanji"] .crumbs,
   body[data-view="kanji"] footer.foot { display: none !important; }
@@ -916,12 +943,10 @@ window.__BUILD__ = "20260816x";
   @media (max-height: 560px) {
     .home-landing { gap: 8px; }
     .home-stats .sub { display: none; }
-    .home-stats { min-height: 180px; }
-    .home-filter { display: none; }
+    .home-stats { min-height: 160px; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
     .home-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 1fr; min-height: 120px; }
-    .home-next { display: none; }
   }
 
   /* buttons — manga panels; primary is coral→aqua so neither colour owns the CTA */
@@ -1586,8 +1611,10 @@ window.__BUILD__ = "20260816x";
     body:not([data-view="dash"]) .enso { display: none; }
     body:not([data-view="dash"]) header.masthead { padding-bottom: 10px; }
     body:not([data-view="dash"]) header.masthead::after { display: none; }
-    body:not([data-view="dash"]) h1 { font-size: 18px; margin: 0; }
-    body:not([data-view="dash"]) .masthead-inner .mascot-face { max-height: 40px; height: 2.2em; }
+    body:not([data-view="dash"]) h1 { font-size: 16px; margin: 0; }
+    body:not([data-view="dash"]) .masthead-inner .mascot-face { max-height: 36px; height: 2.1em; }
+    .back-home { font-size: 12px; padding: 6px 8px; gap: 4px; }
+    .back-home .bh-ico { width: 16px; height: 16px; }
     .crumbs { margin-top: 14px; }
 
     .enso { width: 68px; height: 68px; top: -2px; }
@@ -1829,9 +1856,14 @@ window.__BUILD__ = "20260816x";
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot-face" src="mascot-face.png?v=20260816x" alt="" width="80" height="75"
+    <img class="mascot-face" src="mascot-face.png?v=20260816y" alt="" width="80" height="75"
       decoding="async" aria-hidden="true">
-    <h1>トムさんの勉強ガイド <span class="jp">みんなの日本語</span></h1>
+    <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
+    <a class="back-home" href="#/" id="backHome">
+      <span class="bh-arrow" aria-hidden="true">←</span>
+      <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
+      Back home
+    </a>
   </div>
 </header>
 
@@ -3122,31 +3154,31 @@ function waveViz(history) {
     <path class="line" d="${line}"/>
   </svg>`;
 }
-function homeStat(k, viz, valHtml, sub) {
-  return `<div class="stat">
-    <div class="k">${esc(k)}</div>
+function homeStat(k, viz, valHtml, sub, href) {
+  const inner = `<div class="k">${esc(k)}</div>
     <div class="viz">${viz}</div>
     <div class="meta">
       <div class="val">${valHtml}</div>
       <div class="sub">${sub}</div>
-    </div>
-  </div>`;
+    </div>`;
+  if (href) {
+    return `<a class="stat" href="${href}">${inner}</a>`;
+  }
+  return `<div class="stat">${inner}</div>`;
 }
 
-/* Home filter for vocabulary + grammar: "all" or a lesson number. Defaults to
-   the furthest lesson the learner has started (same idea as resume / Jump to). */
+/* Home filter for vocabulary + grammar: always a lesson number. Defaults to
+   the furthest lesson the learner has started (same idea as Jump to). */
 function homeFilterDefault() {
-  const cur = currentLesson();
-  return cur || "all";
+  return currentLesson() || LESSONS[0].n;
 }
 function homeFilterValue() {
   const raw = S.homeFilter;
-  if (raw === "all") return "all";
-  if (raw != null && raw !== "" && LESSONS.some(l => l.n === +raw)) return +raw;
+  if (raw != null && raw !== "" && raw !== "all" && LESSONS.some(l => l.n === +raw)) return +raw;
   return homeFilterDefault();
 }
 function setHomeFilter(v) {
-  S.homeFilter = v === "all" ? "all" : +v;
+  S.homeFilter = +v;
   save();
 }
 
@@ -3154,45 +3186,25 @@ function renderHome() {
   document.getElementById("crumbs").innerHTML = "";
 
   const filter = homeFilterValue();
-  const filterLesson = filter === "all" ? null : filter;
+  const filterLesson = filter;
 
-  let wordsLearned, wordsTotal, wordsStarted, wordsPct, wordsSub;
-  let grammarPct, grammarVal, grammarSub;
+  const vs = vocabScore(filterLesson);
+  const wordsLearned = vs ? vs.learned : 0;
+  const wordsTotal = vs ? vs.total : 0;
+  const wordsStarted = vs ? Math.max(0, vs.seen - vs.learned) : 0;
+  const wordsPct = vs ? vs.pct : 0;
+  const wordsSub = wordsStarted
+    ? `${wordsStarted} more started · L${filterLesson}`
+    : `box ${LEARNED_BOX} of 5 · L${filterLesson}`;
 
-  if (filterLesson) {
-    const vs = vocabScore(filterLesson);
-    wordsLearned = vs ? vs.learned : 0;
-    wordsTotal = vs ? vs.total : 0;
-    wordsStarted = vs ? Math.max(0, vs.seen - vs.learned) : 0;
-    wordsPct = vs ? vs.pct : 0;
-    wordsSub = wordsStarted
-      ? `${wordsStarted} more started · L${filterLesson}`
-      : `box ${LEARNED_BOX} of 5 · L${filterLesson}`;
-
-    const gs = grammarScore(filterLesson);
-    grammarPct = gs ? gs.pct : 0;
-    grammarVal = gs
-      ? `${gs.pct}<span class="of">%</span>`
-      : "—";
-    grammarSub = gs
-      ? `${gs.total} recent · L${filterLesson}`
-      : `not drilled yet · L${filterLesson}`;
-  } else {
-    const solid = LESSONS.filter(l => {
-      const g = grammarScore(l.n);
-      return g && g.pct >= 80;
-    }).length;
-    const vocabLessons = LESSONS.map(l => vocabScore(l.n)).filter(Boolean);
-    wordsLearned = vocabLessons.reduce((a, v) => a + v.learned, 0);
-    wordsTotal = vocabLessons.reduce((a, v) => a + v.total, 0);
-    wordsStarted = vocabLessons.reduce((a, v) => a + v.seen, 0) - wordsLearned;
-    wordsPct = wordsTotal ? (wordsLearned / wordsTotal) * 100 : 0;
-    wordsSub = wordsStarted ? `${wordsStarted} more started` : `box ${LEARNED_BOX} of 5`;
-
-    grammarPct = LESSONS.length ? (solid / LESSONS.length) * 100 : 0;
-    grammarVal = `${solid}<span class="of"> / ${LESSONS.length}</span>`;
-    grammarSub = "grammar at 80%+";
-  }
+  const gs = grammarScore(filterLesson);
+  const grammarPct = gs ? gs.pct : 0;
+  const grammarVal = gs
+    ? `${gs.pct}<span class="of">%</span>`
+    : "—";
+  const grammarSub = gs
+    ? `${gs.total} recent · L${filterLesson}`
+    : `not drilled yet · L${filterLesson}`;
 
   const kanjiLevels = KANJI_LEVELS.filter(l => l.ready).map(l => ({
     id: l.id,
@@ -3205,57 +3217,79 @@ function renderHome() {
 
   const vAcc = verbAccuracy();
   const vHist = (S.verbs && S.verbs.history) || [];
-  const next = nextUp();
 
-  const filterOpts = [`<option value="all"${filter === "all" ? " selected" : ""}>All lessons</option>`]
-    .concat(LESSONS.map(l =>
-      `<option value="${l.n}"${filter === l.n ? " selected" : ""}>Lesson ${l.n}</option>`))
-    .join("");
+  const filterOpts = LESSONS.map(l =>
+    `<option value="${l.n}"${filter === l.n ? " selected" : ""}>${l.n}</option>`).join("");
 
   document.getElementById("view").innerHTML = `
     <section class="home-landing">
-      <div class="home-brand">
-        <img class="mascot-full" src="mascot-full.png?v=20260816x" alt="" width="72" height="235"
-          decoding="async" aria-hidden="true">
-        <h1 class="brand">トムさんの勉強ガイド</h1>
+      <div class="home-top">
+        <div class="home-brand">
+          <img class="mascot-full" src="mascot-full.png?v=20260816y" alt="" width="72" height="235"
+            decoding="async" aria-hidden="true">
+          <h1 class="brand">トムさんの勉強ガイド</h1>
+        </div>
+        <div class="home-settings" id="homeSettings">
+          <button type="button" class="home-settings-btn" id="homeSettingsBtn"
+            aria-haspopup="true" aria-expanded="false" aria-label="Settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"/>
+              <path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
+            </svg>
+          </button>
+          <div class="home-settings-menu" role="menu">
+            <span class="hp-status">${esc(savedAtLabel())}</span>
+            <button type="button" id="exp" role="menuitem">Save backup</button>
+            <button type="button" id="exprestore" role="menuitem">Restore</button>
+            <label for="imp" role="menuitem">Import<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
+          </div>
+        </div>
       </div>
 
       <div class="home-filter">
-        <label for="homefilter">Focus</label>
-        <select id="homefilter" aria-label="Filter vocabulary and grammar by lesson">${filterOpts}</select>
+        <label for="homefilter">Lesson</label>
+        <select id="homefilter" aria-label="Lesson number for vocabulary and grammar">${filterOpts}</select>
+        <a class="all-lessons" href="#/lessons">All lessons</a>
       </div>
 
       <div class="home-stats">
         ${homeStat("Vocabulary", ensoViz(wordsPct),
           `${wordsLearned}<span class="of"> / ${wordsTotal}</span>`,
-          wordsSub)}
+          wordsSub, `#/cards/${filterLesson}`)}
         ${homeStat("Lesson Grammar", brushViz(grammarPct),
           grammarVal,
-          grammarSub)}
+          grammarSub, `#/drill/${filterLesson}`)}
         ${homeStat("Kanji", pillarsViz(kanjiLevels),
           `${kanjiKnownN}<span class="of"> / ${kanjiTotalN}</span>`,
-          `${kanjiPct}%`)}
+          `${kanjiPct}%`, "#/kanji")}
         ${homeStat("Verbs", waveViz(vHist),
           vAcc === null ? "—" : `${vAcc}%`,
-          verbSub())}
-      </div>
-
-      ${next ? `<div class="home-next">
-        <a class="btn primary" href="${next.go}">${esc(next.label || "Continue")}</a>
-      </div>` : ""}
-
-      <div class="home-progress">
-        <span class="hp-status">${esc(savedAtLabel())}</span>
-        <button type="button" id="exp">Save backup</button>
-        <button type="button" id="exprestore">Restore</button>
-        <label for="imp">Import<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
+          verbSub(), "#/verbs")}
       </div>
     </section>`;
 
-  wireResume(renderHome);
   document.getElementById("homefilter").addEventListener("change", e => {
     setHomeFilter(e.target.value);
     renderHome();
+  });
+  const settings = document.getElementById("homeSettings");
+  const settingsBtn = document.getElementById("homeSettingsBtn");
+  settingsBtn.addEventListener("click", e => {
+    e.stopPropagation();
+    const open = !settings.classList.contains("open");
+    settings.classList.toggle("open", open);
+    settingsBtn.setAttribute("aria-expanded", String(open));
+    if (open) {
+      const onDoc = ev => {
+        if (!settings.contains(ev.target)) {
+          settings.classList.remove("open");
+          settingsBtn.setAttribute("aria-expanded", "false");
+          document.removeEventListener("click", onDoc);
+        }
+      };
+      setTimeout(() => document.addEventListener("click", onDoc), 0);
+    }
   });
   document.getElementById("exp").addEventListener("click", () => openBackupSheet("export"));
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
@@ -3270,8 +3304,6 @@ function renderLessons() {
      from a flag in the data. */
   const cur = currentLesson();
   document.getElementById("view").innerHTML = `
-    <h2 class="view">Lessons</h2>
-
     <div class="toolbar">
       <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
       ${cur ? `<button class="btn" id="jump">Jump to Lesson ${cur}</button>` : ""}
@@ -4933,8 +4965,6 @@ function renderVerbs() {
   }).join("");
 
   view.innerHTML = `
-    <h2 class="view">Verbs</h2>
-
     ${resumeCards(["verbs"])}
 
     ${optionsPanel([
@@ -5634,8 +5664,6 @@ function renderKanji() {
 
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
-      <h2 class="view">Kanji</h2>
-
       ${resumeCards(["kanji"])}
 
       ${optionsPanel([
@@ -6197,6 +6225,12 @@ function paintNav(section) {
     if (a.getAttribute("href") === section) a.setAttribute("aria-current", "page");
     else a.removeAttribute("aria-current");
   });
+  const jp = document.getElementById("masthead-jp");
+  if (jp) {
+    if (section === "#/kanji") jp.textContent = "漢字";
+    else if (section === "#/verbs") jp.textContent = "動詞";
+    else jp.textContent = "みんなの日本語";
+  }
 }
 
 function notFound() {
