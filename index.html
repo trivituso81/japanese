@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815r">
+<link rel="manifest" href="site.webmanifest?v=20260815s">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815r";
+window.__BUILD__ = "20260815s";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -619,6 +619,14 @@ window.__BUILD__ = "20260815r";
     text-decoration: none; letter-spacing: .03em; margin-bottom: 10px;
   }
   .k-study-back:hover { text-decoration: underline; }
+  .k-study-nav {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px; margin-bottom: 10px;
+  }
+  .k-study-nav .k-study-back { margin-bottom: 0; }
+  .k-study-nav .k-study-back-alt {
+    color: var(--text-soft); font-weight: 600;
+  }
   .k-browse-page .k-browse-head {
     display: flex; flex-wrap: wrap; align-items: baseline;
     justify-content: space-between; gap: 8px 14px; margin-bottom: 12px;
@@ -1713,7 +1721,7 @@ window.__BUILD__ = "20260815r";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815r"></script>
+<script src="japanese-data.js?v=20260815s"></script>
 <script>
 /* ============================================================
    State
@@ -4977,6 +4985,17 @@ function goKanjiLearn(c) {
   goto(kanjiLearnHref(c));
 }
 
+/* From a Learn page opened mid-drill: drop the verdict and open the next
+   typing prompt (or results if the round is finished). */
+function goNextKanjiFromLearn() {
+  if (KDRILL) {
+    KDRILL.verdict = null;
+    saveKanjiSession();
+  }
+  clearKanjiReturn();
+  goto("#/kanji/drill");
+}
+
 function kanjiParts(c) {
   return (typeof KANJI_PARTS === "object" && KANJI_PARTS[c]) || null;
 }
@@ -5240,6 +5259,10 @@ function renderKanjiDetail(raw) {
   const backLabel = /^#\/kanji\/drill/.test(backHref) ? "← Back to drill"
     : /^#\/kanji\/browse/.test(backHref) ? "← Browse characters"
     : "← Kanji";
+  const fromDrill = !!KDRILL && /^#\/kanji\/drill/.test(backHref);
+  const canNext = fromDrill && KDRILL.i < KDRILL.list.length;
+  const drillDone = fromDrill && KDRILL.i >= KDRILL.list.length;
+  const nextLabel = canNext ? "Next kanji →" : drillDone ? "See results →" : "";
 
   crumbs([
     ["#/kanji", "Kanji"],
@@ -5255,9 +5278,16 @@ function renderKanjiDetail(raw) {
     ? parts.phonetic.sound
     : onShow;
 
+  const topNav = nextLabel
+    ? `<div class="k-study-nav">
+        <a class="k-study-back" href="#/kanji/drill" id="knextlearn">${esc(nextLabel)}</a>
+        <a class="k-study-back k-study-back-alt" href="${esc(backHref)}">${esc(backLabel)}</a>
+      </div>`
+    : `<a class="k-study-back" href="${esc(backHref)}">${esc(backLabel)}</a>`;
+
   document.getElementById("view").innerHTML = `
     <article class="k-code">
-      <a class="k-study-back" href="${esc(backHref)}">${esc(backLabel)}</a>
+      ${topNav}
 
       <header class="k-code-hero">
         <p class="k-code-glyph" lang="ja">${esc(k.c)}</p>
@@ -5306,6 +5336,11 @@ function renderKanjiDetail(raw) {
       </div>
     </article>`;
 
+  const kn = document.getElementById("knextlearn");
+  if (kn) kn.addEventListener("click", e => {
+    e.preventDefault();
+    goNextKanjiFromLearn();
+  });
   document.getElementById("kdrill1").addEventListener("click", () => {
     clearKanjiReturn();
     startKanji([k.c]);
