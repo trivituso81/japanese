@@ -299,7 +299,9 @@
     width: 100%; font-size: 15.5px; padding: 14px 18px; min-height: 50px;
   }
 
-  body[data-view="cards"] .wrap {
+  /* Setup + play shells shared by flashcards and kanji drill */
+  body[data-view="cards"] .wrap,
+  body[data-view="kanji"] .wrap {
     min-height: 100dvh;
     padding-top: max(14px, env(safe-area-inset-top, 0px));
     padding-bottom: calc(var(--botnav-h, 58px) + 12px + env(safe-area-inset-bottom, 0px));
@@ -308,13 +310,19 @@
   body[data-view="cards"] header.masthead,
   body[data-view="cards"] .topnav,
   body[data-view="cards"] .crumbs,
-  body[data-view="cards"] footer.foot { display: none !important; }
-  body[data-view="cards"] #view {
+  body[data-view="cards"] footer.foot,
+  body[data-view="kanji"] header.masthead,
+  body[data-view="kanji"] .topnav,
+  body[data-view="kanji"] .crumbs,
+  body[data-view="kanji"] footer.foot { display: none !important; }
+  body[data-view="cards"] #view,
+  body[data-view="kanji"] #view {
     flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
   }
 
-  /* Active flashcard round — one card owns the phone viewport */
-  body[data-view="cards-play"] .wrap {
+  /* Active round — one card owns the phone viewport */
+  body[data-view="cards-play"] .wrap,
+  body[data-view="kanji-play"] .wrap {
     min-height: 100dvh;
     max-width: none;
     padding: max(6px, env(safe-area-inset-top, 0px)) 12px
@@ -324,8 +332,13 @@
   body[data-view="cards-play"] header.masthead,
   body[data-view="cards-play"] .topnav,
   body[data-view="cards-play"] .crumbs,
-  body[data-view="cards-play"] footer.foot { display: none !important; }
-  body[data-view="cards-play"] #view {
+  body[data-view="cards-play"] footer.foot,
+  body[data-view="kanji-play"] header.masthead,
+  body[data-view="kanji-play"] .topnav,
+  body[data-view="kanji-play"] .crumbs,
+  body[data-view="kanji-play"] footer.foot { display: none !important; }
+  body[data-view="cards-play"] #view,
+  body[data-view="kanji-play"] #view {
     flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
   }
   .card-play {
@@ -372,6 +385,41 @@
     flex: 1; display: flex; flex-direction: column; justify-content: center;
     padding: 24px 8px;
   }
+
+  /* Kanji drill uses the same play shell; the face is one big character and
+     the bottom band holds the meaning input (or the revealed gloss). */
+  body[data-view="kanji-play"] .card-play .card-face { bottom: 7.5em; }
+  body[data-view="kanji-play"] .card-play .card-reveal { height: 7.5em; }
+  .card-play .kbig-face {
+    font-family: var(--jp-mincho); font-weight: 400;
+    font-size: clamp(4.5rem, 26vw, 7.5rem); line-height: 1;
+    letter-spacing: .04em; color: var(--text);
+  }
+  .card-play .kin {
+    width: 100%; max-width: 420px; font: inherit; font-size: 17px;
+    padding: 12px 14px; border: 1px solid var(--rule-strong); border-radius: 0;
+    background: var(--bg); color: var(--text); text-align: center;
+  }
+  .card-play .kin:focus {
+    outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
+  }
+  .card-play .k-ans-mean {
+    font-family: var(--serif); font-size: clamp(1.25rem, 4.5vw, 1.6rem);
+    color: var(--text); line-height: 1.35;
+  }
+  .card-play .k-ans-meta {
+    font-size: 12.5px; color: var(--text-soft); line-height: 1.4;
+  }
+  .kanji-browse {
+    margin-top: 8px; font-size: 13px; color: var(--text-soft);
+  }
+  .kanji-browse > summary {
+    cursor: pointer; list-style: none; font-weight: 600; letter-spacing: .04em;
+    color: var(--text-soft); text-align: center; padding: 8px;
+  }
+  .kanji-browse > summary::-webkit-details-marker { display: none; }
+  .kanji-browse[open] > summary { color: var(--seal); margin-bottom: 10px; }
+  .kanji-browse .ktable { margin-top: 4px; }
 
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
@@ -1150,11 +1198,14 @@
     .card-reveal { height: 5.25em; }
     .prompt { font-size: 25px; } .prompt.jp { font-size: 30px; }
     .answer { font-size: 20px; } .answer.jp { font-size: 23px; }
-    body[data-view="cards-play"] .card-play .card {
+    body[data-view="cards-play"] .card-play .card,
+    body[data-view="kanji-play"] .card-play .card {
       padding: 0; min-height: 0;
     }
     body[data-view="cards-play"] .card-play .card-face { bottom: 6em; }
     body[data-view="cards-play"] .card-play .card-reveal { height: 6em; }
+    body[data-view="kanji-play"] .card-play .card-face { bottom: 7em; }
+    body[data-view="kanji-play"] .card-play .card-reveal { height: 7em; }
     body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
     body[data-view="cards-play"] .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
     body[data-view="cards-play"] .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
@@ -3598,6 +3649,18 @@ document.addEventListener("click", e => {
 });
 
 document.addEventListener("keydown", e => {
+  if (KDRILL && location.hash.startsWith("#/kanji/drill")) {
+    if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
+    if (e.key === "u" || e.key === "U") {
+      e.preventDefault(); return undoKanji();
+    }
+    if ((e.code === "Enter" || e.code === "Space") && KDRILL.verdict) {
+      e.preventDefault();
+      KDRILL.verdict = null;
+      return drawKanji();
+    }
+    return;
+  }
   if (!CARD || !location.hash.startsWith("#/cards/")) return;
   if (e.target.tagName === "TEXTAREA" || e.target.tagName === "INPUT") return;
   if (e.key === "u" || e.key === "U") {
@@ -4320,26 +4383,21 @@ function pickKanji(pool, count) {
 const kReadings = k => [k.on.join("、"), k.kun.join("、")].filter(Boolean).join("  /  ");
 
 function renderKanji() {
-  crumbs([["#/", "Home"], [null, "Kanji"]]);
+  document.getElementById("crumbs").innerHTML = "";
+  document.body.dataset.view = "kanji";
+  showBotnav();
   const o = kOpts();
-  const view = document.getElementById("view");
   const level = KANJI_LEVELS.find(l => l.id === o.level) || KANJI_LEVELS[0];
   const set = kanjiAt(level.id);
   const lessons = kanjiLessons();
   const known = set.filter(k => kState(k.c) === "known").length;
   const learning = set.filter(k => kState(k.c) === "learning").length;
-  /* A level not loaded yet explains itself in the page. It used to say so in
-     a title attribute, which a touch screen has no way to show. */
   const pending = KANJI_LEVELS.filter(l => !l.ready);
 
   const rows = set.map(k => {
     const st = kState(k.c);
     const rec = kRecord(k.c);
     const n = lessons[k.c];
-    /* The readings and the example lose their columns on a phone — six
-       columns of Japanese will not fit — but they are not decoration, and
-       with the drill only showing them after a wrong answer there was no way
-       to study a character's readings on a phone at all. So each row opens. */
     return `<tr class="k-${st}">
       <td class="k-c">${esc(k.c)}</td>
       <td class="k-m"><b>${esc(k.en)}</b>
@@ -4367,57 +4425,54 @@ function renderKanji() {
     </tr>`;
   }).join("");
 
-  view.innerHTML = `
-    <h2 class="view">Kanji</h2>
-    <p class="viewsub">Recognition practice on its own track. You are shown the character and
-      type what it means; anything reasonable counts, and a typo will not fail you.</p>
+  document.getElementById("view").innerHTML = `
+    <section class="cards-setup">
+      <div>
+        <p class="cards-kicker">Kanji</p>
+        <h1 class="cards-title">${esc(level.label)}</h1>
+      </div>
 
-    ${resumeCards(["kanji"])}
+      ${resumeCards(["kanji"])}
 
-    <div class="seg">
-      ${KANJI_LEVELS.map(l => l.ready
-        ? `<button class="btn lev" data-lv="${l.id}" aria-pressed="${l.id === level.id}">${esc(l.label)}
-             <span>${kanjiAt(l.id).length} kanji</span></button>`
-        : `<button class="btn lev" disabled aria-pressed="false">${esc(l.label)}
-             <span>later</span></button>`).join("")}
-    </div>
-    <p class="hintline">${esc(level.note)}</p>
-    ${pending.length ? `<p class="hintline">${pending.map(l =>
-      `<b>${esc(l.label)}</b> — ${esc(l.note)}`).join(" ")}</p>` : ""}
+      ${optionsPanel([
+        { k: "Level", seg: KANJI_LEVELS.map(l => l.ready
+          ? `<button class="btn lev" data-lv="${l.id}" aria-pressed="${l.id === level.id}">${esc(l.label)}</button>`
+          : `<button class="btn lev" disabled aria-pressed="false">${esc(l.label)}</button>`).join("") },
+        { k: "Session", seg: KANJI_COUNTS.map(c =>
+          `<button class="btn ksize" data-size="${c}" aria-pressed="${c === o.count}">${c}</button>`).join("") },
+        { check: `<label><input type="checkbox" id="kinc"${o.includeKnown ? " checked" : ""}>
+          Include known · ${known}/${set.length} known${learning ? ` · ${learning} shaky` : ""}</label>` },
+        { start: `<button class="btn primary" id="kstart">Start</button>` }
+      ])}
 
-    ${statGrid([
-      { k: "Known", val: known, of: set.length, sub: `right ${KANJI_KNOWN} times running` },
-      { k: "Still shaky", val: learning, sub: "seen but not secure" },
-      { k: "Untouched", val: set.length - known - learning, sub: "not yet drilled" },
-      { k: "Recent accuracy", val: kanjiAccuracy() === null ? "—" : kanjiAccuracy() + "%",
-        sub: `${(S.kanji && S.kanji.runs) || 0} rounds` }
-    ])}
+      ${pending.length ? `<p class="hintline">${pending.map(l =>
+        `<b>${esc(l.label)}</b> — ${esc(l.note)}`).join(" ")}</p>` : ""}
 
-    ${optionsPanel([
-      { k: "Questions", html: `<select id="kcount">${KANJI_COUNTS.map(c =>
-          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` },
-      { check: `<label><input type="checkbox" id="kinc"${o.includeKnown ? " checked" : ""}>
-          Include known kanji</label>` },
-      { start: `<button class="btn primary" id="kstart">Start drill</button>` }
-    ])}
+      <details class="kanji-browse">
+        <summary>Browse characters</summary>
+        <table class="ktable">
+          <thead><tr>
+            <th>Kanji</th><th>Meaning</th><th class="k-on">On</th><th class="k-kun">Kun</th>
+            <th class="k-ex">Example</th><th class="k-l">Lesson</th><th class="k-s">You</th>
+          </tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </details>
+    </section>`;
 
-    <table class="ktable">
-      <thead><tr>
-        <th>Kanji</th><th>Meaning</th><th class="k-on">On</th><th class="k-kun">Kun</th>
-        <th class="k-ex">Example</th><th class="k-l">Lesson</th><th class="k-s">You</th>
-      </tr></thead>
-      <tbody>${rows}</tbody>
-    </table>
-    <p class="hintline">Lesson shows where the character first turns up in your
-      vocabulary lists, so you can see which ones the book has already given you.</p>`;
-
-  view.querySelectorAll("button.lev[data-lv]").forEach(b =>
+  document.querySelectorAll("button.lev[data-lv]").forEach(b =>
     b.addEventListener("click", () => { setKOpts({ level: b.dataset.lv }); renderKanji(); }));
-  document.getElementById("kcount").addEventListener("change", e => setKOpts({ count: +e.target.value }));
-  document.getElementById("kinc").addEventListener("change", e => setKOpts({ includeKnown: e.target.checked }));
-  view.querySelectorAll("button.k-unmark").forEach(b =>
+  document.querySelectorAll("button.ksize").forEach(b =>
+    b.addEventListener("click", () => {
+      setKOpts({ count: +b.dataset.size });
+      document.querySelectorAll("button.ksize").forEach(x =>
+        x.setAttribute("aria-pressed", String(x === b)));
+    }));
+  document.getElementById("kinc").addEventListener("change", e =>
+    setKOpts({ includeKnown: e.target.checked }));
+  document.querySelectorAll("button.k-unmark").forEach(b =>
     b.addEventListener("click", () => { unknowKanji(b.dataset.c); renderKanji(); }));
-  view.querySelectorAll("button.k-more").forEach(b =>
+  document.querySelectorAll("button.k-more").forEach(b =>
     b.addEventListener("click", () => {
       const row = document.getElementById("kd-" + b.dataset.c);
       if (!row) return;
@@ -4436,13 +4491,24 @@ function startKanji(only) {
   const pool = only && only.length ? only.map(kanjiBy).filter(Boolean) : kanjiPool(o);
   if (!pool.length) return goto("#/kanji");
   const list = only && only.length ? pickKanji(pool, pool.length) : pickKanji(pool, o.count);
-  KDRILL = { level: o.level, list, i: 0, verdict: null, answers: [], focus: !!(only && only.length) };
+  KDRILL = { level: o.level, list, i: 0, verdict: null, answers: [], focus: !!(only && only.length),
+             prev: null };
   saveKanjiSession();
   goto("#/kanji/drill");
 }
 function kanjiDrillRoute() {
   if (!KDRILL) return startKanji();
+  enterKanjiPlay();
   drawKanji();
+}
+
+function enterKanjiPlay() {
+  document.body.dataset.view = "kanji-play";
+  document.getElementById("crumbs").innerHTML = "";
+  showBotnav();
+  if (!document.querySelector(".card-play#stage")) {
+    document.getElementById("view").innerHTML = `<section class="card-play" id="stage"></section>`;
+  }
 }
 
 function saveKanjiSession() {
@@ -4459,81 +4525,89 @@ function resumeKanji() {
   const list = s.chars.map(kanjiBy).filter(Boolean);
   if (!list.length) { clearKanjiSession(); return goto("#/kanji"); }
   KDRILL = { level: s.level, list, i: s.i, verdict: null,
-             answers: s.answers || [], focus: s.focus || false };
+             answers: s.answers || [], focus: s.focus || false, prev: null };
   goto("#/kanji/drill");
 }
 
 function drawKanji() {
-  const view = document.getElementById("view");
+  enterKanjiPlay();
+  const stage = document.getElementById("stage");
+  if (!stage) return;
   const total = KDRILL.list.length;
-  crumbs([["#/", "Home"], ["#/kanji", "Kanji"], [null, "Drill"]]);
+
+  if (KDRILL.i >= total && !KDRILL.verdict) return drawKanjiEnd(stage);
 
   if (KDRILL.verdict) {
     const { k, typed } = KDRILL.verdict;
     const last = KDRILL.answers[KDRILL.answers.length - 1] || {};
     const ok = !!last.ok;
     const n = kanjiLessons()[k.c];
-    view.innerHTML = drillStage({
-      heading: "Kanji",
-      sub: `${esc(KDRILL.level)} · one attempt each`,
-      left: `Question <b>${KDRILL.i}</b> of <b>${total}</b>`,
-      right: runningScore(KDRILL.answers),
-      done: KDRILL.i, total,
+    stage.innerHTML = drillStage({
+      left: `<b>${Math.min(KDRILL.i, total)}</b> of <b>${total}</b>`,
+      right: `${runningScore(KDRILL.answers)}
+        <button type="button" class="btn sm stage-undo" id="kundo">Undo</button>`,
+      done: Math.min(KDRILL.i, total), total,
       body: `
-      <div class="verdict ${ok ? "ok" : "no"}">
-        <div class="vhead"><b>${ok ? "Correct" : "Not quite"}</b>
-          ${last.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
-        <div class="kbig">${esc(k.c)}</div>
-        <div class="vrow"><span class="vtag">means</span>
-          <span class="kmean">${esc(k.en)}</span></div>
-        <div class="vrow"><span class="vtag">you</span>
-          <span class="vgloss">${esc(typed || "—")}</span></div>
-        <div class="vrow"><span class="vtag">readings</span>
-          <span class="jpline">${esc(kReadings(k) || "—")}</span></div>
-        <div class="vrow"><span class="vtag">as in</span>
-          <span class="jpline">${esc(k.ex.w)}</span>
-          <span class="vgloss">${esc(k.ex.r)} · ${esc(k.ex.en)}</span></div>
-        ${k.ok.length > 1 ? `<div class="vrow"><span class="vtag">also</span>
-          <span class="vgloss">${esc(k.ok.slice(0, 6).join(", "))}</span></div>` : ""}
-        ${n ? `<div class="vrow"><span class="vtag">book</span>
-          <span class="vgloss">first appears in Lesson ${n}</span></div>` : ""}
-        <div class="rowacts">
-          <button class="btn primary" id="knext">${KDRILL.i >= total ? "See results" : "Next kanji"}</button>
-          ${ok ? "" : `<button class="btn good" id="kflip">My answer was right</button>`}
-          <span class="keys">Enter for the next kanji</span>
+      <div class="deck">
+        <div class="card" id="face">
+          <div class="card-face">
+            <div class="kbig-face">${esc(k.c)}</div>
+          </div>
+          <div class="card-reveal is-open">
+            <div class="k-ans-mean">${esc(k.en)}</div>
+            <div class="k-ans-meta">${esc(kReadings(k) || "—")}${
+              k.ex ? ` · ${esc(k.ex.w)} ${esc(k.ex.en)}` : ""}${
+              n ? ` · L${n}` : ""}</div>
+            ${typed ? `<div class="k-ans-meta">you: ${esc(typed)}</div>` : ""}
+          </div>
         </div>
+      </div>
+      <div class="cardacts">
+        ${ok ? "" : `<button class="btn good wide" id="kflip">My answer was right</button>`}
+        <button class="btn primary wide" id="knext">${KDRILL.i >= total ? "See results" : "Next"}</button>
+      </div>
+      <div class="cardmeta">
+        <span class="taphint">${ok ? "Correct" : "Not quite"} · Enter for next</span>
       </div>`
     });
-    const nx = document.getElementById("knext");
-    nx.focus();
-    nx.addEventListener("click", () => { KDRILL.verdict = null; drawKanji(); });
+    document.getElementById("knext").addEventListener("click", () => {
+      KDRILL.verdict = null; drawKanji();
+    });
     const kf = document.getElementById("kflip");
     if (kf) kf.addEventListener("click", () => regradeKanji(true));
+    document.getElementById("kundo").addEventListener("click", undoKanji);
     return;
   }
 
-  if (KDRILL.i >= total) return drawKanjiEnd(view);
-
   const k = KDRILL.list[KDRILL.i];
   const lastOk = KDRILL.lastOk;
-  view.innerHTML = drillStage({
-    heading: "What does this mean?",
-    sub: `${esc(KDRILL.level)}${KDRILL.focus ? " · focused round" : ""}`,
-    left: `Question <b>${KDRILL.i + 1}</b> of <b>${total}</b>`,
-    right: runningScore(KDRILL.answers),
+  stage.innerHTML = drillStage({
+    left: `<b>${KDRILL.i + 1}</b> of <b>${total}</b> · <b>${total - KDRILL.i}</b> left`,
+    right: `${runningScore(KDRILL.answers)}
+      <button type="button" class="btn sm stage-undo" id="kundo"
+        ${KDRILL.answers.length ? "" : "disabled"}>Undo</button>`,
     done: KDRILL.i, total,
     body: `
-    <div class="vcard">
-      ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
-        ${esc(lastOk.en)} — correct</p>` : ""}
-      <div class="kbig">${esc(k.c)}</div>
-      <input type="text" id="kin" autocomplete="off" autocapitalize="off" autocorrect="off"
-        spellcheck="false" placeholder="Meaning in English">
-      <div class="rowacts">
-        <button class="btn primary" id="kgo">Submit</button>
-        <button class="btn" id="kskip">Skip</button>
+    <div class="deck">
+      <div class="card" id="face">
+        <div class="card-face">
+          ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
+            ${esc(lastOk.en)}</p>` : ""}
+          <div class="kbig-face">${esc(k.c)}</div>
+        </div>
+        <div class="card-reveal is-open">
+          <input type="text" class="kin" id="kin" autocomplete="off" autocapitalize="off"
+            autocorrect="off" spellcheck="false" placeholder="Meaning in English"
+            enterkeyhint="done">
+        </div>
       </div>
-      <p class="hintline">Enter to submit · one meaning is enough</p>
+    </div>
+    <div class="cardacts">
+      <button class="btn bad wide" id="kskip">Skip</button>
+      <button class="btn primary wide" id="kgo">Check</button>
+    </div>
+    <div class="cardmeta">
+      <span class="taphint">Type the meaning · Enter to check</span>
     </div>`
   });
 
@@ -4542,25 +4616,56 @@ function drawKanji() {
   const send = () => submitKanji(input.value);
   document.getElementById("kgo").addEventListener("click", send);
   document.getElementById("kskip").addEventListener("click", () => submitKanji(""));
-  input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); send(); } });
+  document.getElementById("kundo").addEventListener("click", undoKanji);
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); send(); }
+  });
 }
 
 function submitKanji(typed) {
   const k = KDRILL.list[KDRILL.i];
   if (!k) return;
   const ok = judgeKanji(typed, k);
-  // a miss zeroes the streak, so its old value is kept in case the verdict
-  // is overturned and the streak has to be put back
   const before = kRecord(k.c);
   const wasStreak = before ? before.streak : 0;
+  const histLen = (S.kanji && S.kanji.history) ? S.kanji.history.length : 0;
+  KDRILL.prev = {
+    i: KDRILL.i, answers: KDRILL.answers.slice(),
+    verdict: KDRILL.verdict, lastOk: KDRILL.lastOk,
+    wasStreak, histLen, typed: String(typed).trim(), c: k.c, ok
+  };
   recordKanji(ok, k.c);
   KDRILL.answers.push({ c: k.c, en: k.en, ok, typed: String(typed).trim(), wasStreak });
   KDRILL.i++;
   saveKanjiSession();
-  // right answers need no ceremony; only a miss is worth stopping for, but the
-  // character just cleared is still worth a line on the next card
   KDRILL.verdict = ok ? null : { k, typed: String(typed).trim() };
   KDRILL.lastOk = ok ? { c: k.c, en: k.en } : null;
+  drawKanji();
+}
+
+function undoKanji() {
+  const p = KDRILL && KDRILL.prev;
+  if (!p) return;
+  const a = KDRILL.answers[KDRILL.answers.length - 1];
+  if (!a || a.c !== p.c) return;
+  KDRILL.answers.pop();
+  KDRILL.i = p.i;
+  KDRILL.verdict = null;
+  KDRILL.lastOk = p.lastOk || null;
+  const st = S.kanji;
+  if (st) {
+    if (st.history && st.history.length > p.histLen) st.history.length = p.histLen;
+    const e = st.by && st.by[p.c];
+    if (e) {
+      e.n = Math.max(0, (e.n || 0) - 1);
+      if (p.ok) e.ok = Math.max(0, (e.ok || 0) - 1);
+      e.streak = p.wasStreak || 0;
+      if (!e.n) delete st.by[p.c];
+    }
+  }
+  KDRILL.prev = null;
+  saveKanjiSession();
+  save();
   drawKanji();
 }
 
@@ -4580,12 +4685,16 @@ function regradeKanji(ok) {
     }
   }
   a.ok = ok; a.overridden = true;
+  if (ok) {
+    KDRILL.verdict = null;
+    KDRILL.lastOk = { c: a.c, en: a.en };
+  }
   saveKanjiSession();
   save();
   drawKanji();
 }
 
-function drawKanjiEnd(view) {
+function drawKanjiEnd(stage) {
   const st = kStats();
   if (!KDRILL.counted) { st.runs = (st.runs || 0) + 1; KDRILL.counted = true; save(); }
   clearKanjiSession();
@@ -4594,46 +4703,29 @@ function drawKanjiEnd(view) {
   const right = KDRILL.answers.filter(a => a.ok).length;
   const missed = KDRILL.answers.filter(a => !a.ok);
   const set = kanjiAt(KDRILL.level);
-  const lessons = kanjiLessons();
 
-  view.innerHTML = summaryScreen({
-    title: "Round complete",
-    sub: `${esc(KDRILL.level)} kanji${KDRILL.focus ? " · focused round" : ""}`,
+  stage.innerHTML = summaryPanel({
     right, total,
-    lead: `${pct(right, total)}%${missed.length
-      ? ` · ${missed.length} to work on` : " · nothing missed"}`,
+    lead: `${pct(right, total)}% · ${esc(KDRILL.level)}${KDRILL.focus ? " · focused" : ""}${
+      missed.length ? ` · ${missed.length} to work on` : " · nothing missed"}`,
     body: `
-      ${statGrid([
-        { k: "Known overall", val: kanjiKnown(KDRILL.level), of: set.length,
-          sub: "across every round" },
-        { k: "Recent accuracy", val: kanjiAccuracy() + "%",
-          sub: `last ${Math.min(WINDOW, st.history.length)} answers` }
-      ])}
-
-      ${missed.length ? `<table class="misstable allwrong big-lead"><thead><tr>
-          <th>Kanji</th><th>Means</th><th>You wrote</th><th>Readings</th><th>As in</th><th>L</th>
-        </tr></thead><tbody>${missed.map(a => {
-          const k = kanjiBy(a.c);
-          return `<tr>
-            <td data-col="lead">${esc(a.c)}</td>
-            <td data-col="gloss"><b>${esc(k.en)}</b></td>
-            <td data-col="yours">${esc(a.typed || "—")}</td>
-            <td data-col="meta" class="jpline">${esc(kReadings(k))}</td>
-            <td data-col="drop" class="jpline">${esc(k.ex.w)}
-              <span class="vgloss">${esc(k.ex.en)}</span></td>
-            <td data-col="tag">${lessons[a.c] ? "L" + lessons[a.c] : "—"}</td></tr>`;
-        }).join("")}</tbody></table>` : ""}`,
+      <div class="boxbar" style="width:100%;margin:12px 0">
+        <i class="b5" style="width:${pct(right, total)}%"></i>
+      </div>
+      <p class="hintline">${kanjiKnown(KDRILL.level)} of ${set.length} known overall</p>
+      ${missed.length ? `<p class="hintline">${missed.map(a => esc(a.c)).join(" · ")}</p>` : ""}`,
     actions: [
       missed.length && { id: "kfocus", primary: true, label: `Drill those ${missed.length} again` },
-      { id: "kagain", primary: !missed.length, label: `Another ${kOpts().count}` },
-      { go: "#/kanji", label: "Back to kanji table" },
-      { go: "#/", label: "Back to dashboard" }
+      { id: "kagain", primary: !missed.length, label: "New round" },
+      { id: "ksettings", label: "Settings" },
+      { go: "#/", label: "Home" }
     ]
   });
 
   document.getElementById("kagain").addEventListener("click", () => startKanji());
   const fx = document.getElementById("kfocus");
   if (fx) fx.addEventListener("click", () => startKanji(missed.map(a => a.c)));
+  document.getElementById("ksettings").addEventListener("click", () => goto("#/kanji"));
 }
 
 /* ============================================================
@@ -4664,6 +4756,7 @@ const VDRILL_RE = /^#\/verbs\/drill\/([a-z_]+)$/;
 function viewName(h, m) {
   if (h === "#/resume" || h === "#/drill/resume") return "drill";
   if (/^#\/verbs/.test(h)) return "verbs";
+  if (/^#\/kanji\/(drill|resume)/.test(h)) return "kanji-play";
   if (/^#\/kanji/.test(h)) return "kanji";
   if (h === "#/lessons") return "lessons";
   return m ? m[1] : "dash";
