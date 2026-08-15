@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815j">
+<link rel="manifest" href="site.webmanifest?v=20260815k">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815j";
+window.__BUILD__ = "20260815k";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -481,8 +481,8 @@ window.__BUILD__ = "20260815j";
     overflow: hidden;
     box-sizing: border-box;
   }
-  body[data-view="kanji-play"] .card-play .card-face { bottom: 7.5em; }
-  body[data-view="kanji-play"] .card-play .card-reveal { height: 7.5em; }
+  body[data-view="kanji-play"] .card-play .card-face { bottom: 8.5em; }
+  body[data-view="kanji-play"] .card-play .card-reveal { height: 8.5em; }
   .card-play .kbig-face {
     font-family: var(--jp-mincho); font-weight: 400;
     font-size: clamp(4.5rem, 26vw, 7.5rem); line-height: 1;
@@ -499,10 +499,24 @@ window.__BUILD__ = "20260815j";
   }
   .card-play .k-ans-mean {
     font-family: var(--serif); font-size: clamp(1.25rem, 4.5vw, 1.6rem);
-    color: var(--text); line-height: 1.35;
+    color: var(--text); line-height: 1.3;
+  }
+  .card-play .k-ans-jp {
+    font-family: var(--jp-mincho);
+    font-size: clamp(1.4rem, 5.2vw, 1.8rem);
+    line-height: 1.7;
+    color: var(--text);
+    margin-top: 2px;
+    letter-spacing: .02em;
+  }
+  .card-play .k-ans-jp rt {
+    font-family: var(--jp);
+    font-size: 0.38em;
+    font-weight: 500;
   }
   .card-play .k-ans-meta {
-    font-size: 12.5px; color: var(--text-soft); line-height: 1.4;
+    font-size: 12.5px; color: var(--text-soft); line-height: 1.35;
+    margin-top: 4px;
   }
 
   /* Typing lives in a frame pinned to visualViewport — not the layout
@@ -1513,8 +1527,8 @@ window.__BUILD__ = "20260815j";
     }
     body[data-view="cards-play"] .card-play .card-face { bottom: 6em; }
     body[data-view="cards-play"] .card-play .card-reveal { height: 6em; }
-    body[data-view="kanji-play"] .card-play .card-face { bottom: 7em; }
-    body[data-view="kanji-play"] .card-play .card-reveal { height: 7em; }
+    body[data-view="kanji-play"] .card-play .card-face { bottom: 8em; }
+    body[data-view="kanji-play"] .card-play .card-reveal { height: 8em; }
     body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
     body[data-view="cards-play"] .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
     body[data-view="cards-play"] .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
@@ -1663,7 +1677,7 @@ window.__BUILD__ = "20260815j";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815j"></script>
+<script src="japanese-data.js?v=20260815k"></script>
 <script>
 /* ============================================================
    State
@@ -4897,6 +4911,11 @@ function pickKanji(pool, count) {
 }
 
 const kReadings = k => [k.on.join("、"), k.kun.join("、")].filter(Boolean).join("  /  ");
+/* Example word with furigana for the drill reveal (Japanese under English). */
+function kExampleRuby(k) {
+  if (!k || !k.ex || !k.ex.w) return "";
+  return ruby(furiganaOf(k.ex.w, k.ex.r || ""));
+}
 
 function kanjiReturnTo() {
   try { return sessionStorage.getItem("kanjiReturn") || ""; }
@@ -5357,8 +5376,9 @@ function drawKanji() {
           </div>
           <div class="card-reveal is-open">
             <div class="k-ans-mean">${esc(k.en)}</div>
+            ${k.ex && k.ex.w
+              ? `<div class="k-ans-jp" lang="ja">${kExampleRuby(k)}</div>` : ""}
             <div class="k-ans-meta">${esc(kReadings(k) || "—")}${
-              k.ex ? ` · ${esc(k.ex.w)} ${esc(k.ex.en)}` : ""}${
               n ? ` · L${n}` : ""}</div>
             ${typed ? `<div class="k-ans-meta">you: ${esc(typed)}</div>` : ""}
           </div>
