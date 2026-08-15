@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815v">
+<link rel="manifest" href="site.webmanifest?v=20260815x">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815v";
+window.__BUILD__ = "20260815x";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1281,6 +1281,17 @@ window.__BUILD__ = "20260815v";
   .vword { font-family: var(--jp-mincho); font-size: 44px; line-height: 1.55; margin: 16px 0 6px;
     letter-spacing: .04em; }
   .vword.en { font-family: var(--serif); font-size: 29px; line-height: 1.3; letter-spacing: 0; }
+  .vword-row {
+    display: flex; align-items: center; justify-content: center;
+    gap: 10px; margin: 16px 0 6px;
+  }
+  .vword-row .vword { margin: 0; }
+  .vword-row .speak {
+    margin-top: 0; padding: 6px; min-width: 36px; min-height: 36px;
+    justify-content: center; flex: 0 0 auto;
+  }
+  .vword-row .speak .speak-lab { display: none; }
+  .vword-row .speak svg { width: 16px; height: 16px; }
   /* At this size the shared 0.5em reading would rival the word itself, and the
      line needs headroom or the ruby rides up into the form name above it. */
   .vword rt { font-size: 0.3em; }
@@ -1750,7 +1761,7 @@ window.__BUILD__ = "20260815v";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815v"></script>
+<script src="japanese-data.js?v=20260815x"></script>
 <script>
 /* ============================================================
    State
@@ -4664,6 +4675,14 @@ const verbPrompt = (v, style) => {
   return { main: c.kanji || c.kana, html: vRuby(c), sub: v.en };
 };
 
+/* Kana (+ kanji) for TTS when the prompt itself is Japanese. */
+function verbPromptSpeak(v, style) {
+  if (!v || style === "en") return null;
+  const c = style === "dict" ? conjugate(v, "dict") : { kana: v.ms, kanji: v.kanji || null };
+  if (!c || !c.kana) return null;
+  return { reading: c.kana, kanji: c.kanji || c.kana };
+}
+
 /* Strict: the kana spelling or the kanji spelling, nothing else. Only spaces
    and a trailing full stop are forgiven. */
 function judgeVerb(typed, answer) {
@@ -4711,7 +4730,11 @@ function drawVerb() {
     const vn = document.getElementById("vnext");
     // the round is a typing loop; without this the hand has to leave the keyboard
     vn.focus();
-    vn.addEventListener("click", () => { VERB.verdict = null; drawVerb(); });
+    vn.addEventListener("click", () => {
+      unlockTts();
+      VERB.verdict = null;
+      drawVerb();
+    });
     const vf = document.getElementById("vflip");
     if (vf) vf.addEventListener("click", () => regradeVerb(true));
     return;
@@ -4721,7 +4744,9 @@ function drawVerb() {
 
   const v = VERB.list[VERB.i];
   const p = verbPrompt(v, VERB.prompt);
+  const speakSrc = verbPromptSpeak(v, VERB.prompt);
   const lastOk = VERB.lastOk;
+  stopSpeaking();
   view.innerHTML = drillStage({
     heading: esc(meta.label),
     sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus ? " · focused round" : ""}`,
@@ -4732,7 +4757,10 @@ function drawVerb() {
     <div class="vcard">
       ${lastOk ? `<p class="tick">${vRuby(lastOk.answer)} — correct</p>` : ""}
       <div class="vask">Give the <b>${esc(meta.label)}</b></div>
-      <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
+      <div class="vword-row">
+        <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
+        ${speakSrc ? speakButton({ icon: true, label: false }) : ""}
+      </div>
       ${p.sub ? `<div class="vgloss big">${esc(p.sub)}</div>` : ""}
       <input type="text" id="vin" autocomplete="off" autocapitalize="off" autocorrect="off"
         spellcheck="false" placeholder="Type the ${esc(meta.label)}">
@@ -4746,10 +4774,19 @@ function drawVerb() {
 
   const input = document.getElementById("vin");
   input.focus();
-  const send = () => submitVerb(input.value);
+  const send = () => { unlockTts(); submitVerb(input.value); };
   document.getElementById("vgo").addEventListener("click", send);
-  document.getElementById("vskip").addEventListener("click", () => submitVerb(""));
-  input.addEventListener("keydown", e => { if (e.key === "Enter") { e.preventDefault(); send(); } });
+  document.getElementById("vskip").addEventListener("click", () => {
+    unlockTts();
+    submitVerb("");
+  });
+  input.addEventListener("keydown", e => {
+    if (e.key === "Enter") { e.preventDefault(); send(); }
+  });
+  if (speakSrc) {
+    wireSpeak(speakSrc.reading, speakSrc.kanji);
+    speakJapanese(speakSrc.reading, speakSrc.kanji);
+  }
 }
 
 /* The matcher takes the kana or the kanji spelling and nothing else, which
