@@ -633,7 +633,20 @@ window.__BUILD__ = "20260815k";
   }
   .k-code-mean {
     font-family: var(--serif); font-size: clamp(1.25rem, 4.5vw, 1.55rem);
-    margin: 10px 0 6px; color: var(--text);
+    margin: 10px 0 4px; color: var(--text);
+  }
+  .k-code-jp {
+    font-family: var(--jp-mincho);
+    font-size: clamp(1.35rem, 5vw, 1.7rem);
+    line-height: 1.7;
+    color: var(--text);
+    margin: 0 0 8px;
+    letter-spacing: .02em;
+  }
+  .k-code-jp rt {
+    font-family: var(--jp);
+    font-size: 0.38em;
+    font-weight: 500;
   }
   .k-code-meta {
     font-size: 12.5px; color: var(--text-soft); letter-spacing: .04em;
@@ -724,9 +737,11 @@ window.__BUILD__ = "20260815k";
   }
   .k-code-ex {
     font-family: var(--jp-mincho); font-size: 1.5rem; margin: 0 0 4px;
+    line-height: 1.7;
   }
-  .k-code-ex .r { display: block; font-family: var(--jp); font-size: 13px;
-    color: var(--text-faint); margin-top: 2px; }
+  .k-code-ex rt {
+    font-family: var(--jp); font-size: 0.38em; font-weight: 500;
+  }
   .k-code-acts {
     display: flex; flex-direction: column; gap: 8px; margin-top: 18px;
   }
@@ -4998,6 +5013,18 @@ function kanjiInsideCards(k) {
         where: self.where || "",
         detail: self.tip || ""
       });
+    } else if (parts && parts.tip) {
+      const role = parts.kind === "pictograph" ? "Picture mark"
+        : parts.kind === "ideograph" ? "Shape story"
+        : "How to see it";
+      cards.push({
+        role,
+        c: k.c,
+        en: k.en,
+        sound: "",
+        where: "",
+        detail: parts.tip
+      });
     }
   }
   return cards;
@@ -5031,7 +5058,9 @@ function kanjiInsideHtml(k, onShow) {
     ? `<p>The meaning radical points at the idea; the sound clue is why the ON reading is ${esc(onShow)}.</p>`
     : cards[0].role === "This is a radical"
       ? `<p>This character itself is used as a meaning radical inside other kanji — learn its shape once, then spot it again.</p>`
-      : `<p>Break the character into these pieces; the radical’s usual meaning is the best memory hook.</p>`;
+      : cards.some(c => c.role === "Meaning radical" || c.role === "Component")
+        ? `<p>Read the pieces left-to-right or top-to-bottom; the radical’s usual meaning is the memory hook for the whole character.</p>`
+        : `<p>Some characters are mostly a whole-shape memory — use the story below until the shape sticks.</p>`;
   return `<section class="k-code-block">
     <h2>Inside the character</h2>
     <div class="k-code-parts${cards.length === 1 ? " one" : ""}">${body}</div>
@@ -5224,7 +5253,11 @@ function renderKanjiDetail(raw) {
   const onShow = k.on.length ? k.on.join(" · ") : "—";
   const kunShow = k.kun.length ? k.kun.join(" · ") : "—";
   const story = kanjiStory(k);
+  const insideCards = kanjiInsideCards(k);
   const partsHtml = kanjiInsideHtml(k, onShow);
+  const storyDup = insideCards.length === 1
+    && insideCards[0].detail === story
+    && /Picture mark|Shape story|How to see it/.test(insideCards[0].role || "");
 
   const peerSound = parts && parts.phonetic && parts.phonetic.sound
     ? parts.phonetic.sound
@@ -5237,6 +5270,8 @@ function renderKanjiDetail(raw) {
       <header class="k-code-hero">
         <p class="k-code-glyph" lang="ja">${esc(k.c)}</p>
         <h1 class="k-code-mean">${esc(k.en)}</h1>
+        ${k.ex && k.ex.w
+          ? `<p class="k-code-jp" lang="ja">${kExampleRuby(k)}</p>` : ""}
         <p class="k-code-meta">${esc(k.lv)} · ${k.s} stroke${k.s === 1 ? "" : "s"}${
           n ? ` · <a href="#/lesson/${n}">Lesson ${n}</a>` : ""}${
           st === "known" ? " · known"
@@ -5245,10 +5280,10 @@ function renderKanjiDetail(raw) {
 
       ${partsHtml}
 
-      <section class="k-code-block k-code-story">
+      ${storyDup ? "" : `<section class="k-code-block k-code-story">
         <h2>Remember this</h2>
         <p class="story">${esc(story)}</p>
-      </section>
+      </section>`}
 
       <section class="k-code-block">
         <h2>Readings</h2>
@@ -5271,8 +5306,7 @@ function renderKanjiDetail(raw) {
 
       <section class="k-code-block">
         <h2>As in</h2>
-        <p class="k-code-ex" lang="ja">${esc(k.ex.w)}
-          <span class="r">${esc(k.ex.r)}</span></p>
+        <p class="k-code-ex" lang="ja">${kExampleRuby(k) || esc(k.ex.w)}</p>
         <p>${esc(k.ex.en)}</p>
       </section>
 

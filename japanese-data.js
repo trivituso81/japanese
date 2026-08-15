@@ -9822,6 +9822,45 @@ const KANJI_RADICALS = {
   "少": {"en": "few", "where": "small with slash", "tip": "Few / a little — smallness cut further."},
   "攵": {"en": "strike / teach action", "where": "right side (bokuzukuri)", "tip": "A hand with a stick — action, teaching, or forcing something to happen (教)."},
   "七": {"en": "seven", "where": "cut mark", "tip": "Seven — also a phonetic color in 切."},
+  "亠": {"en": "lid", "where": "top", "tip": "A lid or cover stroke on top of a character."},
+  "凵": {"en": "container", "where": "bottom open box", "tip": "An open container — something held or framed."},
+  "央": {"en": "center", "where": "phonetic エイ", "tip": "Center / middle. Sound clue エイ in 英・映."},
+  "介": {"en": "mediate", "where": "phonetic カイ", "tip": "Mediate / between. Sound clue in 界."},
+  "井": {"en": "well", "where": "grid", "tip": "A well grate — water source under a roof in 寒."},
+  "⺀": {"en": "ice", "where": "dots", "tip": "Ice dots — cold."},
+  "彦": {"en": "lad", "where": "phonetic", "tip": "Lad / handsome — phonetic color in 顔."},
+  "业": {"en": "business", "where": "top of 業", "tip": "Business / stacked work marks."},
+  "乂": {"en": "crossed", "where": "X mark", "tip": "Crossed strokes — marking off a section."},
+  "圣": {"en": "hand / sacred", "where": "phonetic in 軽", "tip": "Hand/earth phonetic that lightens 軽."},
+  "㑒": {"en": "together", "where": "phonetic in 験", "tip": "Phonetic block in 験 (ケン)."},
+  "ム": {"en": "private", "where": "katakana-like", "tip": "A private loop — also appears in 広."},
+  "耂": {"en": "old / elder", "where": "top of 者・考", "tip": "Elder / old-person mark — age and thinking (考), person (者)."},
+  "丂": {"en": "breath mark", "where": "bent phonetic", "tip": "Bent breath / obstruction mark — sound color in 考."},
+  "⺌": {"en": "sparks", "where": "top dots", "tip": "Small spark marks — light in 光."},
+  "兀": {"en": "stool / bare", "where": "legs", "tip": "A bare standing form under 光."},
+  "采": {"en": "pluck", "where": "phonetic サイ", "tip": "Pluck / gather. Sound clue in 菜."},
+  "产": {"en": "standing cliff", "where": "top of 産", "tip": "Standing production mark over 生."},
+  "与": {"en": "give", "where": "phonetic シャ", "tip": "Give / together with — phonetic in 写."},
+  "昔": {"en": "long ago", "where": "phonetic シャク", "tip": "Long ago. Sound clue in 借."},
+  "王": {"en": "king / jade", "where": "alone or left", "tip": "King; also the jade radical form in 理."},
+  "昜": {"en": "bright sun", "where": "phonetic ジョウ", "tip": "Bright / raise. Sound clue in 場."},
+  "具": {"en": "tool", "where": "eye over table", "tip": "Prepare / tool — builds 真."},
+  "兑": {"en": "exchange", "where": "phonetic セツ", "tip": "Exchange / sharp. Sound clue in 説."},
+  "弋": {"en": "stake", "where": "phonetic", "tip": "A stake / peg — phonetic in 代."},
+  "是": {"en": "just so", "where": "phonetic ダイ", "tip": "This / correct. Sound clue in 題."},
+  "丁": {"en": "block", "where": "phonetic チョウ", "tip": "Block / town section. Sound clue in 町."},
+  "氐": {"en": "low base", "where": "phonetic テイ", "tip": "Base / low. Sound clue in 低."},
+  "龺": {"en": "sunrise", "where": "left of 朝", "tip": "Sunrise / ten-plus-early marks in 朝."},
+  "尚": {"en": "esteem", "where": "phonetic ドウ", "tip": "Esteem / still. Sound clue in 堂."},
+  "勿": {"en": "not / stripes", "where": "phonetic", "tip": "Do not / stripe marks — phonetic in 物."},
+  "更": {"en": "change", "where": "phonetic ベン", "tip": "Change / anew. Sound clue in 便."},
+  "未": {"en": "not yet", "where": "phonetic ミ／マイ", "tip": "Not yet (a tree not fully grown). Sound clue in 妹・味."},
+  "予": {"en": "beforehand", "where": "phonetic ヤ", "tip": "Beforehand. Sound clue in 野."},
+  "翟": {"en": "pheasant", "where": "phonetic ヨウ", "tip": "Pheasant — phonetic in 曜."},
+  "𠬝": {"en": "obey", "where": "right of 服", "tip": "Obey / hand-and-seal mark in 服."},
+  "𠂇": {"en": "hand", "where": "top-left of 有", "tip": "A left hand holding — in 有."},
+  "𠂉": {"en": "person stroke", "where": "in 旅", "tip": "A person stroke in travel compounds."},
+  "⺶": {"en": "sheep", "where": "top of 着", "tip": "Sheep-like top — wearing / arriving in 着."},
 };
 
 /* ------------------------------------------------------------
@@ -9835,18 +9874,18 @@ const KANJI_RADICALS = {
 const KANJI_PARTS = {
   "一": {"kind":"pictograph","tip":"One bar. The simplest tally — just a single stroke for “one.”"},
   "二": {"kind":"pictograph","tip":"Two bars stacked. Count them: one, two."},
-  "三": {"kind":"pictograph","tip":"Three bars. Same tally logic as 一 and 二."},
-  "四": {"kind":"ideograph","tip":"A box with legs tucked inside — old drawing of four fingers in a square. ON シ is common; kun よ／よん is what you say when counting."},
-  "五": {"kind":"ideograph","tip":"A crossbar between two lines — five as a completed hand shape. ON ゴ."},
-  "六": {"kind":"ideograph","tip":"A lid over eight’s shape reduced — six. ON ロク, kun む・つ."},
+  "三": {"kind": "pictograph", "tip": "Three bars stacked. Same tally logic as 一 and 二 — count the lines.", "components": [{"c": "一", "en": "one"}, {"c": "一", "en": "one"}, {"c": "一", "en": "one"}]},
+  "四": {"kind": "ideograph", "tip": "A box with legs tucked inside — four fingers in a square. ON シ.", "components": [{"c": "囗", "en": "enclosure"}, {"c": "儿", "en": "legs"}]},
+  "五": {"kind": "ideograph", "tip": "A crossbar between two lines — five as a completed hand shape. ON ゴ."},
+  "六": {"kind": "ideograph", "tip": "A lid over a split — six. ON ロク.", "components": [{"c": "亠", "en": "lid"}, {"c": "八", "en": "split"}]},
   "七": {"kind":"ideograph","tip":"A cut across a line — seven. ON シチ, kun なな."},
   "八": {"kind":"pictograph","tip":"Two strokes opening apart — eight as something split. ON ハチ."},
-  "九": {"kind":"pictograph","tip":"A hooked stroke — nine, almost ten but bent back. ON キュウ／ク."},
+  "九": {"kind": "pictograph", "tip": "A hooked stroke — nine, almost ten but bent back before it reaches a full cross. ON キュウ／ク."},
   "十": {"kind":"pictograph","tip":"A cross — all directions, ten. ON ジュウ."},
-  "百": {"kind":"ideograph","tip":"一 (one) over 白 (white) — “one white,” an old way toward hundred. ON ヒャク."},
-  "千": {"kind":"ideograph","tip":"Person stroke on 十 — a thousand. ON セン."},
-  "万": {"kind":"ideograph","tip":"A compressed “scorpion” mark that came to mean ten thousand. ON マン."},
-  "円": {"kind":"pictograph","tip":"A round coin outline — yen / circle. ON エン."},
+  "百": {"kind": "ideograph", "tip": "一 (one) over 白 (white) — “one white,” an old path to hundred. ON ヒャク.", "components": [{"c": "一", "en": "one"}, {"c": "白", "en": "white"}]},
+  "千": {"kind": "ideograph", "tip": "A person-stroke on 十 — a thousand (ten hundreds). ON セン.", "components": [{"c": "丿", "en": "person stroke"}, {"c": "十", "en": "ten"}]},
+  "万": {"kind": "ideograph", "tip": "A compressed scorpion-like mark that came to mean ten thousand. ON マン — mostly memorization, but picture a huge tally squeezed into one shape."},
+  "円": {"kind": "pictograph", "tip": "A round coin outline — yen / circle. Picture a coin’s edge. ON エン."},
   "日": {"kind":"pictograph","tip":"A sun with a middle line — day / sun. Also the meaning radical in time-of-day characters."},
   "月": {"kind":"pictograph","tip":"A crescent moon — month / moon. Meaning radical for body parts when written ⺼."},
   "火": {"kind":"pictograph","tip":"Flames licking up. Meaning radical (灬 when under) for heat and cooking."},
@@ -9907,7 +9946,7 @@ const KANJI_PARTS = {
   "暗": {"radical": {"c": "日", "en": "sun / day"}, "phonetic": {"c": "音", "en": "sound", "sound": "オン→アン"}, "tip": "Day/sun + 音 (sound). When the “sound” of day fades you get dark — ON アン from the 音 family (オン／イン／アン).", "components": [{"c": "日", "en": "sun / day"}, {"c": "音", "en": "sound"}]},
   "音": {"kind":"phonetic","sound":"オン／イン","tip":"Sound rising from a standing tongue/mouth shape. Sound clue behind 暗 (アン) and 意 (イ)."},
   "意": {"radical": {"c": "心", "en": "heart / mind"}, "phonetic": {"c": "音", "en": "sound", "sound": "オン→イ"}, "tip": "音 (sound) over 心 (heart) → mind / meaning / intention. Same phonetic family as 暗.", "components": [{"c": "音", "en": "sound"}, {"c": "心", "en": "heart / mind"}]},
-  "死": {"kind":"ideograph","tip":"Bone remains beside a kneeling person — death. ON and kun are both シ／し, so 死ぬ (しぬ) and compounds like 死亡 stay on that same sound."},
+  "死": {"kind": "ideograph", "tip": "Bone marks + a person — death. Stark picture, easy to lock in. ON シ.", "radical": {"c": "歹", "en": "bone / death"}, "components": [{"c": "歹", "en": "bone"}, {"c": "匕", "en": "person"}]},
   "聞": {"radical": {"c": "耳", "en": "ear"}, "phonetic": {"c": "門", "en": "gate", "sound": "モン／ブン"}, "tip": "Ear at the gate → listen / ask. 門 lends the モン／ブン sound; 聞 is usually ブン／モン.", "components": [{"c": "耳", "en": "ear"}, {"c": "門", "en": "gate"}]},
   "問": {"radical": {"c": "口", "en": "mouth"}, "phonetic": {"c": "門", "en": "gate", "sound": "モン"}, "tip": "Mouth at the gate → question. Clear モン from 門.", "components": [{"c": "口", "en": "mouth"}, {"c": "門", "en": "gate"}]},
   "間": {"radical": {"c": "日", "en": "sun"}, "phonetic": {"c": "門", "en": "gate", "sound": "カン／ケン"}, "tip": "Sunlight through a gate — the space between → interval. 門 still marks the family, reading shifts to カン／ケン.", "components": [{"c": "門", "en": "gate"}, {"c": "日", "en": "sun"}]},
@@ -9948,10 +9987,10 @@ const KANJI_PARTS = {
   "親": {"radical": {"c": "見", "en": "see"}, "phonetic": {"c": "亲", "en": "close", "sound": "シン"}, "tip": "Seeing those close to you → parent / intimate. Same シン family as 新.", "components": [{"c": "亲", "en": "close"}, {"c": "見", "en": "see"}]},
   "買": {"radical": {"c": "貝", "en": "shell / money"}, "tip": "Net over shells/money → buy. Picture scooping up payment.", "components": [{"c": "网", "en": "net"}, {"c": "貝", "en": "shell / money"}]},
   "仕": {"radical":{"c":"亻","en":"person"},"phonetic":{"c":"士","en":"scholar"},"tip":"Person + scholar → serve / do, as in 仕事."},
-  "事": {"kind":"ideograph","tip":"A hand dealing with a matter — thing / affair / work."},
+  "事": {"kind": "ideograph", "tip": "A hand gripping a writing/record mark — matter / affair / thing to do. ON ジ (仕事)."},
   "字": {"radical": {"c": "宀", "en": "roof"}, "phonetic": {"c": "子", "en": "child"}, "tip": "Child under a roof → character / letter (ジ).", "components": [{"c": "宀", "en": "roof"}, {"c": "子", "en": "child"}]},
   "家": {"radical": {"c": "宀", "en": "roof"}, "phonetic": {"c": "豕", "en": "pig"}, "tip": "Pig under a roof — household livestock → house / family. ON カ／ケ.", "components": [{"c": "宀", "en": "roof"}, {"c": "豕", "en": "pig"}]},
-  "族": {"tip":"Banner and arrow forms — clan / family. ON ゾク."},
+  "族": {"tip": "Clan flag + arrow — tribe / family. ON ゾク (家族).", "radical": {"c": "方", "en": "direction / clan flag"}, "components": [{"c": "方", "en": "flag"}, {"c": "矢", "en": "arrow"}]},
   "漢": {"radical":{"c":"氵","en":"water"},"tip":"Water radical + a complex phonetic — China / Han. The カン in 漢字."},
   "社": {"radical": {"c": "礻", "en": "altar"}, "tip": "Spirit altar + earth → shrine / company.", "components": [{"c": "礻", "en": "altar"}, {"c": "土", "en": "earth"}]},
   "会": {"kind": "ideograph", "tip": "People gathering under a cover to speak — meet.", "components": [{"c": "人", "en": "person"}, {"c": "云", "en": "say / gather"}]},
@@ -9983,28 +10022,28 @@ const KANJI_PARTS = {
   "毎": {"kind":"phonetic","sound":"マイ","tip":"Every / each. Building block in 海 (カイ)."},
   "勉": {"radical": {"c": "力", "en": "effort"}, "phonetic": {"c": "免", "sound": "ベン"}, "tip": "Effort + 免 phonetic → make an effort / study (ベン).", "components": [{"c": "免", "en": "avoid"}, {"c": "力", "en": "effort"}]},
   "強": {"radical":{"c":"弓","en":"bow"},"tip":"Bow pulled taut (with insect marks) — strong. ON キョウ／ゴウ."},
-  "弱": {"kind":"ideograph","tip":"Two limp bows — weak. ON ジャク."},
+  "弱": {"kind": "ideograph", "tip": "Two limp bows — weak. Compare 強 (a taut bow). ON ジャク.", "components": [{"c": "弓", "en": "bow"}, {"c": "弓", "en": "bow"}]},
   "薬": {"radical": {"c": "艹", "en": "plant"}, "phonetic": {"c": "楽", "en": "comfort / music", "sound": "ヤク"}, "tip": "Plant + 楽 → medicine. 楽’s family gives ヤク／ガク／ラク.", "components": [{"c": "艹", "en": "plant"}, {"c": "楽", "en": "comfort / music"}]},
   "楽": {"kind":"phonetic","sound":"ガク／ラク／ゴウ","tip":"Music / comfort / fun. Phonetic behind 薬 (ヤク)."},
   "病": {"radical": {"c": "疒", "en": "sickness"}, "phonetic": {"c": "丙", "sound": "ビョウ"}, "tip": "Sickness + 丙 → illness (ビョウ).", "components": [{"c": "疒", "en": "sickness"}, {"c": "丙", "en": "third"}]},
   "院": {"radical": {"c": "阝", "en": "building / mound"}, "phonetic": {"c": "完", "sound": "イン"}, "tip": "Building + 完 (イン) → institution / hospital wing.", "components": [{"c": "阝", "en": "building / mound"}, {"c": "完", "en": "complete"}]},
   "終": {"radical": {"c": "糸", "en": "thread"}, "phonetic": {"c": "冬", "en": "winter", "sound": "シュウ"}, "tip": "Thread + winter phonetic → end. ON シュウ.", "components": [{"c": "糸", "en": "thread"}, {"c": "冬", "en": "winter"}]},
   "冬": {"kind":"ideograph","tip":"Twists ending in ice — winter. Phonetic color in 終."},
-  "春": {"kind":"ideograph","tip":"Sun under budding growth — spring. ON シュン."},
-  "夏": {"kind":"ideograph","tip":"A figure under slow steps — summer. ON カ／ゲ."},
+  "春": {"kind": "ideograph", "tip": "Sun under budding growth — spring. ON シュン.", "components": [{"c": "三", "en": "buds"}, {"c": "人", "en": "growth"}, {"c": "日", "en": "sun"}]},
+  "夏": {"kind": "ideograph", "tip": "A head under slow summer steps — summer. Picture heat that makes you trudge. ON カ／ゲ.", "components": [{"c": "頁", "en": "head"}, {"c": "夂", "en": "go slowly"}]},
   "秋": {"radical": {"c": "禾", "en": "grain"}, "phonetic": {"c": "火", "en": "fire"}, "tip": "Grain and fire — harvest season → autumn. ON シュウ.", "components": [{"c": "禾", "en": "grain"}, {"c": "火", "en": "fire"}]},
   "風": {"tip":"Expansion with insect — wind. ON フウ／フ."},
-  "朝": {"tip":"Sunrise forms with moon still present — morning. ON チョウ."},
-  "昼": {"tip":"Measure of the bright day — noon / daytime. ON チュウ."},
+  "朝": {"tip": "Sunrise forms with the moon still there — morning. ON チョウ, kun あさ.", "components": [{"c": "龺", "en": "sunrise"}, {"c": "月", "en": "moon"}]},
+  "昼": {"tip": "A measure of the bright day — daytime / noon. ON チュウ, kun ひる.", "components": [{"c": "尺", "en": "measure"}, {"c": "日", "en": "sun"}]},
   "夜": {"radical":{"c":"夕","en":"evening"},"tip":"Person under evening — night. ON ヤ."},
   "夕": {"kind":"pictograph","tip":"A crescent at dusk — evening."},
-  "午": {"kind": "ideograph", "tip": "A pestle mark — noon (as in 午前／午後). ON ゴ."},
+  "午": {"kind": "ideograph", "tip": "A pestle / horse-mark that settled as noon — 午前 and 午後 hinge on this. ON ゴ."},
   "前": {"tip": "Feet with a cut before them — before / in front. ON ゼン.", "components": [{"c": "止", "en": "foot"}, {"c": "刂", "en": "knife"}]},
   "後": {"tip": "Stepping with a thread dragged behind — after / behind. ON ゴ／コウ.", "components": [{"c": "彳", "en": "stepping"}, {"c": "幺", "en": "thread"}, {"c": "夂", "en": "drag"}]},
   "今": {"tip": "A cover over the present moment — now.", "components": [{"c": "人", "en": "cover"}, {"c": "丶", "en": "present mark"}]},
   "来": {"kind": "ideograph", "tip": "Wheat coming closer — come.", "components": [{"c": "木", "en": "grain stalk"}, {"c": "丷", "en": "coming marks"}]},
   "行": {"kind":"pictograph","tip":"A crossroads — go / carry out. ON コウ／ギョウ."},
-  "帰": {"tip":"Stop and broom — return home. ON キ."},
+  "帰": {"tip": "Stop and turn the broom/sword homeward — return home. ON キ.", "radical": {"c": "止", "en": "stop / foot"}, "components": [{"c": "刀", "en": "sword / broom-like"}, {"c": "止", "en": "stop"}]},
   "歩": {"radical": {"c": "止", "en": "foot / stop"}, "tip": "Feet in motion — walk. ON ホ／ブ／フ.", "components": [{"c": "止", "en": "foot / stop"}, {"c": "少", "en": "few steps"}]},
   "走": {"kind":"pictograph","tip":"A person sprinting — run. ON ソウ."},
   "見": {"kind": "pictograph", "tip": "Eye on legs — see / look. ON ケン.", "components": [{"c": "目", "en": "eye"}, {"c": "儿", "en": "legs"}]},
@@ -10018,26 +10057,26 @@ const KANJI_PARTS = {
   "市": {"kind":"phonetic","sound":"シ","tip":"Market / city. Sound clue in 姉・紙 neighborhood."},
   "使": {"radical": {"c": "亻", "en": "person"}, "phonetic": {"c": "吏", "sound": "シ"}, "tip": "Person + official phonetic → use / messenger. ON シ.", "components": [{"c": "亻", "en": "person"}, {"c": "吏", "en": "official"}]},
   "止": {"kind":"pictograph","tip":"A footprint halted — stop. ON シ."},
-  "正": {"kind":"ideograph","tip":"Stop at the line — correct / right. ON セイ／ショウ."},
-  "世": {"kind":"ideograph","tip":"Three tens leafed — generation / world. ON セイ／セ."},
+  "正": {"kind": "ideograph", "tip": "Stop at the line — correct / right. ON セイ／ショウ.", "components": [{"c": "一", "en": "line"}, {"c": "止", "en": "stop"}]},
+  "世": {"kind": "ideograph", "tip": "Three tens leafed together — thirty years / generation / world. ON セイ／セ."},
   "自": {"kind":"pictograph","tip":"A nose — pointing at oneself. ON ジ／シ."},
   "首": {"kind":"pictograph","tip":"Hair over a face — neck / head / chief. ON シュ."},
   "心": {"kind":"pictograph","tip":"A heart. Meaning radical 忄／心 for feelings."},
-  "合": {"kind":"ideograph","tip":"A lid fitting a mouth — fit / join. ON ゴウ／ガッ."},
-  "同": {"kind":"ideograph","tip":"A cover over one mouth — same. ON ドウ."},
-  "光": {"tip":"Fire/person radiance — light. ON コウ."},
-  "有": {"tip":"Hand owning meat — have / exist. ON ユウ／ウ."},
+  "合": {"kind": "ideograph", "tip": "A lid fitting a mouth — fit / join / suit. ON ゴウ／ガッ.", "components": [{"c": "人", "en": "lid / gather"}, {"c": "一", "en": "fit line"}, {"c": "口", "en": "mouth"}]},
+  "同": {"kind": "ideograph", "tip": "One mouth under one cover — same. ON ドウ.", "components": [{"c": "冂", "en": "frame"}, {"c": "一", "en": "one"}, {"c": "口", "en": "mouth"}]},
+  "光": {"tip": "Sparks over a standing form — light / shine. ON コウ.", "components": [{"c": "⺌", "en": "fire sparks"}, {"c": "兀", "en": "person / stool"}]},
+  "有": {"tip": "A hand holding meat/moon — have / exist. ON ユウ／ウ.", "components": [{"c": "𠂇", "en": "hand"}, {"c": "月", "en": "flesh / moon"}]},
   "無": {"tip":"Dance of negation — not / nothing. ON ム／ブ."},
-  "不": {"kind":"ideograph","tip":"A bird that doesn’t fly — not. ON フ／ブ."},
+  "不": {"kind": "ideograph", "tip": "A bird that won’t fly (wings down) — not / un-. ON フ／ブ."},
   "用": {"kind":"ideograph","tip":"A use-ready fence gate — use / for. ON ヨウ."},
   "切": {"radical": {"c": "刀", "en": "knife"}, "phonetic": {"c": "七", "sound": "セツ／サイ"}, "tip": "Knife + seven phonetic → cut. ON セツ／サイ.", "components": [{"c": "七", "en": "seven"}, {"c": "刀", "en": "knife"}]},
   "刀": {"kind":"pictograph","tip":"A blade — sword / knife. Radical 刂 on the right."},
   "分": {"radical": {"c": "刀", "en": "knife"}, "tip": "Eight split by a knife — divide / minute. ON ブン／フン／ブ.", "components": [{"c": "八", "en": "split"}, {"c": "刀", "en": "knife"}]},
   "別": {"radical":{"c":"刂","en":"knife"},"tip":"Bones separated by a knife — separate / another. ON ベツ."},
-  "医": {"tip":"Arrow in a box — medicine / doctor (the old quiver of cures). ON イ."},
-  "元": {"kind":"ideograph","tip":"Person with head emphasized — origin / head / yen’s “gen.” ON ゲン／ガン."},
+  "医": {"tip": "An arrow kept in a box — the old doctor’s quiver of cures → medicine / doctor. ON イ.", "radical": {"c": "酉", "en": "wine / medicine jar"}, "components": [{"c": "匚", "en": "box"}, {"c": "矢", "en": "arrow"}]},
+  "元": {"kind": "ideograph", "tip": "Two marks on legs — origin / head / “gen.” The starting point of a person. ON ゲン／ガン.", "components": [{"c": "二", "en": "two"}, {"c": "儿", "en": "legs"}]},
   "気": {"tip": "Steam-like strokes — spirit / air / mood. ON キ.", "components": [{"c": "气", "en": "steam"}, {"c": "㐅", "en": "crossing vapor"}]},
-  "天": {"kind":"ideograph","tip":"Person under the sky line — heaven / sky. ON テン."},
+  "天": {"kind": "ideograph", "tip": "A big person under the sky line — heaven / sky. ON テン.", "components": [{"c": "一", "en": "sky line"}, {"c": "大", "en": "big person"}]},
   "立": {"kind": "pictograph", "tip": "A person standing firmly — stand. ON リツ."},
   "色": {"tip":"Person kneeling over a seal — color / sensuality. ON ショク／シキ."},
   "白": {"kind":"pictograph","tip":"A white sunburst / thumbnail — white. ON ハク／ビャク."},
@@ -10055,7 +10094,7 @@ const KANJI_PARTS = {
 
   "半": {"components": [{"c": "丷", "en": "split top"}, {"c": "牛", "en": "ox halved"}], "kind": "ideograph", "tip": "An ox cut down the middle — half."},
 
-  "南": {"kind": "ideograph", "tip": "A bounded south-facing frame — south. ON ナン, kun みなみ."},
+  "南": {"kind": "ideograph", "tip": "A bounded south-facing frame — south. Mostly a shape to memorize; kun みなみ. ON ナン."},
 
   "多": {"components": [{"c": "夕", "en": "evening"}, {"c": "夕", "en": "evening"}], "kind": "compound", "tip": "Evening stacked on evening — many (nights add up)."},
 
@@ -10067,9 +10106,171 @@ const KANJI_PARTS = {
 
   "西": {"kind": "pictograph", "tip": "A basket / bird settling — west (where the sun goes). ON セイ／サイ."},
 
-  "年": {"kind": "ideograph", "tip": "A person carrying ripe grain — the harvest year. ON ネン."},
+  "年": {"kind": "ideograph", "tip": "A person carrying ripe grain — the harvest year. Picture the year’s crop on someone’s back. ON ネン."},
 
   "少": {"components": [{"c": "小", "en": "small"}, {"c": "丿", "en": "extra slash"}], "kind": "ideograph", "tip": "Small with an extra cut — few / a little."},
 
   "魚": {"kind": "pictograph", "tip": "A fish with fins and tail — fish. ON ギョ."},
+
+  "以": {"components": [{"c": "人", "en": "person"}, {"c": "丶", "en": "mark"}], "tip": "A person with a mark of means — by means of / from. ON イ."},
+
+  "引": {"radical": {"c": "弓", "en": "bow"}, "components": [{"c": "弓", "en": "bow"}, {"c": "丨", "en": "string pull"}], "tip": "A bow with the string pulled — pull / draw. ON イン."},
+
+  "員": {"radical": {"c": "貝", "en": "shell / money"}, "components": [{"c": "口", "en": "mouth"}, {"c": "貝", "en": "shell / money"}], "tip": "Mouth over shells/money — a counted member of a paid group → employee / member. ON イン."},
+
+  "英": {"radical": {"c": "艹", "en": "plant"}, "phonetic": {"c": "央", "en": "center", "sound": "エイ"}, "components": [{"c": "艹", "en": "plant"}, {"c": "央", "en": "center"}], "tip": "Plant + 央 (エイ) — outstanding flower → England / English (エイ). The sound clue is why 英語 is エイゴ."},
+
+  "映": {"radical": {"c": "日", "en": "sun"}, "phonetic": {"c": "央", "en": "center", "sound": "エイ"}, "components": [{"c": "日", "en": "sun"}, {"c": "央", "en": "center"}], "tip": "Sun + 央 (エイ) — light thrown onto a surface → reflect / project (映画). Same エイ as 英."},
+
+  "歌": {"radical": {"c": "欠", "en": "open mouth"}, "phonetic": {"c": "可", "en": "can", "sound": "カ"}, "components": [{"c": "可", "en": "can"}, {"c": "欠", "en": "open mouth"}], "tip": "可 (カ) + open mouth — singing aloud → song. ON カ matches the sound clue."},
+
+  "画": {"radical": {"c": "田", "en": "field"}, "components": [{"c": "一", "en": "frame"}, {"c": "田", "en": "field plots"}, {"c": "凵", "en": "container"}], "tip": "Field plots framed like a picture — drawing / picture. ON ガ／カク."},
+
+  "回": {"radical": {"c": "囗", "en": "enclosure"}, "components": [{"c": "囗", "en": "enclosure"}, {"c": "口", "en": "mouth / opening"}], "tip": "An opening inside a border — go around / times (one turn). ON カイ."},
+
+  "界": {"radical": {"c": "田", "en": "field"}, "phonetic": {"c": "介", "en": "mediate", "sound": "カイ"}, "components": [{"c": "田", "en": "field"}, {"c": "介", "en": "mediate"}], "tip": "Field + 介 (カイ) — bounded fields → world / realm. ON カイ."},
+
+  "寒": {"radical": {"c": "宀", "en": "roof"}, "components": [{"c": "宀", "en": "roof"}, {"c": "井", "en": "well"}, {"c": "⺀", "en": "ice"}], "tip": "Under a roof with ice marks — cold. Picture the house freezing. ON カン."},
+
+  "顔": {"radical": {"c": "頁", "en": "head"}, "phonetic": {"c": "彦", "en": "lad", "sound": "ガン"}, "components": [{"c": "彦", "en": "lad"}, {"c": "頁", "en": "head"}], "tip": "Head radical + phonetic — the face you present. ON ガン, kun かお."},
+
+  "起": {"radical": {"c": "走", "en": "run"}, "phonetic": {"c": "己", "en": "oneself", "sound": "キ"}, "components": [{"c": "走", "en": "run"}, {"c": "己", "en": "oneself"}], "tip": "Run + oneself (キ) — get yourself up and going → wake / occur. ON キ."},
+
+  "究": {"radical": {"c": "穴", "en": "hole / cave"}, "phonetic": {"c": "九", "en": "nine", "sound": "キュウ"}, "components": [{"c": "穴", "en": "hole"}, {"c": "九", "en": "nine"}], "tip": "Cave + nine (キュウ) — dig deep into a hole → research. ON キュウ."},
+
+  "去": {"components": [{"c": "土", "en": "earth"}, {"c": "厶", "en": "private leave"}], "tip": "Leaving the earth behind — go away / past. ON キョ／コ."},
+
+  "京": {"components": [{"c": "亠", "en": "lid"}, {"c": "口", "en": "opening"}, {"c": "小", "en": "small base"}], "tip": "A tall capital watchtower shape — capital city. ON キョウ／ケイ (東京)."},
+
+  "業": {"components": [{"c": "业", "en": "business top"}, {"c": "木", "en": "wood"}], "tip": "A complex “work piled on wood” mark — business / vocation. ON ギョウ."},
+
+  "銀": {"radical": {"c": "金", "en": "metal"}, "phonetic": {"c": "艮", "en": "stopping", "sound": "ギン"}, "components": [{"c": "金", "en": "metal"}, {"c": "艮", "en": "stopping"}], "tip": "Metal + 艮 phonetic → silver. ON ギン (銀行)."},
+
+  "区": {"radical": {"c": "匚", "en": "box frame"}, "components": [{"c": "匚", "en": "box"}, {"c": "乂", "en": "crossed marks"}], "tip": "Marks boxed into a section — ward / district. ON ク."},
+
+  "計": {"radical": {"c": "言", "en": "speech"}, "components": [{"c": "言", "en": "speech"}, {"c": "十", "en": "ten"}], "tip": "Speech + ten — counting aloud, measuring by numbers → measure / plan. Picture saying the tally. ON ケイ."},
+
+  "兄": {"components": [{"c": "口", "en": "mouth"}, {"c": "儿", "en": "legs"}], "tip": "A mouth on legs — the older brother who speaks for the kids. ON ケイ／キョウ."},
+
+  "軽": {"radical": {"c": "車", "en": "vehicle"}, "phonetic": {"c": "圣", "en": "light hand", "sound": "ケイ"}, "components": [{"c": "車", "en": "vehicle"}, {"c": "圣", "en": "hand / light"}], "tip": "Vehicle + a light phonetic — light (not heavy). ON ケイ."},
+
+  "研": {"radical": {"c": "石", "en": "stone"}, "phonetic": {"c": "开", "en": "open / grind", "sound": "ケン"}, "components": [{"c": "石", "en": "stone"}, {"c": "开", "en": "grind open"}], "tip": "Stone + grind marks — polish / study by grinding ideas. ON ケン (研究)."},
+
+  "県": {"components": [{"c": "目", "en": "eye"}, {"c": "木", "en": "tree hang"}], "tip": "An eye hung from a tree — old “hang and show” → prefecture. ON ケン."},
+
+  "建": {"radical": {"c": "廴", "en": "long stride"}, "phonetic": {"c": "聿", "en": "brush", "sound": "ケン"}, "components": [{"c": "廴", "en": "long stride"}, {"c": "聿", "en": "brush"}], "tip": "Long stride + brush — laying out and building. ON ケン."},
+
+  "験": {"radical": {"c": "馬", "en": "horse"}, "phonetic": {"c": "㑒", "en": "together", "sound": "ケン"}, "components": [{"c": "馬", "en": "horse"}, {"c": "㑒", "en": "together"}], "tip": "Horse + phonetic — test a horse’s mettle → exam / test. ON ケン (試験)."},
+
+  "広": {"radical": {"c": "广", "en": "building"}, "phonetic": {"c": "ム", "en": "private"}, "components": [{"c": "广", "en": "building"}, {"c": "ム", "en": "private"}], "tip": "A broad building shelter — wide / spacious. ON コウ."},
+
+  "考": {"radical": {"c": "耂", "en": "old / elder"}, "phonetic": {"c": "丂", "en": "breath mark", "sound": "コウ"}, "components": [{"c": "耂", "en": "elder"}, {"c": "丂", "en": "breath / bent"}], "tip": "Elder + a bent breath mark — an old person thinking it over → consider. ON コウ."},
+
+  "菜": {"radical": {"c": "艹", "en": "plant"}, "phonetic": {"c": "采", "en": "pluck", "sound": "サイ"}, "components": [{"c": "艹", "en": "plant"}, {"c": "采", "en": "pluck"}], "tip": "Plant + pluck (サイ) — vegetables you pick. ON サイ (野菜)."},
+
+  "産": {"radical": {"c": "生", "en": "life / birth"}, "components": [{"c": "产", "en": "standing cliff"}, {"c": "生", "en": "life"}], "tip": "Life/birth under a standing mark — produce / give birth. ON サン."},
+
+  "室": {"radical": {"c": "宀", "en": "roof"}, "phonetic": {"c": "至", "en": "arrive", "sound": "シツ"}, "components": [{"c": "宀", "en": "roof"}, {"c": "至", "en": "arrive"}], "tip": "Roof + arrive (シツ) — a room you reach under a roof. ON シツ (教室)."},
+
+  "質": {"radical": {"c": "貝", "en": "shell / money"}, "components": [{"c": "斤", "en": "axe"}, {"c": "斤", "en": "axe"}, {"c": "貝", "en": "shell"}], "tip": "Two axes over money-shells — cut to the real value → quality / ask. ON シツ (質問)."},
+
+  "写": {"radical": {"c": "冖", "en": "cover"}, "phonetic": {"c": "与", "en": "give", "sound": "シャ"}, "components": [{"c": "冖", "en": "cover"}, {"c": "与", "en": "give"}], "tip": "Cover + phonetic — copy / photograph (写す). ON シャ (写真)."},
+
+  "者": {"radical": {"c": "耂", "en": "old / elder"}, "components": [{"c": "耂", "en": "elder"}, {"c": "日", "en": "say / sun"}], "tip": "Elder over a sun/say mark — someone / person (the one who…). ON シャ."},
+
+  "借": {"radical": {"c": "亻", "en": "person"}, "phonetic": {"c": "昔", "en": "long ago", "sound": "シャク"}, "components": [{"c": "亻", "en": "person"}, {"c": "昔", "en": "long ago"}], "tip": "Person + 昔 (シャク) — borrow from someone. ON シャク."},
+
+  "主": {"components": [{"c": "丶", "en": "dot / flame"}, {"c": "王", "en": "king"}], "tip": "A lamp-dot over king — lord / main / master. ON シュ."},
+
+  "集": {"radical": {"c": "隹", "en": "bird"}, "components": [{"c": "隹", "en": "bird"}, {"c": "木", "en": "tree"}], "tip": "Birds on a tree — gather / collect. Clear picture story. ON シュウ."},
+
+  "習": {"radical": {"c": "羽", "en": "feather"}, "phonetic": {"c": "白", "en": "white", "sound": "シュウ"}, "components": [{"c": "羽", "en": "feather"}, {"c": "白", "en": "white"}], "tip": "Feathers + white — practice until it turns white/clear → learn. ON シュウ (練習)."},
+
+  "住": {"radical": {"c": "亻", "en": "person"}, "phonetic": {"c": "主", "en": "master", "sound": "ジュウ"}, "components": [{"c": "亻", "en": "person"}, {"c": "主", "en": "master"}], "tip": "Person + master (ジュウ) — dwell where you are master of the house. ON ジュウ."},
+
+  "重": {"tip": "A heavy stacked load — heavy / pile / important. Feel the weight in the dense shape. ON ジュウ／チョウ."},
+
+  "所": {"radical": {"c": "戸", "en": "door"}, "phonetic": {"c": "斤", "en": "axe", "sound": "ショ"}, "components": [{"c": "戸", "en": "door"}, {"c": "斤", "en": "axe"}], "tip": "Door + axe phonetic — a place / whereabouts. ON ショ (場所)."},
+
+  "暑": {"radical": {"c": "日", "en": "sun"}, "phonetic": {"c": "者", "en": "someone", "sound": "ショ"}, "components": [{"c": "日", "en": "sun"}, {"c": "者", "en": "someone"}], "tip": "Sun + 者 (ショ) — hot weather. ON ショ."},
+
+  "場": {"radical": {"c": "土", "en": "earth"}, "phonetic": {"c": "昜", "en": "bright sun", "sound": "ジョウ"}, "components": [{"c": "土", "en": "earth"}, {"c": "昜", "en": "bright"}], "tip": "Earth + bright phonetic — a place / venue on the ground. ON ジョウ (場所)."},
+
+  "乗": {"components": [{"c": "禾", "en": "grain"}, {"c": "北", "en": "like tree fork"}], "tip": "A person climbing into a tree/vehicle shape — ride / get on. ON ジョウ."},
+
+  "真": {"components": [{"c": "十", "en": "ten"}, {"c": "具", "en": "tool / eye"}], "tip": "Straight ten over an eye/tool — true / real. ON シン (写真)."},
+
+  "声": {"components": [{"c": "士", "en": "scholar"}, {"c": "尸", "en": "body"}], "tip": "A simplified voice-from-the-body mark — voice. ON セイ, kun こえ."},
+
+  "説": {"radical": {"c": "言", "en": "speech"}, "phonetic": {"c": "兑", "en": "exchange", "sound": "セツ"}, "components": [{"c": "言", "en": "speech"}, {"c": "兑", "en": "exchange"}], "tip": "Speech + exchange phonetic — explain / theory. ON セツ (説明)."},
+
+  "村": {"radical": {"c": "木", "en": "tree"}, "phonetic": {"c": "寸", "en": "measure", "sound": "ソン"}, "components": [{"c": "木", "en": "tree"}, {"c": "寸", "en": "measure"}], "tip": "Tree + measure — a measured grove → village. ON ソン."},
+
+  "太": {"components": [{"c": "大", "en": "big"}, {"c": "丶", "en": "dot"}], "tip": "Big with an extra dot of plumpness — thick / fat. ON タイ／タ."},
+
+  "貸": {"radical": {"c": "貝", "en": "shell / money"}, "phonetic": {"c": "代", "en": "substitute", "sound": "タイ"}, "components": [{"c": "代", "en": "substitute"}, {"c": "貝", "en": "money"}], "tip": "Substitute + money — lend (hand money over in place). ON タイ."},
+
+  "代": {"radical": {"c": "亻", "en": "person"}, "phonetic": {"c": "弋", "en": "stake", "sound": "ダイ"}, "components": [{"c": "亻", "en": "person"}, {"c": "弋", "en": "stake"}], "tip": "Person + stake — substitute / era / generation. ON ダイ／タイ."},
+
+  "題": {"radical": {"c": "頁", "en": "head / page"}, "phonetic": {"c": "是", "en": "just so", "sound": "ダイ"}, "components": [{"c": "是", "en": "just so"}, {"c": "頁", "en": "head"}], "tip": "Just-so + head/page — topic / title / question. ON ダイ (問題)."},
+
+  "短": {"radical": {"c": "矢", "en": "arrow"}, "phonetic": {"c": "豆", "en": "bean", "sound": "タン"}, "components": [{"c": "矢", "en": "arrow"}, {"c": "豆", "en": "bean"}], "tip": "Arrow + bean (タン) — a short arrow → short. ON タン."},
+
+  "知": {"radical": {"c": "矢", "en": "arrow"}, "components": [{"c": "矢", "en": "arrow"}, {"c": "口", "en": "mouth"}], "tip": "Arrow + mouth — knowledge shot straight into words → know. ON チ."},
+
+  "着": {"radical": {"c": "羊", "en": "sheep"}, "components": [{"c": "⺶", "en": "sheep"}, {"c": "目", "en": "eye"}], "tip": "Sheep-like top over eye — arrive / wear (you “land on” clothes or a place). ON チャク."},
+
+  "注": {"radical": {"c": "氵", "en": "water"}, "phonetic": {"c": "主", "en": "master", "sound": "チュウ"}, "components": [{"c": "氵", "en": "water"}, {"c": "主", "en": "master"}], "tip": "Water + master (チュウ) — pour / pay attention (注ぐ・注意). ON チュウ."},
+
+  "町": {"radical": {"c": "田", "en": "field"}, "phonetic": {"c": "丁", "en": "block", "sound": "チョウ"}, "components": [{"c": "田", "en": "field"}, {"c": "丁", "en": "block"}], "tip": "Field + block (チョウ) — town / block. ON チョウ, kun まち."},
+
+  "弟": {"components": [{"c": "弓", "en": "bow"}, {"c": "丷", "en": "marks"}, {"c": "丨", "en": "line"}], "tip": "A bound younger-brother shape (order in the line) — younger brother. ON テイ／ダイ."},
+
+  "低": {"radical": {"c": "亻", "en": "person"}, "phonetic": {"c": "氐", "en": "low base", "sound": "テイ"}, "components": [{"c": "亻", "en": "person"}, {"c": "氐", "en": "base"}], "tip": "Person + low-base phonetic — low. ON テイ."},
+
+  "転": {"radical": {"c": "車", "en": "vehicle"}, "phonetic": {"c": "云", "en": "cloud / say", "sound": "テン"}, "components": [{"c": "車", "en": "vehicle"}, {"c": "云", "en": "cloud"}], "tip": "Vehicle + cloud phonetic — revolve / roll (自転車). ON テン."},
+
+  "都": {"radical": {"c": "阝", "en": "village"}, "phonetic": {"c": "者", "en": "someone", "sound": "ト"}, "components": [{"c": "者", "en": "someone"}, {"c": "阝", "en": "village"}], "tip": "Someone + village radical — metropolis / capital. ON ト／ツ."},
+
+  "度": {"radical": {"c": "广", "en": "building"}, "components": [{"c": "广", "en": "building"}, {"c": "又", "en": "hand"}], "tip": "Building + hand measuring — degrees / times. ON ド."},
+
+  "答": {"radical": {"c": "竹", "en": "bamboo"}, "phonetic": {"c": "合", "en": "fit", "sound": "トウ"}, "components": [{"c": "竹", "en": "bamboo"}, {"c": "合", "en": "fit"}], "tip": "Bamboo + fit (トウ) — answer that fits. ON トウ."},
+
+  "頭": {"radical": {"c": "頁", "en": "head"}, "phonetic": {"c": "豆", "en": "bean", "sound": "トウ／ズ"}, "components": [{"c": "豆", "en": "bean"}, {"c": "頁", "en": "head"}], "tip": "Bean + head — head (the “bean” on your shoulders). ON トウ／ズ, kun あたま."},
+
+  "動": {"radical": {"c": "力", "en": "strength"}, "phonetic": {"c": "重", "en": "heavy", "sound": "ドウ"}, "components": [{"c": "重", "en": "heavy"}, {"c": "力", "en": "strength"}], "tip": "Heavy + strength — move (force against weight). ON ドウ."},
+
+  "堂": {"radical": {"c": "土", "en": "earth"}, "phonetic": {"c": "尚", "en": "esteem", "sound": "ドウ"}, "components": [{"c": "尚", "en": "esteem"}, {"c": "土", "en": "earth"}], "tip": "Esteem + earth — a hall built on ground. ON ドウ (食堂)."},
+
+  "働": {"radical": {"c": "亻", "en": "person"}, "components": [{"c": "亻", "en": "person"}, {"c": "動", "en": "move"}], "tip": "Person + move — a person moving → work. ON ドウ (Japanese-made kanji)."},
+
+  "特": {"radical": {"c": "牛", "en": "cow"}, "phonetic": {"c": "寺", "en": "temple", "sound": "トク"}, "components": [{"c": "牛", "en": "cow"}, {"c": "寺", "en": "temple"}], "tip": "Cow + temple (トク) — special (a standout ox). ON トク."},
+
+  "発": {"components": [{"c": "癶", "en": "feet spreading"}, {"c": "开", "en": "open"}], "tip": "Feet spreading to open out — depart / emit / start. ON ハツ (出発)."},
+
+  "品": {"components": [{"c": "口", "en": "mouth"}, {"c": "口", "en": "mouth"}, {"c": "口", "en": "mouth"}], "tip": "Three mouths / boxes of goods — goods / quality. ON ヒン."},
+
+  "服": {"radical": {"c": "月", "en": "flesh / body"}, "phonetic": {"c": "𠬝", "en": "obey mark", "sound": "フク"}, "components": [{"c": "月", "en": "body"}, {"c": "又", "en": "hand"}, {"c": "卩", "en": "seal"}], "tip": "Body + obeying hand/seal — clothes you put on the body. ON フク."},
+
+  "物": {"radical": {"c": "牛", "en": "cow"}, "phonetic": {"c": "勿", "en": "not / stripes", "sound": "ブツ／モツ"}, "components": [{"c": "牛", "en": "cow"}, {"c": "勿", "en": "stripes"}], "tip": "Cow + stripes phonetic — a thing / object. ON ブツ／モツ (食べ物)."},
+
+  "便": {"radical": {"c": "亻", "en": "person"}, "phonetic": {"c": "更", "en": "change", "sound": "ベン"}, "components": [{"c": "亻", "en": "person"}, {"c": "更", "en": "change"}], "tip": "Person + change — convenience / mail. ON ベン／ビン."},
+
+  "妹": {"radical": {"c": "女", "en": "woman"}, "phonetic": {"c": "未", "en": "not yet", "sound": "マイ"}, "components": [{"c": "女", "en": "woman"}, {"c": "未", "en": "not yet"}], "tip": "Woman + not-yet (マイ) — younger sister (not yet grown). ON マイ."},
+
+  "味": {"radical": {"c": "口", "en": "mouth"}, "phonetic": {"c": "未", "en": "not yet", "sound": "ミ"}, "components": [{"c": "口", "en": "mouth"}, {"c": "未", "en": "not yet"}], "tip": "Mouth + not-yet (ミ) — flavor / taste. ON ミ (意味)."},
+
+  "民": {"tip": "A simplified eye/population mark — people / nation. ON ミン (市民)."},
+
+  "野": {"radical": {"c": "里", "en": "village"}, "phonetic": {"c": "予", "en": "beforehand", "sound": "ヤ"}, "components": [{"c": "里", "en": "village"}, {"c": "予", "en": "beforehand"}], "tip": "Village + beforehand — the open field outside town. ON ヤ (野菜)."},
+
+  "曜": {"radical": {"c": "日", "en": "sun"}, "phonetic": {"c": "翟", "en": "pheasant", "sound": "ヨウ"}, "components": [{"c": "日", "en": "sun"}, {"c": "翟", "en": "pheasant"}], "tip": "Sun + phonetic — day of the week. ON ヨウ (曜日)."},
+
+  "洋": {"radical": {"c": "氵", "en": "water"}, "phonetic": {"c": "羊", "en": "sheep", "sound": "ヨウ"}, "components": [{"c": "氵", "en": "water"}, {"c": "羊", "en": "sheep"}], "tip": "Water + sheep (ヨウ) — ocean / Western. ON ヨウ (西洋)."},
+
+  "理": {"radical": {"c": "王", "en": "jade / king"}, "phonetic": {"c": "里", "en": "village", "sound": "リ"}, "components": [{"c": "王", "en": "jade"}, {"c": "里", "en": "village"}], "tip": "Jade + village (リ) — polish jade into reason / logic. ON リ (料理)."},
+
+  "旅": {"radical": {"c": "方", "en": "direction / flag"}, "components": [{"c": "方", "en": "flag"}, {"c": "𠂉", "en": "person"}, {"c": "氏", "en": "clan-like"}], "tip": "Flag and people on the move — trip / travel. ON リョ."},
+
+  "料": {"radical": {"c": "米", "en": "rice"}, "phonetic": {"c": "斗", "en": "dipper", "sound": "リョウ"}, "components": [{"c": "米", "en": "rice"}, {"c": "斗", "en": "dipper"}], "tip": "Rice + measuring dipper — fee / materials (measured rice). ON リョウ."},
 };
