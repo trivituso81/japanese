@@ -5328,8 +5328,8 @@ function renderKanjiDetail(raw) {
 
   const topNav = nextLabel
     ? `<div class="k-study-nav">
-        <a class="k-study-back" href="#/kanji/drill" id="knextlearn">${esc(nextLabel)}</a>
-        <a class="k-study-back k-study-back-alt" href="${esc(backHref)}">${esc(backLabel)}</a>
+        <a class="k-study-back" href="${esc(backHref)}">${esc(backLabel)}</a>
+        <a class="k-study-back k-study-back-alt" href="#/kanji/drill" id="knextlearn">${esc(nextLabel)}</a>
       </div>`
     : `<a class="k-study-back" href="${esc(backHref)}">${esc(backLabel)}</a>`;
 
