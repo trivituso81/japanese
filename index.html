@@ -121,74 +121,153 @@
   .crumbs a { text-decoration: none; color: var(--text-soft); }
   .crumbs a:hover { color: var(--seal); text-decoration: underline; }
 
-  /* Home landing — one composition above the bottom bar on a phone */
+  /* Home landing — brand · stats grid · CTA, sized for a phone fold */
   .home-landing {
-    display: flex; flex-direction: column; justify-content: flex-start;
+    display: flex; flex-direction: column;
     flex: 1 1 auto; min-height: 0;
-    padding: 10px 0 6px; gap: 18px;
+    padding: 6px 0 4px; gap: 12px;
   }
-  .home-brand { text-align: center; padding: 2px 8px 0; }
+  .home-brand {
+    text-align: center; padding: 4px 8px 2px;
+    flex: 0 0 auto;
+  }
   .home-brand .brand {
-    font-family: var(--jp-mincho); font-size: clamp(2.35rem, 10vw, 3.1rem);
-    line-height: 1.1; letter-spacing: .08em; color: var(--seal);
-    margin: 0 0 8px; font-weight: 400;
+    font-family: var(--jp-mincho); font-size: clamp(2.5rem, 11vw, 3.35rem);
+    line-height: 1.08; letter-spacing: .1em; color: var(--seal);
+    margin: 0; font-weight: 400;
   }
   .home-brand .tag {
-    font-family: var(--serif); font-size: 16px; line-height: 1.4;
-    font-style: italic; color: var(--text-soft); margin: 0;
+    font-family: var(--serif); font-size: 14px; line-height: 1.35;
+    font-style: italic; color: var(--text-soft); margin: 8px 0 0;
     max-width: 28ch; margin-inline: auto;
   }
+
   .home-stats {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
-    border: 1px solid var(--rule-strong); background: var(--rule);
-    overflow: hidden; flex: 0 0 auto;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    gap: 1px; flex: 1 1 auto; min-height: 220px;
+    border: 1px solid var(--rule-strong); background: var(--rule-strong);
+    overflow: hidden;
   }
   .home-stats .stat {
-    background: var(--bg); padding: 18px 14px 16px; text-align: center;
+    background: var(--bg);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: space-between;
+    padding: 12px 10px 11px; text-align: center; min-height: 0; gap: 6px;
   }
   .home-stats .k {
-    font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase;
-    color: var(--text-soft); font-weight: 700;
+    font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--text-soft); font-weight: 700; flex: 0 0 auto;
+  }
+  .home-stats .viz {
+    flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+    min-height: 0; width: 100%; position: relative;
+  }
+  .home-stats .meta {
+    flex: 0 0 auto; width: 100%;
   }
   .home-stats .val {
-    font-family: var(--serif); font-size: clamp(1.85rem, 8vw, 2.45rem);
-    font-weight: 400; line-height: 1.1; margin-top: 8px;
+    font-family: var(--serif); font-size: clamp(1.15rem, 4.6vw, 1.45rem);
+    font-weight: 400; line-height: 1.15;
     font-variant-numeric: tabular-nums; color: var(--text);
   }
-  .home-stats .of {
-    font-size: 15px; color: var(--text-soft); font-weight: 400;
-  }
+  .home-stats .of { font-size: .72em; color: var(--text-soft); }
   .home-stats .sub {
-    font-family: var(--serif); font-size: 13px; color: var(--text-soft);
-    margin-top: 6px; line-height: 1.35;
+    font-family: var(--serif); font-size: 12px; color: var(--text-soft);
+    margin-top: 2px; line-height: 1.3;
   }
+
+  /* 円相 — brush circle for vocabulary */
+  .viz-enso { width: min(92px, 34vw); height: auto; display: block; }
+  .viz-enso .track {
+    fill: none; stroke: var(--rule-strong); stroke-width: 5.5;
+    stroke-linecap: round;
+  }
+  .viz-enso .ink {
+    fill: none; stroke: var(--seal); stroke-width: 5.5;
+    stroke-linecap: round;
+    transform-origin: 44px 44px;
+    animation: enso-draw .9s ease-out both;
+  }
+  .viz-enso .pct {
+    font-family: var(--jp-mincho); font-size: 15px; fill: var(--text);
+  }
+  @keyframes enso-draw {
+    from { stroke-dashoffset: 240; opacity: .35; }
+  }
+
+  /* 一筆 — single brush stroke for lessons */
+  .viz-brush { width: 100%; max-width: 132px; height: 28px; display: block; }
+  .viz-brush .track { fill: var(--bg-inset); }
+  .viz-brush .ink { fill: var(--done); }
+  .viz-brush .tip { fill: var(--done); opacity: .85; }
+
+  /* 算木 — level pillars for kanji */
+  .viz-pillars {
+    display: flex; align-items: flex-end; justify-content: center;
+    gap: 14px; height: 64px; width: 100%; padding: 0 6px;
+  }
+  .viz-pillars .pillar {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: flex-end; gap: 4px; height: 100%; flex: 0 0 auto;
+  }
+  .viz-pillars .shaft {
+    width: 14px; background: var(--bg-inset);
+    display: flex; align-items: flex-end; height: 48px;
+    border: 1px solid var(--rule);
+  }
+  .viz-pillars .fill {
+    width: 100%; background: var(--seal);
+    transition: height .6s ease-out;
+  }
+  .viz-pillars .pillar:nth-child(2) .fill { background: var(--now); }
+  .viz-pillars .pillar:nth-child(3) .fill { background: var(--accent); }
+  .viz-pillars .plab {
+    font-size: 10px; font-weight: 700; letter-spacing: .08em;
+    color: var(--text-soft); text-transform: uppercase;
+  }
+
+  /* 青海波 sparkline — recent verb answers as a quiet wave */
+  .viz-wave { width: 100%; max-width: 140px; height: 56px; display: block; }
+  .viz-wave .sea { fill: var(--accent); fill-opacity: .12; }
+  .viz-wave .line {
+    fill: none; stroke: var(--accent); stroke-width: 1.6;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .viz-wave .empty {
+    fill: none; stroke: var(--rule-strong); stroke-width: 1.2;
+    stroke-dasharray: 3 4; stroke-linecap: round;
+  }
+
   .home-next {
-    text-align: center; padding: 2px 4px 0;
-  }
-  .home-next .say {
-    font-family: var(--serif); font-size: 16.5px; line-height: 1.35;
-    color: var(--text); margin: 0 0 12px; font-weight: 400;
+    text-align: center; padding: 2px 0 0; flex: 0 0 auto;
   }
   .home-next .btn {
-    min-width: 200px; font-size: 15px; padding: 12px 18px; min-height: 48px;
+    display: block; width: 100%; max-width: none;
+    font-size: 15.5px; padding: 14px 18px; min-height: 50px;
+    letter-spacing: .06em;
   }
   .home-utils {
-    display: flex; flex-wrap: wrap; gap: 8px 18px; justify-content: center;
-    margin-top: auto; padding-top: 4px;
-    font-size: 13.5px; color: var(--text-faint);
+    display: flex; flex-wrap: wrap; gap: 6px 16px; justify-content: center;
+    flex: 0 0 auto; padding-top: 2px;
+    font-size: 13px; color: var(--text-faint);
   }
   .home-utils button, .home-utils .linkish {
-    font: inherit; font-size: 13.5px; font-weight: 600; letter-spacing: .03em;
+    font: inherit; font-size: 13px; font-weight: 600; letter-spacing: .03em;
     color: var(--text-soft); background: none; border: 0; padding: 0;
     cursor: pointer; text-decoration: underline; text-underline-offset: 3px;
   }
   .home-utils button:hover, .home-utils .linkish:hover { color: var(--seal); }
 
+  @media (prefers-reduced-motion: reduce) {
+    .viz-enso .ink { animation: none; }
+    .viz-pillars .fill { transition: none; }
+  }
+
   /* Dash fills the viewport above the bar; masthead/footer stay out of the way */
   body[data-view="dash"] .wrap {
     min-height: 100dvh;
-    padding-top: max(14px, env(safe-area-inset-top, 0px));
-    padding-bottom: calc(var(--botnav-h, 58px) + 10px + env(safe-area-inset-bottom, 0px));
+    padding-top: max(12px, env(safe-area-inset-top, 0px));
+    padding-bottom: calc(var(--botnav-h, 58px) + 8px + env(safe-area-inset-bottom, 0px));
     display: flex; flex-direction: column;
   }
   body[data-view="dash"] header.masthead,
@@ -206,28 +285,26 @@
   }
 
   @media (max-height: 700px) {
-    .home-landing { gap: 14px; padding-top: 6px; }
-    .home-brand .brand { font-size: clamp(2rem, 9vw, 2.5rem); margin-bottom: 6px; }
-    .home-brand .tag { font-size: 14.5px; }
-    .home-stats .stat { padding: 14px 12px 13px; }
-    .home-stats .k { font-size: 11px; }
-    .home-stats .val { font-size: clamp(1.6rem, 7vw, 2.1rem); margin-top: 6px; }
-    .home-stats .of { font-size: 14px; }
-    .home-stats .sub { font-size: 12px; margin-top: 4px; }
-    .home-next .say { font-size: 15px; margin-bottom: 10px; }
-    .home-next .btn { font-size: 14px; min-height: 44px; padding: 10px 16px; }
-    .home-utils { font-size: 13px; }
-    .home-utils button, .home-utils .linkish { font-size: 13px; }
+    .home-landing { gap: 10px; }
+    .home-brand .brand { font-size: clamp(2.1rem, 9vw, 2.7rem); }
+    .home-brand .tag { font-size: 13px; margin-top: 5px; }
+    .home-stats { min-height: 180px; }
+    .home-stats .stat { padding: 10px 8px 9px; gap: 4px; }
+    .viz-enso { width: min(78px, 30vw); }
+    .viz-pillars { height: 52px; gap: 12px; }
+    .viz-pillars .shaft { height: 40px; width: 12px; }
+    .viz-wave { height: 46px; }
+    .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
   }
   @media (max-height: 560px) {
-    .home-landing { gap: 10px; padding-top: 4px; }
+    .home-landing { gap: 8px; }
     .home-brand .tag { display: none; }
     .home-stats .sub { display: none; }
-    .home-stats .stat { padding: 12px 10px; }
+    .home-stats { min-height: 150px; }
     .home-utils { display: none; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
-    .home-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .home-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 1fr; min-height: 120px; }
     .home-next { display: none; }
   }
 
@@ -235,7 +312,8 @@
   .btn { font: inherit; font-family: var(--ui); font-size: 12.5px; font-weight: 600;
     padding: 8px 15px; cursor: pointer; letter-spacing: .03em;
     border: 1px solid var(--rule-strong); background: var(--bg); color: var(--text-soft);
-    border-radius: 0; white-space: nowrap; transition: border-color .16s, color .16s, background .16s; }
+    border-radius: 0; white-space: nowrap; text-decoration: none;
+    transition: border-color .16s, color .16s, background .16s; }
   .btn:hover:not(:disabled) { border-color: var(--text-soft); color: var(--text); background: var(--bg-soft); }
   .btn:disabled { opacity: 0.36; cursor: not-allowed; }
   .btn.primary { background: var(--seal); border-color: var(--seal); color: #fdf8f1;
@@ -1984,6 +2062,92 @@ function wireStatusSelects() {
    "where is lesson 31", and is a page of its own. Kept together, the table won
    — on a phone it pushed the standing, the recommendation and any unfinished
    round several screens down. */
+
+/* Home quadrant visuals — same numbers as before, drawn in brush/ink idioms
+   rather than modern chart chrome: 円相 for vocabulary, a single brush stroke
+   for lessons, 算木 pillars for kanji levels, and a quiet wave of recent
+   verb answers. */
+function clampPct(n) {
+  return Math.max(0, Math.min(100, Math.round(n)));
+}
+function ensoViz(pct) {
+  const p = clampPct(pct);
+  const r = 34, c = 2 * Math.PI * r;
+  /* Leave the classic open gap in the circle (~14%), then ink only as far
+     as progress has gone along the remainder. */
+  const gap = c * 0.14;
+  const arc = c - gap;
+  const ink = (p / 100) * arc;
+  const rest = c - ink;
+  return `<svg class="viz-enso" viewBox="0 0 88 88" aria-hidden="true">
+    <circle class="track" cx="44" cy="44" r="${r}"
+      stroke-dasharray="${arc} ${gap}" stroke-dashoffset="${c * 0.08}"/>
+    <circle class="ink" cx="44" cy="44" r="${r}"
+      stroke-dasharray="${ink} ${rest}" stroke-dashoffset="${c * 0.08}"/>
+    <text class="pct" x="44" y="48" text-anchor="middle">${p}<tspan font-size="10">%</tspan></text>
+  </svg>`;
+}
+function brushViz(pct) {
+  const p = clampPct(pct);
+  const w = Math.max(p > 0 ? 8 : 0, (p / 100) * 118);
+  /* Slightly uneven brush tip — not a stadium progress pill. */
+  return `<svg class="viz-brush" viewBox="0 0 120 28" aria-hidden="true">
+    <path class="track" d="M2 10h116v8H2z"/>
+    ${w ? `<path class="ink" d="M2 9.5h${Math.max(0, w - 6)}c2.2 0 4 .8 5.2 2.2L${w + 1} 18H2z"/>
+    <ellipse class="tip" cx="${w}" cy="14" rx="3.2" ry="5.2"/>` : ""}
+  </svg>`;
+}
+function pillarsViz(levels) {
+  if (!levels.length) return `<div class="viz-pillars" aria-hidden="true"></div>`;
+  return `<div class="viz-pillars" aria-hidden="true">${levels.map(l => {
+    const h = l.total ? Math.round((l.known / l.total) * 48) : 0;
+    return `<div class="pillar">
+      <div class="shaft"><div class="fill" style="height:${Math.max(h, l.known ? 3 : 0)}px"></div></div>
+      <span class="plab">${esc(l.id)}</span>
+    </div>`;
+  }).join("")}</div>`;
+}
+function waveViz(history) {
+  const raw = (history || []).slice(-16);
+  const W = 140, H = 56, pad = 6;
+  if (!raw.length) {
+    return `<svg class="viz-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+      <path class="empty" d="M6 30 C 30 18, 52 42, 74 30 S 118 18, 134 30"/>
+    </svg>`;
+  }
+  /* Soften the binary answers into a quiet wave — still readable as
+     recent form, without the jagged modern sparkline look. */
+  const pts = raw.map((_, i, a) => {
+    const slice = a.slice(Math.max(0, i - 1), i + 2);
+    return slice.reduce((s, x) => s + x, 0) / slice.length;
+  });
+  const step = (W - pad * 2) / Math.max(pts.length - 1, 1);
+  const yOf = v => pad + (1 - v) * (H - pad * 2);
+  const coords = pts.map((v, i) => [pad + i * step, yOf(v)]);
+  let line = `M${coords[0][0].toFixed(1)},${coords[0][1].toFixed(1)}`;
+  for (let i = 1; i < coords.length; i++) {
+    const p0 = coords[i - 1], p1 = coords[i];
+    const mx = ((p0[0] + p1[0]) / 2).toFixed(1);
+    line += ` Q ${p0[0].toFixed(1)},${p0[1].toFixed(1)} ${mx},${((p0[1] + p1[1]) / 2).toFixed(1)}`;
+    if (i === coords.length - 1) line += ` T ${p1[0].toFixed(1)},${p1[1].toFixed(1)}`;
+  }
+  const area = `${line} L${coords[coords.length - 1][0].toFixed(1)},${H - pad} L${coords[0][0].toFixed(1)},${H - pad} Z`;
+  return `<svg class="viz-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+    <path class="sea" d="${area}"/>
+    <path class="line" d="${line}"/>
+  </svg>`;
+}
+function homeStat(k, viz, valHtml, sub) {
+  return `<div class="stat">
+    <div class="k">${esc(k)}</div>
+    <div class="viz">${viz}</div>
+    <div class="meta">
+      <div class="val">${valHtml}</div>
+      <div class="sub">${sub}</div>
+    </div>
+  </div>`;
+}
+
 function renderHome() {
   document.getElementById("crumbs").innerHTML = "";
 
@@ -1995,16 +2159,21 @@ function renderHome() {
   const wordsLearned = vocabLessons.reduce((a, v) => a + v.learned, 0);
   const wordsTotal = vocabLessons.reduce((a, v) => a + v.total, 0);
   const wordsStarted = vocabLessons.reduce((a, v) => a + v.seen, 0) - wordsLearned;
-  const kanjiKnownN = KANJI_LEVELS.filter(l => l.ready).reduce((n, l) => n + kanjiKnown(l.id), 0);
-  const kanjiTotalN = KANJI_LEVELS.filter(l => l.ready).reduce((n, l) => n + kanjiAt(l.id).length, 0);
-  const vAcc = verbAccuracy();
-  const next = nextUp();
+  const wordsPct = wordsTotal ? (wordsLearned / wordsTotal) * 100 : 0;
+  const solidPct = LESSONS.length ? (solid / LESSONS.length) * 100 : 0;
 
-  const stat = (k, val, of, sub) => `<div class="stat">
-    <div class="k">${esc(k)}</div>
-    <div class="val">${val}${of != null ? `<span class="of"> / ${of}</span>` : ""}</div>
-    <div class="sub">${sub}</div>
-  </div>`;
+  const kanjiLevels = KANJI_LEVELS.filter(l => l.ready).map(l => ({
+    id: l.id,
+    known: kanjiKnown(l.id),
+    total: kanjiAt(l.id).length
+  }));
+  const kanjiKnownN = kanjiLevels.reduce((n, l) => n + l.known, 0);
+  const kanjiTotalN = kanjiLevels.reduce((n, l) => n + l.total, 0);
+  const kAcc = kanjiAccuracy();
+
+  const vAcc = verbAccuracy();
+  const vHist = (S.verbs && S.verbs.history) || [];
+  const next = nextUp();
 
   document.getElementById("view").innerHTML = `
     <section class="home-landing">
@@ -2014,16 +2183,23 @@ function renderHome() {
       </div>
 
       <div class="home-stats">
-        ${stat("Words learned", wordsLearned, wordsTotal,
+        ${homeStat("Words learned", ensoViz(wordsPct),
+          `${wordsLearned}<span class="of"> / ${wordsTotal}</span>`,
           wordsStarted ? `${wordsStarted} more started` : `box ${LEARNED_BOX} of 5`)}
-        ${stat("Lessons solid", solid, LESSONS.length, "grammar at 80%+")}
-        ${stat("Kanji known", kanjiKnownN, kanjiTotalN,
-          KANJI_LEVELS.filter(l => l.ready).map(l => l.id).join(" · "))}
-        ${stat("Verb drill", vAcc === null ? "—" : vAcc + "%", null, verbSub())}
+        ${homeStat("Lessons solid", brushViz(solidPct),
+          `${solid}<span class="of"> / ${LESSONS.length}</span>`,
+          "grammar at 80%+")}
+        ${homeStat("Kanji known", pillarsViz(kanjiLevels),
+          `${kanjiKnownN}<span class="of"> / ${kanjiTotalN}</span>`,
+          kAcc === null
+            ? kanjiLevels.map(l => l.id).join(" · ")
+            : `${kAcc}% recent · ${kanjiLevels.map(l => l.id).join(" · ")}`)}
+        ${homeStat("Verb drill", waveViz(vHist),
+          vAcc === null ? "—" : `${vAcc}%`,
+          verbSub())}
       </div>
 
       ${next ? `<div class="home-next">
-        <p class="say">${esc(next.k)}</p>
         <a class="btn primary" href="${next.go}">${esc(next.label || "Continue")}</a>
       </div>` : ""}
 
