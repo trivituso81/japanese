@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815x">
+<link rel="manifest" href="site.webmanifest?v=20260815y">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815x";
+window.__BUILD__ = "20260815y";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1761,7 +1761,7 @@ window.__BUILD__ = "20260815x";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815x"></script>
+<script src="japanese-data.js?v=20260815y"></script>
 <script>
 /* ============================================================
    State
@@ -4627,6 +4627,7 @@ function recordVerb(ok, type) {
    address, so the breadcrumb back to the setup table is a real link, the
    browser's back button behaves, and a form can be bookmarked. */
 function startVerbs(form, types) {
+  unlockTts();
   const o = vOpts();
   const pool = verbPool(o.ceiling, form);
   if (!pool.length) return goto("#/verbs");
@@ -4732,6 +4733,7 @@ function drawVerb() {
     vn.focus();
     vn.addEventListener("click", () => {
       unlockTts();
+      flushPendingSpeak();
       VERB.verdict = null;
       drawVerb();
     });
@@ -4774,12 +4776,17 @@ function drawVerb() {
 
   const input = document.getElementById("vin");
   input.focus();
-  const send = () => { unlockTts(); submitVerb(input.value); };
+  const send = () => { unlockTts(); flushPendingSpeak(); submitVerb(input.value); };
   document.getElementById("vgo").addEventListener("click", send);
   document.getElementById("vskip").addEventListener("click", () => {
     unlockTts();
+    flushPendingSpeak();
     submitVerb("");
   });
+  input.addEventListener("pointerdown", () => {
+    unlockTts();
+    flushPendingSpeak();
+  }, { once: true });
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") { e.preventDefault(); send(); }
   });
