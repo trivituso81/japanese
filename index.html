@@ -506,9 +506,26 @@ window.__BUILD__ = "20260815n";
     font-size: clamp(1.4rem, 5.2vw, 1.8rem);
     line-height: 1.7;
     color: var(--text);
-    margin-top: 2px;
+    margin-top: 0;
     letter-spacing: .02em;
   }
+  .card-play .k-ans-jp-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 2px;
+  }
+  .card-play .k-ans-jp-row .speak {
+    margin-top: 0;
+    padding: 6px;
+    min-width: 36px;
+    min-height: 36px;
+    justify-content: center;
+    flex: 0 0 auto;
+  }
+  .card-play .k-ans-jp-row .speak .speak-lab { display: none; }
+  .card-play .k-ans-jp-row .speak svg { width: 16px; height: 16px; }
   .card-play .k-ans-jp rt {
     font-family: var(--jp);
     font-size: 0.38em;
@@ -2086,9 +2103,12 @@ const SPEAK_SVG = `<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"
   <path fill="currentColor" d="M3 9v6h4l5 4V5L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
 </svg>`;
 
-function speakButton() {
-  return `<button type="button" class="speak" id="speak" aria-label="Pronounce">
-    ${SPEAK_SVG}<span class="speak-lab">Listen</span></button>`;
+function speakButton(opts) {
+  const o = opts || {};
+  const lab = o.label === false ? "" : `<span class="speak-lab">Listen</span>`;
+  const cls = o.icon ? "speak icon" : "speak";
+  return `<button type="button" class="${cls}" id="speak" aria-label="Pronounce">
+    ${SPEAK_SVG}${lab}</button>`;
 }
 
 function wireSpeak(reading, kanji) {
@@ -5384,7 +5404,10 @@ function drawKanji() {
           <div class="card-reveal is-open">
             <div class="k-ans-mean">${esc(k.en)}</div>
             ${k.ex && k.ex.w
-              ? `<div class="k-ans-jp" lang="ja">${kExampleRuby(k)}</div>` : ""}
+              ? `<div class="k-ans-jp-row">
+                  <div class="k-ans-jp" lang="ja">${kExampleRuby(k)}</div>
+                  ${speakButton({ icon: true, label: false })}
+                </div>` : ""}
             <div class="k-ans-meta">${esc(kReadings(k) || "—")}${
               n ? ` · L${n}` : ""}</div>
             ${typed ? `<div class="k-ans-meta">you: ${esc(typed)}</div>` : ""}
@@ -5409,6 +5432,7 @@ function drawKanji() {
       e.preventDefault();
       goKanjiLearn(k.c);
     });
+    if (k.ex && k.ex.w) wireSpeak(k.ex.r || k.ex.w, k.ex.w);
     return;
   }
 
