@@ -401,19 +401,6 @@
   }
   body[data-view="kanji-play"] .card-play .card-face { bottom: 7.5em; }
   body[data-view="kanji-play"] .card-play .card-reveal { height: 7.5em; }
-  /* Typing dock: input + Skip/Check live in the reveal band so the keyboard
-     only has to keep one compact strip visible — the character stays above. */
-  body[data-view="kanji-play"] .card-play .card:has(.kanji-type) {
-    display: flex; flex-direction: column;
-  }
-  body[data-view="kanji-play"] .card-play .card:has(.kanji-type) .card-face {
-    position: relative; inset: auto; flex: 1 1 auto; min-height: 0;
-    bottom: auto;
-  }
-  body[data-view="kanji-play"] .card-play .card-reveal.kanji-type {
-    position: relative; inset: auto; height: auto; flex: 0 0 auto;
-    min-height: 0; padding: 10px 12px 12px; gap: 8px;
-  }
   .card-play .kbig-face {
     font-family: var(--jp-mincho); font-weight: 400;
     font-size: clamp(4.5rem, 26vw, 7.5rem); line-height: 1;
@@ -428,12 +415,6 @@
   .card-play .kin:focus {
     outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent);
   }
-  .card-play .k-type-acts {
-    display: flex; gap: 8px; width: 100%; max-width: 420px;
-  }
-  .card-play .k-type-acts .btn {
-    flex: 1 1 0; min-height: 48px; font-size: 15px; padding: 10px 12px;
-  }
   .card-play .k-ans-mean {
     font-family: var(--serif); font-size: clamp(1.25rem, 4.5vw, 1.6rem);
     color: var(--text); line-height: 1.35;
@@ -442,43 +423,65 @@
     font-size: 12.5px; color: var(--text-soft); line-height: 1.4;
   }
 
-  /* Keyboard open — fit to the visual viewport, hide chrome, shrink the glyph
-     so 是 (etc.) stays fully readable above the typing dock. */
-  body.kb-open[data-view="kanji-play"] .wrap {
-    position: fixed;
-    top: var(--vv-top, 0px);
-    left: 0;
-    right: 0;
-    width: 100%;
-    max-width: none;
-    padding-bottom: 6px;
-    z-index: 5;
+  /* Typing lives in a frame pinned to visualViewport — not the layout
+     viewport — so iOS cannot scroll the glyph out from under the keyboard. */
+  body.kanji-typing {
+    overflow: hidden !important;
+    overscroll-behavior: none;
   }
-  body.kb-open[data-view="kanji-play"] .botnav {
-    visibility: hidden; pointer-events: none;
+  body.kanji-typing .wrap {
+    visibility: hidden;
+    pointer-events: none;
   }
-  body.kb-open[data-view="kanji-play"] .card-play .stagehead {
-    padding: 4px 2px 6px; font-size: 11px;
+  body.kanji-typing .botnav {
+    visibility: hidden !important;
+    pointer-events: none !important;
   }
-  body.kb-open[data-view="kanji-play"] .card-play .prog { margin-bottom: 2px; }
-  body.kb-open[data-view="kanji-play"] .card-play .cardmeta { display: none; }
-  body.kb-open[data-view="kanji-play"] .card-play .kbig-face {
-    font-size: clamp(2.6rem, 14vmin, 4.2rem);
-  }
-  body.kb-open[data-view="kanji-play"] .card-play .card:has(.kanji-type) .card-face {
-    padding: 8px 10px 6px;
-  }
-  body.kb-open[data-view="kanji-play"] .card-play .card-reveal.kanji-type {
-    padding: 8px 10px 10px; gap: 6px;
-  }
-  body.kb-open[data-view="kanji-play"] .card-play .kin {
-    font-size: 16px; padding: 10px 12px;
-  }
-  body.kb-open[data-view="kanji-play"] .card-play .k-type-acts .btn {
-    min-height: 44px; padding: 8px 10px; font-size: 14px;
-  }
-  body.kb-open {
+  .k-type-frame {
+    display: none;
+    flex-direction: column;
+    box-sizing: border-box;
+    margin: 0; padding: 8px 14px 10px;
+    background: var(--washi);
+    color: var(--text);
     overflow: hidden;
+    z-index: 40;
+    -webkit-overflow-scrolling: auto;
+  }
+  body.kanji-typing .k-type-frame {
+    display: flex;
+  }
+  .k-type-frame .k-type-top {
+    flex: 0 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; padding: 2px 0 6px;
+    font-size: 12px; color: var(--text-soft); letter-spacing: .04em;
+  }
+  .k-type-frame .k-type-top b { color: var(--text); font-variant-numeric: tabular-nums; }
+  .k-type-frame .k-type-glyph {
+    flex: 1 1 auto; min-height: 0;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    gap: 8px; text-align: center;
+  }
+  .k-type-frame .kbig-face {
+    font-size: var(--k-glyph, clamp(2.75rem, 18vmin, 5.5rem));
+  }
+  .k-type-frame .tick {
+    margin: 0; font-size: 12px; color: var(--text-soft);
+  }
+  .k-type-frame .k-type-dock {
+    flex: 0 0 auto;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px; padding-top: 6px;
+    border-top: 1px solid var(--rule);
+  }
+  .k-type-frame .kin { max-width: none; }
+  .k-type-frame .k-type-acts {
+    display: flex; gap: 8px; width: 100%;
+  }
+  .k-type-frame .k-type-acts .btn {
+    flex: 1 1 0; min-height: 48px; font-size: 15px; padding: 10px 12px;
   }
   .kanji-browse {
     margin-top: 8px; font-size: 13px; color: var(--text-soft);
@@ -1276,12 +1279,6 @@
     body[data-view="cards-play"] .card-play .card-reveal { height: 6em; }
     body[data-view="kanji-play"] .card-play .card-face { bottom: 7em; }
     body[data-view="kanji-play"] .card-play .card-reveal { height: 7em; }
-    body[data-view="kanji-play"] .card-play .card:has(.kanji-type) .card-face {
-      bottom: auto;
-    }
-    body[data-view="kanji-play"] .card-play .card-reveal.kanji-type {
-      height: auto;
-    }
     body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
     body[data-view="cards-play"] .card-play .prompt.jp { font-size: clamp(2.1rem, 9vw, 3rem); }
     body[data-view="cards-play"] .card-play .answer { font-size: clamp(1.35rem, 5vw, 1.75rem); }
@@ -1414,6 +1411,8 @@
     Verbs
   </a>
 </nav>
+
+<div class="k-type-frame" id="kframe" hidden></div>
 
 <script src="japanese-data.js"></script>
 <script>
@@ -4588,6 +4587,17 @@ function enterKanjiPlay() {
   syncKanjiKeyboard();
 }
 
+function leaveKanjiTyping() {
+  document.body.classList.remove("kanji-typing");
+  const frame = document.getElementById("kframe");
+  if (frame) {
+    frame.hidden = true;
+    frame.innerHTML = "";
+    frame.removeAttribute("style");
+  }
+  syncKanjiKeyboard();
+}
+
 function saveKanjiSession() {
   if (!KDRILL) return;
   if (KDRILL.i >= KDRILL.list.length) return clearKanjiSession();
@@ -4615,6 +4625,7 @@ function drawKanji() {
   if (KDRILL.i >= total && !KDRILL.verdict) return drawKanjiEnd(stage);
 
   if (KDRILL.verdict) {
+    leaveKanjiTyping();
     const { k, typed } = KDRILL.verdict;
     const last = KDRILL.answers[KDRILL.answers.length - 1] || {};
     const ok = !!last.ok;
@@ -4658,49 +4669,36 @@ function drawKanji() {
 
   const k = KDRILL.list[KDRILL.i];
   const lastOk = KDRILL.lastOk;
-  stage.innerHTML = drillStage({
-    left: `<b>${KDRILL.i + 1}</b> of <b>${total}</b> · <b>${total - KDRILL.i}</b> left`,
-    right: `${runningScore(KDRILL.answers)}
+  /* Typing uses a separate frame pinned to visualViewport (not the scrolled
+     page). The in-flow stage stays empty so Safari has nothing to shove up. */
+  stage.innerHTML = "";
+  const frame = document.getElementById("kframe");
+  frame.hidden = false;
+  frame.innerHTML = `
+    <div class="k-type-top">
+      <span><b>${KDRILL.i + 1}</b> of <b>${total}</b> · <b>${total - KDRILL.i}</b> left
+        · ${runningScore(KDRILL.answers)}</span>
       <button type="button" class="btn sm stage-undo" id="kundo"
-        ${KDRILL.answers.length ? "" : "disabled"}>Undo</button>`,
-    done: KDRILL.i, total,
-    body: `
-    <div class="deck">
-      <div class="card" id="face">
-        <div class="card-face">
-          ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
-            ${esc(lastOk.en)}</p>` : ""}
-          <div class="kbig-face">${esc(k.c)}</div>
-        </div>
-        <div class="card-reveal is-open kanji-type">
-          <input type="text" class="kin" id="kin" autocomplete="off" autocapitalize="off"
-            autocorrect="off" spellcheck="false" placeholder="Meaning in English"
-            enterkeyhint="done">
-          <div class="k-type-acts">
-            <button class="btn bad wide" id="kskip" type="button">Skip</button>
-            <button class="btn primary wide" id="kgo" type="button">Check</button>
-          </div>
-        </div>
-      </div>
+        ${KDRILL.answers.length ? "" : "disabled"}>Undo</button>
     </div>
-    <div class="cardmeta">
-      <span class="taphint">Type the meaning · Enter to check</span>
-    </div>`
-  });
+    <div class="k-type-glyph">
+      ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
+        ${esc(lastOk.en)}</p>` : ""}
+      <div class="kbig-face">${esc(k.c)}</div>
+    </div>
+    <div class="k-type-dock">
+      <input type="text" class="kin" id="kin" autocomplete="off" autocapitalize="off"
+        autocorrect="off" spellcheck="false" placeholder="Meaning in English"
+        enterkeyhint="done">
+      <div class="k-type-acts">
+        <button class="btn bad wide" id="kskip" type="button">Skip</button>
+        <button class="btn primary wide" id="kgo" type="button">Check</button>
+      </div>
+    </div>`;
+  document.body.classList.add("kanji-typing");
+  syncKanjiKeyboard();
 
   const input = document.getElementById("kin");
-  const pinViewport = () => {
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-    syncKanjiKeyboard();
-  };
-  /* Focus after layout so iOS sizes the visual viewport against the dock,
-     then pin scroll so the character is not shoved off-screen. */
-  requestAnimationFrame(() => {
-    input.focus({ preventScroll: true });
-    pinViewport();
-  });
   const send = () => submitKanji(input.value);
   document.getElementById("kgo").addEventListener("click", send);
   document.getElementById("kskip").addEventListener("click", () => submitKanji(""));
@@ -4708,12 +4706,20 @@ function drawKanji() {
   input.addEventListener("keydown", e => {
     if (e.key === "Enter") { e.preventDefault(); send(); }
   });
-  input.addEventListener("focus", () => {
-    requestAnimationFrame(pinViewport);
-  });
+  /* Focus without scrolling; keep pinning through the keyboard animation. */
+  const focusIn = () => {
+    try { input.focus({ preventScroll: true }); }
+    catch (_) { input.focus(); }
+    syncKanjiKeyboard();
+    requestAnimationFrame(syncKanjiKeyboard);
+    setTimeout(syncKanjiKeyboard, 50);
+    setTimeout(syncKanjiKeyboard, 250);
+  };
+  focusIn();
 }
 
 function submitKanji(typed) {
+  leaveKanjiTyping();
   const k = KDRILL.list[KDRILL.i];
   if (!k) return;
   const ok = judgeKanji(typed, k);
@@ -4786,6 +4792,7 @@ function regradeKanji(ok) {
 }
 
 function drawKanjiEnd(stage) {
+  leaveKanjiTyping();
   const st = kStats();
   if (!KDRILL.counted) { st.runs = (st.runs || 0) + 1; KDRILL.counted = true; save(); }
   clearKanjiSession();
@@ -4926,34 +4933,45 @@ wireBotnavScroll();
 wireKanjiKeyboard();
 route();
 
-/* Keep the kanji character in the visible area when iOS raises the keyboard.
-   visualViewport shrinks; we match the play shell to that height and toggle a
-   compact typing mode instead of letting Safari scroll the glyph off-screen. */
+/* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
+   *layout* viewport when the keyboard opens; matching vv.offsetTop/height
+   keeps the glyph inside the actually visible rectangle. */
 function syncKanjiKeyboard() {
-  const vv = window.visualViewport;
+  const frame = document.getElementById("kframe");
   const playing = document.body.dataset.view === "kanji-play";
-  if (!playing) {
-    document.body.classList.remove("kb-open");
+  const typing = playing && document.body.classList.contains("kanji-typing") && frame && !frame.hidden;
+
+  if (!typing) {
+    if (!playing) document.body.classList.remove("kanji-typing");
+    if (frame && document.body.dataset.view !== "kanji-play") {
+      frame.hidden = true;
+      frame.innerHTML = "";
+      frame.removeAttribute("style");
+    }
     document.documentElement.style.removeProperty("--play-h");
-    document.documentElement.style.removeProperty("--vv-top");
     return;
   }
-  const layoutH = window.innerHeight || document.documentElement.clientHeight;
-  const visibleH = vv ? vv.height : layoutH;
-  const offset = vv ? vv.offsetTop : 0;
-  const inset = Math.max(0, layoutH - visibleH - offset);
-  const open = inset > 80;
-  document.body.classList.toggle("kb-open", open);
-  if (open) {
-    document.documentElement.style.setProperty("--play-h", `${Math.round(visibleH)}px`);
-    document.documentElement.style.setProperty("--vv-top", `${Math.round(offset)}px`);
-    window.scrollTo(0, 0);
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  } else {
-    document.documentElement.style.setProperty("--play-h", "100dvh");
-    document.documentElement.style.removeProperty("--vv-top");
-  }
+
+  const vv = window.visualViewport;
+  const top = vv ? vv.offsetTop : 0;
+  const left = vv ? vv.offsetLeft : 0;
+  const width = vv ? vv.width : window.innerWidth;
+  const height = vv ? vv.height : window.innerHeight;
+  frame.style.position = "fixed";
+  frame.style.top = `${Math.round(top)}px`;
+  frame.style.left = `${Math.round(left)}px`;
+  frame.style.width = `${Math.round(width)}px`;
+  frame.style.height = `${Math.round(height)}px`;
+  frame.style.right = "auto";
+  frame.style.bottom = "auto";
+  frame.style.zIndex = "40";
+  /* Size the glyph from the visible frame height so it never clips. */
+  const glyph = Math.max(40, Math.min(Math.round(height * 0.32), 96));
+  frame.style.setProperty("--k-glyph", `${glyph}px`);
+
+  window.scrollTo(0, 0);
+  document.documentElement.scrollTop = 0;
+  document.body.scrollTop = 0;
 }
 function wireKanjiKeyboard() {
   const sync = () => syncKanjiKeyboard();
@@ -4963,12 +4981,22 @@ function wireKanjiKeyboard() {
     vv.addEventListener("scroll", sync);
   }
   window.addEventListener("resize", sync);
-  window.addEventListener("orientationchange", () => setTimeout(sync, 100));
+  window.addEventListener("orientationchange", () => setTimeout(sync, 120));
   document.addEventListener("focusin", e => {
-    if (e.target && e.target.id === "kin") requestAnimationFrame(sync);
+    if (e.target && e.target.id === "kin") {
+      requestAnimationFrame(sync);
+      setTimeout(sync, 50);
+      setTimeout(sync, 300);
+    }
   });
-  document.addEventListener("focusout", () => setTimeout(sync, 80));
-  window.addEventListener("hashchange", () => setTimeout(sync, 0));
+  window.addEventListener("hashchange", () => {
+    if (document.body.dataset.view !== "kanji-play") leaveKanjiTyping();
+    else setTimeout(sync, 0);
+  });
+  document.addEventListener("touchmove", e => {
+    if (!document.body.classList.contains("kanji-typing")) return;
+    e.preventDefault();
+  }, { passive: false });
   sync();
 }
 
