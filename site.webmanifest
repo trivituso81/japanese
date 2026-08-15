@@ -1,6 +1,6 @@
 {
-  "name": "Japanese Study Guide",
-  "short_name": "勉強ノート",
+  "name": "トムさんの勉強ガイド",
+  "short_name": "勉強ガイド",
   "description": "Minna no Nihongo vocabulary flashcards and drills",
   "start_url": "./index.html",
   "display": "standalone",
