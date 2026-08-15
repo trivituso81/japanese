@@ -1450,9 +1450,12 @@ function speakJapanese(reading, kanji) {
   const token = ++speakToken;
   const hold = [reading, kanji];
 
-  // Play Google Translate TTS directly. The page meta referrer=same-origin
-  // keeps a github.io Referer off the request (that would 404). Fetch cannot
-  // be used — the endpoint has no CORS headers.
+  // Play Google Translate TTS directly. Fetch cannot be used — the endpoint
+  // has no CORS headers — so we load it as Audio. Explicit no-referrer is
+  // required: Safari has been observed sending the github.io page as Referer
+  // on media requests even with <meta name="referrer" content="same-origin">,
+  // and that Referer makes translate_tts 404 (then we used to fall back to
+  // the robotic Web Speech voice).
   if (typeof Audio !== "undefined") {
     const audio = new Audio();
     speakAudio = audio;
@@ -1469,6 +1472,9 @@ function speakJapanese(reading, kanji) {
       pendingSpeak = hold;
       setSpeakBusy(false);
     };
+    try { audio.referrerPolicy = "no-referrer"; } catch (e) {}
+    audio.setAttribute("referrerpolicy", "no-referrer");
+    audio.preload = "auto";
     audio.addEventListener("playing", () => { settled = true; });
     audio.addEventListener("ended", () => {
       if (token === speakToken) setSpeakBusy(false);
@@ -1482,10 +1488,15 @@ function speakJapanese(reading, kanji) {
         else fallback();
       });
     }
+    // Only fall back if Google never starts — give mobile networks time.
+    // Do not use readyState alone: Safari often sits below HAVE_CURRENT_DATA
+    // for a while even while a good stream is on the way.
     setTimeout(() => {
       if (settled || token !== speakToken) return;
-      if (audio.readyState < 2) fallback();
-    }, 2500);
+      if (audio.error || (audio.paused && audio.currentTime === 0 && audio.readyState < 2)) {
+        fallback();
+      }
+    }, 8000);
     return true;
   }
 
