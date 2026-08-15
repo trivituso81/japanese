@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815i">
+<link rel="manifest" href="site.webmanifest?v=20260815j">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815i";
+window.__BUILD__ = "20260815j";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -657,22 +657,40 @@ window.__BUILD__ = "20260815i";
   }
   .k-code-reading span { font-family: var(--jp-mincho); font-size: 1.25rem; }
   .k-code-parts {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 10px 0 8px;
+    display: grid; grid-template-columns: 1fr; gap: 10px; margin: 10px 0 10px;
+  }
+  @media (min-width: 420px) {
+    .k-code-parts:not(.one) { grid-template-columns: 1fr 1fr; }
   }
   .k-code-part {
     background: var(--bg); border: 1px solid var(--rule-strong);
-    padding: 12px 10px; text-align: center;
+    padding: 12px 12px 14px; text-align: left;
   }
   .k-code-part .pc {
     display: block; font-family: var(--jp-mincho); font-size: 2rem; line-height: 1.1;
-    color: var(--text); margin-bottom: 4px;
+    color: var(--text); margin: 2px 0 4px; text-align: center;
+    text-decoration: none;
   }
+  a.k-code-part .pc,
+  .k-code-part a.pc { color: var(--text); }
+  .k-code-part a.pc:hover { color: var(--seal); }
   .k-code-part .pk {
     display: block; font-size: 10px; font-weight: 700; letter-spacing: .14em;
     text-transform: uppercase; color: var(--seal); margin-bottom: 2px;
+    text-align: center;
   }
   .k-code-part .pe {
-    font-size: 12.5px; color: var(--text-soft); line-height: 1.35;
+    display: block; font-size: 13px; color: var(--text); line-height: 1.35;
+    text-align: center; margin-bottom: 6px;
+  }
+  .k-code-part .pe span { font-family: var(--jp-mincho); }
+  .k-code-part .pw {
+    display: block; font-size: 11px; color: var(--text-faint); letter-spacing: .02em;
+    text-align: center; margin-bottom: 6px;
+  }
+  .k-code-part .pd {
+    margin: 0; font-size: 12.5px; line-height: 1.45; color: var(--text-soft);
+    text-align: left;
   }
   .k-code-family {
     display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
@@ -1645,7 +1663,7 @@ window.__BUILD__ = "20260815i";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815h"></script>
+<script src="japanese-data.js?v=20260815j"></script>
 <script>
 /* ============================================================
    State
@@ -4905,6 +4923,98 @@ function kanjiParts(c) {
   return (typeof KANJI_PARTS === "object" && KANJI_PARTS[c]) || null;
 }
 
+function kanjiRadicalInfo(c) {
+  return (typeof KANJI_RADICALS === "object" && KANJI_RADICALS[c]) || null;
+}
+
+/* Build the “inside the character” cards: meaning radical, sound clue,
+   and any listed components — each with a short radical tip when known. */
+function kanjiInsideCards(k) {
+  const parts = kanjiParts(k.c);
+  const cards = [];
+  const seen = new Set();
+  const push = (role, piece, fallbackEn) => {
+    if (!piece || !piece.c || seen.has(role + ":" + piece.c)) return;
+    seen.add(role + ":" + piece.c);
+    const info = kanjiRadicalInfo(piece.c);
+    const en = piece.en || (info && info.en) || fallbackEn || "";
+    let detail = "";
+    if (info && info.tip) detail = info.tip;
+    else if (info && info.where) detail = info.where;
+    cards.push({
+      role,
+      c: piece.c,
+      en,
+      sound: piece.sound || "",
+      where: (info && info.where) || "",
+      detail
+    });
+  };
+
+  if (parts) {
+    if (parts.radical) push("Meaning radical", parts.radical);
+    if (parts.phonetic) push("Sound clue", parts.phonetic);
+    if (Array.isArray(parts.components)) {
+      parts.components.forEach(comp => {
+        if (parts.radical && comp.c === parts.radical.c) return;
+        if (parts.phonetic && comp.c === parts.phonetic.c) return;
+        push("Component", comp);
+      });
+    }
+  }
+
+  if (!cards.length) {
+    const self = kanjiRadicalInfo(k.c);
+    if (self) {
+      cards.push({
+        role: "This is a radical",
+        c: k.c,
+        en: self.en || k.en,
+        sound: "",
+        where: self.where || "",
+        detail: self.tip || ""
+      });
+    }
+  }
+  return cards;
+}
+
+function kanjiInsideHtml(k, onShow) {
+  const cards = kanjiInsideCards(k);
+  if (!cards.length) return "";
+  const parts = kanjiParts(k.c);
+  const hasPair = parts && parts.radical && parts.phonetic;
+  const body = cards.map(card => {
+    const sound = card.sound ? ` · <span lang="ja">${esc(card.sound)}</span>` : "";
+    const where = card.where
+      ? `<span class="pw">${esc(card.where)}</span>` : "";
+    const detail = card.detail
+      ? `<p class="pd">${esc(card.detail)}</p>` : "";
+    const href = (typeof kanjiBy === "function" && kanjiBy(card.c))
+      ? kanjiLearnHref(card.c) : null;
+    const glyph = href
+      ? `<a class="pc" lang="ja" href="${href}">${esc(card.c)}</a>`
+      : `<span class="pc" lang="ja">${esc(card.c)}</span>`;
+    return `<div class="k-code-part">
+      <span class="pk">${esc(card.role)}</span>
+      ${glyph}
+      <span class="pe">${esc(card.en)}${sound}</span>
+      ${where}
+      ${detail}
+    </div>`;
+  }).join("");
+  const blurb = hasPair
+    ? `<p>The meaning radical points at the idea; the sound clue is why the ON reading is ${esc(onShow)}.</p>`
+    : cards[0].role === "This is a radical"
+      ? `<p>This character itself is used as a meaning radical inside other kanji — learn its shape once, then spot it again.</p>`
+      : `<p>Break the character into these pieces; the radical’s usual meaning is the best memory hook.</p>`;
+  return `<section class="k-code-block">
+    <h2>Inside the character</h2>
+    <div class="k-code-parts${cards.length === 1 ? " one" : ""}">${body}</div>
+    ${blurb}
+  </section>`;
+}
+
 /* Peers that share the same phonetic component (true Kanji Code “sound clue”),
    not every character that happens to list the same ON string. */
 function kanjiPhoneticPeers(k, limit) {
@@ -5090,27 +5200,7 @@ function renderKanjiDetail(raw) {
   const onShow = k.on.length ? k.on.join(" · ") : "—";
   const kunShow = k.kun.length ? k.kun.join(" · ") : "—";
   const story = kanjiStory(k);
-
-  let partsHtml = "";
-  if (parts && (parts.radical || parts.phonetic)) {
-    partsHtml = `<section class="k-code-block">
-      <h2>Why it looks this way</h2>
-      <div class="k-code-parts">
-        ${parts.radical ? `<div class="k-code-part">
-          <span class="pk">Meaning side</span>
-          <span class="pc">${esc(parts.radical.c)}</span>
-          <span class="pe">${esc(parts.radical.en || "")}</span>
-        </div>` : ""}
-        ${parts.phonetic ? `<div class="k-code-part">
-          <span class="pk">Sound clue</span>
-          <span class="pc">${esc(parts.phonetic.c)}</span>
-          <span class="pe">${esc(parts.phonetic.en || "")}${
-            parts.phonetic.sound ? ` · ${esc(parts.phonetic.sound)}` : ""}</span>
-        </div>` : ""}
-      </div>
-      <p>The meaning side hints at the idea; the sound clue is why the ON reading is ${esc(onShow)}.</p>
-    </section>`;
-  }
+  const partsHtml = kanjiInsideHtml(k, onShow);
 
   const peerSound = parts && parts.phonetic && parts.phonetic.sound
     ? parts.phonetic.sound
@@ -5129,6 +5219,8 @@ function renderKanjiDetail(raw) {
             : st === "learning" && rec ? ` · learning ${rec.ok}/${rec.n}` : ""}</p>
       </header>
 
+      ${partsHtml}
+
       <section class="k-code-block k-code-story">
         <h2>Remember this</h2>
         <p class="story">${esc(story)}</p>
@@ -5139,8 +5231,6 @@ function renderKanjiDetail(raw) {
         <p class="k-code-reading"><b>ON</b> <span lang="ja">${esc(onShow)}</span></p>
         <p class="k-code-reading"><b>kun</b> <span lang="ja">${esc(kunShow)}</span></p>
       </section>
-
-      ${partsHtml}
 
       ${peers.length ? `<section class="k-code-block">
         <h2>Same sound clue · ${esc(phonKey)}</h2>
