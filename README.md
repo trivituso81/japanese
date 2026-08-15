@@ -60,10 +60,10 @@ If you have been studying from the local copy, carry it over once:
    JSON file it saves.
 2. Open the published site and press **Import**, then pick that file.
 
-That same Export file is your real backup across updates. On an iPhone, Export
-opens the **share sheet** — choose **Save to Files**. Import → **Browse** to
-pick it again. Clearing Safari website data still wipes on-device storage, so
-export every so often — especially before switching phones.
+That same Export file is your real backup across updates. On an iPhone, use
+**Share backup** → **Save to Files** (or **Copy backup** into Notes). Import
+opens the file picker — tap **Browse**, not Recents; look under On My iPhone
+or iCloud Drive. Clearing Safari website data still wipes on-device storage.
 
 ## Files
 
