@@ -2557,7 +2557,7 @@ function renderHome() {
   }));
   const kanjiKnownN = kanjiLevels.reduce((n, l) => n + l.known, 0);
   const kanjiTotalN = kanjiLevels.reduce((n, l) => n + l.total, 0);
-  const kAcc = kanjiAccuracy();
+  const kanjiPct = kanjiTotalN ? Math.round((kanjiKnownN / kanjiTotalN) * 100) : 0;
 
   const vAcc = verbAccuracy();
   const vHist = (S.verbs && S.verbs.history) || [];
@@ -2578,9 +2578,7 @@ function renderHome() {
           "grammar at 80%+")}
         ${homeStat("Kanji known", pillarsViz(kanjiLevels),
           `${kanjiKnownN}<span class="of"> / ${kanjiTotalN}</span>`,
-          kAcc === null
-            ? kanjiLevels.map(l => l.id).join(" · ")
-            : `${kAcc}% recent · ${kanjiLevels.map(l => l.id).join(" · ")}`)}
+          `${kanjiPct}%`)}
         ${homeStat("Verb drill", waveViz(vHist),
           vAcc === null ? "—" : `${vAcc}%`,
           verbSub())}
