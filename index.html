@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815w">
+<link rel="manifest" href="site.webmanifest?v=20260815v">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815w";
+window.__BUILD__ = "20260815v";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1593,8 +1593,8 @@ window.__BUILD__ = "20260815w";
     body[data-view="kanji-play"] .card-play .card {
       padding: 0; min-height: 0;
     }
-    body[data-view="cards-play"] .card-play .card-face { bottom: 6em; }
-    body[data-view="cards-play"] .card-play .card-reveal { height: 6em; }
+    body[data-view="cards-play"] .card-play .card-face { bottom: 8.5em; }
+    body[data-view="cards-play"] .card-play .card-reveal { height: 8.5em; }
     body[data-view="kanji-play"] .card-play .card-face { bottom: 8em; }
     body[data-view="kanji-play"] .card-play .card-reveal { height: 8em; }
     body[data-view="cards-play"] .card-play .prompt { font-size: clamp(1.7rem, 6.5vw, 2.35rem); }
@@ -1750,7 +1750,7 @@ window.__BUILD__ = "20260815w";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815w"></script>
+<script src="japanese-data.js?v=20260815v"></script>
 <script>
 /* ============================================================
    State
@@ -3462,10 +3462,11 @@ function drawCard() {
   const enAns = `<div class="answer">${esc(en)}</div>`;
 
   const frontSpeak = dir === "jp-en" && showSpeak ? speakButton() : "";
-  const backSpeak = dir === "en-jp" && CARD.shown && showSpeak ? speakButton() : "";
-  const back = CARD.shown
-    ? (dir === "jp-en" ? enAns : jpAns) + backSpeak
-    : "";
+  const backSpeak = dir === "en-jp" && CARD.shown && showSpeak
+    ? speakButton({ icon: true, label: false }) : "";
+  const back = !CARD.shown ? ""
+    : dir === "jp-en" ? enAns
+    : `<div class="card-reveal-ans">${jpAns}${backSpeak}</div>`;
 
   stage.innerHTML = drillStage({
     left: `${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
