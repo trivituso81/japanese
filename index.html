@@ -641,10 +641,10 @@
     padding: 6px 0;
   }
   .k-learn:hover { text-decoration: underline; }
-  .k-type-frame .k-learn {
-    align-self: center; margin-top: 2px; margin-bottom: 2px;
+  .k-type-frame .k-type-glyph .k-learn,
+  .card-play .card-face .k-learn {
+    margin-top: 10px; padding: 4px 8px;
   }
-  .cardmeta .k-learn { display: block; text-align: center; margin-top: 4px; }
 
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
@@ -5069,6 +5069,7 @@ function drawKanji() {
         <div class="card" id="face">
           <div class="card-face">
             <div class="kbig-face">${esc(k.c)}</div>
+            <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
           </div>
           <div class="card-reveal is-open">
             <div class="k-ans-mean">${esc(k.en)}</div>
@@ -5085,7 +5086,6 @@ function drawKanji() {
       </div>
       <div class="cardmeta">
         <span class="taphint">${ok ? "Correct" : "Not quite"} · Enter for next</span>
-        <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
       </div>`
     });
     document.getElementById("knext").addEventListener("click", () => {
@@ -5119,6 +5119,7 @@ function drawKanji() {
       ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
         ${esc(lastOk.en)}</p>` : ""}
       <div class="kbig-face">${esc(k.c)}</div>
+      <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
     </div>
     <div class="k-type-dock">
       <input type="text" class="kin" id="kin" autocomplete="off" autocapitalize="off"
@@ -5128,7 +5129,6 @@ function drawKanji() {
         <button class="btn bad wide" id="kskip" type="button">Skip</button>
         <button class="btn primary wide" id="kgo" type="button">Check</button>
       </div>
-      <a class="k-learn" href="${kanjiLearnHref(k.c)}" id="klearn">Learn this kanji</a>
     </div>`;
   document.body.classList.add("kanji-typing");
   syncKanjiKeyboard();
