@@ -46,25 +46,22 @@ and the site follows within a minute.
 ## Move your progress across
 
 Progress is kept in the browser's own storage, tied to the address the page was
-opened from. A site served from `github.io` is a different address from a file
-opened off your disk, so **the two do not share progress**, and neither do two
-different browsers or a laptop and a phone.
+opened from. On an iPhone, **Safari and the home-screen app often keep separate
+copies** — re-adding the home icon can look like a full reset even though Safari
+still has your save.
 
-The home screen shows **Save backup** and **Import file**. Save backup opens
-a box of your progress text — tap Select all, Copy, paste into Notes (or Share).
-To restore without Files, paste that text back and tap Restore from text.
-Re-adding the home icon does not erase progress by itself.
+### Transfer into a fresh home-screen icon
 
-If you have been studying from the local copy, carry it over once:
+1. Open the site in **Safari** (not the home icon).
+2. Tap **Save backup** → **Select all** → Copy (paste into Notes if you want).
+3. Add the site to the Home Screen again.
+4. Open the new icon → tap **Restore progress** → paste → **Restore from text**.
 
-1. Open the local `index.html`, press **Export** on the home screen, and keep the
-   JSON file it saves.
-2. Open the published site and press **Import**, then pick that file.
+You can also use **Import file** if you already saved a `.json` backup.
 
-That same Export file is your real backup across updates. On an iPhone, use
-**Share backup** → **Save to Files** (or **Copy backup** into Notes). Import
-opens the file picker — tap **Browse**, not Recents; look under On My iPhone
-or iCloud Drive. Clearing Safari website data still wipes on-device storage.
+A site served from `github.io` is a different address from a file opened off
+your disk, so those do not share progress either, and neither do two different
+browsers or a laptop and a phone.
 
 ## Files
 

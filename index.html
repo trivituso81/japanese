@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815g">
+<link rel="manifest" href="site.webmanifest?v=20260815h">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815g";
+window.__BUILD__ = "20260815h";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -1653,7 +1653,7 @@ window.__BUILD__ = "20260815g";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815g"></script>
+<script src="japanese-data.js?v=20260815h"></script>
 <script>
 /* ============================================================
    State
@@ -2797,17 +2797,20 @@ function renderHome() {
         <div class="hp-row">
           <span class="hp-status">${esc(savedAtLabel())}</span>
           <button type="button" id="exp">Save backup</button>
+          <button type="button" id="exprestore">Restore progress</button>
           <label for="imp">Import file<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
         </div>
-        <p class="hp-note">You do <b>not</b> need a file to keep progress on this phone.
-          <b>Save backup</b> only makes a spare copy you can paste into Notes.
-          Re-adding the home icon keeps your progress as long as you don’t clear Safari website data.</p>
+        <p class="hp-note">On iPhone, the <b>home-screen app stores progress separately from Safari</b>.
+          Re-adding the icon starts empty — before you do that, tap <b>Save backup</b> → Select all → Copy.
+          After re-adding, open the icon and tap <b>Restore progress</b> → paste → Restore from text.</p>
       </div>
     </section>`;
 
   wireResume(renderHome);
   document.getElementById("exp").addEventListener("click", () => openBackupSheet("export"));
+  document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   document.getElementById("imp").addEventListener("change", importProgress);
+  maybeOfferRestore();
 }
 
 function renderLessons() {
@@ -2872,20 +2875,43 @@ function closeBackupSheet() {
   sheet.hidden = true;
 }
 
+let _offeredRestore = false;
+function maybeOfferRestore() {
+  if (_offeredRestore) return;
+  if (progressWeight(S) > 0) return;
+  _offeredRestore = true;
+  /* Home-screen apps on iPhone often boot with empty storage even when
+     Safari still has the old save — offer restore immediately. */
+  openBackupSheet("restore");
+}
+
 function openBackupSheet(mode) {
   const sheet = document.getElementById("backupSheet");
   const ta = document.getElementById("backupText");
   const help = document.getElementById("backupHelp");
+  const title = document.getElementById("backupTitle");
   if (!sheet || !ta || !help) return;
-  const { name, text } = progressBackupPayload();
-  ta.value = text;
-  help.innerHTML = mode === "import"
-    ? "Paste a backup here, then tap <b>Restore from text</b>."
-    : `Tap <b>Select all</b>, then Copy. Paste into Notes (or Share → Save to Files as <b>${esc(name)}</b>).`;
+  const restoring = mode === "restore" || mode === "import";
+  if (title) title.textContent = restoring ? "Restore progress" : "Save backup";
+  if (restoring) {
+    ta.value = "";
+    help.innerHTML =
+      "If the home-screen app looks empty after you re-added it, progress is probably still in Safari.<br><br>" +
+      "1. Open this site in <b>Safari</b> (not the icon)<br>" +
+      "2. Tap <b>Save backup</b> → <b>Select all</b> → Copy<br>" +
+      "3. Return here, paste into the box, tap <b>Restore from text</b>";
+  } else {
+    const { name, text } = progressBackupPayload();
+    ta.value = text;
+    help.innerHTML =
+      "On iPhone the home-screen app does <b>not</b> share saves with Safari. " +
+      "Before you re-add the icon, tap <b>Select all</b> → Copy, keep it in Notes, " +
+      `then Restore after installing. (File name: <b>${esc(name)}</b>)`;
+  }
   sheet.hidden = false;
   requestAnimationFrame(() => {
     ta.focus();
-    ta.setSelectionRange(0, ta.value.length);
+    if (!restoring) ta.setSelectionRange(0, ta.value.length);
   });
 }
 
