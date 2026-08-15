@@ -7286,7 +7286,7 @@ const CONTENT = {
       ["I had my foot stepped on in the train.", "わたしは 電車{でんしゃ}の 中{なか}で 足{あし}を 踏{ふ}まれました。", "the agent is left out when it hardly matters"],
       ["I had my hand bitten by a dog.", "わたしは 犬{いぬ}に 手{て}を かまれました。", ""],
       ["I had my clothes made dirty by my child.", "わたしは 子{こ}どもに 服{ふく}を 汚{よご}されました。", "the pattern always implies you were put out"],
-      ["I had my bicycle repaired by a friend.", "わたしは 友{とも}だちに 自転車{じてんしゃ}を 修理{しゅうり}して もらいました。", "a welcome action takes 〜て もらいました, never the passive"],
+      ["I had my bicycle broken by my younger brother.", "わたしは 弟{おとうと}に 自転車{じてんしゃ}を 壊{こわ}されました。", "unwelcome, so passive — a welcome repair would be 〜て もらいました"],
     ]
   },
   {
