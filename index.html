@@ -5081,18 +5081,6 @@ function kanjiPhoneticPeers(k, limit) {
   return { key, peers: peers.slice(0, lim) };
 }
 
-function kanjiStory(k) {
-  const p = kanjiParts(k.c);
-  if (p && p.tip) return p.tip;
-  const on = k.on.length ? k.on.join("・") : null;
-  const kun = k.kun.length ? k.kun.join("・") : null;
-  let s = `${k.c} means “${k.en}.”`;
-  if (on) s += ` ON ${on}.`;
-  if (kun) s += ` Kun ${kun}.`;
-  if (k.ex) s += ` Anchor it with ${k.ex.w} (${k.ex.r}) — ${k.ex.en}.`;
-  return s;
-}
-
 function renderKanji() {
   document.getElementById("crumbs").innerHTML = "";
   document.body.dataset.view = "kanji";
