@@ -2754,8 +2754,9 @@ function renderHome() {
           <button type="button" id="exp">Export backup</button>
           <label for="imp">Import<input type="file" id="imp" accept="application/json,.json"></label>
         </div>
-        <p class="hp-note">Progress stays on this phone if you refresh or re-add the home icon.
-          Export a backup first if you want a spare copy in Files.</p>
+        <p class="hp-note">Export opens a share sheet on iPhone — choose
+          <b>Save to Files</b>. To bring it back, tap Import → <b>Browse</b>
+          and pick that file. Progress itself stays on this phone.</p>
       </div>
     </section>`;
 
@@ -2814,11 +2815,68 @@ function verbSub() {
 }
 
 function exportProgress() {
-  const blob = new Blob([JSON.stringify(S, null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
-  a.click(); URL.revokeObjectURL(a.href);
+  save();
+  const name = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
+  const text = JSON.stringify(S, null, 2);
+  const blob = new Blob([text], { type: "application/json" });
+  const file = new File([blob], name, { type: "application/json" });
+
+  const shareFile = async () => {
+    if (!navigator.share || !navigator.canShare) return false;
+    try {
+      if (!navigator.canShare({ files: [file] })) return false;
+      await navigator.share({ files: [file], title: "Study progress backup" });
+      return true;
+    } catch (e) {
+      if (e && e.name === "AbortError") return true; // user cancelled — stop
+      return false;
+    }
+  };
+
+  const downloadFile = () => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = name;
+    a.rel = "noopener";
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+  };
+
+  const copyFallback = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        alert(
+          "Backup copied to the clipboard.\n\n" +
+          "Open Notes → paste → Share → Save to Files.\n" +
+          "Later, Import → Browse and pick that file."
+        );
+        return;
+      }
+    } catch (e) {}
+    prompt("Copy this backup text and save it somewhere safe:", text);
+  };
+
+  /* iPhone (especially the home-screen app) often ignores <a download>.
+     Prefer the share sheet so you can tap Save to Files. */
+  Promise.resolve(shareFile()).then(shared => {
+    if (shared) return;
+    downloadFile();
+    const ios = /iPad|iPhone|iPod/.test(navigator.userAgent)
+      || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    const standalone = navigator.standalone === true
+      || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    if (ios || standalone) {
+      const wantCopy = confirm(
+        "On iPhone, Export should open a share sheet.\n\n" +
+        "If you saw it: choose “Save to Files”, then Import → Browse to find it.\n\n" +
+        "If nothing appeared, tap OK to copy the backup instead."
+      );
+      if (wantCopy) copyFallback();
+    }
+  });
 }
 /* A one-line census of a saved state, so the import confirmation can say what
    is about to be replaced and what with, rather than asking blind. */
