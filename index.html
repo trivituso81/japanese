@@ -16,12 +16,12 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="manifest" href="site.webmanifest?v=20260815t">
+<link rel="manifest" href="site.webmanifest?v=20260815u">
 <title>トムさんの勉強ガイド</title>
 <script>
 /* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
    Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
-window.__BUILD__ = "20260815t";
+window.__BUILD__ = "20260815u";
 (function () {
   var standalone = (window.navigator.standalone === true)
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -767,6 +767,21 @@ window.__BUILD__ = "20260815t";
   .k-code-ex rt {
     font-family: var(--jp); font-size: 0.38em; font-weight: 500;
   }
+  .k-code-exlist { display: flex; flex-direction: column; gap: 14px; }
+  .k-code-exrow {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+  }
+  .k-code-exmain { min-width: 0; flex: 1 1 auto; }
+  .k-code-exen {
+    margin: 0; font-size: 14px; line-height: 1.45; color: var(--text-soft);
+  }
+  .k-code-exrow .speak {
+    margin-top: 0; padding: 6px; min-width: 36px; min-height: 36px;
+    justify-content: center; flex: 0 0 auto;
+  }
+  .k-code-exrow .speak .speak-lab { display: none; }
+  .k-code-exrow .speak svg { width: 16px; height: 16px; }
   .k-code-acts {
     display: flex; flex-direction: column; gap: 8px; margin-top: 18px;
   }
@@ -1721,7 +1736,7 @@ window.__BUILD__ = "20260815t";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260815t"></script>
+<script src="japanese-data.js?v=20260815u"></script>
 <script>
 /* ============================================================
    State
@@ -1947,7 +1962,7 @@ function googleTtsUrl(text) {
 }
 
 function setSpeakBusy(on) {
-  const btn = document.getElementById("speak");
+  const btn = speakBusyEl || document.getElementById("speak");
   if (!btn) return;
   if (on) btn.setAttribute("aria-busy", "true");
   else btn.removeAttribute("aria-busy");
@@ -1970,6 +1985,7 @@ function speakViaWebSpeech(text) {
 let speakToken = 0;   // ignore stale async replies when the card changes
 let ttsUnlocked = false;
 let pendingSpeak = null;   // [reading, kanji] waiting for a user gesture
+let speakBusyEl = null;    // which Listen button is currently playing
 
 /* Browsers block audible Autoplay until the page has a user gesture. A silent
    play on the first tap unlocks later auto-speaks after swipe animations. */
@@ -2114,17 +2130,24 @@ function speakButton(opts) {
   const o = opts || {};
   const lab = o.label === false ? "" : `<span class="speak-lab">Listen</span>`;
   const cls = o.icon ? "speak icon" : "speak";
-  return `<button type="button" class="${cls}" id="speak" aria-label="Pronounce">
+  const id = o.id || "speak";
+  return `<button type="button" class="${cls}" id="${esc(id)}" aria-label="Pronounce">
     ${SPEAK_SVG}${lab}</button>`;
 }
 
-function wireSpeak(reading, kanji) {
-  const btn = document.getElementById("speak");
+function wireSpeak(reading, kanji, btnOrId) {
+  const btn = typeof btnOrId === "string"
+    ? document.getElementById(btnOrId)
+    : (btnOrId || document.getElementById("speak"));
   if (!btn) return;
   // Keep the listen tap off the swipe / flip handlers on #face.
   const stop = e => e.stopPropagation();
   ["pointerdown", "pointerup", "click"].forEach(ev => btn.addEventListener(ev, stop));
-  btn.addEventListener("click", () => { unlockTts(); speakJapanese(reading, kanji); });
+  btn.addEventListener("click", () => {
+    unlockTts();
+    speakBusyEl = btn;
+    speakJapanese(reading, kanji);
+  });
 }
 
 /* Render the Japanese face without baking the verb-group numeral into the
@@ -4961,7 +4984,18 @@ const kReadings = k => [k.on.join("、"), k.kun.join("、")].filter(Boolean).joi
 /* Example word with furigana for the drill reveal (Japanese under English). */
 function kExampleRuby(k) {
   if (!k || !k.ex || !k.ex.w) return "";
-  return ruby(furiganaOf(k.ex.w, k.ex.r || ""));
+  return exRuby(k.ex);
+}
+function kanjiExamples(k) {
+  if (!k) return [];
+  if (Array.isArray(k.exs) && k.exs.length) {
+    return k.exs.filter(ex => ex && ex.w);
+  }
+  return (k.ex && k.ex.w) ? [k.ex] : [];
+}
+function exRuby(ex) {
+  if (!ex || !ex.w) return "";
+  return ruby(furiganaOf(ex.w, ex.r || ""));
 }
 
 function kanjiReturnTo() {
@@ -5299,6 +5333,20 @@ function renderKanjiDetail(raw) {
       </div>`
     : `<a class="k-study-back" href="${esc(backHref)}">${esc(backLabel)}</a>`;
 
+  const examples = kanjiExamples(k);
+  const asInHtml = examples.length ? `<section class="k-code-block">
+        <h2>As in</h2>
+        <div class="k-code-exlist">
+          ${examples.map((ex, i) => `<div class="k-code-exrow">
+            <div class="k-code-exmain">
+              <p class="k-code-ex" lang="ja">${exRuby(ex) || esc(ex.w)}</p>
+              <p class="k-code-exen">${esc(ex.en || "")}</p>
+            </div>
+            ${speakButton({ icon: true, label: false, id: "speak-ex-" + i })}
+          </div>`).join("")}
+        </div>
+      </section>` : "";
+
   document.getElementById("view").innerHTML = `
     <article class="k-code">
       ${topNav}
@@ -5322,11 +5370,7 @@ function renderKanjiDetail(raw) {
 
       ${partsHtml}
 
-      <section class="k-code-block">
-        <h2>As in</h2>
-        <p class="k-code-ex" lang="ja">${kExampleRuby(k) || esc(k.ex.w)}</p>
-        <p>${esc(k.ex.en)}</p>
-      </section>
+      ${asInHtml}
 
       ${peers.length ? `<section class="k-code-block">
         <h2>Same sound clue · ${esc(phonKey)}</h2>
@@ -5355,6 +5399,7 @@ function renderKanjiDetail(raw) {
     e.preventDefault();
     goNextKanjiFromLearn();
   });
+  examples.forEach((ex, i) => wireSpeak(ex.r || ex.w, ex.w, "speak-ex-" + i));
   document.getElementById("kdrill1").addEventListener("click", () => {
     clearKanjiReturn();
     startKanji([k.c]);
