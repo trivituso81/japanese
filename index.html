@@ -19,13 +19,11 @@
 <link rel="manifest" href="site.webmanifest?v=20260816e">
 <title>トムさんの勉強ガイド</title>
 <script>
-/* Home-screen (standalone) iOS keeps a stale shell until the URL changes.
-   Bump __BUILD__ whenever the study pages need to force a fresh fetch. */
+/* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
+   every load so Safari and home-screen shells do not keep a stale copy. */
 window.__BUILD__ = "20260816e";
 (function () {
-  var standalone = (window.navigator.standalone === true)
-    || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
-  if (!standalone) return;
+  /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
     var u = new URL(location.href);
     if (u.searchParams.get("v") === window.__BUILD__) return;
@@ -2269,10 +2267,13 @@ function wireSpeak(reading, kanji, btnOrId) {
   // Keep the listen tap off the swipe / flip handlers on #face.
   const stop = e => e.stopPropagation();
   ["pointerdown", "pointerup", "click"].forEach(ev => btn.addEventListener(ev, stop));
-  /* Unlock on pointerdown so the shared element is primed before click fires
-     speak — helps iOS keep the gesture attached to the same Audio node. */
-  btn.addEventListener("pointerdown", () => { unlockTts(); });
+  /* Unlock on pointerdown so the shared <audio> is primed before click runs
+     play — required for iOS home-screen Web Apps. */
+  const arm = () => { ensureSpeakAudio(); unlockTts(); };
+  btn.addEventListener("pointerdown", arm);
+  btn.addEventListener("touchstart", arm, { passive: true });
   btn.addEventListener("click", () => {
+    ensureSpeakAudio();
     unlockTts();
     speakBusyEl = btn;
     speakJapanese(reading, kanji);
