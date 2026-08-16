@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817r";
+window.__BUILD__ = "20260817s";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -522,7 +522,7 @@ window.__BUILD__ = "20260817r";
     margin-top: 0; padding-left: 16px;
   }
   .cards-setup .options { margin: 0; flex: 1 1 auto; }
-  .cards-setup .opt.start { margin-top: auto; padding-top: 12px; }
+  .cards-setup .opt.start { margin-top: auto; padding-top: 12px; display: flex; flex-direction: column; gap: 10px; }
   .cards-setup .opt.start .btn {
     width: 100%; font-size: 15.5px; padding: 14px 18px; min-height: 50px;
   }
@@ -2264,7 +2264,7 @@ const LEARNED_BOX = 4;   // a word counts as learned once it reaches this Leitne
 const WINDOW = 20;       // grammar score reads the last this-many answers for a lesson
 const HISTORY_CAP = 60;
 
-const blank = () => ({ lessons: {}, cards: {}, drills: {}, asked: [] });
+const blank = () => ({ lessons: {}, cards: {}, drills: {}, asked: [], cardMisses: {} });
 
 /* Where you have got to. The data file carries a hand-set `current` flag, but
    a flag written by hand goes stale the moment you move on, and this is the
@@ -2344,6 +2344,9 @@ function migrate(s) {
     }
   }
   migrateCards(s);
+  if (!s.cardMisses || typeof s.cardMisses !== "object" || Array.isArray(s.cardMisses)) {
+    s.cardMisses = {};
+  }
   return s;
 }
 
@@ -2918,7 +2921,31 @@ function vocabScore(n) {
   if (!d.length) return null;
   const learned = d.filter(c => boxOf(c.id) >= LEARNED_BOX).length;
   const seen = d.filter(c => boxOf(c.id) > 0).length;
-  return { learned, seen, total: d.length, pct: pct(learned, d.length) };
+  /* Each step toward LEARNED_BOX counts, so a first session moves the home
+     ring instead of looking as though nothing was saved. */
+  const steps = d.reduce((a, c) => a + Math.min(boxOf(c.id), LEARNED_BOX), 0);
+  const climbPct = Math.round((100 * steps) / (d.length * LEARNED_BOX));
+  return {
+    learned, seen, total: d.length,
+    pct: pct(learned, d.length),
+    climbPct
+  };
+}
+
+/* Persist the ids missed on the latest first-pass flashcard round for a scope,
+   so returning to that lesson can offer a scored retry of just those words. */
+function rememberCardMisses(scope, ids) {
+  S.cardMisses = S.cardMisses || {};
+  const key = String(scope);
+  const list = [...ids];
+  if (list.length) S.cardMisses[key] = list;
+  else delete S.cardMisses[key];
+}
+function cardMissesFor(scope, ns, proper) {
+  const saved = (S.cardMisses && S.cardMisses[String(scope)]) || [];
+  if (!saved.length) return [];
+  const live = new Set(deck(ns, !!proper).map(c => c.id));
+  return saved.filter(id => live.has(id));
 }
 
 function points(n) {
@@ -3567,10 +3594,13 @@ function renderHome() {
   const wordsLearned = vs ? vs.learned : 0;
   const wordsTotal = vs ? vs.total : 0;
   const wordsStarted = vs ? Math.max(0, vs.seen - vs.learned) : 0;
-  const wordsPct = vs ? vs.pct : 0;
+  /* Ring follows climb toward box LEARNED_BOX so studying always moves it. */
+  const wordsPct = vs ? vs.climbPct : 0;
   const wordsSub = wordsStarted
-    ? `${wordsStarted} more started · L${filterLesson}`
-    : `box ${LEARNED_BOX} of 5 · L${filterLesson}`;
+    ? `${wordsLearned} learned · ${wordsStarted} climbing · L${filterLesson}`
+    : wordsLearned
+      ? `all started words at box ${LEARNED_BOX} · L${filterLesson}`
+      : `box ${LEARNED_BOX} of 5 · L${filterLesson}`;
 
   const gs = grammarScore(filterLesson);
   const grammarPct = gs ? gs.pct : 0;
@@ -3960,6 +3990,9 @@ function renderCards(scope) {
   const ns = scopeOf(scope).filter(n => VOCAB[n]);
   if (!ns.length) return notFound();   // no word list in range: a dead address
   const range = isRange(scope);
+  /* Keep the home lesson filter on the lesson just opened so returning home
+     shows the same deck's numbers. */
+  if (!range && ns[0]) setHomeFilter(ns[0]);
   document.getElementById("crumbs").innerHTML = "";
   document.body.dataset.view = "cards";
   showBotnav();
@@ -3969,6 +4002,8 @@ function renderCards(scope) {
            missed: new Set(), attempts: {}, prev: null, animating: false,
            playing: false };
   const title = range ? scopeLabel(scope) : `Lesson ${ns[0]}`;
+  const missIds = cardMissesFor(scope, ns, false);
+  const unlearnedN = deck(ns, false).filter(c => boxOf(c.id) < LEARNED_BOX).length;
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
       <div>
@@ -3988,7 +4023,17 @@ function renderCards(scope) {
         { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
           `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
         { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>` },
-        { start: `<button class="btn primary" id="deal">Start</button>` }
+        missIds.length && {
+          start: `<button class="btn primary" id="retryMiss">Retry ${missIds.length} you missed</button>
+            <button class="btn" id="deal">New round</button>`
+        },
+        !missIds.length && unlearnedN > 0 && unlearnedN < deck(ns, false).length && {
+          start: `<button class="btn primary" id="retryUnlearned">Practice ${unlearnedN} still learning</button>
+            <button class="btn" id="deal">Full deck</button>`
+        },
+        !missIds.length && !(unlearnedN > 0 && unlearnedN < deck(ns, false).length) && {
+          start: `<button class="btn primary" id="deal">Start</button>`
+        }
       ])}
     </section>`;
 
@@ -4012,7 +4057,22 @@ function renderCards(scope) {
     CARD.stale = true;
     refreshDeal();
   });
-  document.getElementById("deal").addEventListener("click", () => { unlockTts(); startSession(); });
+  const deal = document.getElementById("deal");
+  if (deal) deal.addEventListener("click", () => { unlockTts(); startSession(); });
+  const retryMiss = document.getElementById("retryMiss");
+  if (retryMiss) retryMiss.addEventListener("click", () => {
+    unlockTts();
+    const ids = cardMissesFor(CARD.scope, CARD.ns, CARD.proper);
+    startSession(ids.length ? new Set(ids) : undefined);
+  });
+  const retryUnlearned = document.getElementById("retryUnlearned");
+  if (retryUnlearned) retryUnlearned.addEventListener("click", () => {
+    unlockTts();
+    const ids = deck(CARD.ns, CARD.proper)
+      .filter(c => boxOf(c.id) < LEARNED_BOX)
+      .map(c => c.id);
+    startSession(ids.length ? new Set(ids) : undefined);
+  });
 }
 
 /* Enter the full-viewport play shell once a round begins. */
@@ -4060,9 +4120,9 @@ function buildRound(only) {
 }
 
 /* A session is one trip through the stack. Every answer takes its card out,
-   right or wrong, so nothing comes round again mid-pass. What you missed can
-   be run through again afterwards, but those repeats are practice: the score
-   belongs to the first pass, and only a new session sets a new one. */
+   right or wrong, so nothing comes round again mid-pass. Misses can be run
+   as a fresh scored session afterwards — getting them right then moves the
+   Leitner box, so the home tile can climb toward 100%. */
 function startSession(only) {
   enterCardPlay();
   CARD.round = buildRound(only);
@@ -4072,18 +4132,17 @@ function startSession(only) {
   CARD.missed = new Set(); CARD.graded = new Set(); CARD.attempts = {};
   CARD.prev = null; CARD.animating = false;
   CARD.stale = false;   // this round now matches the settings on screen
+  CARD.missOnly = !!(only && only.size);
+  /* A full new round replaces the previous miss list as answers come in. */
+  if (!CARD.missOnly) rememberCardMisses(CARD.scope, []);
   drawCard();
 }
 
 function nextPass() {
+  /* Kept for undo compatibility; new UI starts a scored miss session instead. */
   const ids = new Set(CARD.missed);
   if (!ids.size) return;
-  if (!CARD.playing) enterCardPlay();
-  CARD.round = buildRound(ids);
-  CARD.pass++; CARD.passSize = CARD.round.length; CARD.passDone = 0;
-  CARD.i = 0; CARD.shown = false; CARD.missed = new Set();
-  CARD.prev = null; CARD.animating = false;
-  drawCard();
+  startSession(ids);
 }
 
 function revealCard() {
@@ -4131,8 +4190,12 @@ function answerCard(known) {
   CARD.round.splice(CARD.i, 1);
   CARD.passDone++;
   if (!known) CARD.missed.add(c.id);
+  else CARD.missed.delete(c.id);
   if (CARD.i >= CARD.round.length) CARD.i = 0;
   CARD.shown = false;
+  /* Keep the reusable miss list current so Home → cards can offer a retry
+     even if this sitting is left halfway. */
+  rememberCardMisses(CARD.scope, CARD.missed);
   save();
   drawCard();
 }
@@ -4146,6 +4209,7 @@ function undoCard() {
   CARD.attempts = p.attempts;
   if (p.rec) S.cards[p.id] = p.rec; else delete S.cards[p.id];
   CARD.prev = null; CARD.shown = p.shown;
+  rememberCardMisses(CARD.scope, CARD.missed);
   save();
   drawCard();
 }
@@ -4277,37 +4341,41 @@ function drawSessionEnd(stage) {
   const dist = [0, 0, 0, 0, 0, 0];
   d.forEach(c => dist[boxOf(c.id)]++);
   const missed = CARD.missed.size;
-  const repeat = CARD.pass > 1;
   const atBox = dist.slice(LEARNED_BOX).reduce((a, b) => a + b, 0);
   const climbing = dist.slice(1, LEARNED_BOX).reduce((a, b) => a + b, 0);
+  rememberCardMisses(CARD.scope, CARD.missed);
 
   // the play shell is already the page; only the panel
   stage.innerHTML = summaryPanel({
     right: CARD.firstTry,
     total: CARD.total,
-    lead: `known first time · ${repeat ? `repeat ${CARD.pass - 1} finished, and your score is
-      set by the first pass` : "stack cleared"}${repeat && missed
-        ? ` · ${missed} still missed on this repeat`
-        : missed ? ` · ${missed} to look at again` : " · nothing missed"}`,
+    lead: `known first time · stack cleared${missed
+        ? ` · ${missed} to look at again`
+        : " · nothing missed"}`,
     body: `
       <div class="boxbar">${dist.map((c, b) =>
         c ? `<i class="b${b}" style="width:${c / d.length * 100}%"></i>` : "").join("")}</div>
       <p class="hintline">${atBox} of ${d.length} words in this deck have reached box
         ${LEARNED_BOX}${climbing ? `, and ${climbing} are on their way there` : ""}.</p>`,
     actions: [
-      missed && { id: "redo", primary: true, label: `Run the ${missed} you missed again` },
+      missed && { id: "redo", primary: true, label: `Retry the ${missed} you missed` },
       { id: "again", primary: !missed, label: "New round" },
       { id: "settings", label: "Settings" },
       isRange(CARD.scope)
         ? { go: "#/", label: "Home" }
         : { go: `#/lesson/${CARD.ns[0]}`, label: "Back to lesson" }
     ],
-    footnote: missed && !repeat ? `A repeat drills the words you missed without touching the
-      score or the boxes. Start a new round to be scored afresh.` : ""
+    footnote: missed
+      ? `Getting a missed word right on retry raises its box — that is how the
+        home vocabulary ring climbs toward 100%.`
+      : ""
   });
   document.getElementById("again").addEventListener("click", () => { unlockTts(); startSession(); });
   const redo = document.getElementById("redo");
-  if (redo) redo.addEventListener("click", () => { unlockTts(); nextPass(); });
+  if (redo) redo.addEventListener("click", () => {
+    unlockTts();
+    startSession(new Set(CARD.missed));
+  });
   document.getElementById("settings").addEventListener("click", () => renderCards(CARD.scope));
   save();
 }
@@ -6668,6 +6736,12 @@ function route() {
   if (kind === "sweep") return renderDrill(scope, true);
 }
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
+/* bfcache / browser-back can restore a painted home without re-running route;
+   pull fresh numbers whenever home is showing again. */
+window.addEventListener("pageshow", () => {
+  const h = location.hash || "#/";
+  if (h === "#/" || h === "#" || h === "") renderHome();
+});
 wireFurigana();
 wireBotnavScroll();
 wireKanjiKeyboard();
