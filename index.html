@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260818b";
+window.__BUILD__ = "20260818c";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -3933,8 +3933,9 @@ function openBackupSheet(mode) {
   }
   sheet.hidden = false;
   requestAnimationFrame(() => {
-    ta.focus();
-    if (!restoring) ta.setSelectionRange(0, ta.value.length);
+    /* Only focus for restore (paste). Focusing on copy opens the iOS keyboard. */
+    if (restoring) ta.focus();
+    else ta.blur();
   });
 }
 
@@ -3953,18 +3954,22 @@ function wireBackupSheet() {
     const ta = document.getElementById("backupText");
     const text = ta.value || progressBackupPayload().text;
     ta.value = text;
-    ta.focus();
-    ta.setSelectionRange(0, ta.value.length);
     try {
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(text);
+        ta.blur();
         return;
       }
     } catch (err) {}
+    /* Fallback needs a selection; blur afterward so the keyboard dismisses. */
     try {
+      ta.focus();
+      ta.setSelectionRange(0, ta.value.length);
       const ok = document.execCommand && document.execCommand("copy");
+      ta.blur();
       if (!ok) alert("Couldn’t copy — use Select all, then copy from the system menu.");
     } catch (err) {
+      ta.blur();
       alert("Couldn’t copy — use Select all, then copy from the system menu.");
     }
   });
