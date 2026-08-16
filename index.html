@@ -6082,8 +6082,7 @@ function drawKanji() {
     <div class="k-type-top">
       <span><b>${KDRILL.i + 1}</b> of <b>${total}</b> · <b>${total - KDRILL.i}</b> left
         · ${runningScore(KDRILL.answers)}</span>
-      <button type="button" class="btn sm stage-undo" id="kundo"
-        ${KDRILL.answers.length ? "" : "disabled"}>Undo</button>
+      ${undoButton("kundo", !KDRILL.answers.length)}
     </div>
     <div class="k-type-glyph">
       ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
