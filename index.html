@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817v";
+window.__BUILD__ = "20260817w";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -460,14 +460,25 @@ window.__BUILD__ = "20260817v";
   }
   .backup-sheet[hidden] { display: none !important; }
   .backup-card {
+    position: relative;
     width: min(440px, 100%); max-height: min(88dvh, 640px);
     background: var(--washi); color: var(--text);
     border: 1px solid var(--rule-strong);
     display: flex; flex-direction: column; gap: 10px;
     padding: 16px 14px 14px; box-sizing: border-box;
   }
+  .backup-card .backup-x {
+    position: absolute; top: 8px; right: 8px;
+    width: 40px; height: 40px; margin: 0; padding: 0;
+    border: none; background: transparent; color: var(--text);
+    font-size: 28px; line-height: 1; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: var(--radius-sm);
+  }
+  .backup-card .backup-x:hover { background: var(--bg-soft); }
   .backup-card h2 {
-    margin: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
+    margin: 0; padding-right: 40px;
+    font-family: var(--serif); font-size: 1.25rem; font-weight: 400;
   }
   .backup-card .backup-help {
     margin: 0; font-size: 13px; line-height: 1.45; color: var(--text-soft);
@@ -479,9 +490,11 @@ window.__BUILD__ = "20260817v";
     background: var(--bg); color: var(--text); resize: none;
   }
   .backup-card .backup-acts {
-    display: flex; flex-wrap: wrap; gap: 8px;
+    display: flex; flex-wrap: nowrap; gap: 8px;
   }
-  .backup-card .backup-acts .btn { flex: 1 1 40%; min-height: 44px; }
+  .backup-card .backup-acts[hidden] { display: none !important; }
+  .backup-card .backup-acts .btn { flex: 1 1 0; min-height: 44px; }
+  .backup-card .backup-acts .btn:not(.primary) { background: #fff; color: var(--text); }
 
   @media (prefers-reduced-motion: reduce) {
     .viz-enso .ink { animation: none; }
@@ -2235,14 +2248,17 @@ window.__BUILD__ = "20260817v";
 <div class="k-type-frame" id="kframe" hidden></div>
 <div class="backup-sheet" id="backupSheet" hidden>
   <div class="backup-card" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
-    <h2 id="backupTitle">Progress backup</h2>
+    <button type="button" class="backup-x" id="backupClose" aria-label="Close">&times;</button>
+    <h2 id="backupTitle">Copy backup</h2>
     <p class="backup-help" id="backupHelp"></p>
     <textarea id="backupText" spellcheck="false" autocomplete="off"></textarea>
-    <div class="backup-acts">
-      <button type="button" class="btn primary" id="backupSelect">Select all</button>
-      <button type="button" class="btn" id="backupShare">Share</button>
-      <button type="button" class="btn" id="backupRestore">Restore from text</button>
-      <button type="button" class="btn" id="backupClose">Close</button>
+    <div class="backup-acts" id="backupActsExport">
+      <button type="button" class="btn" id="backupSelect">Select all</button>
+      <button type="button" class="btn primary" id="backupCopy">Copy</button>
+    </div>
+    <div class="backup-acts" id="backupActsRestore" hidden>
+      <button type="button" class="btn" id="backupPaste">Paste</button>
+      <button type="button" class="btn primary" id="backupRestore">Restore from text</button>
     </div>
   </div>
 </div>
@@ -3646,9 +3662,8 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status">${esc(savedAtLabel())}</span>
-            <button type="button" id="exp" role="menuitem">Save backup</button>
-            <button type="button" id="exprestore" role="menuitem">Restore</button>
-            <label for="imp" role="menuitem">Import<input type="file" id="imp" accept="application/json,.json,text/plain,.txt"></label>
+            <button type="button" id="exp" role="menuitem">Copy backup</button>
+            <button type="button" id="exprestore" role="menuitem">Restore progress</button>
           </div>
         </div>
       </div>
@@ -3705,7 +3720,6 @@ function renderHome() {
   });
   document.getElementById("exp").addEventListener("click", () => openBackupSheet("export"));
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
-  document.getElementById("imp").addEventListener("change", importProgress);
   maybeOfferRestore();
 }
 
@@ -3782,18 +3796,22 @@ function openBackupSheet(mode) {
   const ta = document.getElementById("backupText");
   const help = document.getElementById("backupHelp");
   const title = document.getElementById("backupTitle");
+  const actsExport = document.getElementById("backupActsExport");
+  const actsRestore = document.getElementById("backupActsRestore");
   if (!sheet || !ta || !help) return;
   const restoring = mode === "restore" || mode === "import";
-  if (title) title.textContent = restoring ? "Restore progress" : "Save backup";
+  if (title) title.textContent = restoring ? "Restore progress" : "Copy backup";
+  if (actsExport) actsExport.hidden = restoring;
+  if (actsRestore) actsRestore.hidden = !restoring;
   if (restoring) {
     ta.value = "";
     help.innerHTML =
-      "Paste a backup copied from Safari, then tap <b>Restore from text</b>.";
+      "Paste a backup into the box, then tap <b>Restore from text</b>.";
   } else {
     const { text } = progressBackupPayload();
     ta.value = text;
     help.innerHTML =
-      "Tap <b>Select all</b> → Copy, then paste into Notes or into Restore on the home-screen app.";
+      "Tap <b>Select all</b>, then <b>Copy</b>. Paste into Notes or into Restore progress on the home-screen app.";
   }
   sheet.hidden = false;
   requestAnimationFrame(() => {
@@ -3813,30 +3831,39 @@ function wireBackupSheet() {
     ta.focus();
     ta.setSelectionRange(0, ta.value.length);
   });
-  document.getElementById("backupShare").addEventListener("click", async () => {
+  document.getElementById("backupCopy").addEventListener("click", async () => {
     const ta = document.getElementById("backupText");
     const text = ta.value || progressBackupPayload().text;
-    const name = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
-    const file = new File([text], name, { type: "text/plain" });
-    if (!navigator.share) {
-      alert("Sharing isn’t available here — use Select all → Copy instead.");
-      return;
-    }
+    ta.value = text;
+    ta.focus();
+    ta.setSelectionRange(0, ta.value.length);
     try {
-      if (!navigator.canShare || navigator.canShare({ files: [file] })) {
-        await navigator.share({ files: [file], title: "Study progress backup" });
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
         return;
       }
-    } catch (e) {
-      if (e && e.name === "AbortError") return;
-    }
+    } catch (err) {}
     try {
-      await navigator.share({ title: name, text });
-    } catch (e) {
-      if (e && e.name !== "AbortError") {
-        alert("Couldn’t share — use Select all → Copy, then paste into Notes.");
-      }
+      const ok = document.execCommand && document.execCommand("copy");
+      if (!ok) alert("Couldn’t copy — use Select all, then copy from the system menu.");
+    } catch (err) {
+      alert("Couldn’t copy — use Select all, then copy from the system menu.");
     }
+  });
+  document.getElementById("backupPaste").addEventListener("click", async () => {
+    const ta = document.getElementById("backupText");
+    try {
+      if (navigator.clipboard && navigator.clipboard.readText) {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          ta.value = text;
+          ta.focus();
+          return;
+        }
+      }
+    } catch (err) {}
+    ta.focus();
+    alert("Paste into the box with a long-press, then tap Restore from text.");
   });
   document.getElementById("backupRestore").addEventListener("click", () => {
     const raw = document.getElementById("backupText").value.trim();
