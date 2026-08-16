@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260816x">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260816x">
-<link rel="manifest" href="site.webmanifest?v=20260816x">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260816z">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260816z">
+<link rel="manifest" href="site.webmanifest?v=20260816z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260816x";
+window.__BUILD__ = "20260816z";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -107,9 +107,9 @@ window.__BUILD__ = "20260816x";
   .masthead-inner {
     display: flex; align-items: center; gap: 12px; min-height: 0;
   }
-  .masthead-inner .mascot-face {
-    flex: none; height: 2.55em; width: auto; max-height: 52px;
-    object-fit: contain; object-position: bottom center;
+  .masthead-inner .mascot {
+    flex: none; height: 2.7em; width: auto; max-height: 56px;
+    object-fit: contain; object-position: center bottom;
     pointer-events: none; user-select: none;
   }
   h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: -0.01em;
@@ -157,9 +157,9 @@ window.__BUILD__ = "20260816x";
     display: flex; align-items: flex-end; justify-content: flex-start; gap: 10px;
     min-width: 0; flex: 1 1 auto; padding: 0;
   }
-  .home-brand .mascot-full {
+  .home-brand .mascot {
     flex: none; height: clamp(52px, 16vw, 72px); width: auto;
-    object-fit: contain; object-position: bottom center;
+    object-fit: contain; object-position: center bottom;
     pointer-events: none; user-select: none;
   }
   .home-brand .brand {
@@ -1612,7 +1612,7 @@ window.__BUILD__ = "20260816x";
     body:not([data-view="dash"]) header.masthead { padding-bottom: 10px; }
     body:not([data-view="dash"]) header.masthead::after { display: none; }
     body:not([data-view="dash"]) h1 { font-size: 16px; margin: 0; }
-    body:not([data-view="dash"]) .masthead-inner .mascot-face { max-height: 36px; height: 2.1em; }
+    body:not([data-view="dash"]) .masthead-inner .mascot { max-height: 40px; height: 2.3em; }
     .back-home { font-size: 12px; padding: 6px 8px; gap: 4px; }
     .back-home .bh-ico { width: 16px; height: 16px; }
     .crumbs { margin-top: 14px; }
@@ -1856,7 +1856,7 @@ window.__BUILD__ = "20260816x";
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot-face" src="mascot-face.png?v=20260816y" alt="" width="80" height="75"
+    <img class="mascot" src="mascot.png?v=20260816z" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
     <a class="back-home" href="#/" id="backHome">
@@ -1920,7 +1920,7 @@ window.__BUILD__ = "20260816x";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260816x"></script>
+<script src="japanese-data.js?v=20260816z"></script>
 <script>
 /* ============================================================
    State
@@ -3229,7 +3229,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot-full" src="mascot-full.png?v=20260816y" alt="" width="72" height="235"
+          <img class="mascot" src="mascot.png?v=20260816z" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
