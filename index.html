@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260818a";
+window.__BUILD__ = "20260818b";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -3741,6 +3741,7 @@ function renderHome() {
           <div class="home-settings-menu" role="menu">
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
+            <button type="button" id="expshare" role="menuitem">Share</button>
             <button type="button" id="exprestore" role="menuitem">Restore progress</button>
           </div>
         </div>
@@ -3804,6 +3805,11 @@ function renderHome() {
     }
   });
   document.getElementById("exp").addEventListener("click", () => openBackupSheet("export"));
+  document.getElementById("expshare").addEventListener("click", () => {
+    settings.classList.remove("open");
+    settingsBtn.setAttribute("aria-expanded", "false");
+    shareProgressBackup();
+  });
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   maybeOfferRestore();
 }
@@ -3858,6 +3864,33 @@ function progressBackupPayload() {
   const name = "japanese-study-" + new Date().toISOString().slice(0, 10) + ".json";
   const text = JSON.stringify(S, null, 2);
   return { name, text };
+}
+
+/* Open the system share sheet (Messages, Mail, etc.) with the progress JSON. */
+async function shareProgressBackup() {
+  const { name, text } = progressBackupPayload();
+  if (!navigator.share) {
+    openBackupSheet("export");
+    alert("Sharing isn’t available here — use Copy backup instead.");
+    return;
+  }
+  try {
+    /* Text payload works in Messages; file is nicer for Files/Notes when allowed. */
+    const file = new File([text], name, { type: "text/plain" });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({ files: [file], title: "Study progress backup", text });
+      return;
+    }
+  } catch (e) {
+    if (e && e.name === "AbortError") return;
+  }
+  try {
+    await navigator.share({ title: name, text });
+  } catch (e) {
+    if (e && e.name === "AbortError") return;
+    openBackupSheet("export");
+    alert("Couldn’t open Share — use Copy backup instead.");
+  }
 }
 
 function closeBackupSheet() {
