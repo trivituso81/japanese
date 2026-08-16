@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817t";
+window.__BUILD__ = "20260817u";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -325,9 +325,14 @@ window.__BUILD__ = "20260817t";
     box-shadow: 2px 2px 0 var(--shadow-ink);
   }
   .home-filter .all-lessons {
+    display: inline-flex; align-items: center; gap: 7px;
     font-size: 15px; font-weight: 700; text-decoration: none;
     color: var(--accent-deep); padding: 8px 4px;
     white-space: nowrap;
+  }
+  .home-filter .all-lessons svg {
+    width: 1.05em; height: 1.05em; flex: 0 0 auto;
+    stroke: currentColor;
   }
   .home-filter .all-lessons:hover { text-decoration: underline; }
 
@@ -3655,7 +3660,13 @@ function renderHome() {
       <div class="home-filter">
         <label for="homefilter">Lesson</label>
         <select id="homefilter" aria-label="Lesson number for vocabulary and grammar">${filterOpts}</select>
-        <a class="all-lessons" href="#/lessons">View lesson directory</a>
+        <a class="all-lessons" href="#/lessons">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+            <path d="M8 6h12M8 12h12M8 18h12"/>
+            <path d="M4 6h.01M4 12h.01M4 18h.01"/>
+          </svg>
+          View lesson directory
+        </a>
       </div>
 
       <div class="home-stats">
