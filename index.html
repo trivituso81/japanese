@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817x";
+window.__BUILD__ = "20260817y";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -582,6 +582,16 @@ window.__BUILD__ = "20260817x";
     padding: max(6px, env(safe-area-inset-top, 0px)) 12px
       calc(var(--botnav-h, 58px) + 6px + env(safe-area-inset-bottom, 0px));
     display: flex; flex-direction: column;
+  }
+  /* Flashcard play: no page scroll — iOS rubber-banding was fighting swipes. */
+  body[data-view="cards-play"] {
+    overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: manipulation;
+  }
+  html:has(body[data-view="cards-play"]) {
+    overflow: hidden;
+    overscroll-behavior: none;
   }
   body[data-view="cards-play"] .topnav,
   body[data-view="cards-play"] .crumbs,
@@ -1314,8 +1324,11 @@ window.__BUILD__ = "20260817x";
     background: linear-gradient(90deg, var(--seal), var(--accent));
     transition: width .25s ease; }
   .deck { position: relative; overflow: hidden; }
-  .deck .card { position: relative; touch-action: pan-y; user-select: none;
+  /* pan-y let iOS own vertical motion on the card (rubber-band + pointercancel),
+     which aborted horizontal know/don't-know swipes mid-drag. */
+  .deck .card { position: relative; touch-action: none; user-select: none;
     -webkit-user-select: none; -webkit-tap-highlight-color: transparent; }
+  body[data-view="cards-play"] .deck .card { touch-action: none; }
   .deck .card.live { cursor: grab; }
   .deck .card.live:active { cursor: grabbing; }
   .swipetag { position: absolute; top: 14px; z-index: 2; padding: 6px 12px; font-size: 11px;
@@ -4419,15 +4432,16 @@ function drawSessionEnd(stage) {
   save();
 }
 
-/* Drag the card left or right. Vertical movement is left to the page so the
-   view still scrolls normally on a phone. */
+/* Drag the card left or right. Vertical page scroll is locked during
+   cards-play; keep a loose vertical escape so a real scroll intent can abort,
+   but do not drop a mostly-horizontal swipe on small finger jitter. */
 function wireSwipe(face) {
   if (!face || !face.addEventListener) return;
   // the labels sit on the deck rather than the card, so they stay put and
   // readable while the card slides out from under them
   const yes = document.querySelector(".tag-yes");
   const no = document.querySelector(".tag-no");
-  let x0 = 0, y0 = 0, dx = 0, dragging = false, decided = false;
+  let x0 = 0, y0 = 0, dx = 0, dragging = false, decided = false, axis = null;
 
   const settle = () => {
     face.style.transition = "transform .18s ease, opacity .18s ease";
@@ -4436,42 +4450,68 @@ function wireSwipe(face) {
     if (no) no.style.opacity = "0";
   };
 
-  face.addEventListener("pointerdown", e => {
+  const onDown = e => {
     if (CARD.animating) return;
+    if (e.pointerType === "mouse" && e.button !== 0) return;
     unlockTts();
     flushPendingSpeak();
-    dragging = true; decided = false; dx = 0;
+    dragging = true; decided = false; axis = null; dx = 0;
     x0 = e.clientX; y0 = e.clientY;
     face.style.transition = "none";
     if (face.setPointerCapture) { try { face.setPointerCapture(e.pointerId); } catch (err) {} }
-  });
+  };
 
-  face.addEventListener("pointermove", e => {
+  const onMove = e => {
     if (!dragging) return;
     dx = e.clientX - x0;
     const dy = e.clientY - y0;
     if (!decided) {
-      if (Math.abs(dy) > 14 && Math.abs(dy) > Math.abs(dx)) { dragging = false; settle(); return; }
-      if (Math.abs(dx) > 8) decided = true; else return;
+      const adx = Math.abs(dx), ady = Math.abs(dy);
+      if (adx < 8 && ady < 8) return;
+      /* Prefer horizontal unless vertical is clearly dominant. */
+      if (ady > 18 && ady > adx * 1.35) {
+        axis = "y";
+        dragging = false;
+        settle();
+        return;
+      }
+      if (adx >= 8) {
+        axis = "x";
+        decided = true;
+      } else return;
     }
+    if (axis !== "x") return;
+    if (e.cancelable) e.preventDefault();
     const slide = Math.max(-160, Math.min(160, dx));
     face.style.transform = `translateX(${slide}px) rotate(${slide / 24}deg)`;
     if (yes) yes.style.opacity = String(Math.max(0, Math.min(1, dx / SWIPE_MIN)));
     if (no) no.style.opacity = String(Math.max(0, Math.min(1, -dx / SWIPE_MIN)));
-  });
+  };
 
-  face.addEventListener("pointerup", () => {
+  const onUp = () => {
     if (!dragging) return;
     dragging = false;
     // a swipe answers from either face — knowing a word on sight is the whole
     // point, and made you flip to a reading you did not need
-    if (Math.abs(dx) >= SWIPE_MIN) return commitCard(dx > 0);
+    if (axis === "x" && Math.abs(dx) >= SWIPE_MIN) return commitCard(dx > 0);
     // anything shorter was a tap, which turns a face-down card over
     settle();
-    if (!CARD.shown) revealCard();
-  });
+    if (!CARD.shown && axis !== "y") revealCard();
+  };
 
-  face.addEventListener("pointercancel", () => { dragging = false; settle(); });
+  face.addEventListener("pointerdown", onDown);
+  face.addEventListener("pointermove", onMove);
+  face.addEventListener("pointerup", onUp);
+  face.addEventListener("pointercancel", () => {
+    /* iOS may cancel when it thought it owned the gesture — snap back cleanly. */
+    if (!dragging) return;
+    dragging = false;
+    settle();
+  });
+  /* Non-passive touchmove backup: some WebKit builds still scroll under pointers. */
+  face.addEventListener("touchmove", e => {
+    if (dragging && axis === "x" && e.cancelable) e.preventDefault();
+  }, { passive: false });
 }
 
 /* ============================================================
