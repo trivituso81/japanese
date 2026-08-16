@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817w";
+window.__BUILD__ = "20260817x";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -1940,15 +1940,18 @@ window.__BUILD__ = "20260817w";
     .home-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
     .home-stats .sub { font-size: 14px; }
     .viz-enso .pct { font-size: 20px; }
-    .viz-enso .track, .viz-enso .ink { stroke-width: 22; }
-    .viz-pillars { gap: 22px; }
-    .viz-pillars .pillar { max-width: 110px; }
-    .viz-pillars .shaft { min-height: 0; border-width: 2.5px; }
+    /* ~20% thinner strokes than the prior iPad bump — phone stay as-is. */
+    .viz-enso .track, .viz-enso .ink { stroke-width: 17.5; }
+    .viz-brush { height: 80%; }
+    .viz-pillars { gap: 18px; }
+    .viz-pillars .pillar { max-width: 88px; }
+    .viz-pillars .shaft { min-height: 0; border-width: 2px; }
     .viz-pillars .ppct { font-size: 14px; }
     .viz-pillars .plab { font-size: 12px; }
     .viz-pillars .pcnt { font-size: 12px; }
-    .viz-wave .line { stroke-width: 11; }
-    .viz-wave .empty { stroke-width: 8; }
+    .viz-wave { height: 80%; }
+    .viz-wave .line { stroke-width: 8.8; }
+    .viz-wave .empty { stroke-width: 6.4; }
     .home-next { padding-top: 6px; }
     .home-next .btn {
       max-width: 440px; margin: 0 auto;
@@ -2153,12 +2156,14 @@ window.__BUILD__ = "20260817w";
     .home-stats .stat { padding: 14px 14px 12px; gap: 8px; }
     .home-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
     .viz-enso .pct { font-size: 18px; }
-    .viz-enso .track, .viz-enso .ink { stroke-width: 22; }
-    .viz-pillars { gap: 18px; }
-    .viz-pillars .pillar { max-width: 100px; }
+    .viz-enso .track, .viz-enso .ink { stroke-width: 17.5; }
+    .viz-brush { height: 80%; }
+    .viz-pillars { gap: 14px; }
+    .viz-pillars .pillar { max-width: 80px; }
     .viz-pillars .shaft { min-height: 0; }
-    .viz-wave .line { stroke-width: 10; }
-    .viz-wave .empty { stroke-width: 7.5; }
+    .viz-wave { height: 80%; }
+    .viz-wave .line { stroke-width: 8; }
+    .viz-wave .empty { stroke-width: 6; }
 
     .cards-setup {
       max-width: 680px;
