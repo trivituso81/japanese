@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817z";
+window.__BUILD__ = "20260818a";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -224,94 +224,28 @@ window.__BUILD__ = "20260817z";
   .home-settings-menu label:hover { text-decoration: underline; }
   .home-settings-menu input[type="file"] { display: none; }
 
-  .home-stats {
-    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
-    gap: 12px; flex: 1 1 auto; min-height: 0;
-    width: 100%;
-    border: none; background: transparent;
-    overflow: visible;
-  }
-  .home-stats .stat {
-    background: var(--bg);
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: space-between;
-    padding: 14px 12px 12px; text-align: center; min-height: 0; gap: 6px;
+  /* Lesson focus: filter + vocab/grammar live inside one framed panel.
+     Kanji/verbs sit outside as smaller freestanding long-term trackers. */
+  .home-lesson-frame {
+    flex: 2.2 1 auto; min-height: 0;
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 12px 10px 10px;
     border: 2px solid var(--text);
     border-radius: var(--radius);
+    background:
+      radial-gradient(ellipse 80% 55% at 0% 0%, rgba(225, 29, 90, .06), transparent 55%),
+      radial-gradient(ellipse 70% 50% at 100% 100%, rgba(8, 145, 178, .07), transparent 55%),
+      var(--bg);
     box-shadow: 5px 5px 0 var(--shadow-ink);
-    position: relative;
-    overflow: hidden;
-    text-decoration: none; color: inherit;
-    -webkit-tap-highlight-color: transparent;
-    cursor: pointer;
-    transition: transform .14s ease, box-shadow .14s ease;
   }
-  .home-stats a.stat:hover,
-  .home-stats a.stat:focus-visible {
-    transform: translateY(-2px);
-    outline: none;
-  }
-  .home-stats a.stat:active { transform: translateY(1px); }
-  .home-stats .stat::before {
-    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
-    background: radial-gradient(ellipse 80% 60% at 100% 0%, transparent 40%, transparent 100%);
-  }
-  /* Alternate coral / aqua panel washes so magenta never owns the grid */
-  .home-stats .stat:nth-child(1) {
-    background:
-      radial-gradient(ellipse 90% 70% at 0% 100%, rgba(225, 29, 90, .10), transparent 55%),
-      linear-gradient(165deg, #fff 0%, #fff5f8 100%);
-    box-shadow: 5px 5px 0 #7a1838;
-  }
-  .home-stats .stat:nth-child(2) {
-    background:
-      radial-gradient(ellipse 90% 70% at 100% 0%, rgba(8, 145, 178, .12), transparent 55%),
-      linear-gradient(165deg, #fff 0%, #f0fafc 100%);
-    box-shadow: 5px 5px 0 #0a4f5f;
-  }
-  .home-stats .stat:nth-child(3) {
-    background:
-      radial-gradient(ellipse 90% 70% at 0% 0%, rgba(8, 145, 178, .10), transparent 55%),
-      linear-gradient(195deg, #fff 0%, #f3fafc 100%);
-    box-shadow: 5px 5px 0 #0c5a6c;
-  }
-  .home-stats .stat:nth-child(4) {
-    background:
-      radial-gradient(ellipse 90% 70% at 100% 100%, rgba(225, 29, 90, .09), transparent 55%),
-      linear-gradient(195deg, #fff 0%, #fff6f9 100%);
-    box-shadow: 5px 5px 0 #6e1a36;
-  }
-  .home-stats .k {
-    font-size: clamp(1.35rem, 5.6vw, 1.9rem); letter-spacing: .05em; text-transform: uppercase;
-    color: var(--text); font-weight: 700; flex: 0 0 auto; line-height: 1.1;
-    position: relative; z-index: 1;
-  }
-  .home-stats .stat:nth-child(1) .k,
-  .home-stats .stat:nth-child(4) .k { color: var(--seal-deep); }
-  .home-stats .stat:nth-child(2) .k,
-  .home-stats .stat:nth-child(3) .k { color: var(--accent-deep); }
-  .home-stats .viz {
-    flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
-    min-height: 0; width: 100%; align-self: stretch; position: relative; z-index: 1;
-  }
-  .home-stats .meta {
-    flex: 0 0 auto; width: 100%; position: relative; z-index: 1;
-  }
-  .home-stats .val {
-    font-family: var(--serif); font-size: clamp(1.15rem, 4.6vw, 1.45rem);
-    font-weight: 600; line-height: 1.15;
-    font-variant-numeric: tabular-nums; color: var(--text);
-  }
-  .home-stats .of { font-size: .72em; color: var(--text-soft); }
-  .home-stats .sub {
-    font-family: var(--serif); font-size: 12px; color: var(--text-soft);
-    margin-top: 2px; line-height: 1.3;
-  }
-
-  /* Lesson picker for the top vocabulary + grammar quadrants */
   .home-filter {
-    display: flex; align-items: center; justify-content: center;
-    gap: 12px; flex: 0 0 auto; padding: 2px 4px; flex-wrap: wrap;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px; flex: 0 0 auto; padding: 0 2px; flex-wrap: nowrap;
+    width: 100%;
+  }
+  .home-filter-lesson {
+    display: inline-flex; align-items: center; gap: 8px;
+    min-width: 0; justify-content: flex-start;
   }
   .home-filter label {
     font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
@@ -328,13 +262,125 @@ window.__BUILD__ = "20260817z";
     display: inline-flex; align-items: center; gap: 7px;
     font-size: 15px; font-weight: 700; text-decoration: none;
     color: var(--accent-deep); padding: 8px 4px;
-    white-space: nowrap;
+    white-space: nowrap; margin-left: auto;
   }
   .home-filter .all-lessons svg {
     width: 1.05em; height: 1.05em; flex: 0 0 auto;
     stroke: currentColor;
   }
   .home-filter .all-lessons:hover { text-decoration: underline; }
+
+  .home-lesson-stats,
+  .home-track-stats {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    width: 100%; min-height: 0;
+    border: none; background: transparent; overflow: visible;
+  }
+  .home-lesson-stats {
+    flex: 1 1 auto; min-height: 0;
+    grid-template-rows: 1fr;
+  }
+  .home-track-stats {
+    flex: 1 1 auto;
+    min-height: 0;
+    /* Roughly half the lesson panel — longer-term trackers. */
+    max-height: min(28vh, 220px);
+    grid-template-rows: 1fr;
+  }
+
+  .home-lesson-stats .stat,
+  .home-track-stats .stat {
+    background: var(--bg);
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: space-between;
+    padding: 14px 12px 12px; text-align: center; min-height: 0; gap: 6px;
+    border: 2px solid var(--text);
+    border-radius: var(--radius);
+    box-shadow: 5px 5px 0 var(--shadow-ink);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none; color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    transition: transform .14s ease, box-shadow .14s ease;
+  }
+  .home-track-stats .stat {
+    padding: 10px 10px 9px; gap: 4px;
+    box-shadow: 3px 3px 0 var(--shadow-ink);
+  }
+  .home-lesson-stats a.stat:hover,
+  .home-lesson-stats a.stat:focus-visible,
+  .home-track-stats a.stat:hover,
+  .home-track-stats a.stat:focus-visible {
+    transform: translateY(-2px);
+    outline: none;
+  }
+  .home-lesson-stats a.stat:active,
+  .home-track-stats a.stat:active { transform: translateY(1px); }
+  .home-lesson-stats .stat::before,
+  .home-track-stats .stat::before {
+    content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
+    background: radial-gradient(ellipse 80% 60% at 100% 0%, transparent 40%, transparent 100%);
+  }
+  .home-lesson-stats .stat:nth-child(1) {
+    background:
+      radial-gradient(ellipse 90% 70% at 0% 100%, rgba(225, 29, 90, .10), transparent 55%),
+      linear-gradient(165deg, #fff 0%, #fff5f8 100%);
+    box-shadow: 5px 5px 0 #7a1838;
+  }
+  .home-lesson-stats .stat:nth-child(2) {
+    background:
+      radial-gradient(ellipse 90% 70% at 100% 0%, rgba(8, 145, 178, .12), transparent 55%),
+      linear-gradient(165deg, #fff 0%, #f0fafc 100%);
+    box-shadow: 5px 5px 0 #0a4f5f;
+  }
+  .home-track-stats .stat:nth-child(1) {
+    background:
+      radial-gradient(ellipse 90% 70% at 0% 0%, rgba(8, 145, 178, .10), transparent 55%),
+      linear-gradient(195deg, #fff 0%, #f3fafc 100%);
+    box-shadow: 3px 3px 0 #0c5a6c;
+  }
+  .home-track-stats .stat:nth-child(2) {
+    background:
+      radial-gradient(ellipse 90% 70% at 100% 100%, rgba(225, 29, 90, .09), transparent 55%),
+      linear-gradient(195deg, #fff 0%, #fff6f9 100%);
+    box-shadow: 3px 3px 0 #6e1a36;
+  }
+  .home-lesson-stats .k,
+  .home-track-stats .k {
+    font-size: clamp(1.35rem, 5.6vw, 1.9rem); letter-spacing: .05em; text-transform: uppercase;
+    color: var(--text); font-weight: 700; flex: 0 0 auto; line-height: 1.1;
+    position: relative; z-index: 1;
+  }
+  .home-track-stats .k { font-size: clamp(1.05rem, 4.2vw, 1.35rem); }
+  .home-lesson-stats .stat:nth-child(1) .k,
+  .home-track-stats .stat:nth-child(2) .k { color: var(--seal-deep); }
+  .home-lesson-stats .stat:nth-child(2) .k,
+  .home-track-stats .stat:nth-child(1) .k { color: var(--accent-deep); }
+  .home-lesson-stats .viz,
+  .home-track-stats .viz {
+    flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
+    min-height: 0; width: 100%; align-self: stretch; position: relative; z-index: 1;
+  }
+  .home-lesson-stats .meta,
+  .home-track-stats .meta {
+    flex: 0 0 auto; width: 100%; position: relative; z-index: 1;
+  }
+  .home-lesson-stats .val,
+  .home-track-stats .val {
+    font-family: var(--serif); font-size: clamp(1.15rem, 4.6vw, 1.45rem);
+    font-weight: 600; line-height: 1.15;
+    font-variant-numeric: tabular-nums; color: var(--text);
+  }
+  .home-track-stats .val { font-size: clamp(1rem, 3.8vw, 1.2rem); }
+  .home-lesson-stats .of,
+  .home-track-stats .of { font-size: .72em; color: var(--text-soft); }
+  .home-lesson-stats .sub,
+  .home-track-stats .sub {
+    font-family: var(--serif); font-size: 12px; color: var(--text-soft);
+    margin-top: 2px; line-height: 1.3;
+  }
+  .home-track-stats .sub { font-size: 11px; }
 
   /* Progress ring for vocabulary — fill the viz slot, thick ring */
   .viz-enso {
@@ -983,9 +1029,12 @@ window.__BUILD__ = "20260817z";
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
     .home-brand .brand { font-size: clamp(1.45rem, 6.5vw, 2rem); }
-    .home-stats { min-height: 220px; }
-    .home-stats .stat { padding: 10px 8px 9px; gap: 4px; }
-    .home-stats .k { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    .home-lesson-frame { padding: 8px 8px 8px; gap: 8px; }
+    .home-lesson-stats .stat { padding: 10px 8px 9px; gap: 4px; }
+    .home-lesson-stats .k { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    .home-track-stats { max-height: min(22vh, 160px); }
+    .home-track-stats .stat { padding: 8px 8px 7px; }
+    .home-track-stats .k { font-size: clamp(1rem, 4vw, 1.2rem); }
     .viz-brush { min-height: 40px; }
     .viz-pillars { gap: 12px; }
     .viz-pillars .pillar { max-width: 72px; }
@@ -997,11 +1046,13 @@ window.__BUILD__ = "20260817z";
   }
   @media (max-height: 560px) {
     .home-landing { gap: 8px; }
-    .home-stats .sub { display: none; }
-    .home-stats { min-height: 160px; }
+    .home-lesson-stats .sub,
+    .home-track-stats .sub { display: none; }
+    .home-track-stats { max-height: min(18vh, 120px); }
   }
   @media (max-height: 500px) and (orientation: landscape) {
-    .home-stats { grid-template-columns: repeat(4, minmax(0, 1fr)); grid-template-rows: 1fr; min-height: 120px; }
+    .home-lesson-frame { flex: 1 1 auto; }
+    .home-track-stats { max-height: none; flex: 0 0 auto; }
   }
 
   /* buttons — manga panels; primary is coral→aqua so neither colour owns the CTA */
@@ -1945,14 +1996,19 @@ window.__BUILD__ = "20260817z";
     .home-brand .brand {
       font-size: clamp(2.15rem, 4vw, 2.8rem);
     }
-    .home-stats {
-      min-height: min(54vh, 560px);
-      flex: 1 1 auto;
+    .home-lesson-frame {
+      padding: 16px 14px 14px; gap: 12px;
+      min-height: min(42vh, 420px);
     }
-    .home-stats .stat { padding: 18px 18px 16px; gap: 10px; }
-    .home-stats .k { font-size: clamp(1.45rem, 2.4vw, 1.95rem); letter-spacing: .05em; }
-    .home-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
-    .home-stats .sub { font-size: 14px; }
+    .home-lesson-stats .stat { padding: 18px 18px 16px; gap: 10px; }
+    .home-lesson-stats .k { font-size: clamp(1.45rem, 2.4vw, 1.95rem); letter-spacing: .05em; }
+    .home-lesson-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
+    .home-lesson-stats .sub { font-size: 14px; }
+    .home-track-stats { max-height: min(24vh, 240px); gap: 12px; }
+    .home-track-stats .stat { padding: 14px 14px 12px; }
+    .home-track-stats .k { font-size: clamp(1.2rem, 2vw, 1.5rem); }
+    .home-track-stats .val { font-size: clamp(1.2rem, 2vw, 1.45rem); }
+    .home-track-stats .sub { font-size: 13px; }
     .viz-enso .pct { font-size: 20px; }
     /* ~20% thinner strokes than the prior iPad bump — phone stay as-is. */
     .viz-enso .track, .viz-enso .ink { stroke-width: 14.5; }
@@ -2159,16 +2215,20 @@ window.__BUILD__ = "20260817z";
       flex: 0 0 auto;
       width: 100%;
     }
-    .home-stats {
-      flex: 1 1 auto;
+    .home-lesson-frame {
+      flex: 2.2 1 auto;
       width: 100%;
       min-height: 0;
-      height: auto;
-      grid-column: auto;
-      grid-row: auto;
     }
-    .home-stats .stat { padding: 14px 14px 12px; gap: 8px; }
-    .home-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
+    .home-track-stats {
+      flex: 1 1 auto;
+      width: 100%;
+      max-height: min(28vh, 220px);
+    }
+    .home-lesson-stats .stat { padding: 14px 14px 12px; gap: 8px; }
+    .home-lesson-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
+    .home-track-stats .stat { padding: 12px 12px 10px; }
+    .home-track-stats .k { font-size: clamp(1.15rem, 1.8vw, 1.4rem); }
     .viz-enso .pct { font-size: 18px; }
     .viz-enso .track, .viz-enso .ink { stroke-width: 14.5; }
     .viz-brush { height: 80%; }
@@ -3686,25 +3746,32 @@ function renderHome() {
         </div>
       </div>
 
-      <div class="home-filter">
-        <label for="homefilter">Lesson</label>
-        <select id="homefilter" aria-label="Lesson number for vocabulary and grammar">${filterOpts}</select>
-        <a class="all-lessons" href="#/lessons">
-          <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
-            <path d="M8 6h12M8 12h12M8 18h12"/>
-            <path d="M4 6h.01M4 12h.01M4 18h.01"/>
-          </svg>
-          View lesson directory
-        </a>
+      <div class="home-lesson-frame">
+        <div class="home-filter">
+          <div class="home-filter-lesson">
+            <label for="homefilter">Lesson</label>
+            <select id="homefilter" aria-label="Lesson number for vocabulary and grammar">${filterOpts}</select>
+          </div>
+          <a class="all-lessons" href="#/lessons">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
+              <path d="M8 6h12M8 12h12M8 18h12"/>
+              <path d="M4 6h.01M4 12h.01M4 18h.01"/>
+            </svg>
+            View lesson directory
+          </a>
+        </div>
+
+        <div class="home-lesson-stats">
+          ${homeStat("Lesson Vocabulary", ensoViz(wordsPct),
+            `${wordsLearned}<span class="of"> / ${wordsTotal}</span>`,
+            wordsSub, `#/cards/${filterLesson}`)}
+          ${homeStat("Lesson Grammar", brushViz(grammarPct),
+            grammarVal,
+            grammarSub, `#/drill/${filterLesson}`)}
+        </div>
       </div>
 
-      <div class="home-stats">
-        ${homeStat("Lesson Vocabulary", ensoViz(wordsPct),
-          `${wordsLearned}<span class="of"> / ${wordsTotal}</span>`,
-          wordsSub, `#/cards/${filterLesson}`)}
-        ${homeStat("Lesson Grammar", brushViz(grammarPct),
-          grammarVal,
-          grammarSub, `#/drill/${filterLesson}`)}
+      <div class="home-track-stats">
         ${homeStat("Kanji", pillarsViz(kanjiLevels),
           `${kanjiKnownN}<span class="of"> / ${kanjiTotalN}</span>`,
           `${kanjiPct}%`, "#/kanji")}
