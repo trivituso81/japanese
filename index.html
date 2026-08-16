@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817y";
+window.__BUILD__ = "20260817z";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -342,15 +342,16 @@ window.__BUILD__ = "20260817y";
     aspect-ratio: 1; display: block;
   }
   .viz-enso .track {
-    fill: none; stroke: var(--rule-strong); stroke-width: 20;
-    stroke-linecap: round;
+    fill: none; stroke: var(--rule-strong); stroke-width: 17;
+    stroke-linecap: butt;
   }
   .viz-enso .ink {
-    fill: none; stroke: var(--seal); stroke-width: 20;
+    fill: none; stroke: var(--seal); stroke-width: 17;
     stroke-linecap: round;
     transform-origin: 44px 44px;
     animation: enso-draw .9s ease-out both;
   }
+  .viz-enso .ink.full { stroke-linecap: butt; animation: none; }
   .viz-enso .pct {
     font-family: var(--jp-mincho); font-size: 16px; fill: var(--text); font-weight: 700;
   }
@@ -1954,7 +1955,7 @@ window.__BUILD__ = "20260817y";
     .home-stats .sub { font-size: 14px; }
     .viz-enso .pct { font-size: 20px; }
     /* ~20% thinner strokes than the prior iPad bump — phone stay as-is. */
-    .viz-enso .track, .viz-enso .ink { stroke-width: 17.5; }
+    .viz-enso .track, .viz-enso .ink { stroke-width: 14.5; }
     .viz-brush { height: 80%; }
     .viz-pillars { gap: 18px; }
     .viz-pillars .pillar { max-width: 88px; }
@@ -2169,7 +2170,7 @@ window.__BUILD__ = "20260817y";
     .home-stats .stat { padding: 14px 14px 12px; gap: 8px; }
     .home-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
     .viz-enso .pct { font-size: 18px; }
-    .viz-enso .track, .viz-enso .ink { stroke-width: 17.5; }
+    .viz-enso .track, .viz-enso .ink { stroke-width: 14.5; }
     .viz-brush { height: 80%; }
     .viz-pillars { gap: 14px; }
     .viz-pillars .pillar { max-width: 80px; }
@@ -3517,19 +3518,18 @@ function clampPct(n) {
 }
 function ensoViz(pct) {
   const p = clampPct(pct);
-  /* Slightly smaller radius so a thick stroke stays inside the viewBox. */
+  /* Slightly smaller radius so the stroke stays inside the viewBox. */
   const r = 30, c = 2 * Math.PI * r;
-  /* Leave the classic open gap in the circle (~14%), then ink only as far
-     as progress has gone along the remainder. */
-  const gap = c * 0.14;
-  const arc = c - gap;
-  const ink = (p / 100) * arc;
-  const rest = c - ink;
+  /* Full-circumference progress ring — at 100% the ink closes completely. */
+  const ink = (p / 100) * c;
+  const rest = Math.max(0, c - ink);
+  const full = p >= 100;
+  const rot = c * 0.25; /* start at 12 o'clock */
   return `<svg class="viz-enso" viewBox="0 0 88 88" aria-hidden="true">
     <circle class="track" cx="44" cy="44" r="${r}"
-      stroke-dasharray="${arc} ${gap}" stroke-dashoffset="${c * 0.08}"/>
-    <circle class="ink" cx="44" cy="44" r="${r}"
-      stroke-dasharray="${ink} ${rest}" stroke-dashoffset="${c * 0.08}"/>
+      stroke-dasharray="${c} 0" stroke-dashoffset="${rot}"/>
+    <circle class="ink${full ? " full" : ""}" cx="44" cy="44" r="${r}"
+      stroke-dasharray="${full ? `${c} 0` : `${ink} ${rest}`}" stroke-dashoffset="${rot}"/>
     <text class="pct" x="44" y="49" text-anchor="middle">${p}<tspan font-size="11">%</tspan></text>
   </svg>`;
 }
