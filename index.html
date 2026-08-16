@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817a";
+window.__BUILD__ = "20260817b";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -516,13 +516,22 @@ window.__BUILD__ = "20260817a";
     padding-bottom: calc(var(--botnav-h, 58px) + 12px + env(safe-area-inset-bottom, 0px));
     display: flex; flex-direction: column;
   }
-  body[data-view="cards"] header.masthead,
   body[data-view="cards"] .topnav,
   body[data-view="cards"] .crumbs,
   body[data-view="cards"] footer.foot,
   body[data-view="kanji"] .topnav,
   body[data-view="kanji"] .crumbs,
   body[data-view="kanji"] footer.foot { display: none !important; }
+  /* Flashcard setup/play keep the portrait + site title; section JP is set in paintNav. */
+  body[data-view="cards"] .masthead-inner h1,
+  body[data-view="cards-play"] .masthead-inner h1 {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 2px;
+    font-size: clamp(1.05rem, 3.8vw, 1.45rem); line-height: 1.2;
+  }
+  body[data-view="cards"] .masthead-inner h1 .jp,
+  body[data-view="cards-play"] .masthead-inner h1 .jp {
+    display: block; margin-left: 0; font-size: 0.78em; line-height: 1.25;
+  }
   body[data-view="cards"] #view,
   body[data-view="kanji"] #view {
     flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
@@ -537,7 +546,6 @@ window.__BUILD__ = "20260817a";
       calc(var(--botnav-h, 58px) + 6px + env(safe-area-inset-bottom, 0px));
     display: flex; flex-direction: column;
   }
-  body[data-view="cards-play"] header.masthead,
   body[data-view="cards-play"] .topnav,
   body[data-view="cards-play"] .crumbs,
   body[data-view="cards-play"] footer.foot,
@@ -557,16 +565,15 @@ window.__BUILD__ = "20260817a";
     margin: 0; border: none; background: transparent;
   }
   .card-play .stagehead {
-    flex: 0 0 auto; padding: 8px 4px 10px; background: transparent;
-    border-bottom: none; font-size: 12.5px;
+    flex: 0 0 auto; padding: 4px 2px 8px; background: transparent;
+    border-bottom: none; font-size: 12.5px; gap: 8px;
+    justify-content: flex-end;
   }
+  .card-play .stagehead > span:first-child:empty { display: none; }
   .card-play .prog { flex: 0 0 auto; height: 3px; border: none; margin: 0 0 4px; }
   .card-play .deck {
     flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
     position: relative;
-  }
-  .card-play .stagehead {
-    padding: 8px 4px 10px; gap: 8px;
   }
   .card-play .card {
     flex: 1 1 auto; min-height: 0;
@@ -1208,6 +1215,10 @@ window.__BUILD__ = "20260817a";
   }
   .stagehead .stage-undo {
     flex: 0 0 auto; margin: 0; min-height: 32px; padding: 4px 10px; font-size: 12px;
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .stagehead .stage-undo svg {
+    width: 14px; height: 14px; flex: none; display: block;
   }
   .stagehead b { color: var(--text); font-variant-numeric: tabular-nums; }
   .card {
@@ -1856,7 +1867,7 @@ window.__BUILD__ = "20260817a";
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260817a" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260817b" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
     <a class="back-home" href="#/" id="backHome">
@@ -1920,7 +1931,7 @@ window.__BUILD__ = "20260817a";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260817a"></script>
+<script src="japanese-data.js?v=20260817b"></script>
 <script>
 /* ============================================================
    State
@@ -2502,6 +2513,13 @@ function speakButton(opts) {
   const id = o.id || "speak";
   return `<button type="button" class="${cls}" id="${esc(id)}" aria-label="Pronounce">
     ${SPEAK_SVG}${lab}</button>`;
+}
+
+const UNDO_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h11a5 5 0 0 1 0 10h-3"/></svg>`;
+
+function undoButton(id, disabled) {
+  return `<button type="button" class="btn sm stage-undo" id="${esc(id)}"${
+    disabled ? " disabled" : ""}>${UNDO_SVG}Undo</button>`;
 }
 
 function wireSpeak(reading, kanji, btnOrId) {
@@ -3891,11 +3909,12 @@ function drawCard() {
     : `<div class="card-reveal-ans">${jpAns}${backSpeak}</div>`;
 
   stage.innerHTML = drillStage({
-    left: `${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
-      <b>${CARD.passSize}</b> · <b>${CARD.round.length}</b> left`,
-    right: `${isRange(CARD.scope) ? `L${c.n} · ` : ""}box <b>${boxOf(c.id)}</b>${
+    left: "",
+    right: `${CARD.pass > 1 ? `Repeat ${CARD.pass - 1} · ` : ""}<b>${CARD.passDone}</b> of
+      <b>${CARD.passSize}</b> · <b>${CARD.round.length}</b> left${
+      isRange(CARD.scope) ? ` · L${c.n}` : ""}${
       again ? ` · <span class="rep">again</span>` : ""}
-      <button type="button" class="btn sm stage-undo" id="undo" ${CARD.prev ? "" : "disabled"}>Undo</button>`,
+      ${undoButton("undo", !CARD.prev)}`,
     done: CARD.passDone, total: CARD.passSize,
     body: `
     <div class="deck">
@@ -6008,7 +6027,7 @@ function drawKanji() {
     stage.innerHTML = drillStage({
       left: `<b>${Math.min(KDRILL.i, total)}</b> of <b>${total}</b>`,
       right: `${runningScore(KDRILL.answers)}
-        <button type="button" class="btn sm stage-undo" id="kundo">Undo</button>`,
+        ${undoButton("kundo", false)}`,
       done: Math.min(KDRILL.i, total), total,
       body: `
       <div class="deck">
@@ -6272,7 +6291,9 @@ function paintNav(section) {
   });
   const jp = document.getElementById("masthead-jp");
   if (jp) {
-    if (section === "#/kanji") jp.textContent = "漢字";
+    const h = location.hash || "#/";
+    if (/^#\/cards\//.test(h)) jp.textContent = "みんなの日本語のフラッシュカード";
+    else if (section === "#/kanji") jp.textContent = "漢字";
     else if (section === "#/verbs") jp.textContent = "動詞";
     else jp.textContent = "みんなの日本語";
   }
