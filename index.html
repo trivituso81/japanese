@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817p";
+window.__BUILD__ = "20260817q";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -282,7 +282,7 @@ window.__BUILD__ = "20260817p";
     box-shadow: 5px 5px 0 #6e1a36;
   }
   .home-stats .k {
-    font-size: clamp(1.2rem, 5.2vw, 1.75rem); letter-spacing: .06em; text-transform: uppercase;
+    font-size: clamp(1.35rem, 5.6vw, 1.9rem); letter-spacing: .05em; text-transform: uppercase;
     color: var(--text); font-weight: 700; flex: 0 0 auto; line-height: 1.1;
     position: relative; z-index: 1;
   }
@@ -292,7 +292,7 @@ window.__BUILD__ = "20260817p";
   .home-stats .stat:nth-child(3) .k { color: var(--accent-deep); }
   .home-stats .viz {
     flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
-    min-height: 0; width: 100%; position: relative; z-index: 1;
+    min-height: 0; width: 100%; align-self: stretch; position: relative; z-index: 1;
   }
   .home-stats .meta {
     flex: 0 0 auto; width: 100%; position: relative; z-index: 1;
@@ -331,51 +331,57 @@ window.__BUILD__ = "20260817p";
   }
   .home-filter .all-lessons:hover { text-decoration: underline; }
 
-  /* Progress ring for vocabulary */
-  .viz-enso { width: min(148px, 46vw); height: auto; display: block; }
+  /* Progress ring for vocabulary — fill the viz slot, thick ring */
+  .viz-enso {
+    width: auto; height: 100%; max-height: 100%; max-width: 100%;
+    aspect-ratio: 1; display: block;
+  }
   .viz-enso .track {
-    fill: none; stroke: var(--rule-strong); stroke-width: 14;
+    fill: none; stroke: var(--rule-strong); stroke-width: 20;
     stroke-linecap: round;
   }
   .viz-enso .ink {
-    fill: none; stroke: var(--seal); stroke-width: 14;
+    fill: none; stroke: var(--seal); stroke-width: 20;
     stroke-linecap: round;
     transform-origin: 44px 44px;
     animation: enso-draw .9s ease-out both;
   }
   .viz-enso .pct {
-    font-family: var(--jp-mincho); font-size: 14px; fill: var(--text); font-weight: 700;
+    font-family: var(--jp-mincho); font-size: 16px; fill: var(--text); font-weight: 700;
   }
   @keyframes enso-draw {
     from { stroke-dashoffset: 240; opacity: .35; }
   }
 
-  /* Lesson progress bar — aqua */
-  .viz-brush { width: 100%; max-width: 168px; height: 44px; display: block; }
+  /* Lesson progress bar — aqua; full width + height of the viz slot */
+  .viz-brush {
+    width: 100%; max-width: none; height: 100%; min-height: 48px;
+    display: block;
+  }
   .viz-brush .track { fill: var(--bg-inset); }
   .viz-brush .ink { fill: var(--accent); }
   .viz-brush .tip { fill: var(--accent-deep); opacity: .9; }
 
-  /* Level meters for kanji */
+  /* Level meters for kanji — fill height + width */
   .viz-pillars {
     display: flex; align-items: stretch; justify-content: center;
-    gap: 14px; height: 100%; width: 100%; max-width: 168px;
-    margin: 0 auto; padding: 0 2px; box-sizing: border-box;
+    gap: 16px; height: 100%; width: 100%; max-width: none;
+    margin: 0 auto; padding: 0; box-sizing: border-box;
   }
   .viz-pillars .pillar {
-    flex: 1 1 0; min-width: 0; max-width: 64px; height: 100%;
+    flex: 1 1 0; min-width: 0; max-width: 88px; height: 100%;
     display: flex; flex-direction: column; align-items: center;
-    justify-content: flex-end; gap: 3px; min-height: 0;
+    justify-content: flex-end; gap: 4px; min-height: 0;
   }
   .viz-pillars .ppct {
     flex: 0 0 auto;
-    font-size: 11px; font-weight: 700; letter-spacing: .02em;
+    font-size: 12px; font-weight: 700; letter-spacing: .02em;
     font-variant-numeric: tabular-nums; color: var(--text); line-height: 1;
   }
   .viz-pillars .shaft {
-    flex: 1 1 auto; width: 100%; min-height: 52px;
+    flex: 1 1 auto; width: 100%; min-height: 64px;
     background: var(--bg-inset);
-    border: 1px solid var(--rule-strong);
+    border: 2px solid var(--rule-strong);
     display: flex; align-items: flex-end;
     box-sizing: border-box;
     border-radius: var(--radius-sm); overflow: hidden;
@@ -389,25 +395,28 @@ window.__BUILD__ = "20260817p";
   .viz-pillars .pillar:nth-child(3) .fill { background: var(--accent-deep); }
   .viz-pillars .plab {
     flex: 0 0 auto;
-    font-size: 10px; font-weight: 700; letter-spacing: .08em;
+    font-size: 11px; font-weight: 700; letter-spacing: .08em;
     color: var(--text); text-transform: uppercase; line-height: 1;
   }
   .viz-pillars .pcnt {
     flex: 0 0 auto;
-    font-size: 10px; font-variant-numeric: tabular-nums;
+    font-size: 11px; font-variant-numeric: tabular-nums;
     color: var(--text-soft); line-height: 1;
   }
 
-  /* Sparkline — recent verb answers */
-  .viz-wave { width: 100%; max-width: 180px; height: 88px; display: block; }
-  .viz-wave .sea { fill: var(--accent); fill-opacity: .12; }
+  /* Sparkline — recent verb answers; fill the viz slot */
+  .viz-wave {
+    width: 100%; max-width: none; height: 100%; min-height: 72px;
+    display: block;
+  }
+  .viz-wave .sea { fill: var(--accent); fill-opacity: .14; }
   .viz-wave .line {
-    fill: none; stroke: var(--accent); stroke-width: 5.5;
+    fill: none; stroke: var(--accent); stroke-width: 9;
     stroke-linecap: round; stroke-linejoin: round;
   }
   .viz-wave .empty {
-    fill: none; stroke: var(--rule-strong); stroke-width: 4;
-    stroke-dasharray: 5 6; stroke-linecap: round;
+    fill: none; stroke: var(--rule-strong); stroke-width: 7;
+    stroke-dasharray: 6 7; stroke-linecap: round;
   }
 
   .home-next {
@@ -947,14 +956,14 @@ window.__BUILD__ = "20260817p";
     .home-brand .brand { font-size: clamp(1.45rem, 6.5vw, 2rem); }
     .home-stats { min-height: 220px; }
     .home-stats .stat { padding: 10px 8px 9px; gap: 4px; }
-    .home-stats .k { font-size: clamp(1.15rem, 4.8vw, 1.55rem); }
-    .viz-enso { width: min(120px, 40vw); }
-    .viz-brush { max-width: 150px; height: 36px; }
-    .viz-pillars { max-width: 150px; gap: 12px; }
+    .home-stats .k { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    .viz-brush { min-height: 40px; }
+    .viz-pillars { gap: 12px; }
+    .viz-pillars .pillar { max-width: 72px; }
     .viz-pillars .shaft { min-height: 40px; }
     .viz-pillars .ppct { font-size: 10px; }
     .viz-pillars .pcnt { font-size: 9px; }
-    .viz-wave { height: 68px; max-width: 150px; }
+    .viz-wave { min-height: 48px; }
     .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
   }
   @media (max-height: 560px) {
@@ -1908,19 +1917,20 @@ window.__BUILD__ = "20260817p";
       min-height: min(54vh, 560px);
       flex: 1 1 auto;
     }
-    .home-stats .stat { padding: 22px 20px 18px; gap: 12px; }
-    .home-stats .k { font-size: 11.5px; letter-spacing: .16em; }
+    .home-stats .stat { padding: 18px 18px 16px; gap: 10px; }
+    .home-stats .k { font-size: clamp(1.45rem, 2.4vw, 1.95rem); letter-spacing: .05em; }
     .home-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
     .home-stats .sub { font-size: 14px; }
-    .viz-enso { width: min(128px, 16vw); }
-    .viz-enso .pct { font-size: 18px; }
-    .viz-brush { max-width: 200px; height: 38px; }
-    .viz-pillars { max-width: 240px; gap: 20px; }
-    .viz-pillars .shaft { min-height: 96px; }
-    .viz-pillars .ppct { font-size: 13px; }
-    .viz-pillars .plab { font-size: 11px; }
-    .viz-pillars .pcnt { font-size: 11px; }
-    .viz-wave { max-width: 200px; height: 80px; }
+    .viz-enso .pct { font-size: 20px; }
+    .viz-enso .track, .viz-enso .ink { stroke-width: 22; }
+    .viz-pillars { gap: 22px; }
+    .viz-pillars .pillar { max-width: 110px; }
+    .viz-pillars .shaft { min-height: 0; border-width: 2.5px; }
+    .viz-pillars .ppct { font-size: 14px; }
+    .viz-pillars .plab { font-size: 12px; }
+    .viz-pillars .pcnt { font-size: 12px; }
+    .viz-wave .line { stroke-width: 11; }
+    .viz-wave .empty { stroke-width: 8; }
     .home-next { padding-top: 6px; }
     .home-next .btn {
       max-width: 440px; margin: 0 auto;
@@ -2122,12 +2132,15 @@ window.__BUILD__ = "20260817p";
       grid-column: auto;
       grid-row: auto;
     }
-    .home-stats .stat { padding: 16px 16px 14px; gap: 8px; }
-    .viz-enso { width: min(110px, 12vw); }
-    .viz-pillars { max-width: 220px; gap: 16px; }
-    .viz-pillars .shaft { min-height: 64px; }
-    .viz-wave { height: 64px; max-width: 180px; }
-    .viz-brush { max-width: 180px; height: 34px; }
+    .home-stats .stat { padding: 14px 14px 12px; gap: 8px; }
+    .home-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
+    .viz-enso .pct { font-size: 18px; }
+    .viz-enso .track, .viz-enso .ink { stroke-width: 22; }
+    .viz-pillars { gap: 18px; }
+    .viz-pillars .pillar { max-width: 100px; }
+    .viz-pillars .shaft { min-height: 0; }
+    .viz-wave .line { stroke-width: 10; }
+    .viz-wave .empty { stroke-width: 7.5; }
 
     .cards-setup {
       max-width: 680px;
@@ -3442,7 +3455,8 @@ function clampPct(n) {
 }
 function ensoViz(pct) {
   const p = clampPct(pct);
-  const r = 34, c = 2 * Math.PI * r;
+  /* Slightly smaller radius so a thick stroke stays inside the viewBox. */
+  const r = 30, c = 2 * Math.PI * r;
   /* Leave the classic open gap in the circle (~14%), then ink only as far
      as progress has gone along the remainder. */
   const gap = c * 0.14;
@@ -3454,17 +3468,17 @@ function ensoViz(pct) {
       stroke-dasharray="${arc} ${gap}" stroke-dashoffset="${c * 0.08}"/>
     <circle class="ink" cx="44" cy="44" r="${r}"
       stroke-dasharray="${ink} ${rest}" stroke-dashoffset="${c * 0.08}"/>
-    <text class="pct" x="44" y="48" text-anchor="middle">${p}<tspan font-size="10">%</tspan></text>
+    <text class="pct" x="44" y="49" text-anchor="middle">${p}<tspan font-size="11">%</tspan></text>
   </svg>`;
 }
 function brushViz(pct) {
   const p = clampPct(pct);
-  const w = Math.max(p > 0 ? 14 : 0, (p / 100) * 118);
-  /* Slightly uneven brush tip — not a stadium progress pill. */
-  return `<svg class="viz-brush" viewBox="0 0 120 40" aria-hidden="true">
-    <path class="track" d="M2 12h116v16H2z"/>
-    ${w ? `<path class="ink" d="M2 11h${Math.max(0, w - 8)}c3 0 5.2 1.2 6.8 3.2L${w + 2} 28H2z"/>
-    <ellipse class="tip" cx="${w}" cy="20" rx="5" ry="8.5"/>` : ""}
+  const w = Math.max(p > 0 ? 14 : 0, (p / 100) * 116);
+  /* Chunky brush bar that fills the taller viewBox. */
+  return `<svg class="viz-brush" viewBox="0 0 120 48" aria-hidden="true" preserveAspectRatio="none">
+    <path class="track" d="M2 8h116v32H2z"/>
+    ${w ? `<path class="ink" d="M2 7h${Math.max(0, w - 10)}c4 0 6.5 1.6 8.5 4.2L${w + 2} 40H2z"/>
+    <ellipse class="tip" cx="${w}" cy="24" rx="7" ry="14"/>` : ""}
   </svg>`;
 }
 function pillarsViz(levels) {
@@ -3489,7 +3503,7 @@ function waveViz(history) {
   const raw = (history || []).slice(-16);
   const W = 160, H = 72, pad = 8;
   if (!raw.length) {
-    return `<svg class="viz-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+    return `<svg class="viz-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true" preserveAspectRatio="none">
       <path class="empty" d="M8 38 C 36 22, 60 52, 86 38 S 132 22, 152 38"/>
     </svg>`;
   }
@@ -3510,7 +3524,7 @@ function waveViz(history) {
     if (i === coords.length - 1) line += ` T ${p1[0].toFixed(1)},${p1[1].toFixed(1)}`;
   }
   const area = `${line} L${coords[coords.length - 1][0].toFixed(1)},${H - pad} L${coords[0][0].toFixed(1)},${H - pad} Z`;
-  return `<svg class="viz-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true">
+  return `<svg class="viz-wave" viewBox="0 0 ${W} ${H}" aria-hidden="true" preserveAspectRatio="none">
     <path class="sea" d="${area}"/>
     <path class="line" d="${line}"/>
   </svg>`;
@@ -3615,7 +3629,7 @@ function renderHome() {
       </div>
 
       <div class="home-stats">
-        ${homeStat("Vocabulary", ensoViz(wordsPct),
+        ${homeStat("Lesson Vocabulary", ensoViz(wordsPct),
           `${wordsLearned}<span class="of"> / ${wordsTotal}</span>`,
           wordsSub, `#/cards/${filterLesson}`)}
         ${homeStat("Lesson Grammar", brushViz(grammarPct),
