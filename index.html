@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260817i";
+window.__BUILD__ = "20260817j";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -167,6 +167,16 @@ window.__BUILD__ = "20260817i";
     line-height: 1.2; letter-spacing: .04em; color: var(--text);
     margin: 0; font-weight: 700; text-align: left;
     animation: brand-in .55s ease-out both;
+  }
+  /* Phone: keep トムさんの勉強ガイド on one line (no orphan ド). */
+  @media (max-width: 430px) {
+    .home-brand { gap: 8px; }
+    .home-brand .brand {
+      font-size: clamp(1.15rem, 4.7vw, 1.4rem);
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+    .home-brand .mascot { height: clamp(44px, 14vw, 58px); }
   }
   .home-brand .brand::after {
     content: ""; display: block; width: min(9.5rem, 42%); height: 4px;
