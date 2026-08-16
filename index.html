@@ -6902,6 +6902,13 @@ function wireBotnavScroll() {
   let lastY = window.scrollY || 0;
   let ticking = false;
   const onScroll = () => {
+    /* Card play locks scrolling; ignore rubber-band scrollY noise on iOS. */
+    const view = document.body.dataset.view || "";
+    if (view === "cards-play" || view === "kanji-play") {
+      lastY = window.scrollY || 0;
+      ticking = false;
+      return;
+    }
     const y = window.scrollY || 0;
     const dy = y - lastY;
     if (dy > 6 && y > 24) hideBotnav();
