@@ -203,6 +203,65 @@
     .lhead { flex-wrap: wrap; gap: 8px 10px; }
     .ltitle { flex-basis: 100%; order: 3; }
   }
+
+  /* Largest iPad (Pro 12.9″ / 13″) — portrait ≈1024×1366, landscape ≈1366×1024 */
+  @media (min-width: 900px) and (max-width: 1400px) {
+    :root { --maxw: 1000px; }
+    body { font-size: 17px; line-height: 1.65; }
+    .wrap { padding: 48px 36px 120px; }
+    input, select, textarea { font-size: 16px; }
+
+    h1 { font-size: 34px; }
+    .standfirst { font-size: 17.5px; max-width: 64ch; }
+    .kicker { font-size: 13px; letter-spacing: .1em; }
+
+    .progress { margin-top: 32px; }
+    .progress .ph { padding: 14px 18px; }
+    .progress .ph b { font-size: 16px; }
+    .legend { padding: 14px 18px; font-size: 14px; gap: 8px 24px; }
+
+    .toolbar { margin-top: 26px; padding: 16px 0; gap: 12px 16px; }
+    .toolbar input[type=search] {
+      flex: 1 1 320px; font-size: 16px; padding: 10px 14px; min-height: 44px;
+    }
+    .btn { font-size: 13.5px; padding: 9px 14px; min-height: 40px; }
+
+    .part { margin-top: 56px; }
+    .part-title { font-size: 26px; padding-bottom: 14px; }
+    .lhead { padding: 14px 18px; gap: 14px; }
+    .ltitle { font-size: 16px; }
+    .ltitle .sub { font-size: 14px; }
+    .lnum { font-size: 14px; min-width: 36px; }
+    .chip { font-size: 11px; padding: 4px 10px; }
+
+    .lbody { padding: 8px 18px 22px; }
+    .points .g { font-size: 17px; }
+    .points .e { font-size: 15px; }
+    .src { font-size: 13.5px; padding: 10px 14px; }
+
+    .vlist { grid-template-columns: minmax(220px, 36%) 1fr; }
+    .vj { font-size: 16.5px; }
+    .ve2, .vе { font-size: 14.5px; }
+    .vlist > div { padding: 9px 14px; }
+
+    .pat { padding: 18px 18px; }
+    .pat h4 { font-size: 20px; }
+    .ex .j { font-size: 17.5px; }
+    .ex .t { font-size: 14.5px; }
+    table.cmp { font-size: 14.5px; }
+    table.cmp .j { font-size: 16px; }
+
+    .notes textarea { min-height: 72px; font-size: 15px; padding: 11px 13px; }
+    .segmented .btn { min-height: 40px; }
+    footer.foot { margin-top: 64px; font-size: 14px; }
+  }
+
+  @media (min-width: 1100px) and (max-width: 1400px) and (orientation: landscape) {
+    :root { --maxw: 1120px; }
+    .wrap { padding: 36px 40px 100px; }
+    .toolbar input[type=search] { flex: 1 1 400px; }
+  }
+
   @media print {
     .toolbar, .lctl .segmented, .btn { display: none !important; }
     .lbody { display: block !important; }
