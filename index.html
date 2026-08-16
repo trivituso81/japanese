@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260816z">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260816z">
-<link rel="manifest" href="site.webmanifest?v=20260816z">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817a">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817a">
+<link rel="manifest" href="site.webmanifest?v=20260817a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260816z";
+window.__BUILD__ = "20260817a";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -1856,7 +1856,7 @@ window.__BUILD__ = "20260816z";
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260816z" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260817a" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
     <a class="back-home" href="#/" id="backHome">
@@ -1920,7 +1920,7 @@ window.__BUILD__ = "20260816z";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260816z"></script>
+<script src="japanese-data.js?v=20260817a"></script>
 <script>
 /* ============================================================
    State
@@ -2173,8 +2173,11 @@ if (canSpeakBrowser) {
 }
 
 function googleTtsUrl(text) {
-  return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q="
-    + encodeURIComponent(text) + "&_=" + Date.now();
+  const q = String(text || "");
+  return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q="
+    + encodeURIComponent(q)
+    + "&total=1&idx=0&textlen=" + encodeURIComponent(String(q.length))
+    + "&_=" + Date.now();
 }
 
 function ensureSpeakAudio() {
@@ -2199,13 +2202,27 @@ function ensureSpeakFrame() {
   f.id = "tts-frame";
   f.title = "Pronunciation";
   f.setAttribute("referrerpolicy", "no-referrer");
-  f.setAttribute("allow", "autoplay; fullscreen");
+  f.setAttribute("allow", "autoplay");
   /* Off-screen but not display:none — iOS is unreliable about media in
      display:none / hidden documents and iframes. */
   f.style.cssText = "position:fixed;left:0;top:0;width:1px;height:1px;opacity:0.01;border:0;pointer-events:none;z-index:-1;";
+  const u = new URL("tts.html", location.href);
+  if (window.__BUILD__) u.searchParams.set("v", window.__BUILD__);
+  f.src = u.href;
   document.body.appendChild(f);
   speakFrame = f;
   return f;
+}
+
+function postToSpeakFrame(msg) {
+  const f = ensureSpeakFrame();
+  if (!f || !f.contentWindow) return false;
+  try {
+    f.contentWindow.postMessage(msg, "*");
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
 
 function setSpeakBusy(on) {
@@ -2236,6 +2253,23 @@ let speakToken = 0;
 let ttsUnlocked = false;
 let pendingSpeak = null;
 let speakBusyEl = null;
+let speakFrameReady = false;
+let speakFrameWaiters = [];
+
+function onSpeakFrameReady(fn) {
+  if (speakFrameReady) { fn(); return; }
+  speakFrameWaiters.push(fn);
+}
+
+window.addEventListener("message", ev => {
+  const d = ev && ev.data;
+  if (!d || typeof d !== "object") return;
+  if (d.type === "tts-ready" || d.type === "tts-unlocked") {
+    speakFrameReady = true;
+    const waiters = speakFrameWaiters.splice(0);
+    waiters.forEach(fn => { try { fn(); } catch (e) {} });
+  }
+});
 
 function detachSpeakHandlers() {
   if (!speakAudio) return;
@@ -2248,22 +2282,33 @@ function detachSpeakHandlers() {
 function unlockTts() {
   if (typeof Audio === "undefined") return;
   const a = ensureSpeakAudio();
-  ensureSpeakFrame();
-  if (!a) return;
-  if (ttsUnlocked) return;
-  ttsUnlocked = true;
-  try {
-    detachSpeakHandlers();
-    a.src = SILENT_WAV;
-    const p = a.play();
-    if (p && typeof p.then === "function") {
-      p.then(() => {
-        try {
-          if ((a.currentSrc || a.src || "").indexOf("data:") === 0) a.pause();
-        } catch (e) {}
-      }).catch(() => {});
-    }
-  } catch (e) {}
+  const f = ensureSpeakFrame();
+  if (a && !ttsUnlocked) {
+    ttsUnlocked = true;
+    try {
+      detachSpeakHandlers();
+      a.src = SILENT_WAV;
+      const p = a.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => {
+          try {
+            if ((a.currentSrc || a.src || "").indexOf("data:") === 0) a.pause();
+          } catch (e) {}
+        }).catch(() => {});
+      }
+    } catch (e) {}
+  } else {
+    ttsUnlocked = true;
+  }
+  /* iOS unlocks media per document. Unlock the persistent TTS iframe in this
+     same gesture so later speak messages can autoplay there. */
+  if (f) {
+    const ping = () => { postToSpeakFrame({ type: "tts-unlock" }); };
+    onSpeakFrameReady(ping);
+    /* If the frame is still loading, also try after a tick. */
+    setTimeout(ping, 0);
+    setTimeout(ping, 120);
+  }
 }
 
 function flushPendingSpeak() {
@@ -2273,10 +2318,8 @@ function flushPendingSpeak() {
   speakJapanese(args[0], args[1]);
 }
 
-/* Play Google TTS from tts.html inside a no-referrer iframe. Safari has been
-   observed attaching a github.io Referer to <audio src=googleapis> even when
-   the parent meta/element asked for no-referrer; a child document whose own
-   meta is no-referrer does not. */
+/* Play Google TTS via the persistent no-referrer iframe (postMessage).
+   Reloading tts.html per word would drop iOS's per-document media unlock. */
 function speakViaTtsFrame(text, token, gen) {
   const f = ensureSpeakFrame();
   if (!f) return false;
@@ -2297,22 +2340,24 @@ function speakViaTtsFrame(text, token, gen) {
     } else if (d.type === "tts-error") {
       frameSettled = true;
       window.removeEventListener("message", onMsg);
-      /* Fall back to in-page audio, then Web Speech. */
       if (!speakViaAudioElement(text, token, gen)) speakViaWebSpeech(text);
     }
   };
   window.addEventListener("message", onMsg);
-  const u = new URL("tts.html", location.href);
-  u.searchParams.set("q", text);
-  u.searchParams.set("_", String(Date.now()));
-  if (window.__BUILD__) u.searchParams.set("v", window.__BUILD__);
-  f.src = u.href;
-  /* If the iframe never phones home, fall back. */
+  const send = () => {
+    if (msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
+    if (!postToSpeakFrame({ type: "tts-speak", q: text })) {
+      window.removeEventListener("message", onMsg);
+      if (!speakViaAudioElement(text, token, gen)) speakViaWebSpeech(text);
+    }
+  };
+  onSpeakFrameReady(send);
+  setTimeout(send, 0);
   setTimeout(() => {
     if (frameSettled || msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
     window.removeEventListener("message", onMsg);
     if (!speakViaAudioElement(text, token, gen)) speakViaWebSpeech(text);
-  }, 7000);
+  }, 8000);
   return true;
 }
 
@@ -2383,14 +2428,12 @@ function speakJapanese(reading, kanji) {
   if (speakAudio) {
     try { speakAudio.pause(); } catch (e) {}
   }
-  if (speakFrame) {
-    try { speakFrame.src = "about:blank"; } catch (e) {}
-  }
   setSpeakBusy(true);
 
   const token = speakToken;
   const gen = speakAudioGen;
-  /* iframe-first: reliable no-referrer for Google TTS on iOS Safari / PWA. */
+  /* iframe-first: reliable no-referrer for Google TTS on iOS Safari / PWA.
+     Do not blank the frame first — that races the next load on Safari. */
   if (speakViaTtsFrame(text, token, gen)) return true;
   if (speakViaAudioElement(text, token, gen)) return true;
   return speakViaWebSpeech(text);
@@ -3229,7 +3272,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260816z" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260817a" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -4658,8 +4701,8 @@ function wireFurigana() {
 let ignoreHashchange = false;
 function goto(dest) {
   if (location.hash === dest) return route();
-  // Flashcards need to draw inside the click gesture so auto-speak is allowed.
-  if (/^#\/cards\//.test(dest)) {
+  /* Keep TTS unlock inside the same tap for screens that auto-speak. */
+  if (/^#\/(cards|drill|verbs|kanji)\b/.test(dest)) {
     unlockTts();
     ignoreHashchange = true;
     location.hash = dest;
@@ -4679,8 +4722,8 @@ document.addEventListener("click", e => {
   const a = e.target.closest('a[href^="#/"]');
   if (!a) return;
   const href = a.getAttribute("href") || "";
-  // Intercept flashcard links so TTS unlock + first speak share the tap.
-  if (/^#\/cards\//.test(href)) {
+  // Intercept speak-bearing routes so unlock + first speak share the tap.
+  if (/^#\/(cards|drill|verbs|kanji)\b/.test(href)) {
     e.preventDefault();
     return goto(href);
   }

@@ -12,6 +12,19 @@
 <body>
 <script>
 (function () {
+  var SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
+  var audio = document.createElement("audio");
+  audio.setAttribute("playsinline", "");
+  audio.setAttribute("webkit-playsinline", "");
+  try { audio.playsInline = true; } catch (e) {}
+  try { audio.setAttribute("referrerpolicy", "no-referrer"); } catch (e) {}
+  try { audio.referrerPolicy = "no-referrer"; } catch (e) {}
+  audio.preload = "auto";
+  document.body.appendChild(audio);
+
+  var objectUrl = null;
+  var speakSeq = 0;
+
   function tell(type, extra) {
     try {
       if (parent && parent !== window) {
@@ -20,24 +33,36 @@
     } catch (e) {}
   }
 
-  var q = "";
-  try { q = new URLSearchParams(location.search).get("q") || ""; } catch (e) {}
-  if (!q) { tell("tts-error", { reason: "empty" }); return; }
+  function revoke() {
+    if (!objectUrl) return;
+    try { URL.revokeObjectURL(objectUrl); } catch (e) {}
+    objectUrl = null;
+  }
 
-  var a = document.createElement("audio");
-  a.setAttribute("playsinline", "");
-  a.setAttribute("webkit-playsinline", "");
-  try { a.playsInline = true; } catch (e) {}
-  a.preload = "auto";
-  a.src = "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=gtx&tl=ja&q="
-    + encodeURIComponent(q) + "&_=" + Date.now();
+  function ttsUrl(q) {
+    return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q="
+      + encodeURIComponent(q)
+      + "&total=1&idx=0&textlen=" + encodeURIComponent(String(q.length))
+      + "&_=" + Date.now();
+  }
 
-  var settled = false;
-  function fail(reason) {
-    if (settled) return;
-    settled = true;
-    tell("tts-error", { reason: reason || "error" });
-    /* Last resort inside this no-referrer document. */
+  function unlock() {
+    try { audio.pause(); } catch (e) {}
+    audio.src = SILENT;
+    var p = audio.play();
+    if (p && typeof p.then === "function") {
+      p.then(function () {
+        try { audio.pause(); } catch (e) {}
+        tell("tts-unlocked");
+      }).catch(function () { tell("tts-unlocked"); });
+    } else {
+      tell("tts-unlocked");
+    }
+  }
+
+  function fail(seq, q, reason) {
+    if (seq !== speakSeq) return;
+    tell("tts-error", { reason: reason || "error", q: q });
     if (!("speechSynthesis" in window)) return;
     try {
       speechSynthesis.cancel();
@@ -48,27 +73,89 @@
     } catch (e) {}
   }
 
-  a.addEventListener("playing", function () {
-    if (settled) return;
-    settled = true;
-    tell("tts-playing");
-  });
-  a.addEventListener("ended", function () { tell("tts-ended"); });
-  a.addEventListener("error", function () { fail("media-error"); });
-
-  document.body.appendChild(a);
-  var p = a.play();
-  if (p && typeof p.then === "function") {
-    p.then(function () { tell("tts-playing"); settled = true; })
-     .catch(function (err) {
-       fail(err && err.name ? err.name : "play-rejected");
-     });
+  function playBlobOrSrc(seq, q, src) {
+    if (seq !== speakSeq) return;
+    try { audio.pause(); } catch (e) {}
+    audio.src = src;
+    var settled = false;
+    function onPlaying() {
+      if (seq !== speakSeq || settled) return;
+      settled = true;
+      tell("tts-playing", { q: q });
+    }
+    function onEnded() {
+      if (seq !== speakSeq) return;
+      tell("tts-ended", { q: q });
+    }
+    function onError() {
+      if (seq !== speakSeq || settled) return;
+      settled = true;
+      fail(seq, q, "media-error");
+    }
+    audio.addEventListener("playing", onPlaying, { once: true });
+    audio.addEventListener("ended", onEnded, { once: true });
+    audio.addEventListener("error", onError, { once: true });
+    var p = audio.play();
+    if (p && typeof p.then === "function") {
+      p.then(function () {
+        if (seq !== speakSeq || settled) return;
+        settled = true;
+        tell("tts-playing", { q: q });
+      }).catch(function (err) {
+        if (seq !== speakSeq || settled) return;
+        settled = true;
+        fail(seq, q, err && err.name ? err.name : "play-rejected");
+      });
+    }
+    setTimeout(function () {
+      if (seq !== speakSeq || settled) return;
+      if (audio.error || (audio.paused && audio.currentTime === 0)) {
+        settled = true;
+        fail(seq, q, "timeout");
+      }
+    }, 8000);
   }
 
-  setTimeout(function () {
-    if (settled) return;
-    if (a.error || (a.paused && a.currentTime === 0)) fail("timeout");
-  }, 6000);
+  function speak(q) {
+    q = String(q || "");
+    if (!q) { tell("tts-error", { reason: "empty" }); return; }
+    var seq = ++speakSeq;
+    revoke();
+    var url = ttsUrl(q);
+    if (typeof fetch !== "function") {
+      playBlobOrSrc(seq, q, url);
+      return;
+    }
+    fetch(url, { referrerPolicy: "no-referrer", cache: "no-store", mode: "cors" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("http-" + r.status);
+        return r.blob();
+      })
+      .then(function (blob) {
+        if (seq !== speakSeq) return;
+        if (!blob || !blob.size) throw new Error("empty-blob");
+        objectUrl = URL.createObjectURL(blob);
+        playBlobOrSrc(seq, q, objectUrl);
+      })
+      .catch(function () {
+        if (seq !== speakSeq) return;
+        playBlobOrSrc(seq, q, url);
+      });
+  }
+
+  window.addEventListener("message", function (ev) {
+    var d = ev && ev.data;
+    if (!d || typeof d !== "object") return;
+    if (d.type === "tts-unlock") unlock();
+    else if (d.type === "tts-speak") speak(d.q);
+    else if (d.type === "tts-stop") {
+      speakSeq++;
+      try { audio.pause(); } catch (e) {}
+      revoke();
+    }
+  });
+
+  tell("tts-ready");
 })();
 </script>
 </body>
