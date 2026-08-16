@@ -2926,14 +2926,10 @@ function vocabScore(n) {
   if (!d.length) return null;
   const learned = d.filter(c => boxOf(c.id) >= LEARNED_BOX).length;
   const seen = d.filter(c => boxOf(c.id) > 0).length;
-  /* Each step toward LEARNED_BOX counts, so a first session moves the home
-     ring instead of looking as though nothing was saved. */
-  const steps = d.reduce((a, c) => a + Math.min(boxOf(c.id), LEARNED_BOX), 0);
-  const climbPct = Math.round((100 * steps) / (d.length * LEARNED_BOX));
+  const climbing = Math.max(0, seen - learned);
   return {
-    learned, seen, total: d.length,
-    pct: pct(learned, d.length),
-    climbPct
+    learned, seen, climbing, total: d.length,
+    pct: pct(learned, d.length)
   };
 }
 
@@ -3598,14 +3594,14 @@ function renderHome() {
   const vs = vocabScore(filterLesson);
   const wordsLearned = vs ? vs.learned : 0;
   const wordsTotal = vs ? vs.total : 0;
-  const wordsStarted = vs ? Math.max(0, vs.seen - vs.learned) : 0;
-  /* Ring follows climb toward box LEARNED_BOX so studying always moves it. */
-  const wordsPct = vs ? vs.climbPct : 0;
-  const wordsSub = wordsStarted
-    ? `${wordsLearned} learned · ${wordsStarted} climbing · L${filterLesson}`
+  const wordsClimbing = vs ? vs.climbing : 0;
+  /* Ring and fraction are the same story: words at box LEARNED_BOX+. */
+  const wordsPct = vs ? vs.pct : 0;
+  const wordsSub = wordsClimbing
+    ? `${wordsClimbing} climbing · L${filterLesson}`
     : wordsLearned
-      ? `all started words at box ${LEARNED_BOX} · L${filterLesson}`
-      : `box ${LEARNED_BOX} of 5 · L${filterLesson}`;
+      ? `all started words learned · L${filterLesson}`
+      : `box ${LEARNED_BOX}+ counts as learned · L${filterLesson}`;
 
   const gs = grammarScore(filterLesson);
   const grammarPct = gs ? gs.pct : 0;
