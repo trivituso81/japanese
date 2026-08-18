@@ -35,6 +35,10 @@ VOCAB
 ポルトガル||Portugal
 サウジアラビア||Saudi Arabia
 ロシア||Russia
+せっけいします III|設計します|design
+けんちくか|建築家|architect
+かがくしゃ|科学者|scientist
+そうおん|騒音|noise
 PROPER
 ドミニカ||Dominica
 ライトきょうだい|ライト兄弟|Wright brothers, American pioneers in aviation Wilbur Wright (1867-1912) Orville Wright (1871-1948)
