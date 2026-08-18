@@ -2181,6 +2181,10 @@ const VOCAB = {
     ["ポルトガル", "", "Portugal"],
     ["サウジアラビア", "", "Saudi Arabia"],
     ["ロシア", "", "Russia"],
+    ["せっけいします III", "設計します", "design"],
+    ["けんちくか", "建築家", "architect"],
+    ["かがくしゃ", "科学者", "scientist"],
+    ["そうおん", "騒音", "noise"],
   ],
   p: [
     ["ドミニカ", "", "Dominica"],
@@ -7324,9 +7328,9 @@ const CONTENT = {
       ["\"The Tale of Genji\" was written by Murasaki Shikibu.", "「源氏物語{げんじものがたり}」は 紫式部{むらさきしきぶ}に よって 書{か}かれました。", "authorship takes に よって, not plain に"],
       ["The telephone was invented by Bell.", "電話{でんわ}は ベルに よって 発明{はつめい}されました。", ""],
       ["The aeroplane was invented by the Wright brothers.", "飛行機{ひこうき}は ライト兄弟{きょうだい}に よって 発明{はつめい}されました。", ""],
-      ["This building was designed by a famous architect.", "この 建物{たてもの}は 有名{ゆうめい}な 建築家{けんちくか}に よって 設計{せっけい}されました。", "設計{せっけい}します belongs to this group of verbs"],
+      ["This building was designed by a famous architect.", "この 建物{たてもの}は 有名{ゆうめい}な 建築家{けんちくか}に よって 設計{せっけい}されました。", "有名{ゆうめい} is from Lesson 8; 建築家{けんちくか} and 設計{せっけい}します are in this lesson's cards"],
       ["Who was this picture painted by?", "この 絵{え}は だれに よって かかれましたか。", "だれに よって for the question"],
-      ["That new medicine was discovered by a Japanese scientist.", "あの 新{あたら}しい 薬{くすり}は 日本{にほん}の 科学者{かがくしゃ}に よって 発見{はっけん}されました。", ""],
+      ["That new medicine was discovered by a Japanese scientist.", "あの 新{あたら}しい 薬{くすり}は 日本{にほん}の 科学者{かがくしゃ}に よって 発見{はっけん}されました。", "科学者{かがくしゃ} is in this lesson's cards"],
     ]
   },
   {
