@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823b";
+window.__BUILD__ = "20260823c";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -2352,14 +2352,17 @@ window.__BUILD__ = "20260823b";
   </div>
 </div>
 
-<script src="japanese-data.js?v=20260823b"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
+<script src="firebase-config.js?v=20260823c"></script>
+<script src="japanese-data.js?v=20260823c"></script>
 <script>
 /* ============================================================
    State
 
-   Future: Google login feature — logged-out landing with Google-only
-   sign-in, then cloud-synced progress (lessons/cards/drills/verbs/kanji).
-   Not implemented yet; keep localStorage as the source of truth for now.
+   Progress is saved to localStorage on every change, and — when signed in
+   with Google — debounced to Firestore so any device can resume.
    ============================================================ */
 const KEY = "mnn-study-v1";
 const KEY_BAK = KEY + ":bak";
@@ -2500,6 +2503,7 @@ function save(opts) {
     localStorage.setItem(KEY, raw);
     localStorage.setItem(KEY_BAK, raw);
     localStorage.setItem(KEY_SAVED, String(Date.now()));
+    scheduleCloudSync();
     return true;
   } catch (e) {
     if (!_saveWarned) {
@@ -2532,10 +2536,173 @@ function requestPersistentStorage() {
 }
 
 /* Flush on background / close — iOS Safari is eager to suspend tabs. */
-window.addEventListener("pagehide", () => { save(); });
+window.addEventListener("pagehide", () => { save(); flushCloudSync(); });
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") save();
+  if (document.visibilityState === "hidden") { save(); flushCloudSync(); }
 });
+
+/* ============================================================
+   Google sign-in + Firestore sync
+
+   localStorage stays the fast path; when signed in, the same JSON is
+   pushed to users/{uid} after every save (debounced) and merged on login.
+   ============================================================ */
+const CLOUD_SCHEMA = 1;
+let cloudAuth = null;
+let cloudDb = null;
+let cloudUser = null;
+let cloudSyncTimer = null;
+let cloudSyncing = false;
+let cloudLastPush = 0;
+let cloudHydratedUid = null;
+
+function initCloud() {
+  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") return;
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+    cloudAuth = firebase.auth();
+    cloudDb = firebase.firestore();
+    cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    cloudAuth.getRedirectResult().catch(() => {});
+    cloudAuth.onAuthStateChanged(user => {
+      cloudUser = user;
+      if (user) syncOnSignIn(user);
+      else cloudHydratedUid = null;
+      updateCloudUi();
+      const h = location.hash;
+      if (h === "#/" || h === "#" || h === "") renderHome();
+    });
+  } catch (e) {}
+}
+
+function cloudDocRef(uid) {
+  return cloudDb.collection("users").doc(uid);
+}
+
+async function pullCloud(uid) {
+  const snap = await cloudDocRef(uid).get();
+  if (!snap.exists) return null;
+  const data = snap.data();
+  if (!data || !data.progress) return null;
+  const progress = migrate(Object.assign(blank(), data.progress));
+  return {
+    progress,
+    weight: data.weight || progressWeight(progress),
+    updatedAt: data.updatedAt && data.updatedAt.toMillis ? data.updatedAt.toMillis() : 0
+  };
+}
+
+async function pushCloud(uid) {
+  if (!uid) return;
+  cloudSyncing = true;
+  try {
+    await cloudDocRef(uid).set({
+      progress: S,
+      weight: progressWeight(S),
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      schema: CLOUD_SCHEMA
+    }, { merge: true });
+    cloudLastPush = Date.now();
+  } catch (e) {
+    console.warn("cloud push failed", e);
+  } finally {
+    cloudSyncing = false;
+  }
+}
+
+function pickProgress(local, localTs, cloud) {
+  const lw = progressWeight(local);
+  if (!cloud || cloud.weight === 0) return { progress: local, source: "local" };
+  const cw = cloud.weight;
+  if (lw === 0) return { progress: cloud.progress, source: "cloud" };
+  if (cw > lw) return { progress: cloud.progress, source: "cloud" };
+  if (lw > cw) return { progress: local, source: "local" };
+  const ct = cloud.updatedAt || 0;
+  const lt = localTs || 0;
+  return ct > lt
+    ? { progress: cloud.progress, source: "cloud" }
+    : { progress: local, source: "local" };
+}
+
+async function syncOnSignIn(user) {
+  if (cloudHydratedUid === user.uid) return;
+  cloudHydratedUid = user.uid;
+  const localTs = +localStorage.getItem(KEY_SAVED) || 0;
+  let cloud = null;
+  try { cloud = await pullCloud(user.uid); } catch (e) { return; }
+  const picked = pickProgress(S, localTs, cloud);
+  S = picked.progress;
+  save({ force: true });
+  if (picked.source === "local" && progressWeight(S) > 0) await pushCloud(user.uid);
+  updateCloudUi();
+}
+
+function scheduleCloudSync() {
+  if (!cloudUser) return;
+  clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = setTimeout(() => flushCloudSync(), 400);
+}
+
+function flushCloudSync() {
+  clearTimeout(cloudSyncTimer);
+  cloudSyncTimer = null;
+  if (!cloudUser) return Promise.resolve();
+  return pushCloud(cloudUser.uid).then(() => updateCloudUi());
+}
+
+function cloudStatusLine() {
+  if (!cloudAuth) return "";
+  if (!cloudUser) return "Sign in to sync across devices";
+  const who = cloudUser.email || "Google account";
+  if (cloudSyncing) return `${who} · syncing…`;
+  if (!cloudLastPush) return `${who} · linked`;
+  const mins = Math.round((Date.now() - cloudLastPush) / 60000);
+  if (mins < 1) return `${who} · synced just now`;
+  if (mins < 60) return `${who} · synced ${mins}m ago`;
+  return `${who} · synced ${Math.round(mins / 60)}h ago`;
+}
+
+function signInGoogle() {
+  if (!cloudAuth) return alert("Cloud sync is not available.");
+  const provider = new firebase.auth.GoogleAuthProvider();
+  const useRedirect = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+    || window.navigator.standalone
+    || window.matchMedia("(display-mode: standalone)").matches;
+  if (useRedirect) cloudAuth.signInWithRedirect(provider);
+  else {
+    cloudAuth.signInWithPopup(provider).catch(e => {
+      if (e && e.code === "auth/popup-blocked") cloudAuth.signInWithRedirect(provider);
+    });
+  }
+}
+
+function signOutGoogle() {
+  if (!cloudAuth) return;
+  flushCloudSync().finally(() => cloudAuth.signOut());
+}
+
+function updateCloudUi() {
+  const status = document.getElementById("cloudStatus");
+  if (status) status.textContent = cloudStatusLine();
+  const signIn = document.getElementById("cloudSignIn");
+  const signOut = document.getElementById("cloudSignOut");
+  if (signIn) signIn.hidden = !!cloudUser;
+  if (signOut) signOut.hidden = !cloudUser;
+}
+
+function wireCloudSettings() {
+  const signIn = document.getElementById("cloudSignIn");
+  const signOut = document.getElementById("cloudSignOut");
+  if (signIn) signIn.addEventListener("click", () => {
+    document.getElementById("homeSettings").classList.remove("open");
+    signInGoogle();
+  });
+  if (signOut) signOut.addEventListener("click", () => {
+    document.getElementById("homeSettings").classList.remove("open");
+    signOutGoogle();
+  });
+  updateCloudUi();
+}
 
 function lessonState(n) {
   if (!S.lessons[n]) S.lessons[n] = { overall: "todo", note: "" };
@@ -3749,6 +3916,9 @@ function renderHome() {
             </svg>
           </button>
           <div class="home-settings-menu" role="menu">
+            <span class="hp-status" id="cloudStatus"></span>
+            <button type="button" id="cloudSignIn" role="menuitem">Sign in with Google</button>
+            <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
             <button type="button" id="expshare" role="menuitem">Share</button>
@@ -3821,6 +3991,7 @@ function renderHome() {
     shareProgressBackup();
   });
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
+  wireCloudSettings();
   maybeOfferRestore();
 }
 
@@ -6949,6 +7120,7 @@ wireFurigana();
 wireBotnavScroll();
 wireKanjiKeyboard();
 wireBackupSheet();
+initCloud();
 route();
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
