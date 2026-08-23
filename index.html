@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823p">
+<link rel="manifest" href="site.webmanifest?v=20260823r">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823p";
+window.__BUILD__ = "20260823r";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823p";
+  var v = window.__BUILD__ || "20260823r";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823p"));
+    + encodeURIComponent(window.__BUILD__ || "20260823r"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823p") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823r") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -708,6 +708,54 @@ document.addEventListener("DOMContentLoaded", function () {
   .viz-wave .empty {
     fill: none; stroke: var(--rule-strong); stroke-width: 7;
     stroke-dasharray: 6 7; stroke-linecap: round;
+  }
+
+  /* Verb conjugation badges — one seal per form in VERB_FORMS */
+  .viz-badges {
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    gap: 4px;
+    width: 100%; height: 100%;
+    align-content: center;
+    min-height: 56px;
+  }
+  .viz-badges .vb {
+    aspect-ratio: 1;
+    min-width: 0; min-height: 0;
+    display: flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--rule-strong);
+    border-radius: 50%;
+    background: var(--bg-inset);
+    color: var(--text-faint);
+    font-family: var(--jp-mincho);
+    font-size: clamp(6.5px, 1.9vw, 9.5px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: .01em;
+    text-align: center;
+    padding: 1px;
+    box-sizing: border-box;
+    opacity: .55;
+  }
+  .viz-badges .vb.learning {
+    border-color: var(--now);
+    color: var(--text-soft);
+    background: #fff7e8;
+    opacity: 1;
+  }
+  .viz-badges .vb.earned {
+    border-color: var(--text);
+    border-width: 2px;
+    color: #fff;
+    background: linear-gradient(145deg, var(--seal) 0%, var(--accent-deep) 100%);
+    box-shadow: 1px 1px 0 var(--shadow-ink);
+    opacity: 1;
+  }
+  .viz-badges .vb .vb-lab {
+    display: block;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: clip;
   }
 
   .home-next {
@@ -1280,6 +1328,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .viz-pillars .ppct { font-size: 10px; }
     .viz-pillars .pcnt { font-size: 9px; }
     .viz-wave { min-height: 48px; }
+    .viz-badges { min-height: 48px; gap: 3px; }
     .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
   }
   @media (max-height: 560px) {
@@ -2526,7 +2575,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823p#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823r#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2628,7 +2677,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823p"></script>
+<script src="firebase-config.js?v=20260823r"></script>
 <script>
 /* ============================================================
    State
@@ -2728,6 +2777,15 @@ function migrate(s) {
   if (!s.cardMisses || typeof s.cardMisses !== "object" || Array.isArray(s.cardMisses)) {
     s.cardMisses = {};
   }
+  /* Conjugation badges need per-form tallies; older saves only had byType. */
+  if (!s.verbs || typeof s.verbs !== "object") s.verbs = { history: [], byType: {}, byForm: {}, runs: 0 };
+  if (!s.verbs.byForm || typeof s.verbs.byForm !== "object" || Array.isArray(s.verbs.byForm)) {
+    s.verbs.byForm = {};
+  }
+  if (!s.verbs.byType || typeof s.verbs.byType !== "object" || Array.isArray(s.verbs.byType)) {
+    s.verbs.byType = {};
+  }
+  if (!Array.isArray(s.verbs.history)) s.verbs.history = [];
   return s;
 }
 
@@ -2875,7 +2933,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823p" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823r" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3141,7 +3199,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823p"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823r"));
     return;
   }
   const start = () => {
@@ -3155,7 +3213,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823p"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823r"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4293,10 +4351,8 @@ function wireStatusSelects() {
    — on a phone it pushed the standing, the recommendation and any unfinished
    round several screens down. */
 
-/* Home quadrant visuals — same numbers as before, drawn in brush/ink idioms
-   rather than modern chart chrome: 円相 for vocabulary, a single brush stroke
-   for lessons, 算木 pillars for kanji levels, and a quiet wave of recent
-   verb answers. */
+/* Home quadrant visuals — 円相 for vocabulary, brush stroke for lessons,
+   算木 pillars for kanji, and conjugation badges for verbs. */
 function clampPct(n) {
   return Math.max(0, Math.min(100, Math.round(n)));
 }
@@ -4375,6 +4431,58 @@ function waveViz(history) {
     <path class="line" d="${line}"/>
   </svg>`;
 }
+
+/* ============================================================
+   Verb conjugation badges
+
+   One badge per entry in VERB_FORMS (て-form, ない-form, …). Progress is
+   tracked in S.verbs.byForm as you drill. A badge is earned once you have
+   enough success on that form — not by verb class (Group 1/2/3).
+   ============================================================ */
+const VERB_BADGE_MIN = 8;
+const VERB_BADGE_ACC = 0.8;
+
+function verbFormStats(formId) {
+  const by = (S.verbs && S.verbs.byForm) || {};
+  const t = by[formId] || { ok: 0, n: 0 };
+  return { ok: t.ok || 0, n: t.n || 0 };
+}
+
+function verbBadgeTier(formId) {
+  const { ok, n } = verbFormStats(formId);
+  if (n <= 0) return "locked";
+  if (n >= VERB_BADGE_MIN && ok / n >= VERB_BADGE_ACC) return "earned";
+  return "learning";
+}
+
+function verbBadgeShort(form) {
+  const jp = String(form.jp || form.label || form.id);
+  return jp.length > 5 ? jp.slice(0, 4) + "…" : jp;
+}
+
+function verbBadgeCensus() {
+  const forms = VERB_FORMS || [];
+  let earned = 0, learning = 0;
+  forms.forEach(f => {
+    const t = verbBadgeTier(f.id);
+    if (t === "earned") earned++;
+    else if (t === "learning") learning++;
+  });
+  return { total: forms.length, earned, learning };
+}
+
+function badgesViz() {
+  const forms = VERB_FORMS || [];
+  if (!forms.length) return `<div class="viz-badges" aria-hidden="true"></div>`;
+  const cells = forms.map(f => {
+    const tier = verbBadgeTier(f.id);
+    const { ok, n } = verbFormStats(f.id);
+    const title = `${f.label} · ${n ? `${ok}/${n}` : "not started"}`;
+    return `<span class="vb ${tier}" title="${esc(title)}" aria-label="${esc(title)}"><span class="vb-lab">${esc(verbBadgeShort(f))}</span></span>`;
+  }).join("");
+  return `<div class="viz-badges" role="img" aria-label="Verb conjugation badges">${cells}</div>`;
+}
+
 function homeStat(k, viz, valHtml, sub, href) {
   const inner = `<div class="k">${esc(k)}</div>
     <div class="viz">${viz}</div>
@@ -4439,8 +4547,7 @@ function renderHome() {
   const kanjiTotalN = kanjiLevels.reduce((n, l) => n + l.total, 0);
   const kanjiPct = kanjiTotalN ? Math.round((kanjiKnownN / kanjiTotalN) * 100) : 0;
 
-  const vAcc = verbAccuracy();
-  const vHist = (S.verbs && S.verbs.history) || [];
+  const vBadges = verbBadgeCensus();
 
   const filterOpts = LESSONS.map(l =>
     `<option value="${l.n}"${filter === l.n ? " selected" : ""}>${l.n}</option>`).join("");
@@ -4464,7 +4571,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823p" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260823r" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <button type="button" id="cloudPull" role="menuitem" hidden>Download from Google</button>
             <button type="button" id="cloudPush" role="menuitem" hidden>Upload this device to Google</button>
@@ -4505,8 +4612,8 @@ function renderHome() {
         ${homeStat("Kanji", pillarsViz(kanjiLevels),
           `${kanjiKnownN}<span class="of"> / ${kanjiTotalN}</span>`,
           `${kanjiPct}%`, "#/kanji")}
-        ${homeStat("Verbs", waveViz(vHist),
-          vAcc === null ? "—" : `${vAcc}%`,
+        ${homeStat("Verbs", badgesViz(),
+          `${vBadges.earned}<span class="of"> / ${vBadges.total}</span>`,
           verbSub(), "#/verbs")}
       </div>
     </section>`;
@@ -4583,10 +4690,11 @@ function verbAccuracy() {
   return pct(recent.reduce((a, x) => a + x, 0), recent.length);
 }
 function verbSub() {
-  const st = S.verbs;
-  if (!st || !st.history || !st.history.length) return "not started";
-  const weak = weakTypes(3);
-  return weak.length ? `weakest: ${typeLabel(weak[0].t)}` : `${st.runs || 0} rounds · no weak spots`;
+  const { earned, learning, total } = verbBadgeCensus();
+  if (!earned && !learning) return "earn badges per conjugation";
+  if (earned === total) return "all conjugations badged";
+  if (learning) return `${learning} in progress`;
+  return `${earned} conjugation${earned === 1 ? "" : "s"} locked in`;
 }
 
 function progressBackupPayload() {
@@ -6395,12 +6503,17 @@ function weakTypes(min) {
     .sort((a, b) => (a.ok / a.n) - (b.ok / b.n) || b.n - a.n);
 }
 
-function recordVerb(ok, type) {
-  const st = S.verbs = S.verbs || { history: [], byType: {}, runs: 0 };
+function recordVerb(ok, type, form) {
+  const st = S.verbs = S.verbs || { history: [], byType: {}, byForm: {}, runs: 0 };
+  if (!st.byForm || typeof st.byForm !== "object") st.byForm = {};
   st.history.push(ok ? 1 : 0);
   if (st.history.length > HISTORY_CAP) st.history = st.history.slice(-HISTORY_CAP);
   const t = st.byType[type] = st.byType[type] || { ok: 0, n: 0 };
   t.n++; if (ok) t.ok++;
+  if (form) {
+    const f = st.byForm[form] = st.byForm[form] || { ok: 0, n: 0 };
+    f.n++; if (ok) f.ok++;
+  }
 }
 
 /* Deals the round, then hands over to the router. The drill has its own
@@ -6602,6 +6715,12 @@ function regradeVerb(ok) {
     st.history[st.history.length - 1] = ok ? 1 : 0;
     const t = st.byType[a.type];
     if (t) t.ok += ok ? 1 : -1;
+    const form = VERB && VERB.form;
+    if (form) {
+      if (!st.byForm || typeof st.byForm !== "object") st.byForm = {};
+      const f = st.byForm[form] = st.byForm[form] || { ok: 0, n: 0 };
+      f.ok += ok ? 1 : -1;
+    }
   }
   a.ok = ok; a.overridden = true;
   saveVerbSession();
@@ -6615,7 +6734,7 @@ function submitVerb(typed) {
   const answer = conjugate(v, VERB.form);
   const ok = judgeVerb(typed, answer);
   const type = verbType(v);
-  recordVerb(ok, type);
+  recordVerb(ok, type, VERB.form);
   VERB.answers.push({ ms: v.ms, kanji: v.kanji, en: v.en, n: v.n, type, ok,
                       typed: String(typed).trim(), answer });
   VERB.i++;
@@ -6628,7 +6747,8 @@ function submitVerb(typed) {
 }
 
 function drawVerbEnd(view, meta) {
-  const st = S.verbs = S.verbs || { history: [], byType: {}, runs: 0 };
+  const st = S.verbs = S.verbs || { history: [], byType: {}, byForm: {}, runs: 0 };
+  if (!st.byForm || typeof st.byForm !== "object") st.byForm = {};
   if (!VERB.counted) { st.runs = (st.runs || 0) + 1; VERB.counted = true; save(); }
   clearVerbSession();
 
@@ -7748,7 +7868,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823p&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823r&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
