@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823x">
+<link rel="manifest" href="site.webmanifest?v=20260823y">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823x";
+window.__BUILD__ = "20260823y";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823x";
+  var v = window.__BUILD__ || "20260823y";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823x"));
+    + encodeURIComponent(window.__BUILD__ || "20260823y"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823x") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823y") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1844,8 +1844,42 @@ document.addEventListener("DOMContentLoaded", function () {
   .vforms td { padding: 10px 10px 10px 0; border-bottom: 1px solid var(--rule);
     vertical-align: middle; font-size: 14px; }
   .vf-n { width: 34px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
+  .vf-l { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .vf-l .vf-text { min-width: 0; }
   .vf-l b { display: block; }
   .vf-jp { font-family: var(--jp); font-size: 12.5px; color: var(--text-faint); }
+  .vf-badge.vb {
+    flex: 0 0 auto;
+    width: 34px; height: 34px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--rule-strong);
+    border-radius: 50%;
+    background: var(--bg-inset);
+    color: var(--text-faint);
+    font-family: var(--jp-mincho);
+    font-size: 9px; font-weight: 700; line-height: 1.05;
+    text-align: center; padding: 2px; box-sizing: border-box;
+    opacity: .55;
+  }
+  .vf-badge.vb.learning {
+    border-color: var(--now); color: var(--text-soft);
+    background: #fff7e8; opacity: 1;
+  }
+  .vf-badge.vb.earned {
+    border-color: var(--text); border-width: 2px; color: #fff;
+    background: linear-gradient(145deg, var(--seal) 0%, var(--accent-deep) 100%);
+    box-shadow: 1px 1px 0 var(--shadow-ink); opacity: 1;
+  }
+  .vf-badge.vb .vb-lab { display: block; max-width: 100%; overflow: hidden; }
+  .vf-badge-key {
+    display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center;
+    margin: 4px 0 0; font-size: 12px; color: var(--text-soft);
+  }
+  .vf-badge-key span { display: inline-flex; align-items: center; gap: 6px; }
+  .vf-badge-key .vb {
+    width: 18px; height: 18px; font-size: 0; line-height: 0;
+    opacity: 1; padding: 0;
+  }
   .vf-e { font-family: var(--jp-mincho); font-size: 16px; }
   .vf-c { width: 60px; color: var(--text-faint); font-variant-numeric: tabular-nums; }
   .vf-go { width: 76px; text-align: right; }
@@ -2598,7 +2632,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823x#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823y#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2700,7 +2734,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823x"></script>
+<script src="firebase-config.js?v=20260823y"></script>
 <script>
 /* ============================================================
    State
@@ -2967,7 +3001,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823x" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823y" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3256,7 +3290,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823x"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
     return;
   }
   const start = () => {
@@ -3270,7 +3304,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823x"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4543,6 +4577,15 @@ function verbBadgeShort(form) {
   return jp.length > 5 ? jp.slice(0, 4) + "…" : jp;
 }
 
+function verbBadgeSeal(form, opts) {
+  const o = opts || {};
+  const tier = verbBadgeTier(form.id);
+  const { ok, n } = verbFormStats(form.id);
+  const title = `${form.label} · ${n ? `${ok}/${n}` : "not started"}`;
+  const cls = o.className ? ` ${o.className}` : "";
+  return `<span class="vb ${tier}${cls}" title="${esc(title)}" aria-label="${esc(title)}"><span class="vb-lab">${esc(verbBadgeShort(form))}</span></span>`;
+}
+
 function verbBadgeCensus() {
   const forms = VERB_FORMS || [];
   let earned = 0, learning = 0;
@@ -4557,12 +4600,7 @@ function verbBadgeCensus() {
 function badgesViz() {
   const forms = VERB_FORMS || [];
   if (!forms.length) return `<div class="viz-badges" aria-hidden="true"></div>`;
-  const cells = forms.map(f => {
-    const tier = verbBadgeTier(f.id);
-    const { ok, n } = verbFormStats(f.id);
-    const title = `${f.label} · ${n ? `${ok}/${n}` : "not started"}`;
-    return `<span class="vb ${tier}" title="${esc(title)}" aria-label="${esc(title)}"><span class="vb-lab">${esc(verbBadgeShort(f))}</span></span>`;
-  }).join("");
+  const cells = forms.map(f => verbBadgeSeal(f)).join("");
   return `<div class="viz-badges" role="img" aria-label="Verb conjugation badges">${cells}</div>`;
 }
 
@@ -4657,7 +4695,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823x" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260823y" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
@@ -6536,9 +6574,18 @@ function renderVerbs() {
   const rows = forms.map(f => {
     const ex = sample && conjugate(sample, f.id);
     const pool = verbPool(o.ceiling, f.id).length;
+    const tier = verbBadgeTier(f.id);
+    const { ok, n } = verbFormStats(f.id);
+    const tip = n ? `${ok}/${n}` : "not started";
     return `<tr>
       <td class="vf-n">${f.n}</td>
-      <td class="vf-l"><b>${esc(f.label)}</b><span class="vf-jp">${esc(f.jp)}</span></td>
+      <td class="vf-l">
+        ${verbBadgeSeal(f, { className: "vf-badge" })}
+        <span class="vf-text">
+          <b>${esc(f.label)}</b>
+          <span class="vf-jp">${esc(f.jp)} · ${esc(tip)}${tier === "earned" ? " · earned" : tier === "learning" ? " · learning" : ""}</span>
+        </span>
+      </td>
       <td class="vf-e">${ex ? vRuby(ex) : "—"}</td>
       <td class="vf-c">${pool}</td>
       <td class="vf-go"><button class="btn small go" data-form="${f.id}"
@@ -6560,6 +6607,14 @@ function renderVerbs() {
           `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` },
       { start: `<button class="btn primary" id="vstart"${form ? "" : " disabled"}>Start drill</button>` }
     ])}
+
+    <p class="hintline">One seal per conjugation form (て-form, ない-form, …) — not Group I/II/III.
+      Earn a seal with at least ${VERB_BADGE_MIN} answers at ${Math.round(VERB_BADGE_ACC * 100)}%+ accuracy.</p>
+    <div class="vf-badge-key" aria-hidden="true">
+      <span><span class="vb vf-badge locked"></span> new</span>
+      <span><span class="vb vf-badge learning"></span> learning</span>
+      <span><span class="vb vf-badge earned"></span> earned</span>
+    </div>
 
     <table class="vforms">
       <thead><tr><th>L</th><th>Form</th><th>書きます becomes</th>
@@ -7983,7 +8038,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823x&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823y&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
