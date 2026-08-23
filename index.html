@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823e";
+window.__BUILD__ = "20260823f";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -2330,7 +2330,7 @@ window.__BUILD__ = "20260823e";
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823e#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823f#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2354,8 +2354,11 @@ window.__BUILD__ = "20260823e";
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.</p>
     <div class="welcome-actions">
-      <a class="btn-google" href="https://trivituso81.github.io/japanese/?v=20260823e#/">Open the study guide</a>
-      <p class="welcome-lead">If this page stays stuck, delete the home-screen icon and open that link in Safari.</p>
+      <button type="button" class="btn-google" id="staticOpen"
+        onclick="location.replace('https://trivituso81.github.io/japanese/?v=20260823f&amp;r='+Date.now()+'#/')">
+        Reload the study guide
+      </button>
+      <p class="welcome-lead">If buttons still do nothing, this page’s scripts did not load. Open the link above in Safari (not the home-screen icon).</p>
     </div>
   </section>
 </main>
@@ -2405,11 +2408,10 @@ window.__BUILD__ = "20260823e";
   </div>
 </div>
 
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js?v=20260823e"></script>
-<script src="japanese-data.js?v=20260823e"></script>
+<!-- App first. Firebase loads later in the background so a slow/blocked
+     CDN cannot leave this page stuck on the static welcome forever. -->
+<script src="firebase-config.js?v=20260823f"></script>
+<script src="japanese-data.js?v=20260823f"></script>
 <script>
 /* ============================================================
    State
@@ -2602,6 +2604,11 @@ document.addEventListener("visibilitychange", () => {
    ============================================================ */
 const CLOUD_SCHEMA = 1;
 const KEY_GUEST = KEY + ":guest";
+const FIREBASE_SDK = [
+  "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js",
+  "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js",
+  "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"
+];
 let cloudAuth = null;
 let cloudDb = null;
 let cloudUser = null;
@@ -2609,8 +2616,10 @@ let cloudSyncTimer = null;
 let cloudSyncing = false;
 let cloudLastPush = 0;
 let cloudHydratedUid = null;
-let authReady = !window.FIREBASE_CONFIG;
+/* Paint the app immediately. Firebase is optional and loads afterward. */
+let authReady = true;
 let authError = "";
+let cloudBootStarted = false;
 
 const GOOGLE_G = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
 
@@ -2662,32 +2671,57 @@ function renderWelcomeLanding() {
   document.getElementById("welcomeGuest").addEventListener("click", continueAsGuest);
 }
 
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement("script");
+    s.src = src;
+    s.async = true;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error("Failed to load " + src));
+    document.head.appendChild(s);
+  });
+}
+
+async function ensureFirebase() {
+  if (typeof firebase !== "undefined") return true;
+  if (!window.FIREBASE_CONFIG) return false;
+  for (const src of FIREBASE_SDK) await loadScript(src);
+  return typeof firebase !== "undefined";
+}
+
+function bindCloudAuth() {
+  if (!cloudAuth) return;
+  cloudAuth.getRedirectResult().catch(e => { authError = authErrorMessage(e); });
+  cloudAuth.onAuthStateChanged(user => {
+    cloudUser = user;
+    if (user) {
+      localStorage.removeItem(KEY_GUEST);
+      syncOnSignIn(user);
+    } else cloudHydratedUid = null;
+    updateCloudUi();
+    route();
+  });
+}
+
 function initCloud() {
-  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
-    authReady = true;
-    return;
-  }
-  try {
-    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
-    cloudAuth = firebase.auth();
-    cloudDb = firebase.firestore();
-    cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    cloudAuth.getRedirectResult()
-      .catch(e => { authError = authErrorMessage(e); })
-      .finally(() => { authReady = true; route(); });
-    cloudAuth.onAuthStateChanged(user => {
-      cloudUser = user;
-      authReady = true;
-      if (user) {
-        localStorage.removeItem(KEY_GUEST);
-        syncOnSignIn(user);
-      } else cloudHydratedUid = null;
-      updateCloudUi();
-      route();
+  if (cloudBootStarted) return;
+  cloudBootStarted = true;
+  if (!window.FIREBASE_CONFIG) return;
+  ensureFirebase()
+    .then(ok => {
+      if (!ok) return;
+      if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+      cloudAuth = firebase.auth();
+      cloudDb = firebase.firestore();
+      cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      bindCloudAuth();
+    })
+    .catch(e => {
+      authError = "Could not load Google sign-in. You can still continue without signing in.";
+      console.warn(e);
+      const h = location.hash || "#/";
+      if (h === "#/" || h === "#" || h === "") route();
     });
-  } catch (e) {
-    authReady = true;
-  }
 }
 
 function cloudDocRef(uid) {
@@ -2778,27 +2812,44 @@ function cloudStatusLine() {
 }
 
 function signInGoogle() {
-  if (!cloudAuth) {
-    authError = "Cloud sign-in is not available on this page.";
-    route();
-    return;
-  }
   authError = "";
-  const provider = new firebase.auth.GoogleAuthProvider();
-  const useRedirect = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
-    || window.navigator.standalone
-    || window.matchMedia("(display-mode: standalone)").matches;
-  if (useRedirect) {
-    cloudAuth.signInWithRedirect(provider);
-    return;
-  }
-  cloudAuth.signInWithPopup(provider).catch(e => {
-    if (e && e.code === "auth/popup-blocked") cloudAuth.signInWithRedirect(provider);
-    else {
-      authError = authErrorMessage(e);
+  const start = () => {
+    if (!cloudAuth) {
+      authError = "Cloud sign-in is not available on this page.";
       route();
+      return;
     }
-  });
+    const provider = new firebase.auth.GoogleAuthProvider();
+    const useRedirect = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
+      || window.navigator.standalone
+      || window.matchMedia("(display-mode: standalone)").matches;
+    if (useRedirect) {
+      cloudAuth.signInWithRedirect(provider);
+      return;
+    }
+    cloudAuth.signInWithPopup(provider).catch(e => {
+      if (e && e.code === "auth/popup-blocked") cloudAuth.signInWithRedirect(provider);
+      else {
+        authError = authErrorMessage(e);
+        route();
+      }
+    });
+  };
+  if (cloudAuth) return start();
+  ensureFirebase()
+    .then(ok => {
+      if (!ok) throw new Error("Firebase SDK missing");
+      if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+      cloudAuth = firebase.auth();
+      cloudDb = firebase.firestore();
+      cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      bindCloudAuth();
+      start();
+    })
+    .catch(e => {
+      authError = authErrorMessage(e) || "Could not load Google sign-in.";
+      route();
+    });
 }
 
 function signOutGoogle() {
@@ -7214,11 +7265,6 @@ function route() {
   paintNav(navSection(h));
 
   if (h === "#/" || h === "#" || h === "") {
-    if (!authReady && window.FIREBASE_CONFIG) {
-      document.getElementById("crumbs").innerHTML = "";
-      document.getElementById("view").innerHTML = `<section class="welcome-gate"><p class="welcome-lead">Loading…</p></section>`;
-      return;
-    }
     if (useWelcomeLanding()) return renderWelcomeLanding();
     return renderHome();
   }
@@ -7264,12 +7310,18 @@ try {
       <h2>トムさんの勉強ガイド</h2>
       <p class="auth-error">${esc(String(bootErr && bootErr.message || bootErr))}</p>
       <div class="welcome-actions">
-        <a class="btn-google" href="https://trivituso81.github.io/japanese/?v=20260823e#/">Reload the study guide</a>
+        <button type="button" class="btn-google"
+          onclick="location.replace('https://trivituso81.github.io/japanese/?v=20260823f&amp;r='+Date.now()+'#/')">
+          Reload the study guide
+        </button>
         <button type="button" class="btn" id="bootRestore">Restore saved progress</button>
+        <button type="button" class="linkish" id="bootGuest">Continue without signing in</button>
       </div>
     </section>`;
     const br = document.getElementById("bootRestore");
     if (br) br.addEventListener("click", () => openBackupSheet("restore"));
+    const bg = document.getElementById("bootGuest");
+    if (bg) bg.addEventListener("click", continueAsGuest);
   }
 }
 
@@ -7277,7 +7329,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823e#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823f&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
