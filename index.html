@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823y">
+<link rel="manifest" href="site.webmanifest?v=20260823z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823y";
+window.__BUILD__ = "20260823z";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823y";
+  var v = window.__BUILD__ || "20260823z";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    + encodeURIComponent(window.__BUILD__ || "20260823z"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823y") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823z") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -359,16 +359,34 @@ document.addEventListener("DOMContentLoaded", function () {
     to { opacity: 1; transform: none; }
   }
 
-  .home-settings { position: relative; flex: none; align-self: flex-start; }
-  .home-settings-btn {
+  .home-settings-bar {
+    display: flex; align-items: center; gap: 8px;
+    flex: none; align-self: flex-start;
+  }
+  .home-settings { position: relative; flex: none; }
+  .home-settings-btn,
+  .home-auth-btn {
     display: inline-flex; align-items: center; justify-content: center;
     width: 42px; height: 42px; padding: 0; cursor: pointer;
     border: 1.5px solid var(--text); border-radius: var(--radius-sm);
     background: var(--bg); color: var(--text);
     box-shadow: 2px 2px 0 var(--shadow-ink);
   }
-  .home-settings-btn:hover { background: var(--bg-soft); }
-  .home-settings-btn svg { width: 22px; height: 22px; display: block; }
+  .home-settings-btn:hover,
+  .home-auth-btn:hover { background: var(--bg-soft); }
+  .home-settings-btn svg,
+  .home-auth-btn svg { width: 22px; height: 22px; display: block; }
+  .home-auth-btn[data-auth="out"] {
+    color: var(--text-faint); border-color: var(--rule-strong);
+  }
+  .home-auth-btn[data-auth="in"] {
+    color: var(--accent-deep); border-color: var(--accent-deep);
+    background: var(--accent-soft);
+  }
+  .home-auth-btn[data-auth="pending"] {
+    color: var(--text-faint); border-color: var(--rule-strong);
+    opacity: .7;
+  }
   .home-settings-menu {
     position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
     min-width: 230px; max-width: min(92vw, 300px);
@@ -2632,7 +2650,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823y#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823z#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2734,7 +2752,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823y"></script>
+<script src="firebase-config.js?v=20260823z"></script>
 <script>
 /* ============================================================
    State
@@ -3001,7 +3019,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823y" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823z" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3290,7 +3308,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823z"));
     return;
   }
   const start = () => {
@@ -3304,7 +3322,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823z"));
         return;
       }
       authError = authErrorMessage(e);
@@ -3346,30 +3364,86 @@ function requireCloudUser() {
   return null;
 }
 
+/* in | out | pending — drives the account icon and which menu action is shown. */
+function authUiState() {
+  if (requireCloudUser()) return "in";
+  if (cloudBootStarted && !cloudAuth) return "pending";
+  return "out";
+}
+
+const AUTH_ICON_OUT = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>`;
+const AUTH_ICON_IN = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>`;
+
+function authIconHtml(state) {
+  if (state === "in") return AUTH_ICON_IN;
+  return AUTH_ICON_OUT;
+}
+
 function updateCloudUi() {
   const user = requireCloudUser();
+  const state = authUiState();
   const status = document.getElementById("cloudStatus");
   if (status) status.textContent = cloudStatusLine() || authError || "";
+
+  const authBtn = document.getElementById("homeAuthBtn");
+  if (authBtn) {
+    authBtn.dataset.auth = state;
+    authBtn.innerHTML = authIconHtml(state);
+    authBtn.setAttribute("aria-label",
+      state === "in" ? "Signed in with Google"
+        : state === "pending" ? "Connecting to Google"
+          : "Signed out");
+    authBtn.title = state === "in"
+      ? ((user && user.email) || "Signed in")
+      : state === "pending" ? "Connecting…"
+        : "Signed out — tap to sign in";
+    authBtn.disabled = state === "pending";
+  }
+
   const signIn = document.getElementById("cloudSignIn");
   const signOut = document.getElementById("cloudSignOut");
-  if (signIn) signIn.hidden = !!user;
-  if (signOut) signOut.hidden = !user;
+  if (signIn) signIn.hidden = state === "in";
+  if (signOut) signOut.hidden = state !== "in";
 }
 
 function wireCloudSettings() {
   const signIn = document.getElementById("cloudSignIn");
   const signOut = document.getElementById("cloudSignOut");
+  const settings = document.getElementById("homeSettings");
+  const settingsBtn = document.getElementById("homeSettingsBtn");
+  const authBtn = document.getElementById("homeAuthBtn");
   const closeMenu = () => {
-    const box = document.getElementById("homeSettings");
-    const btn = document.getElementById("homeSettingsBtn");
-    if (box) box.classList.remove("open");
-    if (btn) btn.setAttribute("aria-expanded", "false");
+    if (settings) settings.classList.remove("open");
+    if (settingsBtn) settingsBtn.setAttribute("aria-expanded", "false");
   };
-  if (signIn) signIn.addEventListener("click", () => { closeMenu(); });
+  const openMenu = () => {
+    if (!settings || !settingsBtn) return;
+    settings.classList.add("open");
+    settingsBtn.setAttribute("aria-expanded", "true");
+    updateCloudUi();
+  };
+  if (signIn) signIn.addEventListener("click", () => {
+    closeMenu();
+    signInGoogle();
+  });
   if (signOut) signOut.addEventListener("click", () => {
     closeMenu();
     signOutGoogle();
   });
+  if (authBtn) {
+    authBtn.addEventListener("click", e => {
+      e.stopPropagation();
+      const state = authUiState();
+      if (state === "out") {
+        /* Account icon shows signed out — start Google sign-in immediately. */
+        signInGoogle();
+        return;
+      }
+      if (!settings) return;
+      if (settings.classList.contains("open")) closeMenu();
+      else openMenu();
+    });
+  }
   updateCloudUi();
 }
 
@@ -4672,6 +4746,12 @@ function renderHome() {
     : `${kanjiPct}% known`;
 
   const vBadges = verbBadgeCensus();
+  const authState = authUiState();
+  const authUser = requireCloudUser();
+  const authLabel = authState === "in" ? "Signed in with Google"
+    : authState === "pending" ? "Connecting to Google" : "Signed out";
+  const authTitle = authState === "in" ? ((authUser && authUser.email) || "Signed in")
+    : authState === "pending" ? "Connecting…" : "Signed out — tap to sign in";
 
   const filterOpts = LESSONS.map(l =>
     `<option value="${l.n}"${filter === l.n ? " selected" : ""}>${l.n}</option>`).join("");
@@ -4684,23 +4764,31 @@ function renderHome() {
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
-        <div class="home-settings" id="homeSettings">
-          <button type="button" class="home-settings-btn" id="homeSettingsBtn"
-            aria-haspopup="true" aria-expanded="false" aria-label="Settings">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-              stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <circle cx="12" cy="12" r="3"/>
-              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-            </svg>
+        <div class="home-settings-bar">
+          <button type="button" class="home-auth-btn" id="homeAuthBtn"
+            data-auth="${authState}"
+            aria-label="${esc(authLabel)}"
+            title="${esc(authTitle)}">
+            ${authIconHtml(authState)}
           </button>
-          <div class="home-settings-menu" role="menu">
-            <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823y" id="cloudSignIn" role="menuitem">Sign in with Google</a>
-            <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
-            <span class="hp-status">${esc(savedAtLabel())}</span>
-            <button type="button" id="exp" role="menuitem">Copy backup</button>
-            <button type="button" id="expshare" role="menuitem">Share</button>
-            <button type="button" id="exprestore" role="menuitem">Restore progress</button>
+          <div class="home-settings" id="homeSettings">
+            <button type="button" class="home-settings-btn" id="homeSettingsBtn"
+              aria-haspopup="true" aria-expanded="false" aria-label="Settings">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09A1.65 1.65 0 0 0 15 4.6a1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+              </svg>
+            </button>
+            <div class="home-settings-menu" role="menu">
+              <span class="hp-status" id="cloudStatus"></span>
+              <button type="button" id="cloudSignIn" role="menuitem"${authState === "in" ? " hidden" : ""}>Sign in with Google</button>
+              <button type="button" id="cloudSignOut" role="menuitem"${authState !== "in" ? " hidden" : ""}>Sign out</button>
+              <span class="hp-status">${esc(savedAtLabel())}</span>
+              <button type="button" id="exp" role="menuitem">Copy backup</button>
+              <button type="button" id="expshare" role="menuitem">Share</button>
+              <button type="button" id="exprestore" role="menuitem">Restore progress</button>
+            </div>
           </div>
         </div>
       </div>
@@ -8038,7 +8126,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823y&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823z&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
