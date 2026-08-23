@@ -87,6 +87,25 @@ Re-adding the icon does **not** erase progress: it is stored for the website,
 not inside the icon. Still tap **Export backup** on the home screen first if you
 want a spare JSON file in Files.
 
+## Google sync (iPhone ↔ iPad)
+
+Sign-in uses Firebase Auth; progress is stored in Firestore at `users/{uid}`.
+
+1. In the [Firebase console](https://console.firebase.google.com/) open project
+   **japanese-study-83926** → **Firestore Database** → **Rules**.
+2. Publish the contents of `firestore.rules` from this repo (each signed-in
+   user may only read/write their own `users/{userId}` document). If rules are
+   still the default deny-all (or expired test mode), Upload will fail with
+   permission-denied even though Sign in works.
+3. On the device that **has** your progress (same Safari tab or home-screen app
+   that shows your lessons): gear → confirm the Google email → **Upload this
+   device to Google** → wait for “Uploaded … and verified” with a weight number.
+4. On the other device: sign in with the **same** Google account → **Download
+   from Google** → confirm the weight looks right.
+
+Safari and a home-screen icon can keep **separate** local copies on iOS — always
+upload from the place that still shows your study data.
+
 ## Running it locally
 
 Open `index.html` by double-clicking it. That is all — it works straight off the
