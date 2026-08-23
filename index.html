@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823s">
+<link rel="manifest" href="site.webmanifest?v=20260823t">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823s";
+window.__BUILD__ = "20260823t";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823s";
+  var v = window.__BUILD__ || "20260823t";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823s"));
+    + encodeURIComponent(window.__BUILD__ || "20260823t"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823s") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823t") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -371,7 +371,9 @@ document.addEventListener("DOMContentLoaded", function () {
   .home-settings-btn svg { width: 22px; height: 22px; display: block; }
   .home-settings-menu {
     position: absolute; top: calc(100% + 8px); right: 0; z-index: 30;
-    min-width: 210px; padding: 10px 12px;
+    min-width: 230px; max-width: min(92vw, 300px);
+    max-height: min(70vh, 420px); overflow-y: auto; -webkit-overflow-scrolling: touch;
+    padding: 10px 12px;
     background: var(--bg); border: 2px solid var(--text);
     border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--shadow-ink);
     display: none; flex-direction: column; gap: 8px;
@@ -379,6 +381,12 @@ document.addEventListener("DOMContentLoaded", function () {
   .home-settings.open .home-settings-menu { display: flex; }
   .home-settings-menu .hp-status {
     font-size: 12px; color: var(--text-faint); line-height: 1.35;
+  }
+  .home-settings-menu .hp-cloud-label {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--text-faint);
+    padding: 4px 0 0; margin: 2px 0 0;
+    border-top: 1px solid var(--rule);
   }
   .home-settings-menu button,
   .home-settings-menu label,
@@ -2585,7 +2593,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823s#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823t#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2687,7 +2695,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823s"></script>
+<script src="firebase-config.js?v=20260823t"></script>
 <script>
 /* ============================================================
    State
@@ -2943,7 +2951,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823s" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823t" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3131,11 +3139,8 @@ async function syncOnSignIn(user) {
 }
 
 async function pullCloudToDevice() {
-  const user = requireCloudUser();
-  if (!user) {
-    alert("Not signed in on this page yet. Tap Sign in with Google, then try Download again.");
-    return;
-  }
+  const user = ensureSignedInForCloud("Download from Google");
+  if (!user) return;
   try {
     const cloud = await pullCloud(user.uid);
     if (!cloud || cloud.weight === 0) {
@@ -3209,7 +3214,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823s"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823t"));
     return;
   }
   const start = () => {
@@ -3223,7 +3228,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823s"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823t"));
         return;
       }
       authError = authErrorMessage(e);
@@ -3271,12 +3276,10 @@ function updateCloudUi() {
   if (status) status.textContent = cloudStatusLine() || authError || "";
   const signIn = document.getElementById("cloudSignIn");
   const signOut = document.getElementById("cloudSignOut");
-  const pull = document.getElementById("cloudPull");
-  const push = document.getElementById("cloudPush");
+  /* Upload / Download stay visible even while signed out so the restore
+     flow is always findable; their handlers nudge into sign-in if needed. */
   if (signIn) signIn.hidden = !!user;
   if (signOut) signOut.hidden = !user;
-  if (pull) pull.hidden = !user;
-  if (push) push.hidden = !user;
 }
 
 function wireCloudSettings() {
@@ -3284,30 +3287,46 @@ function wireCloudSettings() {
   const signOut = document.getElementById("cloudSignOut");
   const pull = document.getElementById("cloudPull");
   const push = document.getElementById("cloudPush");
-  if (signIn) signIn.addEventListener("click", () => {
-    document.getElementById("homeSettings").classList.remove("open");
-  });
+  const closeMenu = () => {
+    const box = document.getElementById("homeSettings");
+    const btn = document.getElementById("homeSettingsBtn");
+    if (box) box.classList.remove("open");
+    if (btn) btn.setAttribute("aria-expanded", "false");
+  };
+  if (signIn) signIn.addEventListener("click", () => { closeMenu(); });
   if (signOut) signOut.addEventListener("click", () => {
-    document.getElementById("homeSettings").classList.remove("open");
+    closeMenu();
     signOutGoogle();
   });
   if (pull) pull.addEventListener("click", () => {
-    document.getElementById("homeSettings").classList.remove("open");
+    closeMenu();
     pullCloudToDevice();
   });
   if (push) push.addEventListener("click", () => {
-    document.getElementById("homeSettings").classList.remove("open");
+    closeMenu();
     uploadLocalToCloud();
   });
   updateCloudUi();
 }
 
-async function uploadLocalToCloud() {
+function ensureSignedInForCloud(actionLabel) {
   const user = requireCloudUser();
-  if (!user) {
-    alert("Not signed in on this page yet. Tap Sign in with Google, then try Upload again.");
-    return;
+  if (user) return user;
+  if (!cloudAuth && cloudBootStarted) {
+    alert("Still connecting to Google…\n\nWait a moment, open the gear again, then tap "
+      + actionLabel + ".");
+    return null;
   }
+  if (confirm("Sign in with Google first to " + actionLabel.toLowerCase()
+      + ".\n\nOpen Google sign-in now?")) {
+    signInGoogle();
+  }
+  return null;
+}
+
+async function uploadLocalToCloud() {
+  const user = ensureSignedInForCloud("Upload this device to Google");
+  if (!user) return;
   if (progressWeight(S) === 0) {
     alert("This device has no progress to upload.");
     return;
@@ -4587,10 +4606,11 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823s" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260823t" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
-            <button type="button" id="cloudPull" role="menuitem" hidden>Download from Google</button>
-            <button type="button" id="cloudPush" role="menuitem" hidden>Upload this device to Google</button>
+            <div class="hp-cloud-label">Google sync</div>
+            <button type="button" id="cloudPull" role="menuitem">Download from Google</button>
+            <button type="button" id="cloudPush" role="menuitem">Upload this device to Google</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
             <button type="button" id="expshare" role="menuitem">Share</button>
@@ -4646,6 +4666,7 @@ function renderHome() {
     settings.classList.toggle("open", open);
     settingsBtn.setAttribute("aria-expanded", String(open));
     if (open) {
+      updateCloudUi();
       const onDoc = ev => {
         if (!settings.contains(ev.target)) {
           settings.classList.remove("open");
@@ -7913,7 +7934,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823s&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823t&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
