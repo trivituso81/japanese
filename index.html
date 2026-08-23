@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823m">
+<link rel="manifest" href="site.webmanifest?v=20260823n">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823m";
+window.__BUILD__ = "20260823n";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823m";
+  var v = window.__BUILD__ || "20260823n";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823m"));
+    + encodeURIComponent(window.__BUILD__ || "20260823n"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823m") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823n") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -2514,7 +2514,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823m#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823n#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2616,7 +2616,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823m"></script>
+<script src="firebase-config.js?v=20260823n"></script>
 <script>
 /* ============================================================
    State
@@ -2863,7 +2863,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823m" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823n" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3126,7 +3126,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823m"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823n"));
     return;
   }
   const start = () => {
@@ -3140,7 +3140,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823m"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823n"));
         return;
       }
       authError = authErrorMessage(e);
@@ -7722,7 +7722,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823m&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823n&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
