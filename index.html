@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823u">
+<link rel="manifest" href="site.webmanifest?v=20260823v">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823u";
+window.__BUILD__ = "20260823v";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823u";
+  var v = window.__BUILD__ || "20260823v";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823u"));
+    + encodeURIComponent(window.__BUILD__ || "20260823v"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823u") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823v") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -2604,7 +2604,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823u#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823v#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2706,7 +2706,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823u"></script>
+<script src="firebase-config.js?v=20260823v"></script>
 <script>
 /* ============================================================
    State
@@ -2962,7 +2962,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823u" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823v" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3046,54 +3046,116 @@ function cloudDocRef(uid) {
   return cloudDb.collection("users").doc(uid);
 }
 
+/* Strip mid-drill sessions and anything JSON cannot round-trip (undefined,
+   NaN, functions). Firestore rejects undefined and is happier with a flat
+   JSON string than a deep map of lesson cards. */
+function cloudProgressSnapshot(s) {
+  const copy = JSON.parse(JSON.stringify(s || blank()));
+  delete copy.session;
+  delete copy.vsession;
+  delete copy.ksession;
+  return copy;
+}
+
+function cloudErrDetail(e) {
+  if (!e) return "";
+  const code = e.code ? String(e.code) : "";
+  const msg = e.message ? String(e.message) : String(e);
+  if (code === "permission-denied" || /insufficient permissions|PERMISSION_DENIED/i.test(msg)) {
+    return "Firestore blocked the write (permission-denied). In the Firebase console open Firestore → Rules and publish rules that allow each signed-in user to read/write only users/{theirUid}. A firestore.rules file is in the GitHub repo.";
+  }
+  if (code === "available/resource-exhausted" || /exceeds|too big|size/i.test(msg)) {
+    return "Progress is too large for one Firestore document. Use Copy backup instead.";
+  }
+  return (code ? code + ": " : "") + msg;
+}
+
 async function pullCloud(uid) {
-  const snap = await cloudDocRef(uid).get();
+  let snap;
+  try {
+    snap = await cloudDocRef(uid).get({ source: "server" });
+  } catch (e) {
+    snap = await cloudDocRef(uid).get();
+  }
   if (!snap.exists) return null;
-  const data = snap.data();
-  if (!data || !data.progress) return null;
-  const progress = migrate(Object.assign(blank(), data.progress));
+  const data = snap.data() || {};
+  let raw = null;
+  if (typeof data.progressJson === "string" && data.progressJson) {
+    try { raw = JSON.parse(data.progressJson); }
+    catch (err) { raw = null; }
+  }
+  if (!raw && data.progress && typeof data.progress === "object") raw = data.progress;
+  if (!raw) return null;
+  const progress = migrate(Object.assign(blank(), raw));
   return {
     progress,
-    weight: data.weight || progressWeight(progress),
-    updatedAt: data.updatedAt && data.updatedAt.toMillis ? data.updatedAt.toMillis() : 0
+    weight: typeof data.weight === "number" ? data.weight : progressWeight(progress),
+    updatedAt: data.updatedAt && data.updatedAt.toMillis ? data.updatedAt.toMillis() : 0,
+    email: data.email || ""
   };
 }
 
-async function pushCloud(uid) {
+async function pushCloud(uid, opts) {
   if (!uid) return false;
-  const localWeight = progressWeight(S);
+  const force = !!(opts && opts.force);
+  const snapshot = cloudProgressSnapshot(S);
+  const localWeight = progressWeight(snapshot);
   /* Never upload an empty shell — that is how a blank iPad wipe reaches Gmail. */
   if (localWeight === 0) {
     console.warn("cloud push skipped: local progress is empty");
+    authError = "This device has no progress to upload.";
     return false;
   }
   cloudSyncing = true;
+  authError = "";
   try {
     let cloudWeight = 0;
     try {
       const existing = await pullCloud(uid);
       cloudWeight = existing ? existing.weight : 0;
     } catch (e) {
-      /* If we cannot read cloud, do not risk overwriting it with a weaker copy. */
-      console.warn("cloud push skipped: could not read existing cloud progress", e);
-      authError = "Could not verify cloud progress before upload. Copy a backup from your iPhone.";
-      return false;
+      console.warn("cloud push: could not read existing cloud progress", e);
+      if (!force) {
+        authError = "Could not verify cloud progress before upload. " + cloudErrDetail(e);
+        return false;
+      }
     }
-    if (cloudWeight > localWeight) {
+    if (!force && cloudWeight > localWeight) {
       console.warn("cloud push skipped: cloud has more progress", cloudWeight, localWeight);
+      authError = "Google already has more progress (" + cloudWeight + ") than this device (" + localWeight + "). Use Download, or Upload and confirm overwrite.";
       return false;
     }
-    await cloudDocRef(uid).set({
-      progress: S,
+    const user = requireCloudUser();
+    const payload = {
+      progressJson: JSON.stringify(snapshot),
       weight: localWeight,
       updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
-      schema: CLOUD_SCHEMA
-    }, { merge: true });
+      schema: CLOUD_SCHEMA,
+      email: (user && user.email) || null
+    };
+    /* Keep a shallow progress map for older readers; prefer progressJson on pull. */
+    try {
+      payload.progress = snapshot;
+      await cloudDocRef(uid).set(payload, { merge: true });
+    } catch (e) {
+      /* If the nested map is rejected, retry with JSON only. */
+      console.warn("cloud push with nested progress failed, retrying JSON-only", e);
+      delete payload.progress;
+      await cloudDocRef(uid).set(payload, { merge: true });
+    }
+    /* Read back from the server so a silent rules failure cannot look like success. */
+    const verify = await pullCloud(uid);
+    if (!verify || verify.weight < localWeight) {
+      authError = "Upload did not stick in Google (read-back weight "
+        + (verify ? verify.weight : 0) + ", local " + localWeight + "). "
+        + "Check Firestore rules for users/{uid}.";
+      return false;
+    }
     cloudLastPush = Date.now();
     return true;
   } catch (e) {
     console.warn("cloud push failed", e);
-    authError = "Could not save progress to Google. Your phone copy is still here — use Copy backup.";
+    authError = "Could not save progress to Google. " + cloudErrDetail(e);
     return false;
   } finally {
     cloudSyncing = false;
@@ -3155,24 +3217,38 @@ async function pullCloudToDevice() {
   try {
     const cloud = await pullCloud(user.uid);
     if (!cloud || cloud.weight === 0) {
-      alert("No progress found in your Google account yet.\n\nCopy a backup from your iPhone, then Restore on this device while signed in.");
+      alert(
+        "No progress found in Google for " + (user.email || "this account") + ".\n\n" +
+        "On the iPhone that has your study data (same Google account, same browser or home-screen app):\n" +
+        "1. Gear → confirm the email matches\n" +
+        "2. Upload this device to Google\n" +
+        "3. Wait for the success message with a weight number\n\n" +
+        "Or use Copy backup on the iPhone and Restore progress here."
+      );
       return;
     }
-    if (progressWeight(S) > cloud.weight) {
+    const localW = progressWeight(S);
+    if (localW > cloud.weight) {
       if (!confirm(
         "This device has MORE progress than Google.\n\n" +
-        "Device: " + describeProgress(S) + "\n" +
-        "Google: " + describeProgress(cloud.progress) + "\n\n" +
+        "Account:  " + (user.email || user.uid) + "\n" +
+        "Device:   " + describeProgress(S) + " (weight " + localW + ")\n" +
+        "Google:   " + describeProgress(cloud.progress) + " (weight " + cloud.weight + ")\n\n" +
         "Replace this device with the Google copy anyway?"
       )) return;
-    }
+    } else if (!confirm(
+      "Download Google progress onto this device?\n\n" +
+      "Account:  " + (user.email || user.uid) + "\n" +
+      "Google:   " + describeProgress(cloud.progress) + " (weight " + cloud.weight + ")\n" +
+      "Device now: " + describeProgress(S) + " (weight " + localW + ")"
+    )) return;
     S = cloud.progress;
     save({ force: true });
     updateCloudUi();
     route();
-    alert("Restored from Google.\n\n" + describeProgress(S));
+    alert("Restored from Google (" + (user.email || "signed-in account") + ").\n\n" + describeProgress(S));
   } catch (e) {
-    alert("Could not download from Google: " + ((e && e.message) || e));
+    alert("Could not download from Google.\n\n" + cloudErrDetail(e));
   }
 }
 
@@ -3208,7 +3284,8 @@ function cloudStatusLine() {
   if (!user) return "Sign in to sync across devices";
   const who = user.email || "Google account";
   if (cloudSyncing) return `${who} · syncing…`;
-  if (!cloudLastPush) return `${who} · linked`;
+  if (authError) return `${who} · sync issue`;
+  if (!cloudLastPush) return `${who} · linked · tap Upload to save`;
   const mins = Math.round((Date.now() - cloudLastPush) / 60000);
   if (mins < 1) return `${who} · synced just now`;
   if (mins < 60) return `${who} · synced ${mins}m ago`;
@@ -3225,7 +3302,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823u"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823v"));
     return;
   }
   const start = () => {
@@ -3239,7 +3316,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823u"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823v"));
         return;
       }
       authError = authErrorMessage(e);
@@ -3338,15 +3415,39 @@ function ensureSignedInForCloud(actionLabel) {
 async function uploadLocalToCloud() {
   const user = ensureSignedInForCloud("Upload this device to Google");
   if (!user) return;
-  if (progressWeight(S) === 0) {
-    alert("This device has no progress to upload.");
+  const localW = progressWeight(S);
+  if (localW === 0) {
+    alert("This device has no progress to upload.\n\nOpen the Safari tab or home-screen icon that still shows your lessons/cards, then try Upload again.");
     return;
   }
-  if (!confirm("Upload this device’s progress to Google?\n\n" + describeProgress(S))) return;
-  const ok = await pushCloud(user.uid);
+  let cloudW = 0;
+  try {
+    const existing = await pullCloud(user.uid);
+    cloudW = existing ? existing.weight : 0;
+  } catch (e) {
+    /* Still offer upload; pushCloud will surface permission errors. */
+  }
+  let msg =
+    "Upload this device’s progress to Google?\n\n" +
+    "Account:  " + (user.email || user.uid) + "\n" +
+    "Device:   " + describeProgress(S) + " (weight " + localW + ")\n" +
+    "Google:   " + (cloudW ? ("weight " + cloudW) : "empty / nothing saved yet");
+  if (cloudW > localW) {
+    msg += "\n\nGoogle currently has MORE progress. Overwrite it with this device anyway?";
+  }
+  if (!confirm(msg)) return;
+  const ok = await pushCloud(user.uid, { force: true });
   updateCloudUi();
-  if (ok) alert("Uploaded to Google.\n\n" + describeProgress(S));
-  else alert(authError || "Upload did not run (Google already has equal or more progress, or the network failed).");
+  if (ok) {
+    alert(
+      "Uploaded to Google and verified.\n\n" +
+      "Account: " + (user.email || user.uid) + "\n" +
+      describeProgress(S) + " (weight " + localW + ")\n\n" +
+      "On the other device: sign in with the SAME Google account → Download from Google."
+    );
+  } else {
+    alert(authError || "Upload failed. Your phone copy is still here — use Copy backup.");
+  }
 }
 
 function lessonState(n) {
@@ -4667,7 +4768,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823u" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260823v" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <div class="hp-cloud-label">Google sync</div>
             <button type="button" id="cloudPull" role="menuitem">Download from Google</button>
@@ -7995,7 +8096,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823u&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823v&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
