@@ -24,16 +24,70 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823f";
+window.__BUILD__ = "20260823g";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
     var u = new URL(location.href);
+    if (u.searchParams.get("guest") === "1") {
+      localStorage.setItem("mnn-study-v1:guest", "1");
+      u.searchParams.delete("guest");
+      var gqs = u.searchParams.toString();
+      location.replace(u.pathname + (gqs ? "?" + gqs : "") + (u.hash || "#/"));
+      return;
+    }
+    if (u.searchParams.get("signin") === "1") {
+      try { sessionStorage.setItem("mnn-study-v1:signin", "1"); } catch (e) {}
+      u.searchParams.delete("signin");
+      var sqs = u.searchParams.toString();
+      location.replace(u.pathname + (sqs ? "?" + sqs : "") + (u.hash || "#/"));
+      return;
+    }
     if (u.searchParams.get("v") === window.__BUILD__) return;
     u.searchParams.set("v", window.__BUILD__);
     location.replace(u.href);
   } catch (e) {}
 })();
+function staticRestoreFromText() {
+  try {
+    var t = document.getElementById("staticRestoreText");
+    var raw = (t && t.value || "").trim();
+    if (!raw) throw new Error("Paste your backup text first.");
+    var obj = JSON.parse(raw);
+    if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("That does not look like a backup.");
+    localStorage.setItem("mnn-study-v1", raw);
+    localStorage.setItem("mnn-study-v1:guest", "1");
+    var u = new URL(location.href);
+    u.searchParams.delete("guest");
+    location.replace(u.pathname + "?" + u.searchParams.toString() + "#/");
+  } catch (e) {
+    alert((e && e.message) || "Could not restore.");
+  }
+}
+document.addEventListener("DOMContentLoaded", function () {
+  try {
+    var build = window.__BUILD__;
+    ["staticGuest", "staticGoogle"].forEach(function (id) {
+      var a = document.getElementById(id);
+      if (!a) return;
+      var u = new URL(a.getAttribute("href"), location.href);
+      if (build) u.searchParams.set("v", build);
+      a.setAttribute("href", u.pathname + u.search + u.hash);
+    });
+  } catch (e) {}
+  var rb = document.getElementById("staticRestoreBtn");
+  if (rb) rb.addEventListener("click", function () {
+    var p = document.getElementById("staticRestorePanel");
+    if (!p) return;
+    p.hidden = !p.hidden;
+    if (!p.hidden) {
+      var ta = document.getElementById("staticRestoreText");
+      if (ta) ta.focus();
+    }
+  });
+  var rg = document.getElementById("staticRestoreGo");
+  if (rg) rg.addEventListener("click", staticRestoreFromText);
+});
 </script>
 <style>
   /* ============================================================
@@ -257,11 +311,24 @@ window.__BUILD__ = "20260823f";
   .btn-google:hover { background: #f8f9fa; }
   .btn-google svg { width: 20px; height: 20px; flex: 0 0 auto; }
   .welcome-gate .btn { min-height: 44px; }
-  .welcome-gate .linkish {
+  .welcome-gate .linkish,
+  .welcome-gate a.linkish {
     font: inherit; font-size: 14px; font-weight: 600; color: var(--accent-deep);
     background: none; border: none; padding: 8px 0; cursor: pointer;
+    text-decoration: none; display: inline-block;
   }
-  .welcome-gate .linkish:hover { text-decoration: underline; }
+  .welcome-gate .linkish:hover,
+  .welcome-gate a.linkish:hover { text-decoration: underline; }
+  .welcome-gate .static-restore {
+    width: min(100%, 360px); display: flex; flex-direction: column; gap: 10px;
+    text-align: left;
+  }
+  .welcome-gate .static-restore textarea {
+    width: 100%; min-height: 120px; font-family: ui-monospace, monospace;
+    font-size: 12px; padding: 10px; border: 2px solid var(--text);
+    border-radius: var(--radius-sm); resize: vertical; box-sizing: border-box;
+  }
+  #loadStatus { min-height: 1.2em; }
   .welcome-gate .auth-error {
     font-size: 13px; color: var(--miss); line-height: 1.5; max-width: 22em; margin: 0;
   }
@@ -2330,7 +2397,7 @@ window.__BUILD__ = "20260823f";
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823f#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823g#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2347,19 +2414,26 @@ window.__BUILD__ = "20260823f";
 </nav>
 
 <nav class="crumbs" id="crumbs"></nav>
-<!-- Static fallback so a failed/cached script never leaves a blank screen. -->
+<!-- Static welcome works even if lesson data is still loading or fails. -->
 <main id="view">
   <section class="welcome-gate">
     <img class="welcome-mascot" src="mascot.png?v=20260817p" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
-    <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.</p>
-    <div class="welcome-actions">
-      <button type="button" class="btn-google" id="staticOpen"
-        onclick="location.replace('https://trivituso81.github.io/japanese/?v=20260823f&amp;r='+Date.now()+'#/')">
-        Reload the study guide
-      </button>
-      <p class="welcome-lead">If buttons still do nothing, this page’s scripts did not load. Open the link above in Safari (not the home-screen icon).</p>
+    <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
+      Sign in to sync across devices. Already studying on this phone?
+      Tap <b>Continue without signing in</b>.</p>
+    <div class="welcome-actions" id="staticWelcomeActions">
+      <a class="btn-google" id="staticGoogle" href="?signin=1#/">Sign in with Google</a>
+      <button type="button" class="btn" id="staticRestoreBtn">Restore saved progress</button>
+      <a class="linkish" id="staticGuest" href="?guest=1">Continue without signing in</a>
     </div>
+    <div id="staticRestorePanel" class="static-restore" hidden>
+      <p class="welcome-lead">Paste the backup text copied from your other device (Settings → Copy backup).</p>
+      <textarea id="staticRestoreText" spellcheck="false" autocomplete="off" rows="6"
+        placeholder="{ &quot;lessons&quot;: … }"></textarea>
+      <button type="button" class="btn primary" id="staticRestoreGo">Restore from text</button>
+    </div>
+    <p class="welcome-lead" id="loadStatus">Loading study data…</p>
   </section>
 </main>
 
@@ -2410,8 +2484,7 @@ window.__BUILD__ = "20260823f";
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823f"></script>
-<script src="japanese-data.js?v=20260823f"></script>
+<script src="firebase-config.js?v=20260823g"></script>
 <script>
 /* ============================================================
    State
@@ -7295,41 +7368,100 @@ window.addEventListener("pageshow", () => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
 });
-wireFurigana();
-wireBotnavScroll();
-wireKanjiKeyboard();
-wireBackupSheet();
-try {
-  initCloud();
-  route();
-} catch (bootErr) {
-  const view = document.getElementById("view");
-  if (view) {
-    document.body.dataset.view = "dash";
-    view.innerHTML = `<section class="welcome-gate">
-      <h2>トムさんの勉強ガイド</h2>
-      <p class="auth-error">${esc(String(bootErr && bootErr.message || bootErr))}</p>
-      <div class="welcome-actions">
-        <button type="button" class="btn-google"
-          onclick="location.replace('https://trivituso81.github.io/japanese/?v=20260823f&amp;r='+Date.now()+'#/')">
-          Reload the study guide
-        </button>
-        <button type="button" class="btn" id="bootRestore">Restore saved progress</button>
-        <button type="button" class="linkish" id="bootGuest">Continue without signing in</button>
-      </div>
-    </section>`;
-    const br = document.getElementById("bootRestore");
-    if (br) br.addEventListener("click", () => openBackupSheet("restore"));
-    const bg = document.getElementById("bootGuest");
-    if (bg) bg.addEventListener("click", continueAsGuest);
+function loadStudyData() {
+  return new Promise((resolve, reject) => {
+    if (typeof LESSONS !== "undefined" && LESSONS.length) return resolve();
+    const s = document.createElement("script");
+    s.src = "japanese-data.js?v=" + encodeURIComponent(window.__BUILD__ || "");
+    s.onload = () => {
+      if (typeof LESSONS === "undefined" || !LESSONS.length) {
+        reject(new Error("Lesson data loaded but LESSONS is missing."));
+        return;
+      }
+      resolve();
+    };
+    s.onerror = () => reject(new Error("Could not download japanese-data.js. Check your connection and try again."));
+    document.head.appendChild(s);
+  });
+}
+
+function setLoadStatus(msg) {
+  const el = document.getElementById("loadStatus");
+  if (!el) return;
+  if (msg) {
+    el.textContent = msg;
+    el.hidden = false;
+  } else {
+    el.hidden = true;
   }
 }
+
+function bootApp() {
+  setLoadStatus("");
+  wireFurigana();
+  wireBotnavScroll();
+  wireKanjiKeyboard();
+  wireBackupSheet();
+  initCloud();
+  route();
+  try {
+    if (sessionStorage.getItem("mnn-study-v1:signin") === "1") {
+      sessionStorage.removeItem("mnn-study-v1:signin");
+      if (useWelcomeLanding()) signInGoogle();
+    }
+  } catch (e) {}
+}
+
+function showBootFailure(err) {
+  const msg = (err && err.message) ? err.message : String(err);
+  setLoadStatus(msg);
+  const view = document.getElementById("view");
+  if (!view || view.querySelector("#staticWelcomeActions")) return;
+  document.body.dataset.view = "dash";
+  view.innerHTML = `<section class="welcome-gate">
+    <h2>トムさんの勉強ガイド</h2>
+    <p class="auth-error">${esc(msg)}</p>
+    <div class="welcome-actions" id="staticWelcomeActions">
+      <a class="btn-google" href="?signin=1#/">Sign in with Google</a>
+      <button type="button" class="btn" id="staticRestoreBtn">Restore saved progress</button>
+      <a class="linkish" href="?guest=1">Continue without signing in</a>
+    </div>
+    <div id="staticRestorePanel" class="static-restore" hidden>
+      <textarea id="staticRestoreText" spellcheck="false" autocomplete="off" rows="6"></textarea>
+      <button type="button" class="btn primary" id="staticRestoreGo">Restore from text</button>
+    </div>
+  </section>`;
+  const rb = document.getElementById("staticRestoreBtn");
+  if (rb) rb.addEventListener("click", () => {
+    const p = document.getElementById("staticRestorePanel");
+    if (p) { p.hidden = !p.hidden; const ta = document.getElementById("staticRestoreText"); if (ta) ta.focus(); }
+  });
+  const rg = document.getElementById("staticRestoreGo");
+  if (rg) rg.addEventListener("click", () => {
+    try {
+      const raw = (document.getElementById("staticRestoreText").value || "").trim();
+      if (!raw) throw new Error("Paste your backup text first.");
+      const obj = JSON.parse(raw);
+      if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("That does not look like a backup.");
+      localStorage.setItem(KEY, raw);
+      localStorage.setItem(KEY_GUEST, "1");
+      location.replace(location.pathname + location.search + "#/");
+    } catch (e) {
+      alert((e && e.message) || "Could not restore.");
+    }
+  });
+}
+
+setLoadStatus("Loading study data…");
+loadStudyData()
+  .then(bootApp)
+  .catch(showBootFailure);
 
 document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823f&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823g&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
