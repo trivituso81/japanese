@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260817p">
+<link rel="manifest" href="site.webmanifest?v=20260823h">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,14 +24,17 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823g";
+window.__BUILD__ = "20260823h";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
     var u = new URL(location.href);
+    var standalone = window.navigator.standalone
+      || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
     if (u.searchParams.get("guest") === "1") {
       localStorage.setItem("mnn-study-v1:guest", "1");
       u.searchParams.delete("guest");
+      if (!u.searchParams.get("v")) u.searchParams.set("v", window.__BUILD__);
       var gqs = u.searchParams.toString();
       location.replace(u.pathname + (gqs ? "?" + gqs : "") + (u.hash || "#/"));
       return;
@@ -39,15 +42,34 @@ window.__BUILD__ = "20260823g";
     if (u.searchParams.get("signin") === "1") {
       try { sessionStorage.setItem("mnn-study-v1:signin", "1"); } catch (e) {}
       u.searchParams.delete("signin");
+      if (!u.searchParams.get("v")) u.searchParams.set("v", window.__BUILD__);
       var sqs = u.searchParams.toString();
       location.replace(u.pathname + (sqs ? "?" + sqs : "") + (u.hash || "#/"));
       return;
     }
-    if (u.searchParams.get("v") === window.__BUILD__) return;
-    u.searchParams.set("v", window.__BUILD__);
-    location.replace(u.href);
+    if (u.searchParams.get("v") !== window.__BUILD__) {
+      u.searchParams.set("v", window.__BUILD__);
+      if (standalone) u.searchParams.set("r", Date.now());
+      location.replace(u.href);
+    }
   } catch (e) {}
 })();
+function staticContinueGuest() {
+  try { localStorage.setItem("mnn-study-v1:guest", "1"); } catch (e) {}
+  if (typeof route === "function" && typeof LESSONS !== "undefined") {
+    try { route(); return; } catch (e) {}
+  }
+  var v = window.__BUILD__ || "";
+  location.assign(location.pathname + "?v=" + encodeURIComponent(v) + "&r=" + Date.now() + "#/");
+}
+function staticSignIn() {
+  try { sessionStorage.setItem("mnn-study-v1:signin", "1"); } catch (e) {}
+  if (typeof signInGoogle === "function") {
+    try { signInGoogle(); return; } catch (e) {}
+  }
+  var v = window.__BUILD__ || "";
+  location.assign(location.pathname + "?v=" + encodeURIComponent(v) + "&signin=1&r=" + Date.now() + "#/");
+}
 function staticRestoreFromText() {
   try {
     var t = document.getElementById("staticRestoreText");
@@ -66,14 +88,17 @@ function staticRestoreFromText() {
 }
 document.addEventListener("DOMContentLoaded", function () {
   try {
-    var build = window.__BUILD__;
-    ["staticGuest", "staticGoogle"].forEach(function (id) {
-      var a = document.getElementById(id);
-      if (!a) return;
-      var u = new URL(a.getAttribute("href"), location.href);
-      if (build) u.searchParams.set("v", build);
-      a.setAttribute("href", u.pathname + u.search + u.hash);
-    });
+    var standalone = window.navigator.standalone
+      || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
+    if (standalone) {
+      var ph = document.getElementById("staticPwaHint");
+      if (ph) ph.hidden = false;
+    }
+    var raw = localStorage.getItem("mnn-study-v1") || localStorage.getItem("mnn-study-v1:bak");
+    if (raw && raw.length > 30) {
+      var hh = document.getElementById("staticProgressHint");
+      if (hh) hh.hidden = false;
+    }
   } catch (e) {}
   var rb = document.getElementById("staticRestoreBtn");
   if (rb) rb.addEventListener("click", function () {
@@ -312,13 +337,16 @@ document.addEventListener("DOMContentLoaded", function () {
   .btn-google svg { width: 20px; height: 20px; flex: 0 0 auto; }
   .welcome-gate .btn { min-height: 44px; }
   .welcome-gate .linkish,
-  .welcome-gate a.linkish {
+  .welcome-gate a.linkish,
+  .welcome-gate button.linkish {
     font: inherit; font-size: 14px; font-weight: 600; color: var(--accent-deep);
     background: none; border: none; padding: 8px 0; cursor: pointer;
-    text-decoration: none; display: inline-block;
+    text-decoration: none; display: inline-block; min-height: 44px;
+    -webkit-tap-highlight-color: rgba(8, 145, 178, .2);
   }
   .welcome-gate .linkish:hover,
-  .welcome-gate a.linkish:hover { text-decoration: underline; }
+  .welcome-gate a.linkish:hover,
+  .welcome-gate button.linkish:hover { text-decoration: underline; }
   .welcome-gate .static-restore {
     width: min(100%, 360px); display: flex; flex-direction: column; gap: 10px;
     text-align: left;
@@ -2397,7 +2425,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823g#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823h#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2422,10 +2450,13 @@ document.addEventListener("DOMContentLoaded", function () {
     <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
       Sign in to sync across devices. Already studying on this phone?
       Tap <b>Continue without signing in</b>.</p>
+    <p class="welcome-lead" id="staticProgressHint" hidden>
+      This device already has saved progress. Tap <b>Continue without signing in</b>,
+      then open the gear icon on Home → <b>Copy backup</b>.</p>
     <div class="welcome-actions" id="staticWelcomeActions">
-      <a class="btn-google" id="staticGoogle" href="?signin=1#/">Sign in with Google</a>
+      <button type="button" class="btn-google" id="staticGoogle" onclick="staticSignIn()">Sign in with Google</button>
       <button type="button" class="btn" id="staticRestoreBtn">Restore saved progress</button>
-      <a class="linkish" id="staticGuest" href="?guest=1">Continue without signing in</a>
+      <button type="button" class="linkish" id="staticGuest" onclick="staticContinueGuest()">Continue without signing in</button>
     </div>
     <div id="staticRestorePanel" class="static-restore" hidden>
       <p class="welcome-lead">Paste the backup text copied from your other device (Settings → Copy backup).</p>
@@ -2434,6 +2465,8 @@ document.addEventListener("DOMContentLoaded", function () {
       <button type="button" class="btn primary" id="staticRestoreGo">Restore from text</button>
     </div>
     <p class="welcome-lead" id="loadStatus">Loading study data…</p>
+    <p class="welcome-lead" id="staticPwaHint" hidden>
+      Home-screen icon out of date? Delete it, open this page once in Safari, then Add to Home Screen again.</p>
   </section>
 </main>
 
@@ -2484,7 +2517,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823g"></script>
+<script src="firebase-config.js?v=20260823h"></script>
 <script>
 /* ============================================================
    State
@@ -7422,9 +7455,9 @@ function showBootFailure(err) {
     <h2>トムさんの勉強ガイド</h2>
     <p class="auth-error">${esc(msg)}</p>
     <div class="welcome-actions" id="staticWelcomeActions">
-      <a class="btn-google" href="?signin=1#/">Sign in with Google</a>
+      <button type="button" class="btn-google" onclick="staticSignIn()">Sign in with Google</button>
       <button type="button" class="btn" id="staticRestoreBtn">Restore saved progress</button>
-      <a class="linkish" href="?guest=1">Continue without signing in</a>
+      <button type="button" class="linkish" onclick="staticContinueGuest()">Continue without signing in</button>
     </div>
     <div id="staticRestorePanel" class="static-restore" hidden>
       <textarea id="staticRestoreText" spellcheck="false" autocomplete="off" rows="6"></textarea>
@@ -7461,7 +7494,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823g&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823h&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
