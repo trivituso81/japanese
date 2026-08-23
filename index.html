@@ -459,9 +459,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* Lesson focus: filter + vocab/grammar live inside one framed panel.
-     Kanji/verbs sit below with ~1/3 of the fold so their charts can breathe. */
+     Kanji/verbs sit below with ~45% of the remaining fold height. */
   .home-lesson-frame {
-    flex: 2 1 0; min-height: 0;
+    flex: 55 1 0; min-height: 0;
     display: flex; flex-direction: column; gap: 8px;
     padding: 10px 10px 8px;
     border: 2px solid var(--text);
@@ -515,9 +515,9 @@ document.addEventListener("DOMContentLoaded", function () {
     grid-template-rows: 1fr;
   }
   .home-track-stats {
-    flex: 1 1 0;
+    flex: 45 1 0;
     min-height: 0;
-    /* ~1/3 of the fold with the lesson frame at flex:2 — room for kanji/verb charts. */
+    /* ~45% of the fold with the lesson frame at 55%. */
     max-height: none;
     grid-template-rows: 1fr;
   }
@@ -1350,8 +1350,8 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-track-stats .sub { display: none; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
-    .home-lesson-frame { flex: 1.4 1 0; }
-    .home-track-stats { flex: 1 1 0; max-height: none; }
+    .home-lesson-frame { flex: 55 1 0; }
+    .home-track-stats { flex: 45 1 0; max-height: none; }
   }
 
   /* buttons — manga panels; primary is coral→aqua so neither colour owns the CTA */
@@ -2318,13 +2318,13 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-lesson-frame {
       padding: 14px 14px 12px; gap: 10px;
       min-height: 0;
-      flex: 2 1 0;
+      flex: 55 1 0;
     }
     .home-lesson-stats .stat { padding: 14px 14px 12px; gap: 8px; }
     .home-lesson-stats .k { font-size: clamp(1.45rem, 2.4vw, 1.95rem); letter-spacing: .05em; }
     .home-lesson-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
     .home-lesson-stats .sub { font-size: 14px; }
-    .home-track-stats { max-height: none; flex: 1 1 0; gap: 12px; }
+    .home-track-stats { max-height: none; flex: 45 1 0; gap: 12px; }
     .home-track-stats .stat { padding: 14px 14px 12px; }
     .home-track-stats .k { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     .home-track-stats .val { font-size: clamp(1.2rem, 2vw, 1.45rem); }
@@ -2536,12 +2536,12 @@ document.addEventListener("DOMContentLoaded", function () {
       width: 100%;
     }
     .home-lesson-frame {
-      flex: 2 1 0;
+      flex: 55 1 0;
       width: 100%;
       min-height: 0;
     }
     .home-track-stats {
-      flex: 1 1 0;
+      flex: 45 1 0;
       width: 100%;
       max-height: none;
     }
