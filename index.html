@@ -382,12 +382,6 @@ document.addEventListener("DOMContentLoaded", function () {
   .home-settings-menu .hp-status {
     font-size: 12px; color: var(--text-faint); line-height: 1.35;
   }
-  .home-settings-menu .hp-cloud-label {
-    font-size: 10.5px; font-weight: 700; letter-spacing: .14em;
-    text-transform: uppercase; color: var(--text-faint);
-    padding: 4px 0 0; margin: 2px 0 0;
-    border-top: 1px solid var(--rule);
-  }
   .home-settings-menu button,
   .home-settings-menu label,
   .home-settings-menu a {
@@ -2891,20 +2885,29 @@ function requestPersistentStorage() {
   } catch (e) {}
 }
 
-/* Flush on background / close — iOS Safari is eager to suspend tabs. */
+/* Flush on background / close — iOS Safari is eager to suspend tabs.
+   On return, compare Google save timestamps and offer restore if needed. */
 window.addEventListener("pagehide", () => { save(); flushCloudSync(); });
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") { save(); flushCloudSync(); }
+  else reconcileCloud("resume");
 });
 
 /* ============================================================
    Google sign-in + Firestore sync
 
-   localStorage stays the fast path; when signed in, the same JSON is
-   pushed to users/{uid} after every save (debounced) and merged on login.
+   Sign in once. After that the app compares this device’s save time with
+   the copy stored for that Google account (Firestore users/{uid}):
+
+     • Cloud newer → ask before restoring onto this device
+     • Local newer → quietly upload
+     • Same age   → leave alone
+
+   No manual Upload / Download buttons.
    ============================================================ */
 const CLOUD_SCHEMA = 1;
 const KEY_GUEST = KEY + ":guest";
+const KEY_CLOUD_DECLINED = KEY + ":cloudDeclinedTs";
 const FIREBASE_SDK = [
   "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js",
   "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js",
@@ -2916,7 +2919,9 @@ let cloudUser = null;
 let cloudSyncTimer = null;
 let cloudSyncing = false;
 let cloudLastPush = 0;
-let cloudHydratedUid = null;
+let cloudCheckBusy = false;
+let cloudLastCheckedAt = 0;
+const CLOUD_CHECK_MIN_MS = 10000;
 /* Paint the app immediately. Firebase is optional and loads afterward. */
 let authReady = true;
 let authError = "";
@@ -3014,8 +3019,8 @@ function bindCloudAuth() {
     cloudUser = user;
     if (user) {
       localStorage.removeItem(KEY_GUEST);
-      syncOnSignIn(user);
-    } else cloudHydratedUid = null;
+      reconcileCloud("signin");
+    }
     updateCloudUi();
     route();
   });
@@ -3100,31 +3105,26 @@ async function pushCloud(uid, opts) {
   const force = !!(opts && opts.force);
   const snapshot = cloudProgressSnapshot(S);
   const localWeight = progressWeight(snapshot);
-  /* Never upload an empty shell — that is how a blank iPad wipe reaches Gmail. */
-  if (localWeight === 0) {
-    console.warn("cloud push skipped: local progress is empty");
-    authError = "This device has no progress to upload.";
-    return false;
-  }
+  if (localWeight === 0) return false;
   cloudSyncing = true;
   authError = "";
   try {
-    let cloudWeight = 0;
+    let existing = null;
     try {
-      const existing = await pullCloud(uid);
-      cloudWeight = existing ? existing.weight : 0;
+      existing = await pullCloud(uid);
     } catch (e) {
-      console.warn("cloud push: could not read existing cloud progress", e);
       if (!force) {
-        authError = "Could not verify cloud progress before upload. " + cloudErrDetail(e);
+        authError = "Could not reach Google save. " + cloudErrDetail(e);
         return false;
       }
     }
-    if (!force && cloudWeight > localWeight) {
-      console.warn("cloud push skipped: cloud has more progress", cloudWeight, localWeight);
-      authError = "Google already has more progress (" + cloudWeight + ") than this device (" + localWeight + "). Use Download, or Upload and confirm overwrite.";
-      return false;
-    }
+    const localTs = +localStorage.getItem(KEY_SAVED) || 0;
+    const cloudTs = existing ? (existing.updatedAt || 0) : 0;
+    const cloudWeight = existing ? existing.weight : 0;
+    /* Never clobber a newer Google copy unless the user already accepted. */
+    if (!force && existing && cloudTs > localTs) return false;
+    if (!force && cloudWeight > localWeight && cloudTs >= localTs) return false;
+
     const user = requireCloudUser();
     const payload = {
       progressJson: JSON.stringify(snapshot),
@@ -3133,23 +3133,12 @@ async function pushCloud(uid, opts) {
       schema: CLOUD_SCHEMA,
       email: (user && user.email) || null
     };
-    /* Keep a shallow progress map for older readers; prefer progressJson on pull. */
     try {
       payload.progress = snapshot;
       await cloudDocRef(uid).set(payload, { merge: true });
     } catch (e) {
-      /* If the nested map is rejected, retry with JSON only. */
-      console.warn("cloud push with nested progress failed, retrying JSON-only", e);
       delete payload.progress;
       await cloudDocRef(uid).set(payload, { merge: true });
-    }
-    /* Read back from the server so a silent rules failure cannot look like success. */
-    const verify = await pullCloud(uid);
-    if (!verify || verify.weight < localWeight) {
-      authError = "Upload did not stick in Google (read-back weight "
-        + (verify ? verify.weight : 0) + ", local " + localWeight + "). "
-        + "Check Firestore rules for users/{uid}.";
-      return false;
     }
     cloudLastPush = Date.now();
     return true;
@@ -3162,93 +3151,60 @@ async function pushCloud(uid, opts) {
   }
 }
 
-function pickProgress(local, localTs, cloud) {
-  const lw = progressWeight(local);
-  if (!cloud || cloud.weight === 0) return { progress: local, source: "local" };
-  const cw = cloud.weight;
-  /* Prefer cloud whenever it is at least as rich — protects older iPads. */
-  if (cw > lw) return { progress: cloud.progress, source: "cloud" };
-  if (lw === 0) return { progress: cloud.progress, source: "cloud" };
-  if (lw > cw) return { progress: local, source: "local" };
-  const ct = cloud.updatedAt || 0;
-  const lt = localTs || 0;
-  return ct >= lt
-    ? { progress: cloud.progress, source: "cloud" }
-    : { progress: local, source: "local" };
-}
-
-async function syncOnSignIn(user) {
-  if (cloudHydratedUid === user.uid) return;
-  cloudHydratedUid = user.uid;
-  const localTs = +localStorage.getItem(KEY_SAVED) || 0;
-  const localBefore = progressWeight(S);
-  let cloud = null;
-  try {
-    cloud = await pullCloud(user.uid);
-  } catch (e) {
-    authError = "Signed in, but could not download cloud progress. Check Firestore rules / network. Do not study here until sync works — use Copy backup on your iPhone.";
-    updateCloudUi();
-    alert(authError);
-    return;
-  }
-  const picked = pickProgress(S, localTs, cloud);
-  S = picked.progress;
-  save({ force: true });
-  if (picked.source === "local" && progressWeight(S) > 0) {
-    const ok = await pushCloud(user.uid);
-    if (!ok && authError) alert(authError);
-  }
+/* Compare Google save time with this device. Prompt only when cloud is newer. */
+async function reconcileCloud(reason) {
+  const user = requireCloudUser();
+  if (!user || !cloudDb || cloudCheckBusy) return;
+  const now = Date.now();
+  if (reason !== "signin" && now - cloudLastCheckedAt < CLOUD_CHECK_MIN_MS) return;
+  cloudCheckBusy = true;
+  cloudLastCheckedAt = now;
   updateCloudUi();
-  const after = progressWeight(S);
-  const cloudW = cloud ? cloud.weight : 0;
-  if (after === 0 && localBefore === 0 && cloudW === 0) {
-    alert("Signed in, but this Google account has no saved study progress yet.\n\nOn the iPhone that still has your progress: gear → Copy backup, then on this iPad: Restore progress and paste. Stay signed in so it uploads.");
-  } else if (picked.source === "cloud") {
-    alert("Loaded your Google backup on this device.\n\n" + describeProgress(S));
-  } else if (after > 0) {
-    alert("Using this device’s progress and syncing it to Google.\n\n" + describeProgress(S));
-  }
-  route();
-}
-
-async function pullCloudToDevice() {
-  const user = ensureSignedInForCloud("Download from Google");
-  if (!user) return;
   try {
-    const cloud = await pullCloud(user.uid);
-    if (!cloud || cloud.weight === 0) {
-      alert(
-        "No progress found in Google for " + (user.email || "this account") + ".\n\n" +
-        "On the iPhone that has your study data (same Google account, same browser or home-screen app):\n" +
-        "1. Gear → confirm the email matches\n" +
-        "2. Upload this device to Google\n" +
-        "3. Wait for the success message with a weight number\n\n" +
-        "Or use Copy backup on the iPhone and Restore progress here."
-      );
+    let cloud = null;
+    try {
+      cloud = await pullCloud(user.uid);
+    } catch (e) {
+      authError = "Could not check Google save. " + cloudErrDetail(e);
+      updateCloudUi();
       return;
     }
+
+    const localTs = +localStorage.getItem(KEY_SAVED) || 0;
+    const cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
     const localW = progressWeight(S);
-    if (localW > cloud.weight) {
-      if (!confirm(
-        "This device has MORE progress than Google.\n\n" +
-        "Account:  " + (user.email || user.uid) + "\n" +
-        "Device:   " + describeProgress(S) + " (weight " + localW + ")\n" +
-        "Google:   " + describeProgress(cloud.progress) + " (weight " + cloud.weight + ")\n\n" +
-        "Replace this device with the Google copy anyway?"
-      )) return;
-    } else if (!confirm(
-      "Download Google progress onto this device?\n\n" +
-      "Account:  " + (user.email || user.uid) + "\n" +
-      "Google:   " + describeProgress(cloud.progress) + " (weight " + cloud.weight + ")\n" +
-      "Device now: " + describeProgress(S) + " (weight " + localW + ")"
-    )) return;
-    S = cloud.progress;
-    save({ force: true });
+    const cloudW = cloud ? cloud.weight : 0;
+    const who = user.email || "your Google account";
+
+    if (cloud && cloudW > 0 && cloudTs > localTs) {
+      const declined = localStorage.getItem(KEY_CLOUD_DECLINED);
+      if (declined === String(cloudTs)) return;
+      const ok = confirm(
+        "Newer progress is saved for " + who + ".\n\n" +
+        "Google:      " + describeProgress(cloud.progress) + "\n" +
+        "This device: " + describeProgress(S) + "\n\n" +
+        "Restore the Google copy onto this device?"
+      );
+      if (ok) {
+        localStorage.removeItem(KEY_CLOUD_DECLINED);
+        S = cloud.progress;
+        save({ force: true });
+        updateCloudUi();
+        route();
+      } else {
+        localStorage.setItem(KEY_CLOUD_DECLINED, String(cloudTs));
+      }
+      return;
+    }
+
+    /* Local same age or newer — upload quietly when this device is ahead. */
+    if (localW > 0 && (!cloud || localTs > cloudTs)) {
+      await pushCloud(user.uid, { force: true });
+      updateCloudUi();
+    }
+  } finally {
+    cloudCheckBusy = false;
     updateCloudUi();
-    route();
-    alert("Restored from Google (" + (user.email || "signed-in account") + ").\n\n" + describeProgress(S));
-  } catch (e) {
-    alert("Could not download from Google.\n\n" + cloudErrDetail(e));
   }
 }
 
@@ -3270,8 +3226,6 @@ function flushCloudSync() {
 function initProgressState() {
   if (S) return;
   S = load();
-  /* Rewrite both slots after load so a recovered backup becomes the primary,
-     and the vocab remap marker is persisted. */
   if (S.vocabRemapped || progressWeight(S) > 0) save();
   requestPersistentStorage();
 }
@@ -3283,9 +3237,9 @@ function cloudStatusLine() {
   const user = requireCloudUser();
   if (!user) return "Sign in to sync across devices";
   const who = user.email || "Google account";
-  if (cloudSyncing) return `${who} · syncing…`;
+  if (cloudCheckBusy || cloudSyncing) return `${who} · checking…`;
   if (authError) return `${who} · sync issue`;
-  if (!cloudLastPush) return `${who} · linked · tap Upload to save`;
+  if (!cloudLastPush) return `${who} · signed in`;
   const mins = Math.round((Date.now() - cloudLastPush) / 60000);
   if (mins < 1) return `${who} · synced just now`;
   if (mins < 60) return `${who} · synced ${mins}m ago`;
@@ -3364,8 +3318,6 @@ function updateCloudUi() {
   if (status) status.textContent = cloudStatusLine() || authError || "";
   const signIn = document.getElementById("cloudSignIn");
   const signOut = document.getElementById("cloudSignOut");
-  /* Upload / Download stay visible even while signed out so the restore
-     flow is always findable; their handlers nudge into sign-in if needed. */
   if (signIn) signIn.hidden = !!user;
   if (signOut) signOut.hidden = !user;
 }
@@ -3373,8 +3325,6 @@ function updateCloudUi() {
 function wireCloudSettings() {
   const signIn = document.getElementById("cloudSignIn");
   const signOut = document.getElementById("cloudSignOut");
-  const pull = document.getElementById("cloudPull");
-  const push = document.getElementById("cloudPush");
   const closeMenu = () => {
     const box = document.getElementById("homeSettings");
     const btn = document.getElementById("homeSettingsBtn");
@@ -3386,68 +3336,7 @@ function wireCloudSettings() {
     closeMenu();
     signOutGoogle();
   });
-  if (pull) pull.addEventListener("click", () => {
-    closeMenu();
-    pullCloudToDevice();
-  });
-  if (push) push.addEventListener("click", () => {
-    closeMenu();
-    uploadLocalToCloud();
-  });
   updateCloudUi();
-}
-
-function ensureSignedInForCloud(actionLabel) {
-  const user = requireCloudUser();
-  if (user) return user;
-  if (!cloudAuth && cloudBootStarted) {
-    alert("Still connecting to Google…\n\nWait a moment, open the gear again, then tap "
-      + actionLabel + ".");
-    return null;
-  }
-  if (confirm("Sign in with Google first to " + actionLabel.toLowerCase()
-      + ".\n\nOpen Google sign-in now?")) {
-    signInGoogle();
-  }
-  return null;
-}
-
-async function uploadLocalToCloud() {
-  const user = ensureSignedInForCloud("Upload this device to Google");
-  if (!user) return;
-  const localW = progressWeight(S);
-  if (localW === 0) {
-    alert("This device has no progress to upload.\n\nOpen the Safari tab or home-screen icon that still shows your lessons/cards, then try Upload again.");
-    return;
-  }
-  let cloudW = 0;
-  try {
-    const existing = await pullCloud(user.uid);
-    cloudW = existing ? existing.weight : 0;
-  } catch (e) {
-    /* Still offer upload; pushCloud will surface permission errors. */
-  }
-  let msg =
-    "Upload this device’s progress to Google?\n\n" +
-    "Account:  " + (user.email || user.uid) + "\n" +
-    "Device:   " + describeProgress(S) + " (weight " + localW + ")\n" +
-    "Google:   " + (cloudW ? ("weight " + cloudW) : "empty / nothing saved yet");
-  if (cloudW > localW) {
-    msg += "\n\nGoogle currently has MORE progress. Overwrite it with this device anyway?";
-  }
-  if (!confirm(msg)) return;
-  const ok = await pushCloud(user.uid, { force: true });
-  updateCloudUi();
-  if (ok) {
-    alert(
-      "Uploaded to Google and verified.\n\n" +
-      "Account: " + (user.email || user.uid) + "\n" +
-      describeProgress(S) + " (weight " + localW + ")\n\n" +
-      "On the other device: sign in with the SAME Google account → Download from Google."
-    );
-  } else {
-    alert(authError || "Upload failed. Your phone copy is still here — use Copy backup.");
-  }
 }
 
 function lessonState(n) {
@@ -4770,9 +4659,6 @@ function renderHome() {
             <span class="hp-status" id="cloudStatus"></span>
             <a href="signin.html?v=20260823v" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
-            <div class="hp-cloud-label">Google sync</div>
-            <button type="button" id="cloudPull" role="menuitem">Download from Google</button>
-            <button type="button" id="cloudPush" role="menuitem">Upload this device to Google</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
             <button type="button" id="expshare" role="menuitem">Share</button>
@@ -8016,6 +7902,7 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
 window.addEventListener("pageshow", () => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
+  if (requireCloudUser()) reconcileCloud("resume");
 });
 function loadStudyData() {
   return new Promise((resolve, reject) => {
