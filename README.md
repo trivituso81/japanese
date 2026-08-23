@@ -89,22 +89,22 @@ want a spare JSON file in Files.
 
 ## Google sync (iPhone ↔ iPad)
 
-Sign-in uses Firebase Auth; progress is stored in Firestore at `users/{uid}`.
+Sign in with Google once on each device (same account). Progress is stored in
+Firestore at `users/{uid}` — not Google Drive files.
 
-1. In the [Firebase console](https://console.firebase.google.com/) open project
-   **japanese-study-83926** → **Firestore Database** → **Rules**.
-2. Publish the contents of `firestore.rules` from this repo (each signed-in
-   user may only read/write their own `users/{userId}` document). If rules are
-   still the default deny-all (or expired test mode), Upload will fail with
-   permission-denied even though Sign in works.
-3. On the device that **has** your progress (same Safari tab or home-screen app
-   that shows your lessons): gear → confirm the Google email → **Upload this
-   device to Google** → wait for “Uploaded … and verified” with a weight number.
-4. On the other device: sign in with the **same** Google account → **Download
-   from Google** → confirm the weight looks right.
+When you sign in, refresh, or come back to the app, it checks the Google
+save’s timestamp:
 
-Safari and a home-screen icon can keep **separate** local copies on iOS — always
-upload from the place that still shows your study data.
+- **Google newer** → a prompt offers to restore onto this device
+- **This device newer** → it quietly uploads
+- **Same age** → nothing happens
+
+Publish `firestore.rules` from this repo in the Firebase console
+(Firestore → Rules) so signed-in users can read/write only their own doc.
+Without that, sign-in works but sync cannot.
+
+Copy backup / Restore progress remain available in the gear menu as a
+manual escape hatch.
 
 ## Running it locally
 
