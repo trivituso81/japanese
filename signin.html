@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Sign in — トムさんの勉強ガイド</title>
+<style>
+  :root {
+    --bg: #eef2f8; --card: #fff; --text: #12141a; --soft: #445064;
+    --accent: #0e7490; --miss: #be1248;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100dvh; font-family: -apple-system, system-ui, sans-serif;
+    background: var(--bg); color: var(--text);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px 16px;
+  }
+  main {
+    width: min(100%, 380px); background: var(--card); border: 2px solid var(--text);
+    border-radius: 12px; padding: 28px 22px; text-align: center;
+    box-shadow: 4px 4px 0 rgba(18,20,26,.12);
+    display: flex; flex-direction: column; gap: 14px; align-items: stretch;
+  }
+  h1 { font-size: 1.25rem; margin: 0; line-height: 1.35; }
+  p { margin: 0; color: var(--soft); font-size: 15px; line-height: 1.5; }
+  #err { color: var(--miss); font-size: 14px; font-weight: 600; min-height: 1.2em; }
+  #status { font-size: 14px; color: var(--soft); min-height: 1.2em; }
+  button, .link {
+    display: block; width: 100%; min-height: 52px; padding: 12px 16px;
+    font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
+    border: 2px solid var(--text); background: var(--card); color: var(--text);
+    cursor: pointer; text-decoration: none; text-align: center;
+    -webkit-tap-highlight-color: rgba(14,116,144,.25);
+  }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  button:disabled { opacity: .55; }
+</style>
+<script src="firebase-config.js?v=20260823j"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+</head>
+<body>
+<main>
+  <h1>Sign in with Google</h1>
+  <p>Tap the button below. Safari will open Google, then return here and save your progress to your account.</p>
+  <p id="status">Preparing…</p>
+  <p id="err"></p>
+  <button type="button" class="primary" id="go" disabled>Continue with Google</button>
+  <a class="link" id="back" href="./index.html?v=20260823j#/">Back to study guide</a>
+</main>
+<script>
+(function () {
+  var HOME = "./index.html?v=20260823j#/";
+  var status = document.getElementById("status");
+  var err = document.getElementById("err");
+  var go = document.getElementById("go");
+
+  function showErr(msg) {
+    err.textContent = msg || "Sign-in failed.";
+    status.textContent = "";
+    go.disabled = false;
+    go.textContent = "Try again with Google";
+  }
+
+  function goHome() {
+    location.replace(HOME);
+  }
+
+  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
+    showErr("Could not load Google sign-in. Check your connection and try again.");
+    return;
+  }
+
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+  } catch (e) {
+    showErr((e && e.message) || "Firebase failed to start.");
+    return;
+  }
+
+  var auth = firebase.auth();
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function () {});
+
+  status.textContent = "Checking for an existing sign-in…";
+
+  auth.getRedirectResult()
+    .then(function (result) {
+      if (result && result.user) {
+        status.textContent = "Signed in. Returning…";
+        goHome();
+        return;
+      }
+      status.textContent = "Ready. Tap the button to continue.";
+      go.disabled = false;
+    })
+    .catch(function (e) {
+      var code = e && e.code ? e.code : "";
+      if (code === "auth/operation-not-allowed") {
+        showErr("Google sign-in is not enabled in Firebase yet.");
+      } else if (code === "auth/unauthorized-domain") {
+        showErr("This website is not an authorised domain in Firebase.");
+      } else {
+        showErr((e && e.message) || "Sign-in failed.");
+      }
+    });
+
+  auth.onAuthStateChanged(function (user) {
+    if (user) {
+      status.textContent = "Signed in as " + (user.email || "Google user") + ". Returning…";
+      goHome();
+    }
+  });
+
+  go.addEventListener("click", function () {
+    err.textContent = "";
+    status.textContent = "Opening Google…";
+    go.disabled = true;
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    auth.signInWithRedirect(provider).catch(function (e) {
+      showErr((e && e.message) || "Could not open Google sign-in.");
+    });
+  });
+})();
+</script>
+</body>
+</html>
