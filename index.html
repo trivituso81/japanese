@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823d";
+window.__BUILD__ = "20260823e";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -252,6 +252,7 @@ window.__BUILD__ = "20260823d";
     background: #fff; color: #3c4043; font: inherit; font-size: 15px; font-weight: 600;
     border: 1px solid #dadce0; border-radius: 4px; cursor: pointer;
     box-shadow: 0 1px 2px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.08);
+    text-decoration: none;
   }
   .btn-google:hover { background: #f8f9fa; }
   .btn-google svg { width: 20px; height: 20px; flex: 0 0 auto; }
@@ -2311,7 +2312,7 @@ window.__BUILD__ = "20260823d";
   }
 </style>
 </head>
-<body>
+<body data-view="dash">
 <!-- Persistent TTS player. iOS unlocks per element; keep one node for the
      whole session, with playsinline + no-referrer so Google TTS can load.
      Not display:none / hidden — iOS skips media in fully hidden nodes. -->
@@ -2329,7 +2330,7 @@ window.__BUILD__ = "20260823d";
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823e#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2346,10 +2347,21 @@ window.__BUILD__ = "20260823d";
 </nav>
 
 <nav class="crumbs" id="crumbs"></nav>
-<main id="view"></main>
+<!-- Static fallback so a failed/cached script never leaves a blank screen. -->
+<main id="view">
+  <section class="welcome-gate">
+    <img class="welcome-mascot" src="mascot.png?v=20260817p" alt="" width="96" height="96" decoding="async">
+    <h2>トムさんの勉強ガイド<br>へようこそ</h2>
+    <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.</p>
+    <div class="welcome-actions">
+      <a class="btn-google" href="https://trivituso81.github.io/japanese/?v=20260823e#/">Open the study guide</a>
+      <p class="welcome-lead">If this page stays stuck, delete the home-screen icon and open that link in Safari.</p>
+    </div>
+  </section>
+</main>
 
 <footer class="foot">
-  Progress lives in this browser only.
+  Progress saves on this device, and to your Google account when signed in.
   Keep <code>japanese-data.js</code> in the same folder as this file.
   The reference tracker is at <a href="japanese.html">japanese.html</a>.
 </footer>
@@ -2396,8 +2408,8 @@ window.__BUILD__ = "20260823d";
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js?v=20260823d"></script>
-<script src="japanese-data.js?v=20260823d"></script>
+<script src="firebase-config.js?v=20260823e"></script>
+<script src="japanese-data.js?v=20260823e"></script>
 <script>
 /* ============================================================
    State
@@ -7241,8 +7253,32 @@ wireFurigana();
 wireBotnavScroll();
 wireKanjiKeyboard();
 wireBackupSheet();
-initCloud();
-route();
+try {
+  initCloud();
+  route();
+} catch (bootErr) {
+  const view = document.getElementById("view");
+  if (view) {
+    document.body.dataset.view = "dash";
+    view.innerHTML = `<section class="welcome-gate">
+      <h2>トムさんの勉強ガイド</h2>
+      <p class="auth-error">${esc(String(bootErr && bootErr.message || bootErr))}</p>
+      <div class="welcome-actions">
+        <a class="btn-google" href="https://trivituso81.github.io/japanese/?v=20260823e#/">Reload the study guide</a>
+        <button type="button" class="btn" id="bootRestore">Restore saved progress</button>
+      </div>
+    </section>`;
+    const br = document.getElementById("bootRestore");
+    if (br) br.addEventListener("click", () => openBackupSheet("restore"));
+  }
+}
+
+document.addEventListener("click", e => {
+  const a = e.target.closest("#backHome");
+  if (!a) return;
+  e.preventDefault();
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823e#/");
+});
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
    *layout* viewport when the keyboard opens; matching vv.offsetTop/height
