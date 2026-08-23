@@ -24,7 +24,11 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
+<<<<<<< HEAD
 window.__BUILD__ = "20260818d";
+=======
+window.__BUILD__ = "20260823a";
+>>>>>>> origin/cursor/verb-verdict-speak-b501
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -1572,6 +1576,16 @@ window.__BUILD__ = "20260818d";
   .vcard .rowacts { justify-content: center; }
   .jpline { font-family: var(--jp-mincho); letter-spacing: .02em; }
   .jpline.big { font-size: 22px; }
+  /* Correct conjugation + Listen on the verb verdict, beside the answer. */
+  .verdict .ans-speak {
+    display: inline-flex; align-items: center; gap: 8px; vertical-align: middle;
+  }
+  .verdict .ans-speak .speak {
+    margin-top: 0; padding: 6px; min-width: 36px; min-height: 36px;
+    justify-content: center; flex: 0 0 auto;
+  }
+  .verdict .ans-speak .speak .speak-lab { display: none; }
+  .verdict .ans-speak .speak svg { width: 16px; height: 16px; }
   .focusnote { font-family: var(--serif); margin-top: 16px; padding: 13px 16px;
     background: var(--warn-bg); border-left: 3px solid var(--now); line-height: 1.7; }
   .focusnote b { font-family: var(--jp-mincho); font-weight: 500; color: var(--text); }
@@ -5756,9 +5770,12 @@ function drawVerb() {
     const last = VERB.answers[VERB.answers.length - 1] || {};
     const ok = !!last.ok;
     const p = verbPrompt(v, effectiveVerbPrompt(VERB.form, VERB.prompt));
+    const speakReading = answer && answer.kana ? answer.kana : "";
+    const speakKanji = answer && (answer.kanji || answer.kana) ? (answer.kanji || answer.kana) : "";
+    stopSpeaking();
     view.innerHTML = drillStage({
       heading: esc(meta.label),
-      sub: "One attempt each — kana or the kanji spelling both count.",
+      sub: "One attempt each — listen to the correct form before moving on.",
       left: `Question <b>${VERB.i}</b> of <b>${total}</b>`,
       right: runningScore(VERB.answers),
       done: VERB.i, total,
@@ -5769,10 +5786,14 @@ function drawVerb() {
         <div class="vrow"><span class="vtag">prompt</span>
           <span class="jpline">${p.html}</span> <span class="vgloss">${esc(v.en)}</span></div>
         <div class="vrow"><span class="vtag">you</span><span class="jpline">${esc(typed || "—")}</span></div>
-        ${ok ? "" : `<div class="vrow"><span class="vtag">answer</span>
-          <span class="jpline big">${vRuby(answer)}</span>${answer.kanji
+        <div class="vrow"><span class="vtag">answer</span>
+          <span class="ans-speak">
+            <span class="jpline big">${vRuby(answer)}</span>
+            ${speakReading || speakKanji
+              ? speakButton({ icon: true, label: false, id: "vspeak" }) : ""}
+          </span>${answer && answer.kanji
             ? `<span class="vgloss">${esc(answer.kana)}</span>` : ""}</div>
-          <div class="vrow"><span class="vtag">type</span>
+        ${ok ? "" : `<div class="vrow"><span class="vtag">type</span>
             <span class="vgloss">${esc(typeLabel(verbType(v)))} · introduced Lesson ${v.n}</span></div>`}
         <div class="rowacts">
           <button class="btn primary" id="vnext">${VERB.i >= total ? "See results" : "Next verb"}</button>
@@ -5792,6 +5813,11 @@ function drawVerb() {
     });
     const vf = document.getElementById("vflip");
     if (vf) vf.addEventListener("click", () => regradeVerb(true));
+    if (speakReading || speakKanji) {
+      wireSpeak(speakReading, speakKanji, "vspeak");
+      speakBusyEl = document.getElementById("vspeak");
+      speakJapanese(speakReading, speakKanji);
+    }
     return;
   }
 
@@ -5801,7 +5827,6 @@ function drawVerb() {
   const promptStyle = effectiveVerbPrompt(VERB.form, VERB.prompt);
   const p = verbPrompt(v, promptStyle);
   const speakSrc = verbPromptSpeak(v, promptStyle);
-  const lastOk = VERB.lastOk;
   stopSpeaking();
   view.innerHTML = drillStage({
     heading: esc(meta.label),
@@ -5811,7 +5836,6 @@ function drawVerb() {
     done: VERB.i, total,
     body: `
     <div class="vcard">
-      ${lastOk ? `<p class="tick">${vRuby(lastOk.answer)} — correct</p>` : ""}
       <div class="vask">Give the <b>${esc(meta.label)}</b></div>
       <div class="vword-row">
         <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
@@ -5880,11 +5904,10 @@ function submitVerb(typed) {
   VERB.i++;
   VERB.verdict = { v, ok, typed: String(typed).trim(), answer };
   saveVerbSession();
-  /* A right answer needs no ceremony — stopping the loop to confirm one would
-     halve the pace. It is still worth a line on the next card, so the form you
-     just produced can be read back rather than merely assumed. */
-  VERB.lastOk = ok ? { answer } : null;
-  if (ok) { VERB.verdict = null; drawVerb(); } else drawVerb();
+  /* Always stop on the verdict — correct or not — so Google TTS can read the
+     conjugation aloud. Skipping ahead on a hit left nothing to listen to. */
+  VERB.lastOk = null;
+  drawVerb();
 }
 
 function drawVerbEnd(view, meta) {
