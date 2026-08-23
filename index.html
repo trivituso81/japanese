@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823c";
+window.__BUILD__ = "20260823d";
 (function () {
   /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
@@ -223,6 +223,47 @@ window.__BUILD__ = "20260823c";
   .home-settings-menu button:hover,
   .home-settings-menu label:hover { text-decoration: underline; }
   .home-settings-menu input[type="file"] { display: none; }
+
+  /* Signed-out welcome — sign in, restore a backup, or continue as guest */
+  .welcome-gate {
+    flex: 1 1 auto; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    padding: 28px 20px 48px; gap: 22px; min-height: min(62vh, 520px);
+  }
+  .welcome-gate .welcome-mascot {
+    width: clamp(72px, 22vw, 96px); height: auto;
+    object-fit: contain; pointer-events: none;
+  }
+  .welcome-gate h2 {
+    font-family: var(--jp-mincho); font-size: clamp(1.55rem, 6.5vw, 2.1rem);
+    line-height: 1.45; letter-spacing: .04em; margin: 0; font-weight: 700;
+  }
+  .welcome-gate .welcome-lead {
+    font-size: 15px; color: var(--text-soft); max-width: 22em;
+    line-height: 1.65; margin: 0;
+  }
+  .welcome-gate .welcome-actions {
+    display: flex; flex-direction: column; align-items: stretch;
+    gap: 12px; width: min(100%, 320px);
+  }
+  .btn-google {
+    display: inline-flex; align-items: center; justify-content: center;
+    gap: 10px; padding: 12px 18px; min-height: 48px;
+    background: #fff; color: #3c4043; font: inherit; font-size: 15px; font-weight: 600;
+    border: 1px solid #dadce0; border-radius: 4px; cursor: pointer;
+    box-shadow: 0 1px 2px rgba(60,64,67,.15), 0 1px 3px rgba(60,64,67,.08);
+  }
+  .btn-google:hover { background: #f8f9fa; }
+  .btn-google svg { width: 20px; height: 20px; flex: 0 0 auto; }
+  .welcome-gate .btn { min-height: 44px; }
+  .welcome-gate .linkish {
+    font: inherit; font-size: 14px; font-weight: 600; color: var(--accent-deep);
+    background: none; border: none; padding: 8px 0; cursor: pointer;
+  }
+  .welcome-gate .linkish:hover { text-decoration: underline; }
+  .welcome-gate .auth-error {
+    font-size: 13px; color: var(--miss); line-height: 1.5; max-width: 22em; margin: 0;
+  }
 
   /* Lesson focus: filter + vocab/grammar live inside one framed panel.
      Kanji/verbs sit outside as smaller freestanding long-term trackers. */
@@ -2355,8 +2396,8 @@ window.__BUILD__ = "20260823c";
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js?v=20260823c"></script>
-<script src="japanese-data.js?v=20260823c"></script>
+<script src="firebase-config.js?v=20260823d"></script>
+<script src="japanese-data.js?v=20260823d"></script>
 <script>
 /* ============================================================
    State
@@ -2548,6 +2589,7 @@ document.addEventListener("visibilitychange", () => {
    pushed to users/{uid} after every save (debounced) and merged on login.
    ============================================================ */
 const CLOUD_SCHEMA = 1;
+const KEY_GUEST = KEY + ":guest";
 let cloudAuth = null;
 let cloudDb = null;
 let cloudUser = null;
@@ -2555,24 +2597,85 @@ let cloudSyncTimer = null;
 let cloudSyncing = false;
 let cloudLastPush = 0;
 let cloudHydratedUid = null;
+let authReady = !window.FIREBASE_CONFIG;
+let authError = "";
+
+const GOOGLE_G = `<svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>`;
+
+function authErrorMessage(err) {
+  const code = err && err.code ? err.code : "";
+  if (code === "auth/operation-not-allowed") {
+    return "Google sign-in is not enabled in Firebase yet. Open Authentication → Sign-in method → Google → Enable.";
+  }
+  if (code === "auth/unauthorized-domain") {
+    return "This website address is not authorised in Firebase. Add it under Authentication → Settings → Authorised domains.";
+  }
+  return (err && err.message) ? err.message : "Sign-in failed.";
+}
+
+function continueAsGuest() {
+  localStorage.setItem(KEY_GUEST, "1");
+  authError = "";
+  route();
+}
+
+/* Welcome screen only when signed out, no local progress, and guest mode
+   not chosen yet — so an old phone with saves goes straight to the app. */
+function useWelcomeLanding() {
+  if (cloudUser) return false;
+  if (localStorage.getItem(KEY_GUEST) === "1") return false;
+  if (progressWeight(S) > 0) return false;
+  return true;
+}
+
+function renderWelcomeLanding() {
+  document.getElementById("crumbs").innerHTML = "";
+  document.body.dataset.view = "dash";
+  document.getElementById("view").innerHTML = `
+    <section class="welcome-gate">
+      <img class="welcome-mascot" src="mascot.png?v=20260817p" alt="" width="96" height="96" decoding="async">
+      <h2>トムさんの勉強ガイド<br>へようこそ</h2>
+      <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
+        Sign in to sync across devices. Already studying on this phone?
+        Tap <b>Continue without signing in</b>.</p>
+      <div class="welcome-actions">
+        <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
+        <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
+        <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
+      </div>
+      ${authError ? `<p class="auth-error">${esc(authError)}</p>` : ""}
+    </section>`;
+  document.getElementById("welcomeGoogle").addEventListener("click", signInGoogle);
+  document.getElementById("welcomeRestore").addEventListener("click", () => openBackupSheet("restore"));
+  document.getElementById("welcomeGuest").addEventListener("click", continueAsGuest);
+}
 
 function initCloud() {
-  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") return;
+  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
+    authReady = true;
+    return;
+  }
   try {
     if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
     cloudAuth = firebase.auth();
     cloudDb = firebase.firestore();
     cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    cloudAuth.getRedirectResult().catch(() => {});
+    cloudAuth.getRedirectResult()
+      .catch(e => { authError = authErrorMessage(e); })
+      .finally(() => { authReady = true; route(); });
     cloudAuth.onAuthStateChanged(user => {
       cloudUser = user;
-      if (user) syncOnSignIn(user);
-      else cloudHydratedUid = null;
+      authReady = true;
+      if (user) {
+        localStorage.removeItem(KEY_GUEST);
+        syncOnSignIn(user);
+      } else cloudHydratedUid = null;
       updateCloudUi();
-      const h = location.hash;
-      if (h === "#/" || h === "#" || h === "") renderHome();
+      route();
     });
-  } catch (e) {}
+  } catch (e) {
+    authReady = true;
+  }
 }
 
 function cloudDocRef(uid) {
@@ -2663,17 +2766,27 @@ function cloudStatusLine() {
 }
 
 function signInGoogle() {
-  if (!cloudAuth) return alert("Cloud sync is not available.");
+  if (!cloudAuth) {
+    authError = "Cloud sign-in is not available on this page.";
+    route();
+    return;
+  }
+  authError = "";
   const provider = new firebase.auth.GoogleAuthProvider();
   const useRedirect = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     || window.navigator.standalone
     || window.matchMedia("(display-mode: standalone)").matches;
-  if (useRedirect) cloudAuth.signInWithRedirect(provider);
-  else {
-    cloudAuth.signInWithPopup(provider).catch(e => {
-      if (e && e.code === "auth/popup-blocked") cloudAuth.signInWithRedirect(provider);
-    });
+  if (useRedirect) {
+    cloudAuth.signInWithRedirect(provider);
+    return;
   }
+  cloudAuth.signInWithPopup(provider).catch(e => {
+    if (e && e.code === "auth/popup-blocked") cloudAuth.signInWithRedirect(provider);
+    else {
+      authError = authErrorMessage(e);
+      route();
+    }
+  });
 }
 
 function signOutGoogle() {
@@ -7088,7 +7201,15 @@ function route() {
   document.body.dataset.view = viewName(h, m);
   paintNav(navSection(h));
 
-  if (h === "#/" || h === "#" || h === "") return renderHome();
+  if (h === "#/" || h === "#" || h === "") {
+    if (!authReady && window.FIREBASE_CONFIG) {
+      document.getElementById("crumbs").innerHTML = "";
+      document.getElementById("view").innerHTML = `<section class="welcome-gate"><p class="welcome-lead">Loading…</p></section>`;
+      return;
+    }
+    if (useWelcomeLanding()) return renderWelcomeLanding();
+    return renderHome();
+  }
   if (h === "#/lessons") return renderLessons();
   if (h === "#/resume" || h === "#/drill/resume") return resumeDrill();
   if (h === "#/verbs") { VERB = null; return renderVerbs(); }
@@ -7114,7 +7235,7 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
    pull fresh numbers whenever home is showing again. */
 window.addEventListener("pageshow", () => {
   const h = location.hash || "#/";
-  if (h === "#/" || h === "#" || h === "") renderHome();
+  if (h === "#/" || h === "#" || h === "") route();
 });
 wireFurigana();
 wireBotnavScroll();
