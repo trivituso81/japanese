@@ -28,6 +28,7 @@
   p { margin: 0; color: var(--soft); font-size: 15px; line-height: 1.5; }
   #err { color: var(--miss); font-size: 14px; font-weight: 600; min-height: 1.2em; white-space: pre-wrap; }
   #status { font-size: 14px; color: var(--soft); min-height: 1.2em; }
+  #gisBtn { display: flex; justify-content: center; min-height: 48px; }
   button, .link {
     display: block; width: 100%; min-height: 52px; padding: 12px 16px;
     font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
@@ -38,36 +39,35 @@
   button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
   button:disabled { opacity: .55; }
 </style>
-<script src="firebase-config.js?v=20260823k"></script>
+<script src="firebase-config.js?v=20260823l"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 <main>
   <h1>Sign in with Google</h1>
-  <p>Tap <b>Continue with Google</b>. After you pick your account, you will return to the study guide.</p>
-  <p id="status">Ready. Tap the button below.</p>
+  <p>Tap the Google button below. After you pick your account, this page will finish signing you in.</p>
+  <p id="status">Loading Google…</p>
   <p id="err"></p>
+  <div id="gisBtn"></div>
   <button type="button" class="primary" id="go">Continue with Google</button>
-  <button type="button" id="popup" hidden>Try another sign-in method</button>
-  <a class="link" id="back" href="./index.html?v=20260823k#/">Back to study guide</a>
+  <a class="link" id="back" href="./index.html?v=20260823l#/">Back to study guide</a>
 </main>
 <script>
 (function () {
-  var HOME = "./index.html?v=20260823k&r=" + Date.now() + "#/";
+  var HOME = "./index.html?v=20260823l&r=" + Date.now() + "#/";
+  var CLIENT_ID = "947800274122-tdclsihn1eug9qd7eqe97cd6fi2ck0l2.apps.googleusercontent.com";
   var status = document.getElementById("status");
   var err = document.getElementById("err");
   var go = document.getElementById("go");
-  var popupBtn = document.getElementById("popup");
   var signedIn = false;
-  var redirectStarted = false;
+  var gisReady = false;
 
   function showErr(msg) {
     err.textContent = msg || "Sign-in failed.";
     status.textContent = "You can try again, or go back.";
     go.disabled = false;
-    go.textContent = "Try again with Google";
-    popupBtn.hidden = false;
   }
 
   function goHome() {
@@ -77,39 +77,34 @@
     location.replace(HOME);
   }
 
-  function provider() {
-    var p = new firebase.auth.GoogleAuthProvider();
-    p.setCustomParameters({ prompt: "select_account" });
-    p.addScope("email");
-    p.addScope("profile");
-    return p;
-  }
-
   function friendly(e) {
     var code = e && e.code ? e.code : "";
-    if (code === "auth/operation-not-allowed") {
-      return "Google sign-in is not enabled in Firebase yet.";
-    }
-    if (code === "auth/unauthorized-domain") {
-      return "This website is not an authorised domain in Firebase.";
-    }
-    if (code === "auth/popup-blocked") {
-      return "Safari blocked the sign-in window. Tap Continue with Google instead.";
-    }
-    if (code === "auth/popup-closed-by-user") {
-      return "Sign-in was closed before finishing. Tap to try again.";
-    }
-    if (code === "auth/network-request-failed") {
-      return "Network error. Check Wi‑Fi/cellular and try again.";
-    }
+    if (code === "auth/operation-not-allowed") return "Google sign-in is not enabled in Firebase yet.";
+    if (code === "auth/unauthorized-domain") return "This website is not an authorised domain in Firebase.";
+    if (code === "auth/popup-blocked") return "Safari blocked the sign-in window. Use the Google button above instead.";
+    if (code === "auth/popup-closed-by-user") return "Sign-in was closed before finishing. Tap to try again.";
+    if (code === "auth/network-request-failed") return "Network error. Check Wi‑Fi/cellular and try again.";
+    if (code === "auth/invalid-credential") return "Google sign-in returned an invalid credential. Try again.";
     return (e && e.message) || "Sign-in failed.";
   }
 
-  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
-    showErr("Could not load Google sign-in. Check your connection (and turn off content blockers for this site), then reload.");
-    return;
+  function finishWithIdToken(idToken) {
+    if (!idToken) return showErr("Google did not return an ID token.");
+    status.textContent = "Finishing sign-in…";
+    go.disabled = true;
+    var cred = firebase.auth.GoogleAuthProvider.credential(idToken);
+    firebase.auth().signInWithCredential(cred)
+      .then(function (result) {
+        if (result && result.user) goHome();
+        else showErr("No Google account returned.");
+      })
+      .catch(function (e) { showErr(friendly(e)); });
   }
 
+  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
+    showErr("Could not load Google sign-in. Check your connection, then reload.");
+    return;
+  }
   try {
     if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
   } catch (e) {
@@ -118,77 +113,100 @@
   }
 
   var auth = firebase.auth();
-
-  /* Never leave the button disabled waiting on Safari — getRedirectResult can hang forever. */
-  go.disabled = false;
-  status.textContent = "Ready. Tap the button below.";
-
   auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function () {});
-
   auth.onAuthStateChanged(function (user) {
     if (user) goHome();
   });
 
-  /* Race: if redirect result never arrives, keep UI usable. */
-  var redirectWait = Promise.race([
-    auth.getRedirectResult().then(function (result) { return result; }),
-    new Promise(function (resolve) {
-      setTimeout(function () { resolve({ __timeout: true }); }, 2000);
-    })
-  ]);
+  /* Ignore hanging getRedirectResult from older attempts. */
+  try {
+    Promise.race([
+      auth.getRedirectResult(),
+      new Promise(function (resolve) { setTimeout(resolve, 1500); })
+    ]).then(function (result) {
+      if (result && result.user) goHome();
+    }).catch(function () {});
+  } catch (e) {}
 
-  redirectWait.then(function (result) {
-    if (result && result.user) {
-      goHome();
-      return;
+  function renderGis() {
+    if (!window.google || !google.accounts || !google.accounts.id) return false;
+    try {
+      google.accounts.id.initialize({
+        client_id: CLIENT_ID,
+        callback: function (response) {
+          if (!response || !response.credential) return showErr("Google did not return a credential.");
+          finishWithIdToken(response.credential);
+        },
+        auto_select: false,
+        cancel_on_tap_outside: true,
+        context: "signin",
+        ux_mode: "popup",
+        use_fedcm_for_prompt: false
+      });
+      google.accounts.id.renderButton(document.getElementById("gisBtn"), {
+        type: "standard",
+        theme: "outline",
+        size: "large",
+        text: "continue_with",
+        shape: "rectangular",
+        logo_alignment: "left",
+        width: 320
+      });
+      gisReady = true;
+      status.textContent = "Ready. Tap the Google button (or Continue below).";
+      return true;
+    } catch (e) {
+      return false;
     }
-    if (result && result.__timeout) {
+  }
+
+  function waitForGis(tries) {
+    if (renderGis()) return;
+    if (tries <= 0) {
       status.textContent = "Ready. Tap Continue with Google.";
       return;
     }
-    status.textContent = "Ready. Tap Continue with Google.";
-  }).catch(function (e) {
-    showErr(friendly(e));
-  });
-
-  function startRedirect() {
-    err.textContent = "";
-    status.textContent = "Opening Google…";
-    go.disabled = true;
-    redirectStarted = true;
-    auth.signInWithRedirect(provider()).catch(function (e) {
-      showErr(friendly(e));
-    });
-    /* If Safari never navigates away, unlock the button again. */
-    setTimeout(function () {
-      if (signedIn || document.hidden) return;
-      if (redirectStarted) {
-        go.disabled = false;
-        popupBtn.hidden = false;
-        status.textContent = "Still here? Try again, or use the other method.";
-        err.textContent = "Google did not open. Turn off content blockers for trivituso81.github.io, then try again.";
-      }
-    }, 4000);
+    setTimeout(function () { waitForGis(tries - 1); }, 200);
   }
 
-  function startPopup() {
+  function startFirebasePopup() {
     err.textContent = "";
     status.textContent = "Opening Google…";
     go.disabled = true;
-    popupBtn.disabled = true;
-    auth.signInWithPopup(provider())
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    provider.addScope("email");
+    provider.addScope("profile");
+    auth.signInWithPopup(provider)
       .then(function (result) {
         if (result && result.user) goHome();
         else showErr("No Google account returned.");
       })
       .catch(function (e) {
-        popupBtn.disabled = false;
+        go.disabled = false;
         showErr(friendly(e));
       });
   }
 
-  go.addEventListener("click", startRedirect);
-  popupBtn.addEventListener("click", startPopup);
+  function clickGisButton() {
+    var btn = document.querySelector("#gisBtn div[role=button], #gisBtn [role=button]");
+    if (btn) {
+      btn.click();
+      return true;
+    }
+    return false;
+  }
+
+  go.addEventListener("click", function () {
+    err.textContent = "";
+    if (clickGisButton()) {
+      status.textContent = "Choose your Google account…";
+      return;
+    }
+    startFirebasePopup();
+  });
+
+  waitForGis(50);
 })();
 </script>
 </body>
