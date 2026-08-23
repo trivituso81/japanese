@@ -387,6 +387,12 @@ document.addEventListener("DOMContentLoaded", function () {
     color: var(--accent-deep); background: none; border: none;
     padding: 6px 0; cursor: pointer; text-decoration: none; display: block;
   }
+  /* display:block above would otherwise override the HTML hidden attribute. */
+  .home-settings-menu button[hidden],
+  .home-settings-menu a[hidden],
+  .home-settings-menu label[hidden] {
+    display: none !important;
+  }
   .home-settings-menu button:hover,
   .home-settings-menu label:hover,
   .home-settings-menu a:hover { text-decoration: underline; }
@@ -3057,12 +3063,13 @@ async function syncOnSignIn(user) {
 }
 
 async function pullCloudToDevice() {
-  if (!cloudUser) {
-    alert("Sign in with Google first.");
+  const user = requireCloudUser();
+  if (!user) {
+    alert("Not signed in on this page yet. Tap Sign in with Google, then try Download again.");
     return;
   }
   try {
-    const cloud = await pullCloud(cloudUser.uid);
+    const cloud = await pullCloud(user.uid);
     if (!cloud || cloud.weight === 0) {
       alert("No progress found in your Google account yet.\n\nCopy a backup from your iPhone, then Restore on this device while signed in.");
       return;
@@ -3179,17 +3186,27 @@ function signOutGoogle() {
   flushCloudSync().finally(() => cloudAuth.signOut());
 }
 
+function requireCloudUser() {
+  if (cloudUser) return cloudUser;
+  if (cloudAuth && cloudAuth.currentUser) {
+    cloudUser = cloudAuth.currentUser;
+    return cloudUser;
+  }
+  return null;
+}
+
 function updateCloudUi() {
+  const user = requireCloudUser();
   const status = document.getElementById("cloudStatus");
   if (status) status.textContent = cloudStatusLine() || authError || "";
   const signIn = document.getElementById("cloudSignIn");
   const signOut = document.getElementById("cloudSignOut");
   const pull = document.getElementById("cloudPull");
   const push = document.getElementById("cloudPush");
-  if (signIn) signIn.hidden = !!cloudUser;
-  if (signOut) signOut.hidden = !cloudUser;
-  if (pull) pull.hidden = !cloudUser;
-  if (push) push.hidden = !cloudUser;
+  if (signIn) signIn.hidden = !!user;
+  if (signOut) signOut.hidden = !user;
+  if (pull) pull.hidden = !user;
+  if (push) push.hidden = !user;
 }
 
 function wireCloudSettings() {
@@ -3216,8 +3233,9 @@ function wireCloudSettings() {
 }
 
 async function uploadLocalToCloud() {
-  if (!cloudUser) {
-    alert("Sign in with Google first.");
+  const user = requireCloudUser();
+  if (!user) {
+    alert("Not signed in on this page yet. Tap Sign in with Google, then try Upload again.");
     return;
   }
   if (progressWeight(S) === 0) {
@@ -3225,7 +3243,7 @@ async function uploadLocalToCloud() {
     return;
   }
   if (!confirm("Upload this device’s progress to Google?\n\n" + describeProgress(S))) return;
-  const ok = await pushCloud(cloudUser.uid);
+  const ok = await pushCloud(user.uid);
   updateCloudUi();
   if (ok) alert("Uploaded to Google.\n\n" + describeProgress(S));
   else alert(authError || "Upload did not run (Google already has equal or more progress, or the network failed).");
