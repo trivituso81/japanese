@@ -3083,9 +3083,12 @@ const DEEP36 = `
      formation  how it is built
      examples   model sentences, [japanese, english]
      drills     translation prompts, [english, japanese, note]
+                  optional 4th field: "review" — uses vocabulary from
+                  earlier lessons; omit (or "lesson") for this lesson's words
 
-   Drills are the bank the practice mode samples from, so a lesson
-   wants roughly six per point to keep a ten-question set varied.
+   Drills are the bank the practice mode samples from. A lesson wants
+   enough per point that a ten-question set stays varied; Lesson 37
+   keeps a lesson-vocab core and adds a review tier with earlier words.
    Lessons absent from here fall back to the one-line glosses in
    LESSONS and are flagged in the app as not yet written up.
    ============================================================ */
@@ -7251,6 +7254,12 @@ const CONTENT = {
       ["Give the passive form of 招待{しょうたい}します (invite).", "招待{しょうたい}されます", "Group III: します becomes されます"],
       ["Give the passive form of 言{い}います (say).", "言{い}われます", "Group I: 〜います becomes 〜われます"],
       ["Give the plain (dictionary) form of the passive 頼{たの}まれます (be asked).", "頼{たの}まれる", "every passive verb conjugates as a Group II verb"],
+      ["Give the passive form of 読{よ}みます (read).", "読{よ}まれます", "Group I · review vocab", "review"],
+      ["Give the passive form of 食{た}べます (eat).", "食{た}べられます", "Group II · review vocab", "review"],
+      ["Give the passive form of 買{か}います (buy).", "買{か}われます", "Group I: 〜います → 〜われます · review vocab", "review"],
+      ["Give the passive form of 待{ま}ちます (wait).", "待{ま}たれます", "Group I · review vocab", "review"],
+      ["Give the passive form of 見{み}ます (see / look).", "見{み}られます", "Group II · same shape as the potential · review vocab", "review"],
+      ["Give the plain (dictionary) form of the passive 使{つか}われます (be used).", "使{つか}われる", "passives conjugate as Group II · review vocab", "review"],
     ]
   },
   {
@@ -7271,6 +7280,12 @@ const CONTENT = {
       ["I was asked by my mother to go shopping.", "わたしは 母{はは}に 買{か}い物{もの}を 頼{たの}まれました。", ""],
       ["I was woken by my child at six this morning.", "わたしは けさ 6時{じ}に 子{こ}どもに 起{お}こされました。", "起{お}こします is Group I: 起{お}こされます"],
       ["I was bitten by a dog.", "わたしは 犬{いぬ}に かまれました。", "an animal can stand in the に slot"],
+      ["I was called by my friend.", "わたしは 友{とも}達{だち}に 呼{よ}ばれました。", "呼{よ}びます → 呼{よ}ばれます · review vocab", "review"],
+      ["I was taught Japanese by my father.", "わたしは 父{ちち}に 日本語{にほんご}を 教{おし}えられました。", "教{おし}えます is Group II · review vocab", "review"],
+      ["I was waited for by my older sister at the station.", "わたしは 駅{えき}で 姉{あね}に 待{ま}たれました。", "review vocab", "review"],
+      ["I was seen by my neighbour yesterday.", "わたしは きのう 隣{となり}の 人{ひと}に 見{み}られました。", "見{み}られます · review vocab", "review"],
+      ["I was helped by a stranger.", "わたしは 知{し}らない 人{ひと}に 手{て}伝{つだ}われました。", "手{て}伝{つだ}います → 手{て}伝{つだ}われます · review vocab", "review"],
+      ["I was stopped by a company employee.", "わたしは 会社員{かいしゃいん}に 止{と}められました。", "止{と}めます is Group II · review vocab", "review"],
     ]
   },
   {
@@ -7291,6 +7306,12 @@ const CONTENT = {
       ["I had my hand bitten by a dog.", "わたしは 犬{いぬ}に 手{て}を かまれました。", ""],
       ["I had my clothes made dirty by my child.", "わたしは 子{こ}どもに 服{ふく}を 汚{よご}されました。", "the pattern always implies you were put out"],
       ["I had my bicycle broken by my younger brother.", "わたしは 弟{おとうと}に 自転車{じてんしゃ}を 壊{こわ}されました。", "unwelcome, so passive — a welcome repair would be 〜て もらいました"],
+      ["I had my umbrella taken by mistake.", "わたしは 傘{かさ}を 間違{まちが}えられました。", "agent omitted · review vocab", "review"],
+      ["I had my book read by my younger sister.", "わたしは 妹{いもうと}に 本{ほん}を 読{よ}まれました。", "unwelcome feeling · review vocab", "review"],
+      ["I had my letter thrown away by my older brother.", "わたしは 兄{あに}に 手紙{てがみ}を 捨{す}てられました。", "捨{す}てます is Group II · review vocab", "review"],
+      ["I had my glasses thrown away by a child.", "わたしは 子{こ}どもに 眼鏡{めがね}を 捨{す}てられました。", "捨{す}てます is Group II · review vocab", "review"],
+      ["I had my bag opened by my friend.", "わたしは 友{とも}達{だち}に かばんを 開{あ}けられました。", "開{あ}けます is Group II · review vocab", "review"],
+      ["I had my cake eaten by my younger brother.", "わたしは 弟{おとうと}に ケーキを 食{た}べられました。", "classic annoyance passive · review vocab", "review"],
     ]
   },
   {
@@ -7311,6 +7332,12 @@ const CONTENT = {
       ["Japanese comics are read in many countries.", "日本{にほん}の 漫画{まんが}は いろいろな 国{くに}で 読{よ}まれて います。", ""],
       ["Oil is imported from Saudi Arabia.", "石油{せきゆ}は サウジアラビアから 輸入{ゆにゅう}されて います。", ""],
       ["This book has been translated into many languages.", "この 本{ほん}は いろいろな ことばに 翻訳{ほんやく}されて います。", "the translator is beside the point"],
+      ["Tea is drunk in many countries.", "お茶{ちゃ}は いろいろな 国{くに}で 飲{の}まれて います。", "agent left out · review vocab", "review"],
+      ["English is spoken in America.", "アメリカで 英語{えいご}が 話{はな}されて います。", "review vocab", "review"],
+      ["Letters are sent every day.", "毎日{まいにち} 手紙{てがみ}が 送{おく}られます。", "送{おく}ります → 送{おく}られます · review vocab", "review"],
+      ["This shop is closed on Sundays.", "この 店{みせ}は 日曜日{にちようび}に 閉{し}められます。", "閉{し}めます is Group II · review vocab", "review"],
+      ["New buildings are built every year.", "毎年{まいとし} 新{あたら}しい 建物{たてもの}が 建{た}てられます。", "建{た}てます · review vocab", "review"],
+      ["This song is sung in many countries.", "この 歌{うた}は いろいろな 国{くに}で 歌{うた}われて います。", "歌{うた}います → 歌{うた}われます · review vocab", "review"],
     ]
   },
   {
@@ -7331,6 +7358,12 @@ const CONTENT = {
       ["This building was designed by a famous architect.", "この 建物{たてもの}は 有名{ゆうめい}な 建築家{けんちくか}に よって 設計{せっけい}されました。", "有名{ゆうめい} is from Lesson 8; 建築家{けんちくか} and 設計{せっけい}します are in this lesson's cards"],
       ["Who was this picture painted by?", "この 絵{え}は だれに よって かかれましたか。", "だれに よって for the question"],
       ["That new medicine was discovered by a Japanese scientist.", "あの 新{あたら}しい 薬{くすり}は 日本{にほん}の 科学者{かがくしゃ}に よって 発見{はっけん}されました。", "科学者{かがくしゃ} is in this lesson's cards"],
+      ["This letter was written by my father.", "この 手紙{てがみ}は 父{ちち}に よって 書{か}かれました。", "に よって for authorship · review vocab", "review"],
+      ["This dictionary was written by a teacher.", "この 辞書{じしょ}は 先生{せんせい}に よって 書{か}かれました。", "review vocab", "review"],
+      ["This picture was drawn by a child.", "この 絵{え}は 子{こ}どもに よって かかれました。", "かきます → かかれます · review vocab", "review"],
+      ["This map was made by my friend.", "この 地図{ちず}は 友{とも}達{だち}に よって 作{つく}られました。", "作{つく}ります with に よって · review vocab", "review"],
+      ["Who was this book written by?", "この 本{ほん}は だれに よって 書{か}かれましたか。", "review vocab", "review"],
+      ["That song was written by a Japanese singer.", "あの 歌{うた}は 日本{にほん}の 歌手{かしゅ}に よって 作{つく}られました。", "歌手{かしゅ} and 歌{うた} from earlier lessons", "review"],
     ]
   },
   {
@@ -7351,6 +7384,12 @@ const CONTENT = {
       ["This bag is made of paper.", "この かばんは 紙{かみ}で 作{つく}られて います。", ""],
       ["What are these sweets made from?", "この おかしは 何{なに}から 作{つく}られて いますか。", "何{なに}から asks about the raw material"],
       ["Paper is made from trees.", "紙{かみ}は 木{き}から 作{つく}られます。", "the same 木{き}, but here it disappears into the product, so から"],
+      ["Juice is made from fruit.", "ジュースは 果物{くだもの}から 作{つく}られます。", "transformed material → から · review vocab", "review"],
+      ["This food is made from vegetables.", "この 食{た}べ物{もの}は 野菜{やさい}から 作{つく}られます。", "transformed → から · review vocab", "review"],
+      ["This desk is made of wood.", "この 机{つくえ}は 木{き}で 作{つく}られて います。", "visible material → で · review vocab", "review"],
+      ["This window is made of glass.", "この 窓{まど}は ガラスで 作{つく}られて います。", "review vocab", "review"],
+      ["These chopsticks are made of wood.", "この 箸{はし}は 木{き}で 作{つく}られて います。", "visible → で · review vocab", "review"],
+      ["This juice is made from oranges.", "この ジュースは みかんから 作{つく}られます。", "transformed → から · review vocab", "review"],
     ]
   },
 ]},

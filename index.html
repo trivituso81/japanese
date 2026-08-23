@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823r">
+<link rel="manifest" href="site.webmanifest?v=20260823s">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823r";
+window.__BUILD__ = "20260823s";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823r";
+  var v = window.__BUILD__ || "20260823s";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823r"));
+    + encodeURIComponent(window.__BUILD__ || "20260823s"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823r") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823s") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1465,6 +1465,16 @@ document.addEventListener("DOMContentLoaded", function () {
     color: var(--text); }
   .toolbar input[type=search]:focus { outline: 1px solid var(--accent); outline-offset: 1px;
     border-color: var(--accent); }
+  .toolbar .drill-vocab-opt {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 600; color: var(--text-soft);
+    letter-spacing: .02em; cursor: pointer; user-select: none;
+    padding: 6px 2px;
+  }
+  .toolbar .drill-vocab-opt input {
+    width: 16px; height: 16px; margin: 0; accent-color: var(--accent-deep);
+    cursor: pointer;
+  }
 
   /* dashboard table */
   .board { width: 100%; border-collapse: collapse; margin: 10px 0 0; }
@@ -2575,7 +2585,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823r#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823s#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2677,7 +2687,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823r"></script>
+<script src="firebase-config.js?v=20260823s"></script>
 <script>
 /* ============================================================
    State
@@ -2933,7 +2943,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823r" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823s" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3199,7 +3209,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823r"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823s"));
     return;
   }
   const start = () => {
@@ -3213,7 +3223,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823r"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823s"));
         return;
       }
       authError = authErrorMessage(e);
@@ -3834,11 +3844,17 @@ function points(n) {
     examples: [], drills: [] })) : [];
 }
 const authored = n => !!CONTENT[n];
-function drillBank(ns) {
+/* Optional opts.lessonVocab: keep only drills tagged for this lesson's words
+   (no fourth field, or "lesson"). "review" drills use earlier-lesson vocab. */
+function drillBank(ns, opts) {
+  const lessonOnly = !!(opts && opts.lessonVocab);
   const out = [];
-  for (const n of ns) points(n).forEach((p, pi) => (p.drills || []).forEach((d, di) =>
+  for (const n of ns) points(n).forEach((p, pi) => (p.drills || []).forEach((d, di) => {
+    const tier = d[3] === "review" ? "review" : "lesson";
+    if (lessonOnly && tier === "review") return;
     out.push({ en: d[0], jp: d[1], note: d[2] || "", pi, di, id: `${n}:${pi}:${di}`,
-               pattern: p.pattern, n })));
+               pattern: p.pattern, n, tier });
+  }));
   return out;
 }
 
@@ -4571,7 +4587,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823r" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260823s" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <button type="button" id="cloudPull" role="menuitem" hidden>Download from Google</button>
             <button type="button" id="cloudPush" role="menuitem" hidden>Upload this device to Google</button>
@@ -4898,7 +4914,10 @@ function renderLesson(n) {
 
   const pts = points(n);
   const v = VOCAB[n];
-  const bank = drillBank([n]).length;
+  const bankAll = drillBank([n]).length;
+  const bankLesson = drillBank([n], { lessonVocab: true }).length;
+  const hasReview = bankAll > bankLesson;
+  const bank = bankAll;
 
   const head = `
     <h2 class="view">Lesson ${n} · ${esc(l.title)}</h2>
@@ -4906,8 +4925,11 @@ function renderLesson(n) {
     <div class="toolbar">
       <button class="btn primary" data-go="#/cards/${n}" ${v ? "" : "disabled"}>
         Flashcards${v ? ` · ${v.v.length} words` : ""}</button>
-      <button class="btn primary" data-go="#/drill/${n}" ${bank ? "" : "disabled"}>
+      <button class="btn primary" id="lessonDrillBtn" data-go="#/drill/${n}" ${bank ? "" : "disabled"}>
         Grammar drill${bank ? ` · ${bank} in bank` : ""}</button>
+      ${hasReview ? `<label class="drill-vocab-opt" title="Use only prompts built from this lesson's vocabulary">
+        <input type="checkbox" id="drillLessonVocab"> Lesson words only
+      </label>` : ""}
     </div>`;
 
   const gaps = [];
@@ -4955,6 +4977,19 @@ function renderLesson(n) {
 
   document.getElementById("view").innerHTML = head + gapNote +
     `<h2 class="view minor">Grammar points</h2>` + grammar + vocab + lnav;
+
+  const drillOpt = document.getElementById("drillLessonVocab");
+  const drillBtn = document.getElementById("lessonDrillBtn");
+  if (drillOpt && drillBtn) {
+    const syncDrillBtn = () => {
+      const only = drillOpt.checked;
+      const count = only ? bankLesson : bankAll;
+      drillBtn.textContent = count ? `Grammar drill · ${count} in bank` : "Grammar drill";
+      drillBtn.disabled = !count;
+      drillBtn.setAttribute("data-go", only ? `#/drill/${n}/lv` : `#/drill/${n}`);
+    };
+    drillOpt.addEventListener("change", syncDrillBtn);
+  }
 }
 
 function vocabRow([reading, kanji, en], id) {
@@ -5669,14 +5704,16 @@ function judgeAnswer(typed, jp, en) {
 let DRILL = null;
 const DRILL_SIZE = 10;
 
-function renderDrill(scope, sweep) {
-  const ns = scopeOf(scope).filter(n => drillBank([n]).length);
-  const bank = drillBank(ns);
+function renderDrill(scope, sweep, lessonVocab) {
+  const bankOpts = lessonVocab ? { lessonVocab: true } : null;
+  const ns = scopeOf(scope).filter(n => drillBank([n], bankOpts).length);
+  const bank = drillBank(ns, bankOpts);
   if (!bank.length) return notFound();
   const range = isRange(scope);
   crumbs(range
     ? [["#/lessons", "Lessons"], [null, sweep ? "Diagnostic sweep" : "Mixed drill"]]
-    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
+    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`],
+       [null, lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
 
   /* A set parked at this very address is picked up rather than thrown away.
      Answers are banked question by question, so dealing a fresh set over the
@@ -5686,10 +5723,11 @@ function renderDrill(scope, sweep) {
      rather than by asking for an ordinary drill. */
   const s = S.session;
   if (s && s.qs && s.i > 0 && s.i < s.qs.length && !s.focus
-      && s.scope === scope && !!s.sweep === !!sweep)
+      && s.scope === scope && !!s.sweep === !!sweep
+      && !!s.lessonVocab === !!lessonVocab)
     return resumeDrill();
 
-  newDrill(scope, ns, bank, null, sweep);
+  newDrill(scope, ns, bank, null, sweep, null, lessonVocab);
 }
 
 /* One question per lesson, every lesson in range: the sweep is a map of where
@@ -5826,13 +5864,14 @@ function groupBy(list, key) {
 }
 const pickOne = list => list.splice(Math.floor(Math.random() * list.length), 1)[0];
 
-function newDrill(scope, ns, bank, only, sweep, focus) {
+function newDrill(scope, ns, bank, only, sweep, focus, lessonVocab) {
   let qs;
   if (only && only.length) qs = shuffle(only).slice(0, Math.max(DRILL_SIZE, only.length));
   else if (sweep) qs = sweepQuestions(ns, bank.slice());
   else if (isRange(scope)) qs = mixedQuestions(ns, bank.slice(), DRILL_SIZE);
   else qs = lessonQuestions(bank.slice(), DRILL_SIZE);
   DRILL = { scope, ns, bank, sweep: !!sweep, focus: focus || null,
+            lessonVocab: !!lessonVocab,
             qs: sweep ? qs : shuffle(qs), i: 0, typed: "", verdict: null, answers: [] };
   markAsked(DRILL.qs);
   saveSession();
@@ -5874,7 +5913,8 @@ function regradeLast(ok) {
 function saveSession() {
   if (!DRILL) return;
   if (DRILL.i >= DRILL.qs.length) return clearSession();
-  S.session = { scope: DRILL.scope, sweep: DRILL.sweep, focus: DRILL.focus, qs: DRILL.qs,
+  S.session = { scope: DRILL.scope, sweep: DRILL.sweep, focus: DRILL.focus,
+                lessonVocab: !!DRILL.lessonVocab, qs: DRILL.qs,
                 i: DRILL.i, answers: DRILL.answers, ts: Date.now() };
   save();
 }
@@ -5883,12 +5923,15 @@ function clearSession() { delete S.session; save(); }
 function resumeDrill() {
   const s = S.session;
   if (!s || !s.qs || s.i >= s.qs.length) return goto("#/");
-  const ns = scopeOf(s.scope).filter(n => drillBank([n]).length);
+  const bankOpts = s.lessonVocab ? { lessonVocab: true } : null;
+  const ns = scopeOf(s.scope).filter(n => drillBank([n], bankOpts).length);
   const range = isRange(s.scope);
   crumbs(range
     ? [["#/lessons", "Lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
-    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`], [null, "Grammar drill"]]);
-  DRILL = { scope: s.scope, ns, bank: drillBank(ns), sweep: s.sweep, focus: s.focus || null,
+    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`],
+       [null, s.lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
+  DRILL = { scope: s.scope, ns, bank: drillBank(ns, bankOpts), sweep: s.sweep,
+            focus: s.focus || null, lessonVocab: !!s.lessonVocab,
             qs: s.qs, i: s.i, typed: "", verdict: null, answers: s.answers };
   drawDrill();
 }
@@ -5973,9 +6016,10 @@ function drawDrill() {
       ]
     });
     document.getElementById("againAll").addEventListener("click", () =>
-      newDrill(scope, DRILL.ns, DRILL.bank, null, sweep));
+      newDrill(scope, DRILL.ns, DRILL.bank, null, sweep, null, DRILL.lessonVocab));
     const am = document.getElementById("againMissed");
-    if (am) am.addEventListener("click", () => newDrill(scope, DRILL.ns, DRILL.bank, missed, false));
+    if (am) am.addEventListener("click", () =>
+      newDrill(scope, DRILL.ns, DRILL.bank, missed, false, null, DRILL.lessonVocab));
     const fx = document.getElementById("focus");
     if (fx) fx.addEventListener("click", () =>
       newDrill(scope, focusNs, drillBank(focusNs), focusQs, false, focusLabel));
@@ -7684,7 +7728,7 @@ function drawKanjiEnd(stage) {
    back to its setup screen a working link rather than a link to the page you
    are already on, and it lets the back button and a reload behave.
    ============================================================ */
-const SCOPE_RE = /^#\/(lesson|cards|drill|sweep)\/(all|\d+(?:-\d+)?)$/;
+const SCOPE_RE = /^#\/(lesson|cards|drill|sweep)\/(all|\d+(?:-\d+)?)(?:\/(lv))?$/;
 const VDRILL_RE = /^#\/verbs\/drill\/([a-z_]+)$/;
 
 /* Which face the masthead wears. Bail-outs redirect rather than drawing the
@@ -7776,10 +7820,10 @@ function route() {
   if (h === "#/kanji/resume") return resumeKanji();
   if (h === "#/kanji/drill") return kanjiDrillRoute();
   if (!m) return notFound();
-  const [, kind, scope] = m;
+  const [, kind, scope, drillFilter] = m;
   if (kind === "lesson") return renderLesson(+scope);
   if (kind === "cards") return renderCards(scope);
-  if (kind === "drill") return renderDrill(scope, false);
+  if (kind === "drill") return renderDrill(scope, false, drillFilter === "lv");
   if (kind === "sweep") return renderDrill(scope, true);
 }
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
@@ -7868,7 +7912,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823r&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823s&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
