@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823o">
+<link rel="manifest" href="site.webmanifest?v=20260823n">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823o";
+window.__BUILD__ = "20260823n";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823o";
+  var v = window.__BUILD__ || "20260823n";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823o"));
+    + encodeURIComponent(window.__BUILD__ || "20260823n"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823o") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260823n") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -571,6 +571,13 @@ document.addEventListener("DOMContentLoaded", function () {
       radial-gradient(ellipse 90% 70% at 100% 100%, rgba(225, 29, 90, .09), transparent 55%),
       linear-gradient(195deg, #fff 0%, #fff6f9 100%);
     box-shadow: 3px 3px 0 #6e1a36;
+  }
+  .home-lesson-stats .stat {
+    /* Organic enso/brush already leave air — keep the tiles tighter vertically. */
+    padding: 10px 10px 8px; gap: 4px;
+  }
+  .home-track-stats .stat {
+    padding: 12px 12px 10px; gap: 6px;
   }
   .home-lesson-stats .k,
   .home-track-stats .k {
@@ -1255,10 +1262,9 @@ document.addEventListener("DOMContentLoaded", function () {
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
     .home-brand .brand { font-size: clamp(1.45rem, 6.5vw, 2rem); }
-    .home-lesson-frame { padding: 8px 8px 8px; gap: 8px; }
-    .home-lesson-stats .stat { padding: 10px 8px 9px; gap: 4px; }
+    .home-lesson-frame { padding: 8px 8px 8px; gap: 6px; }
+    .home-lesson-stats .stat { padding: 8px 8px 7px; gap: 3px; }
     .home-lesson-stats .k { font-size: clamp(1.2rem, 5vw, 1.6rem); }
-    .home-track-stats { max-height: min(22vh, 160px); }
     .home-track-stats .stat { padding: 8px 8px 7px; }
     .home-track-stats .k { font-size: clamp(1rem, 4vw, 1.2rem); }
     .viz-brush { min-height: 40px; }
@@ -1274,11 +1280,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-landing { gap: 8px; }
     .home-lesson-stats .sub,
     .home-track-stats .sub { display: none; }
-    .home-track-stats { max-height: min(18vh, 120px); }
   }
   @media (max-height: 500px) and (orientation: landscape) {
-    .home-lesson-frame { flex: 1 1 auto; }
-    .home-track-stats { max-height: none; flex: 0 0 auto; }
+    .home-lesson-frame { flex: 1.4 1 0; }
+    .home-track-stats { flex: 1 1 0; max-height: none; }
   }
 
   /* buttons — manga panels; primary is coral→aqua so neither colour owns the CTA */
@@ -2233,14 +2238,15 @@ document.addEventListener("DOMContentLoaded", function () {
       font-size: clamp(2.15rem, 4vw, 2.8rem);
     }
     .home-lesson-frame {
-      padding: 16px 14px 14px; gap: 12px;
-      min-height: min(42vh, 420px);
+      padding: 14px 14px 12px; gap: 10px;
+      min-height: 0;
+      flex: 2 1 0;
     }
-    .home-lesson-stats .stat { padding: 18px 18px 16px; gap: 10px; }
+    .home-lesson-stats .stat { padding: 14px 14px 12px; gap: 8px; }
     .home-lesson-stats .k { font-size: clamp(1.45rem, 2.4vw, 1.95rem); letter-spacing: .05em; }
     .home-lesson-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
     .home-lesson-stats .sub { font-size: 14px; }
-    .home-track-stats { max-height: min(24vh, 240px); gap: 12px; }
+    .home-track-stats { max-height: none; flex: 1 1 0; gap: 12px; }
     .home-track-stats .stat { padding: 14px 14px 12px; }
     .home-track-stats .k { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     .home-track-stats .val { font-size: clamp(1.2rem, 2vw, 1.45rem); }
@@ -2452,16 +2458,16 @@ document.addEventListener("DOMContentLoaded", function () {
       width: 100%;
     }
     .home-lesson-frame {
-      flex: 2.2 1 auto;
+      flex: 2 1 0;
       width: 100%;
       min-height: 0;
     }
     .home-track-stats {
-      flex: 1 1 auto;
+      flex: 1 1 0;
       width: 100%;
-      max-height: min(28vh, 220px);
+      max-height: none;
     }
-    .home-lesson-stats .stat { padding: 14px 14px 12px; gap: 8px; }
+    .home-lesson-stats .stat { padding: 12px 12px 10px; gap: 6px; }
     .home-lesson-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
     .home-track-stats .stat { padding: 12px 12px 10px; }
     .home-track-stats .k { font-size: clamp(1.15rem, 1.8vw, 1.4rem); }
@@ -2514,7 +2520,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823o#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823n#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2616,7 +2622,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823o"></script>
+<script src="firebase-config.js?v=20260823n"></script>
 <script>
 /* ============================================================
    State
@@ -2863,7 +2869,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823o" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260823n" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3126,7 +3132,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823o"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823n"));
     return;
   }
   const start = () => {
@@ -3140,7 +3146,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823o"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823n"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4438,7 +4444,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823o" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260823n" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <button type="button" id="cloudPull" role="menuitem" hidden>Download from Google</button>
             <button type="button" id="cloudPush" role="menuitem" hidden>Upload this device to Google</button>
@@ -7722,7 +7728,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823o&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823n&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
