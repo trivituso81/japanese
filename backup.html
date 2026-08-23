@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="robots" content="noindex">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<title>Copy study progress</title>
+<style>
+  :root {
+    --bg: #eef2f8; --card: #fff; --text: #12141a; --soft: #445064;
+    --accent: #0e7490; --ink: #12141a; --ok: #0f9f6e; --miss: #be1248;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; min-height: 100dvh; font-family: -apple-system, system-ui, sans-serif;
+    background: var(--bg); color: var(--text); padding: 20px 16px 40px;
+  }
+  main { max-width: 420px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  h1 { font-size: 1.35rem; margin: 0; line-height: 1.3; }
+  p { margin: 0; color: var(--soft); font-size: 15px; line-height: 1.5; }
+  .status { font-weight: 600; color: var(--text); }
+  .status.ok { color: var(--ok); }
+  .status.bad { color: var(--miss); }
+  textarea {
+    width: 100%; min-height: 220px; padding: 12px; font-size: 12px;
+    font-family: ui-monospace, Menlo, monospace; border: 2px solid var(--ink);
+    border-radius: 8px; resize: vertical; background: var(--card);
+  }
+  .acts { display: flex; flex-direction: column; gap: 10px; }
+  button, .btn {
+    display: block; width: 100%; min-height: 48px; padding: 12px 16px;
+    font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
+    border: 2px solid var(--ink); background: var(--card); color: var(--text);
+    cursor: pointer; text-align: center; text-decoration: none;
+    -webkit-tap-highlight-color: rgba(14,116,144,.25);
+  }
+  button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .hint { font-size: 13px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Copy study progress</h1>
+  <p id="status" class="status">Looking for saved progress on this device…</p>
+  <p class="hint">Open this page from the <b>same place</b> you study (home-screen icon or Safari). iPhone sometimes keeps home-screen data separate from Safari.</p>
+  <textarea id="out" readonly spellcheck="false" placeholder="No backup found yet."></textarea>
+  <div class="acts">
+    <button type="button" class="primary" id="copy">Copy backup</button>
+    <button type="button" id="share">Share backup</button>
+    <button type="button" id="select">Select all</button>
+    <a class="btn" id="home" href="./index.html?v=20260823i#/">Back to study guide</a>
+  </div>
+  <p class="hint">After copying: sign in with Google on any device → gear → Restore progress → paste. Progress then syncs to your account.</p>
+</main>
+<script>
+(function () {
+  var KEY = "mnn-study-v1";
+  var KEY_BAK = KEY + ":bak";
+  var status = document.getElementById("status");
+  var out = document.getElementById("out");
+
+  function pickRaw() {
+    var primary = localStorage.getItem(KEY) || "";
+    var backup = localStorage.getItem(KEY_BAK) || "";
+    if (primary.length >= backup.length) return primary || backup;
+    return backup || primary;
+  }
+
+  function refresh() {
+    var raw = pickRaw();
+    if (!raw) {
+      status.className = "status bad";
+      status.textContent = "No saved progress found in this browser.";
+      out.value = "";
+      return null;
+    }
+    status.className = "status ok";
+    status.textContent = "Found progress (" + raw.length.toLocaleString() + " characters). Copy or Share it now.";
+    out.value = raw;
+    return raw;
+  }
+
+  async function copyText(text) {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(text);
+        status.className = "status ok";
+        status.textContent = "Copied. Paste into Notes, then Restore after you sign in.";
+        return;
+      }
+    } catch (e) {}
+    out.focus();
+    out.setSelectionRange(0, out.value.length);
+    try {
+      if (document.execCommand && document.execCommand("copy")) {
+        status.className = "status ok";
+        status.textContent = "Copied. Paste into Notes, then Restore after you sign in.";
+        return;
+      }
+    } catch (e) {}
+    alert("Tap Select all, then use Copy from the iPhone menu.");
+  }
+
+  async function shareText(text) {
+    try {
+      if (navigator.share) {
+        await navigator.share({ title: "Study progress backup", text: text });
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === "AbortError") return;
+    }
+    await copyText(text);
+  }
+
+  document.getElementById("copy").addEventListener("click", function () {
+    var raw = refresh();
+    if (!raw) return alert("Nothing to copy on this device.");
+    copyText(raw);
+  });
+  document.getElementById("share").addEventListener("click", function () {
+    var raw = refresh();
+    if (!raw) return alert("Nothing to share on this device.");
+    shareText(raw);
+  });
+  document.getElementById("select").addEventListener("click", function () {
+    refresh();
+    out.focus();
+    out.setSelectionRange(0, out.value.length);
+  });
+
+  refresh();
+})();
+</script>
+</body>
+</html>

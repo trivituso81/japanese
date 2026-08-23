@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823h">
+<link rel="manifest" href="site.webmanifest?v=20260823i">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,9 +24,8 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823h";
+window.__BUILD__ = "20260823i";
 (function () {
-  /* Rewrite ?v= so index.html + japanese-data.js are fetched fresh. */
   try {
     var u = new URL(location.href);
     var standalone = window.navigator.standalone
@@ -49,27 +48,105 @@ window.__BUILD__ = "20260823h";
     }
     if (u.searchParams.get("v") !== window.__BUILD__) {
       u.searchParams.set("v", window.__BUILD__);
-      if (standalone) u.searchParams.set("r", Date.now());
+      if (standalone) u.searchParams.set("r", String(Date.now()));
       location.replace(u.href);
     }
   } catch (e) {}
 })();
+
+function staticProgressRaw() {
+  try {
+    var a = localStorage.getItem("mnn-study-v1") || "";
+    var b = localStorage.getItem("mnn-study-v1:bak") || "";
+    return (a.length >= b.length ? a : b) || a || b || "";
+  } catch (e) { return ""; }
+}
+
+function staticShowCopyPanel() {
+  var panel = document.getElementById("staticRestorePanel");
+  var ta = document.getElementById("staticRestoreText");
+  var title = document.getElementById("staticPanelTitle");
+  var go = document.getElementById("staticRestoreGo");
+  var raw = staticProgressRaw();
+  if (!panel || !ta) return;
+  panel.hidden = false;
+  if (title) title.textContent = raw
+    ? "Your progress is below. Tap Copy, or Select all → Copy."
+    : "Paste a backup below, then tap Restore from text.";
+  if (raw) {
+    ta.value = raw;
+    ta.readOnly = true;
+    if (go) go.hidden = true;
+  } else {
+    ta.value = "";
+    ta.readOnly = false;
+    if (go) go.hidden = false;
+  }
+}
+
+function staticCopyProgress() {
+  var raw = staticProgressRaw();
+  if (!raw) {
+    alert("No saved progress found in this app’s storage. Open backup.html from the same home-screen icon, or copy from Safari if you studied there.");
+    return;
+  }
+  staticShowCopyPanel();
+  var ta = document.getElementById("staticRestoreText");
+  var done = function () {
+    var st = document.getElementById("loadStatus");
+    if (st) { st.hidden = false; st.textContent = "Copied. Next: Sign in with Google → Restore progress (paste)."; }
+    alert("Backup copied. Next: Sign in with Google, then Restore progress and paste.");
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(raw).then(done).catch(function () {
+      if (ta) { ta.focus(); ta.setSelectionRange(0, ta.value.length); }
+      try {
+        if (document.execCommand && document.execCommand("copy")) return done();
+      } catch (e) {}
+      alert("Tap Select all, then Copy from the iPhone menu.");
+    });
+    return;
+  }
+  if (ta) { ta.focus(); ta.setSelectionRange(0, ta.value.length); }
+  try {
+    if (document.execCommand && document.execCommand("copy")) return done();
+  } catch (e) {}
+  alert("Tap Select all, then Copy from the iPhone menu.");
+}
+
+function staticShareProgress() {
+  var raw = staticProgressRaw();
+  if (!raw) return alert("No saved progress found here.");
+  staticShowCopyPanel();
+  if (!navigator.share) return staticCopyProgress();
+  navigator.share({ title: "Study progress backup", text: raw }).catch(function (e) {
+    if (e && e.name === "AbortError") return;
+    staticCopyProgress();
+  });
+}
+
 function staticContinueGuest() {
   try { localStorage.setItem("mnn-study-v1:guest", "1"); } catch (e) {}
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "";
-  location.assign(location.pathname + "?v=" + encodeURIComponent(v) + "&r=" + Date.now() + "#/");
+  var v = window.__BUILD__ || "20260823i";
+  var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
+    + "&guest=1&r=" + Date.now() + "#/";
+  try { location.replace(url); }
+  catch (e) { location.href = url; }
 }
+
 function staticSignIn() {
   try { sessionStorage.setItem("mnn-study-v1:signin", "1"); } catch (e) {}
   if (typeof signInGoogle === "function") {
     try { signInGoogle(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "";
-  location.assign(location.pathname + "?v=" + encodeURIComponent(v) + "&signin=1&r=" + Date.now() + "#/");
+  var v = window.__BUILD__ || "20260823i";
+  location.replace("https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
+    + "&signin=1&r=" + Date.now() + "#/");
 }
+
 function staticRestoreFromText() {
   try {
     var t = document.getElementById("staticRestoreText");
@@ -79,14 +156,26 @@ function staticRestoreFromText() {
     if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("That does not look like a backup.");
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
-    var u = new URL(location.href);
-    u.searchParams.delete("guest");
-    location.replace(u.pathname + "?" + u.searchParams.toString() + "#/");
+    location.replace("https://trivituso81.github.io/japanese/index.html?v="
+      + encodeURIComponent(window.__BUILD__ || "20260823i") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
 }
+
 document.addEventListener("DOMContentLoaded", function () {
+  var hasProgress = staticProgressRaw().length > 30;
+  var withProg = document.getElementById("staticActionsWithProgress");
+  var noProg = document.getElementById("staticActionsNoProgress");
+  if (withProg) withProg.hidden = !hasProgress;
+  if (noProg) noProg.hidden = hasProgress;
+  var fresh = document.getElementById("staticFreshLead");
+  if (fresh) fresh.hidden = hasProgress;
+  if (hasProgress) {
+    var hh = document.getElementById("staticProgressHint");
+    if (hh) hh.hidden = false;
+    staticShowCopyPanel();
+  }
   try {
     var standalone = window.navigator.standalone
       || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -94,24 +183,27 @@ document.addEventListener("DOMContentLoaded", function () {
       var ph = document.getElementById("staticPwaHint");
       if (ph) ph.hidden = false;
     }
-    var raw = localStorage.getItem("mnn-study-v1") || localStorage.getItem("mnn-study-v1:bak");
-    if (raw && raw.length > 30) {
-      var hh = document.getElementById("staticProgressHint");
-      if (hh) hh.hidden = false;
-    }
   } catch (e) {}
   var rb = document.getElementById("staticRestoreBtn");
   if (rb) rb.addEventListener("click", function () {
+    var ta = document.getElementById("staticRestoreText");
+    if (ta) { ta.readOnly = false; ta.value = ""; }
+    var go = document.getElementById("staticRestoreGo");
+    if (go) go.hidden = false;
+    var title = document.getElementById("staticPanelTitle");
+    if (title) title.textContent = "Paste a backup below, then tap Restore from text.";
     var p = document.getElementById("staticRestorePanel");
-    if (!p) return;
-    p.hidden = !p.hidden;
-    if (!p.hidden) {
-      var ta = document.getElementById("staticRestoreText");
-      if (ta) ta.focus();
-    }
+    if (p) { p.hidden = false; if (ta) ta.focus(); }
   });
   var rg = document.getElementById("staticRestoreGo");
   if (rg) rg.addEventListener("click", staticRestoreFromText);
+  var sel = document.getElementById("staticSelectAll");
+  if (sel) sel.addEventListener("click", function () {
+    var ta = document.getElementById("staticRestoreText");
+    if (!ta) return;
+    ta.focus();
+    ta.setSelectionRange(0, ta.value.length);
+  });
 });
 </script>
 <style>
@@ -2425,7 +2517,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823h#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823i#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2442,31 +2534,41 @@ document.addEventListener("DOMContentLoaded", function () {
 </nav>
 
 <nav class="crumbs" id="crumbs"></nav>
-<!-- Static welcome works even if lesson data is still loading or fails. -->
+<!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
     <img class="welcome-mascot" src="mascot.png?v=20260817p" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
-    <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
-      Sign in to sync across devices. Already studying on this phone?
-      Tap <b>Continue without signing in</b>.</p>
     <p class="welcome-lead" id="staticProgressHint" hidden>
-      This device already has saved progress. Tap <b>Continue without signing in</b>,
-      then open the gear icon on Home → <b>Copy backup</b>.</p>
-    <div class="welcome-actions" id="staticWelcomeActions">
+      This device already has your study progress. Do <b>not</b> need “Continue”.
+      Tap <b>Copy my progress</b> first, then Sign in with Google and Restore.
+    </p>
+    <p class="welcome-lead" id="staticFreshLead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.</p>
+    <div class="welcome-actions" id="staticActionsWithProgress" hidden>
+      <button type="button" class="btn-google" id="staticCopyProgress" onclick="staticCopyProgress()">Copy my progress</button>
+      <button type="button" class="btn" id="staticShareProgress" onclick="staticShareProgress()">Share backup</button>
+      <button type="button" class="btn" id="staticGoogleExisting" onclick="staticSignIn()">Sign in with Google</button>
+      <a class="btn" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
+      <button type="button" class="linkish" id="staticGuestExisting" onclick="staticContinueGuest()">Open study guide</button>
+    </div>
+    <div class="welcome-actions" id="staticActionsNoProgress">
       <button type="button" class="btn-google" id="staticGoogle" onclick="staticSignIn()">Sign in with Google</button>
       <button type="button" class="btn" id="staticRestoreBtn">Restore saved progress</button>
       <button type="button" class="linkish" id="staticGuest" onclick="staticContinueGuest()">Continue without signing in</button>
+      <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
     </div>
     <div id="staticRestorePanel" class="static-restore" hidden>
-      <p class="welcome-lead">Paste the backup text copied from your other device (Settings → Copy backup).</p>
+      <p class="welcome-lead" id="staticPanelTitle">Paste a backup below, then tap Restore from text.</p>
       <textarea id="staticRestoreText" spellcheck="false" autocomplete="off" rows="6"
         placeholder="{ &quot;lessons&quot;: … }"></textarea>
+      <button type="button" class="btn" id="staticSelectAll">Select all</button>
       <button type="button" class="btn primary" id="staticRestoreGo">Restore from text</button>
     </div>
     <p class="welcome-lead" id="loadStatus">Loading study data…</p>
     <p class="welcome-lead" id="staticPwaHint" hidden>
-      Home-screen icon out of date? Delete it, open this page once in Safari, then Add to Home Screen again.</p>
+      Home-screen icon stuck? Delete it. In Safari open the study guide once, then Add to Home Screen again.
+      Or open the backup page link above from Messages so it loads fresh.
+    </p>
   </section>
 </main>
 
@@ -2517,7 +2619,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823h"></script>
+<script src="firebase-config.js?v=20260823i"></script>
 <script>
 /* ============================================================
    State
@@ -2580,11 +2682,7 @@ function parseProgress(raw) {
   }
 }
 
-let S = load();
-/* Rewrite both slots after load so a recovered backup becomes the primary,
-   and the vocab remap marker is persisted. */
-if (S.vocabRemapped || progressWeight(S) > 0) save();
-requestPersistentStorage();
+let _saveWarned = false;
 
 function load() {
   const primary = parseProgress(localStorage.getItem(KEY));
@@ -2648,7 +2746,6 @@ function migrateCards(s) {
   s.vocabRemapped = true;
 }
 
-let _saveWarned = false;
 function save(opts) {
   forgetCurrent();   // any saved answer can move where "you are up to" points
   const force = !!(opts && opts.force);
@@ -2676,6 +2773,8 @@ function save(opts) {
     return false;
   }
 }
+
+let S = null; /* filled after cloud helpers exist — see initProgressState() */
 
 function savedAtLabel() {
   const t = +localStorage.getItem(KEY_SAVED) || 0;
@@ -2769,6 +2868,7 @@ function renderWelcomeLanding() {
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
+        <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
       </div>
       ${authError ? `<p class="auth-error">${esc(authError)}</p>` : ""}
     </section>`;
@@ -2904,6 +3004,16 @@ function flushCloudSync() {
   if (!cloudUser) return Promise.resolve();
   return pushCloud(cloudUser.uid).then(() => updateCloudUi());
 }
+
+function initProgressState() {
+  if (S) return;
+  S = load();
+  /* Rewrite both slots after load so a recovered backup becomes the primary,
+     and the vocab remap marker is persisted. */
+  if (S.vocabRemapped || progressWeight(S) > 0) save();
+  requestPersistentStorage();
+}
+initProgressState();
 
 function cloudStatusLine() {
   if (!cloudAuth) return "";
@@ -4473,6 +4583,7 @@ function applyImportedProgress(incoming) {
   S = next;
   save({ force: true });
   closeBackupSheet();
+  if (cloudUser) flushCloudSync();
   route();
 }
 
@@ -7440,7 +7551,7 @@ function bootApp() {
   try {
     if (sessionStorage.getItem("mnn-study-v1:signin") === "1") {
       sessionStorage.removeItem("mnn-study-v1:signin");
-      if (useWelcomeLanding()) signInGoogle();
+      signInGoogle();
     }
   } catch (e) {}
 }
@@ -7449,40 +7560,26 @@ function showBootFailure(err) {
   const msg = (err && err.message) ? err.message : String(err);
   setLoadStatus(msg);
   const view = document.getElementById("view");
-  if (!view || view.querySelector("#staticWelcomeActions")) return;
+  if (!view) return;
+  /* Keep the static Copy / Sign-in buttons — do not wipe them on data failure. */
+  if (view.querySelector("#staticActionsWithProgress")
+      || view.querySelector("#staticActionsNoProgress")
+      || view.querySelector("#staticCopyProgress")) {
+    return;
+  }
   document.body.dataset.view = "dash";
+  const has = staticProgressRaw().length > 30;
   view.innerHTML = `<section class="welcome-gate">
     <h2>トムさんの勉強ガイド</h2>
     <p class="auth-error">${esc(msg)}</p>
-    <div class="welcome-actions" id="staticWelcomeActions">
+    <div class="welcome-actions">
+      ${has ? `<button type="button" class="btn-google" onclick="staticCopyProgress()">Copy my progress</button>
+      <button type="button" class="btn" onclick="staticShareProgress()">Share backup</button>` : ""}
       <button type="button" class="btn-google" onclick="staticSignIn()">Sign in with Google</button>
-      <button type="button" class="btn" id="staticRestoreBtn">Restore saved progress</button>
-      <button type="button" class="linkish" onclick="staticContinueGuest()">Continue without signing in</button>
-    </div>
-    <div id="staticRestorePanel" class="static-restore" hidden>
-      <textarea id="staticRestoreText" spellcheck="false" autocomplete="off" rows="6"></textarea>
-      <button type="button" class="btn primary" id="staticRestoreGo">Restore from text</button>
+      <a class="btn" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
+      <button type="button" class="linkish" onclick="staticContinueGuest()">Open study guide</button>
     </div>
   </section>`;
-  const rb = document.getElementById("staticRestoreBtn");
-  if (rb) rb.addEventListener("click", () => {
-    const p = document.getElementById("staticRestorePanel");
-    if (p) { p.hidden = !p.hidden; const ta = document.getElementById("staticRestoreText"); if (ta) ta.focus(); }
-  });
-  const rg = document.getElementById("staticRestoreGo");
-  if (rg) rg.addEventListener("click", () => {
-    try {
-      const raw = (document.getElementById("staticRestoreText").value || "").trim();
-      if (!raw) throw new Error("Paste your backup text first.");
-      const obj = JSON.parse(raw);
-      if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("That does not look like a backup.");
-      localStorage.setItem(KEY, raw);
-      localStorage.setItem(KEY_GUEST, "1");
-      location.replace(location.pathname + location.search + "#/");
-    } catch (e) {
-      alert((e && e.message) || "Could not restore.");
-    }
-  });
 }
 
 setLoadStatus("Loading study data…");
@@ -7494,7 +7591,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823h&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260823i&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
