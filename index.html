@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824k">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824k">
-<link rel="manifest" href="site.webmanifest?v=20260824k">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824n">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824n">
+<link rel="manifest" href="site.webmanifest?v=20260824n">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260824k";
+window.__BUILD__ = "20260824n";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260824k";
+  var v = window.__BUILD__ || "20260824n";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260824k"));
+    + encodeURIComponent(window.__BUILD__ || "20260824n"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260824k") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824n") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1022,7 +1022,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Forced cloud sync check — OK only, no dismiss/cancel. Always on top. */
   .cloud-sync-sheet {
-    position: fixed; inset: 0; z-index: 200;
+    position: fixed; inset: 0; z-index: 10000;
     background: rgba(18, 20, 26, .55);
     display: flex; align-items: center; justify-content: center;
     padding: 18px; box-sizing: border-box;
@@ -3140,10 +3140,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260824k" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260824n" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824k#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824n#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3163,7 +3163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260824k" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260824n" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3257,7 +3257,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260824k"></script>
+<script src="firebase-config.js?v=20260824n"></script>
 <script>
 /* ============================================================
    State
@@ -3540,8 +3540,10 @@ let cloudHomePopupArmed = true;
 let cloudAuthResolved = false;
 let cloudAuthReadyWaiters = [];
 let cloudLoadPopupDone = false;
+let cloudLoadPopupPromise = null;
 const CLOUD_CHECK_MIN_MS = 8000;
 const CLOUD_FORCE_REASONS = { boot: 1, refresh: 1, signin: 1, home: 1, resume: 1 };
+const CLOUD_PULL_TIMEOUT_MS = 2500;
 
 function notifyCloudAuthReady() {
   if (cloudAuthResolved) return;
@@ -3552,6 +3554,9 @@ function notifyCloudAuthReady() {
 function whenCloudAuthReady() {
   if (cloudAuthResolved) return Promise.resolve();
   return new Promise(resolve => cloudAuthReadyWaiters.push(resolve));
+}
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 /* Queue a sync popup until Firebase auth + Firestore are ready.
@@ -3570,28 +3575,53 @@ function runPendingCloudSync() {
   reconcileCloud(reason);
 }
 
-/* After a refresh / cold start: wait until Google auth has answered, then
-   force the save-state popup once for this page load. */
+/* Show the save-state OK dialog on every cold load / refresh.
+   Prefer a Google comparison when signed in; otherwise confirm local save.
+   Never wait on a hung Firebase CDN — iOS has been failing silently there. */
 async function ensureLoadSyncPopup(reason) {
+  if (cloudSyncDialogOpen) return;
+  if (cloudLoadPopupDone) return;
+  if (cloudLoadPopupPromise) return cloudLoadPopupPromise;
   cloudHomePopupArmed = true;
-  requestCloudSyncPopup(reason || "refresh");
-  try { await whenCloudAuthReady(); } catch (e) { return; }
-  if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
-  const user = requireCloudUser();
-  if (!user || !cloudDb) {
-    /* Not signed in — still confirm local save state so a refresh is not silent. */
-    if (progressWeight(S) <= 0) return;
-    await showCloudSyncPopup({
-      title: "Progress on this device",
-      message: "Your study progress is saved on this phone. Sign in with Google to compare with the cloud copy.",
-      localTs: +localStorage.getItem(KEY_SAVED) || 0,
-      cloudTs: 0
-    });
-    cloudHomePopupArmed = false;
-    return;
-  }
-  cloudLastCheckedAt = 0;
-  requestCloudSyncPopup("boot");
+  cloudLoadPopupPromise = (async () => {
+    try {
+      /* Tiny pause so the home paint lands first; do not wait on Google. */
+      await sleep(250);
+      if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
+      if (typeof useWelcomeLanding === "function" && useWelcomeLanding()) return;
+
+      const user = requireCloudUser();
+      if (user && cloudDb) {
+        cloudLastCheckedAt = 0;
+        try {
+          await Promise.race([
+            reconcileCloud(reason === "resume" ? "resume" : "boot"),
+            sleep(CLOUD_PULL_TIMEOUT_MS)
+          ]);
+        } catch (e) {}
+        if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
+      }
+
+      if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
+      /* Always confirm when this device has progress, or guest/signed-in. */
+      const hasProgress = progressWeight(S) > 0;
+      const isGuest = localStorage.getItem(KEY_GUEST) === "1";
+      if (!hasProgress && !isGuest && !user) return;
+
+      await showCloudSyncPopup({
+        title: user ? "You're up to date" : "Progress on this device",
+        message: user
+          ? "Could not reach Google in time. Your progress is saved on this phone."
+          : "Your study progress is saved on this phone. Sign in with Google to compare with the cloud copy.",
+        localTs: +localStorage.getItem(KEY_SAVED) || 0,
+        cloudTs: 0
+      });
+      cloudHomePopupArmed = false;
+    } finally {
+      cloudLoadPopupPromise = null;
+    }
+  })();
+  return cloudLoadPopupPromise;
 }
 /* Paint the app immediately. Firebase is optional and loads afterward. */
 let authReady = true;
@@ -3631,14 +3661,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260824k" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260824n" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260824k" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824n" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3702,6 +3732,8 @@ function bindCloudAuth() {
 function initCloud() {
   if (cloudBootStarted) return;
   cloudBootStarted = true;
+  /* Never block the save-state popup on a hung Firebase CDN. */
+  setTimeout(() => notifyCloudAuthReady(), 2000);
   if (!window.FIREBASE_CONFIG) {
     notifyCloudAuthReady();
     return;
@@ -3720,8 +3752,6 @@ function initCloud() {
       } catch (e) { /* keep default persistence */ }
       bindCloudAuth();
       runPendingCloudSync();
-      /* Safety: if auth never fires (blocked SDK), unlock waiters. */
-      setTimeout(() => notifyCloudAuthReady(), 8000);
     })
     .catch(e => {
       authError = "Could not load Google sign-in. You can still continue without signing in.";
@@ -3859,6 +3889,10 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
     const timesEl = document.getElementById("cloudSyncTimes");
     const ok = document.getElementById("cloudSyncOk");
     if (!sheet || !ok) {
+      try {
+        alert((title || "Sync check") + "\n\n" + (message || ""));
+      } catch (e) {}
+      cloudLoadPopupDone = true;
       resolve();
       return;
     }
@@ -3871,15 +3905,23 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
         `<div><b>This device</b> ${esc(formatSyncTime(localTs))}</div>` +
         `<div><b>Google</b> ${esc(formatSyncTime(cloudTs))}</div>`;
     }
-    /* Keep the dialog above any home UI; re-parent to body in case a view
-       wrapper ever traps stacking contexts. */
+    /* Re-parent + clear [hidden]. The stylesheet uses [hidden]{display:none
+       !important}, so an uncleared attribute keeps the dialog invisible on
+       Safari even if .hidden=false / style.display=flex are set. */
     if (sheet.parentElement !== document.body) document.body.appendChild(sheet);
+    sheet.removeAttribute("hidden");
     sheet.hidden = false;
+    sheet.style.setProperty("display", "flex", "important");
+    sheet.style.setProperty("z-index", "10000", "important");
     const finish = () => {
       ok.removeEventListener("click", finish);
       sheet.hidden = true;
+      sheet.setAttribute("hidden", "");
+      sheet.style.removeProperty("display");
+      sheet.style.removeProperty("z-index");
       cloudSyncDialogOpen = false;
       resolve();
+      try { runPendingCloudSync(); } catch (e) {}
     };
     ok.addEventListener("click", finish);
     setTimeout(() => { try { ok.focus(); } catch (e) {} }, 0);
@@ -3907,7 +3949,12 @@ async function reconcileCloud(reason) {
     let cloud = null;
     const localTs = +localStorage.getItem(KEY_SAVED) || 0;
     try {
-      cloud = await pullCloud(user.uid);
+      cloud = await Promise.race([
+        pullCloud(user.uid),
+        sleep(CLOUD_PULL_TIMEOUT_MS).then(() => {
+          throw new Error("Google save check timed out.");
+        })
+      ]);
     } catch (e) {
       authError = "Could not check Google save. " + cloudErrDetail(e);
       updateCloudUi();
@@ -4028,7 +4075,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824k"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824n"));
     return;
   }
   const start = () => {
@@ -4042,7 +4089,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824k"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824n"));
         return;
       }
       authError = authErrorMessage(e);
@@ -5549,7 +5596,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260824k" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260824n" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -9348,12 +9395,15 @@ function route() {
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
 /* bfcache / browser-back can restore a painted home without re-running route;
    pull fresh numbers whenever home is showing again. */
-window.addEventListener("pageshow", () => {
+window.addEventListener("pageshow", ev => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
-  /* Wait for Google auth, then force the save-state popup once. */
-  cloudLoadPopupDone = false;
-  ensureLoadSyncPopup("refresh");
+  /* Cold load is handled by bootApp. Re-arm only on bfcache restore so we
+     do not clear a popup that just opened (or open two). */
+  if (ev.persisted) {
+    cloudLoadPopupDone = false;
+    ensureLoadSyncPopup("refresh");
+  }
 });
 function loadStudyData() {
   return new Promise((resolve, reject) => {
@@ -9391,6 +9441,8 @@ function bootApp() {
   wireBackupSheet();
   initCloud();
   route();
+  /* Always arm the save-state OK dialog on cold start. */
+  cloudLoadPopupDone = false;
   ensureLoadSyncPopup("boot");
   try {
     if (sessionStorage.getItem("mnn-study-v1:signin") === "1") {
@@ -9435,7 +9487,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260824k&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824n&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
