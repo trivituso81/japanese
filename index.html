@@ -24,7 +24,11 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
+<<<<<<< HEAD
 window.__BUILD__ = "20260824g";
+=======
+window.__BUILD__ = "20260824e";
+>>>>>>> origin/cursor/verb-setup-simplify-b501
 (function () {
   try {
     var u = new URL(location.href);
@@ -2150,6 +2154,21 @@ document.addEventListener("DOMContentLoaded", function () {
   /* the one control that starts things, held to the right so the eye always
      finds it in the same place */
   .opt.start { margin-left: auto; }
+  /* verb setup — filters collapsed by default; form comes from each row's Drill */
+  .vopts-fold { margin: 22px 0 24px; border: 1px solid var(--rule-strong); background: var(--bg-soft); }
+  .vopts-fold-btn {
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    width: 100%; margin: 0; padding: 14px 19px; border: 0; background: transparent;
+    font-family: var(--ui); font-size: 14px; font-weight: 600; color: var(--text);
+    text-align: left; cursor: pointer;
+  }
+  .vopts-fold-btn .chev {
+    flex: none; font-size: 11px; color: var(--text-faint);
+    transition: transform .15s ease;
+  }
+  .vopts-fold.is-open .vopts-fold-btn .chev { transform: rotate(180deg); }
+  .vopts-fold-body .options { margin: 0; border: 0; border-top: 1px solid var(--rule-strong);
+    border-radius: 0; background: transparent; }
   /* Standalone rather than .board: the dashboard's small-screen rules map
      specific columns and would scramble these. */
   .vforms { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
@@ -7064,7 +7083,7 @@ const VERB_PROMPTS = [
   ["dict",   "Dictionary form", "the plain form"]
 ];
 const vOpts = () => {
-  const o = Object.assign({ ceiling: 50, prompt: "polite", count: 10, form: "te" },
+  const o = Object.assign({ ceiling: 50, prompt: "polite", count: 20, form: "te" },
     S.vopts || {});
   /* ます-stem drill was removed; map any saved choice onto dictionary form. */
   if (o.form === "stem") o.form = "dict";
@@ -7103,6 +7122,7 @@ function pickVerbs(pool, count, types) {
 }
 
 let VERB = null;
+let vOptsOpen = false;
 
 function renderVerbs() {
   document.getElementById("crumbs").innerHTML = "";
@@ -7110,11 +7130,7 @@ function renderVerbs() {
   const view = document.getElementById("view");
   const sample = verbs().find(v => v.ms === "かきます") || verbs()[0];
   const forms = VERB_FORMS.filter(f => f.n <= o.ceiling);
-  /* The form the Start button will use. The saved choice stands as long as the
-     lesson ceiling still reaches it; otherwise the latest form it does reach,
-     which is the one you have most recently been taught. */
-  const form = forms.some(f => f.id === o.form) ? o.form
-    : (forms.length ? forms[forms.length - 1].id : null);
+  const promptLabel = (VERB_PROMPTS.find(([id]) => id === o.prompt) || [])[1] || o.prompt;
   const rows = forms.map(f => {
     const ex = sample && conjugate(sample, f.id);
     const pool = verbPool(o.ceiling, f.id).length;
@@ -7140,20 +7156,24 @@ function renderVerbs() {
   view.innerHTML = `
     ${resumeCards(["verbs"])}
 
-    ${optionsPanel([
-      { k: "Verbs taught up to", html: `<select id="vceil">${LESSONS.map(l =>
-          `<option value="${l.n}"${l.n === o.ceiling ? " selected" : ""}>Lesson ${l.n}</option>`).join("")}</select>` },
-      { k: "Form", html: `<select id="vform">${forms.map(f =>
-          `<option value="${f.id}"${f.id === form ? " selected" : ""}>${esc(f.label)}</option>`).join("")}</select>` },
-      { k: "Show me", html: `<select id="vprompt">${VERB_PROMPTS.map(([id, label]) =>
-          `<option value="${id}"${id === o.prompt ? " selected" : ""}>${label}</option>`).join("")}</select>` },
-      { k: "Questions", html: `<select id="vcount">${VERB_COUNTS.map(c =>
-          `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` },
-      { start: `<button class="btn primary" id="vstart"${form ? "" : " disabled"}>Start drill</button>` }
-    ])}
+    <div class="vopts-fold${vOptsOpen ? " is-open" : ""}">
+      <button type="button" class="vopts-fold-btn" id="voptsToggle"
+        aria-expanded="${vOptsOpen ? "true" : "false"}">
+        <span>Drill options · L${o.ceiling} · ${esc(promptLabel)} · ${o.count}</span>
+        <span class="chev" aria-hidden="true">▾</span>
+      </button>
+      <div class="vopts-fold-body"${vOptsOpen ? "" : " hidden"}>
+        ${optionsPanel([
+          { k: "Verbs taught up to", html: `<select id="vceil">${LESSONS.map(l =>
+              `<option value="${l.n}"${l.n === o.ceiling ? " selected" : ""}>Lesson ${l.n}</option>`).join("")}</select>` },
+          { k: "Show me", html: `<select id="vprompt">${VERB_PROMPTS.map(([id, label]) =>
+              `<option value="${id}"${id === o.prompt ? " selected" : ""}>${label}</option>`).join("")}</select>` },
+          { k: "Questions", html: `<select id="vcount">${VERB_COUNTS.map(c =>
+              `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` }
+        ])}
+      </div>
+    </div>
 
-    <p class="hintline">One seal per conjugation form (て-form, ない-form, …) — not Group I/II/III.
-      Earn a seal with at least ${VERB_BADGE_MIN} answers at ${Math.round(VERB_BADGE_ACC * 100)}%+ accuracy.</p>
     <div class="vf-badge-key" aria-hidden="true">
       <span><span class="vb vf-badge locked"></span> new</span>
       <span><span class="vb vf-badge learning"></span> learning</span>
@@ -7170,16 +7190,20 @@ function renderVerbs() {
          lesson limit — the book introduces them later.</p>` : ""}
     ${verbStats()}`;
 
+  document.getElementById("voptsToggle").addEventListener("click", () => {
+    vOptsOpen = !vOptsOpen;
+    renderVerbs();
+  });
   document.getElementById("vceil").addEventListener("change", e => {
     setVOpts({ ceiling: +e.target.value }); renderVerbs();
   });
-  document.getElementById("vform").addEventListener("change", e => setVOpts({ form: e.target.value }));
-  document.getElementById("vprompt").addEventListener("change", e => setVOpts({ prompt: e.target.value }));
-  document.getElementById("vcount").addEventListener("change", e => setVOpts({ count: +e.target.value }));
+  document.getElementById("vprompt").addEventListener("change", e => {
+    setVOpts({ prompt: e.target.value }); renderVerbs();
+  });
+  document.getElementById("vcount").addEventListener("change", e => {
+    setVOpts({ count: +e.target.value }); renderVerbs();
+  });
   wireResume(renderVerbs);
-  const start = document.getElementById("vstart");
-  if (form) start.addEventListener("click", () => startVerbs(vOpts().form || form));
-  // the table keeps its per-row shortcut, which also settles the form
   view.querySelectorAll("button.go").forEach(b =>
     b.addEventListener("click", () => {
       setVOpts({ form: b.dataset.form });
