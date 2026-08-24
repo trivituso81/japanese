@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823y">
+<link rel="manifest" href="site.webmanifest?v=20260824b">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823y";
+window.__BUILD__ = "20260824b";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823y";
+  var v = window.__BUILD__ || "20260824b";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    + encodeURIComponent(window.__BUILD__ || "20260824b"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823y") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824b") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -842,6 +842,44 @@ document.addEventListener("DOMContentLoaded", function () {
   .backup-card .backup-acts[hidden] { display: none !important; }
   .backup-card .backup-acts .btn { flex: 1 1 0; min-height: 44px; }
   .backup-card .backup-acts .btn:not(.primary) { background: #fff; color: var(--text); }
+
+  /* Forced cloud sync check — OK only, no dismiss/cancel. */
+  .cloud-sync-sheet {
+    position: fixed; inset: 0; z-index: 90;
+    background: rgba(18, 20, 26, .5);
+    display: flex; align-items: center; justify-content: center;
+    padding: 18px; box-sizing: border-box;
+  }
+  .cloud-sync-sheet[hidden] { display: none !important; }
+  .cloud-sync-card {
+    width: min(400px, 100%);
+    background: var(--bg); color: var(--text);
+    border: 2px solid var(--text); border-radius: var(--radius-sm);
+    box-shadow: 4px 4px 0 var(--shadow-ink);
+    padding: 18px 16px 14px; display: flex; flex-direction: column; gap: 12px;
+  }
+  .cloud-sync-card h2 {
+    margin: 0; font-family: var(--serif); font-size: 1.2rem; font-weight: 600;
+  }
+  .cloud-sync-card .cloud-sync-msg {
+    margin: 0; font-size: 14.5px; line-height: 1.5; color: var(--text);
+  }
+  .cloud-sync-card .cloud-sync-times {
+    margin: 0; padding: 10px 12px; background: var(--bg-soft);
+    border: 1px solid var(--rule); border-radius: var(--radius-sm);
+    font-size: 12.5px; line-height: 1.45; color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .cloud-sync-card .cloud-sync-times div + div { margin-top: 4px; }
+  .cloud-sync-card .cloud-sync-times b {
+    display: inline-block; min-width: 5.5em; color: var(--text-faint);
+    font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase;
+    font-weight: 700;
+  }
+  .cloud-sync-card .cloud-sync-acts { display: flex; }
+  .cloud-sync-card .cloud-sync-acts .btn {
+    flex: 1 1 auto; min-height: 48px; font-size: 15.5px; font-weight: 700;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .viz-enso .ink { animation: none; }
@@ -2632,7 +2670,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823y#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824b#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2732,9 +2770,21 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </div>
 
+<div class="cloud-sync-sheet" id="cloudSyncSheet" hidden>
+  <div class="cloud-sync-card" role="alertdialog" aria-modal="true"
+    aria-labelledby="cloudSyncTitle" aria-describedby="cloudSyncMsg">
+    <h2 id="cloudSyncTitle">Sync check</h2>
+    <p class="cloud-sync-msg" id="cloudSyncMsg"></p>
+    <div class="cloud-sync-times" id="cloudSyncTimes"></div>
+    <div class="cloud-sync-acts">
+      <button type="button" class="btn primary" id="cloudSyncOk">OK</button>
+    </div>
+  </div>
+</div>
+
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823y"></script>
+<script src="firebase-config.js?v=20260824b"></script>
 <script>
 /* ============================================================
    State
@@ -2920,24 +2970,35 @@ function requestPersistentStorage() {
 }
 
 /* Flush on background / close — iOS Safari is eager to suspend tabs.
-   On return, compare Google save timestamps and offer restore if needed. */
+   After a longer absence, compare Google vs this device and show a sync popup. */
+let cloudHiddenAt = 0;
+const CLOUD_RESUME_AWAY_MS = 2 * 60 * 1000;
 window.addEventListener("pagehide", () => { save(); flushCloudSync(); });
 document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "hidden") { save(); flushCloudSync(); }
-  else reconcileCloud("resume");
+  if (document.visibilityState === "hidden") {
+    cloudHiddenAt = Date.now();
+    save();
+    flushCloudSync();
+  } else {
+    const away = cloudHiddenAt ? Date.now() - cloudHiddenAt : 0;
+    cloudHiddenAt = 0;
+    if (away >= CLOUD_RESUME_AWAY_MS) reconcileCloud("resume");
+  }
 });
 
 /* ============================================================
    Google sign-in + Firestore sync
 
-   Sign in once. After that the app compares this device’s save time with
-   the copy stored for that Google account (Firestore users/{uid}):
+   Sign in once. On sign-in, page refresh, or return after a while away,
+   compare this device’s last-save time with the Google account copy
+   (Firestore users/{uid}) and show a forced-OK popup:
 
-     • Cloud newer → ask before restoring onto this device
-     • Local newer → quietly upload
-     • Same age   → leave alone
+     • Local same or newer → “You’re on the most up-to-date version.”
+       then keep/push local and refresh the screen
+     • Cloud newer → “A newer version… Click OK to download.”
+       then restore Google copy and refresh the screen
 
-   No manual Upload / Download buttons.
+   No cancel — OK is required. No manual Upload / Download buttons.
    ============================================================ */
 const CLOUD_SCHEMA = 1;
 const KEY_GUEST = KEY + ":guest";
@@ -2955,7 +3016,8 @@ let cloudSyncing = false;
 let cloudLastPush = 0;
 let cloudCheckBusy = false;
 let cloudLastCheckedAt = 0;
-const CLOUD_CHECK_MIN_MS = 10000;
+let cloudSyncDialogOpen = false;
+const CLOUD_CHECK_MIN_MS = 8000;
 /* Paint the app immediately. Firebase is optional and loads afterward. */
 let authReady = true;
 let authError = "";
@@ -3001,7 +3063,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823y" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824b" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3185,11 +3247,57 @@ async function pushCloud(uid, opts) {
   }
 }
 
-/* Compare Google save time with this device. Prompt only when cloud is newer. */
+/* Compare Google save time with this device. Always show a forced-OK popup
+   when signed in (signin / refresh / return after a while). */
+function formatSyncTime(ts) {
+  if (!ts) return "never";
+  try {
+    return new Date(ts).toLocaleString(undefined, {
+      year: "numeric", month: "short", day: "numeric",
+      hour: "numeric", minute: "2-digit"
+    });
+  } catch (e) {
+    return new Date(ts).toString();
+  }
+}
+
+function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
+  return new Promise(resolve => {
+    const sheet = document.getElementById("cloudSyncSheet");
+    const titleEl = document.getElementById("cloudSyncTitle");
+    const msgEl = document.getElementById("cloudSyncMsg");
+    const timesEl = document.getElementById("cloudSyncTimes");
+    const ok = document.getElementById("cloudSyncOk");
+    if (!sheet || !ok) {
+      resolve();
+      return;
+    }
+    cloudSyncDialogOpen = true;
+    if (titleEl) titleEl.textContent = title || "Sync check";
+    if (msgEl) msgEl.textContent = message || "";
+    if (timesEl) {
+      timesEl.innerHTML =
+        `<div><b>This device</b> ${esc(formatSyncTime(localTs))}</div>` +
+        `<div><b>Google</b> ${esc(formatSyncTime(cloudTs))}</div>`;
+    }
+    sheet.hidden = false;
+    const finish = () => {
+      ok.removeEventListener("click", finish);
+      sheet.hidden = true;
+      cloudSyncDialogOpen = false;
+      resolve();
+    };
+    ok.addEventListener("click", finish);
+    setTimeout(() => { try { ok.focus(); } catch (e) {} }, 0);
+  });
+}
+
 async function reconcileCloud(reason) {
   const user = requireCloudUser();
-  if (!user || !cloudDb || cloudCheckBusy) return;
+  if (!user || !cloudDb || cloudCheckBusy || cloudSyncDialogOpen) return;
   const now = Date.now();
+  /* Sign-in always checks. Refresh/resume debounce so pageshow + auth
+     restore do not open two popups in a row. */
   if (reason !== "signin" && now - cloudLastCheckedAt < CLOUD_CHECK_MIN_MS) return;
   cloudCheckBusy = true;
   cloudLastCheckedAt = now;
@@ -3208,34 +3316,39 @@ async function reconcileCloud(reason) {
     const cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
     const localW = progressWeight(S);
     const cloudW = cloud ? cloud.weight : 0;
-    const who = user.email || "your Google account";
 
-    if (cloud && cloudW > 0 && cloudTs > localTs) {
-      const declined = localStorage.getItem(KEY_CLOUD_DECLINED);
-      if (declined === String(cloudTs)) return;
-      const ok = confirm(
-        "Newer progress is saved for " + who + ".\n\n" +
-        "Google:      " + describeProgress(cloud.progress) + "\n" +
-        "This device: " + describeProgress(S) + "\n\n" +
-        "Restore the Google copy onto this device?"
-      );
-      if (ok) {
-        localStorage.removeItem(KEY_CLOUD_DECLINED);
-        S = cloud.progress;
-        save({ force: true });
-        updateCloudUi();
-        route();
-      } else {
-        localStorage.setItem(KEY_CLOUD_DECLINED, String(cloudTs));
-      }
+    /* Nothing on either side — no sync dialog. */
+    if (localW === 0 && cloudW === 0) return;
+
+    const cloudNewer = !!(cloud && cloudW > 0 && cloudTs > localTs);
+
+    if (cloudNewer) {
+      await showCloudSyncPopup({
+        title: "Newer data on Google",
+        message: "A newer version of data is available on the server. Click OK to download.",
+        localTs,
+        cloudTs
+      });
+      localStorage.removeItem(KEY_CLOUD_DECLINED);
+      S = cloud.progress;
+      save({ force: true });
+      updateCloudUi();
+      route();
       return;
     }
 
-    /* Local same age or newer — upload quietly when this device is ahead. */
+    /* Local is same age or newer (or Google has no copy yet). */
+    await showCloudSyncPopup({
+      title: "You're up to date",
+      message: "You were on the most updated version.",
+      localTs,
+      cloudTs
+    });
     if (localW > 0 && (!cloud || localTs > cloudTs)) {
       await pushCloud(user.uid, { force: true });
-      updateCloudUi();
     }
+    updateCloudUi();
+    route();
   } finally {
     cloudCheckBusy = false;
     updateCloudUi();
@@ -3290,7 +3403,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824b"));
     return;
   }
   const start = () => {
@@ -3304,7 +3417,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824b"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4695,7 +4808,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823y" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260824b" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
@@ -7957,7 +8070,7 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
 window.addEventListener("pageshow", () => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
-  if (requireCloudUser()) reconcileCloud("resume");
+  if (requireCloudUser()) reconcileCloud("refresh");
 });
 function loadStudyData() {
   return new Promise((resolve, reject) => {
@@ -8038,7 +8151,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823y&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824b&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
