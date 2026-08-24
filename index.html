@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823y";
+window.__BUILD__ = "20260824f";
 (function () {
   try {
     var u = new URL(location.href);
@@ -2754,6 +2754,8 @@ const OVERALL = [
 const LEARNED_BOX = 4;   // a word counts as learned once it reaches this Leitner box
 const WINDOW = 20;       // grammar score reads the last this-many answers for a lesson
 const HISTORY_CAP = 60;
+const VERB_BADGE_MIN = 8;
+const VERB_BADGE_ACC = 0.8;
 
 const blank = () => ({ lessons: {}, cards: {}, drills: {}, asked: [], cardMisses: {} });
 
@@ -2774,6 +2776,44 @@ function currentLesson() {
 
 /* How much a saved state is "worth" — used to pick primary vs backup and to
    refuse quietly overwriting a rich backup with an empty shell. */
+function verbTally(t) {
+  return { ok: (t && t.ok) || 0, n: (t && t.n) || 0 };
+}
+function richerVerbTally(a, b) {
+  const x = verbTally(a), y = verbTally(b);
+  if (y.n > x.n || (y.n === x.n && y.ok > x.ok)) return y;
+  return x;
+}
+function mergeVerbTallies(into, from) {
+  const out = {};
+  new Set([...Object.keys(into || {}), ...Object.keys(from || {})]).forEach(k => {
+    out[k] = richerVerbTally((into || {})[k], (from || {})[k]);
+  });
+  return out;
+}
+/* Conjugation badges live in verbs.byForm. When two copies disagree, keep the
+   richer per-form tallies instead of dropping earned seals. */
+function mergeVerbProgress(into, from) {
+  if (!from || !from.verbs) return into;
+  into.verbs = into.verbs || { history: [], byType: {}, byForm: {}, runs: 0 };
+  const iv = into.verbs, fv = from.verbs;
+  iv.byForm = mergeVerbTallies(iv.byForm, fv.byForm);
+  iv.byType = mergeVerbTallies(iv.byType, fv.byType);
+  const ih = iv.history || [], fh = fv.history || [];
+  if (fh.length > ih.length) iv.history = fh.slice(-HISTORY_CAP);
+  iv.runs = Math.max(iv.runs || 0, fv.runs || 0);
+  return into;
+}
+function verbFormWeight(s) {
+  const by = (s.verbs && s.verbs.byForm) || {};
+  let attempts = 0, earned = 0;
+  Object.keys(by).forEach(k => {
+    const { ok, n } = verbTally(by[k]);
+    attempts += n;
+    if (n >= VERB_BADGE_MIN && n && ok / n >= VERB_BADGE_ACC) earned++;
+  });
+  return attempts + earned * 10;
+}
 function progressWeight(s) {
   if (!s || typeof s !== "object") return 0;
   const lessons = Object.keys(s.lessons || {}).filter(n =>
@@ -2783,7 +2823,7 @@ function progressWeight(s) {
     (a, n) => a + (((s.drills[n] || {}).history || []).length), 0);
   const kanji = Object.keys((s.kanji && s.kanji.by) || {}).length;
   const verbs = ((s.verbs && s.verbs.history) || []).length;
-  return lessons + cards + drills + kanji * 2 + verbs;
+  return lessons + cards + drills + kanji * 2 + verbs + verbFormWeight(s);
 }
 
 function parseProgress(raw) {
@@ -2806,6 +2846,7 @@ function load() {
     /* Prefer whichever copy still holds more progress — a half-written or
        wiped primary should not beat a good backup after a bad refresh. */
     const pick = progressWeight(backup) > progressWeight(primary) ? backup : primary;
+    mergeVerbProgress(pick, pick === primary ? backup : primary);
     return pick;
   }
   return primary || backup || blank();
@@ -3221,7 +3262,9 @@ async function reconcileCloud(reason) {
       );
       if (ok) {
         localStorage.removeItem(KEY_CLOUD_DECLINED);
+        const localCopy = cloudProgressSnapshot(S);
         S = cloud.progress;
+        mergeVerbProgress(S, localCopy);
         save({ force: true });
         updateCloudUi();
         route();
@@ -4556,9 +4599,6 @@ function waveViz(history) {
    tracked in S.verbs.byForm as you drill. A badge is earned once you have
    enough success on that form — not by verb class (Group 1/2/3).
    ============================================================ */
-const VERB_BADGE_MIN = 8;
-const VERB_BADGE_ACC = 0.8;
-
 function verbFormStats(formId) {
   const by = (S.verbs && S.verbs.byForm) || {};
   const t = by[formId] || { ok: 0, n: 0 };
@@ -4986,12 +5026,30 @@ function describeProgress(s) {
   const answers = Object.keys(s.drills || {})
     .reduce((a, n) => a + (((s.drills[n] || {}).history || []).length), 0);
   const kanji = Object.keys((s.kanji && s.kanji.by) || {}).length;
+  const verbAnswers = ((s.verbs && s.verbs.history) || []).length;
+  const verbBadges = verbBadgeCensusFrom(s);
   const bits = [];
   bits.push(`${lessons} lesson${lessons === 1 ? "" : "s"} marked`);
   bits.push(`${cards} flashcard${cards === 1 ? "" : "s"} started`);
   bits.push(`${answers} grammar answer${answers === 1 ? "" : "s"}`);
   bits.push(`${kanji} kanji seen`);
+  if (verbAnswers || verbBadges.earned || verbBadges.learning) {
+    bits.push(`${verbBadges.earned} verb badge${verbBadges.earned === 1 ? "" : "s"} earned`);
+  }
   return bits.join(", ");
+}
+
+function verbBadgeCensusFrom(s) {
+  const forms = VERB_FORMS || [];
+  let earned = 0, learning = 0;
+  const by = (s.verbs && s.verbs.byForm) || {};
+  forms.forEach(f => {
+    const { ok, n } = verbTally(by[f.id]);
+    if (n <= 0) return;
+    if (n >= VERB_BADGE_MIN && ok / n >= VERB_BADGE_ACC) earned++;
+    else learning++;
+  });
+  return { total: forms.length, earned, learning };
 }
 
 function importProgress(e) {
