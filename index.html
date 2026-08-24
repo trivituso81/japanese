@@ -2227,6 +2227,48 @@ document.addEventListener("DOMContentLoaded", function () {
     font-family: var(--jp-mincho); font-size: 23px; text-align: center; padding: 11px 13px;
     border: 1px solid var(--rule-strong); border-radius: var(--radius-sm); background: var(--bg); color: var(--text); }
   .vcard input:focus { outline: 1px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+  .vcard .vin-wrap {
+    position: relative; width: 100%; max-width: 340px; margin: 20px auto 4px;
+  }
+  .vcard .vin-wrap input { margin: 0; max-width: none; }
+  .vcard .vin-tools {
+    display: flex; align-items: stretch; gap: 8px; width: 100%;
+  }
+  .vcard .vin-tools input { flex: 1 1 auto; min-width: 0; }
+  .vcard .vin-mic {
+    flex: 0 0 auto; width: 48px; min-height: 48px; padding: 0;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--text); border-radius: var(--radius-sm);
+    background: var(--bg); color: var(--text); cursor: pointer;
+    box-shadow: 2px 2px 0 var(--shadow-ink);
+  }
+  .vcard .vin-mic svg { width: 22px; height: 22px; display: block; }
+  .vcard .vin-mic:hover { background: var(--bg-soft); }
+  .vcard .vin-mic[aria-pressed="true"] {
+    background: var(--seal-soft); border-color: var(--seal); color: var(--seal-deep);
+  }
+  .vcard .vin-mic[hidden] { display: none !important; }
+  .v-alts {
+    display: none; flex-wrap: wrap; justify-content: center; gap: 6px;
+    margin: 8px 0 0; padding: 0;
+  }
+  .v-alts.open { display: flex; }
+  .v-alts .v-alt {
+    font-family: var(--jp-mincho); font-size: 16px; line-height: 1.2;
+    padding: 8px 12px; min-height: 40px; cursor: pointer;
+    border: 1.5px solid var(--rule-strong); border-radius: var(--radius-sm);
+    background: var(--bg); color: var(--text);
+  }
+  .v-alts .v-alt:hover { background: var(--bg-soft); border-color: var(--text); }
+  .v-alts .v-alt.is-answer {
+    border-color: var(--accent-deep); background: var(--accent-soft); color: var(--accent-deep);
+    font-weight: 700;
+  }
+  .v-alts-hint {
+    width: 100%; margin: 0 0 2px; text-align: center;
+    font-size: 11px; font-weight: 600; letter-spacing: .04em;
+    color: var(--text-faint);
+  }
   .vcard .rowacts { justify-content: center; }
   .jpline { font-family: var(--jp-mincho); letter-spacing: .02em; }
   .jpline.big { font-size: 22px; }
@@ -2431,6 +2473,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .vword.en { font-size: 22px; }
     .vcard { padding: 24px 15px; }
     .vcard input { max-width: none; font-size: 20px; }
+    .vcard .vin-wrap { max-width: none; }
     .vcard .rowacts .btn { flex: 1 1 0; }
 
     /* the form table keeps its lesson number; only the verb count goes */
@@ -7258,7 +7301,258 @@ function judgeVerb(typed, answer) {
   return t === answer.kana || t === answer.kanji;
 }
 
+/* ============================================================
+   Verb answer: same-sound alternatives
+
+   System dictation (and in-app speech) often picks the wrong kanji for a
+   reading. WanaKana normalises kana; candidates come from conjugated forms
+   in this textbook’s verb list that share that reading. Tap one to replace
+   the field before Submit.
+   ============================================================ */
+const WANAKANA_SRC = "https://cdn.jsdelivr.net/npm/wanakana@5.3.1/wanakana.min.js";
+let wanakanaReady = null;
+let _verbReadingIndex = null;   /* reading → surfaces[] */
+let _verbSurfaceReading = null; /* surface → reading */
+let verbAltTimer = null;
+let verbSpeechRec = null;
+
+function ensureWanakana() {
+  if (window.wanakana) return Promise.resolve(window.wanakana);
+  if (wanakanaReady) return wanakanaReady;
+  wanakanaReady = loadScript(WANAKANA_SRC)
+    .then(() => window.wanakana)
+    .catch(e => {
+      console.warn("wanakana failed to load", e);
+      wanakanaReady = null;
+      return null;
+    });
+  return wanakanaReady;
+}
+
+function toHiraJa(s) {
+  const t = String(s || "");
+  if (window.wanakana && window.wanakana.toHiragana) {
+    try { return window.wanakana.toHiragana(t, { passRomaji: true }); }
+    catch (e) {}
+  }
+  /* Minimal katakana → hiragana fallback if the CDN is offline. */
+  return t.replace(/[\u30a1-\u30f6]/g, ch =>
+    String.fromCharCode(ch.charCodeAt(0) - 0x60));
+}
+
+function isKanaOnlyJa(s) {
+  const t = String(s || "").replace(/[\s\u3000ー]/g, "");
+  if (!t) return false;
+  if (window.wanakana && window.wanakana.isKana) return window.wanakana.isKana(t);
+  return /^[\u3040-\u309f\u30a0-\u30ff]+$/.test(t);
+}
+
+function rebuildVerbReadingIndex() {
+  const byReading = new Map();
+  const bySurface = new Map();
+  const add = (reading, surface) => {
+    if (!reading || !surface) return;
+    const r = toHiraJa(reading).replace(/[\s\u3000]/g, "");
+    const surf = String(surface).replace(/[\s\u3000]/g, "");
+    if (!r || !surf) return;
+    bySurface.set(surf, r);
+    let list = byReading.get(r);
+    if (!list) { list = []; byReading.set(r, list); }
+    if (!list.includes(surf)) list.push(surf);
+  };
+  const formIds = (VERB_FORMS || []).map(f => f.id);
+  verbs().forEach(v => {
+    add(v.ms, v.ms);
+    if (v.kanji) add(v.ms, v.kanji);
+    formIds.forEach(fid => {
+      const c = conjugate(v, fid);
+      if (!c || !c.kana) return;
+      add(c.kana, c.kana);
+      if (c.kanji) add(c.kana, c.kanji);
+    });
+  });
+  _verbReadingIndex = byReading;
+  _verbSurfaceReading = bySurface;
+}
+
+function verbReadingIndex() {
+  if (!_verbReadingIndex) rebuildVerbReadingIndex();
+  return _verbReadingIndex;
+}
+function verbSurfaceReading() {
+  if (!_verbSurfaceReading) rebuildVerbReadingIndex();
+  return _verbSurfaceReading;
+}
+
+function readingOfVerbAnswer(text) {
+  const t = String(text || "").replace(/[\s\u3000。]/g, "");
+  if (!t) return "";
+  if (isKanaOnlyJa(t)) return toHiraJa(t).replace(/[\s\u3000]/g, "");
+  const hit = verbSurfaceReading().get(t);
+  if (hit) return hit;
+  return "";
+}
+
+function verbSoundAlternatives(typed, answer) {
+  const t = String(typed || "").replace(/[\s\u3000。]/g, "");
+  if (!t) return [];
+  let reading = readingOfVerbAnswer(t);
+  if (!reading && answer && answer.kana && /[\u4e00-\u9fff]/.test(t)) {
+    /* Unknown kanji from dictation: only fall back when the trailing kana
+       (okurigana) matches the expected reading’s ending. */
+    const expect = toHiraJa(answer.kana).replace(/[\s\u3000]/g, "");
+    const trail = toHiraJa(t.replace(/[\u4e00-\u9fff々〆ヶ]+/g, "")).replace(/[\s\u3000]/g, "");
+    if (trail && expect.endsWith(trail)) reading = expect;
+  }
+  if (!reading) return [];
+  const list = (verbReadingIndex().get(reading) || []).slice();
+  if (answer && answer.kana) {
+    const ar = toHiraJa(answer.kana).replace(/[\s\u3000]/g, "");
+    if (ar === reading) {
+      if (answer.kanji && !list.includes(answer.kanji)) list.unshift(answer.kanji);
+      if (answer.kana && !list.includes(answer.kana)) list.push(answer.kana);
+    }
+  }
+  /* Prefer the expected kanji, then other kanji, then kana. */
+  const prefer = answer && answer.kanji ? answer.kanji : null;
+  list.sort((a, b) => {
+    if (a === prefer) return -1;
+    if (b === prefer) return 1;
+    const aK = /[\u4e00-\u9fff]/.test(a);
+    const bK = /[\u4e00-\u9fff]/.test(b);
+    if (aK !== bK) return aK ? -1 : 1;
+    return a.localeCompare(b, "ja");
+  });
+  return list.filter(s => s && s !== t);
+}
+
+function renderVerbAlts(alts, answer) {
+  const box = document.getElementById("vAlts");
+  if (!box) return;
+  if (!alts.length) {
+    box.classList.remove("open");
+    box.innerHTML = "";
+    return;
+  }
+  const prefer = answer && answer.kanji ? answer.kanji : (answer && answer.kana) || "";
+  box.innerHTML = `<span class="v-alts-hint">Same sound — tap to use</span>` +
+    alts.map(s => `<button type="button" class="v-alt${s === prefer ? " is-answer" : ""}"
+      data-alt="${esc(s)}">${esc(s)}</button>`).join("");
+  box.classList.add("open");
+  box.querySelectorAll(".v-alt").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const input = document.getElementById("vin");
+      if (!input) return;
+      input.value = btn.dataset.alt || "";
+      input.focus();
+      refreshVerbAlts();
+    });
+  });
+}
+
+function refreshVerbAlts() {
+  const input = document.getElementById("vin");
+  if (!input || !VERB || VERB.verdict) return;
+  const v = VERB.list[VERB.i];
+  if (!v) return;
+  const answer = conjugate(v, VERB.form);
+  const alts = verbSoundAlternatives(input.value, answer);
+  renderVerbAlts(alts, answer);
+}
+
+function scheduleVerbAlts() {
+  clearTimeout(verbAltTimer);
+  verbAltTimer = setTimeout(() => {
+    ensureWanakana().finally(() => refreshVerbAlts());
+  }, 120);
+}
+
+function speechRecognitionAvailable() {
+  return !!(window.SpeechRecognition || window.webkitSpeechRecognition);
+}
+
+function stopVerbSpeech() {
+  if (!verbSpeechRec) return;
+  try { verbSpeechRec.onresult = null; verbSpeechRec.onerror = null; verbSpeechRec.onend = null; }
+  catch (e) {}
+  try { verbSpeechRec.abort(); } catch (e) {}
+  verbSpeechRec = null;
+  const mic = document.getElementById("vinMic");
+  if (mic) mic.setAttribute("aria-pressed", "false");
+}
+
+function startVerbSpeech() {
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const input = document.getElementById("vin");
+  const mic = document.getElementById("vinMic");
+  if (!SR || !input) return;
+  stopVerbSpeech();
+  const rec = new SR();
+  verbSpeechRec = rec;
+  rec.lang = "ja-JP";
+  rec.interimResults = false;
+  rec.maxAlternatives = 5;
+  rec.continuous = false;
+  if (mic) mic.setAttribute("aria-pressed", "true");
+  rec.onresult = ev => {
+    const res = ev.results && ev.results[0];
+    if (!res || !res.length) return;
+    const transcripts = [];
+    for (let i = 0; i < res.length; i++) {
+      const t = (res[i].transcript || "").trim();
+      if (t && !transcripts.includes(t)) transcripts.push(t);
+    }
+    if (!transcripts.length) return;
+    input.value = transcripts[0];
+    ensureWanakana().finally(() => {
+      const v = VERB && VERB.list[VERB.i];
+      const answer = v ? conjugate(v, VERB.form) : null;
+      /* Merge speech engine alternatives with same-sound textbook spellings. */
+      const fromSound = verbSoundAlternatives(transcripts[0], answer);
+      const merged = [];
+      transcripts.concat(fromSound).forEach(s => {
+        const n = String(s).replace(/[\s\u3000。]/g, "");
+        if (n && n !== input.value.replace(/[\s\u3000。]/g, "") && !merged.includes(n)) {
+          merged.push(n);
+        }
+      });
+      renderVerbAlts(merged, answer);
+    });
+  };
+  rec.onerror = () => { stopVerbSpeech(); };
+  rec.onend = () => {
+    if (mic) mic.setAttribute("aria-pressed", "false");
+    verbSpeechRec = null;
+  };
+  try { rec.start(); }
+  catch (e) { stopVerbSpeech(); }
+}
+
+function wireVerbAnswerInput(input) {
+  ensureWanakana().then(() => { rebuildVerbReadingIndex(); });
+  const sync = () => scheduleVerbAlts();
+  input.addEventListener("input", sync);
+  input.addEventListener("change", sync);
+  input.addEventListener("compositionend", sync);
+  const mic = document.getElementById("vinMic");
+  if (mic) {
+    if (!speechRecognitionAvailable()) mic.hidden = true;
+    else {
+      mic.hidden = false;
+      mic.addEventListener("click", () => {
+        unlockTts();
+        flushPendingSpeak();
+        if (mic.getAttribute("aria-pressed") === "true") stopVerbSpeech();
+        else startVerbSpeech();
+      });
+    }
+  }
+}
+
+const MIC_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M19 10v1a7 7 0 0 1-14 0v-1"/><line x1="12" y1="19" x2="12" y2="22"/></svg>`;
+
 function drawVerb() {
+  stopVerbSpeech();
   const view = document.getElementById("view");
   const meta = VERB_FORMS.find(f => f.id === VERB.form);
   const total = VERB.list.length;
@@ -7341,21 +7635,36 @@ function drawVerb() {
         ${speakSrc ? speakButton({ icon: true, label: false }) : ""}
       </div>
       ${p.sub ? `<div class="vgloss big">${esc(p.sub)}</div>` : ""}
-      <input type="text" id="vin" autocomplete="off" autocapitalize="off" autocorrect="off"
-        spellcheck="false" placeholder="Type the ${esc(meta.label)}">
+      <div class="vin-wrap">
+        <div class="vin-tools">
+          <input type="text" id="vin" lang="ja" autocomplete="off" autocapitalize="off"
+            autocorrect="off" spellcheck="false"
+            placeholder="Type or dictate the ${esc(meta.label)}">
+          <button type="button" class="vin-mic" id="vinMic" hidden
+            aria-label="Dictate answer" aria-pressed="false" title="Dictate">${MIC_SVG}</button>
+        </div>
+        <div class="v-alts" id="vAlts" role="listbox" aria-label="Same-sound spellings"></div>
+      </div>
       <div class="rowacts">
         <button class="btn primary" id="vgo">Submit</button>
         <button class="btn" id="vskip">Skip</button>
       </div>
-      <p class="hintline">Enter to submit · kana or kanji both count</p>
+      <p class="hintline">Enter to submit · kana or kanji · tap a same-sound spelling if dictation picks the wrong characters</p>
     </div>`
   });
 
   const input = document.getElementById("vin");
   input.focus();
-  const send = () => { unlockTts(); flushPendingSpeak(); submitVerb(input.value); };
+  wireVerbAnswerInput(input);
+  const send = () => {
+    stopVerbSpeech();
+    unlockTts();
+    flushPendingSpeak();
+    submitVerb(input.value);
+  };
   document.getElementById("vgo").addEventListener("click", send);
   document.getElementById("vskip").addEventListener("click", () => {
+    stopVerbSpeech();
     unlockTts();
     flushPendingSpeak();
     submitVerb("");
