@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823y">
+<link rel="manifest" href="site.webmanifest?v=20260824c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823y";
+window.__BUILD__ = "20260824c";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823y";
+  var v = window.__BUILD__ || "20260824c";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    + encodeURIComponent(window.__BUILD__ || "20260824c"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823y") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824c") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -655,58 +655,89 @@ document.addEventListener("DOMContentLoaded", function () {
   .viz-brush .ink { fill: var(--accent); }
   .viz-brush .tip { fill: var(--accent-deep); opacity: .9; }
 
-  /* Level pies for kanji — known / shaky / new per JLPT band */
-  .viz-pies {
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 6px; height: 100%; width: 100%; max-width: none;
-    margin: 0 auto; padding: 0; box-sizing: border-box; min-height: 0;
+  /* Kanji home tile — per-level bars (known / shaky / new) */
+  .home-track-stats .stat.kanji-home {
+    justify-content: flex-start;
+    gap: 5px;
+    padding: 10px 10px 8px;
   }
-  .viz-pies-row {
-    display: flex; align-items: stretch; justify-content: center;
-    gap: 14px; flex: 1 1 auto; width: 100%; min-height: 0;
+  .home-track-stats .stat.kanji-home .k {
+    display: flex; align-items: center; justify-content: center;
+    gap: 5px; width: 100%;
   }
-  .viz-pies .pie {
-    flex: 1 1 0; min-width: 0; max-width: 120px; height: 100%;
-    display: flex; flex-direction: column; align-items: center;
-    justify-content: center; gap: 3px; min-height: 0;
+  .home-track-stats .stat.kanji-home .k .go {
+    font-size: .72em; font-weight: 700; color: var(--accent-deep); opacity: .55;
+    line-height: 1;
   }
-  .viz-pies .pie svg {
-    flex: 1 1 auto; width: 100%; min-height: 0; max-height: 100%;
-    aspect-ratio: 1; display: block;
+  .home-track-stats .stat.kanji-home .meta {
+    padding: 0 2px 2px;
   }
-  .viz-pies .pie-known { fill: var(--accent); }
-  .viz-pies .pie-shaky { fill: var(--now); }
-  .viz-pies .pie-unknown { fill: var(--bg-inset); }
-  .viz-pies .pie-ring {
-    fill: none; stroke: var(--text); stroke-width: 2;
+  .home-track-stats .stat.kanji-home .val {
+    font-size: clamp(1.25rem, 5vw, 1.55rem); font-weight: 700;
   }
-  .viz-pies .plab {
-    flex: 0 0 auto;
-    font-size: 11px; font-weight: 700; letter-spacing: .08em;
-    color: var(--text); text-transform: uppercase; line-height: 1;
+  .home-track-stats .stat.kanji-home .sub {
+    font-size: 11px; margin-top: 3px;
   }
-  .viz-pies .pcnt {
-    flex: 0 0 auto;
-    font-size: 11px; font-variant-numeric: tabular-nums;
-    color: var(--text-soft); line-height: 1;
+  .home-track-stats .stat.kanji-home .sub .shaky,
+  .viz-klevels .shaky { color: var(--now); font-weight: 700; }
+  .home-track-stats .stat.kanji-home .viz {
+    flex: 1 1 auto; align-items: stretch; justify-content: flex-start;
+    min-height: 0;
   }
-  .viz-pies-key {
+  .viz-klevels {
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 7px; width: 100%; height: 100%; min-height: 0;
+    padding: 2px 2px 0; box-sizing: border-box;
+  }
+  .viz-klevels .k-home-row {
+    display: flex; flex-direction: column; gap: 3px; width: 100%;
+  }
+  .viz-klevels .k-home-row-top {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 6px; font-size: 11px; line-height: 1.15;
+    font-variant-numeric: tabular-nums;
+  }
+  .viz-klevels .k-home-row-top .lv {
+    font-weight: 700; letter-spacing: .06em; color: var(--text);
+  }
+  .viz-klevels .k-home-row-top .ct {
+    color: var(--accent-deep); font-weight: 600; text-align: right;
+  }
+  .viz-klevels .k-home-bar {
+    height: 7px; border-radius: 999px;
+    background: var(--bg-inset); border: 1px solid var(--rule);
+    overflow: hidden;
+  }
+  .viz-klevels .k-home-bar > span {
+    display: block; height: 100%; border-radius: inherit;
+    background: var(--accent);
+  }
+  .viz-klevels .k-home-key {
     display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 6px 10px; width: 100%;
+    gap: 6px 10px; width: 100%; margin-top: 2px;
     font-size: 10px; font-weight: 600; letter-spacing: .04em;
     color: var(--text-faint); line-height: 1;
   }
-  .viz-pies-key span {
+  .viz-klevels .k-home-key span {
     display: inline-flex; align-items: center; gap: 4px;
   }
-  .viz-pies-key i {
+  .viz-klevels .k-home-key i {
     width: 8px; height: 8px; border-radius: 50%;
     display: inline-block; flex: none;
-    border: 1px solid var(--rule-strong);
+    border: 1px solid transparent; box-sizing: border-box;
   }
-  .viz-pies-key .k-known i { background: var(--accent); border-color: var(--accent-deep); }
-  .viz-pies-key .k-shaky i { background: var(--now); border-color: #b45309; }
-  .viz-pies-key .k-new i { background: var(--bg-inset); }
+  .viz-klevels .k-home-key .kk-known i {
+    background: var(--accent); border-color: var(--accent-deep);
+  }
+  .viz-klevels .k-home-key .kk-shaky {
+    color: var(--now);
+  }
+  .viz-klevels .k-home-key .kk-shaky i {
+    background: var(--now); border-color: #b45309;
+  }
+  .viz-klevels .k-home-key .kk-new i {
+    background: transparent; border-color: var(--rule-strong);
+  }
 
   /* Sparkline — recent verb answers; fill the viz slot */
   .viz-wave {
@@ -1334,12 +1365,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-track-stats .stat { padding: 8px 8px 7px; }
     .home-track-stats .k { font-size: clamp(1rem, 4vw, 1.2rem); }
     .viz-brush { min-height: 40px; }
-    .viz-pies { gap: 4px; }
-    .viz-pies-row { gap: 10px; }
-    .viz-pies .pie { max-width: 88px; }
-    .viz-pies .plab { font-size: 10px; }
-    .viz-pies .pcnt { font-size: 9px; }
-    .viz-pies-key { font-size: 9px; gap: 4px 8px; }
+    .viz-klevels { gap: 5px; }
+    .viz-klevels .k-home-row-top { font-size: 10px; }
+    .viz-klevels .k-home-bar { height: 6px; }
+    .viz-klevels .k-home-key { font-size: 9px; gap: 4px 8px; }
     .viz-wave { min-height: 48px; }
     .viz-badges { min-height: 48px; gap: 3px; }
     .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
@@ -2367,12 +2396,10 @@ document.addEventListener("DOMContentLoaded", function () {
     /* ~20% thinner strokes than the prior iPad bump — phone stay as-is. */
     .viz-enso .track, .viz-enso .ink { stroke-width: 14.5; }
     .viz-brush { height: 80%; }
-    .viz-pies { gap: 8px; }
-    .viz-pies-row { gap: 20px; }
-    .viz-pies .pie { max-width: 140px; }
-    .viz-pies .plab { font-size: 12px; }
-    .viz-pies .pcnt { font-size: 12px; }
-    .viz-pies-key { font-size: 11px; gap: 8px 14px; }
+    .viz-klevels { gap: 9px; }
+    .viz-klevels .k-home-row-top { font-size: 12px; }
+    .viz-klevels .k-home-bar { height: 8px; }
+    .viz-klevels .k-home-key { font-size: 11px; gap: 8px 14px; }
     .viz-wave { height: 80%; }
     .viz-wave .line { stroke-width: 8.8; }
     .viz-wave .empty { stroke-width: 6.4; }
@@ -2586,9 +2613,7 @@ document.addEventListener("DOMContentLoaded", function () {
     .viz-enso .pct { font-size: 18px; }
     .viz-enso .track, .viz-enso .ink { stroke-width: 14.5; }
     .viz-brush { height: 80%; }
-    .viz-pies { gap: 6px; }
-    .viz-pies-row { gap: 16px; }
-    .viz-pies .pie { max-width: 120px; }
+    .viz-klevels { gap: 8px; }
     .viz-wave { height: 80%; }
     .viz-wave .line { stroke-width: 8; }
     .viz-wave .empty { stroke-width: 6; }
@@ -2632,7 +2657,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823y#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824c#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2734,7 +2759,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823y"></script>
+<script src="firebase-config.js?v=20260824c"></script>
 <script>
 /* ============================================================
    State
@@ -3001,7 +3026,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823y" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824c" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3290,7 +3315,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824c"));
     return;
   }
   const start = () => {
@@ -3304,7 +3329,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824c"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4453,17 +4478,8 @@ function brushViz(pct) {
     <ellipse class="tip" cx="${w}" cy="24" rx="7" ry="14"/>` : ""}
   </svg>`;
 }
-function pieSlicePath(cx, cy, r, a0, a1) {
-  const x0 = cx + r * Math.cos(a0);
-  const y0 = cy + r * Math.sin(a0);
-  const x1 = cx + r * Math.cos(a1);
-  const y1 = cy + r * Math.sin(a1);
-  const large = (a1 - a0) > Math.PI ? 1 : 0;
-  return `M${cx.toFixed(1)} ${cy.toFixed(1)} L${x0.toFixed(1)} ${y0.toFixed(1)} A${r} ${r} 0 ${large} 1 ${x1.toFixed(1)} ${y1.toFixed(1)} Z`;
-}
 
-/* Kanji home pies — one per ready JLPT level. Segments use the same
-   kState buckets the drill already tracks: known, learning (shaky), new. */
+/* Kanji home tile — known/shaky/new per ready JLPT level with bars. */
 function kanjiCensus(lv) {
   const set = kanjiAt(lv);
   let known = 0, shaky = 0, unknown = 0;
@@ -4476,48 +4492,53 @@ function kanjiCensus(lv) {
   return { known, shaky, unknown, total: set.length };
 }
 
-function piesViz(levels) {
-  if (!levels.length) return `<div class="viz-pies" aria-hidden="true"></div>`;
-  const label = levels.map(l => {
-    const pct = l.total ? Math.round((l.known / l.total) * 100) : 0;
-    return `${l.id}: ${l.known} known, ${l.shaky} shaky, ${l.unknown} new (${pct}% known)`;
-  }).join("; ");
-  const cx = 40, cy = 40, r = 34;
-  const pies = levels.map(l => {
-    const parts = [
-      { n: l.known, cls: "pie-known" },
-      { n: l.shaky, cls: "pie-shaky" },
-      { n: l.unknown, cls: "pie-unknown" }
-    ];
-    const total = l.total || parts.reduce((s, p) => s + p.n, 0) || 1;
-    let a = -Math.PI / 2;
-    const slices = parts.filter(p => p.n > 0).map(p => {
-      if (p.n >= total) {
-        return `<circle class="${p.cls}" cx="${cx}" cy="${cy}" r="${r}"/>`;
-      }
-      const sweep = (p.n / total) * Math.PI * 2;
-      const path = pieSlicePath(cx, cy, r, a, a + sweep);
-      a += sweep;
-      return `<path class="${p.cls}" d="${path}"/>`;
-    }).join("");
-    return `<div class="pie">
-      <svg viewBox="0 0 80 80" aria-hidden="true">
-        ${slices || `<circle class="pie-unknown" cx="${cx}" cy="${cy}" r="${r}"/>`}
-        <circle class="pie-ring" cx="${cx}" cy="${cy}" r="${r}"/>
-      </svg>
-      <span class="plab">${esc(l.id)}</span>
-      <span class="pcnt">${l.known}/${l.total}</span>
+function kanjiLevelsViz(levels) {
+  if (!levels.length) return `<div class="viz-klevels" aria-hidden="true"></div>`;
+  const rows = levels.map(l => {
+    const fill = l.total ? Math.round((l.known / l.total) * 100) : 0;
+    const ct = l.shaky
+      ? `${l.known}/${l.total} · <span class="shaky">${l.shaky} shaky</span>`
+      : `${l.known}/${l.total}`;
+    return `<div class="k-home-row">
+      <div class="k-home-row-top">
+        <span class="lv">${esc(l.id)}</span>
+        <span class="ct">${ct}</span>
+      </div>
+      <div class="k-home-bar" aria-hidden="true"><span style="width:${fill}%"></span></div>
     </div>`;
   }).join("");
-  return `<div class="viz-pies" role="img" aria-label="${esc(label)}">
-    <div class="viz-pies-row">${pies}</div>
-    <div class="viz-pies-key" aria-hidden="true">
-      <span class="k-known"><i></i>known</span>
-      <span class="k-shaky"><i></i>shaky</span>
-      <span class="k-new"><i></i>new</span>
+  return `<div class="viz-klevels">
+    ${rows}
+    <div class="k-home-key" aria-hidden="true">
+      <span class="kk-known"><i></i>known</span>
+      <span class="kk-shaky"><i></i>shaky</span>
+      <span class="kk-new"><i></i>new</span>
     </div>
   </div>`;
 }
+
+function kanjiHomeStat(levels, href) {
+  let known = 0, shaky = 0, total = 0;
+  levels.forEach(l => { known += l.known; shaky += l.shaky; total += l.total; });
+  const pct = total ? Math.round((known / total) * 100) : 0;
+  const sub = shaky
+    ? `${pct}% known · <span class="shaky">${shaky} shaky</span>`
+    : `${pct}% known`;
+  const aria = levels.map(l => {
+    const p = l.total ? Math.round((l.known / l.total) * 100) : 0;
+    return `${l.id}: ${l.known} of ${l.total} known${l.shaky ? `, ${l.shaky} shaky` : ""} (${p}%)`;
+  }).join("; ");
+  return `<a class="stat kanji-home" href="${href}"
+    aria-label="${esc(`Kanji ${known} of ${total}. ${aria}`)}">
+    <div class="k">Kanji<span class="go" aria-hidden="true">›</span></div>
+    <div class="meta">
+      <div class="val">${known}<span class="of"> / ${total}</span></div>
+      <div class="sub">${sub}</div>
+    </div>
+    <div class="viz">${kanjiLevelsViz(levels)}</div>
+  </a>`;
+}
+
 function waveViz(history) {
   const raw = (history || []).slice(-16);
   const W = 160, H = 72, pad = 8;
@@ -4663,13 +4684,6 @@ function renderHome() {
     const c = kanjiCensus(l.id);
     return { id: l.id, known: c.known, shaky: c.shaky, unknown: c.unknown, total: c.total };
   });
-  const kanjiKnownN = kanjiLevels.reduce((n, l) => n + l.known, 0);
-  const kanjiShakyN = kanjiLevels.reduce((n, l) => n + l.shaky, 0);
-  const kanjiTotalN = kanjiLevels.reduce((n, l) => n + l.total, 0);
-  const kanjiPct = kanjiTotalN ? Math.round((kanjiKnownN / kanjiTotalN) * 100) : 0;
-  const kanjiSub = kanjiShakyN
-    ? `${kanjiShakyN} shaky · ${kanjiPct}% known`
-    : `${kanjiPct}% known`;
 
   const vBadges = verbBadgeCensus();
 
@@ -4695,7 +4709,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823y" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260824c" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
@@ -4731,9 +4745,7 @@ function renderHome() {
       </div>
 
       <div class="home-track-stats">
-        ${homeStat("Kanji", piesViz(kanjiLevels),
-          `${kanjiKnownN}<span class="of"> / ${kanjiTotalN}</span>`,
-          kanjiSub, "#/kanji")}
+        ${kanjiHomeStat(kanjiLevels, "#/kanji")}
         ${homeStat("Verbs", badgesViz(),
           `${vBadges.earned}<span class="of"> / ${vBadges.total}</span>`,
           verbSub(), "#/verbs")}
@@ -8038,7 +8050,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823y&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824c&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
