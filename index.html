@@ -16,7 +16,7 @@
 <meta http-equiv="Pragma" content="no-cache">
 <link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260817t">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260817t">
-<link rel="manifest" href="site.webmanifest?v=20260823y">
+<link rel="manifest" href="site.webmanifest?v=20260824a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260823y";
+window.__BUILD__ = "20260824a";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260823y";
+  var v = window.__BUILD__ || "20260824a";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    + encodeURIComponent(window.__BUILD__ || "20260824a"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260823y") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824a") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -915,9 +915,13 @@ document.addEventListener("DOMContentLoaded", function () {
   body[data-view="cards-play"] .masthead-inner h1 .jp {
     display: block; margin-left: 0; font-size: 0.78em; line-height: 1.25;
   }
-  body[data-view="cards"] #view,
-  body[data-view="kanji"] #view {
+  body[data-view="cards"] #view {
     flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+  }
+  /* Kanji landing is a scrollable progress page, not a fixed setup panel. */
+  body[data-view="kanji"] #view {
+    flex: 1 1 auto; display: block; min-height: 0;
+    overflow-y: auto; -webkit-overflow-scrolling: touch;
   }
 
   /* Active round — one card owns the phone viewport */
@@ -1134,6 +1138,231 @@ document.addEventListener("DOMContentLoaded", function () {
     text-decoration: none; border-top: 1px solid var(--rule);
   }
   .kanji-browse-link:hover { text-decoration: underline; }
+
+  /* ---- Kanji progress landing (#/kanji) ---- */
+  .k-land {
+    max-width: 520px; margin: 0 auto; padding: 4px 0 28px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .k-land-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 10px; flex-wrap: wrap;
+  }
+  .k-land-head .k {
+    font-size: 11px; font-weight: 700; letter-spacing: .18em;
+    text-transform: uppercase; color: var(--text-faint); margin: 0;
+  }
+  .k-land-head .scope {
+    font-size: 12.5px; color: var(--text-soft); font-weight: 600;
+    letter-spacing: .02em;
+  }
+  .k-land-hero {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    gap: 14px; padding: 4px 0 2px;
+  }
+  .k-land-hero .big {
+    font-family: var(--serif); font-size: clamp(2.6rem, 12vw, 3.4rem);
+    font-weight: 700; line-height: .95; letter-spacing: -.02em;
+    color: var(--text); margin: 0;
+    font-variant-numeric: tabular-nums;
+  }
+  .k-land-hero .big span {
+    display: block; font-size: 13px; font-weight: 600;
+    letter-spacing: .06em; color: var(--text-soft); margin-top: 8px;
+  }
+  .k-land-hero .pcts {
+    text-align: right; font-size: 13px; line-height: 1.45;
+    color: var(--text-soft); font-variant-numeric: tabular-nums;
+  }
+  .k-land-hero .pcts b {
+    display: block; font-size: 15px; color: var(--text); font-weight: 700;
+  }
+  .k-land-triad {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    padding: 12px 0; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule);
+  }
+  .k-land-triad .cell {
+    text-align: center; padding: 4px 2px;
+  }
+  .k-land-triad .n {
+    display: block; font-size: 1.35rem; font-weight: 700;
+    font-variant-numeric: tabular-nums; line-height: 1.1; color: var(--text);
+  }
+  .k-land-triad .lbl {
+    display: block; margin-top: 4px; font-size: 11px; font-weight: 600;
+    letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint);
+  }
+  .k-land-triad .cell.known .n { color: var(--accent-deep); }
+  .k-land-triad .cell.shaky .n { color: var(--now); }
+  .k-land-triad .cell.learn .n { color: var(--text-soft); }
+  .k-land-triad .cell.learn .lbl::before {
+    content: ""; display: inline-block; width: .7em; height: .7em;
+    margin-right: .35em; vertical-align: -.05em;
+    border: 1.5px solid var(--rule-strong); border-radius: 2px;
+    background: transparent;
+  }
+
+  .k-land-sec .k {
+    font-size: 10.5px; font-weight: 700; letter-spacing: .16em;
+    text-transform: uppercase; color: var(--text-faint); margin: 0 0 10px;
+  }
+  .k-journey-bar {
+    display: flex; width: 100%; height: 28px; gap: 3px;
+    border-radius: var(--radius-sm); overflow: hidden;
+  }
+  .k-journey-seg {
+    position: relative; min-width: 0; background: var(--bg-inset);
+    border: 1.5px solid var(--rule-strong); border-radius: 4px;
+    overflow: hidden;
+  }
+  .k-journey-seg.is-done {
+    background: var(--accent-soft); border-color: var(--accent-deep);
+  }
+  .k-journey-seg.is-now {
+    background: var(--bg); border-color: var(--text);
+  }
+  .k-journey-seg.is-next {
+    background: var(--bg); border-style: dashed; border-color: var(--rule-strong);
+    opacity: .72;
+  }
+  .k-journey-fill {
+    position: absolute; left: 0; top: 0; bottom: 0;
+    background: var(--accent); opacity: .85; pointer-events: none;
+  }
+  .k-journey-seg.is-done .k-journey-fill { background: var(--accent-deep); }
+  .k-journey-labs {
+    display: flex; gap: 3px; margin-top: 6px;
+  }
+  .k-journey-labs span {
+    min-width: 0; text-align: center; font-size: 10.5px; font-weight: 700;
+    letter-spacing: .04em; color: var(--text-faint);
+  }
+  .k-journey-labs span.is-done,
+  .k-journey-labs span.is-now { color: var(--text); }
+  .k-journey-note {
+    margin: 8px 0 0; font-size: 13px; line-height: 1.45; color: var(--text-soft);
+  }
+
+  .k-by-level { display: flex; flex-direction: column; gap: 8px; }
+  .k-by-row {
+    display: grid; grid-template-columns: 2.4em 1fr auto;
+    align-items: center; gap: 10px; padding: 8px 4px;
+    border: none; background: transparent; width: 100%;
+    font: inherit; color: inherit; text-align: left; cursor: pointer;
+    border-radius: var(--radius-sm);
+  }
+  .k-by-row:hover { background: var(--bg-soft); }
+  .k-by-row[aria-current="true"] {
+    background: var(--bg); box-shadow: inset 0 0 0 1.5px var(--text);
+  }
+  .k-by-row:disabled {
+    cursor: default; opacity: .55;
+  }
+  .k-by-row:disabled:hover { background: transparent; }
+  .k-by-row .lv {
+    font-size: 13px; font-weight: 700; letter-spacing: .04em; color: var(--text);
+  }
+  .k-by-track {
+    height: 8px; border-radius: 999px; background: var(--bg-inset);
+    border: 1px solid var(--rule); overflow: hidden;
+  }
+  .k-by-row.is-next .k-by-track {
+    background: transparent; border-style: dashed; border-color: var(--rule-strong);
+  }
+  .k-by-fill {
+    height: 100%; background: var(--accent); border-radius: inherit;
+  }
+  .k-by-row.is-done .k-by-fill { background: var(--accent-deep); }
+  .k-by-meta {
+    font-size: 12px; color: var(--text-soft); font-variant-numeric: tabular-nums;
+    white-space: nowrap; text-align: right;
+  }
+  .k-by-meta .shaky { color: var(--now); font-weight: 700; }
+
+  .k-grid-head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    gap: 8px; flex-wrap: wrap; margin-bottom: 8px;
+  }
+  .k-grid-head .title {
+    margin: 0; font-size: 13px; font-weight: 700; color: var(--text);
+  }
+  .k-grid-head .hint {
+    margin: 0; font-size: 12px; color: var(--text-faint); font-weight: 600;
+  }
+  .k-glyph-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(34px, 1fr));
+    gap: 5px;
+  }
+  .k-glyph {
+    aspect-ratio: 1; display: flex; align-items: center; justify-content: center;
+    font-family: var(--jp-mincho); font-size: clamp(15px, 4.2vw, 18px);
+    line-height: 1; text-decoration: none; color: var(--text);
+    border: 1.5px solid var(--rule-strong); border-radius: 6px;
+    background: var(--bg); min-height: 34px;
+  }
+  .k-glyph.st-known {
+    background: var(--accent-soft); border-color: var(--accent-deep);
+    color: var(--accent-deep);
+  }
+  .k-glyph.st-learning {
+    background: var(--seal-soft); border-color: var(--seal);
+    color: var(--seal-deep); font-weight: 700;
+  }
+  .k-glyph.st-new {
+    background: transparent; border-color: var(--rule-strong); color: transparent;
+  }
+  .k-glyph.st-new::after {
+    content: ""; width: 40%; height: 40%;
+    border: 1.5px solid var(--rule-strong); border-radius: 2px;
+  }
+  .k-glyph:active { transform: scale(.96); }
+
+  .k-land-cta {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 12px; padding: 14px 0 4px; border-top: 1px solid var(--rule);
+  }
+  .k-land-cta .primary-act {
+    display: inline-flex; align-items: center; justify-content: center;
+    min-height: 44px; padding: 10px 16px; border-radius: var(--radius-sm);
+    border: 1.5px solid var(--text); background: var(--bg); color: var(--text);
+    font: inherit; font-size: 14.5px; font-weight: 700; cursor: pointer;
+    box-shadow: 2px 2px 0 var(--shadow-ink); text-decoration: none;
+  }
+  .k-land-cta .primary-act:hover { background: var(--bg-soft); }
+  .k-land-cta .primary-act.review {
+    border-color: var(--seal); color: var(--seal-deep); background: var(--seal-soft);
+  }
+  .k-land-cta .pace {
+    text-align: right; font-size: 12px; line-height: 1.4; color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+  }
+  .k-land-cta .pace b { display: block; color: var(--text); font-weight: 700; }
+
+  .k-land-practice {
+    display: flex; flex-direction: column; gap: 10px;
+    padding: 12px 14px; background: var(--bg);
+    border: 1.5px solid var(--rule-strong); border-radius: var(--radius-sm);
+  }
+  .k-land-practice .row {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 8px;
+  }
+  .k-land-practice .lab {
+    font-size: 11px; font-weight: 700; letter-spacing: .12em;
+    text-transform: uppercase; color: var(--text-faint); min-width: 4.5em;
+  }
+  .k-land-practice .seg { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; }
+  .k-land-practice label.inc {
+    font-size: 13px; color: var(--text-soft); display: flex;
+    align-items: center; gap: 8px; margin: 0;
+  }
+  .k-land-practice .start-row {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+  }
+  .k-land-practice .start-row .btn.primary { flex: 1 1 140px; min-height: 46px; }
+  .k-land-practice .start-row .kanji-browse-link {
+    flex: 1 1 120px; border: none; padding: 10px 8px; text-align: center;
+  }
 
   /* Full browse + character study pages — phone-first scrolling real estate */
   body[data-view="kanji-study"] header.masthead,
@@ -2632,7 +2861,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <img class="mascot" src="mascot.png?v=20260817p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260823y#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824a#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -2734,7 +2963,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260823y"></script>
+<script src="firebase-config.js?v=20260824a"></script>
 <script>
 /* ============================================================
    State
@@ -3001,7 +3230,7 @@ function renderWelcomeLanding() {
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260823y" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824a" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3290,7 +3519,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824a"));
     return;
   }
   const start = () => {
@@ -3304,7 +3533,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260823y"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824a"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4695,7 +4924,7 @@ function renderHome() {
           </button>
           <div class="home-settings-menu" role="menu">
             <span class="hp-status" id="cloudStatus"></span>
-            <a href="signin.html?v=20260823y" id="cloudSignIn" role="menuitem">Sign in with Google</a>
+            <a href="signin.html?v=20260824a" id="cloudSignIn" role="menuitem">Sign in with Google</a>
             <button type="button" id="cloudSignOut" role="menuitem" hidden>Sign out</button>
             <span class="hp-status">${esc(savedAtLabel())}</span>
             <button type="button" id="exp" role="menuitem">Copy backup</button>
@@ -7000,6 +7229,16 @@ function drawVerbEnd(view, meta) {
 const KANJI_COUNTS = [5, 10, 20, 50];
 const KANJI_KNOWN = 2;              // right this many times running to count as known
 const KANJI_DEFAULTS = { level: "N5", count: 10, includeKnown: false };
+/* Full jōyō roadmap sizes (JLPT bands). N5/N4 match our catalog; N3–N1
+   are shown as future road even though those characters are not drillable yet. */
+const JOYO_ROAD = [
+  { id: "N5", total: 103 },
+  { id: "N4", total: 181 },
+  { id: "N3", total: 361 },
+  { id: "N2", total: 415 },
+  { id: "N1", total: 1076 }
+];
+const JOYO_TOTAL = JOYO_ROAD.reduce((n, l) => n + l.total, 0);
 
 const kOpts = () => {
   const o = Object.assign({}, KANJI_DEFAULTS, S.kopts || {});
@@ -7314,33 +7553,149 @@ function renderKanji() {
   showBotnav();
   clearKanjiReturn();
   const o = kOpts();
-  const level = KANJI_LEVELS.find(l => l.id === o.level) || KANJI_LEVELS[0];
-  const set = kanjiAt(level.id);
-  const known = set.filter(k => kState(k.c) === "known").length;
-  const learning = set.filter(k => kState(k.c) === "learning").length;
-  const pending = KANJI_LEVELS.filter(l => !l.ready);
+  const focusId = (KANJI_LEVELS.find(l => l.id === o.level && l.ready) || KANJI_LEVELS[0]).id;
+  const scope = kanjiScopeCensus();
+  const scopePct = scope.total ? Math.round((scope.known / scope.total) * 100) : 0;
+  const joyoPct = JOYO_TOTAL ? Math.round((scope.known / JOYO_TOTAL) * 100) : 0;
+  const scopeLabels = KANJI_LEVELS.filter(l => l.ready).map(l => l.id).join(" + ");
+  const focus = kanjiLevelRoadMeta(focusId);
+  const focusSet = kanjiAt(focusId).slice().sort((a, b) => a.s - b.s || a.c.localeCompare(b.c));
+  const pace = kanjiPaceLines(focusId);
+  const journeyNote = kanjiJourneyNote();
+
+  const journeySegs = JOYO_ROAD.map(l => {
+    const m = kanjiLevelRoadMeta(l.id);
+    const cls = m.ready
+      ? (m.known >= m.total && m.total ? "is-done" : l.id === focusId ? "is-now" : "is-now")
+      : "is-next";
+    const fill = m.ready && m.total ? Math.round((m.known / m.total) * 100) : 0;
+    return `<div class="k-journey-seg ${cls}" style="flex:${l.total} 1 0" title="${esc(l.id)}">
+      <div class="k-journey-fill" style="width:${fill}%"></div>
+    </div>`;
+  }).join("");
+  const journeyLabs = JOYO_ROAD.map(l => {
+    const m = kanjiLevelRoadMeta(l.id);
+    const cls = m.ready
+      ? (m.known >= m.total && m.total ? "is-done" : "is-now")
+      : "";
+    return `<span class="${cls}" style="flex:${l.total} 1 0">${esc(l.id)}</span>`;
+  }).join("");
+
+  const byRows = JOYO_ROAD.map(l => {
+    const m = kanjiLevelRoadMeta(l.id);
+    const fill = m.ready && m.total ? Math.round((m.known / m.total) * 100) : 0;
+    const current = m.ready && l.id === focusId;
+    if (!m.ready) {
+      return `<button type="button" class="k-by-row is-next" disabled>
+        <span class="lv">${esc(l.id)}</span>
+        <span class="k-by-track" aria-hidden="true"></span>
+        <span class="k-by-meta">${m.total} not started</span>
+      </button>`;
+    }
+    const meta = m.shaky
+      ? `${m.known} / ${m.total} · <span class="shaky">${m.shaky} shaky</span>`
+      : `${m.known} / ${m.total}`;
+    return `<button type="button" class="k-by-row${m.known >= m.total ? " is-done" : ""}"
+      data-lv="${l.id}" aria-current="${current ? "true" : "false"}">
+      <span class="lv">${esc(l.id)}</span>
+      <span class="k-by-track" aria-hidden="true"><span class="k-by-fill" style="width:${fill}%"></span></span>
+      <span class="k-by-meta">${meta}</span>
+    </button>`;
+  }).join("");
+
+  const glyphs = focusSet.map(k => {
+    const st = kState(k.c);
+    const cls = st === "known" ? "st-known" : st === "learning" ? "st-learning" : "st-new";
+    const label = st === "learning" ? `Review ${k.c}` : `Study ${k.c}, ${k.en}`;
+    if (st === "learning") {
+      return `<button type="button" class="k-glyph ${cls}" data-review="${esc(k.c)}"
+        aria-label="${esc(label)}">${esc(k.c)}</button>`;
+    }
+    return `<a class="k-glyph ${cls}" href="${kanjiLearnHref(k.c)}"
+      aria-label="${esc(label)}">${st === "new" ? "" : esc(k.c)}</a>`;
+  }).join("");
+
+  const cta = focus.shaky
+    ? `<button type="button" class="primary-act review" id="kReviewShaky">Review ${focus.shaky} shaky</button>`
+    : focus.unknown
+      ? `<button type="button" class="primary-act" id="kstart">Practice ${Math.min(o.count, focus.unknown)} new</button>`
+      : `<button type="button" class="primary-act" id="kstart">Practice again</button>`;
 
   document.getElementById("view").innerHTML = `
-    <section class="cards-setup">
+    <section class="k-land">
       ${resumeCards(["kanji"])}
 
-      ${optionsPanel([
-        { k: "Level", seg: KANJI_LEVELS.map(l => l.ready
-          ? `<button class="btn lev" data-lv="${l.id}" aria-pressed="${l.id === level.id}">${esc(l.label)}</button>`
-          : `<button class="btn lev" disabled aria-pressed="false">${esc(l.label)}</button>`).join("") },
-        { k: "Session", seg: KANJI_COUNTS.map(c =>
-          `<button class="btn ksize" data-size="${c}" aria-pressed="${c === o.count}">${c}</button>`).join("") },
-        { check: `<label><input type="checkbox" id="kinc"${o.includeKnown ? " checked" : ""}>
-          Include known · ${known}/${set.length} known${learning ? ` · ${learning} shaky` : ""}</label>` },
-        { start: `<button class="btn primary" id="kstart">Start</button>` }
-      ])}
+      <header class="k-land-head">
+        <p class="k">Kanji</p>
+        <p class="scope">${esc(scopeLabels)} · ${scope.total} in scope</p>
+      </header>
 
-      ${pending.length ? `<p class="hintline">${pending.map(l =>
-        `<b>${esc(l.label)}</b> — ${esc(l.note)}`).join(" ")}</p>` : ""}
+      <div class="k-land-hero">
+        <p class="big">${scope.known}<span>known</span></p>
+        <p class="pcts"><b>${scopePct}% of scope</b>${joyoPct}% of all jōyō</p>
+      </div>
 
-      <a class="kanji-browse-link" href="#/kanji/browse">Browse characters</a>
+      <div class="k-land-triad" role="group" aria-label="Progress by status">
+        <div class="cell known"><span class="n">${scope.known}</span><span class="lbl">known</span></div>
+        <div class="cell shaky"><span class="n">${scope.shaky}</span><span class="lbl">shaky</span></div>
+        <div class="cell learn"><span class="n">${scope.toLearn}</span><span class="lbl">to learn</span></div>
+      </div>
+
+      <section class="k-land-sec" aria-label="Jōyō journey">
+        <p class="k">Journey · ${JOYO_TOTAL.toLocaleString()} jōyō kanji</p>
+        <div class="k-journey-bar" role="img"
+          aria-label="JLPT roadmap from N5 to N1">${journeySegs}</div>
+        <div class="k-journey-labs" aria-hidden="true">${journeyLabs}</div>
+        <p class="k-journey-note">${esc(journeyNote)}</p>
+      </section>
+
+      <section class="k-land-sec" aria-label="By level">
+        <p class="k">By level</p>
+        <div class="k-by-level">${byRows}</div>
+      </section>
+
+      <section class="k-land-sec" aria-label="${esc(focusId)} characters">
+        <div class="k-grid-head">
+          <p class="title">${esc(focusId)} · one square per kanji</p>
+          <p class="hint">${focus.shaky ? "tap red to review" : "tap a square to study"}</p>
+        </div>
+        <div class="k-glyph-grid">${glyphs}</div>
+      </section>
+
+      <div class="k-land-cta">
+        ${cta}
+        <p class="pace">${pace.week ? `<b>${esc(pace.week)}</b>` : ""}${pace.eta ? esc(pace.eta) : ""}</p>
+      </div>
+
+      <section class="k-land-practice" aria-label="Practice settings">
+        <div class="row">
+          <span class="lab">Level</span>
+          <div class="seg" role="group" aria-label="Level">
+            ${KANJI_LEVELS.map(l => l.ready
+              ? `<button type="button" class="btn lev" data-lv="${l.id}"
+                  aria-pressed="${l.id === focusId}">${esc(l.label)}</button>`
+              : `<button type="button" class="btn lev" disabled>${esc(l.label)}</button>`).join("")}
+          </div>
+        </div>
+        <div class="row">
+          <span class="lab">Session</span>
+          <div class="seg" role="group" aria-label="Session size">
+            ${KANJI_COUNTS.map(c =>
+              `<button type="button" class="btn ksize" data-size="${c}"
+                aria-pressed="${c === o.count}">${c}</button>`).join("")}
+          </div>
+        </div>
+        <label class="inc"><input type="checkbox" id="kinc"${o.includeKnown ? " checked" : ""}>
+          Include known · ${focus.known}/${focus.total} known${focus.shaky ? ` · ${focus.shaky} shaky` : ""}</label>
+        <div class="start-row">
+          <button type="button" class="btn primary" id="kstartMain">Start practice</button>
+          <a class="kanji-browse-link" href="#/kanji/browse/${focusId}">Browse characters</a>
+        </div>
+      </section>
     </section>`;
 
+  document.querySelectorAll(".k-by-row[data-lv]").forEach(b =>
+    b.addEventListener("click", () => { setKOpts({ level: b.dataset.lv }); renderKanji(); }));
   document.querySelectorAll("button.lev[data-lv]").forEach(b =>
     b.addEventListener("click", () => { setKOpts({ level: b.dataset.lv }); renderKanji(); }));
   document.querySelectorAll("button.ksize").forEach(b =>
@@ -7349,10 +7704,115 @@ function renderKanji() {
       document.querySelectorAll("button.ksize").forEach(x =>
         x.setAttribute("aria-pressed", String(x === b)));
     }));
-  document.getElementById("kinc").addEventListener("change", e =>
-    setKOpts({ includeKnown: e.target.checked }));
+  const kinc = document.getElementById("kinc");
+  if (kinc) kinc.addEventListener("change", e => setKOpts({ includeKnown: e.target.checked }));
   wireResume(renderKanji);
-  document.getElementById("kstart").addEventListener("click", () => startKanji());
+
+  const startBtn = document.getElementById("kstart") || document.getElementById("kstartMain");
+  const startMain = document.getElementById("kstartMain");
+  if (startBtn && startBtn.id === "kstart") startBtn.addEventListener("click", () => startKanji());
+  if (startMain) startMain.addEventListener("click", () => startKanji());
+  const review = document.getElementById("kReviewShaky");
+  if (review) review.addEventListener("click", () => startKanjiShaky(focusId));
+
+  document.querySelectorAll(".k-glyph[data-review]").forEach(btn => {
+    btn.addEventListener("click", () => {
+      setKOpts({ level: focusId });
+      startKanji([btn.dataset.review]);
+    });
+  });
+  document.querySelectorAll("a.k-glyph").forEach(a => {
+    a.addEventListener("click", () => rememberKanjiReturn());
+  });
+}
+
+function kanjiScopeCensus() {
+  let known = 0, shaky = 0, toLearn = 0, total = 0;
+  KANJI_LEVELS.filter(l => l.ready).forEach(l => {
+    const c = kanjiCensus(l.id);
+    known += c.known;
+    shaky += c.shaky;
+    toLearn += c.unknown;
+    total += c.total;
+  });
+  return { known, shaky, toLearn, total };
+}
+
+function kanjiLevelRoadMeta(id) {
+  const road = JOYO_ROAD.find(l => l.id === id) || { id, total: 0 };
+  const ready = KANJI_LEVELS.some(l => l.id === id && l.ready);
+  if (!ready) {
+    return { id, ready: false, known: 0, shaky: 0, unknown: road.total, total: road.total };
+  }
+  const c = kanjiCensus(id);
+  return { id, ready: true, known: c.known, shaky: c.shaky, unknown: c.unknown, total: c.total };
+}
+
+function kanjiJourneyNote() {
+  const n5 = kanjiLevelRoadMeta("N5");
+  const n4 = kanjiLevelRoadMeta("N4");
+  const n4Share = Math.round((181 / JOYO_TOTAL) * 100);
+  const n1Share = Math.round((1076 / JOYO_TOTAL) * 100);
+  if (n5.known >= n5.total && n4.known < n4.total) {
+    return `N5 done. N4 is ${n4Share}% of the road; N1 is half of it.`;
+  }
+  if (n5.known < n5.total) {
+    return `N5 is the on-ramp. N4 is ${n4Share}% of the road; N1 is about ${n1Share}%.`;
+  }
+  if (n4.known >= n4.total) {
+    return `N5 and N4 are locked. N3–N1 are ${JOYO_TOTAL - 284} more on the jōyō road.`;
+  }
+  return `N4 is ${n4Share}% of the road; N1 is about ${n1Share}%.`;
+}
+
+/* Snapshot known counts so the landing can show a rough weekly pace. */
+function kanjiPaceNote(known) {
+  const st = kStats();
+  const now = Date.now();
+  const weekMs = 7 * 24 * 3600 * 1000;
+  st.pace = st.pace || { t0: now, known0: known, weekT: now, weekKnown0: known };
+  if (!Number.isFinite(st.pace.known0)) st.pace.known0 = known;
+  if (!Number.isFinite(st.pace.weekKnown0)) st.pace.weekKnown0 = known;
+  if (!st.pace.weekT) st.pace.weekT = now;
+  if (!st.pace.t0) st.pace.t0 = now;
+  if (now - st.pace.weekT > weekMs) {
+    st.pace.weekT = now;
+    st.pace.weekKnown0 = known;
+    save();
+  }
+  const gainedWeek = Math.max(0, known - st.pace.weekKnown0);
+  const elapsedWeeks = Math.max((now - st.pace.t0) / weekMs, 1 / 14);
+  const gainedTotal = Math.max(0, known - st.pace.known0);
+  const perWeek = gainedTotal / elapsedWeeks;
+  return { gainedWeek, perWeek };
+}
+
+function kanjiPaceLines(levelId) {
+  const scope = kanjiScopeCensus();
+  const pace = kanjiPaceNote(scope.known);
+  const level = kanjiLevelRoadMeta(levelId);
+  const left = Math.max(0, level.total - level.known);
+  const lines = { week: "", eta: "" };
+  if (pace.gainedWeek > 0) lines.week = `+${pace.gainedWeek} known this week`;
+  if (left > 0 && pace.perWeek >= 0.25) {
+    const weeks = Math.max(1, Math.ceil(left / pace.perWeek));
+    lines.eta = `${levelId} known in ~${weeks} wk at this pace`;
+  } else if (level.shaky) {
+    lines.eta = `Lock in ${level.shaky} shaky on ${levelId}`;
+  } else if (left > 0) {
+    lines.eta = `${left} left on ${levelId}`;
+  } else {
+    lines.eta = `${levelId} complete`;
+  }
+  return lines;
+}
+
+function startKanjiShaky(levelId) {
+  if (levelId) setKOpts({ level: levelId });
+  const lv = levelId || kOpts().level;
+  const shaky = kanjiAt(lv).filter(k => kState(k.c) === "learning").map(k => k.c);
+  if (!shaky.length) return startKanji();
+  startKanji(shaky);
 }
 
 function renderKanjiBrowse(levelId) {
@@ -7392,7 +7852,7 @@ function renderKanjiBrowse(levelId) {
 
   document.getElementById("view").innerHTML = `
     <section class="k-browse-page">
-      <a class="k-study-back" href="#/kanji">← Kanji drill</a>
+      <a class="k-study-back" href="#/kanji">← Kanji</a>
       <div class="k-browse-head">
         <h1>Browse characters</h1>
         <p class="sub">${set.length} in ${esc(level.label)} · tap a row to study it</p>
@@ -8038,7 +8498,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260823y&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824a&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
