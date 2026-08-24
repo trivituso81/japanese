@@ -9,7 +9,7 @@
 <style>
   :root {
     --bg: #eef2f8; --card: #fff; --text: #12141a; --soft: #445064;
-    --accent: #0e7490; --miss: #be1248;
+    --accent: #0e7490; --miss: #be1248; --ok: #0f766e;
   }
   * { box-sizing: border-box; }
   body {
@@ -26,8 +26,12 @@
   }
   h1 { font-size: 1.25rem; margin: 0; line-height: 1.35; }
   p { margin: 0; color: var(--soft); font-size: 15px; line-height: 1.5; }
-  #err { color: var(--miss); font-size: 14px; font-weight: 600; min-height: 1.2em; white-space: pre-wrap; }
+  #lead { color: var(--soft); }
+  #detail { color: var(--soft); font-size: 14px; }
+  #err { color: var(--miss); font-size: 14px; font-weight: 600; min-height: 0; white-space: pre-wrap; }
   #status { font-size: 14px; color: var(--soft); min-height: 1.2em; }
+  main[data-state="success"] #status { color: var(--ok); font-weight: 600; }
+  main[data-state="failure"] #status { color: var(--miss); font-weight: 600; }
   a.primary, button.primary {
     display: block; width: 100%; min-height: 52px; padding: 12px 16px;
     font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
@@ -36,56 +40,161 @@
     -webkit-tap-highlight-color: rgba(14,116,144,.25);
     box-sizing: border-box; line-height: 1.3;
   }
-  .link {
+  button.primary { appearance: none; -webkit-appearance: none; }
+  .link, button.link {
     display: block; width: 100%; min-height: 52px; padding: 12px 16px;
     font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
     border: 2px solid var(--text); background: var(--card); color: var(--text);
     cursor: pointer; text-decoration: none; text-align: center;
     box-sizing: border-box; line-height: 1.3;
+    appearance: none; -webkit-appearance: none;
   }
+  [hidden] { display: none !important; }
 </style>
-<script src="firebase-config.js?v=20260824u"></script>
+<script src="firebase-config.js?v=20260824w"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
 <body>
-<main>
-  <h1>Sign in with Google</h1>
-  <p>Tap the teal button. Safari will open Google, then bring you back signed in.</p>
-  <p>Progress backs up to your Google account via Firebase (not Google Drive).</p>
+<main id="card" data-state="checking">
+  <h1 id="title">Sign in with Google</h1>
+  <p id="lead">Tap the teal button. Safari will open Google, then bring you back signed in.</p>
+  <p id="detail">Progress backs up to your Google account via Firebase (not Google Drive).</p>
   <p id="status">Preparing…</p>
   <p id="err"></p>
   <!-- Real <a href> so iOS always navigates from the tap (no async SDK). -->
   <a class="primary" id="go" href="#">Continue with Google</a>
-  <a class="link" id="back" href="./index.html?v=20260824u#/">Back to study guide</a>
+  <button type="button" class="primary" id="continueHome" hidden>Continue</button>
+  <button type="button" class="link" id="tryAgain" hidden>Try again</button>
+  <button type="button" class="link" id="signOutBtn" hidden>Sign out</button>
+  <a class="link" id="back" href="./index.html?v=20260824w#/">Back to study guide</a>
+  <button type="button" class="link" id="exitBtn" hidden>Exit</button>
 </main>
 <script>
 (function () {
-  var HOME = "./index.html?v=20260824u&r=" + Date.now() + "&signedin=1#/";
+  var BUILD = "20260824w";
+  var KEY = "mnn-study-v1";
+  var KEY_JUST = KEY + ":justSignedIn";
+  var KEY_EXPECT = KEY + ":expectAuth";
+  var KEY_HINT = KEY + ":authHint";
+  var KEY_ATTEMPT = KEY + ":authAttempt";
+  var HOME = "./index.html?v=" + BUILD + "&r=" + Date.now() + "&signedin=1#/";
+  var EXIT = "./index.html?v=" + BUILD + "&r=" + Date.now() + "#/";
+
+  var card = document.getElementById("card");
+  var title = document.getElementById("title");
+  var lead = document.getElementById("lead");
+  var detail = document.getElementById("detail");
   var status = document.getElementById("status");
   var err = document.getElementById("err");
   var go = document.getElementById("go");
-  var signedIn = false;
+  var continueHome = document.getElementById("continueHome");
+  var tryAgain = document.getElementById("tryAgain");
+  var signOutBtn = document.getElementById("signOutBtn");
+  var back = document.getElementById("back");
+  var exitBtn = document.getElementById("exitBtn");
+  var settled = false;
+  var auth = null;
 
-  function showErr(msg) {
+  function setVisible(el, on) {
+    if (!el) return;
+    if (on) el.removeAttribute("hidden");
+    else el.setAttribute("hidden", "");
+  }
+
+  function showReady() {
+    settled = false;
+    card.setAttribute("data-state", "ready");
+    title.textContent = "Sign in with Google";
+    lead.textContent = "Tap the teal button. Safari will open Google, then bring you back signed in.";
+    detail.textContent = "Progress backs up to your Google account via Firebase (not Google Drive).";
+    status.textContent = "Ready. Tap Continue with Google.";
+    err.textContent = "";
+    setVisible(go, true);
+    setVisible(continueHome, false);
+    setVisible(tryAgain, false);
+    setVisible(signOutBtn, false);
+    setVisible(back, true);
+    setVisible(exitBtn, false);
+    armContinueLink();
+  }
+
+  function showChecking() {
+    card.setAttribute("data-state", "checking");
+    title.textContent = "Sign in with Google";
+    lead.textContent = "Finishing Google sign-in…";
+    detail.textContent = "Progress backs up to your Google account via Firebase (not Google Drive).";
+    status.textContent = "Checking for a completed sign-in…";
+    err.textContent = "";
+    setVisible(go, false);
+    setVisible(continueHome, false);
+    setVisible(tryAgain, false);
+    setVisible(signOutBtn, false);
+    setVisible(back, false);
+    setVisible(exitBtn, false);
+  }
+
+  function showSuccess(user) {
+    settled = true;
+    try { sessionStorage.removeItem(KEY_ATTEMPT); } catch (e) {}
+    card.setAttribute("data-state", "success");
+    title.textContent = "Signed in";
+    var email = (user && user.email) ? user.email : "Google account";
+    lead.textContent = "You are signed in as " + email + ".";
+    detail.textContent = "Progress will back up to this Google account via Firebase (not Google Drive).";
+    status.textContent = "Sign-in successful.";
+    err.textContent = "";
+    try {
+      sessionStorage.setItem(KEY_JUST, "1");
+      localStorage.setItem(KEY_EXPECT, "1");
+      localStorage.setItem(KEY_HINT, JSON.stringify({
+        uid: user && user.uid ? user.uid : "",
+        email: user && user.email ? user.email : "",
+        at: Date.now()
+      }));
+      localStorage.removeItem(KEY + ":guest");
+    } catch (e) {}
+    setVisible(go, false);
+    setVisible(continueHome, true);
+    setVisible(tryAgain, false);
+    setVisible(signOutBtn, true);
+    setVisible(back, false);
+    setVisible(exitBtn, false);
+  }
+
+  function showFailure(msg) {
+    settled = true;
+    try { sessionStorage.removeItem(KEY_ATTEMPT); } catch (e) {}
+    card.setAttribute("data-state", "failure");
+    title.textContent = "Sign-in failed";
+    lead.textContent = "Google sign-in did not finish on this page.";
+    detail.textContent = "You can try again, or exit back to the study guide.";
+    status.textContent = "Sign-in was not completed.";
     err.textContent = msg || "Sign-in failed.";
-    status.textContent = "You can try again, or go back.";
+    setVisible(go, false);
+    setVisible(continueHome, false);
+    setVisible(tryAgain, true);
+    setVisible(signOutBtn, false);
+    setVisible(back, false);
+    setVisible(exitBtn, true);
   }
 
   function goHome() {
-    if (signedIn) return;
-    signedIn = true;
-    status.textContent = "Signed in. Saving session…";
     try {
-      sessionStorage.setItem("mnn-study-v1:justSignedIn", "1");
-      localStorage.setItem("mnn-study-v1:expectAuth", "1");
+      sessionStorage.setItem(KEY_JUST, "1");
+      localStorage.setItem(KEY_EXPECT, "1");
     } catch (e) {}
-    /* Give LOCAL persistence a moment to flush before leaving this page —
-       bouncing instantly left index.html with no restored session on iPhone. */
-    setTimeout(function () {
-      status.textContent = "Signed in. Returning…";
-      location.replace(HOME);
-    }, 450);
+    status.textContent = "Opening study guide…";
+    location.replace(HOME);
+  }
+
+  function exitHome() {
+    try {
+      sessionStorage.removeItem(KEY_JUST);
+      sessionStorage.removeItem(KEY_ATTEMPT);
+      localStorage.removeItem(KEY_EXPECT);
+    } catch (e) {}
+    location.replace(EXIT);
   }
 
   function friendly(e) {
@@ -93,6 +202,9 @@
     if (code === "auth/operation-not-allowed") return "Google sign-in is not enabled in Firebase yet.";
     if (code === "auth/unauthorized-domain") return "This website is not an authorised domain in Firebase.";
     if (code === "auth/network-request-failed") return "Network error. Check Wi‑Fi/cellular and try again.";
+    if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
+      return "Sign-in was cancelled.";
+    }
     return (e && e.message) || "Sign-in failed.";
   }
 
@@ -128,32 +240,28 @@
     try {
       var url = buildGoogleRedirectUrl();
       go.setAttribute("href", url);
-      status.textContent = "Ready. Tap Continue with Google.";
-      err.textContent = "";
+      if (card.getAttribute("data-state") === "ready") {
+        status.textContent = "Ready. Tap Continue with Google.";
+        err.textContent = "";
+      }
       return url;
     } catch (e) {
       go.setAttribute("href", "#");
-      showErr(e.message || String(e));
+      showFailure(e.message || String(e));
       return null;
     }
   }
 
-  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
-    showErr("Could not load Google sign-in. Check your connection, then reload.");
-    return;
+  function markAttemptLeaving() {
+    try {
+      sessionStorage.setItem(KEY_ATTEMPT, "1");
+      localStorage.setItem(KEY_EXPECT, "1");
+    } catch (e) {}
   }
-  try {
-    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
-  } catch (e) {
-    showErr((e && e.message) || "Firebase failed to start.");
-    return;
-  }
-
-  var auth = firebase.auth();
 
   function afterUser(user) {
-    if (!user) return;
-    var done = function () { goHome(); };
+    if (!user || settled) return;
+    var done = function () { showSuccess(user); };
     try {
       auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
         .then(done)
@@ -163,24 +271,94 @@
     }
   }
 
-  auth.onAuthStateChanged(function (user) {
-    if (user) afterUser(user);
-  });
+  function sleep(ms) {
+    return new Promise(function (resolve) { setTimeout(resolve, ms); });
+  }
 
-  /* Returning from Google / Firebase handler */
-  status.textContent = "Checking for a completed sign-in…";
-  Promise.race([
-    auth.getRedirectResult(),
-    new Promise(function (resolve) { setTimeout(function () { resolve(null); }, 4000); })
-  ]).then(function (result) {
+  async function finishRedirectCheck() {
+    showChecking();
+    try {
+      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+    } catch (e) {}
+
+    var redirectErr = null;
+    var result = null;
+    try {
+      if (typeof auth.authStateReady === "function") {
+        await Promise.race([auth.authStateReady(), sleep(8000)]);
+      }
+      result = await Promise.race([
+        auth.getRedirectResult(),
+        sleep(10000).then(function () { return null; })
+      ]);
+    } catch (e) {
+      redirectErr = e;
+    }
+
     if (result && result.user) {
       afterUser(result.user);
       return;
     }
-    armContinueLink();
-  }).catch(function (e) {
-    showErr(friendly(e));
-    armContinueLink();
+    if (auth.currentUser) {
+      afterUser(auth.currentUser);
+      return;
+    }
+
+    /* IndexedDB restore can lag behind getRedirectResult on iPhone. */
+    var until = Date.now() + 8000;
+    while (Date.now() < until && !auth.currentUser) {
+      await sleep(250);
+    }
+    if (auth.currentUser) {
+      afterUser(auth.currentUser);
+      return;
+    }
+
+    if (redirectErr) showFailure(friendly(redirectErr));
+    else showFailure("Google returned, but this page could not restore the signed-in session. Use the same Safari tab or home-screen icon you started from, then try again.");
+  }
+
+  if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
+    showFailure("Could not load Google sign-in. Check your connection, then reload.");
+    return;
+  }
+  try {
+    if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
+  } catch (e) {
+    showFailure((e && e.message) || "Firebase failed to start.");
+    return;
+  }
+
+  auth = firebase.auth();
+  back.href = EXIT;
+
+  auth.onAuthStateChanged(function (user) {
+    if (user) afterUser(user);
+  });
+
+  continueHome.addEventListener("click", function () {
+    goHome();
+  });
+  tryAgain.addEventListener("click", function () {
+    showReady();
+  });
+  exitBtn.addEventListener("click", function () {
+    exitHome();
+  });
+  signOutBtn.addEventListener("click", function () {
+    status.textContent = "Signing out…";
+    try {
+      sessionStorage.removeItem(KEY_JUST);
+      sessionStorage.removeItem(KEY_ATTEMPT);
+      localStorage.removeItem(KEY_EXPECT);
+      localStorage.removeItem(KEY_HINT);
+    } catch (e) {}
+    var done = function () { showReady(); };
+    try {
+      auth.signOut().then(done).catch(done);
+    } catch (e) {
+      done();
+    }
   });
 
   go.addEventListener("click", function (ev) {
@@ -188,13 +366,49 @@
     err.textContent = "";
     try {
       var url = buildGoogleRedirectUrl();
+      markAttemptLeaving();
       go.setAttribute("href", url);
       status.textContent = "Opening Google…";
       location.assign(url);
     } catch (e) {
-      showErr((e && e.message) || String(e));
+      showFailure((e && e.message) || String(e));
     }
   });
+
+  var returning = false;
+  try { returning = sessionStorage.getItem(KEY_ATTEMPT) === "1"; } catch (e) {}
+
+  if (returning) {
+    finishRedirectCheck();
+  } else {
+    /* Fresh visit: still check for an existing session / late redirect result. */
+    showChecking();
+    Promise.resolve()
+      .then(function () {
+        return auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function () {});
+      })
+      .then(function () {
+        if (typeof auth.authStateReady === "function") {
+          return Promise.race([auth.authStateReady(), sleep(4000)]);
+        }
+      })
+      .then(function () { return auth.getRedirectResult().catch(function () { return null; }); })
+      .then(function (result) {
+        if (settled) return;
+        if (result && result.user) {
+          afterUser(result.user);
+          return;
+        }
+        if (auth.currentUser) {
+          afterUser(auth.currentUser);
+          return;
+        }
+        showReady();
+      })
+      .catch(function () {
+        if (!settled) showReady();
+      });
+  }
 })();
 </script>
 </body>

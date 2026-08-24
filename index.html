@@ -3593,34 +3593,38 @@ async function ensureLoadSyncPopup(reason) {
       } catch (e) {}
 
       /* Wait until onAuthStateChanged has fired (or Firebase failed), then
-         poll briefly so a slow IndexedDB restore can still win. */
-      const waitMs = expectAuth ? 12000 : 6000;
+         poll so a slow IndexedDB restore can still win — especially right
+         after signin.html Continue, when Safari sometimes lags. */
+      const waitMs = expectAuth ? 15000 : 6000;
       try {
         await Promise.race([whenCloudAuthReady(), sleep(waitMs)]);
       } catch (e) {}
 
-      const pollUntil = Date.now() + (expectAuth ? 4000 : 800);
-      while (Date.now() < pollUntil && !requireCloudUser()) {
-        if (cloudAuth && cloudAuth.currentUser) {
-          cloudUser = cloudAuth.currentUser;
-          break;
-        }
+      const pollUntil = Date.now() + (expectAuth ? 8000 : 800);
+      while (Date.now() < pollUntil) {
+        if (cloudAuth && cloudAuth.currentUser) cloudUser = cloudAuth.currentUser;
+        if (requireCloudUser() && cloudDb) break;
         /* Auth bound and settled with no user — stop polling unless we
            were told a sign-in was in flight. */
-        if (cloudAuthResolved && cloudAuth && !expectAuth) break;
+        if (cloudAuthResolved && cloudAuth && !expectAuth && !requireCloudUser()) break;
         await sleep(200);
       }
       if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
 
       const user = requireCloudUser();
-      if (user && cloudDb) {
-        try {
-          sessionStorage.removeItem(KEY + ":justSignedIn");
-          localStorage.removeItem(KEY_EXPECT_AUTH);
-        } catch (e) {}
-        cloudLastCheckedAt = 0;
-        await reconcileCloud(reason === "resume" ? "resume" : (expectAuth ? "signin" : "boot"));
-        return;
+      if (user) {
+        /* User restored: wait briefly for Firestore bind before syncing. */
+        const dbUntil = Date.now() + (expectAuth ? 5000 : 1500);
+        while (!cloudDb && Date.now() < dbUntil) await sleep(100);
+        if (cloudDb) {
+          try {
+            sessionStorage.removeItem(KEY + ":justSignedIn");
+            localStorage.removeItem(KEY_EXPECT_AUTH);
+          } catch (e) {}
+          cloudLastCheckedAt = 0;
+          await reconcileCloud(reason === "resume" ? "resume" : (expectAuth || justSignedIn ? "signin" : "boot"));
+          return;
+        }
       }
 
       if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
@@ -3634,18 +3638,29 @@ async function ensureLoadSyncPopup(reason) {
       } catch (e) {}
 
       const firebaseUp = !!(cloudAuth && cloudDb);
+      /* Never label Google as “not signed in” right after a handoff that
+         left an auth hint — that was the confusing save popup. */
+      const cloudLabel = user
+        ? ((user.email || "signed in") + (cloudDb ? "" : " · connecting…"))
+        : expectAuth
+          ? (authHint && authHint.email ? `session lost (${authHint.email})` : "session not restored")
+          : "not signed in";
       await showCloudSyncPopup({
-        title: expectAuth ? "Sign-in did not stick" : "Progress on this device",
-        message: expectAuth
-          ? (firebaseUp
-            ? "Google sign-in completed on the sign-in page, but this screen could not restore the session. Use the same Safari/home-screen icon you signed in with (browser and home-screen app do not share login), then try Sign in again."
-            : "Could not reach Google on this page. Check your connection, then try Sign in again from the account button.")
-          : "Your study progress is saved on this phone. Sign in with Google to back it up to your account (Firestore — not Google Drive).",
+        title: user && !cloudDb
+          ? "Signed in — still connecting"
+          : expectAuth
+            ? "Sign-in did not stick"
+            : "Progress on this device",
+        message: user && !cloudDb
+          ? "Google sign-in worked, but Firestore is still loading on this page. Tap OK, then open the gear menu and try Save / sync again in a moment."
+          : expectAuth
+            ? (firebaseUp
+              ? "Google sign-in completed on the sign-in page, but this screen could not restore the session. Use the same Safari/home-screen icon you signed in with (browser and home-screen app do not share login), then try Sign in again."
+              : "Could not reach Google on this page. Check your connection, then try Sign in again from the account button.")
+            : "Your study progress is saved on this phone. Sign in with Google to back it up to your account (Firestore — not Google Drive).",
         localTs: +localStorage.getItem(KEY_SAVED) || 0,
         cloudTs: 0,
-        cloudLabel: expectAuth
-          ? (authHint && authHint.email ? `session lost (${authHint.email})` : "session not restored")
-          : "not signed in"
+        cloudLabel
       });
       try {
         sessionStorage.removeItem(KEY + ":justSignedIn");
@@ -3683,11 +3698,17 @@ function continueAsGuest() {
 }
 
 /* Welcome screen only when signed out, no local progress, and guest mode
-   not chosen yet — so an old phone with saves goes straight to the app. */
+   not chosen yet — so an old phone with saves goes straight to the app.
+   Also skip while a Google sign-in handoff is in flight. */
 function useWelcomeLanding() {
   if (cloudUser) return false;
   if (localStorage.getItem(KEY_GUEST) === "1") return false;
   if (progressWeight(S) > 0) return false;
+  try {
+    if (localStorage.getItem(KEY_EXPECT_AUTH) === "1") return false;
+    if (sessionStorage.getItem(KEY + ":justSignedIn") === "1") return false;
+    if (/(?:^|[?&])signedin=1(?:&|$)/.test(location.search || "")) return false;
+  } catch (e) {}
   return true;
 }
 
