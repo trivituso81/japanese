@@ -44,7 +44,7 @@
     box-sizing: border-box; line-height: 1.3;
   }
 </style>
-<script src="firebase-config.js?v=20260824o"></script>
+<script src="firebase-config.js?v=20260824p"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
@@ -56,11 +56,11 @@
   <p id="err"></p>
   <!-- Real <a href> so iOS always navigates from the tap (no async SDK). -->
   <a class="primary" id="go" href="#">Continue with Google</a>
-  <a class="link" id="back" href="./index.html?v=20260824o#/">Back to study guide</a>
+  <a class="link" id="back" href="./index.html?v=20260824p#/">Back to study guide</a>
 </main>
 <script>
 (function () {
-  var HOME = "./index.html?v=20260824o&r=" + Date.now() + "#/";
+  var HOME = "./index.html?v=20260824p&r=" + Date.now() + "&signedin=1#/";
   var status = document.getElementById("status");
   var err = document.getElementById("err");
   var go = document.getElementById("go");
@@ -75,6 +75,7 @@
     if (signedIn) return;
     signedIn = true;
     status.textContent = "Signed in. Returning…";
+    try { sessionStorage.setItem("mnn-study-v1:justSignedIn", "1"); } catch (e) {}
     location.replace(HOME);
   }
 

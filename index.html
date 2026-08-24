@@ -3579,7 +3579,8 @@ function runPendingCloudSync() {
 
 /* Show the save-state OK dialog on every cold load / refresh.
    Prefer a Google comparison when signed in; otherwise confirm local save.
-   Never wait on a hung Firebase CDN — iOS has been failing silently there. */
+   Wait briefly for auth to restore (bounded) so a just-signed-in return does
+   not flash the guest “GOOGLE never” dialog before Firebase answers. */
 async function ensureLoadSyncPopup(reason) {
   if (cloudSyncDialogOpen) return;
   if (cloudLoadPopupDone) return;
@@ -3587,36 +3588,44 @@ async function ensureLoadSyncPopup(reason) {
   cloudHomePopupArmed = true;
   cloudLoadPopupPromise = (async () => {
     try {
-      /* Tiny pause so the home paint lands first; do not wait on Google. */
       await sleep(250);
       if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
       if (typeof useWelcomeLanding === "function" && useWelcomeLanding()) return;
 
+      let justSignedIn = false;
+      try {
+        justSignedIn = sessionStorage.getItem(KEY + ":justSignedIn") === "1"
+          || /(?:^|[?&])signedin=1(?:&|$)/.test(location.search || "");
+      } catch (e) {}
+
+      /* Auth unlocks within ~2s via initCloud; wait a bit longer after sign-in. */
+      const authWait = justSignedIn ? 6000 : 3200;
+      try {
+        await Promise.race([whenCloudAuthReady(), sleep(authWait)]);
+      } catch (e) {}
+      if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
+
       const user = requireCloudUser();
       if (user && cloudDb) {
         cloudLastCheckedAt = 0;
-        try {
-          await Promise.race([
-            reconcileCloud(reason === "resume" ? "resume" : "boot"),
-            sleep(CLOUD_PULL_TIMEOUT_MS)
-          ]);
-        } catch (e) {}
-        if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
+        await reconcileCloud(reason === "resume" ? "resume" : (justSignedIn ? "signin" : "boot"));
+        try { sessionStorage.removeItem(KEY + ":justSignedIn"); } catch (e) {}
+        return;
       }
 
       if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
-      /* Always confirm when this device has progress, or guest/signed-in. */
       const hasProgress = progressWeight(S) > 0;
       const isGuest = localStorage.getItem(KEY_GUEST) === "1";
-      if (!hasProgress && !isGuest && !user) return;
+      if (!hasProgress && !isGuest) return;
 
       await showCloudSyncPopup({
-        title: user ? "You're up to date" : "Progress on this device",
-        message: user
-          ? "Could not reach Google in time. Your progress is saved on this phone."
-          : "Your study progress is saved on this phone. Sign in with Google to compare with the cloud copy.",
+        title: "Progress on this device",
+        message: justSignedIn
+          ? "Google sign-in did not finish on this page yet. Your progress is still saved on this phone — try Sign in again from the account button."
+          : "Your study progress is saved on this phone. Sign in with Google to back it up and compare across devices.",
         localTs: +localStorage.getItem(KEY_SAVED) || 0,
-        cloudTs: 0
+        cloudTs: 0,
+        cloudLabel: "not signed in"
       });
       cloudHomePopupArmed = false;
     } finally {
@@ -3719,12 +3728,24 @@ function bindCloudAuth() {
     else if (authError) alert(authError);
   });
   cloudAuth.onAuthStateChanged(user => {
+    const wasIn = !!cloudUser;
     cloudUser = user;
     notifyCloudAuthReady();
     if (user) {
       localStorage.removeItem(KEY_GUEST);
-      /* Auth restored after Firebase boot — pageshow often ran too early. */
-      requestCloudSyncPopup("signin");
+      /* Session restored or fresh sign-in after cloudUser was empty. */
+      if (!wasIn) {
+        cloudLastCheckedAt = 0;
+        if (cloudSyncDialogOpen) {
+          /* Guest dialog raced ahead — dismiss it and run a real Google sync. */
+          pendingCloudSyncReason = "signin";
+          const ok = document.getElementById("cloudSyncOk");
+          if (ok) setTimeout(() => { try { ok.click(); } catch (e) {} }, 0);
+        } else {
+          cloudLoadPopupDone = false;
+          requestCloudSyncPopup("signin");
+        }
+      }
     }
     updateCloudUi();
     route();
@@ -3807,12 +3828,27 @@ async function pullCloud(uid) {
     catch (err) { raw = null; }
   }
   if (!raw && data.progress && typeof data.progress === "object") raw = data.progress;
-  if (!raw) return null;
+  let updatedAt = 0;
+  if (data.updatedAt) {
+    if (typeof data.updatedAt.toMillis === "function") updatedAt = data.updatedAt.toMillis();
+    else if (typeof data.updatedAt === "number") updatedAt = data.updatedAt;
+    else if (data.updatedAt.seconds) updatedAt = data.updatedAt.seconds * 1000;
+  }
+  if (!raw) {
+    /* Doc exists but progress payload missing — still surface the save time. */
+    return {
+      progress: blank(),
+      weight: typeof data.weight === "number" ? data.weight : 0,
+      updatedAt,
+      email: data.email || "",
+      empty: true
+    };
+  }
   const progress = migrate(Object.assign(blank(), raw));
   return {
     progress,
     weight: typeof data.weight === "number" ? data.weight : progressWeight(progress),
-    updatedAt: data.updatedAt && data.updatedAt.toMillis ? data.updatedAt.toMillis() : 0,
+    updatedAt,
     email: data.email || ""
   };
 }
@@ -3858,6 +3894,7 @@ async function pushCloud(uid, opts) {
       await cloudDocRef(uid).set(payload, { merge: true });
     }
     cloudLastPush = Date.now();
+    try { localStorage.setItem(KEY + ":cloudAt", String(cloudLastPush)); } catch (e) {}
     return true;
   } catch (e) {
     console.warn("cloud push failed", e);
@@ -3882,7 +3919,7 @@ function formatSyncTime(ts) {
   }
 }
 
-function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
+function showCloudSyncPopup({ title, message, localTs, cloudTs, cloudLabel }) {
   return new Promise(resolve => {
     try { closeBackupSheet(); } catch (e) {}
     const sheet = document.getElementById("cloudSyncSheet");
@@ -3903,9 +3940,12 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
     if (titleEl) titleEl.textContent = title || "Sync check";
     if (msgEl) msgEl.textContent = message || "";
     if (timesEl) {
+      const googleLine = cloudLabel != null
+        ? String(cloudLabel)
+        : formatSyncTime(cloudTs);
       timesEl.innerHTML =
         `<div><b>This device</b> ${esc(formatSyncTime(localTs))}</div>` +
-        `<div><b>Google</b> ${esc(formatSyncTime(cloudTs))}</div>`;
+        `<div><b>Google</b> ${esc(googleLine)}</div>`;
     }
     /* Re-parent + clear [hidden]. The stylesheet uses [hidden]{display:none
        !important}, so an uncleared attribute keeps the dialog invisible on
@@ -3970,12 +4010,13 @@ async function reconcileCloud(reason) {
       return;
     }
 
-    const cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
+    let cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
     const localW = progressWeight(S);
-    const cloudW = cloud ? cloud.weight : 0;
+    let cloudW = cloud ? cloud.weight : 0;
+    const cloudEmpty = !cloud || cloud.empty || cloudW === 0;
 
     /* Nothing on either side — still confirm so a refresh is never silent. */
-    if (localW === 0 && cloudW === 0) {
+    if (localW === 0 && cloudEmpty) {
       await showCloudSyncPopup({
         title: "You're up to date",
         message: "No study progress is saved on this device or Google yet.",
@@ -3984,6 +4025,43 @@ async function reconcileCloud(reason) {
       });
       cloudHomePopupArmed = false;
       pendingCloudSyncReason = null;
+      return;
+    }
+
+    /* First Google backup (or empty cloud doc): upload BEFORE the dialog so
+       the popup never claims “GOOGLE never” after a successful sign-in. */
+    if (localW > 0 && cloudEmpty) {
+      const uploaded = await pushCloud(user.uid, { force: true });
+      if (!uploaded) {
+        await showCloudSyncPopup({
+          title: "Could not save to Google",
+          message: authError || "Sign-in worked, but uploading your progress failed. Check your connection and try again from Settings.",
+          localTs,
+          cloudTs: 0
+        });
+        cloudHomePopupArmed = false;
+        pendingCloudSyncReason = null;
+        return;
+      }
+      let savedAt = cloudLastPush || Date.now();
+      try {
+        const again = await Promise.race([
+          pullCloud(user.uid),
+          sleep(2000).then(() => null)
+        ]);
+        if (again && again.updatedAt) savedAt = again.updatedAt;
+      } catch (e) {}
+      await showCloudSyncPopup({
+        title: "Saved to Google",
+        message: "Your study progress is now backed up to your Google account.",
+        localTs: +localStorage.getItem(KEY_SAVED) || savedAt,
+        cloudTs: savedAt
+      });
+      try { sessionStorage.removeItem(KEY + ":justSignedIn"); } catch (e) {}
+      cloudHomePopupArmed = false;
+      pendingCloudSyncReason = null;
+      updateCloudUi();
+      route();
       return;
     }
 
@@ -4008,18 +4086,31 @@ async function reconcileCloud(reason) {
       return;
     }
 
-    /* Local is same age or newer (or Google has no copy yet). */
+    /* Local is same age or newer — push first when local is ahead, then confirm. */
+    if (localW > 0 && localTs > cloudTs) {
+      const uploaded = await pushCloud(user.uid, { force: true });
+      if (uploaded) {
+        cloudTs = cloudLastPush || Date.now();
+        try {
+          const again = await Promise.race([
+            pullCloud(user.uid),
+            sleep(2000).then(() => null)
+          ]);
+          if (again && again.updatedAt) cloudTs = again.updatedAt;
+        } catch (e) {}
+      }
+    }
+
     await showCloudSyncPopup({
       title: "You're up to date",
-      message: "You were on the most updated version.",
-      localTs,
+      message: localTs > (cloud ? (cloud.updatedAt || 0) : 0) && cloudLastPush
+        ? "This device had newer progress. It is now saved on Google too."
+        : "You were on the most updated version.",
+      localTs: +localStorage.getItem(KEY_SAVED) || localTs,
       cloudTs
     });
     cloudHomePopupArmed = false;
     pendingCloudSyncReason = null;
-    if (localW > 0 && (!cloud || localTs > cloudTs)) {
-      await pushCloud(user.uid, { force: true });
-    }
     updateCloudUi();
     route();
   } finally {
