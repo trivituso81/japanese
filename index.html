@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824h">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824h">
-<link rel="manifest" href="site.webmanifest?v=20260824h">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824i">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824i">
+<link rel="manifest" href="site.webmanifest?v=20260824i">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260824h";
+window.__BUILD__ = "20260824i";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260824h";
+  var v = window.__BUILD__ || "20260824i";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260824h"));
+    + encodeURIComponent(window.__BUILD__ || "20260824i"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260824h") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824i") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -800,16 +800,30 @@ document.addEventListener("DOMContentLoaded", function () {
     stroke-dasharray: 6 7; stroke-linecap: round;
   }
 
-  /* Verb conjugation badges — one seal per form in VERB_FORMS */
+  /* Verb conjugation badges — one seal per form in VERB_FORMS.
+     Four across (~45% larger than the old 6×3 cluster) so the seals fill
+     the tile instead of floating in leftover white space. Last row of two
+     is centered. */
+  .home-track-stats .stat.verbs-home {
+    gap: 6px;
+    padding: 10px 8px 8px;
+  }
+  .home-track-stats .stat.verbs-home .viz {
+    align-items: center; justify-content: center;
+  }
   .viz-badges {
-    display: grid;
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-    gap: 4px;
-    width: 100%; height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     align-content: center;
-    min-height: 56px;
+    gap: 7px 6px;
+    width: 100%;
+    max-height: 100%;
+    min-height: 0;
   }
   .viz-badges .vb {
+    flex: 0 0 calc((100% - 18px) / 4);
+    width: calc((100% - 18px) / 4);
     aspect-ratio: 1;
     min-width: 0; min-height: 0;
     display: flex; align-items: center; justify-content: center;
@@ -818,7 +832,7 @@ document.addEventListener("DOMContentLoaded", function () {
     background: var(--bg-inset);
     color: var(--text-faint);
     font-family: var(--jp-mincho);
-    font-size: clamp(6.5px, 1.9vw, 9.5px);
+    font-size: clamp(8.5px, 2.7vw, 12.5px);
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: .01em;
@@ -1686,7 +1700,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .viz-klevels .k-home-bar { height: 9px; }
     .viz-klevels .k-home-key { font-size: 10px; gap: 6px 10px; }
     .viz-wave { min-height: 48px; }
-    .viz-badges { min-height: 48px; gap: 3px; }
+    .viz-badges { gap: 4px 4px; }
+    .viz-badges .vb { font-size: clamp(8px, 2.5vw, 11.5px); }
+    .home-track-stats .stat.verbs-home { padding: 8px 6px 6px; gap: 4px; }
     .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
   }
   @media (max-height: 560px) {
@@ -2777,6 +2793,9 @@ document.addEventListener("DOMContentLoaded", function () {
     .viz-wave { height: 80%; }
     .viz-wave .line { stroke-width: 8.8; }
     .viz-wave .empty { stroke-width: 6.4; }
+    .viz-badges { gap: 8px 7px; }
+    .viz-badges .vb { font-size: clamp(11px, 1.7vw, 14px); }
+    .home-track-stats .stat.verbs-home { padding: 12px 10px 10px; }
     .home-next { padding-top: 6px; }
     .home-next .btn {
       max-width: 440px; margin: 0 auto;
@@ -3028,10 +3047,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260824h" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260824i" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824h#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824i#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3051,7 +3070,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260824h" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260824i" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3145,7 +3164,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260824h"></script>
+<script src="firebase-config.js?v=20260824i"></script>
 <script>
 /* ============================================================
    State
@@ -3458,14 +3477,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260824h" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260824i" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260824h" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824i" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3807,7 +3826,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824h"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824i"));
     return;
   }
   const start = () => {
@@ -3821,7 +3840,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824h"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824i"));
         return;
       }
       authError = authErrorMessage(e);
@@ -5181,7 +5200,8 @@ function badgesViz() {
   return `<div class="viz-badges" role="img" aria-label="Verb conjugation badges">${cells}</div>`;
 }
 
-function homeStat(k, viz, valHtml, sub, href) {
+function homeStat(k, viz, valHtml, sub, href, cls) {
+  const extra = cls ? ` ${cls}` : "";
   const inner = `<div class="k">${esc(k)}</div>
     <div class="viz">${viz}</div>
     <div class="meta">
@@ -5189,9 +5209,9 @@ function homeStat(k, viz, valHtml, sub, href) {
       <div class="sub">${sub}</div>
     </div>`;
   if (href) {
-    return `<a class="stat" href="${href}">${inner}</a>`;
+    return `<a class="stat${extra}" href="${href}">${inner}</a>`;
   }
-  return `<div class="stat">${inner}</div>`;
+  return `<div class="stat${extra}">${inner}</div>`;
 }
 
 /* Home filter for vocabulary + grammar: always a lesson number. Defaults to
@@ -5256,7 +5276,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260824h" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260824i" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -5318,7 +5338,7 @@ function renderHome() {
         ${kanjiHomeStat(kanjiLevels, "#/kanji")}
         ${homeStat("Verbs", badgesViz(),
           `${vBadges.earned}<span class="of"> / ${vBadges.total}</span>`,
-          verbSub(), "#/verbs")}
+          verbSub(), "#/verbs", "verbs-home")}
       </div>
     </section>`;
 
@@ -9140,7 +9160,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260824h&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824i&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
