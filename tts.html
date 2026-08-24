@@ -13,6 +13,8 @@
 <script>
 (function () {
   var SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
+  var FETCH_MS = 2000;
+  var PLAY_MS = 2000;
   var audio = document.createElement("audio");
   audio.setAttribute("playsinline", "");
   audio.setAttribute("webkit-playsinline", "");
@@ -24,6 +26,7 @@
 
   var objectUrl = null;
   var speakSeq = 0;
+  var fetchAbort = null;
 
   function tell(type, extra) {
     try {
@@ -60,17 +63,10 @@
     }
   }
 
+  /* Parent owns Web Speech fallback — avoid double-speaking from this frame. */
   function fail(seq, q, reason) {
     if (seq !== speakSeq) return;
     tell("tts-error", { reason: reason || "error", q: q });
-    if (!("speechSynthesis" in window)) return;
-    try {
-      speechSynthesis.cancel();
-      var u = new SpeechSynthesisUtterance(q);
-      u.lang = "ja-JP";
-      u.rate = 0.92;
-      speechSynthesis.speak(u);
-    } catch (e) {}
   }
 
   function playBlobOrSrc(seq, q, src) {
@@ -113,7 +109,7 @@
         settled = true;
         fail(seq, q, "timeout");
       }
-    }, 8000);
+    }, PLAY_MS);
   }
 
   function speak(q) {
@@ -121,13 +117,28 @@
     if (!q) { tell("tts-error", { reason: "empty" }); return; }
     var seq = ++speakSeq;
     revoke();
+    if (fetchAbort) {
+      try { fetchAbort.abort(); } catch (e) {}
+      fetchAbort = null;
+    }
     var url = ttsUrl(q);
     if (typeof fetch !== "function") {
       playBlobOrSrc(seq, q, url);
       return;
     }
-    fetch(url, { referrerPolicy: "no-referrer", cache: "no-store", mode: "cors" })
+    var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
+    fetchAbort = ctrl;
+    var fetchTimer = setTimeout(function () {
+      try { if (ctrl) ctrl.abort(); } catch (e) {}
+    }, FETCH_MS);
+    fetch(url, {
+      referrerPolicy: "no-referrer",
+      cache: "no-store",
+      mode: "cors",
+      signal: ctrl ? ctrl.signal : undefined
+    })
       .then(function (r) {
+        clearTimeout(fetchTimer);
         if (!r.ok) throw new Error("http-" + r.status);
         return r.blob();
       })
@@ -138,7 +149,9 @@
         playBlobOrSrc(seq, q, objectUrl);
       })
       .catch(function () {
+        clearTimeout(fetchTimer);
         if (seq !== speakSeq) return;
+        /* Direct <audio src> as one quick retry, then parent falls back. */
         playBlobOrSrc(seq, q, url);
       });
   }
@@ -150,6 +163,10 @@
     else if (d.type === "tts-speak") speak(d.q);
     else if (d.type === "tts-stop") {
       speakSeq++;
+      if (fetchAbort) {
+        try { fetchAbort.abort(); } catch (e) {}
+        fetchAbort = null;
+      }
       try { audio.pause(); } catch (e) {}
       revoke();
     }
