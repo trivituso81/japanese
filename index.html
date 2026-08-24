@@ -3403,7 +3403,10 @@ document.addEventListener("visibilitychange", () => {
   } else {
     const away = cloudHiddenAt ? Date.now() - cloudHiddenAt : 0;
     cloudHiddenAt = 0;
-    if (away >= CLOUD_RESUME_AWAY_MS) reconcileCloud("resume");
+    if (away >= CLOUD_RESUME_AWAY_MS) {
+      cloudHomePopupArmed = true;
+      requestCloudSyncPopup("resume");
+    }
   }
 });
 
@@ -3438,7 +3441,25 @@ let cloudLastPush = 0;
 let cloudCheckBusy = false;
 let cloudLastCheckedAt = 0;
 let cloudSyncDialogOpen = false;
+let pendingCloudSyncReason = null;
+let cloudHomePopupArmed = true;
 const CLOUD_CHECK_MIN_MS = 8000;
+
+/* Queue a sync popup until Firebase auth + Firestore are ready.
+   pageshow often fires before Google restores the session, so calling
+   reconcileCloud immediately used to no-op and never retry. */
+function requestCloudSyncPopup(reason) {
+  pendingCloudSyncReason = reason || "refresh";
+  runPendingCloudSync();
+}
+function runPendingCloudSync() {
+  if (!pendingCloudSyncReason) return;
+  if (!requireCloudUser() || !cloudDb) return;
+  if (cloudCheckBusy || cloudSyncDialogOpen) return;
+  const reason = pendingCloudSyncReason;
+  pendingCloudSyncReason = null;
+  reconcileCloud(reason);
+}
 /* Paint the app immediately. Firebase is optional and loads afterward. */
 let authReady = true;
 let authError = "";
@@ -3536,7 +3557,8 @@ function bindCloudAuth() {
     cloudUser = user;
     if (user) {
       localStorage.removeItem(KEY_GUEST);
-      reconcileCloud("signin");
+      /* Auth restored after Firebase boot — pageshow often ran too early. */
+      requestCloudSyncPopup("signin");
     }
     updateCloudUi();
     route();
@@ -3548,13 +3570,16 @@ function initCloud() {
   cloudBootStarted = true;
   if (!window.FIREBASE_CONFIG) return;
   ensureFirebase()
-    .then(ok => {
+    .then(async ok => {
       if (!ok) return;
       if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
       cloudAuth = firebase.auth();
       cloudDb = firebase.firestore();
-      cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      try {
+        await cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
+      } catch (e) { /* keep default persistence */ }
       bindCloudAuth();
+      runPendingCloudSync();
     })
     .catch(e => {
       authError = "Could not load Google sign-in. You can still continue without signing in.";
@@ -3715,13 +3740,22 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
 
 async function reconcileCloud(reason) {
   const user = requireCloudUser();
-  if (!user || !cloudDb || cloudCheckBusy || cloudSyncDialogOpen) return;
+  if (!user || !cloudDb || cloudCheckBusy || cloudSyncDialogOpen) {
+    if (user && cloudDb && (cloudCheckBusy || cloudSyncDialogOpen)) {
+      /* Already checking or showing — keep a follow-up so we don't drop it. */
+      pendingCloudSyncReason = pendingCloudSyncReason || reason;
+    }
+    return;
+  }
   const now = Date.now();
-  /* Sign-in always checks. Refresh/resume debounce so pageshow + auth
-     restore do not open two popups in a row. */
-  if (reason !== "signin" && now - cloudLastCheckedAt < CLOUD_CHECK_MIN_MS) return;
+  /* Sign-in / first home paint always checks. Refresh/resume debounce so
+     pageshow + auth restore do not open two popups in a row. */
+  if (reason !== "signin" && reason !== "home" && now - cloudLastCheckedAt < CLOUD_CHECK_MIN_MS) {
+    return;
+  }
   cloudCheckBusy = true;
   cloudLastCheckedAt = now;
+  pendingCloudSyncReason = null;
   updateCloudUi();
   try {
     let cloud = null;
@@ -3729,6 +3763,7 @@ async function reconcileCloud(reason) {
       cloud = await pullCloud(user.uid);
     } catch (e) {
       authError = "Could not check Google save. " + cloudErrDetail(e);
+      /* Keep armed so a later home paint can retry after a transient failure. */
       updateCloudUi();
       return;
     }
@@ -3739,7 +3774,11 @@ async function reconcileCloud(reason) {
     const cloudW = cloud ? cloud.weight : 0;
 
     /* Nothing on either side — no sync dialog. */
-    if (localW === 0 && cloudW === 0) return;
+    if (localW === 0 && cloudW === 0) {
+      cloudHomePopupArmed = false;
+      pendingCloudSyncReason = null;
+      return;
+    }
 
     const cloudNewer = !!(cloud && cloudW > 0 && cloudTs > localTs);
 
@@ -3755,6 +3794,8 @@ async function reconcileCloud(reason) {
       S = cloud.progress;
       mergeVerbProgress(S, localCopy);
       save({ force: true });
+      cloudHomePopupArmed = false;
+      pendingCloudSyncReason = null;
       updateCloudUi();
       route();
       return;
@@ -3767,6 +3808,8 @@ async function reconcileCloud(reason) {
       localTs,
       cloudTs
     });
+    cloudHomePopupArmed = false;
+    pendingCloudSyncReason = null;
     if (localW > 0 && (!cloud || localTs > cloudTs)) {
       await pushCloud(user.uid, { force: true });
     }
@@ -3775,6 +3818,7 @@ async function reconcileCloud(reason) {
   } finally {
     cloudCheckBusy = false;
     updateCloudUi();
+    runPendingCloudSync();
   }
 }
 
@@ -5374,6 +5418,13 @@ function renderHome() {
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   wireCloudSettings();
   maybeOfferRestore();
+  /* Homepage paint is the reliable hook — Firebase often restores the Google
+     session after the first pageshow, so retry the sync popup here. */
+  runPendingCloudSync();
+  if (cloudHomePopupArmed && requireCloudUser() && cloudDb
+      && !cloudCheckBusy && !cloudSyncDialogOpen) {
+    requestCloudSyncPopup("home");
+  }
 }
 
 function renderLessons() {
@@ -9079,7 +9130,10 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
 window.addEventListener("pageshow", () => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
-  if (requireCloudUser()) reconcileCloud("refresh");
+  /* Arm so the next home paint (after Google session restores) shows the
+     sync popup. Do not require cloudUser yet — Firebase often loads later. */
+  cloudHomePopupArmed = true;
+  requestCloudSyncPopup("refresh");
 });
 function loadStudyData() {
   return new Promise((resolve, reject) => {
