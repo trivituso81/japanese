@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824i">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824i">
-<link rel="manifest" href="site.webmanifest?v=20260824i">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824k">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824k">
+<link rel="manifest" href="site.webmanifest?v=20260824k">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260824i";
+window.__BUILD__ = "20260824k";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260824i";
+  var v = window.__BUILD__ || "20260824k";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260824i"));
+    + encodeURIComponent(window.__BUILD__ || "20260824k"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260824i") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824k") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -477,79 +477,202 @@ document.addEventListener("DOMContentLoaded", function () {
     font-size: 13px; color: var(--miss); line-height: 1.5; max-width: 22em; margin: 0;
   }
 
-  /* Lesson focus: filter + vocab/grammar live inside one framed panel.
-     Kanji/verbs sit below with ~45% of the remaining fold height. */
+  /* Lesson focus: filter + stacked vocab/grammar tiles (lesson-tiles-v2).
+     Kanji/verbs sit below with the remaining fold height. */
   .home-lesson-frame {
-    flex: 55 1 0; min-height: 0;
-    display: flex; flex-direction: column; gap: 8px;
-    padding: 10px 10px 8px;
-    border: 2px solid var(--text);
-    border-radius: var(--radius);
-    background:
-      radial-gradient(ellipse 80% 55% at 0% 0%, rgba(225, 29, 90, .06), transparent 55%),
-      radial-gradient(ellipse 70% 50% at 100% 100%, rgba(8, 145, 178, .07), transparent 55%),
-      var(--bg);
-    box-shadow: 5px 5px 0 var(--shadow-ink);
+    flex: 58 1 0; min-height: 0;
+    display: flex; flex-direction: column; gap: 14px;
+    padding: 14px 14px 16px;
+    border: 2.5px solid var(--text);
+    border-radius: 22px;
+    background: linear-gradient(135deg, #fcf3f6 0%, #f3f6fa 60%, #eff4f8 100%);
+    box-shadow: 0 6px 0 -2px rgba(18, 20, 26, .10), 5px 5px 0 var(--shadow-ink);
+    overflow: hidden;
   }
   .home-filter {
-    display: flex; align-items: center; justify-content: space-between;
-    gap: 10px; flex: 0 0 auto; padding: 0 2px; flex-wrap: nowrap;
-    width: 100%;
+    display: flex; align-items: center; gap: 10px;
+    flex: 0 0 auto; flex-wrap: nowrap; width: 100%;
   }
   .home-filter-lesson {
-    display: inline-flex; align-items: center; gap: 8px;
+    display: inline-flex; align-items: center; gap: 10px;
     min-width: 0; justify-content: flex-start;
   }
   .home-filter label {
-    font-size: 13px; letter-spacing: .12em; text-transform: uppercase;
+    font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
     color: var(--text-faint); font-weight: 700;
   }
+  .home-filter .lesson-stepper {
+    display: inline-flex; align-items: center; gap: 8px;
+    border: 2.5px solid var(--text); border-radius: 12px;
+    padding: 4px 8px 4px 12px; background: #fff;
+    box-shadow: none; min-height: 0;
+  }
   .home-filter select {
-    font-family: var(--ui); font-size: 18px; font-weight: 700;
-    padding: 10px 14px; min-width: 5.5rem; min-height: 48px;
-    border: 2px solid var(--text); border-radius: var(--radius-sm);
-    background: var(--bg); color: var(--text);
-    box-shadow: 2px 2px 0 var(--shadow-ink);
+    font-family: var(--ui); font-size: 20px; font-weight: 700;
+    padding: 2px 0; min-width: 2.4rem; min-height: 0;
+    border: 0; border-radius: 0; background: transparent; color: var(--text);
+    box-shadow: none; appearance: none; -webkit-appearance: none;
+    cursor: pointer; font-variant-numeric: tabular-nums;
+  }
+  .home-filter .lesson-stepper .step-chevs {
+    width: 14px; height: 16px; flex: none; pointer-events: none;
+    stroke: var(--text); stroke-width: 2.6; fill: none;
+    stroke-linecap: round; stroke-linejoin: round;
   }
   .home-filter .all-lessons {
     display: inline-flex; align-items: center; gap: 7px;
-    font-size: 15px; font-weight: 700; text-decoration: none;
-    color: var(--accent-deep); padding: 8px 4px;
+    font-size: 13px; font-weight: 700; text-decoration: none;
+    color: var(--accent-deep); padding: 6px 2px;
     white-space: nowrap; margin-left: auto;
   }
   .home-filter .all-lessons svg {
-    width: 1.05em; height: 1.05em; flex: 0 0 auto;
-    stroke: currentColor;
+    width: 17px; height: 17px; flex: 0 0 auto;
+    stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round;
   }
   .home-filter .all-lessons:hover { text-decoration: underline; }
 
-  .home-lesson-stats,
+  .home-lesson-stats {
+    display: grid; grid-template-columns: 1fr; gap: 14px;
+    width: 100%; min-height: 0; flex: 1 1 auto;
+    border: none; background: transparent; overflow: auto;
+    -webkit-overflow-scrolling: touch;
+  }
   .home-track-stats {
     display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
     width: 100%; min-height: 0;
     border: none; background: transparent; overflow: visible;
-  }
-  .home-lesson-stats {
-    flex: 1 1 auto; min-height: 0;
-    grid-template-rows: 1fr;
-  }
-  .home-track-stats {
-    flex: 45 1 0;
-    min-height: 0;
-    /* ~45% of the fold with the lesson frame at 55%. */
+    flex: 42 1 0;
     max-height: none;
     grid-template-rows: 1fr;
   }
 
-  .home-lesson-stats .stat,
+  /* Lesson tiles — stacked vocab / grammar cards */
+  .ltile {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 12px 14px 13px;
+    border: 2.5px solid var(--text);
+    border-radius: 16px;
+    text-decoration: none; color: inherit;
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+    transition: transform .14s ease;
+    background: linear-gradient(160deg, var(--ltile-a), var(--ltile-b));
+    box-shadow: 5px 5px 0 0 var(--ltile-shadow);
+    min-height: 0;
+  }
+  .ltile.vocab {
+    --ltile-hue: #c7305a;
+    --ltile-shadow: #7b1f3e;
+    --ltile-a: #fbf0f4;
+    --ltile-b: #edf4f9;
+  }
+  .ltile.grammar {
+    --ltile-hue: #3e8faa;
+    --ltile-shadow: #23596b;
+    --ltile-a: #edf4f9;
+    --ltile-b: #f3f7fb;
+  }
+  a.ltile:hover, a.ltile:focus-visible {
+    transform: translateY(-2px); outline: none;
+  }
+  a.ltile:active { transform: translateY(1px); }
+  .ltile .lt-top {
+    display: flex; justify-content: space-between; align-items: center; gap: 10px;
+  }
+  .ltile .lt-title {
+    margin: 0; font-size: 15px; font-weight: 800; letter-spacing: .08em;
+    text-transform: uppercase; color: var(--ltile-hue); line-height: 1.1;
+  }
+  .ltile .lt-hero { line-height: 1; white-space: nowrap; color: var(--text); }
+  .ltile .lt-hero .n {
+    font-size: clamp(1.85rem, 8vw, 2.4rem); font-weight: 700;
+    letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+  }
+  .ltile .lt-hero .u { font-size: .48em; font-weight: 600; margin-left: 1px; }
+  .ltile .lt-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    gap: 10px; margin-top: -2px;
+  }
+  .ltile .lt-sub {
+    font-size: 12.5px; font-weight: 500; color: var(--text-soft); white-space: nowrap;
+  }
+  .ltile .lt-badge {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    padding: 3px 8px 2px; border: 2px solid var(--text); border-radius: 999px;
+    background: #fff; color: var(--text); white-space: nowrap;
+  }
+  .ltile .lt-badge.mastered {
+    background: var(--ltile-hue); color: #fff; border-color: var(--text);
+  }
+  .ltile .lt-badge.not-started {
+    background: transparent; color: var(--text-faint); border-color: var(--text-faint);
+  }
+  .ltile .lt-bar {
+    height: 16px; border: 2px solid var(--text); border-radius: 8px;
+    overflow: hidden; display: flex; background: #e6eaf2; margin-top: 1px;
+  }
+  .ltile .lt-bar i { display: block; height: 100%; }
+  .ltile .lt-bar i + i { border-left: 2px solid var(--text); }
+  .ltile .lt-bar .s-m { background: var(--ltile-hue); }
+  .ltile .lt-bar .s-c { background: var(--now); }
+  .ltile .lt-bar .s-n { background: #c9d0de; }
+  .ltile .lt-legend {
+    display: flex; flex-wrap: wrap; gap: 4px 12px;
+    font-size: 11.5px; font-weight: 600; color: var(--text-soft);
+  }
+  .ltile .lt-legend span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
+  .ltile .lt-legend i {
+    width: 10px; height: 10px; border: 1.5px solid var(--text);
+    border-radius: 2px; display: inline-block; flex: none; box-sizing: border-box;
+  }
+  .ltile .lt-legend .s-m { background: var(--ltile-hue); }
+  .ltile .lt-legend .s-c { background: var(--now); }
+  .ltile .lt-legend .s-n { background: #c9d0de; }
+  .ltile .lt-rows {
+    display: grid;
+    grid-template-columns: auto minmax(0, auto) 1fr 34px;
+    column-gap: 8px; row-gap: 7px; align-items: center; margin-top: 1px;
+  }
+  .ltile .lt-rows .k {
+    font-size: 10.5px; font-weight: 700; color: var(--text-faint);
+    font-variant-numeric: tabular-nums;
+  }
+  .ltile .lt-rows .lbl {
+    font-size: 11.5px; font-weight: 600; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 7.5em;
+  }
+  .ltile .lt-rows .pbar {
+    height: 10px; border: 1.5px solid var(--text); border-radius: 5px;
+    overflow: hidden; background: #e6eaf2; min-width: 0;
+  }
+  .ltile .lt-rows .pbar i { display: block; height: 100%; background: var(--ltile-hue); }
+  .ltile .lt-rows .v {
+    font-size: 11.5px; font-weight: 700; text-align: right;
+    font-variant-numeric: tabular-nums; color: var(--text-soft);
+  }
+  .ltile .lt-rows .v.zero { color: var(--text-faint); }
+  .ltile .lt-rows .v .chk {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 17px; height: 17px; border: 1.5px solid var(--text);
+    border-radius: 50%; background: var(--ltile-hue); vertical-align: middle;
+  }
+  .ltile .lt-rows .v .chk svg {
+    width: 9px; height: 9px; stroke: #fff; stroke-width: 3; fill: none;
+    stroke-linecap: round; stroke-linejoin: round;
+  }
+  .ltile .lt-empty {
+    font-size: 12.5px; color: var(--text-faint); margin: 2px 0 0;
+  }
+
   .home-track-stats .stat {
     background: var(--bg);
     display: flex; flex-direction: column; align-items: center;
     justify-content: space-between;
-    padding: 14px 12px 12px; text-align: center; min-height: 0; gap: 6px;
+    padding: 10px 10px 9px; text-align: center; min-height: 0; gap: 4px;
     border: 2px solid var(--text);
     border-radius: var(--radius);
-    box-shadow: 5px 5px 0 var(--shadow-ink);
+    box-shadow: 3px 3px 0 var(--shadow-ink);
     position: relative;
     overflow: hidden;
     text-decoration: none; color: inherit;
@@ -557,35 +680,15 @@ document.addEventListener("DOMContentLoaded", function () {
     cursor: pointer;
     transition: transform .14s ease, box-shadow .14s ease;
   }
-  .home-track-stats .stat {
-    padding: 10px 10px 9px; gap: 4px;
-    box-shadow: 3px 3px 0 var(--shadow-ink);
-  }
-  .home-lesson-stats a.stat:hover,
-  .home-lesson-stats a.stat:focus-visible,
   .home-track-stats a.stat:hover,
   .home-track-stats a.stat:focus-visible {
     transform: translateY(-2px);
     outline: none;
   }
-  .home-lesson-stats a.stat:active,
   .home-track-stats a.stat:active { transform: translateY(1px); }
-  .home-lesson-stats .stat::before,
   .home-track-stats .stat::before {
     content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .9;
     background: radial-gradient(ellipse 80% 60% at 100% 0%, transparent 40%, transparent 100%);
-  }
-  .home-lesson-stats .stat:nth-child(1) {
-    background:
-      radial-gradient(ellipse 90% 70% at 0% 100%, rgba(225, 29, 90, .10), transparent 55%),
-      linear-gradient(165deg, #fff 0%, #fff5f8 100%);
-    box-shadow: 5px 5px 0 #7a1838;
-  }
-  .home-lesson-stats .stat:nth-child(2) {
-    background:
-      radial-gradient(ellipse 90% 70% at 100% 0%, rgba(8, 145, 178, .12), transparent 55%),
-      linear-gradient(165deg, #fff 0%, #f0fafc 100%);
-    box-shadow: 5px 5px 0 #0a4f5f;
   }
   .home-track-stats .stat:nth-child(1) {
     background:
@@ -599,48 +702,31 @@ document.addEventListener("DOMContentLoaded", function () {
       linear-gradient(195deg, #fff 0%, #fff6f9 100%);
     box-shadow: 3px 3px 0 #6e1a36;
   }
-  .home-lesson-stats .stat {
-    /* Organic enso/brush already leave air — keep the tiles tighter vertically. */
-    padding: 10px 10px 8px; gap: 4px;
-  }
-  .home-track-stats .stat {
-    padding: 12px 12px 10px; gap: 6px;
-  }
-  .home-lesson-stats .k,
+  .home-track-stats .stat { padding: 12px 12px 10px; gap: 6px; }
   .home-track-stats .k {
-    font-size: clamp(1.35rem, 5.6vw, 1.9rem); letter-spacing: .05em; text-transform: uppercase;
+    font-size: clamp(1.05rem, 4.2vw, 1.35rem); letter-spacing: .05em; text-transform: uppercase;
     color: var(--text); font-weight: 700; flex: 0 0 auto; line-height: 1.1;
     position: relative; z-index: 1;
   }
-  .home-track-stats .k { font-size: clamp(1.05rem, 4.2vw, 1.35rem); }
-  .home-lesson-stats .stat:nth-child(1) .k,
   .home-track-stats .stat:nth-child(2) .k { color: var(--seal-deep); }
-  .home-lesson-stats .stat:nth-child(2) .k,
   .home-track-stats .stat:nth-child(1) .k { color: var(--accent-deep); }
-  .home-lesson-stats .viz,
   .home-track-stats .viz {
     flex: 1 1 auto; display: flex; align-items: center; justify-content: center;
     min-height: 0; width: 100%; align-self: stretch; position: relative; z-index: 1;
   }
-  .home-lesson-stats .meta,
   .home-track-stats .meta {
     flex: 0 0 auto; width: 100%; position: relative; z-index: 1;
   }
-  .home-lesson-stats .val,
   .home-track-stats .val {
-    font-family: var(--serif); font-size: clamp(1.15rem, 4.6vw, 1.45rem);
+    font-family: var(--serif); font-size: clamp(1rem, 3.8vw, 1.2rem);
     font-weight: 600; line-height: 1.15;
     font-variant-numeric: tabular-nums; color: var(--text);
   }
-  .home-track-stats .val { font-size: clamp(1rem, 3.8vw, 1.2rem); }
-  .home-lesson-stats .of,
   .home-track-stats .of { font-size: .72em; color: var(--text-soft); }
-  .home-lesson-stats .sub,
   .home-track-stats .sub {
-    font-family: var(--serif); font-size: 12px; color: var(--text-soft);
+    font-family: var(--serif); font-size: 11px; color: var(--text-soft);
     margin-top: 2px; line-height: 1.3;
   }
-  .home-track-stats .sub { font-size: 11px; }
 
   /* Progress ring for vocabulary — fill the viz slot, thick ring */
   .viz-enso {
@@ -1686,9 +1772,14 @@ document.addEventListener("DOMContentLoaded", function () {
   @media (max-height: 700px) {
     .home-landing { gap: 10px; }
     .home-brand .brand { font-size: clamp(1.45rem, 6.5vw, 2rem); }
-    .home-lesson-frame { padding: 8px 8px 8px; gap: 6px; }
-    .home-lesson-stats .stat { padding: 8px 8px 7px; gap: 3px; }
-    .home-lesson-stats .k { font-size: clamp(1.2rem, 5vw, 1.6rem); }
+    .home-lesson-frame { padding: 10px 10px 12px; gap: 10px; }
+    .home-lesson-stats { gap: 10px; }
+    .ltile { padding: 10px 12px 11px; gap: 6px; }
+    .ltile .lt-title { font-size: 13px; }
+    .ltile .lt-hero .n { font-size: clamp(1.55rem, 7vw, 2rem); }
+    .ltile .lt-bar { height: 13px; }
+    .ltile .lt-rows { row-gap: 5px; column-gap: 6px; }
+    .ltile .lt-rows .lbl { font-size: 10.5px; max-width: 6.5em; }
     .home-track-stats .stat { padding: 8px 8px 7px; }
     .home-track-stats .stat.kanji-home { padding: 10px 10px 8px; gap: 7px; box-shadow: 5px 5px 0 #0c5a6c; }
     .kh-val { font-size: clamp(1.75rem, 8vw, 2.2rem); }
@@ -1707,12 +1798,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   @media (max-height: 560px) {
     .home-landing { gap: 8px; }
-    .home-lesson-stats .sub,
     .home-track-stats .sub { display: none; }
+    .ltile .lt-legend { display: none; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
-    .home-lesson-frame { flex: 55 1 0; }
-    .home-track-stats { flex: 45 1 0; max-height: none; }
+    .home-lesson-frame { flex: 58 1 0; }
+    .home-track-stats { flex: 42 1 0; max-height: none; }
   }
 
   /* buttons — manga panels; primary is coral→aqua so neither colour owns the CTA */
@@ -2769,15 +2860,17 @@ document.addEventListener("DOMContentLoaded", function () {
       font-size: clamp(2.15rem, 4vw, 2.8rem);
     }
     .home-lesson-frame {
-      padding: 14px 14px 12px; gap: 10px;
+      padding: 16px 16px 18px; gap: 14px;
       min-height: 0;
-      flex: 55 1 0;
+      flex: 58 1 0;
     }
-    .home-lesson-stats .stat { padding: 14px 14px 12px; gap: 8px; }
-    .home-lesson-stats .k { font-size: clamp(1.45rem, 2.4vw, 1.95rem); letter-spacing: .05em; }
-    .home-lesson-stats .val { font-size: clamp(1.45rem, 2.2vw, 1.8rem); }
-    .home-lesson-stats .sub { font-size: 14px; }
-    .home-track-stats { max-height: none; flex: 45 1 0; gap: 12px; }
+    .home-lesson-stats { gap: 16px; }
+    .ltile { padding: 14px 16px 15px; gap: 9px; border-radius: 18px; }
+    .ltile .lt-title { font-size: 17px; }
+    .ltile .lt-hero .n { font-size: 40px; }
+    .ltile .lt-sub { font-size: 13px; }
+    .ltile .lt-bar { height: 18px; border-radius: 9px; }
+    .home-track-stats { max-height: none; flex: 42 1 0; gap: 12px; }
     .home-track-stats .stat { padding: 14px 14px 12px; }
     .home-track-stats .k { font-size: clamp(1.2rem, 2vw, 1.5rem); }
     .home-track-stats .val { font-size: clamp(1.2rem, 2vw, 1.45rem); }
@@ -2990,17 +3083,17 @@ document.addEventListener("DOMContentLoaded", function () {
       width: 100%;
     }
     .home-lesson-frame {
-      flex: 55 1 0;
+      flex: 58 1 0;
       width: 100%;
       min-height: 0;
     }
     .home-track-stats {
-      flex: 45 1 0;
+      flex: 42 1 0;
       width: 100%;
       max-height: none;
     }
-    .home-lesson-stats .stat { padding: 12px 12px 10px; gap: 6px; }
-    .home-lesson-stats .k { font-size: clamp(1.35rem, 2.1vw, 1.75rem); letter-spacing: .05em; }
+    .ltile { padding: 12px 14px 13px; }
+    .ltile .lt-title { font-size: 15px; }
     .home-track-stats .stat { padding: 12px 12px 10px; }
     .home-track-stats .k { font-size: clamp(1.15rem, 1.8vw, 1.4rem); }
     .viz-enso .pct { font-size: 18px; }
@@ -3047,10 +3140,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260824i" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260824k" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824i#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824k#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3070,7 +3163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260824i" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260824k" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3164,7 +3257,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260824i"></script>
+<script src="firebase-config.js?v=20260824k"></script>
 <script>
 /* ============================================================
    State
@@ -3498,14 +3591,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260824i" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260824k" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260824i" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824k" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3870,7 +3963,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824i"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824k"));
     return;
   }
   const start = () => {
@@ -3884,7 +3977,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824i"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824k"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4622,6 +4715,96 @@ function grammarScore(n) {
            runs: d.runs || 0, correct, total: recent.length };
 }
 
+/* Homepage lesson tiles — a grammar point is “mastered” at this % or above. */
+const GRAMMAR_MASTERED_AT = 90;
+
+function homeGrammarPointPct(n, pi) {
+  const by = (S.drills[n] && S.drills[n].byPoint) || {};
+  const t = by[pi] || by[String(pi)];
+  if (!t || !t.n) return 0;
+  return Math.round((t.ok / t.n) * 100);
+}
+
+function homeGrammarLabel(p) {
+  let s = plain(p.short || p.pattern || "").replace(/\s+/g, " ").trim();
+  const br = s.match(/［([^］]+)］/);
+  if (br) s = br[1];
+  s = s.split(/\s[—–]\s/)[0];
+  if (s.length > 14) s = s.slice(0, 13) + "…";
+  return s;
+}
+
+function lessonProgressBadge(state) {
+  const cls = state === "Mastered" ? "mastered"
+    : state === "Not started" ? "not-started" : "";
+  return `<span class="lt-badge${cls ? " " + cls : ""}">${esc(state)}</span>`;
+}
+
+function lessonVocabTile(n, vs) {
+  const mastered = vs ? vs.learned : 0;
+  const climbing = vs ? vs.climbing : 0;
+  const total = vs ? vs.total : 0;
+  const neu = Math.max(0, total - mastered - climbing);
+  const pctN = total ? Math.round((mastered / total) * 100) : 0;
+  const state = !total || (mastered + climbing === 0) ? "Not started"
+    : mastered === total ? "Mastered" : "In progress";
+  const segs = [["s-m", mastered], ["s-c", climbing], ["s-n", neu]]
+    .filter(([, c]) => c > 0)
+    .map(([cls, c]) => `<i class="${cls}" style="flex:${c}"></i>`).join("");
+  const legend = [["s-m", mastered, "mastered"], ["s-c", climbing, "climbing"], ["s-n", neu, "new"]]
+    .map(([cls, c, t]) => `<span><i class="${cls}"></i>${c} ${t}</span>`).join("");
+  return `<a class="ltile vocab" href="#/cards/${n}"
+    aria-label="${esc(`Lesson vocabulary ${pctN}%. ${mastered} of ${total} words mastered`)}">
+    <div class="lt-top">
+      <h2 class="lt-title">Vocabulary</h2>
+      <div class="lt-hero"><span class="n">${pctN}</span><span class="u">%</span></div>
+    </div>
+    <div class="lt-meta">
+      ${lessonProgressBadge(state)}
+      <span class="lt-sub">${mastered} of ${total} words mastered</span>
+    </div>
+    <div class="lt-bar" role="img" aria-hidden="true">${segs}</div>
+    <div class="lt-legend" aria-hidden="true">${legend}</div>
+  </a>`;
+}
+
+function lessonGrammarTile(n) {
+  const pts = points(n) || [];
+  const rows = pts.map((p, i) => {
+    const pctN = homeGrammarPointPct(n, i);
+    const lab = homeGrammarLabel(p);
+    const val = pctN >= GRAMMAR_MASTERED_AT
+      ? `<span class="chk" aria-label="mastered"><svg viewBox="0 0 12 12"><path d="M2.5 6.5l2.5 2.5 4.5-5"/></svg></span>`
+      : `${pctN}%`;
+    return `<span class="k">${i + 1}</span>
+      <span class="lbl" title="${esc(plain(p.pattern))}">${esc(lab)}</span>
+      <div class="pbar" role="listitem" aria-label="${esc(lab)}: ${pctN}% mastered"><i style="width:${pctN}%"></i></div>
+      <span class="v${pctN === 0 ? " zero" : ""}">${val}</span>`;
+  }).join("");
+  const done = pts.filter((_, i) => homeGrammarPointPct(n, i) >= GRAMMAR_MASTERED_AT).length;
+  const avg = pts.length
+    ? Math.round(pts.reduce((s, _, i) => s + homeGrammarPointPct(n, i), 0) / pts.length)
+    : 0;
+  const any = pts.some((_, i) => homeGrammarPointPct(n, i) > 0);
+  const state = !pts.length || !any ? "Not started"
+    : done === pts.length ? "Mastered" : "In progress";
+  const body = pts.length
+    ? `<div class="lt-rows" role="list" aria-label="Mastery by grammar point">${rows}</div>`
+    : `<p class="lt-empty">No grammar points in this lesson.</p>`;
+  return `<a class="ltile grammar" href="#/drill/${n}"
+    aria-label="${esc(`Lesson grammar ${avg}%. ${done} of ${pts.length} points mastered`)}">
+    <div class="lt-top">
+      <h2 class="lt-title">Grammar</h2>
+      <div class="lt-hero"><span class="n">${avg}</span><span class="u">%</span></div>
+    </div>
+    <div class="lt-meta">
+      ${lessonProgressBadge(state)}
+      <span class="lt-sub">${done} of ${pts.length} points mastered</span>
+    </div>
+    ${body}
+  </a>`;
+}
+
 function recordAnswer(n, ok, pi) {
   const d = S.drills[n] = S.drills[n] || { history: [], byPoint: {}, runs: 0 };
   d.history.push(ok ? 1 : 0);
@@ -5280,25 +5463,6 @@ function renderHome() {
   const filterLesson = filter;
 
   const vs = vocabScore(filterLesson);
-  const wordsLearned = vs ? vs.learned : 0;
-  const wordsTotal = vs ? vs.total : 0;
-  const wordsClimbing = vs ? vs.climbing : 0;
-  /* Ring and fraction are the same story: words at box LEARNED_BOX+. */
-  const wordsPct = vs ? vs.pct : 0;
-  const wordsSub = wordsClimbing
-    ? `${wordsClimbing} climbing · L${filterLesson}`
-    : wordsLearned
-      ? `all started words learned · L${filterLesson}`
-      : `box ${LEARNED_BOX}+ counts as learned · L${filterLesson}`;
-
-  const gs = grammarScore(filterLesson);
-  const grammarPct = gs ? gs.pct : 0;
-  const grammarVal = gs
-    ? `${gs.pct}<span class="of">%</span>`
-    : "—";
-  const grammarSub = gs
-    ? `${gs.total} recent · L${filterLesson}`
-    : `not drilled yet · L${filterLesson}`;
 
   const kanjiLevels = KANJI_LEVELS.filter(l => l.ready).map(l => {
     const c = kanjiCensus(l.id);
@@ -5320,7 +5484,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260824i" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260824k" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -5353,28 +5517,24 @@ function renderHome() {
         </div>
       </div>
 
-      <div class="home-lesson-frame">
+      <div class="home-lesson-frame" aria-label="Lesson progress">
         <div class="home-filter">
           <div class="home-filter-lesson">
             <label for="homefilter">Lesson</label>
-            <select id="homefilter" aria-label="Lesson number for vocabulary and grammar">${filterOpts}</select>
+            <span class="lesson-stepper">
+              <select id="homefilter" aria-label="Lesson number for vocabulary and grammar">${filterOpts}</select>
+              <svg class="step-chevs" viewBox="0 0 14 16" aria-hidden="true"><path d="M3 6l4-4 4 4M3 10l4 4 4-4"/></svg>
+            </span>
           </div>
           <a class="all-lessons" href="#/lessons">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" aria-hidden="true">
-              <path d="M8 6h12M8 12h12M8 18h12"/>
-              <path d="M4 6h.01M4 12h.01M4 18h.01"/>
-            </svg>
+            <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M6 4h10M6 9h10M6 14h10"/><circle cx="2.5" cy="4" r="1.1" fill="currentColor" stroke="none"/><circle cx="2.5" cy="9" r="1.1" fill="currentColor" stroke="none"/><circle cx="2.5" cy="14" r="1.1" fill="currentColor" stroke="none"/></svg>
             View lesson directory
           </a>
         </div>
 
         <div class="home-lesson-stats">
-          ${homeStat("Lesson Vocabulary", ensoViz(wordsPct),
-            `${wordsLearned}<span class="of"> / ${wordsTotal}</span>`,
-            wordsSub, `#/cards/${filterLesson}`)}
-          ${homeStat("Lesson Grammar", brushViz(grammarPct),
-            grammarVal,
-            grammarSub, `#/drill/${filterLesson}`)}
+          ${lessonVocabTile(filterLesson, vs)}
+          ${lessonGrammarTile(filterLesson)}
         </div>
       </div>
 
@@ -9214,7 +9374,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260824i&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824k&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
