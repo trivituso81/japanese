@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824g">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824g">
-<link rel="manifest" href="site.webmanifest?v=20260824g">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824h">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824h">
+<link rel="manifest" href="site.webmanifest?v=20260824h">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260824g";
+window.__BUILD__ = "20260824h";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260824g";
+  var v = window.__BUILD__ || "20260824h";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260824g"));
+    + encodeURIComponent(window.__BUILD__ || "20260824h"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260824g") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824h") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -674,88 +674,115 @@ document.addEventListener("DOMContentLoaded", function () {
   .viz-brush .ink { fill: var(--accent); }
   .viz-brush .tip { fill: var(--accent-deep); opacity: .9; }
 
-  /* Kanji home tile — per-level bars (known / shaky / new) */
+  /* Kanji home tile — level bars card (known / shaky / new) */
   .home-track-stats .stat.kanji-home {
+    align-items: stretch;
     justify-content: flex-start;
-    gap: 5px;
-    padding: 10px 10px 8px;
+    text-align: left;
+    gap: 10px;
+    padding: 14px 14px 12px;
+    border-radius: 22px;
+    border: 2px solid var(--text);
+    background: #fafaf8;
+    box-shadow: 6px 6px 0 #0c5a6c;
   }
-  .home-track-stats .stat.kanji-home .k {
-    display: flex; align-items: center; justify-content: center;
-    gap: 5px; width: 100%;
+  .home-track-stats .stat.kanji-home::before { display: none; }
+  .home-track-stats .stat.kanji-home:hover,
+  .home-track-stats .stat.kanji-home:focus-visible {
+    box-shadow: 7px 7px 0 #0c5a6c;
   }
-  .home-track-stats .stat.kanji-home .k .go {
-    font-size: .72em; font-weight: 700; color: var(--accent-deep); opacity: .55;
-    line-height: 1;
+  .kh-head {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 8px; width: 100%; flex: 0 0 auto;
   }
-  .home-track-stats .stat.kanji-home .meta {
-    padding: 0 2px 2px;
+  .kh-title {
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--accent-deep); line-height: 1;
   }
-  .home-track-stats .stat.kanji-home .val {
-    font-size: clamp(1.25rem, 5vw, 1.55rem); font-weight: 700;
+  .kh-go {
+    flex: none; width: 30px; height: 30px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border: 1.5px solid var(--text); border-radius: 50%;
+    color: var(--text); font-size: 15px; font-weight: 700; line-height: 1;
+    background: transparent;
   }
-  .home-track-stats .stat.kanji-home .sub {
-    font-size: 11px; margin-top: 3px;
-  }
-  .home-track-stats .stat.kanji-home .sub .shaky,
-  .viz-klevels .shaky { color: var(--now); font-weight: 700; }
-  .home-track-stats .stat.kanji-home .viz {
-    flex: 1 1 auto; align-items: stretch; justify-content: flex-start;
-    min-height: 0;
-  }
-  .viz-klevels {
-    display: flex; flex-direction: column; justify-content: center;
-    gap: 7px; width: 100%; height: 100%; min-height: 0;
-    padding: 2px 2px 0; box-sizing: border-box;
-  }
-  .viz-klevels .k-home-row {
-    display: flex; flex-direction: column; gap: 3px; width: 100%;
-  }
-  .viz-klevels .k-home-row-top {
-    display: flex; align-items: baseline; justify-content: space-between;
-    gap: 6px; font-size: 11px; line-height: 1.15;
+  .kh-main { flex: 0 0 auto; width: 100%; padding: 0 1px; }
+  .kh-val {
+    font-family: var(--ui); font-size: clamp(2.15rem, 9vw, 2.85rem);
+    font-weight: 700; line-height: 1; color: var(--text);
     font-variant-numeric: tabular-nums;
   }
+  .kh-of {
+    font-size: .38em; font-weight: 600; color: var(--text-soft);
+    vertical-align: baseline;
+  }
+  .kh-sub {
+    margin-top: 5px; font-size: 12px; line-height: 1.35;
+    color: var(--text-soft); font-family: var(--ui);
+  }
+  .kh-sub .kh-pct { color: var(--text); font-weight: 700; }
+  .kh-sub .kh-shaky { color: var(--now); font-weight: 700; }
+  .home-track-stats .stat.kanji-home .viz {
+    flex: 1 1 auto; align-items: stretch; justify-content: flex-end;
+    min-height: 0; width: 100%;
+  }
+  .viz-klevels {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    gap: 10px; width: 100%; height: 100%; min-height: 0;
+    padding: 0 1px; box-sizing: border-box;
+  }
+  .viz-klevels .k-home-row {
+    display: flex; flex-direction: column; gap: 5px; width: 100%;
+  }
+  .viz-klevels .k-home-row-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 8px; line-height: 1.2; font-variant-numeric: tabular-nums;
+  }
   .viz-klevels .k-home-row-top .lv {
-    font-weight: 700; letter-spacing: .06em; color: var(--text);
+    font-size: 13px; font-weight: 700; letter-spacing: .06em;
+    color: var(--text);
+  }
+  .viz-klevels .k-home-row-nums {
+    display: flex; flex-direction: column; align-items: flex-end;
+    gap: 2px; text-align: right;
   }
   .viz-klevels .k-home-row-top .ct {
-    color: var(--accent-deep); font-weight: 600; text-align: right;
+    font-size: 12px; font-weight: 600; line-height: 1.15;
+  }
+  .viz-klevels .ct-known { color: var(--accent); }
+  .viz-klevels .ct-zero { color: var(--text-soft); font-weight: 600; }
+  .viz-klevels .ct-rest { color: var(--text); font-weight: 600; }
+  .viz-klevels .k-home-shaky-note {
+    font-size: 11px; font-weight: 700; color: var(--now); line-height: 1.1;
   }
   .viz-klevels .k-home-bar {
-    height: 7px; border-radius: 999px;
-    background: var(--bg-inset); border: 1px solid var(--rule);
-    overflow: hidden;
+    height: 11px; border-radius: 999px;
+    background: #e8eef0; border: 2px solid var(--text);
+    overflow: hidden; display: flex; width: 100%; box-sizing: border-box;
   }
-  .viz-klevels .k-home-bar > span {
-    display: block; height: 100%; border-radius: inherit;
-    background: var(--accent);
+  .viz-klevels .k-home-bar .seg {
+    display: block; height: 100%; flex: none;
   }
+  .viz-klevels .k-home-bar .seg.known { background: var(--accent); }
+  .viz-klevels .k-home-bar .seg.shaky { background: var(--now); }
   .viz-klevels .k-home-key {
     display: flex; flex-wrap: wrap; justify-content: center;
-    gap: 6px 10px; width: 100%; margin-top: 2px;
-    font-size: 10px; font-weight: 600; letter-spacing: .04em;
-    color: var(--text-faint); line-height: 1;
+    gap: 8px 14px; width: 100%; margin-top: 4px; padding-top: 2px;
+    font-size: 11px; font-weight: 600; letter-spacing: .02em;
+    color: var(--text-soft); line-height: 1;
   }
   .viz-klevels .k-home-key span {
-    display: inline-flex; align-items: center; gap: 4px;
+    display: inline-flex; align-items: center; gap: 5px;
   }
   .viz-klevels .k-home-key i {
-    width: 8px; height: 8px; border-radius: 50%;
-    display: inline-block; flex: none;
-    border: 1px solid transparent; box-sizing: border-box;
+    width: 9px; height: 9px; border-radius: 50%;
+    display: inline-block; flex: none; box-sizing: border-box;
   }
-  .viz-klevels .k-home-key .kk-known i {
-    background: var(--accent); border-color: var(--accent-deep);
-  }
-  .viz-klevels .k-home-key .kk-shaky {
-    color: var(--now);
-  }
-  .viz-klevels .k-home-key .kk-shaky i {
-    background: var(--now); border-color: #b45309;
-  }
+  .viz-klevels .k-home-key .kk-known i { background: var(--accent); }
+  .viz-klevels .k-home-key .kk-shaky i { background: var(--now); }
   .viz-klevels .k-home-key .kk-new i {
-    background: transparent; border-color: var(--rule-strong);
+    background: #e8eef0; border: 1px solid #b8c4c8;
   }
 
   /* Sparkline — recent verb answers; fill the viz slot */
@@ -1649,12 +1676,15 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-lesson-stats .stat { padding: 8px 8px 7px; gap: 3px; }
     .home-lesson-stats .k { font-size: clamp(1.2rem, 5vw, 1.6rem); }
     .home-track-stats .stat { padding: 8px 8px 7px; }
-    .home-track-stats .k { font-size: clamp(1rem, 4vw, 1.2rem); }
-    .viz-brush { min-height: 40px; }
-    .viz-klevels { gap: 5px; }
-    .viz-klevels .k-home-row-top { font-size: 10px; }
-    .viz-klevels .k-home-bar { height: 6px; }
-    .viz-klevels .k-home-key { font-size: 9px; gap: 4px 8px; }
+    .home-track-stats .stat.kanji-home { padding: 10px 10px 8px; gap: 7px; box-shadow: 5px 5px 0 #0c5a6c; }
+    .kh-val { font-size: clamp(1.75rem, 8vw, 2.2rem); }
+    .kh-go { width: 26px; height: 26px; font-size: 13px; }
+    .viz-klevels { gap: 7px; }
+    .viz-klevels .k-home-row-top .lv { font-size: 11px; }
+    .viz-klevels .k-home-row-top .ct { font-size: 10px; }
+    .viz-klevels .k-home-shaky-note { font-size: 10px; }
+    .viz-klevels .k-home-bar { height: 9px; }
+    .viz-klevels .k-home-key { font-size: 10px; gap: 6px 10px; }
     .viz-wave { min-height: 48px; }
     .viz-badges { min-height: 48px; gap: 3px; }
     .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
@@ -2998,10 +3028,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260824g" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260824h" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824g#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824h#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3021,7 +3051,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260824g" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260824h" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3115,7 +3145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260824g"></script>
+<script src="firebase-config.js?v=20260824h"></script>
 <script>
 /* ============================================================
    State
@@ -3428,14 +3458,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260824g" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260824h" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260824g" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824h" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -3777,7 +3807,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824g"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824h"));
     return;
   }
   const start = () => {
@@ -3791,7 +3821,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824g"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824h"));
         return;
       }
       authError = authErrorMessage(e);
@@ -5013,16 +5043,24 @@ function kanjiCensus(lv) {
 function kanjiLevelsViz(levels) {
   if (!levels.length) return `<div class="viz-klevels" aria-hidden="true"></div>`;
   const rows = levels.map(l => {
-    const fill = l.total ? Math.round((l.known / l.total) * 100) : 0;
-    const ct = l.shaky
-      ? `${l.known}/${l.total} · <span class="shaky">${l.shaky} shaky</span>`
-      : `${l.known}/${l.total}`;
+    const knownPct = l.total ? (l.known / l.total) * 100 : 0;
+    const shakyPct = l.total ? (l.shaky / l.total) * 100 : 0;
+    const knownCls = l.known > 0 ? "ct-known" : "ct-zero";
+    const ct = `<span class="${knownCls}">${l.known}</span><span class="ct-rest">/${l.total}</span>`;
+    const shakyNote = l.shaky
+      ? `<span class="k-home-shaky-note">${l.shaky} shaky</span>` : "";
+    const nums = shakyNote
+      ? `<div class="k-home-row-nums"><span class="ct">${ct}</span>${shakyNote}</div>`
+      : `<span class="ct">${ct}</span>`;
+    const segs = [];
+    if (knownPct > 0) segs.push(`<span class="seg known" style="width:${knownPct}%"></span>`);
+    if (shakyPct > 0) segs.push(`<span class="seg shaky" style="width:${shakyPct}%"></span>`);
     return `<div class="k-home-row">
       <div class="k-home-row-top">
         <span class="lv">${esc(l.id)}</span>
-        <span class="ct">${ct}</span>
+        ${nums}
       </div>
-      <div class="k-home-bar" aria-hidden="true"><span style="width:${fill}%"></span></div>
+      <div class="k-home-bar" aria-hidden="true">${segs.join("")}</div>
     </div>`;
   }).join("");
   return `<div class="viz-klevels">
@@ -5040,18 +5078,21 @@ function kanjiHomeStat(levels, href) {
   levels.forEach(l => { known += l.known; shaky += l.shaky; total += l.total; });
   const pct = total ? Math.round((known / total) * 100) : 0;
   const sub = shaky
-    ? `${pct}% known · <span class="shaky">${shaky} shaky</span>`
-    : `${pct}% known`;
+    ? `<span class="kh-pct">${pct}%</span> known · <span class="kh-shaky">${shaky} shaky</span>`
+    : `<span class="kh-pct">${pct}%</span> known`;
   const aria = levels.map(l => {
     const p = l.total ? Math.round((l.known / l.total) * 100) : 0;
     return `${l.id}: ${l.known} of ${l.total} known${l.shaky ? `, ${l.shaky} shaky` : ""} (${p}%)`;
   }).join("; ");
   return `<a class="stat kanji-home" href="${href}"
     aria-label="${esc(`Kanji ${known} of ${total}. ${aria}`)}">
-    <div class="k">Kanji<span class="go" aria-hidden="true">›</span></div>
-    <div class="meta">
-      <div class="val">${known}<span class="of"> / ${total}</span></div>
-      <div class="sub">${sub}</div>
+    <div class="kh-head">
+      <span class="kh-title">Kanji</span>
+      <span class="kh-go" aria-hidden="true">&gt;</span>
+    </div>
+    <div class="kh-main">
+      <div class="kh-val">${known}<span class="kh-of"> / ${total}</span></div>
+      <div class="kh-sub">${sub}</div>
     </div>
     <div class="viz">${kanjiLevelsViz(levels)}</div>
   </a>`;
@@ -5215,7 +5256,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260824g" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260824h" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -9099,7 +9140,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260824g&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824h&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
