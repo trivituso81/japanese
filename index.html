@@ -9448,7 +9448,9 @@ function drawKanjiEnd(stage) {
   const missed = KDRILL.answers.filter(a => !a.ok);
   const set = kanjiAt(KDRILL.level);
 
-  stage.innerHTML = summaryPanel({
+  stage.innerHTML = `
+    <div class="k-play-nav">${kanjiReturnLink("kReturn")}</div>
+    ${summaryPanel({
     right, total,
     lead: `${pct(right, total)}% · ${esc(KDRILL.level)}${KDRILL.focus ? " · focused" : ""}${
       missed.length ? ` · ${missed.length} to work on` : " · nothing missed"}`,
@@ -9464,7 +9466,8 @@ function drawKanjiEnd(stage) {
       { id: "ksettings", label: "Settings" },
       { go: "#/", label: "Home" }
     ]
-  });
+  })}`;
+  wireKanjiReturn("kReturn");
 
   document.getElementById("kagain").addEventListener("click", () => startKanji());
   const fx = document.getElementById("kfocus");
