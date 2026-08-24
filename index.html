@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824r">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824r">
-<link rel="manifest" href="site.webmanifest?v=20260824r">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260824s">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260824s">
+<link rel="manifest" href="site.webmanifest?v=20260824s">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260824r";
+window.__BUILD__ = "20260824s";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260824r";
+  var v = window.__BUILD__ || "20260824s";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260824r"));
+    + encodeURIComponent(window.__BUILD__ || "20260824s"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260824r") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260824s") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -580,8 +580,10 @@ document.addEventListener("DOMContentLoaded", function () {
     display: flex; justify-content: space-between; align-items: center; gap: 10px;
   }
   .ltile .lt-title {
-    margin: 0; font-size: 15px; font-weight: 800; letter-spacing: .08em;
-    text-transform: uppercase; color: var(--ltile-hue); line-height: 1.1;
+    margin: 0;
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    font-weight: 700; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--ltile-hue); line-height: 1;
   }
   .ltile .lt-hero { line-height: 1; white-space: nowrap; color: var(--text); }
   .ltile .lt-hero .n {
@@ -589,25 +591,6 @@ document.addEventListener("DOMContentLoaded", function () {
     letter-spacing: -.02em; font-variant-numeric: tabular-nums;
   }
   .ltile .lt-hero .u { font-size: .48em; font-weight: 600; margin-left: 1px; }
-  .ltile .lt-meta {
-    display: flex; justify-content: space-between; align-items: center;
-    gap: 10px; margin-top: -2px;
-  }
-  .ltile .lt-sub {
-    font-size: 12.5px; font-weight: 500; color: var(--text-soft); white-space: nowrap;
-  }
-  .ltile .lt-badge {
-    display: inline-flex; align-items: center; gap: 4px;
-    font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-    padding: 3px 8px 2px; border: 2px solid var(--text); border-radius: 999px;
-    background: #fff; color: var(--text); white-space: nowrap;
-  }
-  .ltile .lt-badge.mastered {
-    background: var(--ltile-hue); color: #fff; border-color: var(--text);
-  }
-  .ltile .lt-badge.not-started {
-    background: transparent; color: var(--text-faint); border-color: var(--text-faint);
-  }
   .ltile .lt-bar {
     height: 16px; border: 2px solid var(--text); border-radius: 8px;
     overflow: hidden; display: flex; background: #e6eaf2; margin-top: 1px;
@@ -617,18 +600,6 @@ document.addEventListener("DOMContentLoaded", function () {
   .ltile .lt-bar .s-m { background: var(--ltile-hue); }
   .ltile .lt-bar .s-c { background: var(--now); }
   .ltile .lt-bar .s-n { background: #c9d0de; }
-  .ltile .lt-legend {
-    display: flex; flex-wrap: wrap; gap: 4px 12px;
-    font-size: 11.5px; font-weight: 600; color: var(--text-soft);
-  }
-  .ltile .lt-legend span { display: inline-flex; align-items: center; gap: 5px; white-space: nowrap; }
-  .ltile .lt-legend i {
-    width: 10px; height: 10px; border: 1.5px solid var(--text);
-    border-radius: 2px; display: inline-block; flex: none; box-sizing: border-box;
-  }
-  .ltile .lt-legend .s-m { background: var(--ltile-hue); }
-  .ltile .lt-legend .s-c { background: var(--now); }
-  .ltile .lt-legend .s-n { background: #c9d0de; }
   .ltile .lt-rows {
     display: grid;
     grid-template-columns: auto minmax(0, auto) 1fr 34px;
@@ -1779,7 +1750,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-lesson-frame { padding: 10px 10px 12px; gap: 10px; }
     .home-lesson-stats { gap: 10px; }
     .ltile { padding: 10px 12px 11px; gap: 6px; }
-    .ltile .lt-title { font-size: 13px; }
     .ltile .lt-hero .n { font-size: clamp(1.55rem, 7vw, 2rem); }
     .ltile .lt-bar { height: 13px; }
     .ltile .lt-rows { row-gap: 5px; column-gap: 6px; }
@@ -1800,7 +1770,6 @@ document.addEventListener("DOMContentLoaded", function () {
   @media (max-height: 560px) {
     .home-landing { gap: 8px; }
     .home-track-stats .sub { display: none; }
-    .ltile .lt-legend { display: none; }
   }
   @media (max-height: 500px) and (orientation: landscape) {
     .home-lesson-frame { flex: 58 1 0; }
@@ -2867,9 +2836,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     .home-lesson-stats { gap: 16px; }
     .ltile { padding: 14px 16px 15px; gap: 9px; border-radius: 18px; }
-    .ltile .lt-title { font-size: 17px; }
     .ltile .lt-hero .n { font-size: 40px; }
-    .ltile .lt-sub { font-size: 13px; }
     .ltile .lt-bar { height: 18px; border-radius: 9px; }
     .home-track-stats { max-height: none; flex: 42 1 0; gap: 12px; }
     .home-track-stats .stat { padding: 14px 14px 12px; }
@@ -3095,7 +3062,6 @@ document.addEventListener("DOMContentLoaded", function () {
       max-height: none;
     }
     .ltile { padding: 12px 14px 13px; }
-    .ltile .lt-title { font-size: 15px; }
     .home-track-stats .stat { padding: 12px 12px 10px; }
     .home-track-stats .k { font-size: clamp(1.15rem, 1.8vw, 1.4rem); }
     .viz-enso .pct { font-size: 18px; }
@@ -3142,10 +3108,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260824r" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260824s" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824r#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260824s#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3165,7 +3131,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260824r" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260824s" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3259,7 +3225,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260824r"></script>
+<script src="firebase-config.js?v=20260824s"></script>
 <script>
 /* ============================================================
    State
@@ -3672,14 +3638,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260824r" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260824s" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260824r" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260824s" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -4168,7 +4134,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824r"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824s"));
     return;
   }
   const start = () => {
@@ -4182,7 +4148,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824r"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260824s"));
         return;
       }
       authError = authErrorMessage(e);
@@ -4964,37 +4930,22 @@ function homeGrammarLabel(p) {
   return s;
 }
 
-function lessonProgressBadge(state) {
-  const cls = state === "Mastered" ? "mastered"
-    : state === "Not started" ? "not-started" : "";
-  return `<span class="lt-badge${cls ? " " + cls : ""}">${esc(state)}</span>`;
-}
-
 function lessonVocabTile(n, vs) {
   const mastered = vs ? vs.learned : 0;
   const climbing = vs ? vs.climbing : 0;
   const total = vs ? vs.total : 0;
   const neu = Math.max(0, total - mastered - climbing);
   const pctN = total ? Math.round((mastered / total) * 100) : 0;
-  const state = !total || (mastered + climbing === 0) ? "Not started"
-    : mastered === total ? "Mastered" : "In progress";
   const segs = [["s-m", mastered], ["s-c", climbing], ["s-n", neu]]
     .filter(([, c]) => c > 0)
     .map(([cls, c]) => `<i class="${cls}" style="flex:${c}"></i>`).join("");
-  const legend = [["s-m", mastered, "mastered"], ["s-c", climbing, "climbing"], ["s-n", neu, "new"]]
-    .map(([cls, c, t]) => `<span><i class="${cls}"></i>${c} ${t}</span>`).join("");
   return `<a class="ltile vocab" href="#/cards/${n}"
     aria-label="${esc(`Lesson vocabulary ${pctN}%. ${mastered} of ${total} words mastered`)}">
     <div class="lt-top">
       <h2 class="lt-title">Vocabulary</h2>
       <div class="lt-hero"><span class="n">${pctN}</span><span class="u">%</span></div>
     </div>
-    <div class="lt-meta">
-      ${lessonProgressBadge(state)}
-      <span class="lt-sub">${mastered} of ${total} words mastered</span>
-    </div>
     <div class="lt-bar" role="img" aria-hidden="true">${segs}</div>
-    <div class="lt-legend" aria-hidden="true">${legend}</div>
   </a>`;
 }
 
@@ -5015,9 +4966,6 @@ function lessonGrammarTile(n) {
   const avg = pts.length
     ? Math.round(pts.reduce((s, _, i) => s + homeGrammarPointPct(n, i), 0) / pts.length)
     : 0;
-  const any = pts.some((_, i) => homeGrammarPointPct(n, i) > 0);
-  const state = !pts.length || !any ? "Not started"
-    : done === pts.length ? "Mastered" : "In progress";
   const body = pts.length
     ? `<div class="lt-rows" role="list" aria-label="Mastery by grammar point">${rows}</div>`
     : `<p class="lt-empty">No grammar points in this lesson.</p>`;
@@ -5026,10 +4974,6 @@ function lessonGrammarTile(n) {
     <div class="lt-top">
       <h2 class="lt-title">Grammar</h2>
       <div class="lt-hero"><span class="n">${avg}</span><span class="u">%</span></div>
-    </div>
-    <div class="lt-meta">
-      ${lessonProgressBadge(state)}
-      <span class="lt-sub">${done} of ${pts.length} points mastered</span>
     </div>
     ${body}
   </a>`;
@@ -5756,7 +5700,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260824r" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260824s" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -9651,7 +9595,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260824r&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260824s&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
