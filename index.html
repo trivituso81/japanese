@@ -1020,10 +1020,10 @@ document.addEventListener("DOMContentLoaded", function () {
   .backup-card .backup-acts .btn { flex: 1 1 0; min-height: 44px; }
   .backup-card .backup-acts .btn:not(.primary) { background: #fff; color: var(--text); }
 
-  /* Forced cloud sync check — OK only, no dismiss/cancel. */
+  /* Forced cloud sync check — OK only, no dismiss/cancel. Always on top. */
   .cloud-sync-sheet {
-    position: fixed; inset: 0; z-index: 90;
-    background: rgba(18, 20, 26, .5);
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(18, 20, 26, .55);
     display: flex; align-items: center; justify-content: center;
     padding: 18px; box-sizing: border-box;
   }
@@ -3498,7 +3498,8 @@ document.addEventListener("visibilitychange", () => {
     cloudHiddenAt = 0;
     if (away >= CLOUD_RESUME_AWAY_MS) {
       cloudHomePopupArmed = true;
-      requestCloudSyncPopup("resume");
+      cloudLoadPopupDone = false;
+      ensureLoadSyncPopup("resume");
     }
   }
 });
@@ -3536,7 +3537,22 @@ let cloudLastCheckedAt = 0;
 let cloudSyncDialogOpen = false;
 let pendingCloudSyncReason = null;
 let cloudHomePopupArmed = true;
+let cloudAuthResolved = false;
+let cloudAuthReadyWaiters = [];
+let cloudLoadPopupDone = false;
 const CLOUD_CHECK_MIN_MS = 8000;
+const CLOUD_FORCE_REASONS = { boot: 1, refresh: 1, signin: 1, home: 1, resume: 1 };
+
+function notifyCloudAuthReady() {
+  if (cloudAuthResolved) return;
+  cloudAuthResolved = true;
+  const waiters = cloudAuthReadyWaiters.splice(0);
+  waiters.forEach(fn => { try { fn(); } catch (e) {} });
+}
+function whenCloudAuthReady() {
+  if (cloudAuthResolved) return Promise.resolve();
+  return new Promise(resolve => cloudAuthReadyWaiters.push(resolve));
+}
 
 /* Queue a sync popup until Firebase auth + Firestore are ready.
    pageshow often fires before Google restores the session, so calling
@@ -3552,6 +3568,30 @@ function runPendingCloudSync() {
   const reason = pendingCloudSyncReason;
   pendingCloudSyncReason = null;
   reconcileCloud(reason);
+}
+
+/* After a refresh / cold start: wait until Google auth has answered, then
+   force the save-state popup once for this page load. */
+async function ensureLoadSyncPopup(reason) {
+  cloudHomePopupArmed = true;
+  requestCloudSyncPopup(reason || "refresh");
+  try { await whenCloudAuthReady(); } catch (e) { return; }
+  if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
+  const user = requireCloudUser();
+  if (!user || !cloudDb) {
+    /* Not signed in — still confirm local save state so a refresh is not silent. */
+    if (progressWeight(S) <= 0) return;
+    await showCloudSyncPopup({
+      title: "Progress on this device",
+      message: "Your study progress is saved on this phone. Sign in with Google to compare with the cloud copy.",
+      localTs: +localStorage.getItem(KEY_SAVED) || 0,
+      cloudTs: 0
+    });
+    cloudHomePopupArmed = false;
+    return;
+  }
+  cloudLastCheckedAt = 0;
+  requestCloudSyncPopup("boot");
 }
 /* Paint the app immediately. Firebase is optional and loads afterward. */
 let authReady = true;
@@ -3648,6 +3688,7 @@ function bindCloudAuth() {
   });
   cloudAuth.onAuthStateChanged(user => {
     cloudUser = user;
+    notifyCloudAuthReady();
     if (user) {
       localStorage.removeItem(KEY_GUEST);
       /* Auth restored after Firebase boot — pageshow often ran too early. */
@@ -3661,10 +3702,16 @@ function bindCloudAuth() {
 function initCloud() {
   if (cloudBootStarted) return;
   cloudBootStarted = true;
-  if (!window.FIREBASE_CONFIG) return;
+  if (!window.FIREBASE_CONFIG) {
+    notifyCloudAuthReady();
+    return;
+  }
   ensureFirebase()
     .then(async ok => {
-      if (!ok) return;
+      if (!ok) {
+        notifyCloudAuthReady();
+        return;
+      }
       if (!firebase.apps.length) firebase.initializeApp(window.FIREBASE_CONFIG);
       cloudAuth = firebase.auth();
       cloudDb = firebase.firestore();
@@ -3673,10 +3720,13 @@ function initCloud() {
       } catch (e) { /* keep default persistence */ }
       bindCloudAuth();
       runPendingCloudSync();
+      /* Safety: if auth never fires (blocked SDK), unlock waiters. */
+      setTimeout(() => notifyCloudAuthReady(), 8000);
     })
     .catch(e => {
       authError = "Could not load Google sign-in. You can still continue without signing in.";
       console.warn(e);
+      notifyCloudAuthReady();
       const h = location.hash || "#/";
       if (h === "#/" || h === "#" || h === "") route();
     });
@@ -3802,6 +3852,7 @@ function formatSyncTime(ts) {
 
 function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
   return new Promise(resolve => {
+    try { closeBackupSheet(); } catch (e) {}
     const sheet = document.getElementById("cloudSyncSheet");
     const titleEl = document.getElementById("cloudSyncTitle");
     const msgEl = document.getElementById("cloudSyncMsg");
@@ -3812,6 +3863,7 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
       return;
     }
     cloudSyncDialogOpen = true;
+    cloudLoadPopupDone = true;
     if (titleEl) titleEl.textContent = title || "Sync check";
     if (msgEl) msgEl.textContent = message || "";
     if (timesEl) {
@@ -3819,6 +3871,9 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs }) {
         `<div><b>This device</b> ${esc(formatSyncTime(localTs))}</div>` +
         `<div><b>Google</b> ${esc(formatSyncTime(cloudTs))}</div>`;
     }
+    /* Keep the dialog above any home UI; re-parent to body in case a view
+       wrapper ever traps stacking contexts. */
+    if (sheet.parentElement !== document.body) document.body.appendChild(sheet);
     sheet.hidden = false;
     const finish = () => {
       ok.removeEventListener("click", finish);
@@ -3835,15 +3890,13 @@ async function reconcileCloud(reason) {
   const user = requireCloudUser();
   if (!user || !cloudDb || cloudCheckBusy || cloudSyncDialogOpen) {
     if (user && cloudDb && (cloudCheckBusy || cloudSyncDialogOpen)) {
-      /* Already checking or showing — keep a follow-up so we don't drop it. */
       pendingCloudSyncReason = pendingCloudSyncReason || reason;
     }
     return;
   }
   const now = Date.now();
-  /* Sign-in / first home paint always checks. Refresh/resume debounce so
-     pageshow + auth restore do not open two popups in a row. */
-  if (reason !== "signin" && reason !== "home" && now - cloudLastCheckedAt < CLOUD_CHECK_MIN_MS) {
+  /* Load / sign-in / home / resume always run. Only debounce duplicate quiet checks. */
+  if (!CLOUD_FORCE_REASONS[reason] && now - cloudLastCheckedAt < CLOUD_CHECK_MIN_MS) {
     return;
   }
   cloudCheckBusy = true;
@@ -3852,22 +3905,34 @@ async function reconcileCloud(reason) {
   updateCloudUi();
   try {
     let cloud = null;
+    const localTs = +localStorage.getItem(KEY_SAVED) || 0;
     try {
       cloud = await pullCloud(user.uid);
     } catch (e) {
       authError = "Could not check Google save. " + cloudErrDetail(e);
-      /* Keep armed so a later home paint can retry after a transient failure. */
       updateCloudUi();
+      await showCloudSyncPopup({
+        title: "Could not check Google save",
+        message: authError,
+        localTs,
+        cloudTs: 0
+      });
+      cloudHomePopupArmed = false;
       return;
     }
 
-    const localTs = +localStorage.getItem(KEY_SAVED) || 0;
     const cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
     const localW = progressWeight(S);
     const cloudW = cloud ? cloud.weight : 0;
 
-    /* Nothing on either side — no sync dialog. */
+    /* Nothing on either side — still confirm so a refresh is never silent. */
     if (localW === 0 && cloudW === 0) {
+      await showCloudSyncPopup({
+        title: "You're up to date",
+        message: "No study progress is saved on this device or Google yet.",
+        localTs,
+        cloudTs
+      });
       cloudHomePopupArmed = false;
       pendingCloudSyncReason = null;
       return;
@@ -5578,13 +5643,9 @@ function renderHome() {
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   wireCloudSettings();
   maybeOfferRestore();
-  /* Homepage paint is the reliable hook — Firebase often restores the Google
-     session after the first pageshow, so retry the sync popup here. */
+  /* Homepage paint retries the load sync popup after auth restores. */
   runPendingCloudSync();
-  if (cloudHomePopupArmed && requireCloudUser() && cloudDb
-      && !cloudCheckBusy && !cloudSyncDialogOpen) {
-    requestCloudSyncPopup("home");
-  }
+  if (cloudHomePopupArmed && !cloudLoadPopupDone) ensureLoadSyncPopup("home");
 }
 
 function renderLessons() {
@@ -9290,10 +9351,9 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
 window.addEventListener("pageshow", () => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
-  /* Arm so the next home paint (after Google session restores) shows the
-     sync popup. Do not require cloudUser yet — Firebase often loads later. */
-  cloudHomePopupArmed = true;
-  requestCloudSyncPopup("refresh");
+  /* Wait for Google auth, then force the save-state popup once. */
+  cloudLoadPopupDone = false;
+  ensureLoadSyncPopup("refresh");
 });
 function loadStudyData() {
   return new Promise((resolve, reject) => {
@@ -9331,6 +9391,7 @@ function bootApp() {
   wireBackupSheet();
   initCloud();
   route();
+  ensureLoadSyncPopup("boot");
   try {
     if (sessionStorage.getItem("mnn-study-v1:signin") === "1") {
       sessionStorage.removeItem("mnn-study-v1:signin");
