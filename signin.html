@@ -44,7 +44,7 @@
     box-sizing: border-box; line-height: 1.3;
   }
 </style>
-<script src="firebase-config.js?v=20260824s"></script>
+<script src="firebase-config.js?v=20260824t"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 </head>
@@ -52,15 +52,16 @@
 <main>
   <h1>Sign in with Google</h1>
   <p>Tap the teal button. Safari will open Google, then bring you back signed in.</p>
+  <p>Progress backs up to your Google account via Firebase (not Google Drive).</p>
   <p id="status">Preparing…</p>
   <p id="err"></p>
   <!-- Real <a href> so iOS always navigates from the tap (no async SDK). -->
   <a class="primary" id="go" href="#">Continue with Google</a>
-  <a class="link" id="back" href="./index.html?v=20260824s#/">Back to study guide</a>
+  <a class="link" id="back" href="./index.html?v=20260824t#/">Back to study guide</a>
 </main>
 <script>
 (function () {
-  var HOME = "./index.html?v=20260824s&r=" + Date.now() + "&signedin=1#/";
+  var HOME = "./index.html?v=20260824t&r=" + Date.now() + "&signedin=1#/";
   var status = document.getElementById("status");
   var err = document.getElementById("err");
   var go = document.getElementById("go");
@@ -74,9 +75,17 @@
   function goHome() {
     if (signedIn) return;
     signedIn = true;
-    status.textContent = "Signed in. Returning…";
-    try { sessionStorage.setItem("mnn-study-v1:justSignedIn", "1"); } catch (e) {}
-    location.replace(HOME);
+    status.textContent = "Signed in. Saving session…";
+    try {
+      sessionStorage.setItem("mnn-study-v1:justSignedIn", "1");
+      localStorage.setItem("mnn-study-v1:expectAuth", "1");
+    } catch (e) {}
+    /* Give LOCAL persistence a moment to flush before leaving this page —
+       bouncing instantly left index.html with no restored session on iPhone. */
+    setTimeout(function () {
+      status.textContent = "Signed in. Returning…";
+      location.replace(HOME);
+    }, 450);
   }
 
   function friendly(e) {
@@ -141,22 +150,31 @@
   }
 
   var auth = firebase.auth();
-  try {
-    auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-  } catch (e) {}
+
+  function afterUser(user) {
+    if (!user) return;
+    var done = function () { goHome(); };
+    try {
+      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+        .then(done)
+        .catch(done);
+    } catch (e) {
+      done();
+    }
+  }
 
   auth.onAuthStateChanged(function (user) {
-    if (user) goHome();
+    if (user) afterUser(user);
   });
 
   /* Returning from Google / Firebase handler */
   status.textContent = "Checking for a completed sign-in…";
   Promise.race([
     auth.getRedirectResult(),
-    new Promise(function (resolve) { setTimeout(function () { resolve(null); }, 2500); })
+    new Promise(function (resolve) { setTimeout(function () { resolve(null); }, 4000); })
   ]).then(function (result) {
     if (result && result.user) {
-      goHome();
+      afterUser(result.user);
       return;
     }
     armContinueLink();
