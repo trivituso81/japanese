@@ -778,20 +778,13 @@ document.addEventListener("DOMContentLoaded", function () {
     box-shadow: 7px 7px 0 #0c5a6c;
   }
   .kh-head {
-    display: flex; align-items: center; justify-content: space-between;
+    display: flex; align-items: center; justify-content: flex-start;
     gap: 8px; width: 100%; flex: 0 0 auto;
   }
   .kh-title {
     font-size: clamp(1.15rem, 4.8vw, 1.45rem);
     font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
     color: var(--accent-deep); line-height: 1;
-  }
-  .kh-go {
-    flex: none; width: 30px; height: 30px;
-    display: inline-flex; align-items: center; justify-content: center;
-    border: 1.5px solid var(--text); border-radius: 50%;
-    color: var(--text); font-size: 15px; font-weight: 700; line-height: 1;
-    background: transparent;
   }
   .kh-main { flex: 0 0 auto; width: 100%; padding: 0 1px; }
   .kh-val {
@@ -887,30 +880,41 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   /* Verb conjugation badges — one seal per form in VERB_FORMS.
-     Four across (~45% larger than the old 6×3 cluster) so the seals fill
-     the tile instead of floating in leftover white space. Last row of two
-     is centered. */
+     Size is set by fitVerbBadgeGrid() so the seals fill the tile without
+     overlapping or clipping. --vb-cols / --vb-size / --vb-gap / --vb-fs. */
   .home-track-stats .stat.verbs-home {
     gap: 6px;
     padding: 10px 8px 8px;
   }
+  .home-track-stats .stat.verbs-home .k {
+    font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    letter-spacing: .1em;
+    line-height: 1;
+  }
   .home-track-stats .stat.verbs-home .viz {
     align-items: center; justify-content: center;
+    overflow: hidden;
   }
   .viz-badges {
+    --vb-cols: 5;
+    --vb-size: 28px;
+    --vb-gap: 4px;
+    --vb-fs: 9px;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
-    gap: 7px 6px;
+    gap: var(--vb-gap);
     width: 100%;
+    height: 100%;
     max-height: 100%;
     min-height: 0;
+    box-sizing: border-box;
   }
   .viz-badges .vb {
-    flex: 0 0 calc((100% - 18px) / 4);
-    width: calc((100% - 18px) / 4);
-    aspect-ratio: 1;
+    flex: 0 0 var(--vb-size);
+    width: var(--vb-size);
+    height: var(--vb-size);
     min-width: 0; min-height: 0;
     display: flex; align-items: center; justify-content: center;
     border: 1.5px solid var(--rule-strong);
@@ -918,7 +922,7 @@ document.addEventListener("DOMContentLoaded", function () {
     background: var(--bg-inset);
     color: var(--text-faint);
     font-family: var(--jp-mincho);
-    font-size: clamp(8.5px, 2.7vw, 12.5px);
+    font-size: var(--vb-fs);
     font-weight: 700;
     line-height: 1.05;
     letter-spacing: .01em;
@@ -1783,7 +1787,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-track-stats .stat { padding: 8px 8px 7px; }
     .home-track-stats .stat.kanji-home { padding: 10px 10px 8px; gap: 7px; box-shadow: 5px 5px 0 #0c5a6c; }
     .kh-val { font-size: clamp(1.75rem, 8vw, 2.2rem); }
-    .kh-go { width: 26px; height: 26px; font-size: 13px; }
     .viz-klevels { gap: 7px; }
     .viz-klevels .k-home-row-top .lv { font-size: 11px; }
     .viz-klevels .k-home-row-top .ct { font-size: 10px; }
@@ -1791,8 +1794,6 @@ document.addEventListener("DOMContentLoaded", function () {
     .viz-klevels .k-home-bar { height: 9px; }
     .viz-klevels .k-home-key { font-size: 10px; gap: 6px 10px; }
     .viz-wave { min-height: 48px; }
-    .viz-badges { gap: 4px 4px; }
-    .viz-badges .vb { font-size: clamp(8px, 2.5vw, 11.5px); }
     .home-track-stats .stat.verbs-home { padding: 8px 6px 6px; gap: 4px; }
     .home-next .btn { font-size: 14.5px; min-height: 46px; padding: 12px 16px; }
   }
@@ -2886,9 +2887,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .viz-wave { height: 80%; }
     .viz-wave .line { stroke-width: 8.8; }
     .viz-wave .empty { stroke-width: 6.4; }
-    .viz-badges { gap: 8px 7px; }
-    .viz-badges .vb { font-size: clamp(11px, 1.7vw, 14px); }
     .home-track-stats .stat.verbs-home { padding: 12px 10px 10px; }
+    .home-track-stats .stat.verbs-home .k {
+      font-size: clamp(1.15rem, 4.8vw, 1.45rem);
+    }
     .home-next { padding-top: 6px; }
     .home-next .btn {
       max-width: 440px; margin: 0 auto;
@@ -5446,7 +5448,6 @@ function kanjiHomeStat(levels, href) {
     aria-label="${esc(`Kanji ${known} of ${total}. ${aria}`)}">
     <div class="kh-head">
       <span class="kh-title">Kanji</span>
-      <span class="kh-go" aria-hidden="true">&gt;</span>
     </div>
     <div class="kh-main">
       <div class="kh-val">${known}<span class="kh-of"> / ${total}</span></div>
@@ -5537,6 +5538,49 @@ function badgesViz() {
   if (!forms.length) return `<div class="viz-badges" aria-hidden="true"></div>`;
   const cells = forms.map(f => verbBadgeSeal(f)).join("");
   return `<div class="viz-badges" role="img" aria-label="Verb conjugation badges">${cells}</div>`;
+}
+
+/* Pack verb seals into the tile: pick the largest circle size that fits
+   all badges without overlapping or overflowing the viz area. */
+let _verbBadgeFitObs = null;
+function fitVerbBadgeGrid() {
+  const grid = document.querySelector(".home-track-stats .viz-badges");
+  if (!grid) return;
+  const host = grid.parentElement;
+  if (!host) return;
+  const n = grid.querySelectorAll(".vb").length;
+  if (!n) return;
+  const W = host.clientWidth;
+  const H = host.clientHeight;
+  if (W < 12 || H < 12) return;
+
+  let best = { size: 0, cols: 5, gap: 4 };
+  for (let cols = 6; cols >= 3; cols--) {
+    const rows = Math.ceil(n / cols);
+    for (let gap = 6; gap >= 2; gap--) {
+      const size = Math.floor(Math.min(
+        (W - gap * (cols - 1)) / cols,
+        (H - gap * (rows - 1)) / rows
+      ));
+      if (size > best.size) best = { size, cols, gap };
+    }
+  }
+  const size = Math.max(16, Math.min(best.size, 56));
+  const fs = Math.max(7, Math.min(13, Math.round(size * 0.34)));
+  grid.style.setProperty("--vb-cols", String(best.cols));
+  grid.style.setProperty("--vb-gap", best.gap + "px");
+  grid.style.setProperty("--vb-size", size + "px");
+  grid.style.setProperty("--vb-fs", fs + "px");
+}
+function wireVerbBadgeFit() {
+  fitVerbBadgeGrid();
+  const host = document.querySelector(".home-track-stats .stat.verbs-home .viz");
+  if (!host || typeof ResizeObserver === "undefined") return;
+  if (_verbBadgeFitObs) {
+    try { _verbBadgeFitObs.disconnect(); } catch (e) {}
+  }
+  _verbBadgeFitObs = new ResizeObserver(() => fitVerbBadgeGrid());
+  _verbBadgeFitObs.observe(host);
 }
 
 function homeStat(k, viz, valHtml, sub, href, cls) {
@@ -5693,6 +5737,7 @@ function renderHome() {
   /* Homepage paint retries the load sync popup after auth restores. */
   runPendingCloudSync();
   if (cloudHomePopupArmed && !cloudLoadPopupDone) ensureLoadSyncPopup("home");
+  requestAnimationFrame(() => wireVerbBadgeFit());
 }
 
 function renderLessons() {
