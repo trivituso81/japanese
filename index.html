@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260828y">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260828y">
-<link rel="manifest" href="site.webmanifest?v=20260828y">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260828z">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260828z">
+<link rel="manifest" href="site.webmanifest?v=20260828z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260828y";
+window.__BUILD__ = "20260828z";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260828y";
+  var v = window.__BUILD__ || "20260828z";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260828y"));
+    + encodeURIComponent(window.__BUILD__ || "20260828z"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260828y") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260828z") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -2296,6 +2296,14 @@ document.addEventListener("DOMContentLoaded", function () {
   .vopts-fold.is-open .vopts-fold-btn .chev { transform: rotate(180deg); }
   .vopts-fold-body .options { margin: 0; border: 0; border-top: 1px solid var(--rule-strong);
     border-radius: 0; background: transparent; }
+  .vtype-filters { display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 100%; }
+  .vtype-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .vtype-row .optk { flex: 0 0 auto; min-width: 4.5em; margin: 0; }
+  .vtype-sub { display: flex; flex-wrap: wrap; gap: 6px; padding-left: 12px; margin-left: 6px;
+    border-left: 2px solid var(--rule); }
+  .vtype-sub .btn { font-size: 12px; padding: 6px 10px; }
+  .vtype-all { font-size: 12px; padding: 4px 0 0; }
+  .vtype-all .linkish { font-size: 12px; }
   /* Standalone rather than .board: the dashboard's small-screen rules map
      specific columns and would scramble these. */
   .vforms { width: 100%; border-collapse: collapse; margin: 14px 0 4px; }
@@ -3132,10 +3140,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260828y" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260828z" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260828y#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260828z#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3155,7 +3163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260828y" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260828z" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3249,7 +3257,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260828y"></script>
+<script src="firebase-config.js?v=20260828z"></script>
 <script>
 /* ============================================================
    State
@@ -3723,14 +3731,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260828y" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260828z" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260828y" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260828z" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -4242,7 +4250,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260828y"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260828z"));
     return;
   }
   const start = () => {
@@ -4256,7 +4264,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260828y"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260828z"));
         return;
       }
       authError = authErrorMessage(e);
@@ -5808,7 +5816,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260828y" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260828z" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -7577,6 +7585,115 @@ function shortType(t) {
 }
 const groupOf = t => t === "g2" ? 2 : t.startsWith("g3") ? 3 : 1;
 
+/* Drill filter leaves — map to verbType() values used in pickVerbs. Group 1 is
+   split by て-form sound class (って / んで / いて・いで・して). */
+const VERB_TYPE_LEAVES = {
+  g1tt: ["g1:い", "g1:ち", "g1:り"],
+  g1nd: ["g1:み", "g1:び", "g1:に"],
+  g1i:  ["g1:き", "g1:ぎ", "g1:し"],
+  g2:   ["g2"],
+  g3s:  ["g3:する"],
+  g3k:  ["g3:くる"]
+};
+const ALL_VERB_TYPE_LEAVES = Object.values(VERB_TYPE_LEAVES).flat();
+const VERB_TYPE_GROUPS = [
+  { id: "g1", label: "Group 1", leaves: ["g1tt", "g1nd", "g1i"],
+    sub: [
+      { id: "g1tt", label: "～って", leaves: VERB_TYPE_LEAVES.g1tt },
+      { id: "g1nd", label: "～んで", leaves: VERB_TYPE_LEAVES.g1nd },
+      { id: "g1i",  label: "～いて / ～いで / ～して", leaves: VERB_TYPE_LEAVES.g1i }
+    ] },
+  { id: "g2", label: "Group 2", leaves: ["g2"] },
+  { id: "g3", label: "Group 3", leaves: ["g3s", "g3k"],
+    sub: [
+      { id: "g3s", label: "～する", leaves: VERB_TYPE_LEAVES.g3s },
+      { id: "g3k", label: "～くる", leaves: VERB_TYPE_LEAVES.g3k }
+    ] }
+];
+
+function allVerbTypesSelected(o) {
+  return !o.types || !o.types.length || o.types.length >= ALL_VERB_TYPE_LEAVES.length;
+}
+function activeVerbTypes(o) {
+  if (allVerbTypesSelected(o)) return null;
+  return o.types.slice();
+}
+function leavesOn(o, leaves) {
+  if (allVerbTypesSelected(o)) return true;
+  return leaves.every(t => o.types.includes(t));
+}
+function leavesPartial(o, leaves) {
+  if (allVerbTypesSelected(o)) return false;
+  const n = leaves.filter(t => o.types.includes(t)).length;
+  return n > 0 && n < leaves.length;
+}
+function normalizeVerbTypes(types) {
+  if (!types || !types.length || types.length >= ALL_VERB_TYPE_LEAVES.length) return null;
+  return types.slice();
+}
+function setVerbTypeFilter(types) {
+  setVOpts({ types: normalizeVerbTypes(types) });
+}
+function toggleVerbTypeLeaves(o, leaves) {
+  let sel = allVerbTypesSelected(o) ? ALL_VERB_TYPE_LEAVES.slice() : o.types.slice();
+  const allOn = leaves.every(t => sel.includes(t));
+  if (allOn) {
+    const next = sel.filter(t => !leaves.includes(t));
+    if (!next.length) return;
+    setVerbTypeFilter(next);
+  } else {
+    leaves.forEach(t => { if (!sel.includes(t)) sel.push(t); });
+    setVerbTypeFilter(sel);
+  }
+}
+function verbTypeFilterLabel(o) {
+  if (allVerbTypesSelected(o)) return "all groups";
+  const parts = [];
+  VERB_TYPE_GROUPS.forEach(g => {
+    const leaves = g.leaves.flatMap(k => VERB_TYPE_LEAVES[k] || []);
+    if (leavesOn(o, leaves)) parts.push(g.label.replace("Group ", "G"));
+    else if (leavesPartial(o, leaves)) parts.push(g.label.replace("Group ", "G") + "…");
+  });
+  return parts.length ? parts.join(" · ") : "filtered";
+}
+function verbTypeFilterShort(types) {
+  if (!types || !types.length) return "";
+  const fake = { types };
+  return verbTypeFilterLabel(fake);
+}
+function verbTypeFilterPanel(o) {
+  const subBtn = (id, label, leaves) => {
+    const on = leavesOn(o, leaves);
+    const part = leavesPartial(o, leaves);
+    return `<button type="button" class="btn sm vtype-leaf" data-vtype="${esc(id)}"
+      aria-pressed="${on ? "true" : "false"}"${part ? ' aria-label="' + esc(label) + ' (partial)"' : ""}>${esc(label)}</button>`;
+  };
+  const rows = VERB_TYPE_GROUPS.map(g => {
+    const leaves = g.leaves.flatMap(k => VERB_TYPE_LEAVES[k] || []);
+    const on = leavesOn(o, leaves);
+    const part = leavesPartial(o, leaves);
+    const head = `<button type="button" class="btn sm vtype-grp" data-vgrp="${esc(g.id)}"
+      aria-pressed="${on ? "true" : "false"}">${esc(g.label)}</button>`;
+    const sub = g.sub
+      ? `<div class="vtype-sub">${g.sub.map(s => subBtn(s.id, s.label, s.leaves)).join("")}</div>`
+      : "";
+    return `<div class="vtype-row">${head}${sub}</div>`;
+  }).join("");
+  return `<div class="vtype-filters">
+    <div class="optk">Verb groups</div>
+    ${rows}
+    <p class="vtype-all">${allVerbTypesSelected(o)
+      ? "All types are included."
+      : `<button type="button" class="linkish" id="vtypeAll">Select all types</button>`}</p>
+  </div>`;
+}
+function filterPoolByTypes(pool, types) {
+  if (!types || !types.length) return pool;
+  const want = new Set(types);
+  const out = pool.filter(v => want.has(verbType(v)));
+  return out.length ? out : pool;
+}
+
 /* One spelling of one form. The same operations run over the kana and the
    kanji, because every change happens in the trailing kana. */
 function conjugateOne(word, v, form) {
@@ -7672,10 +7789,11 @@ const VERB_PROMPTS = [
   ["dict",   "Dictionary form", "the plain form"]
 ];
 const vOpts = () => {
-  const o = Object.assign({ ceiling: 50, prompt: "polite", count: 20, form: "te" },
+  const o = Object.assign({ ceiling: 50, prompt: "polite", count: 20, form: "te", types: null },
     S.vopts || {});
   /* ます-stem drill was removed; map any saved choice onto dictionary form. */
   if (o.form === "stem") o.form = "dict";
+  if (Array.isArray(o.types) && !o.types.length) o.types = null;
   return o;
 };
 function setVOpts(patch) { S.vopts = Object.assign(vOpts(), patch); save(); }
@@ -7716,13 +7834,20 @@ let vOptsOpen = false;
 function renderVerbs() {
   document.getElementById("crumbs").innerHTML = "";
   const o = vOpts();
+  try {
+    if (sessionStorage.getItem(KEY + ":verbOptsOpen") === "1") {
+      vOptsOpen = true;
+      sessionStorage.removeItem(KEY + ":verbOptsOpen");
+    }
+  } catch (e) {}
   const view = document.getElementById("view");
   const sample = verbs().find(v => v.ms === "かきます") || verbs()[0];
   const forms = VERB_FORMS.filter(f => f.n <= o.ceiling);
   const promptLabel = (VERB_PROMPTS.find(([id]) => id === o.prompt) || [])[1] || o.prompt;
+  const typeLabel = verbTypeFilterLabel(o);
   const rows = forms.map(f => {
     const ex = sample && conjugate(sample, f.id);
-    const pool = verbPool(o.ceiling, f.id).length;
+    const pool = filterPoolByTypes(verbPool(o.ceiling, f.id), activeVerbTypes(o)).length;
     const tier = verbBadgeTier(f.id);
     const { ok, n } = verbFormStats(f.id);
     const tip = n ? `${ok}/${n}` : "not started";
@@ -7748,7 +7873,7 @@ function renderVerbs() {
     <div class="vopts-fold${vOptsOpen ? " is-open" : ""}">
       <button type="button" class="vopts-fold-btn" id="voptsToggle"
         aria-expanded="${vOptsOpen ? "true" : "false"}">
-        <span>Drill options · L${o.ceiling} · ${esc(promptLabel)} · ${o.count}</span>
+        <span>Drill options · L${o.ceiling} · ${esc(promptLabel)} · ${o.count} · ${esc(typeLabel)}</span>
         <span class="chev" aria-hidden="true">▾</span>
       </button>
       <div class="vopts-fold-body"${vOptsOpen ? "" : " hidden"}>
@@ -7760,6 +7885,9 @@ function renderVerbs() {
           { k: "Questions", html: `<select id="vcount">${VERB_COUNTS.map(c =>
               `<option value="${c}"${c === o.count ? " selected" : ""}>${c}</option>`).join("")}</select>` }
         ])}
+        <div class="options" style="border-top:0;padding-top:0">
+          ${verbTypeFilterPanel(o)}
+        </div>
       </div>
     </div>
 
@@ -7792,6 +7920,26 @@ function renderVerbs() {
   document.getElementById("vcount").addEventListener("change", e => {
     setVOpts({ count: +e.target.value }); renderVerbs();
   });
+  view.querySelectorAll(".vtype-grp").forEach(b => {
+    b.addEventListener("click", () => {
+      const g = VERB_TYPE_GROUPS.find(x => x.id === b.dataset.vgrp);
+      if (!g) return;
+      toggleVerbTypeLeaves(o, g.leaves.flatMap(k => VERB_TYPE_LEAVES[k] || []));
+      renderVerbs();
+    });
+  });
+  view.querySelectorAll(".vtype-leaf").forEach(b => {
+    b.addEventListener("click", () => {
+      VERB_TYPE_GROUPS.forEach(g => {
+        (g.sub || []).forEach(s => {
+          if (s.id === b.dataset.vtype) toggleVerbTypeLeaves(o, s.leaves);
+        });
+      });
+      renderVerbs();
+    });
+  });
+  const vtypeAll = document.getElementById("vtypeAll");
+  if (vtypeAll) vtypeAll.addEventListener("click", () => { setVerbTypeFilter(null); renderVerbs(); });
   wireResume(renderVerbs);
   view.querySelectorAll("button.go").forEach(b =>
     b.addEventListener("click", () => {
@@ -7844,14 +7992,15 @@ function recordVerb(ok, type, form) {
 /* Deals the round, then hands over to the router. The drill has its own
    address, so the breadcrumb back to the setup table is a real link, the
    browser's back button behaves, and a form can be bookmarked. */
-function startVerbs(form, types) {
+function startVerbs(form, typesOverride) {
   unlockTts();
   const o = vOpts();
-  const pool = verbPool(o.ceiling, form);
+  const types = typesOverride || activeVerbTypes(o);
+  const pool = filterPoolByTypes(verbPool(o.ceiling, form), types);
   if (!pool.length) return goto("#/verbs");
   const picked = pickVerbs(pool, o.count, types);
   VERB = { form, ceiling: o.ceiling, prompt: o.prompt, list: picked,
-           i: 0, typed: "", verdict: null, answers: [], focus: types || null };
+           i: 0, typed: "", verdict: null, answers: [], focus: typesOverride || null };
   saveVerbSession();
   goto(verbDrillHash(form));
 }
@@ -8237,7 +8386,11 @@ function drawVerb() {
   stopSpeaking();
   view.innerHTML = drillStage({
     heading: esc(meta.label),
-    sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus ? " · focused round" : ""}`,
+    sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus
+      ? ` · focused round (${esc(verbTypeFilterShort(VERB.focus))})`
+      : activeVerbTypes(vOpts())
+        ? ` · ${esc(verbTypeFilterShort(activeVerbTypes(vOpts())))}`
+        : ""} · <button type="button" class="linkish" id="vChangeTypes">Change types</button>`,
     left: `Question <b>${VERB.i + 1}</b> of <b>${total}</b>`,
     right: runningScore(VERB.answers),
     done: VERB.i, total,
@@ -9707,7 +9860,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260828y&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260828z&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
