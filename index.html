@@ -8422,6 +8422,11 @@ function drawVerb() {
 
   const input = document.getElementById("vin");
   input.focus();
+  const vChangeTypes = document.getElementById("vChangeTypes");
+  if (vChangeTypes) vChangeTypes.addEventListener("click", () => {
+    try { sessionStorage.setItem(KEY + ":verbOptsOpen", "1"); } catch (e) {}
+    goto("#/verbs");
+  });
   wireVerbAnswerInput(input);
   const send = () => {
     stopVerbSpeech();
