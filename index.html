@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260828z">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260828z">
-<link rel="manifest" href="site.webmanifest?v=20260828z">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20260829a">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20260829a">
+<link rel="manifest" href="site.webmanifest?v=20260829a">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20260828z";
+window.__BUILD__ = "20260829a";
 (function () {
   try {
     var u = new URL(location.href);
@@ -130,7 +130,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20260828z";
+  var v = window.__BUILD__ || "20260829a";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -139,7 +139,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20260828z"));
+    + encodeURIComponent(window.__BUILD__ || "20260829a"));
 }
 
 function staticRestoreFromText() {
@@ -152,7 +152,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20260828z") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20260829a") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3140,10 +3140,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20260828z" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20260829a" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260828z#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20260829a#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3163,7 +3163,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20260828z" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20260829a" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3257,7 +3257,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20260828z"></script>
+<script src="firebase-config.js?v=20260829a"></script>
 <script>
 /* ============================================================
    State
@@ -3318,10 +3318,11 @@ function mergeVerbTallies(into, from) {
    richer per-form tallies instead of dropping earned seals. */
 function mergeVerbProgress(into, from) {
   if (!from || !from.verbs) return into;
-  into.verbs = into.verbs || { history: [], byType: {}, byForm: {}, runs: 0 };
+  into.verbs = into.verbs || { history: [], byType: {}, bySubtype: {}, byForm: {}, runs: 0 };
   const iv = into.verbs, fv = from.verbs;
   iv.byForm = mergeVerbTallies(iv.byForm, fv.byForm);
   iv.byType = mergeVerbTallies(iv.byType, fv.byType);
+  iv.bySubtype = mergeVerbTallies(iv.bySubtype, fv.bySubtype);
   const ih = iv.history || [], fh = fv.history || [];
   if (fh.length > ih.length) iv.history = fh.slice(-HISTORY_CAP);
   iv.runs = Math.max(iv.runs || 0, fv.runs || 0);
@@ -3399,12 +3400,15 @@ function migrate(s) {
     s.cardMisses = {};
   }
   /* Conjugation badges need per-form tallies; older saves only had byType. */
-  if (!s.verbs || typeof s.verbs !== "object") s.verbs = { history: [], byType: {}, byForm: {}, runs: 0 };
+  if (!s.verbs || typeof s.verbs !== "object") s.verbs = { history: [], byType: {}, bySubtype: {}, byForm: {}, runs: 0 };
   if (!s.verbs.byForm || typeof s.verbs.byForm !== "object" || Array.isArray(s.verbs.byForm)) {
     s.verbs.byForm = {};
   }
   if (!s.verbs.byType || typeof s.verbs.byType !== "object" || Array.isArray(s.verbs.byType)) {
     s.verbs.byType = {};
+  }
+  if (!s.verbs.bySubtype || typeof s.verbs.bySubtype !== "object" || Array.isArray(s.verbs.bySubtype)) {
+    s.verbs.bySubtype = {};
   }
   if (!Array.isArray(s.verbs.history)) s.verbs.history = [];
   return s;
@@ -3731,14 +3735,14 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20260828z" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20260829a" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
         Tap <b>Continue without signing in</b>.</p>
       <div class="welcome-actions">
         <button type="button" class="btn-google" id="welcomeGoogle">${GOOGLE_G} Sign in with Google</button>
-        <a class="linkish" href="signin.html?v=20260828z" id="welcomeGoogleLink" hidden>Sign in with Google</a>
+        <a class="linkish" href="signin.html?v=20260829a" id="welcomeGoogleLink" hidden>Sign in with Google</a>
         <button type="button" class="btn" id="welcomeRestore">Restore saved progress</button>
         <button type="button" class="linkish" id="welcomeGuest">Continue without signing in</button>
         <a class="linkish" href="https://trivituso81.github.io/japanese/backup.html">Open backup page</a>
@@ -4250,7 +4254,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260828z"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260829a"));
     return;
   }
   const start = () => {
@@ -4264,7 +4268,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260828z"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20260829a"));
         return;
       }
       authError = authErrorMessage(e);
@@ -5326,8 +5330,8 @@ function nextUp() {
       say: vAcc === null
         ? `The verb drill has never been run. It is the fastest way to find out which
            group is costing you marks.`
-        : `Verb conjugation is running at ${vAcc}%${weakTypes(3).length
-            ? `, weakest on ${typeLabel(weakTypes(3)[0].t)}` : ""}.`,
+        : `Verb conjugation is running at ${vAcc}%${weakSubtypes(3).length
+            ? `, weakest on ${subtypeLabel(weakSubtypes(3)[0].t)}` : ""}.`,
       go: "#/verbs", label: "Verb drill"
     },
     kSet.length && {
@@ -5816,7 +5820,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20260828z" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20260829a" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -7610,6 +7614,67 @@ const VERB_TYPE_GROUPS = [
       { id: "g3k", label: "～くる", leaves: VERB_TYPE_LEAVES.g3k }
     ] }
 ];
+const VERB_SUBTYPE_ORDER = ["g1tt", "g1nd", "g1i", "g2", "g3s", "g3k"];
+const VERB_SUBTYPE_LABELS = {
+  g1tt: "G1 · ～って",
+  g1nd: "G1 · ～んで",
+  g1i:  "G1 · ～いて / ～いで / ～して",
+  g2:   "Group 2",
+  g3s:  "G3 · ～する",
+  g3k:  "G3 · ～くる"
+};
+
+function subtypeLabel(id) {
+  return VERB_SUBTYPE_LABELS[id] || id;
+}
+function verbSubtypeFromLeaf(leaf) {
+  for (const id of VERB_SUBTYPE_ORDER) {
+    if ((VERB_TYPE_LEAVES[id] || []).includes(leaf)) return id;
+  }
+  return null;
+}
+function verbSubtype(v) {
+  return verbSubtypeFromLeaf(verbType(v)) || "g2";
+}
+function leafTypesForSubtypes(ids) {
+  const out = [];
+  (ids || []).forEach(id => {
+    (VERB_TYPE_LEAVES[id] || []).forEach(t => { if (!out.includes(t)) out.push(t); });
+  });
+  return out;
+}
+function rollupByTypeToSubtype(byType) {
+  const out = {};
+  Object.keys(byType || {}).forEach(leaf => {
+    const id = verbSubtypeFromLeaf(leaf);
+    if (!id) return;
+    const r = byType[leaf];
+    if (!r || !r.n) return;
+    const s = out[id] = out[id] || { ok: 0, n: 0 };
+    s.ok += r.ok || 0;
+    s.n += r.n || 0;
+  });
+  return out;
+}
+function ensureVerbSubtypes(st) {
+  if (!st) return {};
+  if (!st.bySubtype || typeof st.bySubtype !== "object" || Array.isArray(st.bySubtype)) {
+    st.bySubtype = {};
+  }
+  if (!Object.keys(st.bySubtype).length && st.byType && Object.keys(st.byType).length) {
+    st.bySubtype = rollupByTypeToSubtype(st.byType);
+  }
+  return st.bySubtype;
+}
+function verbFocusLabel(focusLeaves) {
+  if (!focusLeaves || !focusLeaves.length) return "";
+  const subs = VERB_SUBTYPE_ORDER.filter(id => {
+    const leaves = VERB_TYPE_LEAVES[id] || [];
+    return leaves.length && leaves.every(t => focusLeaves.includes(t));
+  });
+  if (subs.length) return subs.map(subtypeLabel).join(" · ");
+  return verbTypeFilterShort(focusLeaves);
+}
 
 function allVerbTypesSelected(o) {
   return !o.types || !o.types.length || o.types.length >= ALL_VERB_TYPE_LEAVES.length;
@@ -7905,7 +7970,8 @@ function renderVerbs() {
     ${forms.length < VERB_FORMS.length
       ? `<p class="hintline">${VERB_FORMS.length - forms.length} more forms appear once you raise the
          lesson limit — the book introduces them later.</p>` : ""}
-    ${verbStats()}`;
+    ${verbStats()}
+    ${verbSubtypeProgressGrid()}`;
 
   document.getElementById("voptsToggle").addEventListener("click", () => {
     vOptsOpen = !vOptsOpen;
@@ -7957,32 +8023,51 @@ function verbStats() {
   const has = !!(st && st.history && st.history.length);
   const recent = has ? st.history.slice(-WINDOW) : [];
   const right = recent.reduce((a, x) => a + x, 0);
-  const weak = has ? weakTypes(3) : [];
+  const weak = has ? weakSubtypes(3) : [];
   return statGrid([
     { k: "Recent accuracy", val: has ? pct(right, recent.length) + "%" : "—",
       sub: has ? `last ${recent.length} answers · ${st.runs || 0} rounds` : "no rounds yet" },
-    { k: "Weakest so far", txt: true, val: weak.length ? esc(typeLabel(weak[0].t)) : "—",
+    { k: "Weakest type", txt: true, val: weak.length ? esc(subtypeLabel(weak[0].t)) : "—",
       sub: has ? (weak.length ? `${weak[0].ok} of ${weak[0].n} right` : "no misses yet")
         : "nothing drilled yet" }
   ]);
 }
 
-/* Types the answers say you are worst at. Only types tried enough times to
-   mean something are ranked, worst accuracy first. */
-function weakTypes(min) {
-  const by = (S.verbs && S.verbs.byType) || {};
-  return Object.keys(by).map(t => ({ t, ok: by[t].ok, n: by[t].n }))
+function verbSubtypeProgressGrid() {
+  const st = S.verbs;
+  if (!st) return "";
+  const by = ensureVerbSubtypes(st);
+  const cells = VERB_SUBTYPE_ORDER.map(id => {
+    const r = by[id];
+    if (!r || !r.n) return null;
+    return { k: subtypeLabel(id), val: r.ok, of: r.n, sub: `${pct(r.ok, r.n)}%` };
+  }).filter(Boolean);
+  if (!cells.length) return "";
+  return `<h3 class="hintline" style="margin:1.1rem 0 .35rem">Progress by verb type</h3>${statGrid(cells)}`;
+}
+
+/* Subtypes the answers say you are worst at — ranked worst accuracy first. */
+function weakSubtypes(min) {
+  const st = S.verbs;
+  if (!st) return [];
+  const by = ensureVerbSubtypes(st);
+  return VERB_SUBTYPE_ORDER.filter(id => by[id])
+    .map(id => ({ t: id, ok: by[id].ok, n: by[id].n }))
     .filter(x => x.n >= (min || 2) && x.ok < x.n)
     .sort((a, b) => (a.ok / a.n) - (b.ok / b.n) || b.n - a.n);
 }
 
-function recordVerb(ok, type, form) {
-  const st = S.verbs = S.verbs || { history: [], byType: {}, byForm: {}, runs: 0 };
+function recordVerb(ok, type, subtype, form) {
+  const st = S.verbs = S.verbs || { history: [], byType: {}, bySubtype: {}, byForm: {}, runs: 0 };
   if (!st.byForm || typeof st.byForm !== "object") st.byForm = {};
+  if (!st.bySubtype || typeof st.bySubtype !== "object") st.bySubtype = {};
   st.history.push(ok ? 1 : 0);
   if (st.history.length > HISTORY_CAP) st.history = st.history.slice(-HISTORY_CAP);
   const t = st.byType[type] = st.byType[type] || { ok: 0, n: 0 };
   t.n++; if (ok) t.ok++;
+  const sub = subtype || verbSubtypeFromLeaf(type) || "g2";
+  const s = st.bySubtype[sub] = st.bySubtype[sub] || { ok: 0, n: 0 };
+  s.n++; if (ok) s.ok++;
   if (form) {
     const f = st.byForm[form] = st.byForm[form] || { ok: 0, n: 0 };
     f.n++; if (ok) f.ok++;
@@ -8349,7 +8434,7 @@ function drawVerb() {
           </span>${answer && answer.kanji
             ? `<span class="vgloss">${esc(answer.kana)}</span>` : ""}</div>
         ${ok ? "" : `<div class="vrow"><span class="vtag">type</span>
-            <span class="vgloss">${esc(typeLabel(verbType(v)))} · introduced Lesson ${v.n}</span></div>`}
+            <span class="vgloss">${esc(subtypeLabel(verbSubtype(v)))} · introduced Lesson ${v.n}</span></div>`}
         <div class="rowacts">
           <button class="btn primary" id="vnext">${VERB.i >= total ? "See results" : "Next verb"}</button>
           ${ok ? "" : `<button class="btn good" id="vflip">My answer was right</button>`}
@@ -8387,7 +8472,7 @@ function drawVerb() {
   view.innerHTML = drillStage({
     heading: esc(meta.label),
     sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus
-      ? ` · focused round (${esc(verbTypeFilterShort(VERB.focus))})`
+      ? ` · focused round (${esc(verbFocusLabel(VERB.focus))})`
       : activeVerbTypes(vOpts())
         ? ` · ${esc(verbTypeFilterShort(activeVerbTypes(vOpts())))}`
         : ""} · <button type="button" class="linkish" id="vChangeTypes">Change types</button>`,
@@ -8467,6 +8552,10 @@ function regradeVerb(ok) {
     st.history[st.history.length - 1] = ok ? 1 : 0;
     const t = st.byType[a.type];
     if (t) t.ok += ok ? 1 : -1;
+    ensureVerbSubtypes(st);
+    const sub = a.subtype || verbSubtypeFromLeaf(a.type);
+    const s = sub && st.bySubtype[sub];
+    if (s) s.ok += ok ? 1 : -1;
     const form = VERB && VERB.form;
     if (form) {
       if (!st.byForm || typeof st.byForm !== "object") st.byForm = {};
@@ -8486,8 +8575,9 @@ function submitVerb(typed) {
   const answer = conjugate(v, VERB.form);
   const ok = judgeVerb(typed, answer);
   const type = verbType(v);
-  recordVerb(ok, type, VERB.form);
-  VERB.answers.push({ ms: v.ms, kanji: v.kanji, en: v.en, n: v.n, type, ok,
+  const subtype = verbSubtype(v);
+  recordVerb(ok, type, subtype, VERB.form);
+  VERB.answers.push({ ms: v.ms, kanji: v.kanji, en: v.en, n: v.n, type, subtype, ok,
                       typed: String(typed).trim(), answer });
   VERB.i++;
   VERB.verdict = { v, ok, typed: String(typed).trim(), answer };
@@ -8499,32 +8589,21 @@ function submitVerb(typed) {
 }
 
 function drawVerbEnd(view, meta) {
-  const st = S.verbs = S.verbs || { history: [], byType: {}, byForm: {}, runs: 0 };
+  const st = S.verbs = S.verbs || { history: [], byType: {}, bySubtype: {}, byForm: {}, runs: 0 };
   if (!st.byForm || typeof st.byForm !== "object") st.byForm = {};
   if (!VERB.counted) { st.runs = (st.runs || 0) + 1; VERB.counted = true; save(); }
   clearVerbSession();
 
   const total = VERB.answers.length;
   const right = VERB.answers.filter(a => a.ok).length;
-  const byType = {};
+  const bySubtype = {};
   VERB.answers.forEach(a => {
-    const r = byType[a.type] = byType[a.type] || { ok: 0, n: 0 };
+    const id = a.subtype || verbSubtypeFromLeaf(a.type) || "g2";
+    const r = bySubtype[id] = bySubtype[id] || { ok: 0, n: 0 };
     r.n++; if (a.ok) r.ok++;
   });
-  const byGroup = { 1: { ok: 0, n: 0 }, 2: { ok: 0, n: 0 }, 3: { ok: 0, n: 0 } };
-  Object.keys(byType).forEach(t => {
-    const g = byGroup[groupOf(t)];
-    g.ok += byType[t].ok; g.n += byType[t].n;
-  });
-  const missedTypes = Object.keys(byType).filter(t => byType[t].ok < byType[t].n)
-    .sort((a, b) => (byType[a].ok / byType[a].n) - (byType[b].ok / byType[b].n));
-  // only worth naming a group if it really is worse than the others; when
-  // everything scored the same there is no single culprit to point at
-  const ranked = [1, 2, 3].filter(g => byGroup[g].n && byGroup[g].ok < byGroup[g].n)
-    .sort((a, b) => (byGroup[a].ok / byGroup[a].n) - (byGroup[b].ok / byGroup[b].n));
-  const rate = g => byGroup[g].ok / byGroup[g].n;
-  const worstGroup = ranked.length && (ranked.length === 1 || rate(ranked[0]) < rate(ranked[1]))
-    ? ranked[0] : null;
+  const missedSubtypes = VERB_SUBTYPE_ORDER.filter(id => bySubtype[id] && bySubtype[id].ok < bySubtype[id].n)
+    .sort((a, b) => (bySubtype[a].ok / bySubtype[a].n) - (bySubtype[b].ok / bySubtype[b].n));
 
   const missed = VERB.answers.filter(a => !a.ok);
   view.innerHTML = summaryScreen({
@@ -8534,21 +8613,16 @@ function drawVerbEnd(view, meta) {
     lead: `${pct(right, total)}%${missed.length
       ? ` · ${missed.length} to work on` : " · nothing missed"}`,
     body: `
-      ${statGrid([1, 2, 3].map(g => byGroup[g].n && {
-        k: `Group ${g}`, val: byGroup[g].ok, of: byGroup[g].n,
-        sub: `${pct(byGroup[g].ok, byGroup[g].n)}%`
+      ${statGrid(VERB_SUBTYPE_ORDER.map(id => bySubtype[id] && bySubtype[id].n && {
+        k: subtypeLabel(id), val: bySubtype[id].ok, of: bySubtype[id].n,
+        sub: `${pct(bySubtype[id].ok, bySubtype[id].n)}%`
       }))}
 
-      ${missedTypes.length ? (() => {
-        // the endings can be named on their own only while they all sit in the
-        // group just called out; once the misses spread, each needs its group
-        const spread = new Set(missedTypes.map(groupOf)).size > 1;
-        const listed = missedTypes.slice(0, 4).map(t =>
-          `<b>${esc(spread ? typeLabel(t) : shortType(t))}</b> (${byType[t].ok}/${byType[t].n})`);
-        const more = missedTypes.length - listed.length;
-        return `<p class="hintline focusnote">${worstGroup
-          ? `<b>Group ${worstGroup}</b> is costing you most. ` : ""}A focused round draws from
-          what you missed: ${listed.join(" · ")}${more ? ` and ${more} more` : ""}.</p>`;
+      ${missedSubtypes.length ? (() => {
+        const listed = missedSubtypes.slice(0, 4).map(id =>
+          `<b>${esc(subtypeLabel(id))}</b> (${bySubtype[id].ok}/${bySubtype[id].n})`);
+        const more = missedSubtypes.length - listed.length;
+        return `<p class="hintline focusnote">A focused round drills the types you missed: ${listed.join(" · ")}${more ? ` and ${more} more` : ""}.</p>`;
       })() : ""}
 
       ${missed.length ? `<table class="misstable allwrong"><thead><tr>
@@ -8558,11 +8632,11 @@ function drawVerbEnd(view, meta) {
           <td data-col="gloss">${esc(a.en)}</td>
           <td data-col="yours" class="jp">${esc(a.typed || "—")}</td>
           <td data-col="answer" class="jp">${vRuby(a.answer)}</td>
-          <td data-col="tag">${esc(typeLabel(a.type))}</td></tr>`).join("")}</tbody></table>` : ""}`,
+          <td data-col="tag">${esc(subtypeLabel(a.subtype || verbSubtypeFromLeaf(a.type) || "g2"))}</td></tr>`).join("")}</tbody></table>` : ""}`,
     actions: [
-      missedTypes.length && { id: "vfocus", primary: true, label: `Drill ${
-        missedTypes.length > 1 ? "those types" : typeLabel(missedTypes[0])}` },
-      { id: "vagain", primary: !missedTypes.length, label: `Another ${vOpts().count}` },
+      missedSubtypes.length && { id: "vfocus", primary: true, label: `Drill ${
+        missedSubtypes.length > 1 ? "missed types" : subtypeLabel(missedSubtypes[0])}` },
+      { id: "vagain", primary: !missedSubtypes.length, label: `Another ${vOpts().count}` },
       { go: "#/verbs", label: "Back to verb forms" },
       { go: "#/", label: "Back to dashboard" }
     ]
@@ -8570,7 +8644,8 @@ function drawVerbEnd(view, meta) {
 
   document.getElementById("vagain").addEventListener("click", () => startVerbs(VERB.form));
   const fx = document.getElementById("vfocus");
-  if (fx) fx.addEventListener("click", () => startVerbs(VERB.form, missedTypes));
+  if (fx) fx.addEventListener("click", () =>
+    startVerbs(VERB.form, leafTypesForSubtypes(missedSubtypes)));
 }
 
 /* ============================================================
@@ -9865,7 +9940,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20260828z&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20260829a&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
