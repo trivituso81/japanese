@@ -26,12 +26,13 @@
   }
   h1 { font-size: 1.25rem; margin: 0; line-height: 1.35; }
   p { margin: 0; color: var(--soft); font-size: 15px; line-height: 1.5; }
-  #lead { color: var(--soft); }
   #detail { color: var(--soft); font-size: 14px; }
   #err { color: var(--miss); font-size: 14px; font-weight: 600; min-height: 0; white-space: pre-wrap; }
   #status { font-size: 14px; color: var(--soft); min-height: 1.2em; }
   main[data-state="success"] #status { color: var(--ok); font-weight: 600; }
   main[data-state="failure"] #status { color: var(--miss); font-weight: 600; }
+  #gisBtn { display: flex; justify-content: center; min-height: 48px; min-width: 0; }
+  #gisBtn > div { width: 100%; max-width: 320px; }
   a.primary, button.primary {
     display: block; width: 100%; min-height: 52px; padding: 12px 16px;
     font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
@@ -39,8 +40,9 @@
     cursor: pointer; text-decoration: none; text-align: center;
     -webkit-tap-highlight-color: rgba(14,116,144,.25);
     box-sizing: border-box; line-height: 1.3;
+    appearance: none; -webkit-appearance: none;
   }
-  button.primary { appearance: none; -webkit-appearance: none; }
+  button.primary:disabled { opacity: .55; cursor: default; }
   .link, button.link {
     display: block; width: 100%; min-height: 52px; padding: 12px 16px;
     font: inherit; font-size: 16px; font-weight: 700; border-radius: 8px;
@@ -51,35 +53,38 @@
   }
   [hidden] { display: none !important; }
 </style>
-<script src="firebase-config.js?v=20260824x"></script>
+<script src="firebase-config.js?v=20260828y"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 <main id="card" data-state="checking">
   <h1 id="title">Sign in with Google</h1>
-  <p id="lead">Tap the teal button. Safari will open Google, then bring you back signed in.</p>
+  <p id="lead">Tap the Google button below. After you pick your account, this page will finish signing you in.</p>
   <p id="detail">Progress backs up to your Google account via Firebase (not Google Drive).</p>
-  <p id="status">Preparing…</p>
+  <p id="status">Loading Google…</p>
   <p id="err"></p>
-  <!-- Real <a href> so iOS always navigates from the tap (no async SDK). -->
-  <a class="primary" id="go" href="#">Continue with Google</a>
+  <div id="gisBtn"></div>
+  <button type="button" class="primary" id="go" hidden>Continue with Google</button>
   <button type="button" class="primary" id="continueHome" hidden>Continue</button>
   <button type="button" class="link" id="tryAgain" hidden>Try again</button>
   <button type="button" class="link" id="signOutBtn" hidden>Sign out</button>
-  <a class="link" id="back" href="./index.html?v=20260824x#/">Back to study guide</a>
+  <a class="link" id="back" href="./index.html?v=20260828y#/">Back to study guide</a>
   <button type="button" class="link" id="exitBtn" hidden>Exit</button>
 </main>
 <script>
 (function () {
-  var BUILD = "20260824x";
+  var BUILD = "20260828y";
   var KEY = "mnn-study-v1";
   var KEY_JUST = KEY + ":justSignedIn";
   var KEY_EXPECT = KEY + ":expectAuth";
   var KEY_HINT = KEY + ":authHint";
-  var KEY_ATTEMPT = KEY + ":authAttempt";
   var HOME = "./index.html?v=" + BUILD + "&r=" + Date.now() + "&signedin=1#/";
   var EXIT = "./index.html?v=" + BUILD + "&r=" + Date.now() + "#/";
+  var CLIENT_ID = window.GOOGLE_CLIENT_ID || "";
+  var IS_IOS = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
 
   var card = document.getElementById("card");
   var title = document.getElementById("title");
@@ -87,6 +92,7 @@
   var detail = document.getElementById("detail");
   var status = document.getElementById("status");
   var err = document.getElementById("err");
+  var gisBtn = document.getElementById("gisBtn");
   var go = document.getElementById("go");
   var continueHome = document.getElementById("continueHome");
   var tryAgain = document.getElementById("tryAgain");
@@ -94,7 +100,9 @@
   var back = document.getElementById("back");
   var exitBtn = document.getElementById("exitBtn");
   var settled = false;
+  var signingIn = false;
   var auth = null;
+  var gisReady = false;
 
   function setVisible(el, on) {
     if (!el) return;
@@ -104,28 +112,34 @@
 
   function showReady() {
     settled = false;
+    signingIn = false;
     card.setAttribute("data-state", "ready");
     title.textContent = "Sign in with Google";
-    lead.textContent = "Tap the teal button. Safari will open Google, then bring you back signed in.";
+    lead.textContent = IS_IOS
+      ? "Tap the Google button. Safari will open your account picker, then bring you back here."
+      : "Tap the Google button below. After you pick your account, this page will finish signing you in.";
     detail.textContent = "Progress backs up to your Google account via Firebase (not Google Drive).";
-    status.textContent = "Ready. Tap Continue with Google.";
+    status.textContent = gisReady
+      ? "Ready. Tap the Google button (or Continue below)."
+      : "Ready. Tap Continue with Google.";
     err.textContent = "";
+    setVisible(gisBtn, gisReady);
     setVisible(go, true);
+    go.disabled = false;
     setVisible(continueHome, false);
     setVisible(tryAgain, false);
     setVisible(signOutBtn, false);
     setVisible(back, true);
     setVisible(exitBtn, false);
-    armContinueLink();
   }
 
-  function showChecking() {
+  function showChecking(msg) {
     card.setAttribute("data-state", "checking");
     title.textContent = "Sign in with Google";
     lead.textContent = "Finishing Google sign-in…";
-    detail.textContent = "Progress backs up to your Google account via Firebase (not Google Drive).";
-    status.textContent = "Checking for a completed sign-in…";
+    status.textContent = msg || "Checking sign-in…";
     err.textContent = "";
+    setVisible(gisBtn, false);
     setVisible(go, false);
     setVisible(continueHome, false);
     setVisible(tryAgain, false);
@@ -135,8 +149,9 @@
   }
 
   function showSuccess(user) {
+    if (settled) return;
     settled = true;
-    try { sessionStorage.removeItem(KEY_ATTEMPT); } catch (e) {}
+    signingIn = false;
     card.setAttribute("data-state", "success");
     title.textContent = "Signed in";
     var email = (user && user.email) ? user.email : "Google account";
@@ -154,6 +169,7 @@
       }));
       localStorage.removeItem(KEY + ":guest");
     } catch (e) {}
+    setVisible(gisBtn, false);
     setVisible(go, false);
     setVisible(continueHome, true);
     setVisible(tryAgain, false);
@@ -163,14 +179,16 @@
   }
 
   function showFailure(msg) {
+    if (settled && card.getAttribute("data-state") === "success") return;
     settled = true;
-    try { sessionStorage.removeItem(KEY_ATTEMPT); } catch (e) {}
+    signingIn = false;
     card.setAttribute("data-state", "failure");
     title.textContent = "Sign-in failed";
     lead.textContent = "Google sign-in did not finish on this page.";
     detail.textContent = "You can try again, or exit back to the study guide.";
     status.textContent = "Sign-in was not completed.";
     err.textContent = msg || "Sign-in failed.";
+    setVisible(gisBtn, false);
     setVisible(go, false);
     setVisible(continueHome, false);
     setVisible(tryAgain, true);
@@ -191,7 +209,6 @@
   function exitHome() {
     try {
       sessionStorage.removeItem(KEY_JUST);
-      sessionStorage.removeItem(KEY_ATTEMPT);
       localStorage.removeItem(KEY_EXPECT);
     } catch (e) {}
     location.replace(EXIT);
@@ -201,125 +218,123 @@
     var code = e && e.code ? e.code : "";
     if (code === "auth/operation-not-allowed") return "Google sign-in is not enabled in Firebase yet.";
     if (code === "auth/unauthorized-domain") return "This website is not an authorised domain in Firebase.";
-    if (code === "auth/network-request-failed") return "Network error. Check Wi‑Fi/cellular and try again.";
+    if (code === "auth/popup-blocked") return "Safari blocked the sign-in window. Tap the Google button and try again.";
     if (code === "auth/popup-closed-by-user" || code === "auth/cancelled-popup-request") {
       return "Sign-in was cancelled.";
     }
+    if (code === "auth/network-request-failed") return "Network error. Check Wi‑Fi/cellular and try again.";
+    if (code === "auth/invalid-credential") return "Google sign-in returned an invalid credential. Try again.";
     return (e && e.message) || "Sign-in failed.";
   }
 
-  /**
-   * Build Firebase's own redirect URL and set session flag the SDK expects.
-   * Must run from a user tap with a real navigation (location / <a href>).
-   * Firebase's signInWithRedirect awaits storage first, which iOS Safari drops.
-   */
-  function buildGoogleRedirectUrl() {
-    var cfg = window.FIREBASE_CONFIG;
-    if (!cfg || !cfg.apiKey || !cfg.authDomain) throw new Error("Missing Firebase config.");
-    var appName = "[DEFAULT]";
-    var pendingKey = "firebase:pendingRedirect:" + cfg.apiKey + ":" + appName;
-    try {
-      sessionStorage.setItem(pendingKey, JSON.stringify("true"));
-    } catch (e) {
-      throw new Error("Safari blocked sign-in storage. Turn off private browsing / content blockers for this site, then try again.");
+  function finishWithIdToken(idToken) {
+    if (!idToken) return showFailure("Google did not return an ID token.");
+    if (signingIn || settled) return;
+    signingIn = true;
+    showChecking("Finishing sign-in…");
+    go.disabled = true;
+    var cred = firebase.auth.GoogleAuthProvider.credential(idToken);
+    auth.signInWithCredential(cred)
+      .then(function (result) {
+        if (result && result.user) {
+          return auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+            .catch(function () {})
+            .then(function () { showSuccess(result.user); });
+        }
+        signingIn = false;
+        showFailure("No Google account returned.");
+      })
+      .catch(function (e) {
+        signingIn = false;
+        showFailure(friendly(e));
+      });
+  }
+
+  function clickGisButton() {
+    var btn = document.querySelector("#gisBtn div[role=button], #gisBtn [role=button]");
+    if (btn) {
+      btn.click();
+      return true;
     }
-    var redirectUrl = location.href.split("#")[0];
-    var params = new URLSearchParams();
-    params.set("apiKey", cfg.apiKey);
-    params.set("appName", appName);
-    params.set("authType", "signInViaRedirect");
-    params.set("redirectUrl", redirectUrl);
-    params.set("v", "10.14.1");
-    params.set("providerId", "google.com");
-    params.set("scopes", "profile,email");
-    params.set("customParameters", JSON.stringify({ prompt: "select_account" }));
-    return "https://" + cfg.authDomain + "/__/auth/handler?" + params.toString();
+    return false;
   }
 
-  function armContinueLink() {
+  function startFirebasePopup() {
+    if (signingIn || settled) return;
+    err.textContent = "";
+    status.textContent = "Opening Google…";
+    go.disabled = true;
+    signingIn = true;
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    auth.signInWithPopup(provider)
+      .then(function (result) {
+        if (result && result.user) showSuccess(result.user);
+        else {
+          signingIn = false;
+          showFailure("No Google account returned.");
+        }
+      })
+      .catch(function (e) {
+        signingIn = false;
+        go.disabled = false;
+        showFailure(friendly(e));
+      });
+  }
+
+  function renderGis() {
+    if (!CLIENT_ID || !window.google || !google.accounts || !google.accounts.id) return false;
     try {
-      var url = buildGoogleRedirectUrl();
-      go.setAttribute("href", url);
-      if (card.getAttribute("data-state") === "ready") {
-        status.textContent = "Ready. Tap Continue with Google.";
-        err.textContent = "";
-      }
-      return url;
+      var loginUri = location.href.split("#")[0];
+      google.accounts.id.initialize({
+        client_id: CLIENT_ID,
+        callback: function (response) {
+          if (!response || !response.credential) return showFailure("Google did not return a credential.");
+          finishWithIdToken(response.credential);
+        },
+        auto_select: false,
+        cancel_on_tap_outside: true,
+        context: "signin",
+        /* Redirect on iPhone — Firebase redirect via firebaseapp.com breaks on
+           Safari 16.1+ (third-party storage). GIS redirect stays same-origin. */
+        ux_mode: IS_IOS ? "redirect" : "popup",
+        login_uri: loginUri,
+        use_fedcm_for_prompt: false
+      });
+      google.accounts.id.renderButton(gisBtn, {
+        type: "standard",
+        theme: "outline",
+        size: "large",
+        text: "continue_with",
+        shape: "rectangular",
+        logo_alignment: "left",
+        width: Math.min(320, Math.max(240, gisBtn.clientWidth || 300))
+      });
+      gisReady = true;
+      return true;
     } catch (e) {
-      go.setAttribute("href", "#");
-      showFailure(e.message || String(e));
-      return null;
+      return false;
     }
   }
 
-  function markAttemptLeaving() {
-    try {
-      sessionStorage.setItem(KEY_ATTEMPT, "1");
-      localStorage.setItem(KEY_EXPECT, "1");
-    } catch (e) {}
-  }
-
-  function afterUser(user) {
-    if (!user || settled) return;
-    var done = function () { showSuccess(user); };
-    try {
-      auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-        .then(done)
-        .catch(done);
-    } catch (e) {
-      done();
-    }
-  }
-
-  function sleep(ms) {
-    return new Promise(function (resolve) { setTimeout(resolve, ms); });
-  }
-
-  async function finishRedirectCheck() {
-    showChecking();
-    try {
-      await auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
-    } catch (e) {}
-
-    var redirectErr = null;
-    var result = null;
-    try {
-      if (typeof auth.authStateReady === "function") {
-        await Promise.race([auth.authStateReady(), sleep(8000)]);
-      }
-      result = await Promise.race([
-        auth.getRedirectResult(),
-        sleep(10000).then(function () { return null; })
-      ]);
-    } catch (e) {
-      redirectErr = e;
-    }
-
-    if (result && result.user) {
-      afterUser(result.user);
+  function waitForGis(tries) {
+    if (renderGis()) {
+      if (!settled) showReady();
       return;
     }
-    if (auth.currentUser) {
-      afterUser(auth.currentUser);
+    if (tries <= 0) {
+      if (!settled) showReady();
       return;
     }
-
-    /* IndexedDB restore can lag behind getRedirectResult on iPhone. */
-    var until = Date.now() + 8000;
-    while (Date.now() < until && !auth.currentUser) {
-      await sleep(250);
-    }
-    if (auth.currentUser) {
-      afterUser(auth.currentUser);
-      return;
-    }
-
-    if (redirectErr) showFailure(friendly(redirectErr));
-    else showFailure("Google returned, but this page could not restore the signed-in session. Use the same Safari tab or home-screen icon you started from, then try again.");
+    setTimeout(function () { waitForGis(tries - 1); }, 200);
   }
 
   if (!window.FIREBASE_CONFIG || typeof firebase === "undefined") {
     showFailure("Could not load Google sign-in. Check your connection, then reload.");
+    return;
+  }
+  if (!CLIENT_ID) {
+    showFailure("Google sign-in is not configured on this page.");
     return;
   }
   try {
@@ -332,28 +347,41 @@
   auth = firebase.auth();
   back.href = EXIT;
 
+  auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function () {});
+
+  /* Ignore stale Firebase redirect attempts from older builds. */
+  try {
+    Promise.race([
+      auth.getRedirectResult(),
+      new Promise(function (resolve) { setTimeout(resolve, 1200); })
+    ]).then(function (result) {
+      if (result && result.user && !settled) showSuccess(result.user);
+    }).catch(function () {});
+  } catch (e) {}
+
   auth.onAuthStateChanged(function (user) {
-    if (user) afterUser(user);
+    if (user && !settled && !signingIn) showSuccess(user);
   });
 
-  continueHome.addEventListener("click", function () {
-    goHome();
-  });
+  continueHome.addEventListener("click", goHome);
   tryAgain.addEventListener("click", function () {
-    showReady();
+    settled = false;
+    waitForGis(50);
   });
-  exitBtn.addEventListener("click", function () {
-    exitHome();
-  });
+  exitBtn.addEventListener("click", exitHome);
   signOutBtn.addEventListener("click", function () {
     status.textContent = "Signing out…";
     try {
       sessionStorage.removeItem(KEY_JUST);
-      sessionStorage.removeItem(KEY_ATTEMPT);
       localStorage.removeItem(KEY_EXPECT);
       localStorage.removeItem(KEY_HINT);
     } catch (e) {}
-    var done = function () { showReady(); };
+    var done = function () {
+      settled = false;
+      gisReady = false;
+      gisBtn.innerHTML = "";
+      waitForGis(50);
+    };
     try {
       auth.signOut().then(done).catch(done);
     } catch (e) {
@@ -361,54 +389,15 @@
     }
   });
 
-  go.addEventListener("click", function (ev) {
-    ev.preventDefault();
-    err.textContent = "";
-    try {
-      var url = buildGoogleRedirectUrl();
-      markAttemptLeaving();
-      go.setAttribute("href", url);
-      status.textContent = "Opening Google…";
-      location.assign(url);
-    } catch (e) {
-      showFailure((e && e.message) || String(e));
+  go.addEventListener("click", function () {
+    if (clickGisButton()) {
+      status.textContent = "Choose your Google account…";
+      return;
     }
+    startFirebasePopup();
   });
 
-  var returning = false;
-  try { returning = sessionStorage.getItem(KEY_ATTEMPT) === "1"; } catch (e) {}
-
-  if (returning) {
-    finishRedirectCheck();
-  } else {
-    /* Fresh visit: still check for an existing session / late redirect result. */
-    showChecking();
-    Promise.resolve()
-      .then(function () {
-        return auth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).catch(function () {});
-      })
-      .then(function () {
-        if (typeof auth.authStateReady === "function") {
-          return Promise.race([auth.authStateReady(), sleep(4000)]);
-        }
-      })
-      .then(function () { return auth.getRedirectResult().catch(function () { return null; }); })
-      .then(function (result) {
-        if (settled) return;
-        if (result && result.user) {
-          afterUser(result.user);
-          return;
-        }
-        if (auth.currentUser) {
-          afterUser(auth.currentUser);
-          return;
-        }
-        showReady();
-      })
-      .catch(function () {
-        if (!settled) showReady();
-      });
-  }
+  waitForGis(50);
 })();
 </script>
 </body>
