@@ -1,4 +1,5 @@
 VOCAB
+さんかします III ［パーティーに ～］|参加します|participate [in a party]
 そだてます II|育てます|breed, bring up
 はこびます I|運びます|carry, transport
 なくなります I|亡くなります|pass away (euphemistic expression for しにます (L. 39))
@@ -16,10 +17,16 @@ VOCAB
 ちゅうがっこう|中学校|junior high school
 えきまえ|駅前|the area in front of the station
 かいがん|海岸|seaside, seashore
+こうじょう|工場|factory
+むら|村|village
+ゆびわ|指輪|ring
 うそ||lie, fib
 しょるい|書類|document, papers
 でんげん|電源|power switch
+しゅうかん|習慣|habit, custom
+けんこう|健康|health
 ～せい|～製|made in ～
+おととし||two years ago
 ［あ、］いけない。||Oops!/ Oh, no! (used when one has made a mistake)
 おさきに ［しつれいします］。|お先に ［失礼します］。|Excuse me (for leaving before you).
 かいらん|回覧|circular, sending round
