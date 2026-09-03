@@ -110,6 +110,7 @@
       gap: 8px;
       min-height: 64px;
       padding: 4px 0 8px;
+      pointer-events: none;
     }
 
     .slot {
@@ -124,6 +125,7 @@
       font-size: 1.75rem;
       font-weight: 700;
       transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+      pointer-events: auto;
     }
 
     .slot.kana {
@@ -512,6 +514,7 @@
           expected: ch,
           isKana,
           value: isKana ? ch : null,
+          tileId: null,
         };
       });
     }
@@ -581,6 +584,7 @@
       if (slotIndex === -1) return;
 
       state.slots[slotIndex].value = tile.char;
+      state.slots[slotIndex].tileId = tile.id;
       tile.used = true;
       render();
 
@@ -594,9 +598,11 @@
       const slot = state.slots[slotIndex];
       if (!slot || slot.isKana || !slot.value) return;
 
-      const tile = state.hand.find((t) => t.used && t.char === slot.value);
+      const tile = state.hand.find((t) => t.id === slot.tileId) ||
+        state.hand.find((t) => t.used && t.char === slot.value);
       if (tile) tile.used = false;
       slot.value = null;
+      slot.tileId = null;
       render();
     }
 
@@ -677,6 +683,9 @@
     }
 
     loadData();
+
+    // Dev/test hooks (safe no-ops for players)
+    window.__forge = { state, render, dealOrder, startNewDay, buildHand, buildSlots };
   </script>
 </body>
 </html>
