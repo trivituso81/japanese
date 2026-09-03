@@ -1,0 +1,3250 @@
+[
+  {
+    "word": "駅",
+    "reading": "えき",
+    "meaning": "train station",
+    "kanji": [
+      "駅"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "飲む",
+    "reading": "のむ",
+    "meaning": "to drink",
+    "kanji": [
+      "飲"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "勉強不足",
+    "reading": "べんきょうぶそく",
+    "meaning": "lack of study",
+    "kanji": [
+      "勉",
+      "強",
+      "不",
+      "足"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "家",
+    "reading": "いえ",
+    "meaning": "one's house",
+    "kanji": [
+      "家"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "買う",
+    "reading": "かう",
+    "meaning": "to buy",
+    "kanji": [
+      "買"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "運転手",
+    "reading": "うんてんしゅ",
+    "meaning": "a driver",
+    "kanji": [
+      "運",
+      "転",
+      "手"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "店",
+    "reading": "みせ",
+    "meaning": "a shop",
+    "kanji": [
+      "店"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "売る",
+    "reading": "うる",
+    "meaning": "to sell",
+    "kanji": [
+      "売"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "映画館",
+    "reading": "えいがかん",
+    "meaning": "cinema",
+    "kanji": [
+      "映",
+      "画",
+      "館"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "口",
+    "reading": "くち",
+    "meaning": "a mouth",
+    "kanji": [
+      "口"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "歩く",
+    "reading": "あるく",
+    "meaning": "to walk",
+    "kanji": [
+      "歩"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "研究室",
+    "reading": "けんきゅうしつ",
+    "meaning": "a study room",
+    "kanji": [
+      "研",
+      "究",
+      "室"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "手",
+    "reading": "て",
+    "meaning": "a hand",
+    "kanji": [
+      "手"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "走る",
+    "reading": "はしる",
+    "meaning": "to run",
+    "kanji": [
+      "走"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "待合室",
+    "reading": "まちあいしつ",
+    "meaning": "waiting room",
+    "kanji": [
+      "待",
+      "合",
+      "室"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "目",
+    "reading": "め",
+    "meaning": "an eye",
+    "kanji": [
+      "目"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "乗る",
+    "reading": "のる",
+    "meaning": "to board",
+    "kanji": [
+      "乗"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "運動会",
+    "reading": "うんどうかい",
+    "meaning": "sports day",
+    "kanji": [
+      "運",
+      "動",
+      "会"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "足",
+    "reading": "あし",
+    "meaning": "a foot",
+    "kanji": [
+      "足"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "着る",
+    "reading": "きる",
+    "meaning": "to put on",
+    "kanji": [
+      "着"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "青春時代",
+    "reading": "せいしゅんじだい",
+    "meaning": "youthful years",
+    "kanji": [
+      "青",
+      "春",
+      "時",
+      "代"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 時"
+  },
+  {
+    "word": "力",
+    "reading": "ちから",
+    "meaning": "strength",
+    "kanji": [
+      "力"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "待つ",
+    "reading": "まつ",
+    "meaning": "to wait",
+    "kanji": [
+      "待"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "体重計",
+    "reading": "たいじゅうけい",
+    "meaning": "bathroom scale",
+    "kanji": [
+      "体",
+      "重",
+      "計"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "心",
+    "reading": "こころ",
+    "meaning": "the heart",
+    "kanji": [
+      "心"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "持つ",
+    "reading": "もつ",
+    "meaning": "to hold",
+    "kanji": [
+      "持"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "写真集",
+    "reading": "しゃしんしゅう",
+    "meaning": "photo book",
+    "kanji": [
+      "写",
+      "真",
+      "集"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "声",
+    "reading": "こえ",
+    "meaning": "a voice",
+    "kanji": [
+      "声"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "使う",
+    "reading": "つかう",
+    "meaning": "to employ",
+    "kanji": [
+      "使"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "音楽会",
+    "reading": "おんがくかい",
+    "meaning": "a concert",
+    "kanji": [
+      "音",
+      "楽",
+      "会"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "顔",
+    "reading": "かお",
+    "meaning": "a face",
+    "kanji": [
+      "顔"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "作る",
+    "reading": "つくる",
+    "meaning": "to create",
+    "kanji": [
+      "作"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "計画",
+    "reading": "けいかく",
+    "meaning": "a plan",
+    "kanji": [
+      "計",
+      "画"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "頭",
+    "reading": "あたま",
+    "meaning": "the head",
+    "kanji": [
+      "頭"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "知る",
+    "reading": "しる",
+    "meaning": "to know",
+    "kanji": [
+      "知"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "場合",
+    "reading": "ばあい",
+    "meaning": "in the case",
+    "kanji": [
+      "場",
+      "合"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "体",
+    "reading": "からだ",
+    "meaning": "the body",
+    "kanji": [
+      "体"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "思う",
+    "reading": "おもう",
+    "meaning": "to think",
+    "kanji": [
+      "思"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "場所",
+    "reading": "ばしょ",
+    "meaning": "a location",
+    "kanji": [
+      "場",
+      "所"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "肉",
+    "reading": "にく",
+    "meaning": "meat",
+    "kanji": [
+      "肉"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "考える",
+    "reading": "かんがえる",
+    "meaning": "to ponder",
+    "kanji": [
+      "考"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "地図",
+    "reading": "ちず",
+    "meaning": "a map",
+    "kanji": [
+      "地",
+      "図"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "魚",
+    "reading": "さかな",
+    "meaning": "a fish",
+    "kanji": [
+      "魚"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "教える",
+    "reading": "おしえる",
+    "meaning": "to instruct",
+    "kanji": [
+      "教"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "自動車",
+    "reading": "じどうしゃ",
+    "meaning": "an automobile",
+    "kanji": [
+      "自",
+      "動",
+      "車"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 車"
+  },
+  {
+    "word": "鳥",
+    "reading": "とり",
+    "meaning": "a bird",
+    "kanji": [
+      "鳥"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "習う",
+    "reading": "ならう",
+    "meaning": "to practice learning",
+    "kanji": [
+      "習"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "自転車",
+    "reading": "じてんしゃ",
+    "meaning": "a bicycle",
+    "kanji": [
+      "自",
+      "転",
+      "車"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 車"
+  },
+  {
+    "word": "犬",
+    "reading": "いぬ",
+    "meaning": "a dog",
+    "kanji": [
+      "犬"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "始める",
+    "reading": "はじめる",
+    "meaning": "to start",
+    "kanji": [
+      "始"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "家族",
+    "reading": "かぞく",
+    "meaning": "one's family",
+    "kanji": [
+      "家",
+      "族"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "牛",
+    "reading": "うし",
+    "meaning": "a cow",
+    "kanji": [
+      "牛"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "終わる",
+    "reading": "おわる",
+    "meaning": "to come to an end",
+    "kanji": [
+      "終"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "兄弟",
+    "reading": "きょうだい",
+    "meaning": "brothers",
+    "kanji": [
+      "兄",
+      "弟"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "花",
+    "reading": "はな",
+    "meaning": "a flower",
+    "kanji": [
+      "花"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "帰る",
+    "reading": "かえる",
+    "meaning": "to return home",
+    "kanji": [
+      "帰"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "姉妹",
+    "reading": "しまい",
+    "meaning": "sisters",
+    "kanji": [
+      "姉",
+      "妹"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "茶",
+    "reading": "ちゃ",
+    "meaning": "tea",
+    "kanji": [
+      "茶"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "言う",
+    "reading": "いう",
+    "meaning": "to speak",
+    "kanji": [
+      "言"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "病院",
+    "reading": "びょういん",
+    "meaning": "a hospital",
+    "kanji": [
+      "病",
+      "院"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "色",
+    "reading": "いろ",
+    "meaning": "a color",
+    "kanji": [
+      "色"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "働く",
+    "reading": "はたらく",
+    "meaning": "to do work",
+    "kanji": [
+      "働"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "医者",
+    "reading": "いしゃ",
+    "meaning": "a doctor",
+    "kanji": [
+      "医",
+      "者"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "紙",
+    "reading": "かみ",
+    "meaning": "paper",
+    "kanji": [
+      "紙"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "起きる",
+    "reading": "おきる",
+    "meaning": "to rise",
+    "kanji": [
+      "起"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "社員",
+    "reading": "しゃいん",
+    "meaning": "an employee",
+    "kanji": [
+      "社",
+      "員"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "服",
+    "reading": "ふく",
+    "meaning": "clothing",
+    "kanji": [
+      "服"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "立つ",
+    "reading": "たつ",
+    "meaning": "to stand",
+    "kanji": [
+      "立"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "仕事",
+    "reading": "しごと",
+    "meaning": "one's job",
+    "kanji": [
+      "仕",
+      "事"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "薬",
+    "reading": "くすり",
+    "meaning": "medicine",
+    "kanji": [
+      "薬"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "開ける",
+    "reading": "あける",
+    "meaning": "to open up",
+    "kanji": [
+      "開"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "建物",
+    "reading": "たてもの",
+    "meaning": "a building",
+    "kanji": [
+      "建",
+      "物"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "音",
+    "reading": "おと",
+    "meaning": "a sound",
+    "kanji": [
+      "音"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "止める",
+    "reading": "とめる",
+    "meaning": "to halt",
+    "kanji": [
+      "止"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "勉強",
+    "reading": "べんきょう",
+    "meaning": "studying",
+    "kanji": [
+      "勉",
+      "強"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "歌",
+    "reading": "うた",
+    "meaning": "a song",
+    "kanji": [
+      "歌"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "進む",
+    "reading": "すすむ",
+    "meaning": "to go forward",
+    "kanji": [
+      "進"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "試験",
+    "reading": "しけん",
+    "meaning": "a test",
+    "kanji": [
+      "試",
+      "験"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "図",
+    "reading": "ず",
+    "meaning": "a diagram",
+    "kanji": [
+      "図"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "通る",
+    "reading": "とおる",
+    "meaning": "to go through",
+    "kanji": [
+      "通"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "問題",
+    "reading": "もんだい",
+    "meaning": "an issue",
+    "kanji": [
+      "問",
+      "題"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "字",
+    "reading": "じ",
+    "meaning": "a character",
+    "kanji": [
+      "字"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "送る",
+    "reading": "おくる",
+    "meaning": "to dispatch",
+    "kanji": [
+      "送"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "質問",
+    "reading": "しつもん",
+    "meaning": "a query",
+    "kanji": [
+      "質",
+      "問"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "文",
+    "reading": "ぶん",
+    "meaning": "a sentence",
+    "kanji": [
+      "文"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "借りる",
+    "reading": "かりる",
+    "meaning": "to rent",
+    "kanji": [
+      "借"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "意味",
+    "reading": "いみ",
+    "meaning": "a sense",
+    "kanji": [
+      "意",
+      "味"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "題",
+    "reading": "だい",
+    "meaning": "a topic",
+    "kanji": [
+      "題"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "貸す",
+    "reading": "かす",
+    "meaning": "to loan",
+    "kanji": [
+      "貸"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "注意",
+    "reading": "ちゅうい",
+    "meaning": "a warning",
+    "kanji": [
+      "注",
+      "意"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "門",
+    "reading": "もん",
+    "meaning": "a gate",
+    "kanji": [
+      "門"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "切る",
+    "reading": "きる",
+    "meaning": "to slice",
+    "kanji": [
+      "切"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "漢字",
+    "reading": "かんじ",
+    "meaning": "Chinese characters",
+    "kanji": [
+      "漢",
+      "字"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "道",
+    "reading": "みち",
+    "meaning": "a road",
+    "kanji": [
+      "道"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "洗う",
+    "reading": "あらう",
+    "meaning": "to cleanse",
+    "kanji": [
+      "洗"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "写真",
+    "reading": "しゃしん",
+    "meaning": "a photo",
+    "kanji": [
+      "写",
+      "真"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "町",
+    "reading": "まち",
+    "meaning": "a town",
+    "kanji": [
+      "町"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "死ぬ",
+    "reading": "しぬ",
+    "meaning": "to pass away",
+    "kanji": [
+      "死"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "夕飯",
+    "reading": "ゆうはん",
+    "meaning": "the evening meal",
+    "kanji": [
+      "夕",
+      "飯"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "市",
+    "reading": "し",
+    "meaning": "a city",
+    "kanji": [
+      "市"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "住む",
+    "reading": "すむ",
+    "meaning": "to dwell",
+    "kanji": [
+      "住"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "料理",
+    "reading": "りょうり",
+    "meaning": "cuisine",
+    "kanji": [
+      "料",
+      "理"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "区",
+    "reading": "く",
+    "meaning": "a ward",
+    "kanji": [
+      "区"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "急ぐ",
+    "reading": "いそぐ",
+    "meaning": "to rush",
+    "kanji": [
+      "急"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "飲み物",
+    "reading": "のみもの",
+    "meaning": "a drink",
+    "kanji": [
+      "飲",
+      "物"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "海",
+    "reading": "うみ",
+    "meaning": "the sea",
+    "kanji": [
+      "海"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "弱い",
+    "reading": "よわい",
+    "meaning": "frail",
+    "kanji": [
+      "弱"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "売店",
+    "reading": "ばいてん",
+    "meaning": "a kiosk",
+    "kanji": [
+      "売",
+      "店"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "野",
+    "reading": "の",
+    "meaning": "a field",
+    "kanji": [
+      "野"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "重い",
+    "reading": "おもい",
+    "meaning": "weighing much",
+    "kanji": [
+      "重"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "花屋",
+    "reading": "はなや",
+    "meaning": "a florist",
+    "kanji": [
+      "花",
+      "屋"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "空",
+    "reading": "そら",
+    "meaning": "the sky",
+    "kanji": [
+      "空"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "軽い",
+    "reading": "かるい",
+    "meaning": "not heavy",
+    "kanji": [
+      "軽"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "肉屋",
+    "reading": "にくや",
+    "meaning": "a butcher",
+    "kanji": [
+      "肉",
+      "屋"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "風",
+    "reading": "かぜ",
+    "meaning": "the wind",
+    "kanji": [
+      "風"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "安い",
+    "reading": "やすい",
+    "meaning": "low-priced",
+    "kanji": [
+      "安"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "洋服",
+    "reading": "ようふく",
+    "meaning": "Western clothing",
+    "kanji": [
+      "洋",
+      "服"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "春",
+    "reading": "はる",
+    "meaning": "spring",
+    "kanji": [
+      "春"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "新しい",
+    "reading": "あたらしい",
+    "meaning": "brand-new",
+    "kanji": [
+      "新"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "有料",
+    "reading": "ゆうりょう",
+    "meaning": "for a fee",
+    "kanji": [
+      "有",
+      "料"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "夏",
+    "reading": "なつ",
+    "meaning": "summer",
+    "kanji": [
+      "夏"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "古い",
+    "reading": "ふるい",
+    "meaning": "aged",
+    "kanji": [
+      "古"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "特別",
+    "reading": "とくべつ",
+    "meaning": "extraordinary",
+    "kanji": [
+      "特",
+      "別"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "秋",
+    "reading": "あき",
+    "meaning": "autumn",
+    "kanji": [
+      "秋"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "早い",
+    "reading": "はやい",
+    "meaning": "soon",
+    "kanji": [
+      "早"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "世界",
+    "reading": "せかい",
+    "meaning": "the globe",
+    "kanji": [
+      "世",
+      "界"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "冬",
+    "reading": "ふゆ",
+    "meaning": "winter",
+    "kanji": [
+      "冬"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "近い",
+    "reading": "ちかい",
+    "meaning": "close by",
+    "kanji": [
+      "近"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "研究",
+    "reading": "けんきゅう",
+    "meaning": "investigation",
+    "kanji": [
+      "研",
+      "究"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "朝",
+    "reading": "あさ",
+    "meaning": "morning",
+    "kanji": [
+      "朝"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "遠い",
+    "reading": "とおい",
+    "meaning": "distant",
+    "kanji": [
+      "遠"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "安心",
+    "reading": "あんしん",
+    "meaning": "peace of mind",
+    "kanji": [
+      "安",
+      "心"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "昼",
+    "reading": "ひる",
+    "meaning": "noon",
+    "kanji": [
+      "昼"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "広い",
+    "reading": "ひろい",
+    "meaning": "broad",
+    "kanji": [
+      "広"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "住所",
+    "reading": "じゅうしょ",
+    "meaning": "one's address",
+    "kanji": [
+      "住",
+      "所"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "夜",
+    "reading": "よる",
+    "meaning": "night",
+    "kanji": [
+      "夜"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "説明",
+    "reading": "せつめい",
+    "meaning": "clarification",
+    "kanji": [
+      "説",
+      "明"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "兄",
+    "reading": "あに",
+    "meaning": "one's older brother",
+    "kanji": [
+      "兄"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "仕方",
+    "reading": "しかた",
+    "meaning": "a means",
+    "kanji": [
+      "仕",
+      "方"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "弟",
+    "reading": "おとうと",
+    "meaning": "one's younger brother",
+    "kanji": [
+      "弟"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "使い方",
+    "reading": "つかいかた",
+    "meaning": "usage",
+    "kanji": [
+      "使",
+      "方"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "姉",
+    "reading": "あね",
+    "meaning": "one's older sister",
+    "kanji": [
+      "姉"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "駅員",
+    "reading": "えきいん",
+    "meaning": "station worker",
+    "kanji": [
+      "駅",
+      "員"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "妹",
+    "reading": "いもうと",
+    "meaning": "one's younger sister",
+    "kanji": [
+      "妹"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "悪口",
+    "reading": "わるぐち",
+    "meaning": "harsh words",
+    "kanji": [
+      "悪",
+      "口"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "親",
+    "reading": "おや",
+    "meaning": "a parent",
+    "kanji": [
+      "親"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "開始",
+    "reading": "かいし",
+    "meaning": "the outset",
+    "kanji": [
+      "開",
+      "始"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "私",
+    "reading": "わたし",
+    "meaning": "I",
+    "kanji": [
+      "私"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "地区",
+    "reading": "ちく",
+    "meaning": "a locality",
+    "kanji": [
+      "地",
+      "区"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "事",
+    "reading": "こと",
+    "meaning": "a matter",
+    "kanji": [
+      "事"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "古代",
+    "reading": "こだい",
+    "meaning": "olden times",
+    "kanji": [
+      "古",
+      "代"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "用",
+    "reading": "よう",
+    "meaning": "business use",
+    "kanji": [
+      "用"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "作品",
+    "reading": "さくひん",
+    "meaning": "a creation",
+    "kanji": [
+      "作",
+      "品"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "銀",
+    "reading": "ぎん",
+    "meaning": "silver",
+    "kanji": [
+      "銀"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "死者",
+    "reading": "ししゃ",
+    "meaning": "the dead",
+    "kanji": [
+      "死",
+      "者"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "味",
+    "reading": "あじ",
+    "meaning": "a taste",
+    "kanji": [
+      "味"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "私立",
+    "reading": "しりつ",
+    "meaning": "non-public",
+    "kanji": [
+      "私",
+      "立"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "悪",
+    "reading": "あく",
+    "meaning": "evil",
+    "kanji": [
+      "悪"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "用紙",
+    "reading": "ようし",
+    "meaning": "stationery sheet",
+    "kanji": [
+      "用",
+      "紙"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "説",
+    "reading": "せつ",
+    "meaning": "a theory",
+    "kanji": [
+      "説"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "持病",
+    "reading": "じびょう",
+    "meaning": "ongoing ailment",
+    "kanji": [
+      "持",
+      "病"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "乗",
+    "reading": "のり",
+    "meaning": "a ride",
+    "kanji": [
+      "乗"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "特色",
+    "reading": "とくしょく",
+    "meaning": "hallmark",
+    "kanji": [
+      "特",
+      "色"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "低",
+    "reading": "ひくみ",
+    "meaning": "lowness",
+    "kanji": [
+      "低"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "新聞社",
+    "reading": "しんぶんしゃ",
+    "meaning": "press office",
+    "kanji": [
+      "新",
+      "聞",
+      "社"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 聞"
+  },
+  {
+    "word": "遠",
+    "reading": "とおみ",
+    "meaning": "farness",
+    "kanji": [
+      "遠"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "親族",
+    "reading": "しんぞく",
+    "meaning": "family relatives",
+    "kanji": [
+      "親",
+      "族"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "暗",
+    "reading": "くらやみ",
+    "meaning": "darkness",
+    "kanji": [
+      "暗"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "青空",
+    "reading": "あおぞら",
+    "meaning": "azure sky",
+    "kanji": [
+      "青",
+      "空"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "寒",
+    "reading": "さむさ",
+    "meaning": "coldness",
+    "kanji": [
+      "寒"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "早朝",
+    "reading": "そうちょう",
+    "meaning": "dawn hours",
+    "kanji": [
+      "早",
+      "朝"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "暑",
+    "reading": "あつさ",
+    "meaning": "heat",
+    "kanji": [
+      "暑"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "多少",
+    "reading": "たしょう",
+    "meaning": "a bit",
+    "kanji": [
+      "多",
+      "少"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "弱",
+    "reading": "よわみ",
+    "meaning": "weakness",
+    "kanji": [
+      "弱"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "注目",
+    "reading": "ちゅうもく",
+    "meaning": "focus of eyes",
+    "kanji": [
+      "注",
+      "目"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "軽",
+    "reading": "かるみ",
+    "meaning": "lightness",
+    "kanji": [
+      "軽"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "歩道",
+    "reading": "ほどう",
+    "meaning": "footpath",
+    "kanji": [
+      "歩",
+      "道"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "本",
+    "reading": "ほん",
+    "meaning": "book",
+    "kanji": [
+      "本"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 本"
+  },
+  {
+    "word": "工業",
+    "reading": "こうぎょう",
+    "meaning": "manufacturing industry",
+    "kanji": [
+      "工",
+      "業"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "車",
+    "reading": "くるま",
+    "meaning": "car",
+    "kanji": [
+      "車"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 車"
+  },
+  {
+    "word": "品質",
+    "reading": "ひんしつ",
+    "meaning": "product quality",
+    "kanji": [
+      "品",
+      "質"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "物",
+    "reading": "もの",
+    "meaning": "a thing",
+    "kanji": [
+      "物"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "旅館",
+    "reading": "りょかん",
+    "meaning": "Japanese inn",
+    "kanji": [
+      "旅",
+      "館"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "所",
+    "reading": "ところ",
+    "meaning": "a place",
+    "kanji": [
+      "所"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "医院",
+    "reading": "いいん",
+    "meaning": "a clinic",
+    "kanji": [
+      "医",
+      "院"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "場",
+    "reading": "ば",
+    "meaning": "a spot",
+    "kanji": [
+      "場"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "台風",
+    "reading": "たいふう",
+    "meaning": "a typhoon",
+    "kanji": [
+      "台",
+      "風"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "室",
+    "reading": "しつ",
+    "meaning": "a room",
+    "kanji": [
+      "室"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "思考",
+    "reading": "しこう",
+    "meaning": "reasoning",
+    "kanji": [
+      "思",
+      "考"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "屋",
+    "reading": "や",
+    "meaning": "a shop building",
+    "kanji": [
+      "屋"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "不明",
+    "reading": "ふめい",
+    "meaning": "unclear",
+    "kanji": [
+      "不",
+      "明"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "赤飯",
+    "reading": "せきはん",
+    "meaning": "festive red rice",
+    "kanji": [
+      "赤",
+      "飯"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "漢文",
+    "reading": "かんぶん",
+    "meaning": "classical Chinese",
+    "kanji": [
+      "漢",
+      "文"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "正門",
+    "reading": "せいもん",
+    "meaning": "main gate",
+    "kanji": [
+      "正",
+      "門"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "来週",
+    "reading": "らいしゅう",
+    "meaning": "next week",
+    "kanji": [
+      "来",
+      "週"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 来"
+  },
+  {
+    "word": "今週",
+    "reading": "こんしゅう",
+    "meaning": "this week",
+    "kanji": [
+      "今",
+      "週"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 今"
+  },
+  {
+    "word": "旅行",
+    "reading": "りょこう",
+    "meaning": "a journey",
+    "kanji": [
+      "旅",
+      "行"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 行"
+  },
+  {
+    "word": "出発",
+    "reading": "しゅっぱつ",
+    "meaning": "setting out",
+    "kanji": [
+      "出",
+      "発"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 出"
+  },
+  {
+    "word": "主人",
+    "reading": "しゅじん",
+    "meaning": "one's husband",
+    "kanji": [
+      "主",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "工場",
+    "reading": "こうじょう",
+    "meaning": "a factory",
+    "kanji": [
+      "工",
+      "場"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "教室",
+    "reading": "きょうしつ",
+    "meaning": "a classroom",
+    "kanji": [
+      "教",
+      "室"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "英語",
+    "reading": "えいご",
+    "meaning": "the English language",
+    "kanji": [
+      "英",
+      "語"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 語"
+  },
+  {
+    "word": "映画",
+    "reading": "えいが",
+    "meaning": "a film",
+    "kanji": [
+      "映",
+      "画"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "音楽",
+    "reading": "おんがく",
+    "meaning": "music",
+    "kanji": [
+      "音",
+      "楽"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "歌手",
+    "reading": "かしゅ",
+    "meaning": "a singer",
+    "kanji": [
+      "歌",
+      "手"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "銀行",
+    "reading": "ぎんこう",
+    "meaning": "a bank",
+    "kanji": [
+      "銀",
+      "行"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 行"
+  },
+  {
+    "word": "昼食",
+    "reading": "ちゅうしょく",
+    "meaning": "lunch",
+    "kanji": [
+      "昼",
+      "食"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 食"
+  },
+  {
+    "word": "夕食",
+    "reading": "ゆうしょく",
+    "meaning": "supper",
+    "kanji": [
+      "夕",
+      "食"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 食"
+  },
+  {
+    "word": "買い物",
+    "reading": "かいもの",
+    "meaning": "shopping trip",
+    "kanji": [
+      "買",
+      "物"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "魚屋",
+    "reading": "さかなや",
+    "meaning": "a fishmonger",
+    "kanji": [
+      "魚",
+      "屋"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "以外",
+    "reading": "いがい",
+    "meaning": "other than",
+    "kanji": [
+      "以",
+      "外"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 外"
+  },
+  {
+    "word": "以上",
+    "reading": "いじょう",
+    "meaning": "and above",
+    "kanji": [
+      "以",
+      "上"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 上"
+  },
+  {
+    "word": "大切",
+    "reading": "たいせつ",
+    "meaning": "precious",
+    "kanji": [
+      "大",
+      "切"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 大"
+  },
+  {
+    "word": "一度",
+    "reading": "いちど",
+    "meaning": "one occasion",
+    "kanji": [
+      "一",
+      "度"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 一"
+  },
+  {
+    "word": "二度",
+    "reading": "にど",
+    "meaning": "two occasions",
+    "kanji": [
+      "二",
+      "度"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 二"
+  },
+  {
+    "word": "真夏",
+    "reading": "まなつ",
+    "meaning": "peak summer",
+    "kanji": [
+      "真",
+      "夏"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "回転",
+    "reading": "かいてん",
+    "meaning": "turning around",
+    "kanji": [
+      "回",
+      "転"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "海外",
+    "reading": "かいがい",
+    "meaning": "foreign lands",
+    "kanji": [
+      "海",
+      "外"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 外"
+  },
+  {
+    "word": "牛肉",
+    "reading": "ぎゅうにく",
+    "meaning": "beef",
+    "kanji": [
+      "牛",
+      "肉"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "去年",
+    "reading": "きょねん",
+    "meaning": "the year before",
+    "kanji": [
+      "去",
+      "年"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 年"
+  },
+  {
+    "word": "強力",
+    "reading": "きょうりょく",
+    "meaning": "mighty",
+    "kanji": [
+      "強",
+      "力"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "体験",
+    "reading": "たいけん",
+    "meaning": "lived experience",
+    "kanji": [
+      "体",
+      "験"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "元気",
+    "reading": "げんき",
+    "meaning": "good health",
+    "kanji": [
+      "元",
+      "気"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 気"
+  },
+  {
+    "word": "方言",
+    "reading": "ほうげん",
+    "meaning": "regional speech",
+    "kanji": [
+      "方",
+      "言"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "中止",
+    "reading": "ちゅうし",
+    "meaning": "suspension",
+    "kanji": [
+      "中",
+      "止"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 中"
+  },
+  {
+    "word": "試食",
+    "reading": "ししょく",
+    "meaning": "sample tasting",
+    "kanji": [
+      "試",
+      "食"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 食"
+  },
+  {
+    "word": "借用",
+    "reading": "しゃくよう",
+    "meaning": "loaning",
+    "kanji": [
+      "借",
+      "用"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "学習",
+    "reading": "がくしゅう",
+    "meaning": "schooling",
+    "kanji": [
+      "学",
+      "習"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 学"
+  },
+  {
+    "word": "集中",
+    "reading": "しゅうちゅう",
+    "meaning": "intense focus",
+    "kanji": [
+      "集",
+      "中"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 中"
+  },
+  {
+    "word": "近所",
+    "reading": "きんじょ",
+    "meaning": "nearby area",
+    "kanji": [
+      "近",
+      "所"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "少年",
+    "reading": "しょうねん",
+    "meaning": "lad",
+    "kanji": [
+      "少",
+      "年"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 年"
+  },
+  {
+    "word": "心理",
+    "reading": "しんり",
+    "meaning": "mentality",
+    "kanji": [
+      "心",
+      "理"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "大声",
+    "reading": "おおごえ",
+    "meaning": "shout",
+    "kanji": [
+      "大",
+      "声"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 大"
+  },
+  {
+    "word": "赤字",
+    "reading": "あかじ",
+    "meaning": "financial loss",
+    "kanji": [
+      "赤",
+      "字"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "走行",
+    "reading": "そうこう",
+    "meaning": "running a route",
+    "kanji": [
+      "走",
+      "行"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 行"
+  },
+  {
+    "word": "貸出",
+    "reading": "かしだし",
+    "meaning": "checking out",
+    "kanji": [
+      "貸",
+      "出"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 出"
+  },
+  {
+    "word": "茶色",
+    "reading": "ちゃいろ",
+    "meaning": "brown color",
+    "kanji": [
+      "茶",
+      "色"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "水着",
+    "reading": "みずぎ",
+    "meaning": "swimwear",
+    "kanji": [
+      "水",
+      "着"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 水"
+  },
+  {
+    "word": "白鳥",
+    "reading": "はくちょう",
+    "meaning": "swan bird",
+    "kanji": [
+      "白",
+      "鳥"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 白"
+  },
+  {
+    "word": "水田",
+    "reading": "すいでん",
+    "meaning": "paddy",
+    "kanji": [
+      "水",
+      "田"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 水"
+  },
+  {
+    "word": "真冬",
+    "reading": "まふゆ",
+    "meaning": "deep winter",
+    "kanji": [
+      "真",
+      "冬"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "先頭",
+    "reading": "せんとう",
+    "meaning": "the head of a line",
+    "kanji": [
+      "先",
+      "頭"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 先"
+  },
+  {
+    "word": "同時",
+    "reading": "どうじ",
+    "meaning": "coinciding",
+    "kanji": [
+      "同",
+      "時"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 時"
+  },
+  {
+    "word": "食堂",
+    "reading": "しょくどう",
+    "meaning": "canteen",
+    "kanji": [
+      "食",
+      "堂"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 食"
+  },
+  {
+    "word": "発売",
+    "reading": "はつばい",
+    "meaning": "put on sale",
+    "kanji": [
+      "発",
+      "売"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "薬屋",
+    "reading": "くすりや",
+    "meaning": "pharmacy",
+    "kanji": [
+      "薬",
+      "屋"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "英会話",
+    "reading": "えいかいわ",
+    "meaning": "spoken English",
+    "kanji": [
+      "英",
+      "会",
+      "話"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 話"
+  },
+  {
+    "word": "帰国",
+    "reading": "きこく",
+    "meaning": "returning to one's country",
+    "kanji": [
+      "帰",
+      "国"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 国"
+  },
+  {
+    "word": "地元",
+    "reading": "じもと",
+    "meaning": "one's hometown area",
+    "kanji": [
+      "地",
+      "元"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "日曜日",
+    "reading": "にちようび",
+    "meaning": "Sunday",
+    "kanji": [
+      "日",
+      "曜",
+      "日"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 日日"
+  },
+  {
+    "word": "月曜日",
+    "reading": "げつようび",
+    "meaning": "Monday",
+    "kanji": [
+      "月",
+      "曜",
+      "日"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 月日"
+  },
+  {
+    "word": "急行",
+    "reading": "きゅうこう",
+    "meaning": "express train",
+    "kanji": [
+      "急",
+      "行"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 行"
+  },
+  {
+    "word": "黒字",
+    "reading": "くろじ",
+    "meaning": "being in profit",
+    "kanji": [
+      "黒",
+      "字"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "黒色",
+    "reading": "くろいろ",
+    "meaning": "black color",
+    "kanji": [
+      "黒",
+      "色"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "終電",
+    "reading": "しゅうでん",
+    "meaning": "last train",
+    "kanji": [
+      "終",
+      "電"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 電"
+  },
+  {
+    "word": "見送り",
+    "reading": "みおくり",
+    "meaning": "seeing off",
+    "kanji": [
+      "見",
+      "送"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 見"
+  },
+  {
+    "word": "有名",
+    "reading": "ゆうめい",
+    "meaning": "famous",
+    "kanji": [
+      "有",
+      "名"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 名"
+  },
+  {
+    "word": "多分",
+    "reading": "たぶん",
+    "meaning": "probably",
+    "kanji": [
+      "多",
+      "分"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 分"
+  },
+  {
+    "word": "秋風",
+    "reading": "あきかぜ",
+    "meaning": "autumn wind",
+    "kanji": [
+      "秋",
+      "風"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "顔色",
+    "reading": "かおいろ",
+    "meaning": "complexion",
+    "kanji": [
+      "顔",
+      "色"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "洋食",
+    "reading": "ようしょく",
+    "meaning": "Western food",
+    "kanji": [
+      "洋",
+      "食"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 食"
+  },
+  {
+    "word": "通行人",
+    "reading": "つうこうにん",
+    "meaning": "passerby",
+    "kanji": [
+      "通",
+      "行",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 行人"
+  },
+  {
+    "word": "広場",
+    "reading": "ひろば",
+    "meaning": "an open square",
+    "kanji": [
+      "広",
+      "場"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "市場",
+    "reading": "いちば",
+    "meaning": "an open market",
+    "kanji": [
+      "市",
+      "場"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "正午",
+    "reading": "しょうご",
+    "meaning": "midday",
+    "kanji": [
+      "正",
+      "午"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 午"
+  },
+  {
+    "word": "知人",
+    "reading": "ちじん",
+    "meaning": "an acquaintance",
+    "kanji": [
+      "知",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "特別室",
+    "reading": "とくべつしつ",
+    "meaning": "special room",
+    "kanji": [
+      "特",
+      "別",
+      "室"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "低下",
+    "reading": "ていか",
+    "meaning": "a decline",
+    "kanji": [
+      "低",
+      "下"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 下"
+  },
+  {
+    "word": "真夜中",
+    "reading": "まよなか",
+    "meaning": "midnight",
+    "kanji": [
+      "真",
+      "夜",
+      "中"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 中"
+  },
+  {
+    "word": "先週",
+    "reading": "せんしゅう",
+    "meaning": "last week",
+    "kanji": [
+      "先",
+      "週"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 先"
+  },
+  {
+    "word": "毎週",
+    "reading": "まいしゅう",
+    "meaning": "every week",
+    "kanji": [
+      "毎",
+      "週"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 毎"
+  },
+  {
+    "word": "毎日",
+    "reading": "まいにち",
+    "meaning": "every day",
+    "kanji": [
+      "毎",
+      "日"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 毎日"
+  },
+  {
+    "word": "毎年",
+    "reading": "まいとし",
+    "meaning": "every year",
+    "kanji": [
+      "毎",
+      "年"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 毎年"
+  },
+  {
+    "word": "今日",
+    "reading": "きょう",
+    "meaning": "today",
+    "kanji": [
+      "今",
+      "日"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 今日"
+  },
+  {
+    "word": "明日",
+    "reading": "あした",
+    "meaning": "tomorrow",
+    "kanji": [
+      "明",
+      "日"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 日"
+  },
+  {
+    "word": "午前",
+    "reading": "ごぜん",
+    "meaning": "before noon",
+    "kanji": [
+      "午",
+      "前"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 午前"
+  },
+  {
+    "word": "午後",
+    "reading": "ごご",
+    "meaning": "after noon",
+    "kanji": [
+      "午",
+      "後"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 午後"
+  },
+  {
+    "word": "時間",
+    "reading": "じかん",
+    "meaning": "a duration",
+    "kanji": [
+      "時",
+      "間"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 時間"
+  },
+  {
+    "word": "時計",
+    "reading": "とけい",
+    "meaning": "a clock",
+    "kanji": [
+      "時",
+      "計"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 時"
+  },
+  {
+    "word": "電車",
+    "reading": "でんしゃ",
+    "meaning": "a train",
+    "kanji": [
+      "電",
+      "車"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 電車"
+  },
+  {
+    "word": "入口",
+    "reading": "いりぐち",
+    "meaning": "an entrance",
+    "kanji": [
+      "入",
+      "口"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 入"
+  },
+  {
+    "word": "出口",
+    "reading": "でぐち",
+    "meaning": "an exit",
+    "kanji": [
+      "出",
+      "口"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 出"
+  },
+  {
+    "word": "右手",
+    "reading": "みぎて",
+    "meaning": "the right hand",
+    "kanji": [
+      "右",
+      "手"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 右"
+  },
+  {
+    "word": "左手",
+    "reading": "ひだりて",
+    "meaning": "the left hand",
+    "kanji": [
+      "左",
+      "手"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 左"
+  },
+  {
+    "word": "友人",
+    "reading": "ゆうじん",
+    "meaning": "a friend",
+    "kanji": [
+      "友",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 友人"
+  },
+  {
+    "word": "自分",
+    "reading": "じぶん",
+    "meaning": "myself",
+    "kanji": [
+      "自",
+      "分"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 分"
+  },
+  {
+    "word": "病気",
+    "reading": "びょうき",
+    "meaning": "being sick",
+    "kanji": [
+      "病",
+      "気"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 気"
+  },
+  {
+    "word": "会社",
+    "reading": "かいしゃ",
+    "meaning": "a firm",
+    "kanji": [
+      "会",
+      "社"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "社長",
+    "reading": "しゃちょう",
+    "meaning": "a company boss",
+    "kanji": [
+      "社",
+      "長"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 長"
+  },
+  {
+    "word": "学校",
+    "reading": "がっこう",
+    "meaning": "a school",
+    "kanji": [
+      "学",
+      "校"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 学校"
+  },
+  {
+    "word": "大学",
+    "reading": "だいがく",
+    "meaning": "a college",
+    "kanji": [
+      "大",
+      "学"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 大学"
+  },
+  {
+    "word": "学生",
+    "reading": "がくせい",
+    "meaning": "a pupil student",
+    "kanji": [
+      "学",
+      "生"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 学生"
+  },
+  {
+    "word": "先生",
+    "reading": "せんせい",
+    "meaning": "an instructor",
+    "kanji": [
+      "先",
+      "生"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 先生"
+  },
+  {
+    "word": "意見",
+    "reading": "いけん",
+    "meaning": "a view",
+    "kanji": [
+      "意",
+      "見"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 見"
+  },
+  {
+    "word": "日本語",
+    "reading": "にほんご",
+    "meaning": "the Japanese language",
+    "kanji": [
+      "日",
+      "本",
+      "語"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 日本語"
+  },
+  {
+    "word": "会話",
+    "reading": "かいわ",
+    "meaning": "a dialogue",
+    "kanji": [
+      "会",
+      "話"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 話"
+  },
+  {
+    "word": "文字",
+    "reading": "もじ",
+    "meaning": "a written letter",
+    "kanji": [
+      "文",
+      "字"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "新聞",
+    "reading": "しんぶん",
+    "meaning": "a newspaper",
+    "kanji": [
+      "新",
+      "聞"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 聞"
+  },
+  {
+    "word": "同人",
+    "reading": "おなじん",
+    "meaning": "same compound 1",
+    "kanji": [
+      "同",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "業人",
+    "reading": "わざじん",
+    "meaning": "business compound 1",
+    "kanji": [
+      "業",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "京",
+    "reading": "みやこ",
+    "meaning": "capital (standalone)",
+    "kanji": [
+      "京"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "京気",
+    "reading": "みやこき",
+    "meaning": "capital compound 2",
+    "kanji": [
+      "京",
+      "気"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 気"
+  },
+  {
+    "word": "田人",
+    "reading": "たじん",
+    "meaning": "rice field compound 1",
+    "kanji": [
+      "田",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "人主",
+    "reading": "じんおも",
+    "meaning": "main compound b1",
+    "kanji": [
+      "人",
+      "主"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "公",
+    "reading": "おおやけ",
+    "meaning": "public (standalone)",
+    "kanji": [
+      "公"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "公気",
+    "reading": "おおやけき",
+    "meaning": "public compound 2",
+    "kanji": [
+      "公",
+      "気"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 気"
+  },
+  {
+    "word": "野人",
+    "reading": "のじん",
+    "meaning": "field compound 1",
+    "kanji": [
+      "野",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "世人",
+    "reading": "よじん",
+    "meaning": "world compound 1",
+    "kanji": [
+      "世",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "界人",
+    "reading": "かいじん",
+    "meaning": "world boundary compound 1",
+    "kanji": [
+      "界",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "台人",
+    "reading": "うてなじん",
+    "meaning": "stand (counter) compound 1",
+    "kanji": [
+      "台",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "町人",
+    "reading": "まちじん",
+    "meaning": "town compound 1",
+    "kanji": [
+      "町",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "建人",
+    "reading": "たじん",
+    "meaning": "build compound 1",
+    "kanji": [
+      "建",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "起人",
+    "reading": "おじん",
+    "meaning": "wake up compound 1",
+    "kanji": [
+      "起",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "去人",
+    "reading": "さじん",
+    "meaning": "leave compound 1",
+    "kanji": [
+      "去",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "答",
+    "reading": "こた",
+    "meaning": "answer (standalone)",
+    "kanji": [
+      "答"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "答気",
+    "reading": "こたき",
+    "meaning": "answer compound 2",
+    "kanji": [
+      "答",
+      "気"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 気"
+  },
+  {
+    "word": "堂人",
+    "reading": "どうじん",
+    "meaning": "hall (building) compound 1",
+    "kanji": [
+      "堂",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "犬人",
+    "reading": "いぬじん",
+    "meaning": "dog compound 1",
+    "kanji": [
+      "犬",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "回人",
+    "reading": "まわじん",
+    "meaning": "times compound 1",
+    "kanji": [
+      "回",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "進人",
+    "reading": "すすじん",
+    "meaning": "advance compound 1",
+    "kanji": [
+      "進",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "働人",
+    "reading": "はたらじん",
+    "meaning": "work compound 1",
+    "kanji": [
+      "働",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  },
+  {
+    "word": "暗い",
+    "reading": "くらい",
+    "meaning": "dim",
+    "kanji": [
+      "暗"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "寒い",
+    "reading": "さむい",
+    "meaning": "chilly",
+    "kanji": [
+      "寒"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "暑い",
+    "reading": "あつい",
+    "meaning": "sweltering",
+    "kanji": [
+      "暑"
+    ],
+    "kana_only": false
+  },
+  {
+    "word": "洗人",
+    "reading": "あらじん",
+    "meaning": "wash compound 1",
+    "kanji": [
+      "洗",
+      "人"
+    ],
+    "kana_only": false,
+    "notes": "uses N5: 人"
+  }
+]
