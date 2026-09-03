@@ -79,6 +79,13 @@ Constraints: mobile-first portrait; tiles ≥56px; Gothic kanji font; all state 
 
 **Deployed as:** `kanji-forge.html`, linked from the main app kanji landing (`index.html#/kanji`). Data files stay at repo root beside the game.
 
+
+## Phase 1b: N5 + manual wrong review
+
+- Level picker (N5 / N4) before a day starts
+- `kanji-n5.json` / `words-n5.json` for N5; existing `kanji.json` / `words.json` for N4
+- Wrong answers stay on screen until the player taps **Next** (correct answers still auto-advance after 1s)
+
 ## Later phases
 
 *(Not started.)*

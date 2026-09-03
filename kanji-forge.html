@@ -54,7 +54,6 @@
       gap: 12px;
     }
 
-
     .back-kanji {
       display: inline-flex;
       align-items: center;
@@ -137,7 +136,7 @@
       justify-content: center;
       font-size: 1.75rem;
       font-weight: 700;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
       pointer-events: auto;
     }
 
@@ -209,7 +208,7 @@
     .locked .tile { pointer-events: none; }
     .locked .slot.filled:not(.kana) { pointer-events: none; }
 
-    .summary {
+    .setup, .summary {
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -218,10 +217,51 @@
       padding: 8px 4px 24px;
     }
 
-    .summary h1 {
+    .setup h1, .summary h1 {
       margin: 0;
       font-size: 1.8rem;
       text-align: center;
+    }
+
+    .setup .lead {
+      margin: 0;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .level-picks {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .level-btn {
+      appearance: none;
+      border: 2px solid var(--slot-border);
+      border-radius: 16px;
+      background: var(--slot);
+      color: var(--ink);
+      font-family: inherit;
+      text-align: left;
+      padding: 16px 18px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .level-btn:active { transform: translateY(1px); }
+    .level-btn .lv {
+      display: block;
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+    .level-btn .desc {
+      display: block;
+      margin-top: 4px;
+      font-size: 0.9rem;
+      color: var(--muted);
     }
 
     .summary .score {
@@ -289,6 +329,21 @@
     }
 
     .btn:active { transform: translateY(1px); opacity: 0.92; }
+    .btn.secondary {
+      background: transparent;
+      color: var(--accent);
+      border: 2px solid var(--accent);
+    }
+
+    .btn-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .next-wrap {
+      padding: 0 4px;
+    }
 
     .loading, .error {
       flex: 1;
@@ -302,7 +357,6 @@
     }
 
     .error { color: var(--bad); }
-
   </style>
 </head>
 <body>
@@ -314,7 +368,25 @@
     /* ============================================================
        STATE
        ============================================================ */
+    const LEVELS = {
+      N5: {
+        id: "N5",
+        label: "N5",
+        desc: "103 beginner kanji · everyday basics",
+        kanjiUrl: "kanji-n5.json",
+        wordsUrl: "words-n5.json",
+      },
+      N4: {
+        id: "N4",
+        label: "N4",
+        desc: "188 upper-beginner kanji · reading practice",
+        kanjiUrl: "kanji.json",
+        wordsUrl: "words.json",
+      },
+    };
+
     const state = {
+      level: null, // "N5" | "N4"
       kanji: [],
       words: [],
       kanjiByChar: Object.create(null),
@@ -324,16 +396,17 @@
       correctCount: 0,
       missed: [],
 
-      screen: "loading", // loading | play | summary | error
-      phase: "input",    // input | feedback
+      screen: "setup", // setup | loading | play | summary | error
+      phase: "input",  // input | feedback
       locked: false,
+      awaitingNext: false,
 
       currentWord: null,
-      slots: [],         // { expected, isKana, value }
-      hand: [],          // { id, char, used }
+      slots: [],
+      hand: [],
       readingVisible: false,
       revealText: "",
-      flash: null,       // "ok" | "bad" | null
+      flash: null,
 
       errorMessage: "",
       _tileSeq: 0,
@@ -343,14 +416,19 @@
     /* ============================================================
        DATA LOADING
        ============================================================ */
-    async function loadData() {
+    async function loadLevel(levelId) {
+      const level = LEVELS[levelId];
+      if (!level) throw new Error("Unknown level.");
+      state.screen = "loading";
+      state.level = levelId;
+      render();
       try {
         const [kanjiRes, wordsRes] = await Promise.all([
-          fetch("kanji.json"),
-          fetch("words.json"),
+          fetch(level.kanjiUrl),
+          fetch(level.wordsUrl),
         ]);
         if (!kanjiRes.ok || !wordsRes.ok) {
-          throw new Error("Could not load kanji.json / words.json. Serve this folder over HTTP.");
+          throw new Error(`Could not load ${level.kanjiUrl} / ${level.wordsUrl}. Serve this folder over HTTP.`);
         }
         const kanji = await kanjiRes.json();
         const words = await wordsRes.json();
@@ -375,11 +453,19 @@
     function render() {
       const app = document.getElementById("app");
       if (state.screen === "loading") {
-        app.innerHTML = `<div class="loading">Loading Kanji Forge…</div>`;
+        app.innerHTML = `<div class="loading">Loading ${escapeHtml(state.level || "")}…</div>`;
         return;
       }
       if (state.screen === "error") {
-        app.innerHTML = `<div class="error">${escapeHtml(state.errorMessage)}</div>`;
+        app.innerHTML = `
+          <div class="error">${escapeHtml(state.errorMessage)}</div>
+          <button type="button" class="btn secondary" id="back-setup">Choose level</button>`;
+        document.getElementById("back-setup")?.addEventListener("click", goToSetup);
+        return;
+      }
+      if (state.screen === "setup") {
+        app.innerHTML = renderSetup();
+        bindSetup();
         return;
       }
       if (state.screen === "summary") {
@@ -389,6 +475,34 @@
       }
       app.innerHTML = renderPlay();
       bindPlay();
+    }
+
+    function renderTopbar(rightHtml) {
+      const levelTag = state.level ? ` · ${state.level}` : "";
+      return `
+        <div class="topbar">
+          <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
+            <a class="back-kanji" href="index.html#/kanji">← Kanji</a>
+            <div class="brand">Kanji Forge${escapeHtml(levelTag)}</div>
+          </div>
+          ${rightHtml}
+        </div>`;
+    }
+
+    function renderSetup() {
+      return `
+        ${renderTopbar(`<div class="counter">Pick a level</div>`)}
+        <div class="setup">
+          <h1>Kanji Forge</h1>
+          <p class="lead">Build words from tiles. Choose N5 or N4 to start a 12-order day.</p>
+          <div class="level-picks">
+            ${Object.values(LEVELS).map((lv) => `
+              <button type="button" class="level-btn" data-level="${lv.id}">
+                <span class="lv">${escapeHtml(lv.label)}</span>
+                <span class="desc">${escapeHtml(lv.desc)}</span>
+              </button>`).join("")}
+          </div>
+        </div>`;
     }
 
     function renderPlay() {
@@ -416,25 +530,24 @@
         })
         .join("");
 
+      const nextBtn = state.awaitingNext
+        ? `<div class="next-wrap"><button type="button" class="btn" id="next-order">Next</button></div>`
+        : "";
+
       return `
-        <div class="topbar">
-          <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
-            <a class="back-kanji" href="index.html#/kanji">← Kanji</a>
-            <div class="brand">Kanji Forge</div>
-          </div>
+        ${renderTopbar(`
           <div class="counter">
             <strong>${state.completed}</strong>/${state.daySize}
             · <strong>${state.correctCount}</strong> correct
-          </div>
-        </div>
+          </div>`)}
         <div class="play${lockedClass}">
           <div class="meaning">${escapeHtml(w ? w.meaning : "")}</div>
           <div class="${readingClass}">${escapeHtml(readingText)}</div>
           <div class="slots">${slotsHtml}</div>
           <div class="reveal">${escapeHtml(state.revealText)}</div>
+          ${nextBtn}
           <div class="hand">${handHtml}</div>
-        </div>
-      `;
+        </div>`;
     }
 
     function renderSummary() {
@@ -453,13 +566,7 @@
           .join("")}</ul>`;
       }
       return `
-        <div class="topbar">
-          <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
-            <a class="back-kanji" href="index.html#/kanji">← Kanji</a>
-            <div class="brand">Kanji Forge</div>
-          </div>
-          <div class="counter">Day complete</div>
-        </div>
+        ${renderTopbar(`<div class="counter">${escapeHtml(state.level || "")} · Day complete</div>`)}
         <div class="summary">
           <h1>End of day</h1>
           <div class="score"><strong>${state.correctCount}</strong> / ${state.daySize} correct</div>
@@ -467,9 +574,17 @@
             <h2>Missed</h2>
             ${listHtml}
           </div>
-          <button type="button" class="btn" id="new-day">New Day</button>
-        </div>
-      `;
+          <div class="btn-row">
+            <button type="button" class="btn" id="new-day">New Day</button>
+            <button type="button" class="btn secondary" id="change-level">Change level</button>
+          </div>
+        </div>`;
+    }
+
+    function bindSetup() {
+      document.querySelectorAll(".level-btn").forEach((btn) => {
+        btn.addEventListener("click", () => loadLevel(btn.getAttribute("data-level")));
+      });
     }
 
     function bindPlay() {
@@ -479,11 +594,13 @@
       document.querySelectorAll(".slot.filled:not(.kana)").forEach((el) => {
         el.addEventListener("click", () => onSlotTap(Number(el.getAttribute("data-slot"))));
       });
+      const next = document.getElementById("next-order");
+      if (next) next.addEventListener("click", () => advanceAfterFeedback());
     }
 
     function bindSummary() {
-      const btn = document.getElementById("new-day");
-      if (btn) btn.addEventListener("click", () => startNewDay());
+      document.getElementById("new-day")?.addEventListener("click", () => startNewDay());
+      document.getElementById("change-level")?.addEventListener("click", () => goToSetup());
     }
 
     function escapeHtml(s) {
@@ -497,6 +614,28 @@
     /* ============================================================
        GAME LOGIC
        ============================================================ */
+    function goToSetup() {
+      clearFeedbackTimer();
+      state.screen = "setup";
+      state.level = null;
+      state.kanji = [];
+      state.words = [];
+      state.kanjiByChar = Object.create(null);
+      state.completed = 0;
+      state.correctCount = 0;
+      state.missed = [];
+      state.currentWord = null;
+      state.slots = [];
+      state.hand = [];
+      state.awaitingNext = false;
+      state.locked = false;
+      state.phase = "input";
+      state.flash = null;
+      state.revealText = "";
+      state.readingVisible = false;
+      render();
+    }
+
     function startNewDay() {
       clearFeedbackTimer();
       state.completed = 0;
@@ -505,6 +644,7 @@
       state.screen = "play";
       state.phase = "input";
       state.locked = false;
+      state.awaitingNext = false;
       state.flash = null;
       state.revealText = "";
       state.readingVisible = false;
@@ -516,6 +656,7 @@
       clearFeedbackTimer();
       state.phase = "input";
       state.locked = false;
+      state.awaitingNext = false;
       state.flash = null;
       state.revealText = "";
       state.readingVisible = false;
@@ -546,7 +687,6 @@
       const answerKanji = unique(word.kanji.filter((c) => !isKanaChar(c)));
       const used = new Set(answerKanji);
 
-      // Lookalike decoys from answer kanji entries (fallback: random)
       const lookalikePool = [];
       for (const ch of answerKanji) {
         const entry = state.kanjiByChar[ch];
@@ -564,7 +704,6 @@
         used.add(look);
       }
 
-      // Fill remaining to 7 from kanji.json
       const randomPool = state.kanji
         .map((k) => k.char)
         .filter((c) => !used.has(c));
@@ -575,15 +714,11 @@
         used.add(ch);
       }
 
-      // If still short (tiny data edge case), allow any unused unicode filler from answers' lookalikes exhausted — duplicate-free pad from kanji again after reshuffle
       const chars = [...answerKanji, ...decoys];
-      while (chars.length < 7) {
+      while (chars.length < 7 && state.kanji.length) {
         const fallback = state.kanji[Math.floor(Math.random() * state.kanji.length)].char;
         if (!chars.includes(fallback)) chars.push(fallback);
-        else if (chars.length < 7) {
-          // last resort: mark with variation — shouldn't happen with 188 kanji
-          break;
-        }
+        else break;
       }
 
       shuffleInPlace(chars);
@@ -607,9 +742,7 @@
       tile.used = true;
       render();
 
-      if (allKanjiSlotsFilled()) {
-        checkAnswer();
-      }
+      if (allKanjiSlotsFilled()) checkAnswer();
     }
 
     function onSlotTap(slotIndex) {
@@ -647,6 +780,7 @@
         state.correctCount += 1;
         state.flash = "ok";
         state.revealText = "";
+        state.awaitingNext = false;
         render();
         state._feedbackTimer = setTimeout(() => advanceAfterFeedback(), 1000);
       } else {
@@ -657,13 +791,14 @@
           reading: state.currentWord.reading,
           meaning: state.currentWord.meaning,
         });
+        state.awaitingNext = true;
         render();
-        state._feedbackTimer = setTimeout(() => advanceAfterFeedback(), 2000);
       }
     }
 
     function advanceAfterFeedback() {
       clearFeedbackTimer();
+      state.awaitingNext = false;
       if (state.completed >= state.daySize) {
         state.screen = "summary";
         state.currentWord = null;
@@ -701,10 +836,10 @@
       return arr;
     }
 
-    loadData();
+    // Start on level picker — do not auto-load a day
+    render();
 
-    // Dev/test hooks (safe no-ops for players)
-    window.__forge = { state, render, dealOrder, startNewDay, buildHand, buildSlots };
+    window.__forge = { state, render, loadLevel, startNewDay, dealOrder, buildHand, buildSlots, goToSetup };
   </script>
 </body>
 </html>
