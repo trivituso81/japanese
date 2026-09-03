@@ -1570,6 +1570,28 @@ document.addEventListener("DOMContentLoaded", function () {
   .k-land-practice .start-row .kanji-browse-link {
     flex: 1 1 120px; border: none; padding: 10px 8px; text-align: center;
   }
+  .k-forge-entry {
+    margin: 4px 0 0;
+    padding: 12px 14px;
+    border-radius: var(--radius-sm);
+    border: 1.5px dashed var(--rule-strong);
+    background: var(--bg-soft);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .k-forge-entry a {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--seal);
+    text-decoration: none;
+  }
+  .k-forge-entry a:hover { text-decoration: underline; }
+  .k-forge-entry span {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.35;
+  }
 
   /* Full browse + character study pages — phone-first scrolling real estate */
   body[data-view="kanji-study"] header.masthead,
@@ -9121,6 +9143,10 @@ function renderKanji() {
           <button type="button" class="btn primary" id="kstartMain">Start practice</button>
           <a class="kanji-browse-link" href="#/kanji/browse/${focusId}">Browse characters</a>
         </div>
+        <p class="k-forge-entry">
+          <a href="kanji-forge.html">Kanji Forge</a>
+          <span>N4 reading game — build words from tiles</span>
+        </p>
       </section>
     </section>`;
 

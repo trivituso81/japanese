@@ -1,0 +1,2925 @@
+[
+  {
+    "char": "会",
+    "meaning": "meet",
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "lookalikes": [
+      "合",
+      "今",
+      "令"
+    ]
+  },
+  {
+    "char": "同",
+    "meaning": "same",
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [
+      "おな"
+    ],
+    "lookalikes": [
+      "用",
+      "向",
+      "周"
+    ]
+  },
+  {
+    "char": "事",
+    "meaning": "matter",
+    "onyomi": [
+      "ジ",
+      "ズ"
+    ],
+    "kunyomi": [
+      "こと",
+      "つか"
+    ],
+    "lookalikes": [
+      "建",
+      "争",
+      "吏"
+    ]
+  },
+  {
+    "char": "自",
+    "meaning": "oneself",
+    "onyomi": [
+      "ジ",
+      "シ"
+    ],
+    "kunyomi": [
+      "みずか",
+      "おの"
+    ],
+    "lookalikes": [
+      "白",
+      "目",
+      "息"
+    ]
+  },
+  {
+    "char": "社",
+    "meaning": "company",
+    "onyomi": [
+      "シャ"
+    ],
+    "kunyomi": [
+      "やしろ"
+    ],
+    "lookalikes": [
+      "杜",
+      "林",
+      "桂"
+    ]
+  },
+  {
+    "char": "発",
+    "meaning": "depart",
+    "onyomi": [
+      "ハツ",
+      "ホツ"
+    ],
+    "kunyomi": [
+      "た",
+      "あば",
+      "おこ",
+      "つか",
+      "はな"
+    ],
+    "lookalikes": [
+      "廃",
+      "登",
+      "癸"
+    ]
+  },
+  {
+    "char": "者",
+    "meaning": "person",
+    "onyomi": [
+      "シャ"
+    ],
+    "kunyomi": [
+      "もの"
+    ],
+    "lookalikes": [
+      "暑",
+      "都",
+      "署"
+    ]
+  },
+  {
+    "char": "地",
+    "meaning": "ground",
+    "onyomi": [
+      "チ",
+      "ジ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "池",
+      "他",
+      "驰"
+    ]
+  },
+  {
+    "char": "業",
+    "meaning": "business",
+    "onyomi": [
+      "ギョウ",
+      "ゴウ"
+    ],
+    "kunyomi": [
+      "わざ"
+    ],
+    "lookalikes": [
+      "楽",
+      "薬",
+      "葉"
+    ]
+  },
+  {
+    "char": "方",
+    "meaning": "direction",
+    "onyomi": [
+      "ホウ"
+    ],
+    "kunyomi": [
+      "かた"
+    ],
+    "lookalikes": [
+      "万",
+      "族",
+      "放"
+    ]
+  },
+  {
+    "char": "新",
+    "meaning": "new",
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "あたら",
+      "あら"
+    ],
+    "lookalikes": [
+      "親",
+      "薪",
+      "断"
+    ]
+  },
+  {
+    "char": "場",
+    "meaning": "place",
+    "onyomi": [
+      "ジョウ",
+      "チョウ"
+    ],
+    "kunyomi": [
+      "ば"
+    ],
+    "lookalikes": [
+      "陽",
+      "傷",
+      "腸"
+    ]
+  },
+  {
+    "char": "員",
+    "meaning": "member",
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "円",
+      "損",
+      "貴"
+    ]
+  },
+  {
+    "char": "立",
+    "meaning": "stand",
+    "onyomi": [
+      "リツ"
+    ],
+    "kunyomi": [
+      "た"
+    ],
+    "lookalikes": [
+      "泣",
+      "位",
+      "翌"
+    ]
+  },
+  {
+    "char": "開",
+    "meaning": "open",
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "あ",
+      "ひら"
+    ],
+    "lookalikes": [
+      "間",
+      "閉",
+      "関"
+    ]
+  },
+  {
+    "char": "手",
+    "meaning": "hand",
+    "onyomi": [
+      "シュ",
+      "ズ"
+    ],
+    "kunyomi": [
+      "て",
+      "た"
+    ],
+    "lookalikes": [
+      "毛",
+      "乎",
+      "拝"
+    ]
+  },
+  {
+    "char": "力",
+    "meaning": "power",
+    "onyomi": [
+      "リョク",
+      "リキ",
+      "リイ"
+    ],
+    "kunyomi": [
+      "ちから"
+    ],
+    "lookalikes": [
+      "刀",
+      "刃",
+      "加"
+    ]
+  },
+  {
+    "char": "問",
+    "meaning": "question",
+    "onyomi": [
+      "モン"
+    ],
+    "kunyomi": [
+      "と",
+      "とん"
+    ],
+    "lookalikes": [
+      "聞",
+      "間",
+      "門"
+    ]
+  },
+  {
+    "char": "代",
+    "meaning": "replace",
+    "onyomi": [
+      "ダイ",
+      "タイ"
+    ],
+    "kunyomi": [
+      "か",
+      "かわ",
+      "しろ"
+    ],
+    "lookalikes": [
+      "貸",
+      "伐",
+      "袋"
+    ]
+  },
+  {
+    "char": "明",
+    "meaning": "bright",
+    "onyomi": [
+      "メイ",
+      "ミョウ",
+      "ミン"
+    ],
+    "kunyomi": [
+      "あ",
+      "あか",
+      "あき"
+    ],
+    "lookalikes": [
+      "朝",
+      "朋",
+      "期"
+    ]
+  },
+  {
+    "char": "動",
+    "meaning": "move",
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [
+      "うご"
+    ],
+    "lookalikes": [
+      "働",
+      "重",
+      "勤"
+    ]
+  },
+  {
+    "char": "京",
+    "meaning": "capital",
+    "onyomi": [
+      "キョウ",
+      "ケイ",
+      "キン"
+    ],
+    "kunyomi": [
+      "みやこ"
+    ],
+    "lookalikes": [
+      "景",
+      "涼",
+      "就"
+    ]
+  },
+  {
+    "char": "目",
+    "meaning": "eye",
+    "onyomi": [
+      "モク"
+    ],
+    "kunyomi": [
+      "め"
+    ],
+    "lookalikes": [
+      "自",
+      "見",
+      "且"
+    ]
+  },
+  {
+    "char": "通",
+    "meaning": "pass through",
+    "onyomi": [
+      "ツウ",
+      "ツ"
+    ],
+    "kunyomi": [
+      "とお",
+      "かよ"
+    ],
+    "lookalikes": [
+      "進",
+      "道",
+      "連"
+    ]
+  },
+  {
+    "char": "言",
+    "meaning": "say",
+    "onyomi": [
+      "ゲン",
+      "ゴン"
+    ],
+    "kunyomi": [
+      "い",
+      "こと"
+    ],
+    "lookalikes": [
+      "音",
+      "計",
+      "話"
+    ]
+  },
+  {
+    "char": "理",
+    "meaning": "reason",
+    "onyomi": [
+      "リ"
+    ],
+    "kunyomi": [
+      "ことわり"
+    ],
+    "lookalikes": [
+      "野",
+      "埋",
+      "里"
+    ]
+  },
+  {
+    "char": "体",
+    "meaning": "body",
+    "onyomi": [
+      "タイ",
+      "テイ"
+    ],
+    "kunyomi": [
+      "からだ"
+    ],
+    "lookalikes": [
+      "休",
+      "本",
+      "未"
+    ]
+  },
+  {
+    "char": "田",
+    "meaning": "rice field",
+    "onyomi": [
+      "デン"
+    ],
+    "kunyomi": [
+      "た"
+    ],
+    "lookalikes": [
+      "由",
+      "甲",
+      "申"
+    ]
+  },
+  {
+    "char": "主",
+    "meaning": "main",
+    "onyomi": [
+      "シュ",
+      "ス",
+      "シュウ"
+    ],
+    "kunyomi": [
+      "おも",
+      "ぬし"
+    ],
+    "lookalikes": [
+      "住",
+      "注",
+      "柱"
+    ]
+  },
+  {
+    "char": "題",
+    "meaning": "topic",
+    "onyomi": [
+      "ダイ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "是",
+      "提",
+      "堤"
+    ]
+  },
+  {
+    "char": "意",
+    "meaning": "idea",
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "音",
+      "竟",
+      "億"
+    ]
+  },
+  {
+    "char": "不",
+    "meaning": "not",
+    "onyomi": [
+      "フ",
+      "ブ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "否",
+      "杯",
+      "坏"
+    ]
+  },
+  {
+    "char": "作",
+    "meaning": "make",
+    "onyomi": [
+      "サク",
+      "サ"
+    ],
+    "kunyomi": [
+      "つく"
+    ],
+    "lookalikes": [
+      "住",
+      "体",
+      "昨"
+    ]
+  },
+  {
+    "char": "用",
+    "meaning": "use",
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [
+      "もち"
+    ],
+    "lookalikes": [
+      "周",
+      "甫",
+      "角"
+    ]
+  },
+  {
+    "char": "度",
+    "meaning": "degree",
+    "onyomi": [
+      "ド",
+      "ト",
+      "タク"
+    ],
+    "kunyomi": [
+      "たび"
+    ],
+    "lookalikes": [
+      "渡",
+      "席",
+      "庶"
+    ]
+  },
+  {
+    "char": "強",
+    "meaning": "strong",
+    "onyomi": [
+      "キョウ",
+      "ゴウ"
+    ],
+    "kunyomi": [
+      "つよ"
+    ],
+    "lookalikes": [
+      "弱",
+      "弾",
+      "張"
+    ]
+  },
+  {
+    "char": "公",
+    "meaning": "public",
+    "onyomi": [
+      "コウ",
+      "ク"
+    ],
+    "kunyomi": [
+      "おおやけ"
+    ],
+    "lookalikes": [
+      "私",
+      "松",
+      "翁"
+    ]
+  },
+  {
+    "char": "持",
+    "meaning": "hold",
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [
+      "も"
+    ],
+    "lookalikes": [
+      "待",
+      "特",
+      "詩"
+    ]
+  },
+  {
+    "char": "野",
+    "meaning": "field",
+    "onyomi": [
+      "ヤ",
+      "ショ"
+    ],
+    "kunyomi": [
+      "の"
+    ],
+    "lookalikes": [
+      "理",
+      "墅",
+      "里"
+    ]
+  },
+  {
+    "char": "以",
+    "meaning": "by means of",
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "もっ"
+    ],
+    "lookalikes": [
+      "似",
+      "次",
+      "仮"
+    ]
+  },
+  {
+    "char": "思",
+    "meaning": "think",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "おも"
+    ],
+    "lookalikes": [
+      "恩",
+      "慮",
+      "念"
+    ]
+  },
+  {
+    "char": "家",
+    "meaning": "house",
+    "onyomi": [
+      "カ",
+      "ケ"
+    ],
+    "kunyomi": [
+      "いえ",
+      "や",
+      "うち"
+    ],
+    "lookalikes": [
+      "冢",
+      "嫁",
+      "稼"
+    ]
+  },
+  {
+    "char": "世",
+    "meaning": "world",
+    "onyomi": [
+      "セイ",
+      "セ",
+      "ソウ"
+    ],
+    "kunyomi": [
+      "よ"
+    ],
+    "lookalikes": [
+      "葉",
+      "泄",
+      "丗"
+    ]
+  },
+  {
+    "char": "多",
+    "meaning": "many",
+    "onyomi": [
+      "タ"
+    ],
+    "kunyomi": [
+      "おお"
+    ],
+    "lookalikes": [
+      "夕",
+      "移",
+      "侈"
+    ]
+  },
+  {
+    "char": "正",
+    "meaning": "correct",
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "ただ",
+      "まさ"
+    ],
+    "lookalikes": [
+      "止",
+      "証",
+      "征"
+    ]
+  },
+  {
+    "char": "安",
+    "meaning": "cheap",
+    "onyomi": [
+      "アン"
+    ],
+    "kunyomi": [
+      "やす"
+    ],
+    "lookalikes": [
+      "案",
+      "按",
+      "妾"
+    ]
+  },
+  {
+    "char": "院",
+    "meaning": "institution",
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "完",
+      "阮",
+      "阪"
+    ]
+  },
+  {
+    "char": "心",
+    "meaning": "heart",
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "こころ"
+    ],
+    "lookalikes": [
+      "必",
+      "志",
+      "忘"
+    ]
+  },
+  {
+    "char": "界",
+    "meaning": "world boundary",
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "畑",
+      "留",
+      "畏"
+    ]
+  },
+  {
+    "char": "教",
+    "meaning": "teach",
+    "onyomi": [
+      "キョウ"
+    ],
+    "kunyomi": [
+      "おし",
+      "おそ"
+    ],
+    "lookalikes": [
+      "敬",
+      "整",
+      "数"
+    ]
+  },
+  {
+    "char": "文",
+    "meaning": "writing",
+    "onyomi": [
+      "ブン",
+      "モン"
+    ],
+    "kunyomi": [
+      "ふみ",
+      "あや"
+    ],
+    "lookalikes": [
+      "父",
+      "交",
+      "又"
+    ]
+  },
+  {
+    "char": "元",
+    "meaning": "origin",
+    "onyomi": [
+      "ゲン",
+      "ガン"
+    ],
+    "kunyomi": [
+      "もと"
+    ],
+    "lookalikes": [
+      "完",
+      "光",
+      "无"
+    ]
+  },
+  {
+    "char": "重",
+    "meaning": "heavy",
+    "onyomi": [
+      "ジュウ",
+      "チョウ"
+    ],
+    "kunyomi": [
+      "おも",
+      "かさ",
+      "え"
+    ],
+    "lookalikes": [
+      "動",
+      "童",
+      "量"
+    ]
+  },
+  {
+    "char": "近",
+    "meaning": "near",
+    "onyomi": [
+      "キン",
+      "コン"
+    ],
+    "kunyomi": [
+      "ちか"
+    ],
+    "lookalikes": [
+      "進",
+      "追",
+      "退"
+    ]
+  },
+  {
+    "char": "考",
+    "meaning": "consider",
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "かんが"
+    ],
+    "lookalikes": [
+      "者",
+      "老",
+      "孝"
+    ]
+  },
+  {
+    "char": "画",
+    "meaning": "picture",
+    "onyomi": [
+      "ガ",
+      "カク",
+      "エ",
+      "カイ"
+    ],
+    "kunyomi": [
+      "えが",
+      "かく",
+      "かぎ",
+      "はかりごと",
+      "はか"
+    ],
+    "lookalikes": [
+      "書",
+      "昼"
+    ]
+  },
+  {
+    "char": "海",
+    "meaning": "sea",
+    "onyomi": [
+      "カイ"
+    ],
+    "kunyomi": [
+      "うみ"
+    ],
+    "lookalikes": [
+      "毎",
+      "梅",
+      "悔"
+    ]
+  },
+  {
+    "char": "売",
+    "meaning": "sell",
+    "onyomi": [
+      "バイ"
+    ],
+    "kunyomi": [
+      "う"
+    ],
+    "lookalikes": [
+      "読",
+      "続",
+      "壳"
+    ]
+  },
+  {
+    "char": "知",
+    "meaning": "know",
+    "onyomi": [
+      "チ"
+    ],
+    "kunyomi": [
+      "し"
+    ],
+    "lookalikes": [
+      "智",
+      "短",
+      "矢"
+    ]
+  },
+  {
+    "char": "道",
+    "meaning": "road",
+    "onyomi": [
+      "トウ",
+      "ドウ"
+    ],
+    "kunyomi": [
+      "みち"
+    ],
+    "lookalikes": [
+      "通",
+      "進",
+      "導"
+    ]
+  },
+  {
+    "char": "集",
+    "meaning": "gather",
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "あつ"
+    ],
+    "lookalikes": [
+      "進",
+      "准",
+      "雑"
+    ]
+  },
+  {
+    "char": "別",
+    "meaning": "separate",
+    "onyomi": [
+      "ベツ"
+    ],
+    "kunyomi": [
+      "わか"
+    ],
+    "lookalikes": [
+      "判",
+      "列",
+      "到"
+    ]
+  },
+  {
+    "char": "物",
+    "meaning": "thing",
+    "onyomi": [
+      "ブツ",
+      "モツ"
+    ],
+    "kunyomi": [
+      "もの"
+    ],
+    "lookalikes": [
+      "場",
+      "勿",
+      "易"
+    ]
+  },
+  {
+    "char": "使",
+    "meaning": "use (employ)",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "つか"
+    ],
+    "lookalikes": [
+      "仕",
+      "便",
+      "吏"
+    ]
+  },
+  {
+    "char": "品",
+    "meaning": "goods",
+    "onyomi": [
+      "ヒン",
+      "ホン"
+    ],
+    "kunyomi": [
+      "しな"
+    ],
+    "lookalikes": [
+      "區",
+      "器",
+      "晶"
+    ]
+  },
+  {
+    "char": "計",
+    "meaning": "measure",
+    "onyomi": [
+      "ケイ"
+    ],
+    "kunyomi": [
+      "はか"
+    ],
+    "lookalikes": [
+      "言",
+      "討",
+      "許"
+    ]
+  },
+  {
+    "char": "死",
+    "meaning": "death",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "し"
+    ],
+    "lookalikes": [
+      "列",
+      "歹",
+      "殆"
+    ]
+  },
+  {
+    "char": "特",
+    "meaning": "special",
+    "onyomi": [
+      "トク"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "持",
+      "待",
+      "牛"
+    ]
+  },
+  {
+    "char": "私",
+    "meaning": "I",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "わたし"
+    ],
+    "lookalikes": [
+      "秋",
+      "和",
+      "利"
+    ]
+  },
+  {
+    "char": "始",
+    "meaning": "begin",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "はじ"
+    ],
+    "lookalikes": [
+      "姉",
+      "胎",
+      "殆"
+    ]
+  },
+  {
+    "char": "朝",
+    "meaning": "morning",
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "あさ"
+    ],
+    "lookalikes": [
+      "潮",
+      "期",
+      "乾"
+    ]
+  },
+  {
+    "char": "運",
+    "meaning": "carry",
+    "onyomi": [
+      "ウン"
+    ],
+    "kunyomi": [
+      "はこ"
+    ],
+    "lookalikes": [
+      "連",
+      "軍",
+      "輝"
+    ]
+  },
+  {
+    "char": "終",
+    "meaning": "end",
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "おわ",
+      "お"
+    ],
+    "lookalikes": [
+      "絡",
+      "絵",
+      "経"
+    ]
+  },
+  {
+    "char": "台",
+    "meaning": "stand (counter)",
+    "onyomi": [
+      "ダイ",
+      "タイ"
+    ],
+    "kunyomi": [
+      "うてな",
+      "われ",
+      "つかさ"
+    ],
+    "lookalikes": [
+      "公",
+      "至",
+      "ム"
+    ]
+  },
+  {
+    "char": "広",
+    "meaning": "wide",
+    "onyomi": [
+      "コウ"
+    ],
+    "kunyomi": [
+      "ひろ"
+    ],
+    "lookalikes": [
+      "店",
+      "床",
+      "庁"
+    ]
+  },
+  {
+    "char": "住",
+    "meaning": "reside",
+    "onyomi": [
+      "ジュウ",
+      "ヂュウ",
+      "チュウ"
+    ],
+    "kunyomi": [
+      "す"
+    ],
+    "lookalikes": [
+      "注",
+      "主",
+      "往"
+    ]
+  },
+  {
+    "char": "真",
+    "meaning": "true",
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "ま"
+    ],
+    "lookalikes": [
+      "直",
+      "具",
+      "鎮"
+    ]
+  },
+  {
+    "char": "有",
+    "meaning": "have",
+    "onyomi": [
+      "ユウ",
+      "ウ"
+    ],
+    "kunyomi": [
+      "あ"
+    ],
+    "lookalikes": [
+      "右",
+      "賄",
+      "肴"
+    ]
+  },
+  {
+    "char": "口",
+    "meaning": "mouth",
+    "onyomi": [
+      "ク",
+      "コウ"
+    ],
+    "kunyomi": [
+      "くち"
+    ],
+    "lookalikes": [
+      "言",
+      "古",
+      "石"
+    ]
+  },
+  {
+    "char": "少",
+    "meaning": "few",
+    "onyomi": [
+      "ショウ"
+    ],
+    "kunyomi": [
+      "すく",
+      "すこ"
+    ],
+    "lookalikes": [
+      "歩",
+      "妙",
+      "砂"
+    ]
+  },
+  {
+    "char": "町",
+    "meaning": "town",
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "まち"
+    ],
+    "lookalikes": [
+      "叮",
+      "可",
+      "庁"
+    ]
+  },
+  {
+    "char": "料",
+    "meaning": "fee",
+    "onyomi": [
+      "リョウ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "科",
+      "斗",
+      "斜"
+    ]
+  },
+  {
+    "char": "工",
+    "meaning": "craft",
+    "onyomi": [
+      "コウ",
+      "ク",
+      "グ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "左",
+      "巫",
+      "功"
+    ]
+  },
+  {
+    "char": "建",
+    "meaning": "build",
+    "onyomi": [
+      "ケン",
+      "コン"
+    ],
+    "kunyomi": [
+      "た"
+    ],
+    "lookalikes": [
+      "健",
+      "廷",
+      "延"
+    ]
+  },
+  {
+    "char": "空",
+    "meaning": "sky",
+    "onyomi": [
+      "クウ"
+    ],
+    "kunyomi": [
+      "そら",
+      "あ"
+    ],
+    "lookalikes": [
+      "究",
+      "穴",
+      "控"
+    ]
+  },
+  {
+    "char": "急",
+    "meaning": "hurry",
+    "onyomi": [
+      "キュウ"
+    ],
+    "kunyomi": [
+      "いそ"
+    ],
+    "lookalikes": [
+      "念",
+      "息",
+      "恩"
+    ]
+  },
+  {
+    "char": "止",
+    "meaning": "stop",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "と",
+      "や"
+    ],
+    "lookalikes": [
+      "正",
+      "歩",
+      "歯"
+    ]
+  },
+  {
+    "char": "送",
+    "meaning": "send",
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "おく"
+    ],
+    "lookalikes": [
+      "迭",
+      "関",
+      "咲"
+    ]
+  },
+  {
+    "char": "切",
+    "meaning": "cut",
+    "onyomi": [
+      "セツ",
+      "サイ"
+    ],
+    "kunyomi": [
+      "き"
+    ],
+    "lookalikes": [
+      "分",
+      "初",
+      "刃"
+    ]
+  },
+  {
+    "char": "転",
+    "meaning": "revolve",
+    "onyomi": [
+      "テン"
+    ],
+    "kunyomi": [
+      "ころ"
+    ],
+    "lookalikes": [
+      "軽",
+      "車",
+      "軒"
+    ]
+  },
+  {
+    "char": "研",
+    "meaning": "polish",
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "lookalikes": [
+      "開",
+      "并",
+      "幵"
+    ]
+  },
+  {
+    "char": "足",
+    "meaning": "foot",
+    "onyomi": [
+      "ソク"
+    ],
+    "kunyomi": [
+      "あし",
+      "た"
+    ],
+    "lookalikes": [
+      "走",
+      "是",
+      "促"
+    ]
+  },
+  {
+    "char": "究",
+    "meaning": "research",
+    "onyomi": [
+      "キュウ",
+      "ク"
+    ],
+    "kunyomi": [
+      "きわ"
+    ],
+    "lookalikes": [
+      "空",
+      "穴",
+      "控"
+    ]
+  },
+  {
+    "char": "楽",
+    "meaning": "fun",
+    "onyomi": [
+      "ガク",
+      "ラク",
+      "ゴウ"
+    ],
+    "kunyomi": [
+      "たの"
+    ],
+    "lookalikes": [
+      "薬",
+      "木",
+      "草"
+    ]
+  },
+  {
+    "char": "起",
+    "meaning": "wake up",
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "お"
+    ],
+    "lookalikes": [
+      "走",
+      "超",
+      "赴"
+    ]
+  },
+  {
+    "char": "着",
+    "meaning": "wear",
+    "onyomi": [
+      "チャク",
+      "ジャク"
+    ],
+    "kunyomi": [
+      "き",
+      "つ"
+    ],
+    "lookalikes": [
+      "者",
+      "看",
+      "差"
+    ]
+  },
+  {
+    "char": "店",
+    "meaning": "shop",
+    "onyomi": [
+      "テン"
+    ],
+    "kunyomi": [
+      "みせ"
+    ],
+    "lookalikes": [
+      "庫",
+      "床",
+      "庁"
+    ]
+  },
+  {
+    "char": "病",
+    "meaning": "illness",
+    "onyomi": [
+      "ビョウ",
+      "ヘイ"
+    ],
+    "kunyomi": [
+      "や",
+      "やまい"
+    ],
+    "lookalikes": [
+      "痛",
+      "症",
+      "疾"
+    ]
+  },
+  {
+    "char": "質",
+    "meaning": "quality",
+    "onyomi": [
+      "シツ",
+      "シチ",
+      "チ"
+    ],
+    "kunyomi": [
+      "たち",
+      "ただ",
+      "もと",
+      "わりふ"
+    ],
+    "lookalikes": [
+      "慎",
+      "賃",
+      "責"
+    ]
+  },
+  {
+    "char": "待",
+    "meaning": "wait",
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "ま"
+    ],
+    "lookalikes": [
+      "持",
+      "特",
+      "侍"
+    ]
+  },
+  {
+    "char": "試",
+    "meaning": "test",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "こころ",
+      "ため"
+    ],
+    "lookalikes": [
+      "式",
+      "詩",
+      "裁"
+    ]
+  },
+  {
+    "char": "族",
+    "meaning": "tribe",
+    "onyomi": [
+      "ゾク"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "旅",
+      "旋",
+      "於"
+    ]
+  },
+  {
+    "char": "銀",
+    "meaning": "silver",
+    "onyomi": [
+      "ギン"
+    ],
+    "kunyomi": [
+      "しろがね"
+    ],
+    "lookalikes": [
+      "鉄",
+      "銅",
+      "銭"
+    ]
+  },
+  {
+    "char": "早",
+    "meaning": "early",
+    "onyomi": [
+      "ソウ",
+      "サッ"
+    ],
+    "kunyomi": [
+      "はや",
+      "さ"
+    ],
+    "lookalikes": [
+      "車",
+      "草",
+      "卓"
+    ]
+  },
+  {
+    "char": "映",
+    "meaning": "project",
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [
+      "うつ",
+      "は"
+    ],
+    "lookalikes": [
+      "英",
+      "決",
+      "央"
+    ]
+  },
+  {
+    "char": "親",
+    "meaning": "parent",
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "おや",
+      "した"
+    ],
+    "lookalikes": [
+      "新",
+      "視"
+    ]
+  },
+  {
+    "char": "験",
+    "meaning": "examine",
+    "onyomi": [
+      "ケン",
+      "ゲン"
+    ],
+    "kunyomi": [
+      "ため",
+      "ためし"
+    ],
+    "lookalikes": [
+      "検",
+      "険",
+      "剣"
+    ]
+  },
+  {
+    "char": "英",
+    "meaning": "England",
+    "onyomi": [
+      "エイ"
+    ],
+    "kunyomi": [
+      "はなぶさ"
+    ],
+    "lookalikes": [
+      "映",
+      "央",
+      "萩"
+    ]
+  },
+  {
+    "char": "医",
+    "meaning": "doctor",
+    "onyomi": [
+      "イ"
+    ],
+    "kunyomi": [
+      "い",
+      "くすし"
+    ],
+    "lookalikes": [
+      "区",
+      "匠",
+      "酉"
+    ]
+  },
+  {
+    "char": "仕",
+    "meaning": "serve",
+    "onyomi": [
+      "シ",
+      "ジ"
+    ],
+    "kunyomi": [
+      "つか"
+    ],
+    "lookalikes": [
+      "任",
+      "付",
+      "化"
+    ]
+  },
+  {
+    "char": "去",
+    "meaning": "leave",
+    "onyomi": [
+      "キョ",
+      "コ"
+    ],
+    "kunyomi": [
+      "さ"
+    ],
+    "lookalikes": [
+      "法",
+      "却",
+      "丢"
+    ]
+  },
+  {
+    "char": "味",
+    "meaning": "taste",
+    "onyomi": [
+      "ミ"
+    ],
+    "kunyomi": [
+      "あじ"
+    ],
+    "lookalikes": [
+      "未",
+      "昧",
+      "和"
+    ]
+  },
+  {
+    "char": "写",
+    "meaning": "copy",
+    "onyomi": [
+      "シャ",
+      "ジャ"
+    ],
+    "kunyomi": [
+      "うつ"
+    ],
+    "lookalikes": [
+      "鳥",
+      "与",
+      "焉"
+    ]
+  },
+  {
+    "char": "字",
+    "meaning": "character",
+    "onyomi": [
+      "ジ"
+    ],
+    "kunyomi": [
+      "あざ",
+      "あざな",
+      "な"
+    ],
+    "lookalikes": [
+      "学",
+      "宇",
+      "守"
+    ]
+  },
+  {
+    "char": "答",
+    "meaning": "answer",
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "こた"
+    ],
+    "lookalikes": [
+      "合",
+      "荅"
+    ]
+  },
+  {
+    "char": "夜",
+    "meaning": "night",
+    "onyomi": [
+      "ヤ"
+    ],
+    "kunyomi": [
+      "よ",
+      "よる"
+    ],
+    "lookalikes": [
+      "旅",
+      "液",
+      "掖"
+    ]
+  },
+  {
+    "char": "音",
+    "meaning": "sound",
+    "onyomi": [
+      "オン",
+      "イン",
+      "ノン"
+    ],
+    "kunyomi": [
+      "おと",
+      "ね"
+    ],
+    "lookalikes": [
+      "意",
+      "暗",
+      "竟"
+    ]
+  },
+  {
+    "char": "注",
+    "meaning": "pour",
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [
+      "そそ",
+      "さ",
+      "つ"
+    ],
+    "lookalikes": [
+      "主",
+      "柱",
+      "往"
+    ]
+  },
+  {
+    "char": "帰",
+    "meaning": "return home",
+    "onyomi": [
+      "キ"
+    ],
+    "kunyomi": [
+      "かえ"
+    ],
+    "lookalikes": [
+      "掃",
+      "婦",
+      "師"
+    ]
+  },
+  {
+    "char": "古",
+    "meaning": "old",
+    "onyomi": [
+      "コ"
+    ],
+    "kunyomi": [
+      "ふる"
+    ],
+    "lookalikes": [
+      "右",
+      "石",
+      "叶"
+    ]
+  },
+  {
+    "char": "歌",
+    "meaning": "song",
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "うた"
+    ],
+    "lookalikes": [
+      "軟",
+      "欠",
+      "哥"
+    ]
+  },
+  {
+    "char": "買",
+    "meaning": "buy",
+    "onyomi": [
+      "バイ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "lookalikes": [
+      "売",
+      "購",
+      "貰"
+    ]
+  },
+  {
+    "char": "悪",
+    "meaning": "bad",
+    "onyomi": [
+      "アク",
+      "オ"
+    ],
+    "kunyomi": [
+      "わる"
+    ],
+    "lookalikes": [
+      "亜",
+      "要"
+    ]
+  },
+  {
+    "char": "図",
+    "meaning": "map",
+    "onyomi": [
+      "ズ",
+      "ト"
+    ],
+    "kunyomi": [
+      "え",
+      "はか"
+    ],
+    "lookalikes": [
+      "回",
+      "団",
+      "因"
+    ]
+  },
+  {
+    "char": "週",
+    "meaning": "week",
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "進",
+      "周",
+      "調"
+    ]
+  },
+  {
+    "char": "室",
+    "meaning": "room",
+    "onyomi": [
+      "シツ"
+    ],
+    "kunyomi": [
+      "むろ"
+    ],
+    "lookalikes": [
+      "屋",
+      "至",
+      "窒"
+    ]
+  },
+  {
+    "char": "歩",
+    "meaning": "walk",
+    "onyomi": [
+      "ホ",
+      "ブ",
+      "フ"
+    ],
+    "kunyomi": [
+      "ある",
+      "あゆ"
+    ],
+    "lookalikes": [
+      "渉",
+      "頻",
+      "歯"
+    ]
+  },
+  {
+    "char": "風",
+    "meaning": "wind",
+    "onyomi": [
+      "フウ",
+      "フ"
+    ],
+    "kunyomi": [
+      "かぜ"
+    ],
+    "lookalikes": [
+      "嵐",
+      "凰",
+      "凪"
+    ]
+  },
+  {
+    "char": "紙",
+    "meaning": "paper",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "かみ"
+    ],
+    "lookalikes": [
+      "糸",
+      "組",
+      "紅"
+    ]
+  },
+  {
+    "char": "黒",
+    "meaning": "black",
+    "onyomi": [
+      "コク"
+    ],
+    "kunyomi": [
+      "くろ"
+    ],
+    "lookalikes": [
+      "墨",
+      "点",
+      "默"
+    ]
+  },
+  {
+    "char": "花",
+    "meaning": "flower",
+    "onyomi": [
+      "カ"
+    ],
+    "kunyomi": [
+      "はな"
+    ],
+    "lookalikes": [
+      "化",
+      "華",
+      "芲"
+    ]
+  },
+  {
+    "char": "春",
+    "meaning": "spring",
+    "onyomi": [
+      "シュン"
+    ],
+    "kunyomi": [
+      "はる"
+    ],
+    "lookalikes": [
+      "奉",
+      "奏",
+      "秦"
+    ]
+  },
+  {
+    "char": "赤",
+    "meaning": "red",
+    "onyomi": [
+      "セキ",
+      "シャク"
+    ],
+    "kunyomi": [
+      "あか"
+    ],
+    "lookalikes": [
+      "亦",
+      "赫",
+      "赦"
+    ]
+  },
+  {
+    "char": "青",
+    "meaning": "blue",
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "あお"
+    ],
+    "lookalikes": [
+      "清",
+      "晴",
+      "精"
+    ]
+  },
+  {
+    "char": "館",
+    "meaning": "hall",
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "やかた",
+      "たて"
+    ],
+    "lookalikes": [
+      "官",
+      "管",
+      "舎"
+    ]
+  },
+  {
+    "char": "屋",
+    "meaning": "roof",
+    "onyomi": [
+      "オク"
+    ],
+    "kunyomi": [
+      "や"
+    ],
+    "lookalikes": [
+      "室",
+      "至",
+      "屈"
+    ]
+  },
+  {
+    "char": "色",
+    "meaning": "color",
+    "onyomi": [
+      "ショク",
+      "シキ"
+    ],
+    "kunyomi": [
+      "いろ"
+    ],
+    "lookalikes": [
+      "絶",
+      "巴",
+      "邑"
+    ]
+  },
+  {
+    "char": "走",
+    "meaning": "run",
+    "onyomi": [
+      "ソウ"
+    ],
+    "kunyomi": [
+      "はし"
+    ],
+    "lookalikes": [
+      "起",
+      "超",
+      "徒"
+    ]
+  },
+  {
+    "char": "秋",
+    "meaning": "autumn",
+    "onyomi": [
+      "シュウ"
+    ],
+    "kunyomi": [
+      "あき"
+    ],
+    "lookalikes": [
+      "私",
+      "愁",
+      "萩"
+    ]
+  },
+  {
+    "char": "夏",
+    "meaning": "summer",
+    "onyomi": [
+      "カ",
+      "ガ",
+      "ゲ"
+    ],
+    "kunyomi": [
+      "なつ"
+    ],
+    "lookalikes": [
+      "憂",
+      "復"
+    ]
+  },
+  {
+    "char": "習",
+    "meaning": "learn",
+    "onyomi": [
+      "シュウ",
+      "ジュ"
+    ],
+    "kunyomi": [
+      "なら"
+    ],
+    "lookalikes": [
+      "羽",
+      "摺",
+      "翼"
+    ]
+  },
+  {
+    "char": "駅",
+    "meaning": "station",
+    "onyomi": [
+      "エキ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "訳",
+      "駆",
+      "駐"
+    ]
+  },
+  {
+    "char": "洋",
+    "meaning": "ocean",
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "詳",
+      "祥",
+      "群"
+    ]
+  },
+  {
+    "char": "旅",
+    "meaning": "trip",
+    "onyomi": [
+      "リョ"
+    ],
+    "kunyomi": [
+      "たび"
+    ],
+    "lookalikes": [
+      "旋",
+      "遊",
+      "於"
+    ]
+  },
+  {
+    "char": "服",
+    "meaning": "clothes",
+    "onyomi": [
+      "フク"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "報",
+      "肢",
+      "朋"
+    ]
+  },
+  {
+    "char": "夕",
+    "meaning": "evening",
+    "onyomi": [
+      "セキ"
+    ],
+    "kunyomi": [
+      "ゆう"
+    ],
+    "lookalikes": [
+      "多",
+      "名",
+      "舛"
+    ]
+  },
+  {
+    "char": "借",
+    "meaning": "borrow",
+    "onyomi": [
+      "シャク"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "lookalikes": [
+      "惜",
+      "措",
+      "錯"
+    ]
+  },
+  {
+    "char": "曜",
+    "meaning": "weekday",
+    "onyomi": [
+      "ヨウ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "濯",
+      "躍",
+      "翟"
+    ]
+  },
+  {
+    "char": "飲",
+    "meaning": "drink",
+    "onyomi": [
+      "イン"
+    ],
+    "kunyomi": [
+      "の"
+    ],
+    "lookalikes": [
+      "飯",
+      "吹",
+      "欠"
+    ]
+  },
+  {
+    "char": "肉",
+    "meaning": "meat",
+    "onyomi": [
+      "ニク"
+    ],
+    "kunyomi": [
+      "しし"
+    ],
+    "lookalikes": [
+      "有",
+      "内",
+      "腐"
+    ]
+  },
+  {
+    "char": "貸",
+    "meaning": "lend",
+    "onyomi": [
+      "タイ"
+    ],
+    "kunyomi": [
+      "か"
+    ],
+    "lookalikes": [
+      "貨",
+      "資",
+      "賀"
+    ]
+  },
+  {
+    "char": "堂",
+    "meaning": "hall (building)",
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "常",
+      "党",
+      "賞"
+    ]
+  },
+  {
+    "char": "鳥",
+    "meaning": "bird",
+    "onyomi": [
+      "チョウ"
+    ],
+    "kunyomi": [
+      "とり"
+    ],
+    "lookalikes": [
+      "烏",
+      "島",
+      "鳴"
+    ]
+  },
+  {
+    "char": "飯",
+    "meaning": "cooked rice",
+    "onyomi": [
+      "ハン"
+    ],
+    "kunyomi": [
+      "めし"
+    ],
+    "lookalikes": [
+      "飲",
+      "館",
+      "飢"
+    ]
+  },
+  {
+    "char": "勉",
+    "meaning": "exertion",
+    "onyomi": [
+      "ベン"
+    ],
+    "kunyomi": [
+      "つと"
+    ],
+    "lookalikes": [
+      "免",
+      "晩",
+      "逸"
+    ]
+  },
+  {
+    "char": "冬",
+    "meaning": "winter",
+    "onyomi": [
+      "トウ"
+    ],
+    "kunyomi": [
+      "ふゆ"
+    ],
+    "lookalikes": [
+      "終",
+      "各",
+      "夂"
+    ]
+  },
+  {
+    "char": "昼",
+    "meaning": "daytime",
+    "onyomi": [
+      "チュウ"
+    ],
+    "kunyomi": [
+      "ひる"
+    ],
+    "lookalikes": [
+      "書",
+      "画",
+      "盡"
+    ]
+  },
+  {
+    "char": "茶",
+    "meaning": "tea",
+    "onyomi": [
+      "チャ",
+      "サ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "茗",
+      "菓"
+    ]
+  },
+  {
+    "char": "弟",
+    "meaning": "younger brother",
+    "onyomi": [
+      "テイ",
+      "ダイ",
+      "デ"
+    ],
+    "kunyomi": [
+      "おとうと"
+    ],
+    "lookalikes": [
+      "第",
+      "茅",
+      "弔"
+    ]
+  },
+  {
+    "char": "牛",
+    "meaning": "cow",
+    "onyomi": [
+      "ギュウ"
+    ],
+    "kunyomi": [
+      "うし"
+    ],
+    "lookalikes": [
+      "午",
+      "生",
+      "特"
+    ]
+  },
+  {
+    "char": "魚",
+    "meaning": "fish",
+    "onyomi": [
+      "ギョ"
+    ],
+    "kunyomi": [
+      "さかな"
+    ],
+    "lookalikes": [
+      "漁",
+      "魯",
+      "鮮"
+    ]
+  },
+  {
+    "char": "兄",
+    "meaning": "older brother",
+    "onyomi": [
+      "ケイ",
+      "キョウ"
+    ],
+    "kunyomi": [
+      "あに"
+    ],
+    "lookalikes": [
+      "況",
+      "祝",
+      "克"
+    ]
+  },
+  {
+    "char": "犬",
+    "meaning": "dog",
+    "onyomi": [
+      "ケン"
+    ],
+    "kunyomi": [
+      "いぬ"
+    ],
+    "lookalikes": [
+      "大",
+      "天",
+      "太"
+    ]
+  },
+  {
+    "char": "妹",
+    "meaning": "younger sister",
+    "onyomi": [
+      "マイ"
+    ],
+    "kunyomi": [
+      "いもうと"
+    ],
+    "lookalikes": [
+      "姉",
+      "未",
+      "昧"
+    ]
+  },
+  {
+    "char": "姉",
+    "meaning": "older sister",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "お",
+      "あね",
+      "ねえ"
+    ],
+    "lookalikes": [
+      "妹",
+      "始",
+      "委"
+    ]
+  },
+  {
+    "char": "漢",
+    "meaning": "China",
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "難",
+      "嘆",
+      "漠"
+    ]
+  },
+  {
+    "char": "合",
+    "meaning": "fit",
+    "onyomi": [
+      "ゴウ",
+      "ガッ",
+      "カッ"
+    ],
+    "kunyomi": [
+      "あ",
+      "あい"
+    ],
+    "lookalikes": [
+      "今",
+      "会",
+      "令"
+    ]
+  },
+  {
+    "char": "回",
+    "meaning": "times",
+    "onyomi": [
+      "カイ",
+      "エ"
+    ],
+    "kunyomi": [
+      "まわ"
+    ],
+    "lookalikes": [
+      "図",
+      "団",
+      "因"
+    ]
+  },
+  {
+    "char": "所",
+    "meaning": "place (spot)",
+    "onyomi": [
+      "ショ"
+    ],
+    "kunyomi": [
+      "ところ"
+    ],
+    "lookalikes": [
+      "近",
+      "庁",
+      "斫"
+    ]
+  },
+  {
+    "char": "進",
+    "meaning": "advance",
+    "onyomi": [
+      "シン"
+    ],
+    "kunyomi": [
+      "すす"
+    ],
+    "lookalikes": [
+      "通",
+      "近",
+      "連"
+    ]
+  },
+  {
+    "char": "乗",
+    "meaning": "ride",
+    "onyomi": [
+      "ジョウ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "の"
+    ],
+    "lookalikes": [
+      "乖",
+      "剩"
+    ]
+  },
+  {
+    "char": "働",
+    "meaning": "work",
+    "onyomi": [
+      "ドウ"
+    ],
+    "kunyomi": [
+      "はたら"
+    ],
+    "lookalikes": [
+      "動",
+      "勤",
+      "勧"
+    ]
+  },
+  {
+    "char": "市",
+    "meaning": "city",
+    "onyomi": [
+      "シ"
+    ],
+    "kunyomi": [
+      "いち"
+    ],
+    "lookalikes": [
+      "布",
+      "吊",
+      "巾"
+    ]
+  },
+  {
+    "char": "顔",
+    "meaning": "face",
+    "onyomi": [
+      "ガン"
+    ],
+    "kunyomi": [
+      "かお"
+    ],
+    "lookalikes": [
+      "頭",
+      "彦",
+      "願"
+    ]
+  },
+  {
+    "char": "頭",
+    "meaning": "head",
+    "onyomi": [
+      "トウ",
+      "ズ",
+      "ト"
+    ],
+    "kunyomi": [
+      "あたま"
+    ],
+    "lookalikes": [
+      "顔",
+      "頁",
+      "須"
+    ]
+  },
+  {
+    "char": "門",
+    "meaning": "gate",
+    "onyomi": [
+      "モン"
+    ],
+    "kunyomi": [
+      "かど",
+      "と"
+    ],
+    "lookalikes": [
+      "問",
+      "聞",
+      "開"
+    ]
+  },
+  {
+    "char": "区",
+    "meaning": "ward",
+    "onyomi": [
+      "ク",
+      "オウ",
+      "コウ"
+    ],
+    "kunyomi": [],
+    "lookalikes": [
+      "医",
+      "匹",
+      "匠"
+    ]
+  },
+  {
+    "char": "軽",
+    "meaning": "light (weight)",
+    "onyomi": [
+      "ケイ",
+      "キョウ",
+      "キン"
+    ],
+    "kunyomi": [
+      "かる",
+      "かろ"
+    ],
+    "lookalikes": [
+      "経",
+      "径",
+      "怪"
+    ]
+  },
+  {
+    "char": "低",
+    "meaning": "low",
+    "onyomi": [
+      "テイ"
+    ],
+    "kunyomi": [
+      "ひく"
+    ],
+    "lookalikes": [
+      "底",
+      "抵",
+      "邸"
+    ]
+  },
+  {
+    "char": "遠",
+    "meaning": "far",
+    "onyomi": [
+      "エン",
+      "オン"
+    ],
+    "kunyomi": [
+      "とお"
+    ],
+    "lookalikes": [
+      "園",
+      "還",
+      "遣"
+    ]
+  },
+  {
+    "char": "暗",
+    "meaning": "dark",
+    "onyomi": [
+      "アン"
+    ],
+    "kunyomi": [
+      "くら",
+      "くれ"
+    ],
+    "lookalikes": [
+      "音",
+      "闇",
+      "諳"
+    ]
+  },
+  {
+    "char": "寒",
+    "meaning": "cold",
+    "onyomi": [
+      "カン"
+    ],
+    "kunyomi": [
+      "さむ"
+    ],
+    "lookalikes": [
+      "塞",
+      "賽",
+      "搴"
+    ]
+  },
+  {
+    "char": "暑",
+    "meaning": "hot (weather)",
+    "onyomi": [
+      "ショ"
+    ],
+    "kunyomi": [
+      "あつ"
+    ],
+    "lookalikes": [
+      "者",
+      "署",
+      "都"
+    ]
+  },
+  {
+    "char": "弱",
+    "meaning": "weak",
+    "onyomi": [
+      "ジャク"
+    ],
+    "kunyomi": [
+      "よわ"
+    ],
+    "lookalikes": [
+      "強",
+      "溺",
+      "羽"
+    ]
+  },
+  {
+    "char": "薬",
+    "meaning": "medicine",
+    "onyomi": [
+      "ヤク"
+    ],
+    "kunyomi": [
+      "くすり"
+    ],
+    "lookalikes": [
+      "楽",
+      "薄",
+      "草"
+    ]
+  },
+  {
+    "char": "説",
+    "meaning": "explain",
+    "onyomi": [
+      "セツ",
+      "ゼイ"
+    ],
+    "kunyomi": [
+      "と"
+    ],
+    "lookalikes": [
+      "税",
+      "鋭",
+      "脱"
+    ]
+  },
+  {
+    "char": "洗",
+    "meaning": "wash",
+    "onyomi": [
+      "セン"
+    ],
+    "kunyomi": [
+      "あら"
+    ],
+    "lookalikes": [
+      "先",
+      "洒"
+    ]
+  },
+  {
+    "char": "声",
+    "meaning": "voice",
+    "onyomi": [
+      "セイ",
+      "ショウ"
+    ],
+    "kunyomi": [
+      "こえ"
+    ],
+    "lookalikes": [
+      "殻",
+      "磬"
+    ]
+  }
+]
