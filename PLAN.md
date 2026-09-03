@@ -63,6 +63,20 @@ Run it and fix the data until it passes clean.
 
 **Validate:** `node check.js` must print `PASS`.
 
+## Phase 1: Core loop
+
+Create `index.html`, a single self-contained file (inline CSS and JS, no frameworks, no build step). Load `kanji.json` and `words.json` with `fetch`; assume the file is served locally.
+
+Build one screen with this flow:
+
+1. **Order** — Random word; English meaning large at top; blank slots per character (kana prefilled/greyed; kanji empty).
+2. **Hand** — 7 tiles: all answer kanji, 2 lookalike decoys, fill with random from `kanji.json`. Shuffle. No duplicates.
+3. **Input** — Tap tile → next empty slot; tap filled slot → return to hand. Auto-check when all slots filled.
+4. **Feedback** — Correct: green + reading, 1s, next. Wrong: red + correct word/reading, 2s, next. Corner counter: completed / correct.
+5. **End of day** — After 12 orders: summary (correct count, missed words), **New Day** button.
+
+Constraints: mobile-first portrait; tiles ≥56px; Gothic kanji font; all state in `state`; script sections: data loading / rendering / game logic. No timers UI, coins, sound, or localStorage yet.
+
 ## Later phases
 
-*(Not started — Phase 0 only. No game logic yet.)*
+*(Not started.)*
