@@ -77,6 +77,8 @@ Build one screen with this flow:
 
 Constraints: mobile-first portrait; tiles ≥56px; Gothic kanji font; all state in `state`; script sections: data loading / rendering / game logic. No timers UI, coins, sound, or localStorage yet.
 
+**Deployed as:** `kanji-forge.html`, linked from the main app kanji landing (`index.html#/kanji`). Data files stay at repo root beside the game.
+
 ## Later phases
 
 *(Not started.)*

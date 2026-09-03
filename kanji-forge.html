@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Kanji Forge</title>
+  <style>
+    :root {
+      --bg: #f4f0e8;
+      --ink: #1a1a1a;
+      --muted: #8a8680;
+      --slot: #fff;
+      --slot-border: #cfc9bd;
+      --tile: #2a2a2a;
+      --tile-ink: #faf8f4;
+      --ok: #1f8a4c;
+      --bad: #c0392b;
+      --panel: #ebe6dc;
+      --accent: #b85c38;
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      padding: 12px 12px calc(16px + var(--safe-bottom));
+    }
+
+    .app {
+      width: 100%;
+      max-width: 420px;
+      min-height: calc(100vh - 24px);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+
+    .back-kanji {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--muted);
+      text-decoration: none;
+      margin-right: 8px;
+    }
+    .back-kanji:hover { color: var(--accent); }
+
+    .brand {
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .counter {
+      font-size: 0.8rem;
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .counter strong {
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .play {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      justify-content: center;
+    }
+
+    .meaning {
+      font-size: clamp(1.6rem, 6.5vw, 2.1rem);
+      font-weight: 700;
+      line-height: 1.25;
+      text-align: center;
+      letter-spacing: 0.01em;
+      min-height: 2.6em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 4px;
+    }
+
+    .reading {
+      text-align: center;
+      font-size: 1.15rem;
+      color: var(--muted);
+      min-height: 1.4em;
+      letter-spacing: 0.06em;
+    }
+
+    .reading.show { color: var(--ink); }
+
+    .slots {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      min-height: 64px;
+      padding: 4px 0 8px;
+      pointer-events: none;
+    }
+
+    .slot {
+      width: 56px;
+      height: 56px;
+      border-radius: 10px;
+      border: 2px solid var(--slot-border);
+      background: var(--slot);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      font-weight: 700;
+      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.12s ease;
+      pointer-events: auto;
+    }
+
+    .slot.kana {
+      color: var(--muted);
+      background: var(--panel);
+      border-color: transparent;
+      font-weight: 500;
+    }
+
+    .slot.filled:not(.kana) {
+      background: var(--tile);
+      color: var(--tile-ink);
+      border-color: var(--tile);
+      cursor: pointer;
+    }
+
+    .slot.flash-ok {
+      background: var(--ok) !important;
+      border-color: var(--ok) !important;
+      color: #fff !important;
+    }
+
+    .slot.flash-bad {
+      background: var(--bad) !important;
+      border-color: var(--bad) !important;
+      color: #fff !important;
+    }
+
+    .reveal {
+      text-align: center;
+      min-height: 1.5em;
+      font-size: 1.05rem;
+      color: var(--bad);
+      letter-spacing: 0.04em;
+    }
+
+    .hand {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      padding: 8px 0 4px;
+    }
+
+    .tile {
+      width: 56px;
+      height: 56px;
+      border: none;
+      border-radius: 12px;
+      background: var(--tile);
+      color: var(--tile-ink);
+      font-family: inherit;
+      font-size: 1.75rem;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 0 #111;
+      transition: transform 0.08s ease, opacity 0.12s ease;
+    }
+
+    .tile:active { transform: translateY(2px); box-shadow: 0 1px 0 #111; }
+    .tile:disabled {
+      opacity: 0.28;
+      cursor: default;
+      box-shadow: none;
+      transform: none;
+    }
+
+    .locked .tile { pointer-events: none; }
+    .locked .slot.filled:not(.kana) { pointer-events: none; }
+
+    .summary {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 18px;
+      padding: 8px 4px 24px;
+    }
+
+    .summary h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .summary .score {
+      text-align: center;
+      font-size: 1.2rem;
+    }
+
+    .missed {
+      background: var(--panel);
+      border-radius: 14px;
+      padding: 14px 16px;
+      max-height: 45vh;
+      overflow: auto;
+    }
+
+    .missed h2 {
+      margin: 0 0 10px;
+      font-size: 0.95rem;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .missed ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .missed li {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .missed .w {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    .missed .m {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .missed .empty {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .btn {
+      appearance: none;
+      border: none;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #fff;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 700;
+      padding: 14px 22px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn:active { transform: translateY(1px); opacity: 0.92; }
+
+    .loading, .error {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--muted);
+      padding: 40px 12px;
+      line-height: 1.5;
+    }
+
+    .error { color: var(--bad); }
+
+  </style>
+</head>
+<body>
+  <div class="app" id="app">
+    <div class="loading">Loading Kanji Forge…</div>
+  </div>
+
+  <script>
+    /* ============================================================
+       STATE
+       ============================================================ */
+    const state = {
+      kanji: [],
+      words: [],
+      kanjiByChar: Object.create(null),
+
+      daySize: 12,
+      completed: 0,
+      correctCount: 0,
+      missed: [],
+
+      screen: "loading", // loading | play | summary | error
+      phase: "input",    // input | feedback
+      locked: false,
+
+      currentWord: null,
+      slots: [],         // { expected, isKana, value }
+      hand: [],          // { id, char, used }
+      readingVisible: false,
+      revealText: "",
+      flash: null,       // "ok" | "bad" | null
+
+      errorMessage: "",
+      _tileSeq: 0,
+      _feedbackTimer: null,
+    };
+
+    /* ============================================================
+       DATA LOADING
+       ============================================================ */
+    async function loadData() {
+      try {
+        const [kanjiRes, wordsRes] = await Promise.all([
+          fetch("kanji.json"),
+          fetch("words.json"),
+        ]);
+        if (!kanjiRes.ok || !wordsRes.ok) {
+          throw new Error("Could not load kanji.json / words.json. Serve this folder over HTTP.");
+        }
+        const kanji = await kanjiRes.json();
+        const words = await wordsRes.json();
+        if (!Array.isArray(kanji) || !Array.isArray(words) || !kanji.length || !words.length) {
+          throw new Error("Kanji or words data is empty.");
+        }
+        state.kanji = kanji;
+        state.words = words.filter((w) => w && w.word && Array.isArray(w.kanji) && w.kanji.length > 0);
+        state.kanjiByChar = Object.create(null);
+        for (const entry of state.kanji) state.kanjiByChar[entry.char] = entry;
+        startNewDay();
+      } catch (err) {
+        state.screen = "error";
+        state.errorMessage = err.message || String(err);
+        render();
+      }
+    }
+
+    /* ============================================================
+       RENDERING
+       ============================================================ */
+    function render() {
+      const app = document.getElementById("app");
+      if (state.screen === "loading") {
+        app.innerHTML = `<div class="loading">Loading Kanji Forge…</div>`;
+        return;
+      }
+      if (state.screen === "error") {
+        app.innerHTML = `<div class="error">${escapeHtml(state.errorMessage)}</div>`;
+        return;
+      }
+      if (state.screen === "summary") {
+        app.innerHTML = renderSummary();
+        bindSummary();
+        return;
+      }
+      app.innerHTML = renderPlay();
+      bindPlay();
+    }
+
+    function renderPlay() {
+      const w = state.currentWord;
+      const lockedClass = state.locked ? " locked" : "";
+      const readingClass = state.readingVisible ? "reading show" : "reading";
+      const readingText = state.readingVisible && w ? w.reading : "";
+      const flash = state.flash;
+
+      const slotsHtml = state.slots
+        .map((slot, i) => {
+          const classes = ["slot"];
+          if (slot.isKana) classes.push("kana");
+          if (slot.value) classes.push("filled");
+          if (flash === "ok") classes.push("flash-ok");
+          if (flash === "bad") classes.push("flash-bad");
+          const content = slot.value || "";
+          return `<div class="${classes.join(" ")}" data-slot="${i}" role="${slot.isKana || !slot.value ? "presentation" : "button"}">${escapeHtml(content)}</div>`;
+        })
+        .join("");
+
+      const handHtml = state.hand
+        .map((tile) => {
+          return `<button type="button" class="tile" data-tile="${tile.id}" ${tile.used || state.locked ? "disabled" : ""}>${escapeHtml(tile.char)}</button>`;
+        })
+        .join("");
+
+      return `
+        <div class="topbar">
+          <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
+            <a class="back-kanji" href="index.html#/kanji">← Kanji</a>
+            <div class="brand">Kanji Forge</div>
+          </div>
+          <div class="counter">
+            <strong>${state.completed}</strong>/${state.daySize}
+            · <strong>${state.correctCount}</strong> correct
+          </div>
+        </div>
+        <div class="play${lockedClass}">
+          <div class="meaning">${escapeHtml(w ? w.meaning : "")}</div>
+          <div class="${readingClass}">${escapeHtml(readingText)}</div>
+          <div class="slots">${slotsHtml}</div>
+          <div class="reveal">${escapeHtml(state.revealText)}</div>
+          <div class="hand">${handHtml}</div>
+        </div>
+      `;
+    }
+
+    function renderSummary() {
+      const missed = state.missed;
+      let listHtml;
+      if (!missed.length) {
+        listHtml = `<p class="empty">No misses. Clean forge today.</p>`;
+      } else {
+        listHtml = `<ul>${missed
+          .map(
+            (m) => `<li>
+              <span class="w">${escapeHtml(m.word)}　${escapeHtml(m.reading)}</span>
+              <span class="m">${escapeHtml(m.meaning)}</span>
+            </li>`
+          )
+          .join("")}</ul>`;
+      }
+      return `
+        <div class="topbar">
+          <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
+            <a class="back-kanji" href="index.html#/kanji">← Kanji</a>
+            <div class="brand">Kanji Forge</div>
+          </div>
+          <div class="counter">Day complete</div>
+        </div>
+        <div class="summary">
+          <h1>End of day</h1>
+          <div class="score"><strong>${state.correctCount}</strong> / ${state.daySize} correct</div>
+          <div class="missed">
+            <h2>Missed</h2>
+            ${listHtml}
+          </div>
+          <button type="button" class="btn" id="new-day">New Day</button>
+        </div>
+      `;
+    }
+
+    function bindPlay() {
+      document.querySelectorAll(".tile").forEach((btn) => {
+        btn.addEventListener("click", () => onTileTap(btn.getAttribute("data-tile")));
+      });
+      document.querySelectorAll(".slot.filled:not(.kana)").forEach((el) => {
+        el.addEventListener("click", () => onSlotTap(Number(el.getAttribute("data-slot"))));
+      });
+    }
+
+    function bindSummary() {
+      const btn = document.getElementById("new-day");
+      if (btn) btn.addEventListener("click", () => startNewDay());
+    }
+
+    function escapeHtml(s) {
+      return String(s ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;");
+    }
+
+    /* ============================================================
+       GAME LOGIC
+       ============================================================ */
+    function startNewDay() {
+      clearFeedbackTimer();
+      state.completed = 0;
+      state.correctCount = 0;
+      state.missed = [];
+      state.screen = "play";
+      state.phase = "input";
+      state.locked = false;
+      state.flash = null;
+      state.revealText = "";
+      state.readingVisible = false;
+      dealOrder();
+      render();
+    }
+
+    function dealOrder() {
+      clearFeedbackTimer();
+      state.phase = "input";
+      state.locked = false;
+      state.flash = null;
+      state.revealText = "";
+      state.readingVisible = false;
+
+      const word = pickRandom(state.words);
+      state.currentWord = word;
+      state.slots = buildSlots(word.word);
+      state.hand = buildHand(word);
+    }
+
+    function buildSlots(wordStr) {
+      return [...wordStr].map((ch) => {
+        const isKana = isKanaChar(ch);
+        return {
+          expected: ch,
+          isKana,
+          value: isKana ? ch : null,
+          tileId: null,
+        };
+      });
+    }
+
+    function isKanaChar(ch) {
+      return /[\u3040-\u309F\u30A0-\u30FF]/.test(ch);
+    }
+
+    function buildHand(word) {
+      const answerKanji = unique(word.kanji.filter((c) => !isKanaChar(c)));
+      const used = new Set(answerKanji);
+
+      // Lookalike decoys from answer kanji entries (fallback: random)
+      const lookalikePool = [];
+      for (const ch of answerKanji) {
+        const entry = state.kanjiByChar[ch];
+        if (!entry || !Array.isArray(entry.lookalikes)) continue;
+        for (const look of entry.lookalikes) {
+          if (!used.has(look) && lookalikePool.indexOf(look) === -1) lookalikePool.push(look);
+        }
+      }
+      shuffleInPlace(lookalikePool);
+
+      const decoys = [];
+      while (decoys.length < 2 && lookalikePool.length) {
+        const look = lookalikePool.shift();
+        decoys.push(look);
+        used.add(look);
+      }
+
+      // Fill remaining to 7 from kanji.json
+      const randomPool = state.kanji
+        .map((k) => k.char)
+        .filter((c) => !used.has(c));
+      shuffleInPlace(randomPool);
+      while (answerKanji.length + decoys.length < 7 && randomPool.length) {
+        const ch = randomPool.shift();
+        decoys.push(ch);
+        used.add(ch);
+      }
+
+      // If still short (tiny data edge case), allow any unused unicode filler from answers' lookalikes exhausted — duplicate-free pad from kanji again after reshuffle
+      const chars = [...answerKanji, ...decoys];
+      while (chars.length < 7) {
+        const fallback = state.kanji[Math.floor(Math.random() * state.kanji.length)].char;
+        if (!chars.includes(fallback)) chars.push(fallback);
+        else if (chars.length < 7) {
+          // last resort: mark with variation — shouldn't happen with 188 kanji
+          break;
+        }
+      }
+
+      shuffleInPlace(chars);
+      return chars.slice(0, 7).map((char) => ({
+        id: `t${++state._tileSeq}`,
+        char,
+        used: false,
+      }));
+    }
+
+    function onTileTap(tileId) {
+      if (state.locked || state.phase !== "input") return;
+      const tile = state.hand.find((t) => t.id === tileId);
+      if (!tile || tile.used) return;
+
+      const slotIndex = state.slots.findIndex((s) => !s.isKana && !s.value);
+      if (slotIndex === -1) return;
+
+      state.slots[slotIndex].value = tile.char;
+      state.slots[slotIndex].tileId = tile.id;
+      tile.used = true;
+      render();
+
+      if (allKanjiSlotsFilled()) {
+        checkAnswer();
+      }
+    }
+
+    function onSlotTap(slotIndex) {
+      if (state.locked || state.phase !== "input") return;
+      const slot = state.slots[slotIndex];
+      if (!slot || slot.isKana || !slot.value) return;
+
+      const tile = state.hand.find((t) => t.id === slot.tileId) ||
+        state.hand.find((t) => t.used && t.char === slot.value);
+      if (tile) tile.used = false;
+      slot.value = null;
+      slot.tileId = null;
+      render();
+    }
+
+    function allKanjiSlotsFilled() {
+      return state.slots.every((s) => s.isKana || s.value);
+    }
+
+    function assembledWord() {
+      return state.slots.map((s) => s.value || "").join("");
+    }
+
+    function checkAnswer() {
+      state.locked = true;
+      state.phase = "feedback";
+      const got = assembledWord();
+      const want = state.currentWord.word;
+      const ok = got === want;
+
+      state.completed += 1;
+      state.readingVisible = true;
+
+      if (ok) {
+        state.correctCount += 1;
+        state.flash = "ok";
+        state.revealText = "";
+        render();
+        state._feedbackTimer = setTimeout(() => advanceAfterFeedback(), 1000);
+      } else {
+        state.flash = "bad";
+        state.revealText = `${want}　${state.currentWord.reading}`;
+        state.missed.push({
+          word: want,
+          reading: state.currentWord.reading,
+          meaning: state.currentWord.meaning,
+        });
+        render();
+        state._feedbackTimer = setTimeout(() => advanceAfterFeedback(), 2000);
+      }
+    }
+
+    function advanceAfterFeedback() {
+      clearFeedbackTimer();
+      if (state.completed >= state.daySize) {
+        state.screen = "summary";
+        state.currentWord = null;
+        state.slots = [];
+        state.hand = [];
+        render();
+        return;
+      }
+      dealOrder();
+      render();
+    }
+
+    function clearFeedbackTimer() {
+      if (state._feedbackTimer) {
+        clearTimeout(state._feedbackTimer);
+        state._feedbackTimer = null;
+      }
+    }
+
+    function pickRandom(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    function unique(arr) {
+      return [...new Set(arr)];
+    }
+
+    function shuffleInPlace(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        const tmp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = tmp;
+      }
+      return arr;
+    }
+
+    loadData();
+
+    // Dev/test hooks (safe no-ops for players)
+    window.__forge = { state, render, dealOrder, startNewDay, buildHand, buildSlots };
+  </script>
+</body>
+</html>
