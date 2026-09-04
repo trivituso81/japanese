@@ -1,0 +1,236 @@
+# char|parts|type|mnemonic
+# parts: a+b or a+b+c using component glyph/display/id or kanji char
+# starters are auto-added from components ∩ kanji
+三|一+二|etymological|One stacked on two: three.
+四|冂+八|invented|Enclosure around eight: four.
+五|二+十|invented|Two crossed by ten: five.
+六|八+一|invented|Eight under one stroke: six.
+七|一+十|invented|One cutting across ten: seven.
+九|力+十|invented|Power bent past ten: nine.
+万|一+力|invented|One powerful sweep: ten thousand.
+円|冂+一|invented|Enclosure closed into a circle: yen.
+千|人+十|etymological|Person mark on ten: thousand.
+午|十+人|invented|Ten and a person mark: noon.
+半|八+十|invented|Eight split from ten: half.
+分|八+刀|etymological|Eight cut by a knife: divide.
+切|七+刀|etymological|Seven under a knife: cut.
+前|止+刂|invented|Stop and cut ahead: before.
+後|辶+糸|invented|Walk tangled in thread: after.
+週|⻌+口+土|invented|Walk around earth and mouth: week.
+年|人+十|invented|Person marking ten: year.
+今|人+一|invented|Person under a present line: now.
+早|日+十|etymological|Sun at ten: early.
+明|日+月|etymological|Sun and moon together: bright.
+時|日+土|invented|Sun over earth marks: time.
+間|門+日|etymological|Sun through the gate: interval.
+曜|日+鳥|invented|Sun with a bird: day of week.
+朝|十+日+月|invented|Ten suns and moon: morning.
+昼|一+日|invented|One over the sun: daytime.
+夜|人+夕|invented|Person in the evening: night.
+春|三+人+日|etymological|Three people under sun: spring.
+夏|自+攵|invented|Self under a strike of heat: summer.
+秋|木+火|invented|Tree under fire: autumn.
+冬|攵+二|invented|Strike of cold under two: winter.
+古|十+口|etymological|Ten mouths of ages: old.
+右|又+口|etymological|Again hand by the mouth: right.
+左|工+又|etymological|Work hand on the left: left.
+名|夕+口|etymological|Evening mouth calling a name.
+外|夕+刀|invented|Evening knife beyond: outside.
+多|夕+夕|etymological|Evening upon evening: many.
+天|一+大|etymological|One over big: heaven.
+少|小+一|invented|Small plus a stroke: few.
+本|木+一|etymological|Tree with a root mark: origin.
+来|木+人|invented|Person coming to the tree: come.
+東|木+日|etymological|Sun through a tree: east.
+西|一+口|invented|One lid over a mouth: west.
+南|十+冂|invented|Ten inside enclosure: south.
+北|人+人|invented|People back to back: north.
+出|山+山|invented|Mountains stacked: exit.
+生|土+一|invented|Earth sprouting one: life.
+国|冂+王|invented|Enclosure around a king: country.
+図|冂+十|invented|Enclosure with marks: diagram.
+地|土+川|invented|Earth by the river: ground.
+場|土+日|invented|Earth in the sun: place.
+所|門+刀|invented|Gate cut to a spot: place.
+町|田+十|invented|Rice field by a street mark: town.
+市|冂+十|invented|Enclosure and ten: city market.
+区|冂+又|invented|Enclosure divided again: ward.
+京|一+口+小|invented|Lid, mouth, small base: capital.
+店|广+口|invented|Building with an open mouth: shop.
+屋|宀+土|invented|Roof over earth: roofed shop.
+室|宀+一+土|invented|Roof reaching the earth: room.
+家|宀+犬|invented|Roof over a dog: house.
+広|广+厶|etymological|Building opened private: wide.
+安|宀+女|etymological|Woman under a roof: peaceful.
+字|宀+子|etymological|Child under a roof: character.
+学|八+子|invented|Open eight over a child: study.
+空|宀+八+工|invented|Roof, open eight, work: sky.
+海|氵+毎|phonetic|Water with every: sea.
+洋|氵+王|invented|Water as vast as a king: ocean.
+注|氵+主|phonetic|Water toward the main: pour.
+洗|氵+先|phonetic|Water ahead: wash.
+漢|氵+艹+口|invented|Water, grass, mouth of China: China.
+花|艹+人|invented|Grass changing like a person: flower.
+茶|艹+人+木|invented|Grass person by a tree: tea.
+野|田+又|invented|Rice field stretched again: field.
+男|田+力|etymological|Rice field and power: man.
+見|目+儿|etymological|Eye on legs: see.
+耳|一+二|invented|One and two strokes: ear.
+足|口+止|etymological|Mouth over stop: foot.
+鳥|白+火|invented|White and fire: bird.
+魚|刀+田+火|invented|Knife, field, and fire: fish.
+牛|十+一|invented|Ten with a horn stroke: cow.
+兄|口+儿|etymological|Mouth on legs: older brother.
+弟|八+刀|invented|Eight beside a knife: younger brother.
+姉|女+市|phonetic|Woman and city sound: older sister.
+妹|女+木|invented|Woman and unfinished tree: younger sister.
+公|八+厶|etymological|Eight opening the private: public.
+主|一+王|etymological|One over the king: main.
+父|八+又|invented|Eight and a hand staff: father.
+母|女+一|invented|Woman with marks: mother.
+毎|人+母|etymological|Person plus mother: every.
+友|手+又|invented|Hand and again: friend.
+休|亻+木|etymological|Person resting by a tree: rest.
+何|亻+口|invented|Person opening the mouth: what.
+作|亻+十+刀|invented|Person cutting with tools: make.
+仕|亻+土|invented|Person on the earth working: serve.
+使|亻+口+十|invented|Person speaking orders: use.
+住|亻+主|phonetic|Person by the main: reside.
+体|亻+本|etymological|Person plus root: body.
+代|亻+十|invented|Person marked for ten: substitute.
+借|亻+日|invented|Person taking for a day: borrow.
+貸|代+貝|etymological|Replace with shell money: lend.
+会|人+二+厶|invented|People under two private: meet.
+先|牛+儿|etymological|Cow leading on legs: ahead.
+私|木+厶|invented|Tree kept private: I.
+者|土+日|invented|Earth and sun mark a person: one who.
+員|口+貝|etymological|Mouth and shell: member.
+働|亻+動|etymological|Person plus move: work.
+医|工+大|invented|Work of the big healer: doctor.
+族|方+人|invented|Direction of people: tribe.
+顔|立+貝|invented|Stand showing shell-face: face.
+頭|口+貝|invented|Mouth over shell: head.
+親|立+木+見|invented|Stand to see the tree: parent.
+社|口+土|invented|Mouth of the earth shrine: shrine.
+校|木+父|invented|Trees where fathers gather: school.
+教|子+攵|invented|Child struck to learn: teach.
+文|一+十|invented|Crossed lines of writing: writing.
+語|言+五+口|etymological|Speech, five, and mouth: language.
+話|言+口|invented|Speech from the mouth: talk.
+売|十+儿|invented|Ten on legs offering goods: sell.
+読|言+売|phonetic|Speech for what is sold: read.
+計|言+十|etymological|Speech counted by ten: measure.
+試|言+工|invented|Speech of a craft test: test.
+説|言+兄|invented|Speech of an older brother: explain.
+思|田+心|etymological|Field over the heart: think.
+音|立+日|etymological|Stand under the sun: sound.
+意|音+心|etymological|Sound in the heart: idea.
+考|土+又|invented|Earth turned again in thought: consider.
+知|人+口|invented|Person and mouth knowing: know.
+聞|門+耳|etymological|Ear at the gate: hear.
+声|口+又|invented|Mouth and hand making voice: voice.
+合|人+一+口|etymological|Person, one, mouth: join.
+答|合+一|invented|Join under one cover: answer.
+問|門+口|etymological|Mouth at the gate: ask.
+道|⻌+自|invented|Walk with self ahead: road.
+通|⻌+月|invented|Walk through the moon gate: pass.
+近|⻌+刀|invented|Walk a knife-cut away: near.
+遠|⻌+土+口|invented|Walk past earth and mouth: far.
+進|⻌+鳥|invented|Walk like a bird forward: advance.
+運|⻌+車|invented|Walk with a cart: carry.
+送|⻌+天|invented|Walk something skyward: send.
+行|人+十|invented|Person stepping ten: go.
+歩|止+少|etymological|Stop then a little: walk.
+走|土+止|invented|Earth under stop: run.
+帰|刀+止|invented|Knife stop turning home: return.
+重|千+田|invented|Thousand rice fields: heavy.
+動|重+力|etymological|Heavy with power: move.
+乗|千+木|invented|Thousand on a tree: ride.
+気|八+一+火|invented|Rising steam of fire: spirit.
+百|一+白|etymological|One and white: hundred.
+買|冂+貝|invented|Enclosure over shell: buy.
+長|一+人|invented|One leading a person: long.
+電|雨+田|invented|Rain over the rice field: electricity.
+食|人+一+口|invented|Person with one mouth: eat.
+飲|食+人|invented|Eat with a person: drink.
+駅|車+足|invented|Cart and foot: station.
+高|口+冂+口|etymological|Mouths stacked high: tall.
+新|立+木+刀|invented|Stand, tree, knife: new.
+書|日+手|invented|Sun and hand writing: write.
+同|冂+一+口|etymological|Enclosure, one, mouth: same.
+事|一+口+手|invented|One mouth and hand: matter.
+発|二+儿|invented|Two on legs departing: depart.
+業|木+王|invented|Tree under a king: business.
+方|一+刀|invented|One and a knife edge: direction.
+開|門+二|invented|Gate with two bars: open.
+理|王+田|invented|King over the rice field: reason.
+不|一+小|invented|One over small: not.
+用|冂+十|invented|Enclosure with a cross: use.
+度|广+又|invented|Building measured again: degree.
+強|力+口|invented|Power from the mouth: strong.
+持|扌+土|invented|Hand on the earth: hold.
+以|人+止|invented|Person stopping to use: by means of.
+世|十+一|invented|Ten across one age: world.
+正|一+止|etymological|One and stop: correct.
+元|二+儿|etymological|Two on legs: origin.
+院|阝+元|invented|Hill by the origin: institute.
+界|田+人|invented|Rice field of people: world.
+画|一+田|invented|One over a rice field: picture.
+集|鳥+木|invented|Birds on a tree: gather.
+別|口+力+刂|etymological|Mouth, power, knife: separate.
+物|牛+刀|invented|Cow marked by a knife: thing.
+品|口+口+口|etymological|Three mouths of goods: goods.
+死|夕+人|invented|Evening over a person: death.
+特|牛+土|invented|Cow on the earth: special.
+台|厶+口|etymological|Private under a mouth: stand.
+始|女+台|phonetic|Woman and pedestal sound: begin.
+終|糸+冬|phonetic|Thread of winter: end.
+真|十+目|invented|Ten eyes seeing truth: true.
+有|又+月|etymological|Again hand holding moon: have.
+料|火+十|invented|Fire measured by ten: fee.
+建|辶+手|invented|Walk of the hand building: build.
+急|刀+心|invented|Knife in the heart: urgent.
+転|車+二|invented|Cart turning two ways: turn.
+究|宀+九|invented|Roof over nine: research.
+楽|白+木|invented|White over a tree: comfort.
+起|走+又|invented|Run again to rise: wake.
+着|王+目|invented|King before the eye: arrive.
+病|广+一+人|invented|Building over one person: sick.
+質|刀+貝|invented|Knife and shell: quality.
+待|人+土|invented|Person on earth waiting: wait.
+銀|金+止|invented|Metal that stops light: silver.
+映|日+大|invented|Sun on something big: reflect.
+験|車+人|invented|Cart testing a person: test.
+英|艹+大|invented|Grass around the big: England.
+去|土+厶|etymological|Earth and private leaving: leave.
+味|口+木|invented|Mouth and tree savor: taste.
+写|宀+一|invented|Roof copying one: copy.
+歌|口+十+人|invented|Mouth, ten, person singing: song.
+悪|一+心|invented|One over the heart: bad.
+風|冂+又|invented|Enclosure moving again: wind.
+紙|糸+十|invented|Thread marked by ten: paper.
+黒|田+土|invented|Rice field earth turned dark: black.
+赤|土+火|invented|Earth in fire: red.
+青|生+月|etymological|Life under moon-blue: blue.
+館|食+宀|invented|Eat under a roof: hall.
+色|刀+口|invented|Knife cutting a mouth hue: color.
+習|白+日|invented|White under the sun: learn.
+旅|方+人|invented|Direction of people: travel.
+服|月+又|invented|Moon and again: clothes.
+肉|冂+人|invented|Enclosure of a person: meat.
+堂|口+土|invented|Mouth over earth hall: hall.
+飯|食+又|invented|Eat again: cooked rice.
+勉|力+人|invented|Power of a person: effort.
+回|冂+口|etymological|Mouth in enclosure: times.
+軽|車+土|invented|Cart over earth: light.
+低|人+下|invented|Person below: low.
+暗|日+音|etymological|Sun covered by sound: dark.
+寒|宀+二+人|invented|Roof over two people cold: cold.
+暑|日+者|phonetic|Sun and one who: hot.
+弱|二+力|invented|Two weak powers: weak.
+薬|艹+楽|etymological|Grass of comfort: medicine.
+題|日+貝|invented|Sun and shell topic: topic.
+研|口+二|invented|Mouth studied twice: polish.
+入|人+一|invented|Person under a line: enter.
+上|一+十|invented|One rising from a cross: above.
+中|口+一|invented|One line through a mouth: middle.

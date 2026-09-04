@@ -1,0 +1,2916 @@
+[
+  {
+    "char": "一",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "One stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "一",
+    "starter": true
+  },
+  {
+    "char": "七",
+    "level": "N5",
+    "parts": [
+      "一",
+      "十"
+    ],
+    "mnemonic": "One cutting across ten: seven.",
+    "mnemonic_type": "invented",
+    "starter_word": "七"
+  },
+  {
+    "char": "万",
+    "level": "N5",
+    "parts": [
+      "一",
+      "力"
+    ],
+    "mnemonic": "One powerful sweep: ten thousand.",
+    "mnemonic_type": "invented",
+    "starter_word": "万"
+  },
+  {
+    "char": "三",
+    "level": "N5",
+    "parts": [
+      "一",
+      "二"
+    ],
+    "mnemonic": "One stacked on two: three.",
+    "mnemonic_type": "etymological",
+    "starter_word": "三"
+  },
+  {
+    "char": "上",
+    "level": "N5",
+    "parts": [
+      "一",
+      "十"
+    ],
+    "mnemonic": "One rising from a cross: above.",
+    "mnemonic_type": "invented",
+    "starter_word": "上"
+  },
+  {
+    "char": "下",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Below stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "下",
+    "starter": true
+  },
+  {
+    "char": "中",
+    "level": "N5",
+    "parts": [
+      "口",
+      "一"
+    ],
+    "mnemonic": "One line through a mouth: middle.",
+    "mnemonic_type": "invented",
+    "starter_word": "中"
+  },
+  {
+    "char": "九",
+    "level": "N5",
+    "parts": [
+      "力",
+      "十"
+    ],
+    "mnemonic": "Power bent past ten: nine.",
+    "mnemonic_type": "invented",
+    "starter_word": "九"
+  },
+  {
+    "char": "二",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Two stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "二",
+    "starter": true
+  },
+  {
+    "char": "五",
+    "level": "N5",
+    "parts": [
+      "二",
+      "十"
+    ],
+    "mnemonic": "Two crossed by ten: five.",
+    "mnemonic_type": "invented",
+    "starter_word": "五"
+  },
+  {
+    "char": "人",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Person stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "人",
+    "starter": true
+  },
+  {
+    "char": "今",
+    "level": "N5",
+    "parts": [
+      "人",
+      "一"
+    ],
+    "mnemonic": "Person under a present line: now.",
+    "mnemonic_type": "invented",
+    "starter_word": "今"
+  },
+  {
+    "char": "休",
+    "level": "N5",
+    "parts": [
+      "亻",
+      "木"
+    ],
+    "mnemonic": "Person resting by a tree: rest.",
+    "mnemonic_type": "etymological",
+    "starter_word": "休"
+  },
+  {
+    "char": "会",
+    "level": "N5",
+    "parts": [
+      "人",
+      "二",
+      "厶"
+    ],
+    "mnemonic": "People under two private: meet.",
+    "mnemonic_type": "invented",
+    "starter_word": "会"
+  },
+  {
+    "char": "何",
+    "level": "N5",
+    "parts": [
+      "亻",
+      "口"
+    ],
+    "mnemonic": "Person opening the mouth: what.",
+    "mnemonic_type": "invented",
+    "starter_word": "何"
+  },
+  {
+    "char": "先",
+    "level": "N5",
+    "parts": [
+      "牛",
+      "儿"
+    ],
+    "mnemonic": "Cow leading on legs: ahead.",
+    "mnemonic_type": "etymological",
+    "starter_word": "先"
+  },
+  {
+    "char": "入",
+    "level": "N5",
+    "parts": [
+      "人",
+      "一"
+    ],
+    "mnemonic": "Person under a line: enter.",
+    "mnemonic_type": "invented",
+    "starter_word": "入"
+  },
+  {
+    "char": "八",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Eight stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "八",
+    "starter": true
+  },
+  {
+    "char": "六",
+    "level": "N5",
+    "parts": [
+      "八",
+      "一"
+    ],
+    "mnemonic": "Eight under one stroke: six.",
+    "mnemonic_type": "invented",
+    "starter_word": "六"
+  },
+  {
+    "char": "円",
+    "level": "N5",
+    "parts": [
+      "冂",
+      "一"
+    ],
+    "mnemonic": "Enclosure closed into a circle: yen.",
+    "mnemonic_type": "invented",
+    "starter_word": "円"
+  },
+  {
+    "char": "出",
+    "level": "N5",
+    "parts": [
+      "山",
+      "山"
+    ],
+    "mnemonic": "Mountains stacked: exit.",
+    "mnemonic_type": "invented",
+    "starter_word": "出"
+  },
+  {
+    "char": "分",
+    "level": "N5",
+    "parts": [
+      "八",
+      "刀"
+    ],
+    "mnemonic": "Eight cut by a knife: divide.",
+    "mnemonic_type": "etymological",
+    "starter_word": "分"
+  },
+  {
+    "char": "前",
+    "level": "N5",
+    "parts": [
+      "止",
+      "刂"
+    ],
+    "mnemonic": "Stop and cut ahead: before.",
+    "mnemonic_type": "invented",
+    "starter_word": "前"
+  },
+  {
+    "char": "北",
+    "level": "N5",
+    "parts": [
+      "人",
+      "人"
+    ],
+    "mnemonic": "People back to back: north.",
+    "mnemonic_type": "invented",
+    "starter_word": "北"
+  },
+  {
+    "char": "十",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Ten stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "十",
+    "starter": true
+  },
+  {
+    "char": "千",
+    "level": "N5",
+    "parts": [
+      "人",
+      "十"
+    ],
+    "mnemonic": "Person mark on ten: thousand.",
+    "mnemonic_type": "etymological",
+    "starter_word": "千"
+  },
+  {
+    "char": "午",
+    "level": "N5",
+    "parts": [
+      "十",
+      "人"
+    ],
+    "mnemonic": "Ten and a person mark: noon.",
+    "mnemonic_type": "invented",
+    "starter_word": "午"
+  },
+  {
+    "char": "半",
+    "level": "N5",
+    "parts": [
+      "八",
+      "十"
+    ],
+    "mnemonic": "Eight split from ten: half.",
+    "mnemonic_type": "invented",
+    "starter_word": "半"
+  },
+  {
+    "char": "南",
+    "level": "N5",
+    "parts": [
+      "十",
+      "冂"
+    ],
+    "mnemonic": "Ten inside enclosure: south.",
+    "mnemonic_type": "invented",
+    "starter_word": "南"
+  },
+  {
+    "char": "友",
+    "level": "N5",
+    "parts": [
+      "手",
+      "又"
+    ],
+    "mnemonic": "Hand and again: friend.",
+    "mnemonic_type": "invented",
+    "starter_word": "友"
+  },
+  {
+    "char": "口",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Mouth stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "口",
+    "starter": true
+  },
+  {
+    "char": "古",
+    "level": "N5",
+    "parts": [
+      "十",
+      "口"
+    ],
+    "mnemonic": "Ten mouths of ages: old.",
+    "mnemonic_type": "etymological",
+    "starter_word": "古"
+  },
+  {
+    "char": "右",
+    "level": "N5",
+    "parts": [
+      "又",
+      "口"
+    ],
+    "mnemonic": "Again hand by the mouth: right.",
+    "mnemonic_type": "etymological",
+    "starter_word": "右"
+  },
+  {
+    "char": "名",
+    "level": "N5",
+    "parts": [
+      "夕",
+      "口"
+    ],
+    "mnemonic": "Evening mouth calling a name.",
+    "mnemonic_type": "etymological",
+    "starter_word": "名"
+  },
+  {
+    "char": "四",
+    "level": "N5",
+    "parts": [
+      "冂",
+      "八"
+    ],
+    "mnemonic": "Enclosure around eight: four.",
+    "mnemonic_type": "invented",
+    "starter_word": "四"
+  },
+  {
+    "char": "国",
+    "level": "N5",
+    "parts": [
+      "冂",
+      "王"
+    ],
+    "mnemonic": "Enclosure around a king: country.",
+    "mnemonic_type": "invented",
+    "starter_word": "国"
+  },
+  {
+    "char": "土",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Soil stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "土",
+    "starter": true
+  },
+  {
+    "char": "外",
+    "level": "N5",
+    "parts": [
+      "夕",
+      "刀"
+    ],
+    "mnemonic": "Evening knife beyond: outside.",
+    "mnemonic_type": "invented",
+    "starter_word": "外"
+  },
+  {
+    "char": "多",
+    "level": "N5",
+    "parts": [
+      "夕",
+      "夕"
+    ],
+    "mnemonic": "Evening upon evening: many.",
+    "mnemonic_type": "etymological",
+    "starter_word": "多"
+  },
+  {
+    "char": "大",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Big stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "大",
+    "starter": true
+  },
+  {
+    "char": "天",
+    "level": "N5",
+    "parts": [
+      "一",
+      "大"
+    ],
+    "mnemonic": "One over big: heaven.",
+    "mnemonic_type": "etymological",
+    "starter_word": "天"
+  },
+  {
+    "char": "女",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Woman stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "女",
+    "starter": true
+  },
+  {
+    "char": "子",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Child stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "子",
+    "starter": true
+  },
+  {
+    "char": "学",
+    "level": "N5",
+    "parts": [
+      "八",
+      "子"
+    ],
+    "mnemonic": "Open eight over a child: study.",
+    "mnemonic_type": "invented",
+    "starter_word": "学"
+  },
+  {
+    "char": "安",
+    "level": "N5",
+    "parts": [
+      "宀",
+      "女"
+    ],
+    "mnemonic": "Woman under a roof: peaceful.",
+    "mnemonic_type": "etymological",
+    "starter_word": "安"
+  },
+  {
+    "char": "小",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Small stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "小",
+    "starter": true
+  },
+  {
+    "char": "少",
+    "level": "N5",
+    "parts": [
+      "小",
+      "一"
+    ],
+    "mnemonic": "Small plus a stroke: few.",
+    "mnemonic_type": "invented",
+    "starter_word": "少"
+  },
+  {
+    "char": "山",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Mountain stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "山",
+    "starter": true
+  },
+  {
+    "char": "川",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "River stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "川",
+    "starter": true
+  },
+  {
+    "char": "左",
+    "level": "N5",
+    "parts": [
+      "工",
+      "又"
+    ],
+    "mnemonic": "Work hand on the left: left.",
+    "mnemonic_type": "etymological",
+    "starter_word": "左"
+  },
+  {
+    "char": "年",
+    "level": "N5",
+    "parts": [
+      "人",
+      "十"
+    ],
+    "mnemonic": "Person marking ten: year.",
+    "mnemonic_type": "invented",
+    "starter_word": "年"
+  },
+  {
+    "char": "店",
+    "level": "N5",
+    "parts": [
+      "广",
+      "口"
+    ],
+    "mnemonic": "Building with an open mouth: shop.",
+    "mnemonic_type": "invented",
+    "starter_word": "店"
+  },
+  {
+    "char": "後",
+    "level": "N5",
+    "parts": [
+      "辶",
+      "糸"
+    ],
+    "mnemonic": "Walk tangled in thread: after.",
+    "mnemonic_type": "invented",
+    "starter_word": "後"
+  },
+  {
+    "char": "手",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Hand stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "手",
+    "starter": true
+  },
+  {
+    "char": "新",
+    "level": "N5",
+    "parts": [
+      "立",
+      "木",
+      "刀"
+    ],
+    "mnemonic": "Stand, tree, knife: new.",
+    "mnemonic_type": "invented",
+    "starter_word": "新"
+  },
+  {
+    "char": "日",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Day stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "日",
+    "starter": true
+  },
+  {
+    "char": "時",
+    "level": "N5",
+    "parts": [
+      "日",
+      "土"
+    ],
+    "mnemonic": "Sun over earth marks: time.",
+    "mnemonic_type": "invented",
+    "starter_word": "時"
+  },
+  {
+    "char": "書",
+    "level": "N5",
+    "parts": [
+      "日",
+      "手"
+    ],
+    "mnemonic": "Sun and hand writing: write.",
+    "mnemonic_type": "invented",
+    "starter_word": "書"
+  },
+  {
+    "char": "月",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Month stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "月",
+    "starter": true
+  },
+  {
+    "char": "木",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Tree stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "木",
+    "starter": true
+  },
+  {
+    "char": "本",
+    "level": "N5",
+    "parts": [
+      "木",
+      "一"
+    ],
+    "mnemonic": "Tree with a root mark: origin.",
+    "mnemonic_type": "etymological",
+    "starter_word": "本"
+  },
+  {
+    "char": "来",
+    "level": "N5",
+    "parts": [
+      "木",
+      "人"
+    ],
+    "mnemonic": "Person coming to the tree: come.",
+    "mnemonic_type": "invented",
+    "starter_word": "来"
+  },
+  {
+    "char": "東",
+    "level": "N5",
+    "parts": [
+      "木",
+      "日"
+    ],
+    "mnemonic": "Sun through a tree: east.",
+    "mnemonic_type": "etymological",
+    "starter_word": "東"
+  },
+  {
+    "char": "校",
+    "level": "N5",
+    "parts": [
+      "木",
+      "父"
+    ],
+    "mnemonic": "Trees where fathers gather: school.",
+    "mnemonic_type": "invented",
+    "starter_word": "校"
+  },
+  {
+    "char": "母",
+    "level": "N5",
+    "parts": [
+      "女",
+      "一"
+    ],
+    "mnemonic": "Woman with marks: mother.",
+    "mnemonic_type": "invented",
+    "starter_word": "母"
+  },
+  {
+    "char": "毎",
+    "level": "N5",
+    "parts": [
+      "人",
+      "母"
+    ],
+    "mnemonic": "Person plus mother: every.",
+    "mnemonic_type": "etymological",
+    "starter_word": "毎日新聞"
+  },
+  {
+    "char": "気",
+    "level": "N5",
+    "parts": [
+      "八",
+      "一",
+      "火"
+    ],
+    "mnemonic": "Rising steam of fire: spirit.",
+    "mnemonic_type": "invented",
+    "starter_word": "気"
+  },
+  {
+    "char": "水",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Water stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "水",
+    "starter": true
+  },
+  {
+    "char": "火",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Fire stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "火",
+    "starter": true
+  },
+  {
+    "char": "父",
+    "level": "N5",
+    "parts": [
+      "八",
+      "又"
+    ],
+    "mnemonic": "Eight and a hand staff: father.",
+    "mnemonic_type": "invented",
+    "starter_word": "父"
+  },
+  {
+    "char": "生",
+    "level": "N5",
+    "parts": [
+      "土",
+      "一"
+    ],
+    "mnemonic": "Earth sprouting one: life.",
+    "mnemonic_type": "invented",
+    "starter_word": "生"
+  },
+  {
+    "char": "男",
+    "level": "N5",
+    "parts": [
+      "田",
+      "力"
+    ],
+    "mnemonic": "Rice field and power: man.",
+    "mnemonic_type": "etymological",
+    "starter_word": "男"
+  },
+  {
+    "char": "白",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "White stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "白",
+    "starter": true
+  },
+  {
+    "char": "百",
+    "level": "N5",
+    "parts": [
+      "一",
+      "白"
+    ],
+    "mnemonic": "One and white: hundred.",
+    "mnemonic_type": "etymological",
+    "starter_word": "百"
+  },
+  {
+    "char": "目",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Eye stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "目",
+    "starter": true
+  },
+  {
+    "char": "社",
+    "level": "N5",
+    "parts": [
+      "口",
+      "土"
+    ],
+    "mnemonic": "Mouth of the earth shrine: shrine.",
+    "mnemonic_type": "invented",
+    "starter_word": "社"
+  },
+  {
+    "char": "空",
+    "level": "N5",
+    "parts": [
+      "宀",
+      "八",
+      "工"
+    ],
+    "mnemonic": "Roof, open eight, work: sky.",
+    "mnemonic_type": "invented",
+    "starter_word": "空"
+  },
+  {
+    "char": "立",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Stand stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "立つ",
+    "starter": true
+  },
+  {
+    "char": "耳",
+    "level": "N5",
+    "parts": [
+      "一",
+      "二"
+    ],
+    "mnemonic": "One and two strokes: ear.",
+    "mnemonic_type": "invented",
+    "starter_word": "耳"
+  },
+  {
+    "char": "聞",
+    "level": "N5",
+    "parts": [
+      "門",
+      "耳"
+    ],
+    "mnemonic": "Ear at the gate: hear.",
+    "mnemonic_type": "etymological",
+    "starter_word": "聞"
+  },
+  {
+    "char": "花",
+    "level": "N5",
+    "parts": [
+      "艹",
+      "人"
+    ],
+    "mnemonic": "Grass changing like a person: flower.",
+    "mnemonic_type": "invented",
+    "starter_word": "花"
+  },
+  {
+    "char": "行",
+    "level": "N5",
+    "parts": [
+      "人",
+      "十"
+    ],
+    "mnemonic": "Person stepping ten: go.",
+    "mnemonic_type": "invented",
+    "starter_word": "行"
+  },
+  {
+    "char": "西",
+    "level": "N5",
+    "parts": [
+      "一",
+      "口"
+    ],
+    "mnemonic": "One lid over a mouth: west.",
+    "mnemonic_type": "invented",
+    "starter_word": "西"
+  },
+  {
+    "char": "見",
+    "level": "N5",
+    "parts": [
+      "目",
+      "儿"
+    ],
+    "mnemonic": "Eye on legs: see.",
+    "mnemonic_type": "etymological",
+    "starter_word": "見"
+  },
+  {
+    "char": "言",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Say stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "言",
+    "starter": true
+  },
+  {
+    "char": "話",
+    "level": "N5",
+    "parts": [
+      "言",
+      "口"
+    ],
+    "mnemonic": "Speech from the mouth: talk.",
+    "mnemonic_type": "invented",
+    "starter_word": "話"
+  },
+  {
+    "char": "語",
+    "level": "N5",
+    "parts": [
+      "言",
+      "五",
+      "口"
+    ],
+    "mnemonic": "Speech, five, and mouth: language.",
+    "mnemonic_type": "etymological",
+    "starter_word": "語"
+  },
+  {
+    "char": "読",
+    "level": "N5",
+    "parts": [
+      "言",
+      "売"
+    ],
+    "mnemonic": "Speech for what is sold: read.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "読"
+  },
+  {
+    "char": "買",
+    "level": "N5",
+    "parts": [
+      "冂",
+      "貝"
+    ],
+    "mnemonic": "Enclosure over shell: buy.",
+    "mnemonic_type": "invented",
+    "starter_word": "買"
+  },
+  {
+    "char": "足",
+    "level": "N5",
+    "parts": [
+      "口",
+      "止"
+    ],
+    "mnemonic": "Mouth over stop: foot.",
+    "mnemonic_type": "etymological",
+    "starter_word": "足"
+  },
+  {
+    "char": "車",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Car stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "車",
+    "starter": true
+  },
+  {
+    "char": "週",
+    "level": "N5",
+    "parts": [
+      "⻌",
+      "口",
+      "土"
+    ],
+    "mnemonic": "Walk around earth and mouth: week.",
+    "mnemonic_type": "invented",
+    "starter_word": "週"
+  },
+  {
+    "char": "道",
+    "level": "N5",
+    "parts": [
+      "⻌",
+      "自"
+    ],
+    "mnemonic": "Walk with self ahead: road.",
+    "mnemonic_type": "invented",
+    "starter_word": "道"
+  },
+  {
+    "char": "金",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Money stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "金",
+    "starter": true
+  },
+  {
+    "char": "長",
+    "level": "N5",
+    "parts": [
+      "一",
+      "人"
+    ],
+    "mnemonic": "One leading a person: long.",
+    "mnemonic_type": "invented",
+    "starter_word": "長"
+  },
+  {
+    "char": "間",
+    "level": "N5",
+    "parts": [
+      "門",
+      "日"
+    ],
+    "mnemonic": "Sun through the gate: interval.",
+    "mnemonic_type": "etymological",
+    "starter_word": "間"
+  },
+  {
+    "char": "雨",
+    "level": "N5",
+    "parts": [],
+    "mnemonic": "Rain stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "雨",
+    "starter": true
+  },
+  {
+    "char": "電",
+    "level": "N5",
+    "parts": [
+      "雨",
+      "田"
+    ],
+    "mnemonic": "Rain over the rice field: electricity.",
+    "mnemonic_type": "invented",
+    "starter_word": "電"
+  },
+  {
+    "char": "食",
+    "level": "N5",
+    "parts": [
+      "人",
+      "一",
+      "口"
+    ],
+    "mnemonic": "Person with one mouth: eat.",
+    "mnemonic_type": "invented",
+    "starter_word": "食"
+  },
+  {
+    "char": "飲",
+    "level": "N5",
+    "parts": [
+      "食",
+      "人"
+    ],
+    "mnemonic": "Eat with a person: drink.",
+    "mnemonic_type": "invented",
+    "starter_word": "飲"
+  },
+  {
+    "char": "駅",
+    "level": "N5",
+    "parts": [
+      "車",
+      "足"
+    ],
+    "mnemonic": "Cart and foot: station.",
+    "mnemonic_type": "invented",
+    "starter_word": "駅"
+  },
+  {
+    "char": "高",
+    "level": "N5",
+    "parts": [
+      "口",
+      "冂",
+      "口"
+    ],
+    "mnemonic": "Mouths stacked high: tall.",
+    "mnemonic_type": "etymological",
+    "starter_word": "高"
+  },
+  {
+    "char": "魚",
+    "level": "N5",
+    "parts": [
+      "刀",
+      "田",
+      "火"
+    ],
+    "mnemonic": "Knife, field, and fire: fish.",
+    "mnemonic_type": "invented",
+    "starter_word": "魚"
+  },
+  {
+    "char": "同",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "一",
+      "口"
+    ],
+    "mnemonic": "Enclosure, one, mouth: same.",
+    "mnemonic_type": "etymological",
+    "starter_word": "同時"
+  },
+  {
+    "char": "事",
+    "level": "N4",
+    "parts": [
+      "一",
+      "口",
+      "手"
+    ],
+    "mnemonic": "One mouth and hand: matter.",
+    "mnemonic_type": "invented",
+    "starter_word": "事"
+  },
+  {
+    "char": "自",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Oneself stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "自動車",
+    "starter": true
+  },
+  {
+    "char": "発",
+    "level": "N4",
+    "parts": [
+      "二",
+      "儿"
+    ],
+    "mnemonic": "Two on legs departing: depart.",
+    "mnemonic_type": "invented",
+    "starter_word": "出発"
+  },
+  {
+    "char": "者",
+    "level": "N4",
+    "parts": [
+      "土",
+      "日"
+    ],
+    "mnemonic": "Earth and sun mark a person: one who.",
+    "mnemonic_type": "invented",
+    "starter_word": "医者"
+  },
+  {
+    "char": "地",
+    "level": "N4",
+    "parts": [
+      "土",
+      "川"
+    ],
+    "mnemonic": "Earth by the river: ground.",
+    "mnemonic_type": "invented",
+    "starter_word": "地図"
+  },
+  {
+    "char": "業",
+    "level": "N4",
+    "parts": [
+      "木",
+      "王"
+    ],
+    "mnemonic": "Tree under a king: business.",
+    "mnemonic_type": "invented",
+    "starter_word": "業人"
+  },
+  {
+    "char": "方",
+    "level": "N4",
+    "parts": [
+      "一",
+      "刀"
+    ],
+    "mnemonic": "One and a knife edge: direction.",
+    "mnemonic_type": "invented",
+    "starter_word": "方言"
+  },
+  {
+    "char": "場",
+    "level": "N4",
+    "parts": [
+      "土",
+      "日"
+    ],
+    "mnemonic": "Earth in the sun: place.",
+    "mnemonic_type": "invented",
+    "starter_word": "場"
+  },
+  {
+    "char": "員",
+    "level": "N4",
+    "parts": [
+      "口",
+      "貝"
+    ],
+    "mnemonic": "Mouth and shell: member.",
+    "mnemonic_type": "etymological",
+    "starter_word": "社員"
+  },
+  {
+    "char": "開",
+    "level": "N4",
+    "parts": [
+      "門",
+      "二"
+    ],
+    "mnemonic": "Gate with two bars: open.",
+    "mnemonic_type": "invented",
+    "starter_word": "開ける"
+  },
+  {
+    "char": "力",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Power stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "力",
+    "starter": true
+  },
+  {
+    "char": "問",
+    "level": "N4",
+    "parts": [
+      "門",
+      "口"
+    ],
+    "mnemonic": "Mouth at the gate: ask.",
+    "mnemonic_type": "etymological",
+    "starter_word": "問題"
+  },
+  {
+    "char": "代",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "十"
+    ],
+    "mnemonic": "Person marked for ten: substitute.",
+    "mnemonic_type": "invented",
+    "starter_word": "青春時代"
+  },
+  {
+    "char": "明",
+    "level": "N4",
+    "parts": [
+      "日",
+      "月"
+    ],
+    "mnemonic": "Sun and moon together: bright.",
+    "mnemonic_type": "etymological",
+    "starter_word": "明日"
+  },
+  {
+    "char": "動",
+    "level": "N4",
+    "parts": [
+      "重",
+      "力"
+    ],
+    "mnemonic": "Heavy with power: move.",
+    "mnemonic_type": "etymological",
+    "starter_word": "運動会"
+  },
+  {
+    "char": "京",
+    "level": "N4",
+    "parts": [
+      "一",
+      "口",
+      "小"
+    ],
+    "mnemonic": "Lid, mouth, small base: capital.",
+    "mnemonic_type": "invented",
+    "starter_word": "京"
+  },
+  {
+    "char": "通",
+    "level": "N4",
+    "parts": [
+      "⻌",
+      "月"
+    ],
+    "mnemonic": "Walk through the moon gate: pass.",
+    "mnemonic_type": "invented",
+    "starter_word": "通る"
+  },
+  {
+    "char": "理",
+    "level": "N4",
+    "parts": [
+      "王",
+      "田"
+    ],
+    "mnemonic": "King over the rice field: reason.",
+    "mnemonic_type": "invented",
+    "starter_word": "料理"
+  },
+  {
+    "char": "体",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "本"
+    ],
+    "mnemonic": "Person plus root: body.",
+    "mnemonic_type": "etymological",
+    "starter_word": "体"
+  },
+  {
+    "char": "田",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Rice field stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "水田",
+    "starter": true
+  },
+  {
+    "char": "主",
+    "level": "N4",
+    "parts": [
+      "一",
+      "王"
+    ],
+    "mnemonic": "One over the king: main.",
+    "mnemonic_type": "etymological",
+    "starter_word": "主人"
+  },
+  {
+    "char": "題",
+    "level": "N4",
+    "parts": [
+      "日",
+      "貝"
+    ],
+    "mnemonic": "Sun and shell topic: topic.",
+    "mnemonic_type": "invented",
+    "starter_word": "題"
+  },
+  {
+    "char": "意",
+    "level": "N4",
+    "parts": [
+      "音",
+      "心"
+    ],
+    "mnemonic": "Sound in the heart: idea.",
+    "mnemonic_type": "etymological",
+    "starter_word": "意見"
+  },
+  {
+    "char": "不",
+    "level": "N4",
+    "parts": [
+      "一",
+      "小"
+    ],
+    "mnemonic": "One over small: not.",
+    "mnemonic_type": "invented",
+    "starter_word": "勉強不足"
+  },
+  {
+    "char": "作",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "十",
+      "刀"
+    ],
+    "mnemonic": "Person cutting with tools: make.",
+    "mnemonic_type": "invented",
+    "starter_word": "作る"
+  },
+  {
+    "char": "用",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "十"
+    ],
+    "mnemonic": "Enclosure with a cross: use.",
+    "mnemonic_type": "invented",
+    "starter_word": "用"
+  },
+  {
+    "char": "度",
+    "level": "N4",
+    "parts": [
+      "广",
+      "又"
+    ],
+    "mnemonic": "Building measured again: degree.",
+    "mnemonic_type": "invented",
+    "starter_word": "一度"
+  },
+  {
+    "char": "強",
+    "level": "N4",
+    "parts": [
+      "力",
+      "口"
+    ],
+    "mnemonic": "Power from the mouth: strong.",
+    "mnemonic_type": "invented",
+    "starter_word": "勉強不足"
+  },
+  {
+    "char": "公",
+    "level": "N4",
+    "parts": [
+      "八",
+      "厶"
+    ],
+    "mnemonic": "Eight opening the private: public.",
+    "mnemonic_type": "etymological",
+    "starter_word": "公"
+  },
+  {
+    "char": "持",
+    "level": "N4",
+    "parts": [
+      "扌",
+      "土"
+    ],
+    "mnemonic": "Hand on the earth: hold.",
+    "mnemonic_type": "invented",
+    "starter_word": "持つ"
+  },
+  {
+    "char": "野",
+    "level": "N4",
+    "parts": [
+      "田",
+      "又"
+    ],
+    "mnemonic": "Rice field stretched again: field.",
+    "mnemonic_type": "invented",
+    "starter_word": "野"
+  },
+  {
+    "char": "以",
+    "level": "N4",
+    "parts": [
+      "人",
+      "止"
+    ],
+    "mnemonic": "Person stopping to use: by means of.",
+    "mnemonic_type": "invented",
+    "starter_word": "以外"
+  },
+  {
+    "char": "思",
+    "level": "N4",
+    "parts": [
+      "田",
+      "心"
+    ],
+    "mnemonic": "Field over the heart: think.",
+    "mnemonic_type": "etymological",
+    "starter_word": "思う"
+  },
+  {
+    "char": "家",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "犬"
+    ],
+    "mnemonic": "Roof over a dog: house.",
+    "mnemonic_type": "invented",
+    "starter_word": "家"
+  },
+  {
+    "char": "世",
+    "level": "N4",
+    "parts": [
+      "十",
+      "一"
+    ],
+    "mnemonic": "Ten across one age: world.",
+    "mnemonic_type": "invented",
+    "starter_word": "世人"
+  },
+  {
+    "char": "正",
+    "level": "N4",
+    "parts": [
+      "一",
+      "止"
+    ],
+    "mnemonic": "One and stop: correct.",
+    "mnemonic_type": "etymological",
+    "starter_word": "正午"
+  },
+  {
+    "char": "院",
+    "level": "N4",
+    "parts": [
+      "阝",
+      "元"
+    ],
+    "mnemonic": "Hill by the origin: institute.",
+    "mnemonic_type": "invented",
+    "starter_word": "病院"
+  },
+  {
+    "char": "心",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Heart stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "心",
+    "starter": true
+  },
+  {
+    "char": "界",
+    "level": "N4",
+    "parts": [
+      "田",
+      "人"
+    ],
+    "mnemonic": "Rice field of people: world.",
+    "mnemonic_type": "invented",
+    "starter_word": "界人"
+  },
+  {
+    "char": "教",
+    "level": "N4",
+    "parts": [
+      "子",
+      "攵"
+    ],
+    "mnemonic": "Child struck to learn: teach.",
+    "mnemonic_type": "invented",
+    "starter_word": "教える"
+  },
+  {
+    "char": "文",
+    "level": "N4",
+    "parts": [
+      "一",
+      "十"
+    ],
+    "mnemonic": "Crossed lines of writing: writing.",
+    "mnemonic_type": "invented",
+    "starter_word": "文"
+  },
+  {
+    "char": "元",
+    "level": "N4",
+    "parts": [
+      "二",
+      "儿"
+    ],
+    "mnemonic": "Two on legs: origin.",
+    "mnemonic_type": "etymological",
+    "starter_word": "元気"
+  },
+  {
+    "char": "重",
+    "level": "N4",
+    "parts": [
+      "千",
+      "田"
+    ],
+    "mnemonic": "Thousand rice fields: heavy.",
+    "mnemonic_type": "invented",
+    "starter_word": "重い"
+  },
+  {
+    "char": "近",
+    "level": "N4",
+    "parts": [
+      "⻌",
+      "刀"
+    ],
+    "mnemonic": "Walk a knife-cut away: near.",
+    "mnemonic_type": "invented",
+    "starter_word": "近い"
+  },
+  {
+    "char": "考",
+    "level": "N4",
+    "parts": [
+      "土",
+      "又"
+    ],
+    "mnemonic": "Earth turned again in thought: consider.",
+    "mnemonic_type": "invented",
+    "starter_word": "考える"
+  },
+  {
+    "char": "画",
+    "level": "N4",
+    "parts": [
+      "一",
+      "田"
+    ],
+    "mnemonic": "One over a rice field: picture.",
+    "mnemonic_type": "invented",
+    "starter_word": "映画館"
+  },
+  {
+    "char": "海",
+    "level": "N4",
+    "parts": [
+      "氵",
+      "毎"
+    ],
+    "mnemonic": "Water with every: sea.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "海"
+  },
+  {
+    "char": "売",
+    "level": "N4",
+    "parts": [
+      "十",
+      "儿"
+    ],
+    "mnemonic": "Ten on legs offering goods: sell.",
+    "mnemonic_type": "invented",
+    "starter_word": "売る"
+  },
+  {
+    "char": "知",
+    "level": "N4",
+    "parts": [
+      "人",
+      "口"
+    ],
+    "mnemonic": "Person and mouth knowing: know.",
+    "mnemonic_type": "invented",
+    "starter_word": "知る"
+  },
+  {
+    "char": "集",
+    "level": "N4",
+    "parts": [
+      "鳥",
+      "木"
+    ],
+    "mnemonic": "Birds on a tree: gather.",
+    "mnemonic_type": "invented",
+    "starter_word": "集中"
+  },
+  {
+    "char": "別",
+    "level": "N4",
+    "parts": [
+      "口",
+      "力",
+      "刂"
+    ],
+    "mnemonic": "Mouth, power, knife: separate.",
+    "mnemonic_type": "etymological",
+    "starter_word": "特別"
+  },
+  {
+    "char": "物",
+    "level": "N4",
+    "parts": [
+      "牛",
+      "刀"
+    ],
+    "mnemonic": "Cow marked by a knife: thing.",
+    "mnemonic_type": "invented",
+    "starter_word": "物"
+  },
+  {
+    "char": "使",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "口",
+      "十"
+    ],
+    "mnemonic": "Person speaking orders: use.",
+    "mnemonic_type": "invented",
+    "starter_word": "使う"
+  },
+  {
+    "char": "品",
+    "level": "N4",
+    "parts": [
+      "口",
+      "口",
+      "口"
+    ],
+    "mnemonic": "Three mouths of goods: goods.",
+    "mnemonic_type": "etymological",
+    "starter_word": "作品"
+  },
+  {
+    "char": "計",
+    "level": "N4",
+    "parts": [
+      "言",
+      "十"
+    ],
+    "mnemonic": "Speech counted by ten: measure.",
+    "mnemonic_type": "etymological",
+    "starter_word": "時計"
+  },
+  {
+    "char": "死",
+    "level": "N4",
+    "parts": [
+      "夕",
+      "人"
+    ],
+    "mnemonic": "Evening over a person: death.",
+    "mnemonic_type": "invented",
+    "starter_word": "死ぬ"
+  },
+  {
+    "char": "特",
+    "level": "N4",
+    "parts": [
+      "牛",
+      "土"
+    ],
+    "mnemonic": "Cow on the earth: special.",
+    "mnemonic_type": "invented",
+    "starter_word": "特別"
+  },
+  {
+    "char": "私",
+    "level": "N4",
+    "parts": [
+      "木",
+      "厶"
+    ],
+    "mnemonic": "Tree kept private: I.",
+    "mnemonic_type": "invented",
+    "starter_word": "私"
+  },
+  {
+    "char": "始",
+    "level": "N4",
+    "parts": [
+      "女",
+      "台"
+    ],
+    "mnemonic": "Woman and pedestal sound: begin.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "始める"
+  },
+  {
+    "char": "朝",
+    "level": "N4",
+    "parts": [
+      "十",
+      "日",
+      "月"
+    ],
+    "mnemonic": "Ten suns and moon: morning.",
+    "mnemonic_type": "invented",
+    "starter_word": "朝"
+  },
+  {
+    "char": "運",
+    "level": "N4",
+    "parts": [
+      "⻌",
+      "車"
+    ],
+    "mnemonic": "Walk with a cart: carry.",
+    "mnemonic_type": "invented",
+    "starter_word": "運転手"
+  },
+  {
+    "char": "終",
+    "level": "N4",
+    "parts": [
+      "糸",
+      "冬"
+    ],
+    "mnemonic": "Thread of winter: end.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "終わる"
+  },
+  {
+    "char": "台",
+    "level": "N4",
+    "parts": [
+      "厶",
+      "口"
+    ],
+    "mnemonic": "Private under a mouth: stand.",
+    "mnemonic_type": "etymological",
+    "starter_word": "台人"
+  },
+  {
+    "char": "広",
+    "level": "N4",
+    "parts": [
+      "广",
+      "厶"
+    ],
+    "mnemonic": "Building opened private: wide.",
+    "mnemonic_type": "etymological",
+    "starter_word": "広い"
+  },
+  {
+    "char": "住",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "主"
+    ],
+    "mnemonic": "Person by the main: reside.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "住む"
+  },
+  {
+    "char": "真",
+    "level": "N4",
+    "parts": [
+      "十",
+      "目"
+    ],
+    "mnemonic": "Ten eyes seeing truth: true.",
+    "mnemonic_type": "invented",
+    "starter_word": "真夜中"
+  },
+  {
+    "char": "有",
+    "level": "N4",
+    "parts": [
+      "又",
+      "月"
+    ],
+    "mnemonic": "Again hand holding moon: have.",
+    "mnemonic_type": "etymological",
+    "starter_word": "有名"
+  },
+  {
+    "char": "町",
+    "level": "N4",
+    "parts": [
+      "田",
+      "十"
+    ],
+    "mnemonic": "Rice field by a street mark: town.",
+    "mnemonic_type": "invented",
+    "starter_word": "町"
+  },
+  {
+    "char": "料",
+    "level": "N4",
+    "parts": [
+      "火",
+      "十"
+    ],
+    "mnemonic": "Fire measured by ten: fee.",
+    "mnemonic_type": "invented",
+    "starter_word": "料理"
+  },
+  {
+    "char": "工",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Craft stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "工業",
+    "starter": true
+  },
+  {
+    "char": "建",
+    "level": "N4",
+    "parts": [
+      "辶",
+      "手"
+    ],
+    "mnemonic": "Walk of the hand building: build.",
+    "mnemonic_type": "invented",
+    "starter_word": "建人"
+  },
+  {
+    "char": "急",
+    "level": "N4",
+    "parts": [
+      "刀",
+      "心"
+    ],
+    "mnemonic": "Knife in the heart: urgent.",
+    "mnemonic_type": "invented",
+    "starter_word": "急ぐ"
+  },
+  {
+    "char": "止",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Stop stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "止める",
+    "starter": true
+  },
+  {
+    "char": "送",
+    "level": "N4",
+    "parts": [
+      "⻌",
+      "天"
+    ],
+    "mnemonic": "Walk something skyward: send.",
+    "mnemonic_type": "invented",
+    "starter_word": "送る"
+  },
+  {
+    "char": "切",
+    "level": "N4",
+    "parts": [
+      "七",
+      "刀"
+    ],
+    "mnemonic": "Seven under a knife: cut.",
+    "mnemonic_type": "etymological",
+    "starter_word": "切る"
+  },
+  {
+    "char": "転",
+    "level": "N4",
+    "parts": [
+      "車",
+      "二"
+    ],
+    "mnemonic": "Cart turning two ways: turn.",
+    "mnemonic_type": "invented",
+    "starter_word": "運転手"
+  },
+  {
+    "char": "研",
+    "level": "N4",
+    "parts": [
+      "口",
+      "二"
+    ],
+    "mnemonic": "Mouth studied twice: polish.",
+    "mnemonic_type": "invented",
+    "starter_word": "研究室"
+  },
+  {
+    "char": "究",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "九"
+    ],
+    "mnemonic": "Roof over nine: research.",
+    "mnemonic_type": "invented",
+    "starter_word": "研究室"
+  },
+  {
+    "char": "楽",
+    "level": "N4",
+    "parts": [
+      "白",
+      "木"
+    ],
+    "mnemonic": "White over a tree: comfort.",
+    "mnemonic_type": "invented",
+    "starter_word": "音楽会"
+  },
+  {
+    "char": "起",
+    "level": "N4",
+    "parts": [
+      "走",
+      "又"
+    ],
+    "mnemonic": "Run again to rise: wake.",
+    "mnemonic_type": "invented",
+    "starter_word": "起きる"
+  },
+  {
+    "char": "着",
+    "level": "N4",
+    "parts": [
+      "王",
+      "目"
+    ],
+    "mnemonic": "King before the eye: arrive.",
+    "mnemonic_type": "invented",
+    "starter_word": "着る"
+  },
+  {
+    "char": "病",
+    "level": "N4",
+    "parts": [
+      "广",
+      "一",
+      "人"
+    ],
+    "mnemonic": "Building over one person: sick.",
+    "mnemonic_type": "invented",
+    "starter_word": "病気"
+  },
+  {
+    "char": "質",
+    "level": "N4",
+    "parts": [
+      "刀",
+      "貝"
+    ],
+    "mnemonic": "Knife and shell: quality.",
+    "mnemonic_type": "invented",
+    "starter_word": "質問"
+  },
+  {
+    "char": "待",
+    "level": "N4",
+    "parts": [
+      "人",
+      "土"
+    ],
+    "mnemonic": "Person on earth waiting: wait.",
+    "mnemonic_type": "invented",
+    "starter_word": "待つ"
+  },
+  {
+    "char": "試",
+    "level": "N4",
+    "parts": [
+      "言",
+      "工"
+    ],
+    "mnemonic": "Speech of a craft test: test.",
+    "mnemonic_type": "invented",
+    "starter_word": "試食"
+  },
+  {
+    "char": "族",
+    "level": "N4",
+    "parts": [
+      "方",
+      "人"
+    ],
+    "mnemonic": "Direction of people: tribe.",
+    "mnemonic_type": "invented",
+    "starter_word": "家族"
+  },
+  {
+    "char": "銀",
+    "level": "N4",
+    "parts": [
+      "金",
+      "止"
+    ],
+    "mnemonic": "Metal that stops light: silver.",
+    "mnemonic_type": "invented",
+    "starter_word": "銀"
+  },
+  {
+    "char": "早",
+    "level": "N4",
+    "parts": [
+      "日",
+      "十"
+    ],
+    "mnemonic": "Sun at ten: early.",
+    "mnemonic_type": "etymological",
+    "starter_word": "早い"
+  },
+  {
+    "char": "映",
+    "level": "N4",
+    "parts": [
+      "日",
+      "大"
+    ],
+    "mnemonic": "Sun on something big: reflect.",
+    "mnemonic_type": "invented",
+    "starter_word": "映画館"
+  },
+  {
+    "char": "親",
+    "level": "N4",
+    "parts": [
+      "立",
+      "木",
+      "見"
+    ],
+    "mnemonic": "Stand to see the tree: parent.",
+    "mnemonic_type": "invented",
+    "starter_word": "親"
+  },
+  {
+    "char": "験",
+    "level": "N4",
+    "parts": [
+      "車",
+      "人"
+    ],
+    "mnemonic": "Cart testing a person: test.",
+    "mnemonic_type": "invented",
+    "starter_word": "試験"
+  },
+  {
+    "char": "英",
+    "level": "N4",
+    "parts": [
+      "艹",
+      "大"
+    ],
+    "mnemonic": "Grass around the big: England.",
+    "mnemonic_type": "invented",
+    "starter_word": "英会話"
+  },
+  {
+    "char": "医",
+    "level": "N4",
+    "parts": [
+      "工",
+      "大"
+    ],
+    "mnemonic": "Work of the big healer: doctor.",
+    "mnemonic_type": "invented",
+    "starter_word": "医者"
+  },
+  {
+    "char": "仕",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "土"
+    ],
+    "mnemonic": "Person on the earth working: serve.",
+    "mnemonic_type": "invented",
+    "starter_word": "仕事"
+  },
+  {
+    "char": "去",
+    "level": "N4",
+    "parts": [
+      "土",
+      "厶"
+    ],
+    "mnemonic": "Earth and private leaving: leave.",
+    "mnemonic_type": "etymological",
+    "starter_word": "去年"
+  },
+  {
+    "char": "味",
+    "level": "N4",
+    "parts": [
+      "口",
+      "木"
+    ],
+    "mnemonic": "Mouth and tree savor: taste.",
+    "mnemonic_type": "invented",
+    "starter_word": "味"
+  },
+  {
+    "char": "写",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "一"
+    ],
+    "mnemonic": "Roof copying one: copy.",
+    "mnemonic_type": "invented",
+    "starter_word": "写真集"
+  },
+  {
+    "char": "字",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "子"
+    ],
+    "mnemonic": "Child under a roof: character.",
+    "mnemonic_type": "etymological",
+    "starter_word": "字"
+  },
+  {
+    "char": "答",
+    "level": "N4",
+    "parts": [
+      "合",
+      "一"
+    ],
+    "mnemonic": "Join under one cover: answer.",
+    "mnemonic_type": "invented",
+    "starter_word": "答"
+  },
+  {
+    "char": "夜",
+    "level": "N4",
+    "parts": [
+      "人",
+      "夕"
+    ],
+    "mnemonic": "Person in the evening: night.",
+    "mnemonic_type": "invented",
+    "starter_word": "夜"
+  },
+  {
+    "char": "音",
+    "level": "N4",
+    "parts": [
+      "立",
+      "日"
+    ],
+    "mnemonic": "Stand under the sun: sound.",
+    "mnemonic_type": "etymological",
+    "starter_word": "音"
+  },
+  {
+    "char": "注",
+    "level": "N4",
+    "parts": [
+      "氵",
+      "主"
+    ],
+    "mnemonic": "Water toward the main: pour.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "注目"
+  },
+  {
+    "char": "帰",
+    "level": "N4",
+    "parts": [
+      "刀",
+      "止"
+    ],
+    "mnemonic": "Knife stop turning home: return.",
+    "mnemonic_type": "invented",
+    "starter_word": "帰る"
+  },
+  {
+    "char": "歌",
+    "level": "N4",
+    "parts": [
+      "口",
+      "十",
+      "人"
+    ],
+    "mnemonic": "Mouth, ten, person singing: song.",
+    "mnemonic_type": "invented",
+    "starter_word": "歌"
+  },
+  {
+    "char": "悪",
+    "level": "N4",
+    "parts": [
+      "一",
+      "心"
+    ],
+    "mnemonic": "One over the heart: bad.",
+    "mnemonic_type": "invented",
+    "starter_word": "悪"
+  },
+  {
+    "char": "図",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "十"
+    ],
+    "mnemonic": "Enclosure with marks: diagram.",
+    "mnemonic_type": "invented",
+    "starter_word": "図"
+  },
+  {
+    "char": "室",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "一",
+      "土"
+    ],
+    "mnemonic": "Roof reaching the earth: room.",
+    "mnemonic_type": "invented",
+    "starter_word": "室"
+  },
+  {
+    "char": "歩",
+    "level": "N4",
+    "parts": [
+      "止",
+      "少"
+    ],
+    "mnemonic": "Stop then a little: walk.",
+    "mnemonic_type": "etymological",
+    "starter_word": "歩く"
+  },
+  {
+    "char": "風",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "又"
+    ],
+    "mnemonic": "Enclosure moving again: wind.",
+    "mnemonic_type": "invented",
+    "starter_word": "風"
+  },
+  {
+    "char": "紙",
+    "level": "N4",
+    "parts": [
+      "糸",
+      "十"
+    ],
+    "mnemonic": "Thread marked by ten: paper.",
+    "mnemonic_type": "invented",
+    "starter_word": "紙"
+  },
+  {
+    "char": "黒",
+    "level": "N4",
+    "parts": [
+      "田",
+      "土"
+    ],
+    "mnemonic": "Rice field earth turned dark: black.",
+    "mnemonic_type": "invented",
+    "starter_word": "黒字"
+  },
+  {
+    "char": "春",
+    "level": "N4",
+    "parts": [
+      "三",
+      "人",
+      "日"
+    ],
+    "mnemonic": "Three people under sun: spring.",
+    "mnemonic_type": "etymological",
+    "starter_word": "春"
+  },
+  {
+    "char": "赤",
+    "level": "N4",
+    "parts": [
+      "土",
+      "火"
+    ],
+    "mnemonic": "Earth in fire: red.",
+    "mnemonic_type": "invented",
+    "starter_word": "赤飯"
+  },
+  {
+    "char": "青",
+    "level": "N4",
+    "parts": [
+      "生",
+      "月"
+    ],
+    "mnemonic": "Life under moon-blue: blue.",
+    "mnemonic_type": "etymological",
+    "starter_word": "青春時代"
+  },
+  {
+    "char": "館",
+    "level": "N4",
+    "parts": [
+      "食",
+      "宀"
+    ],
+    "mnemonic": "Eat under a roof: hall.",
+    "mnemonic_type": "invented",
+    "starter_word": "映画館"
+  },
+  {
+    "char": "屋",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "土"
+    ],
+    "mnemonic": "Roof over earth: roofed shop.",
+    "mnemonic_type": "invented",
+    "starter_word": "屋"
+  },
+  {
+    "char": "色",
+    "level": "N4",
+    "parts": [
+      "刀",
+      "口"
+    ],
+    "mnemonic": "Knife cutting a mouth hue: color.",
+    "mnemonic_type": "invented",
+    "starter_word": "色"
+  },
+  {
+    "char": "走",
+    "level": "N4",
+    "parts": [
+      "土",
+      "止"
+    ],
+    "mnemonic": "Earth under stop: run.",
+    "mnemonic_type": "invented",
+    "starter_word": "走る"
+  },
+  {
+    "char": "秋",
+    "level": "N4",
+    "parts": [
+      "木",
+      "火"
+    ],
+    "mnemonic": "Tree under fire: autumn.",
+    "mnemonic_type": "invented",
+    "starter_word": "秋"
+  },
+  {
+    "char": "夏",
+    "level": "N4",
+    "parts": [
+      "自",
+      "攵"
+    ],
+    "mnemonic": "Self under a strike of heat: summer.",
+    "mnemonic_type": "invented",
+    "starter_word": "夏"
+  },
+  {
+    "char": "習",
+    "level": "N4",
+    "parts": [
+      "白",
+      "日"
+    ],
+    "mnemonic": "White under the sun: learn.",
+    "mnemonic_type": "invented",
+    "starter_word": "習う"
+  },
+  {
+    "char": "洋",
+    "level": "N4",
+    "parts": [
+      "氵",
+      "王"
+    ],
+    "mnemonic": "Water as vast as a king: ocean.",
+    "mnemonic_type": "invented",
+    "starter_word": "洋食"
+  },
+  {
+    "char": "旅",
+    "level": "N4",
+    "parts": [
+      "方",
+      "人"
+    ],
+    "mnemonic": "Direction of people: travel.",
+    "mnemonic_type": "invented",
+    "starter_word": "旅行"
+  },
+  {
+    "char": "服",
+    "level": "N4",
+    "parts": [
+      "月",
+      "又"
+    ],
+    "mnemonic": "Moon and again: clothes.",
+    "mnemonic_type": "invented",
+    "starter_word": "服"
+  },
+  {
+    "char": "夕",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Evening stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "夕食",
+    "starter": true
+  },
+  {
+    "char": "借",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "日"
+    ],
+    "mnemonic": "Person taking for a day: borrow.",
+    "mnemonic_type": "invented",
+    "starter_word": "借りる"
+  },
+  {
+    "char": "曜",
+    "level": "N4",
+    "parts": [
+      "日",
+      "鳥"
+    ],
+    "mnemonic": "Sun with a bird: day of week.",
+    "mnemonic_type": "invented",
+    "starter_word": "日曜日"
+  },
+  {
+    "char": "肉",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "人"
+    ],
+    "mnemonic": "Enclosure of a person: meat.",
+    "mnemonic_type": "invented",
+    "starter_word": "肉"
+  },
+  {
+    "char": "貸",
+    "level": "N4",
+    "parts": [
+      "代",
+      "貝"
+    ],
+    "mnemonic": "Replace with shell money: lend.",
+    "mnemonic_type": "etymological",
+    "starter_word": "貸す"
+  },
+  {
+    "char": "堂",
+    "level": "N4",
+    "parts": [
+      "口",
+      "土"
+    ],
+    "mnemonic": "Mouth over earth hall: hall.",
+    "mnemonic_type": "invented",
+    "starter_word": "食堂"
+  },
+  {
+    "char": "鳥",
+    "level": "N4",
+    "parts": [
+      "白",
+      "火"
+    ],
+    "mnemonic": "White and fire: bird.",
+    "mnemonic_type": "invented",
+    "starter_word": "鳥"
+  },
+  {
+    "char": "飯",
+    "level": "N4",
+    "parts": [
+      "食",
+      "又"
+    ],
+    "mnemonic": "Eat again: cooked rice.",
+    "mnemonic_type": "invented",
+    "starter_word": "夕飯"
+  },
+  {
+    "char": "勉",
+    "level": "N4",
+    "parts": [
+      "力",
+      "人"
+    ],
+    "mnemonic": "Power of a person: effort.",
+    "mnemonic_type": "invented",
+    "starter_word": "勉強不足"
+  },
+  {
+    "char": "冬",
+    "level": "N4",
+    "parts": [
+      "攵",
+      "二"
+    ],
+    "mnemonic": "Strike of cold under two: winter.",
+    "mnemonic_type": "invented",
+    "starter_word": "冬"
+  },
+  {
+    "char": "昼",
+    "level": "N4",
+    "parts": [
+      "一",
+      "日"
+    ],
+    "mnemonic": "One over the sun: daytime.",
+    "mnemonic_type": "invented",
+    "starter_word": "昼"
+  },
+  {
+    "char": "茶",
+    "level": "N4",
+    "parts": [
+      "艹",
+      "人",
+      "木"
+    ],
+    "mnemonic": "Grass person by a tree: tea.",
+    "mnemonic_type": "invented",
+    "starter_word": "茶"
+  },
+  {
+    "char": "弟",
+    "level": "N4",
+    "parts": [
+      "八",
+      "刀"
+    ],
+    "mnemonic": "Eight beside a knife: younger brother.",
+    "mnemonic_type": "invented",
+    "starter_word": "弟"
+  },
+  {
+    "char": "牛",
+    "level": "N4",
+    "parts": [
+      "十",
+      "一"
+    ],
+    "mnemonic": "Ten with a horn stroke: cow.",
+    "mnemonic_type": "invented",
+    "starter_word": "牛"
+  },
+  {
+    "char": "兄",
+    "level": "N4",
+    "parts": [
+      "口",
+      "儿"
+    ],
+    "mnemonic": "Mouth on legs: older brother.",
+    "mnemonic_type": "etymological",
+    "starter_word": "兄"
+  },
+  {
+    "char": "犬",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Dog stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "犬",
+    "starter": true
+  },
+  {
+    "char": "妹",
+    "level": "N4",
+    "parts": [
+      "女",
+      "木"
+    ],
+    "mnemonic": "Woman and unfinished tree: younger sister.",
+    "mnemonic_type": "invented",
+    "starter_word": "妹"
+  },
+  {
+    "char": "姉",
+    "level": "N4",
+    "parts": [
+      "女",
+      "市"
+    ],
+    "mnemonic": "Woman and city sound: older sister.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "姉"
+  },
+  {
+    "char": "漢",
+    "level": "N4",
+    "parts": [
+      "氵",
+      "艹",
+      "口"
+    ],
+    "mnemonic": "Water, grass, mouth of China: China.",
+    "mnemonic_type": "invented",
+    "starter_word": "漢字"
+  },
+  {
+    "char": "合",
+    "level": "N4",
+    "parts": [
+      "人",
+      "一",
+      "口"
+    ],
+    "mnemonic": "Person, one, mouth: join.",
+    "mnemonic_type": "etymological",
+    "starter_word": "待合室"
+  },
+  {
+    "char": "回",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "口"
+    ],
+    "mnemonic": "Mouth in enclosure: times.",
+    "mnemonic_type": "etymological",
+    "starter_word": "回人"
+  },
+  {
+    "char": "所",
+    "level": "N4",
+    "parts": [
+      "門",
+      "刀"
+    ],
+    "mnemonic": "Gate cut to a spot: place.",
+    "mnemonic_type": "invented",
+    "starter_word": "所"
+  },
+  {
+    "char": "進",
+    "level": "N4",
+    "parts": [
+      "⻌",
+      "鳥"
+    ],
+    "mnemonic": "Walk like a bird forward: advance.",
+    "mnemonic_type": "invented",
+    "starter_word": "進む"
+  },
+  {
+    "char": "乗",
+    "level": "N4",
+    "parts": [
+      "千",
+      "木"
+    ],
+    "mnemonic": "Thousand on a tree: ride.",
+    "mnemonic_type": "invented",
+    "starter_word": "乗"
+  },
+  {
+    "char": "働",
+    "level": "N4",
+    "parts": [
+      "亻",
+      "動"
+    ],
+    "mnemonic": "Person plus move: work.",
+    "mnemonic_type": "etymological",
+    "starter_word": "働く"
+  },
+  {
+    "char": "市",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "十"
+    ],
+    "mnemonic": "Enclosure and ten: city market.",
+    "mnemonic_type": "invented",
+    "starter_word": "市"
+  },
+  {
+    "char": "顔",
+    "level": "N4",
+    "parts": [
+      "立",
+      "貝"
+    ],
+    "mnemonic": "Stand showing shell-face: face.",
+    "mnemonic_type": "invented",
+    "starter_word": "顔"
+  },
+  {
+    "char": "頭",
+    "level": "N4",
+    "parts": [
+      "口",
+      "貝"
+    ],
+    "mnemonic": "Mouth over shell: head.",
+    "mnemonic_type": "invented",
+    "starter_word": "頭"
+  },
+  {
+    "char": "門",
+    "level": "N4",
+    "parts": [],
+    "mnemonic": "Gate stands alone.",
+    "mnemonic_type": "etymological",
+    "starter_word": "門",
+    "starter": true
+  },
+  {
+    "char": "区",
+    "level": "N4",
+    "parts": [
+      "冂",
+      "又"
+    ],
+    "mnemonic": "Enclosure divided again: ward.",
+    "mnemonic_type": "invented",
+    "starter_word": "区"
+  },
+  {
+    "char": "軽",
+    "level": "N4",
+    "parts": [
+      "車",
+      "土"
+    ],
+    "mnemonic": "Cart over earth: light.",
+    "mnemonic_type": "invented",
+    "starter_word": "軽"
+  },
+  {
+    "char": "低",
+    "level": "N4",
+    "parts": [
+      "人",
+      "下"
+    ],
+    "mnemonic": "Person below: low.",
+    "mnemonic_type": "invented",
+    "starter_word": "低"
+  },
+  {
+    "char": "遠",
+    "level": "N4",
+    "parts": [
+      "⻌",
+      "土",
+      "口"
+    ],
+    "mnemonic": "Walk past earth and mouth: far.",
+    "mnemonic_type": "invented",
+    "starter_word": "遠"
+  },
+  {
+    "char": "暗",
+    "level": "N4",
+    "parts": [
+      "日",
+      "音"
+    ],
+    "mnemonic": "Sun covered by sound: dark.",
+    "mnemonic_type": "etymological",
+    "starter_word": "暗"
+  },
+  {
+    "char": "寒",
+    "level": "N4",
+    "parts": [
+      "宀",
+      "二",
+      "人"
+    ],
+    "mnemonic": "Roof over two people cold: cold.",
+    "mnemonic_type": "invented",
+    "starter_word": "寒"
+  },
+  {
+    "char": "暑",
+    "level": "N4",
+    "parts": [
+      "日",
+      "者"
+    ],
+    "mnemonic": "Sun and one who: hot.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "暑"
+  },
+  {
+    "char": "弱",
+    "level": "N4",
+    "parts": [
+      "二",
+      "力"
+    ],
+    "mnemonic": "Two weak powers: weak.",
+    "mnemonic_type": "invented",
+    "starter_word": "弱"
+  },
+  {
+    "char": "薬",
+    "level": "N4",
+    "parts": [
+      "艹",
+      "楽"
+    ],
+    "mnemonic": "Grass of comfort: medicine.",
+    "mnemonic_type": "etymological",
+    "starter_word": "薬"
+  },
+  {
+    "char": "説",
+    "level": "N4",
+    "parts": [
+      "言",
+      "兄"
+    ],
+    "mnemonic": "Speech of an older brother: explain.",
+    "mnemonic_type": "invented",
+    "starter_word": "説"
+  },
+  {
+    "char": "洗",
+    "level": "N4",
+    "parts": [
+      "氵",
+      "先"
+    ],
+    "mnemonic": "Water ahead: wash.",
+    "mnemonic_type": "phonetic",
+    "starter_word": "洗う"
+  },
+  {
+    "char": "声",
+    "level": "N4",
+    "parts": [
+      "口",
+      "又"
+    ],
+    "mnemonic": "Mouth and hand making voice: voice.",
+    "mnemonic_type": "invented",
+    "starter_word": "声"
+  }
+]

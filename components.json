@@ -1,0 +1,352 @@
+[
+  {
+    "id": "one",
+    "glyph": "一",
+    "display": "一",
+    "name": "one",
+    "hint": "a single line"
+  },
+  {
+    "id": "two",
+    "glyph": "二",
+    "display": "二",
+    "name": "two",
+    "hint": "two lines"
+  },
+  {
+    "id": "eight",
+    "glyph": "八",
+    "display": "八",
+    "name": "eight",
+    "hint": "two strokes parting"
+  },
+  {
+    "id": "ten",
+    "glyph": "十",
+    "display": "十",
+    "name": "ten",
+    "hint": "a cross"
+  },
+  {
+    "id": "person",
+    "glyph": "人",
+    "display": "亻",
+    "name": "person",
+    "hint": "a standing figure"
+  },
+  {
+    "id": "big",
+    "glyph": "大",
+    "display": "大",
+    "name": "big",
+    "hint": "person with arms out"
+  },
+  {
+    "id": "small",
+    "glyph": "小",
+    "display": "小",
+    "name": "small",
+    "hint": "three little ticks"
+  },
+  {
+    "id": "mouth",
+    "glyph": "口",
+    "display": "口",
+    "name": "mouth",
+    "hint": "an open square"
+  },
+  {
+    "id": "sun",
+    "glyph": "日",
+    "display": "日",
+    "name": "sun",
+    "hint": "a window of light"
+  },
+  {
+    "id": "moon",
+    "glyph": "月",
+    "display": "月",
+    "name": "moon",
+    "hint": "a crescent"
+  },
+  {
+    "id": "tree",
+    "glyph": "木",
+    "display": "木",
+    "name": "tree",
+    "hint": "trunk and branches"
+  },
+  {
+    "id": "water",
+    "glyph": "水",
+    "display": "氵",
+    "name": "water",
+    "hint": "three drops"
+  },
+  {
+    "id": "fire",
+    "glyph": "火",
+    "display": "火",
+    "name": "fire",
+    "hint": "flames rising"
+  },
+  {
+    "id": "earth",
+    "glyph": "土",
+    "display": "土",
+    "name": "earth",
+    "hint": "ground with a sprout"
+  },
+  {
+    "id": "woman",
+    "glyph": "女",
+    "display": "女",
+    "name": "woman",
+    "hint": "kneeling figure"
+  },
+  {
+    "id": "child",
+    "glyph": "子",
+    "display": "子",
+    "name": "child",
+    "hint": "a baby with arms"
+  },
+  {
+    "id": "mountain",
+    "glyph": "山",
+    "display": "山",
+    "name": "mountain",
+    "hint": "three peaks"
+  },
+  {
+    "id": "river",
+    "glyph": "川",
+    "display": "川",
+    "name": "river",
+    "hint": "flowing streams"
+  },
+  {
+    "id": "field",
+    "glyph": "田",
+    "display": "田",
+    "name": "rice field",
+    "hint": "a grid of paddies"
+  },
+  {
+    "id": "power",
+    "glyph": "力",
+    "display": "力",
+    "name": "power",
+    "hint": "a flexed muscle"
+  },
+  {
+    "id": "knife",
+    "glyph": "刀",
+    "display": "刂",
+    "name": "knife",
+    "hint": "a blade at the side"
+  },
+  {
+    "id": "hand",
+    "glyph": "手",
+    "display": "扌",
+    "name": "hand",
+    "hint": "fingers reaching"
+  },
+  {
+    "id": "eye",
+    "glyph": "目",
+    "display": "目",
+    "name": "eye",
+    "hint": "an eye on its side"
+  },
+  {
+    "id": "heart",
+    "glyph": "心",
+    "display": "忄",
+    "name": "heart",
+    "hint": "a heartbeat"
+  },
+  {
+    "id": "say",
+    "glyph": "言",
+    "display": "言",
+    "name": "speech",
+    "hint": "words stacked up"
+  },
+  {
+    "id": "thread",
+    "glyph": "糸",
+    "display": "糸",
+    "name": "thread",
+    "hint": "twisted silk"
+  },
+  {
+    "id": "metal",
+    "glyph": "金",
+    "display": "金",
+    "name": "metal",
+    "hint": "nuggets under a roof"
+  },
+  {
+    "id": "shell",
+    "glyph": "貝",
+    "display": "貝",
+    "name": "shell",
+    "hint": "cowrie money"
+  },
+  {
+    "id": "stand",
+    "glyph": "立",
+    "display": "立",
+    "name": "stand",
+    "hint": "a person upright"
+  },
+  {
+    "id": "stop",
+    "glyph": "止",
+    "display": "止",
+    "name": "stop",
+    "hint": "a foot planting down"
+  },
+  {
+    "id": "rain",
+    "glyph": "雨",
+    "display": "雨",
+    "name": "rain",
+    "hint": "drops from a cloud"
+  },
+  {
+    "id": "car",
+    "glyph": "車",
+    "display": "車",
+    "name": "cart",
+    "hint": "wheels and axle"
+  },
+  {
+    "id": "gate",
+    "glyph": "門",
+    "display": "門",
+    "name": "gate",
+    "hint": "double doors"
+  },
+  {
+    "id": "white",
+    "glyph": "白",
+    "display": "白",
+    "name": "white",
+    "hint": "a sun with a spark"
+  },
+  {
+    "id": "dog",
+    "glyph": "犬",
+    "display": "犭",
+    "name": "dog",
+    "hint": "a big mark for a dog"
+  },
+  {
+    "id": "self",
+    "glyph": "自",
+    "display": "自",
+    "name": "self",
+    "hint": "a nose pointing in"
+  },
+  {
+    "id": "below",
+    "glyph": "下",
+    "display": "下",
+    "name": "below",
+    "hint": "a mark under a line"
+  },
+  {
+    "id": "evening",
+    "glyph": "夕",
+    "display": "夕",
+    "name": "evening",
+    "hint": "a slanted moon"
+  },
+  {
+    "id": "work",
+    "glyph": "工",
+    "display": "工",
+    "name": "work",
+    "hint": "a carpenter's square"
+  },
+  {
+    "id": "legs",
+    "glyph": "儿",
+    "display": "儿",
+    "name": "legs",
+    "hint": "walking legs"
+  },
+  {
+    "id": "roof",
+    "glyph": "宀",
+    "display": "宀",
+    "name": "roof",
+    "hint": "a house roof"
+  },
+  {
+    "id": "building",
+    "glyph": "广",
+    "display": "广",
+    "name": "building",
+    "hint": "a cliff-side hall"
+  },
+  {
+    "id": "strike",
+    "glyph": "攵",
+    "display": "攵",
+    "name": "strike",
+    "hint": "a hand with a stick"
+  },
+  {
+    "id": "hill",
+    "glyph": "阝",
+    "display": "阝",
+    "name": "hill",
+    "hint": "a slope on the side"
+  },
+  {
+    "id": "enclosure",
+    "glyph": "冂",
+    "display": "冂",
+    "name": "enclosure",
+    "hint": "open borders"
+  },
+  {
+    "id": "walk",
+    "glyph": "辶",
+    "display": "⻌",
+    "name": "walk",
+    "hint": "a long road"
+  },
+  {
+    "id": "grass",
+    "glyph": "艹",
+    "display": "艹",
+    "name": "grass",
+    "hint": "plants on top"
+  },
+  {
+    "id": "private",
+    "glyph": "厶",
+    "display": "厶",
+    "name": "private",
+    "hint": "a private curl"
+  },
+  {
+    "id": "king",
+    "glyph": "王",
+    "display": "王",
+    "name": "king",
+    "hint": "three tiers and a link"
+  },
+  {
+    "id": "again",
+    "glyph": "又",
+    "display": "又",
+    "name": "again",
+    "hint": "a right hand"
+  }
+]
