@@ -1,91 +1,28 @@
 # Kanji Forge — Phase Plan
 
-## Phase 0: Data only
+## Phase 0: Data only (done)
 
-Do not write any game logic yet.
+Initial N4 kanji + words datasets and `check.js`. Later extended with N5 data.
 
-Create three files:
+## Phase 0b: Decomposition data (this session)
 
-1. **PLAN.md** — this roadmap.
+Data only — no game logic. Supports a **discovery** mechanic (combine components to discover kanji, like Little Alchemy).
 
-2. **kanji.json** — an array of all 188 N4 kanji (the standard community list, not the pre-2010 official list). Schema per entry:
+Keep unified `kanji.json` (N5 + N4, each entry has `"level"`) and `words.json` as they are. Add:
 
-```json
-{
-  "char": "駅",
-  "meaning": "station",
-  "onyomi": ["エキ"],
-  "kunyomi": [],
-  "lookalikes": ["訳", "駐"]
-}
-```
+1. **components.json** — ~40–50 primitive building blocks (`id`, `glyph`, `display`, `name`, `hint`).
+2. **recipes.json** — one entry per kanji: `parts` (0–3), `mnemonic`, `mnemonic_type`, `starter_word`; starters have `parts: []` and `starter: true`.
 
-Rules:
-- `lookalikes`: 1 to 4 visually similar kanji. Prefer other N4 or N5 kanji, since those will be tiles the player has seen. Include non-N4 lookalikes only when no good N4/N5 match exists.
-- Readings in katakana for onyomi, hiragana for kunyomi. Omit okurigana from kunyomi.
-- Do not include stroke order or stroke counts. This app is reading only.
+Validate with **reach.js**: every kanji reachable from starters, no unknown parts, no cycles; print per-level reachability and longest chain.
 
-3. **words.json** — an array of about 300 N4-level vocabulary words built from the kanji in `kanji.json`. Schema per entry:
+## Phase 1: Discovery core loop (REPLACES prior quiz Phase 1)
 
-```json
-{
-  "word": "来週",
-  "reading": "らいしゅう",
-  "meaning": "next week",
-  "kanji": ["来", "週"],
-  "kana_only": false
-}
-```
+> The previous quiz-style core loop (orders / tiles / hand) is **replaced**.  
+> The core game is now: **combine components to discover kanji** (Little Alchemy–style).  
+> Full Phase 1 UI/spec will be provided next session. Do not implement game logic in 0b.
 
-Rules:
-- Every entry must contain only kanji from `kanji.json`, kana, or N5 kanji. Flag N5 kanji use in a `notes` field so it can be reviewed.
-- Every one of the 188 kanji must appear in at least 2 words. Include single-kanji words where they are common standalone (駅, 本, 車, 家).
-- Meanings: short, natural English, one primary meaning. Write meanings so they point to one word. "next week" is good; "time" is too vague because it matches several words.
-- Mix: roughly 60 percent two-kanji compounds, 25 percent single kanji, 15 percent kanji plus okurigana (食べる, 歩く). For okurigana words the `word` field includes the kana and `kanji` lists only the kanji.
-- No duplicate words. No names of people or places.
-
-After generating, write a small Node script `check.js` that:
-- confirms every kanji in `kanji.json` appears in at least 2 words
-- lists any kanji used in `words.json` that is not in `kanji.json`
-- lists any duplicate words or duplicate meanings
-
-Run it and fix the data until it passes clean.
-
-## Phase 0 deliverables (this repo)
-
-| File | Role |
-|------|------|
-| `kanji.json` | 188 N4 kanji with meanings, readings, lookalikes |
-| `words.json` | ~300 N4 vocab items; every kanji appears ≥2 times |
-| `check.js` | Coverage / duplicate / unknown-kanji validator |
-
-**Kanji list note:** There is no official post-2010 JLPT kanji list. The 188 here merge the widely used community N4 set (Tanos / OpenJLPT, 166 chars, includes 駅) with 22 additional characters from the expanded N4 set already curated in this project’s study data (合回所進乗働市顔頭門区軽低遠暗寒暑弱薬説洗声産引), so the total is exactly 188.
-
-**Validate:** `node check.js` must print `PASS`.
-
-## Phase 1: Core loop
-
-Create `index.html`, a single self-contained file (inline CSS and JS, no frameworks, no build step). Load `kanji.json` and `words.json` with `fetch`; assume the file is served locally.
-
-Build one screen with this flow:
-
-1. **Order** — Random word; English meaning large at top; blank slots per character (kana prefilled/greyed; kanji empty).
-2. **Hand** — 7 tiles: all answer kanji, 2 lookalike decoys, fill with random from `kanji.json`. Shuffle. No duplicates.
-3. **Input** — Tap tile → next empty slot; tap filled slot → return to hand. Auto-check when all slots filled.
-4. **Feedback** — Correct: green + reading, 1s, next. Wrong: red + correct word/reading, 2s, next. Corner counter: completed / correct.
-5. **End of day** — After 12 orders: summary (correct count, missed words), **New Day** button.
-
-Constraints: mobile-first portrait; tiles ≥56px; Gothic kanji font; all state in `state`; script sections: data loading / rendering / game logic. No timers UI, coins, sound, or localStorage yet.
-
-**Deployed as:** `kanji-forge.html`, linked from the main app kanji landing (`index.html#/kanji`). Data files stay at repo root beside the game.
-
-
-## Phase 1b: N5 + manual wrong review
-
-- Level picker (N5 / N4) before a day starts
-- `kanji-n5.json` / `words-n5.json` for N5; existing `kanji.json` / `words.json` for N4
-- Wrong answers stay on screen until the player taps **Next** (correct answers still auto-advance after 1s)
+The existing `kanji-forge.html` quiz remains in the repo until Phase 1 lands; it is not the target design.
 
 ## Later phases
 
-*(Not started.)*
+*(Awaiting Phase 1 discovery spec.)*
