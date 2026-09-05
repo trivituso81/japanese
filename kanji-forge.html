@@ -11,7 +11,7 @@
 :root {
   --bg:#12100e; --panel:#1f1b16; --panel2:#2a241d; --line:#3d342a; --ink:#f3ebe1;
   --muted:#9d9080; --faint:#6d6256; --gold:#d4a24a; --gold-dim:#8a6a2e; --glow:#e8c36a;
-  --ok:#7cb87a; --slot:#16130f; --radius:14px;
+  --ok:#7cb87a; --bad:#c47a6a; --slot:#16130f; --radius:14px;
   --font:"DM Sans", system-ui, sans-serif;
   --jp:"Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
   --safe-b:env(safe-area-inset-bottom, 0px);
@@ -47,34 +47,29 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .choice strong { display:block; font-size:1.4rem; margin-bottom:4px; }
 .choice span { color:var(--muted); font-size:0.9rem; }
 .backlink { text-align:center; color:var(--faint); font-size:0.85rem; text-decoration:none; }
-.backlink:hover { color:var(--muted); }
 
-.shell {
-  display:flex; flex-direction:column; gap:12px;
-  min-height: calc(100dvh - 28px - var(--safe-t) - var(--safe-b));
-}
-.topbar { display:flex; justify-content:space-between; align-items:center; gap:8px; }
-.group { display:flex; align-items:center; gap:8px; }
+.shell { display:flex; flex-direction:column; gap:12px; min-height: calc(100dvh - 28px - var(--safe-t) - var(--safe-b)); }
+.topbar { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
+.group { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
 .pill {
   font-size:0.78rem; font-weight:600; color:var(--muted);
   padding:8px 11px; border-radius:999px; background:var(--panel); border:1px solid var(--line);
 }
 .pill b { color:var(--ink); }
-.ibtn {
-  height:40px; min-width:40px; padding:0 12px; border-radius:12px;
+.pill.warn { border-color:var(--gold-dim); color:var(--gold); }
+.ibtn, .btn {
+  height:40px; min-width:40px; padding:0 14px; border-radius:12px;
   background:var(--panel); border:1px solid var(--line); font-weight:600; font-size:0.85rem;
 }
-.ibtn:active { background:var(--panel2); }
+.btn.primary { background:linear-gradient(160deg, #3a3024, #2a241d); border-color:var(--gold-dim); color:var(--gold); }
+.btn:disabled, .ibtn:disabled { opacity:0.4; pointer-events:none; }
+.ibtn:active, .btn:active { background:var(--panel2); }
 
 .anvil {
   background:linear-gradient(180deg, #2c261f, #1b1713);
   border:1px solid var(--line); border-radius:18px; padding:14px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
 }
-.lbl {
-  font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
-  color:var(--faint); font-weight:700; margin-bottom:8px;
-}
+.lbl { font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase; color:var(--faint); font-weight:700; margin-bottom:8px; }
 .slots { display:flex; justify-content:center; align-items:center; gap:8px; min-height:86px; }
 .slots.shake { animation: shake 0.42s ease; }
 @keyframes shake {
@@ -92,6 +87,12 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .slot .g { font-family:var(--jp); font-weight:700; font-size:1.85rem; line-height:1; }
 .slot .n { font-size:0.62rem; color:var(--muted); max-width:68px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
 .plus { color:var(--faint); font-weight:700; font-size:1.1rem; }
+.locked-banner {
+  margin-top:10px; padding:10px 12px; border-radius:12px;
+  background:rgba(212,162,74,0.1); border:1px solid var(--gold-dim);
+  display:flex; flex-direction:column; gap:8px; align-items:stretch;
+}
+.locked-banner p { margin:0; font-size:0.88rem; color:var(--muted); }
 
 .reveal:empty { display:none; }
 .card {
@@ -99,21 +100,10 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
   border:1px solid var(--gold-dim); border-radius:18px; padding:16px;
   animation: cardIn 0.28s ease; box-shadow: 0 16px 40px rgba(0,0,0,0.35);
 }
-.card.new {
-  box-shadow: 0 0 0 1px rgba(232,195,106,0.35), 0 0 36px rgba(212,162,74,0.2), 0 16px 40px rgba(0,0,0,0.35);
-}
-@keyframes cardIn {
-  from { opacity:0; transform:translateY(8px) scale(0.98); }
-  to { opacity:1; transform:none; }
-}
-.badge {
-  display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.08em;
-  text-transform:uppercase; color:var(--gold); margin-bottom:6px;
-}
-.card-char {
-  font-family:var(--jp); font-weight:900;
-  font-size:clamp(4rem, 22vw, 5.4rem); line-height:1; text-align:center;
-}
+.card.new { box-shadow: 0 0 0 1px rgba(232,195,106,0.35), 0 0 36px rgba(212,162,74,0.2), 0 16px 40px rgba(0,0,0,0.35); }
+@keyframes cardIn { from { opacity:0; transform:translateY(8px) scale(0.98); } to { opacity:1; transform:none; } }
+.badge { display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.08em; text-transform:uppercase; color:var(--gold); margin-bottom:6px; }
+.card-char { font-family:var(--jp); font-weight:900; font-size:clamp(4rem, 22vw, 5.4rem); line-height:1; text-align:center; }
 .card-mean { text-align:center; font-size:1.15rem; font-weight:600; margin:4px 0 12px; }
 .parts { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:6px; margin-bottom:12px; }
 .mini {
@@ -139,9 +129,10 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .link { color:var(--gold); font-size:0.85rem; font-weight:600; text-decoration:underline; text-underline-offset:3px; }
 
 .inv {
-  flex:1; min-height:200px; display:flex; flex-direction:column;
+  flex:1; min-height:180px; display:flex; flex-direction:column;
   border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#18150f;
 }
+.inv.dim .tile { opacity:0.35; pointer-events:none; }
 .grid {
   flex:1; overflow:auto; display:grid; gap:8px;
   grid-template-columns:repeat(auto-fill, minmax(64px, 1fr));
@@ -165,9 +156,7 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 }
 .tile.glow { animation:glow 1.4s ease; }
 @keyframes glow {
-  0% { box-shadow:none; }
-  30% { box-shadow:0 0 20px rgba(232,195,106,0.55); border-color:var(--glow); }
-  100% { box-shadow:none; }
+  0% { box-shadow:none; } 30% { box-shadow:0 0 20px rgba(232,195,106,0.55); border-color:var(--glow); } 100% { box-shadow:none; }
 }
 .tile .g { font-family:var(--jp); font-weight:700; font-size:1.55rem; line-height:1; }
 .tile .n {
@@ -193,9 +182,7 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .btile .g { font-family:var(--jp); font-weight:700; font-size:1.55rem; line-height:1; }
 .btile.lock .g { opacity:0.3; font-size:1.1rem; }
 .btile .h { font-size:0.58rem; color:var(--faint); text-align:center; line-height:1.2; max-height:2.4em; overflow:hidden; }
-.detail {
-  background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px; display:grid; gap:12px;
-}
+.detail { background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px; display:grid; gap:12px; }
 .detail h2 { margin:0; font-family:var(--jp); font-size:2.4rem; font-weight:900; }
 .words { display:grid; gap:8px; }
 .muted { color:var(--muted); font-size:0.85rem; }
@@ -204,7 +191,77 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
   background:var(--panel2); border:1px solid var(--line); padding:10px 14px; border-radius:999px;
   font-size:0.82rem; z-index:40; pointer-events:none; box-shadow:0 8px 24px rgba(0,0,0,0.4);
 }
-.center { min-height:60vh; display:grid; place-items:center; color:var(--muted); text-align:center; padding:24px; }
+.center { min-height:50vh; display:grid; place-items:center; color:var(--muted); text-align:center; padding:24px; }
+
+/* Practice / review */
+.practice {
+  background:linear-gradient(165deg, #2a241d, #1a1713);
+  border:1px solid var(--line); border-radius:18px; padding:16px;
+  display:grid; gap:14px; animation: cardIn 0.25s ease;
+}
+.practice-top { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.progress-pill { font-size:0.78rem; font-weight:700; color:var(--gold); }
+.practice-prompt { text-align:center; }
+.practice-prompt .big {
+  font-family:var(--jp); font-weight:900; font-size:clamp(3.2rem, 18vw, 4.6rem); line-height:1; margin:8px 0;
+}
+.practice-prompt .sub { color:var(--muted); font-size:0.95rem; }
+.choice-list { display:grid; gap:8px; }
+.choice-btn {
+  width:100%; text-align:left; padding:14px 14px; border-radius:12px;
+  background:var(--panel); border:1px solid var(--line); font-weight:600; font-size:1rem;
+}
+.choice-btn .jp { font-family:var(--jp); font-size:1.4rem; font-weight:700; }
+.choice-btn.correct { border-color:var(--ok); background:rgba(124,184,122,0.12); }
+.choice-btn.wrong { border-color:var(--bad); background:rgba(196,122,106,0.12); }
+.choice-btn:disabled { cursor:default; }
+.listen-row { display:grid; gap:8px; }
+.sentence-box {
+  font-family:var(--jp); font-size:1.25rem; line-height:2.1; text-align:center;
+  padding:12px; border-radius:12px; background:var(--slot); border:1px solid var(--line);
+}
+.sentence-box ruby { ruby-align: center; }
+.sentence-box rt { font-size:0.5em; color:var(--muted); }
+.sentence-box .target {
+  color:var(--gold); font-weight:900; border-bottom:2px solid var(--gold-dim); padding:0 2px;
+}
+.en-reveal {
+  text-align:center; color:var(--muted); font-size:0.95rem; padding:8px;
+  border-radius:10px; border:1px dashed var(--line);
+}
+.en-reveal.open { color:var(--ink); border-style:solid; background:var(--panel); }
+.summary-list { display:grid; gap:8px; }
+.summary-row {
+  display:flex; align-items:center; gap:10px; padding:10px 12px; border-radius:12px;
+  background:var(--panel); border:1px solid var(--line);
+}
+.summary-row .ch { font-family:var(--jp); font-size:1.6rem; font-weight:700; width:2rem; }
+.summary-row .mark { margin-left:auto; font-weight:700; }
+.summary-row .mark.ok { color:var(--ok); }
+.summary-row .mark.bad { color:var(--bad); }
+
+.pill.session b { color: var(--gold); }
+.grid.locked .tile { opacity: 0.38; filter: grayscale(0.35); pointer-events: none; }
+.slots.locked .slot { opacity: 0.45; pointer-events: none; }
+.btn-primary {
+  width: 100%; padding: 12px 14px; border-radius: 12px; font-weight: 700;
+  background: linear-gradient(180deg, var(--gold), #b8842f); color: #1a140c;
+  border: none; font-size: 0.95rem;
+}
+.btn-primary:disabled { opacity: 0.5; }
+.btn-ghost {
+  width: 100%; padding: 12px 14px; border-radius: 12px; font-weight: 600;
+  background: var(--panel); color: var(--ink); border: 1px solid var(--line);
+}
+.practice-feedback { font-size: 0.9rem; color: var(--muted); text-align: center; }
+.choice-btn.row { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.choice-btn .spk-mini {
+  flex: 0 0 auto; width: 36px; height: 36px; border-radius: 10px;
+  background: var(--slot); border: 1px solid var(--line); display: grid; place-items: center;
+  color: var(--gold); font-size: 0.85rem;
+}
+.sentence-hint { text-align: center; font-size: 0.8rem; color: var(--faint); }
+
 </style>
 </head>
 <body>
@@ -213,13 +270,14 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 <script>
 /* ===================== DATA ===================== */
 const STORAGE_KEY = "kanjiforge";
+const SESSION_CAP = 5;
 const MNEMONIC_LABELS = {
   etymological: "based on origin",
   phonetic: "one part is for sound",
   invented: "memory aid only",
 };
 
-const state = {
+var state = {
   ready: false,
   error: null,
   screen: "level",
@@ -241,6 +299,16 @@ const state = {
   celebrate: false,
   bookFocus: null,
   toast: null,
+  // Phase 1.5 session
+  sessionNew: [],
+  sessionLocked: false,
+  sessionDone: false,
+  // practice / review overlay
+  flow: null, // null | practice | sentence | review | summary
+  practice: null,
+  review: null,
+  summary: null,
+  sentence: null,
 };
 
 function loadStore() {
@@ -254,6 +322,9 @@ function persistLevel() {
     discovered: state.discovered.slice(),
     discoveryOrder: state.discoveryOrder.slice(),
     hintsOn: state.hintsOn,
+    sessionNew: state.sessionNew.slice(),
+    sessionLocked: !!state.sessionLocked,
+    sessionDone: !!state.sessionDone,
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
 }
@@ -291,6 +362,9 @@ function startersForLevel(level) {
 }
 function kanjiMeta(ch) {
   return state.kanji.find(function (k) { return k.char === ch; }) || { char: ch, meaning: "?", level: "?" };
+}
+function shortMeaning(ch) {
+  return (kanjiMeta(ch).meaning || "?").split(/[,;/]/)[0].trim();
 }
 function recipeFor(ch) {
   return state.recipes.find(function (r) { return r.char === ch; });
@@ -412,6 +486,316 @@ function showToast(msg) {
     if (state.toast === msg) { state.toast = null; render(); }
   }, 2200);
 }
+function shuffle(arr) {
+  var a = arr.slice();
+  for (var i = a.length - 1; i > 0; i--) {
+    var j = Math.floor(Math.random() * (i + 1));
+    var t = a[i]; a[i] = a[j]; a[j] = t;
+  }
+  return a;
+}
+function isKana(ch) {
+  var c = ch.charCodeAt(0);
+  return (c >= 0x3040 && c <= 0x309F) || (c >= 0x30A0 && c <= 0x30FF) || ch === "ー" || ch === "ゝ" || ch === "ゞ";
+}
+function isKanji(ch) {
+  var c = ch.charCodeAt(0);
+  return (c >= 0x4E00 && c <= 0x9FFF) || (c >= 0x3400 && c <= 0x4DBF);
+}
+</script>
+
+<script>
+/* ===================== PRACTICE HELPERS ===================== */
+function meaningChoices(ch) {
+  var correct = shortMeaning(ch);
+  var recipe = recipeFor(ch) || { parts: [] };
+  var parts = recipe.parts || [];
+  var pool = recipesForLevel(state.level).filter(function (r) {
+    if (r.char === ch) return false;
+    if (!r.parts || !r.parts.length) return false;
+    return r.parts.some(function (p) { return parts.indexOf(p) >= 0; });
+  });
+  if (pool.length < 2) {
+    pool = recipesForLevel(state.level).filter(function (r) { return r.char !== ch; });
+  }
+  var distractors = [];
+  var used = {};
+  used[correct.toLowerCase()] = true;
+  shuffle(pool).forEach(function (r) {
+    if (distractors.length >= 2) return;
+    var m = shortMeaning(r.char);
+    if (!m || used[m.toLowerCase()]) return;
+    used[m.toLowerCase()] = true;
+    distractors.push(m);
+  });
+  while (distractors.length < 2) {
+    distractors.push("unknown " + (distractors.length + 1));
+  }
+  return shuffle([
+    { text: correct, correct: true },
+    { text: distractors[0], correct: false },
+    { text: distractors[1], correct: false },
+  ]);
+}
+function lookalikeChoices(ch) {
+  var meta = kanjiMeta(ch);
+  var looks = (meta.lookalikes || []).filter(function (x) { return x && x !== ch; });
+  if (looks.length < 2) {
+    var extras = recipesForLevel(state.level).map(function (r) { return r.char; })
+      .filter(function (c) { return c !== ch && looks.indexOf(c) < 0; });
+    looks = looks.concat(shuffle(extras)).slice(0, 2);
+  } else {
+    looks = shuffle(looks).slice(0, 2);
+  }
+  return shuffle([
+    { text: ch, correct: true },
+    { text: looks[0], correct: false },
+    { text: looks[1] || "？", correct: false },
+  ]);
+}
+function listenChoices(ch) {
+  var recipe = recipeFor(ch) || {};
+  var starter = wordFor(recipe.starter_word) || {
+    word: recipe.starter_word || ch,
+    reading: "",
+    meaning: "",
+    kanji: [ch],
+  };
+  var batch = state.sessionNew.slice();
+  var levelChars = recipesForLevel(state.level).map(function (r) { return r.char; });
+  var prefer = batch.concat(levelChars);
+  var candidates = [];
+  var seen = {};
+  seen[starter.word] = true;
+  prefer.forEach(function (other) {
+    if (other === ch) return;
+    wordsUsing(other).forEach(function (w) {
+      if (seen[w.word]) return;
+      if ((w.kanji || []).indexOf(ch) >= 0) return;
+      seen[w.word] = true;
+      candidates.push(w);
+    });
+  });
+  if (candidates.length < 2) {
+    state.words.forEach(function (w) {
+      if (seen[w.word]) return;
+      if ((w.kanji || []).indexOf(ch) >= 0) return;
+      seen[w.word] = true;
+      candidates.push(w);
+    });
+  }
+  var picks = shuffle(candidates).slice(0, 2);
+  while (picks.length < 2) {
+    picks.push({ word: "？", reading: "", meaning: "" });
+  }
+  return shuffle([
+    { word: starter.word, reading: starter.reading || "", correct: true },
+    { word: picks[0].word, reading: picks[0].reading || "", correct: false },
+    { word: picks[1].word, reading: picks[1].reading || "", correct: false },
+  ]);
+}
+function buildPractice(ch, kinds) {
+  return {
+    char: ch,
+    kinds: kinds.slice(),
+    index: 0,
+    answered: false,
+    picked: -1,
+    correct: false,
+    choices: null,
+    showMnemonic: false,
+  };
+}
+function ensurePracticeChoices() {
+  var p = state.practice;
+  if (!p || p.choices) return;
+  var kind = p.kinds[p.index];
+  if (kind === "meaning") p.choices = meaningChoices(p.char);
+  else if (kind === "lookalike") p.choices = lookalikeChoices(p.char);
+  else p.choices = listenChoices(p.char);
+}
+function startPracticeLadder(ch) {
+  state.flow = "practice";
+  state.practice = buildPractice(ch, ["meaning", "lookalike", "listen"]);
+  ensurePracticeChoices();
+  state.card = null;
+  state.celebrate = false;
+  render();
+}
+function startSentence(ch) {
+  var recipe = recipeFor(ch) || {};
+  var w = wordFor(recipe.starter_word) || {};
+  state.flow = "sentence";
+  state.practice = null;
+  state.sentence = {
+    char: ch,
+    word: w.word || recipe.starter_word || ch,
+    wordReading: w.reading || "",
+    sentence: w.sentence || (w.word || ch),
+    reading: w.sentence_reading || w.reading || "",
+    en: w.sentence_en || w.meaning || "",
+    showEn: false,
+  };
+  render();
+}
+function finishLadderToWorkbench() {
+  state.flow = null;
+  state.practice = null;
+  state.sentence = null;
+  if (state.sessionNew.length >= SESSION_CAP) {
+    state.sessionLocked = true;
+    persistLevel();
+  }
+  render();
+}
+function buildReviewQueue(chars) {
+  var q = [];
+  chars.forEach(function (ch) {
+    q.push({ char: ch, kind: "meaning" });
+    q.push({ char: ch, kind: "lookalike" });
+  });
+  return shuffle(q);
+}
+function startSessionReview(onlyMissed) {
+  var chars = onlyMissed && state.summary
+    ? state.summary.filter(function (r) { return !r.ok; }).map(function (r) { return r.char; })
+    : state.sessionNew.slice();
+  if (!chars.length) {
+    state.flow = "summary";
+    render();
+    return;
+  }
+  state.flow = "review";
+  state.summary = null;
+  state.review = {
+    queue: buildReviewQueue(chars),
+    index: 0,
+    // per kanji: true if both tasks correct so far / overall
+    score: {},
+    answered: false,
+    picked: -1,
+    correct: false,
+    choices: null,
+    showMnemonic: false,
+  };
+  chars.forEach(function (ch) { state.review.score[ch] = true; });
+  fillReviewChoices();
+  render();
+}
+function fillReviewChoices() {
+  var r = state.review;
+  if (!r || r.index >= r.queue.length) return;
+  var item = r.queue[r.index];
+  r.answered = false;
+  r.picked = -1;
+  r.correct = false;
+  r.showMnemonic = false;
+  r.choices = item.kind === "meaning" ? meaningChoices(item.char) : lookalikeChoices(item.char);
+}
+function finishReviewToSummary() {
+  var score = state.review.score;
+  var chars = state.sessionNew.slice();
+  state.summary = chars.map(function (ch) {
+    return { char: ch, ok: score[ch] !== false, meaning: shortMeaning(ch) };
+  });
+  state.review = null;
+  state.flow = "summary";
+  state.sessionDone = true;
+  state.sessionLocked = true;
+  persistLevel();
+  render();
+}
+function newSession() {
+  state.sessionNew = [];
+  state.sessionLocked = false;
+  state.sessionDone = false;
+  state.flow = null;
+  state.practice = null;
+  state.review = null;
+  state.summary = null;
+  state.sentence = null;
+  state.card = null;
+  clearAnvil();
+  persistLevel();
+  render();
+}
+/** Align sentence text with kana reading for furigana (skip furigana on bareChar). */
+function furiganaHtml(sentence, reading, bareChar) {
+  var s = sentence || "";
+  var r = reading || "";
+  var html = "";
+  var si = 0, ri = 0;
+  while (si < s.length) {
+    var ch = s[si];
+    if (!isKanji(ch)) {
+      html += esc(ch);
+      if (ri < r.length && r[ri] === ch) ri++;
+      else if (isKana(ch) && ri < r.length) {
+        // try advance reading to matching kana
+        var found = r.indexOf(ch, ri);
+        if (found >= 0) ri = found + 1;
+      }
+      si++;
+      continue;
+    }
+    // gather consecutive kanji run
+    var runStart = si;
+    while (si < s.length && isKanji(s[si])) si++;
+    var run = s.slice(runStart, si);
+    // find reading until next kana in sentence matches
+    var nextKana = "";
+    for (var k = si; k < s.length; k++) {
+      if (isKana(s[k])) { nextKana = s[k]; break; }
+      if (!isKanji(s[k]) && !isKana(s[k])) break;
+    }
+    var readStart = ri;
+    var readEnd = r.length;
+    if (nextKana) {
+      var nx = r.indexOf(nextKana, ri);
+      if (nx >= 0) readEnd = nx;
+    } else {
+      // rest of reading that is kana
+      readEnd = r.length;
+    }
+    var runReading = r.slice(readStart, readEnd);
+    ri = readEnd;
+    // emit each kanji in run — if single reading for multi-kanji, attach to whole run
+    if (run.length === 1) {
+      if (run === bareChar) {
+        html += '<span class="target" data-act="sentence-word" data-stop>' + esc(run) + '</span>';
+      } else if (runReading) {
+        html += "<ruby>" + esc(run) + "<rt>" + esc(runReading) + "</rt></ruby>";
+      } else {
+        html += esc(run);
+      }
+    } else {
+      // multi-kanji compound: furigana over whole run unless it contains bareChar
+      var parts = [];
+      for (var i = 0; i < run.length; i++) {
+        if (run[i] === bareChar) {
+          parts.push({ bare: true, ch: run[i] });
+        } else {
+          parts.push({ bare: false, ch: run[i] });
+        }
+      }
+      var hasBare = parts.some(function (p) { return p.bare; });
+      if (!hasBare && runReading) {
+        html += "<ruby>" + esc(run) + "<rt>" + esc(runReading) + "</rt></ruby>";
+      } else {
+        // show bare without ruby; others without split readings
+        parts.forEach(function (p) {
+          if (p.bare) {
+            html += '<span class="target" data-act="sentence-word" data-stop>' + esc(p.ch) + '</span>';
+          } else {
+            html += esc(p.ch);
+          }
+        });
+        // if compound has bare + others, put remaining reading as hint on non-bare only when whole reading known — skip
+      }
+    }
+  }
+  return html;
+}
 </script>
 
 <script>
@@ -471,17 +855,200 @@ function renderCard(card, isNew) {
   );
 }
 
+function renderPracticeTask(p, progressLabel, nextAct) {
+  ensurePracticeChoices();
+  var kind = p.kinds[p.index];
+  var recipe = recipeFor(p.char) || {};
+  var typeLabel = MNEMONIC_LABELS[recipe.mnemonic_type] || "memory aid only";
+  var prompt = "";
+  if (kind === "meaning") {
+    var parts = (recipe.parts || []).map(function (part, i) {
+      return (i ? '<span class="plus">+</span>' : '') +
+        '<div class="mini"><div class="g">' + esc(partGlyph(part)) + '</div><div class="n">' + esc(partLabel(part)) + '</div></div>';
+    }).join("");
+    prompt =
+      '<div class="practice-prompt">' +
+        '<div class="big">' + esc(p.char) + '</div>' +
+        '<div class="parts">' + parts + '</div>' +
+        '<div class="sub">What does it mean?</div>' +
+      '</div>';
+  } else if (kind === "lookalike") {
+    prompt =
+      '<div class="practice-prompt">' +
+        '<div class="sub">' + esc(shortMeaning(p.char)) + '</div>' +
+        '<div class="mnemo" style="text-align:left"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(recipe.mnemonic || "") + '</p></div>' +
+        '<div class="sub">Which kanji?</div>' +
+      '</div>';
+  } else {
+    prompt =
+      '<div class="practice-prompt">' +
+        '<div class="sub">Listen, then pick the word</div>' +
+        '<button class="btn-primary" data-act="speak" data-text="' + esc((wordFor(recipe.starter_word) || {}).reading || recipe.starter_word || "") + '">▶ Play starter word</button>' +
+      '</div>';
+  }
+  var choices = (p.choices || []).map(function (c, i) {
+    var cls = "choice-btn";
+    if (kind === "listen" || kind === "lookalike") cls += " row";
+    if (p.answered) {
+      if (c.correct) cls += " correct";
+      else if (i === p.picked) cls += " wrong";
+    }
+    var label;
+    if (kind === "meaning") label = esc(c.text);
+    else if (kind === "lookalike") label = '<span class="jp">' + esc(c.text) + '</span>';
+    else {
+      label =
+        '<span class="jp">' + esc(c.word) + '</span>' +
+        '<span class="spk-mini" data-act="speak" data-text="' + esc(c.reading || c.word) + '" data-stop>♪</span>';
+    }
+    var dis = p.answered ? " disabled" : "";
+    return '<button class="' + cls + '" data-act="' + nextAct + '" data-i="' + i + '"' + dis + '>' + label + '</button>';
+  }).join("");
+  var feedback = "";
+  if (p.answered && !p.correct && p.showMnemonic) {
+    feedback =
+      '<div class="mnemo"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(recipe.mnemonic || "") + '</p></div>' +
+      '<button class="btn-primary" data-act="practice-next">Next</button>';
+  } else if (p.answered && p.correct) {
+    feedback = '<button class="btn-primary" data-act="practice-next">Next</button>';
+  }
+  return (
+    '<div class="practice">' +
+      '<div class="practice-top"><div class="progress-pill">' + esc(progressLabel) + '</div></div>' +
+      prompt +
+      '<div class="choice-list">' + choices + '</div>' +
+      feedback +
+    '</div>'
+  );
+}
+
+function renderSentenceScreen() {
+  var s = state.sentence;
+  if (!s) return "";
+  var furi = furiganaHtml(s.sentence, s.reading, s.char);
+  return (
+    '<div class="practice">' +
+      '<div class="practice-top"><div class="progress-pill">Read</div></div>' +
+      '<div class="sentence-box" data-act="sentence-play">' + furi + '</div>' +
+      '<div class="sentence-hint">Tap the gold kanji for its word · tap elsewhere for the sentence</div>' +
+      '<button class="en-reveal' + (s.showEn ? ' open' : '') + '" data-act="sentence-en">' +
+        (s.showEn ? esc(s.en || "(no translation)") : "Tap for English") +
+      '</button>' +
+      '<button class="btn-primary" data-act="sentence-done">Got it</button>' +
+    '</div>'
+  );
+}
+
+function renderReviewScreen() {
+  var r = state.review;
+  if (!r) return "";
+  var item = r.queue[r.index];
+  var label = "Review " + (r.index + 1) + " / " + r.queue.length;
+  var recipe = recipeFor(item.char) || {};
+  var typeLabel = MNEMONIC_LABELS[recipe.mnemonic_type] || "memory aid only";
+  var prompt = "";
+  if (item.kind === "meaning") {
+    var parts = (recipe.parts || []).map(function (part, i) {
+      return (i ? '<span class="plus">+</span>' : '') +
+        '<div class="mini"><div class="g">' + esc(partGlyph(part)) + '</div><div class="n">' + esc(partLabel(part)) + '</div></div>';
+    }).join("");
+    prompt =
+      '<div class="practice-prompt">' +
+        '<div class="big">' + esc(item.char) + '</div>' +
+        '<div class="parts">' + parts + '</div>' +
+        '<div class="sub">What does it mean?</div>' +
+      '</div>';
+  } else {
+    prompt =
+      '<div class="practice-prompt">' +
+        '<div class="sub">' + esc(shortMeaning(item.char)) + '</div>' +
+        '<div class="mnemo" style="text-align:left"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(recipe.mnemonic || "") + '</p></div>' +
+        '<div class="sub">Which kanji?</div>' +
+      '</div>';
+  }
+  var choices = (r.choices || []).map(function (c, i) {
+    var cls = "choice-btn" + (item.kind === "lookalike" ? " row" : "");
+    if (r.answered) {
+      if (c.correct) cls += " correct";
+      else if (i === r.picked) cls += " wrong";
+    }
+    var labelHtml = item.kind === "meaning" ? esc(c.text) : '<span class="jp">' + esc(c.text) + '</span>';
+    return '<button class="' + cls + '" data-act="review-answer" data-i="' + i + '"' + (r.answered ? " disabled" : "") + '>' + labelHtml + '</button>';
+  }).join("");
+  var feedback = "";
+  if (r.answered && !r.correct && r.showMnemonic) {
+    feedback =
+      '<div class="mnemo"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(recipe.mnemonic || "") + '</p></div>' +
+      '<button class="btn-primary" data-act="review-next">Next</button>';
+  } else if (r.answered && r.correct) {
+    feedback = '<button class="btn-primary" data-act="review-next">Next</button>';
+  }
+  return (
+    '<div class="practice">' +
+      '<div class="practice-top"><div class="progress-pill">' + esc(label) + '</div></div>' +
+      prompt +
+      '<div class="choice-list">' + choices + '</div>' +
+      feedback +
+    '</div>'
+  );
+}
+
+function renderSummaryScreen() {
+  var rows = (state.summary || []).map(function (row) {
+    return (
+      '<div class="summary-row">' +
+        '<div class="ch">' + esc(row.char) + '</div>' +
+        '<div class="muted">' + esc(row.meaning) + '</div>' +
+        '<div class="mark ' + (row.ok ? "ok" : "bad") + '">' + (row.ok ? "✓" : "✗") + '</div>' +
+      '</div>'
+    );
+  }).join("");
+  var missed = (state.summary || []).some(function (r) { return !r.ok; });
+  return (
+    '<div class="practice">' +
+      '<div class="practice-top"><div class="progress-pill">Session summary</div></div>' +
+      '<div class="summary-list">' + rows + '</div>' +
+      (missed ? '<button class="btn-ghost" data-act="review-again">Review again</button>' : '') +
+      '<button class="btn-primary" data-act="new-session">New session</button>' +
+    '</div>'
+  );
+}
+
+function renderFlowOverlay() {
+  if (state.flow === "practice" && state.practice) {
+    var p = state.practice;
+    return renderPracticeTask(p, (p.index + 1) + " / " + p.kinds.length, "practice-answer");
+  }
+  if (state.flow === "sentence") return renderSentenceScreen();
+  if (state.flow === "review") return renderReviewScreen();
+  if (state.flow === "summary") return renderSummaryScreen();
+  return "";
+}
+
 function renderWorkbench() {
   var total = recipesForLevel(state.level).length;
   var found = state.discovered.length;
+  var overlay = renderFlowOverlay();
+  if (overlay) {
+    return (
+      '<div class="shell">' +
+        '<div class="topbar"><div class="group">' +
+          '<button class="ibtn" data-act="change-level" title="Change level">' + esc(state.level) + '</button>' +
+          '<div class="pill session">New kanji today: <b>' + state.sessionNew.length + '</b> / ' + SESSION_CAP + '</div>' +
+        '</div></div>' +
+        overlay +
+      '</div>'
+    );
+  }
   var slots = state.showThird ? 3 : 2;
+  var locked = state.sessionLocked || state.sessionDone;
   var slotHtml = [];
   for (var i = 0; i < slots; i++) {
     var t = state.anvil[i];
     if (i) slotHtml.push('<span class="plus">+</span>');
     slotHtml.push(
       '<button class="slot' + (t ? ' filled' : '') + (state.showThird && i === 2 ? ' pop' : '') +
-      '" data-act="clear-slot" data-i="' + i + '">' +
+      '" data-act="clear-slot" data-i="' + i + '"' + (locked ? ' disabled' : '') + '>' +
       (t ? '<div class="g">' + esc(t.glyph) + '</div><div class="n">' + esc(t.name) + '</div>' : '') +
       '</button>'
     );
@@ -494,23 +1061,41 @@ function renderWorkbench() {
     if (state.nudgeKey === t.key) cls += " nudge";
     if (state.glowKey === t.key) cls += " glow";
     return (
-      '<button class="' + cls + '" data-act="pick-tile" data-key="' + esc(t.key) + '">' +
+      '<button class="' + cls + '" data-act="pick-tile" data-key="' + esc(t.key) + '"' + (locked ? " disabled" : "") + '>' +
         '<div class="g">' + esc(t.glyph) + '</div><div class="n">' + esc(t.name) + '</div>' +
       '</button>'
     );
   }).join("");
+
+  var lockBanner = "";
+  if (state.sessionDone) {
+    lockBanner =
+      '<div class="locked-banner">' +
+        '<p>Session complete. Start a new session to discover more.</p>' +
+        '<button class="btn-primary" data-act="show-summary">Session summary</button>' +
+        '<button class="btn-ghost" data-act="new-session">New session</button>' +
+      '</div>';
+  } else if (state.sessionLocked) {
+    lockBanner =
+      '<div class="locked-banner">' +
+        '<p>Today\'s five are ready. Review them to unlock the next session.</p>' +
+        '<button class="btn-primary" data-act="start-review">Review today\'s ' + SESSION_CAP + '</button>' +
+      '</div>';
+  }
 
   return (
     '<div class="shell">' +
       '<div class="topbar"><div class="group">' +
         '<button class="ibtn" data-act="change-level" title="Change level">' + esc(state.level) + '</button>' +
         '<div class="pill">Discovered <b>' + found + '</b> / ' + total + '</div>' +
+        '<div class="pill session">New kanji today: <b>' + state.sessionNew.length + '</b> / ' + SESSION_CAP + '</div>' +
       '</div><div class="group"><button class="ibtn" data-act="open-book">Book</button></div></div>' +
       '<div class="anvil"><div class="lbl">Anvil</div>' +
-        '<div class="slots' + (state.shaking ? ' shake' : '') + '">' + slotHtml.join("") + '</div>' +
+        '<div class="slots' + (state.shaking ? ' shake' : '') + (locked ? ' locked' : '') + '">' + slotHtml.join("") + '</div>' +
+        lockBanner +
       '</div>' +
       '<div class="reveal">' + (state.card ? renderCard(state.card, state.celebrate) : '') + '</div>' +
-      '<div class="inv"><div class="lbl">Inventory</div><div class="grid">' + tilesHtml + '</div></div>' +
+      '<div class="inv"><div class="lbl">Inventory</div><div class="grid' + (locked ? ' locked' : '') + '">' + tilesHtml + '</div></div>' +
     '</div>'
   );
 }
@@ -617,6 +1202,9 @@ function discover(recipe, isNew) {
   if (isNew) {
     state.discovered.push(recipe.char);
     state.discoveryOrder.push(recipe.char);
+    if (state.sessionNew.indexOf(recipe.char) < 0 && state.sessionNew.length < SESSION_CAP) {
+      state.sessionNew.push(recipe.char);
+    }
     state.glowKey = "k:" + recipe.char;
     persistLevel();
     setTimeout(function () { state.glowKey = null; render(); }, 1400);
@@ -658,6 +1246,7 @@ function maybeNudge() {
   state.failStreak = 0;
 }
 function tryResolveAnvil() {
+  if (state.sessionLocked || state.sessionDone) return;
   var filled = state.anvil.filter(Boolean);
   if (filled.length === 2 && !state.showThird) {
     var exact = findExactRecipe(filled);
@@ -678,7 +1267,8 @@ function tryResolveAnvil() {
   }
 }
 function pickTile(key) {
-  if (state.card) return;
+  if (state.card || state.flow) return;
+  if (state.sessionLocked || state.sessionDone) return;
   var tiles = inventoryTiles();
   var tile = null;
   for (var i = 0; i < tiles.length; i++) if (tiles[i].key === key) { tile = tiles[i]; break; }
@@ -698,7 +1288,8 @@ function pickTile(key) {
   if (filled === 2 || filled === 3) setTimeout(tryResolveAnvil, 70);
 }
 function clearSlot(i) {
-  if (state.card) return;
+  if (state.card || state.flow) return;
+  if (state.sessionLocked || state.sessionDone) return;
   if (!state.anvil[i]) return;
   state.anvil[i] = null;
   var filled = state.anvil.filter(Boolean).length;
@@ -717,6 +1308,11 @@ function startLevel(level) {
   state.failStreak = 0;
   state.nudgeKey = null;
   state.glowKey = null;
+  state.flow = null;
+  state.practice = null;
+  state.review = null;
+  state.summary = null;
+  state.sentence = null;
   clearAnvil();
 
   var saved = loadStore()[level] || {};
@@ -735,6 +1331,15 @@ function startLevel(level) {
   savedOrder.forEach(pushUnique);
   state.discovered.forEach(pushUnique);
   state.discoveryOrder = order;
+
+  var sess = Array.isArray(saved.sessionNew) ? saved.sessionNew.filter(function (c) {
+    return state.discovered.indexOf(c) >= 0;
+  }) : [];
+  state.sessionNew = sess.slice(0, SESSION_CAP);
+  state.sessionLocked = !!saved.sessionLocked || state.sessionNew.length >= SESSION_CAP;
+  state.sessionDone = !!saved.sessionDone;
+  if (state.sessionDone) state.sessionLocked = true;
+
   persistLevel();
   render();
 }
@@ -763,17 +1368,84 @@ function importProgress() {
     showToast("Import failed");
   }
 }
+function answerPractice(i) {
+  var p = state.practice;
+  if (!p || p.answered) return;
+  var c = p.choices[i];
+  if (!c) return;
+  p.answered = true;
+  p.picked = i;
+  p.correct = !!c.correct;
+  p.showMnemonic = !p.correct;
+  render();
+  if (p.correct) {
+    setTimeout(function () {
+      if (state.practice === p && p.answered && p.correct) advancePractice();
+    }, 450);
+  }
+}
+function advancePractice() {
+  var p = state.practice;
+  if (!p) return;
+  if (p.index + 1 < p.kinds.length) {
+    p.index += 1;
+    p.answered = false;
+    p.picked = -1;
+    p.correct = false;
+    p.choices = null;
+    p.showMnemonic = false;
+    ensurePracticeChoices();
+    render();
+    return;
+  }
+  startSentence(p.char);
+}
+function answerReview(i) {
+  var r = state.review;
+  if (!r || r.answered) return;
+  var c = r.choices[i];
+  if (!c) return;
+  r.answered = true;
+  r.picked = i;
+  r.correct = !!c.correct;
+  r.showMnemonic = !r.correct;
+  var item = r.queue[r.index];
+  if (!r.correct) r.score[item.char] = false;
+  render();
+  if (r.correct) {
+    setTimeout(function () {
+      if (state.review === r && r.answered && r.correct) advanceReview();
+    }, 450);
+  }
+}
+function advanceReview() {
+  var r = state.review;
+  if (!r) return;
+  if (r.index + 1 < r.queue.length) {
+    r.index += 1;
+    fillReviewChoices();
+    render();
+    return;
+  }
+  finishReviewToSummary();
+}
 function onClick(ev) {
   var t = ev.target.closest("[data-act]");
   if (!t) return;
   var act = t.getAttribute("data-act");
   if (act === "pick-level") { startLevel(t.getAttribute("data-level")); return; }
-  if (act === "change-level") { state.screen = "level"; state.card = null; render(); return; }
+  if (act === "change-level") { state.screen = "level"; state.card = null; state.flow = null; render(); return; }
   if (act === "pick-tile") { pickTile(t.getAttribute("data-key")); return; }
   if (act === "clear-slot") { clearSlot(Number(t.getAttribute("data-i"))); return; }
   if (act === "dismiss-card") {
     if (ev.target.closest("[data-stop]")) return;
-    state.card = null; state.celebrate = false; render(); return;
+    var wasNew = state.celebrate;
+    var ch = state.card && state.card.char;
+    state.card = null;
+    state.celebrate = false;
+    if (wasNew && ch) startPracticeLadder(ch);
+    else render();
+    return;
   }
   if (act === "speak") { speakJa(t.getAttribute("data-text") || ""); return; }
   if (act === "open-book") { state.screen = "book"; state.bookFocus = null; state.card = null; render(); return; }
@@ -787,6 +1459,37 @@ function onClick(ev) {
   if (act === "toggle-hints") { state.hintsOn = !state.hintsOn; persistLevel(); render(); return; }
   if (act === "export") { exportProgress(); return; }
   if (act === "import") { importProgress(); return; }
+  if (act === "practice-answer") { answerPractice(Number(t.getAttribute("data-i"))); return; }
+  if (act === "practice-next") { advancePractice(); return; }
+  if (act === "sentence-word") {
+    if (state.sentence) speakJa(state.sentence.wordReading || state.sentence.word);
+    return;
+  }
+  if (act === "sentence-play") {
+    if (ev.target.closest("[data-stop]")) return;
+    if (state.sentence) speakJa(state.sentence.reading || state.sentence.sentence);
+    return;
+  }
+  if (act === "sentence-en") {
+    if (state.sentence) { state.sentence.showEn = true; render(); }
+    return;
+  }
+  if (act === "sentence-done") { finishLadderToWorkbench(); return; }
+  if (act === "start-review") { startSessionReview(false); return; }
+  if (act === "review-answer") { answerReview(Number(t.getAttribute("data-i"))); return; }
+  if (act === "review-next") { advanceReview(); return; }
+  if (act === "review-again") { startSessionReview(true); return; }
+  if (act === "new-session") { newSession(); return; }
+  if (act === "show-summary") {
+    if (!state.summary) {
+      state.summary = state.sessionNew.map(function (ch) {
+        return { char: ch, ok: true, meaning: shortMeaning(ch) };
+      });
+    }
+    state.flow = "summary";
+    render();
+    return;
+  }
 }
 document.getElementById("app").addEventListener("click", onClick);
 if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = function () {};

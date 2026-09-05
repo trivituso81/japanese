@@ -7,7 +7,10 @@
       "一"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "一つください。",
+    "sentence_reading": "ひとつください。",
+    "sentence_en": "Please give me one."
   },
   {
     "word": "二",
@@ -17,7 +20,10 @@
       "二"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "二つのりんごです。",
+    "sentence_reading": "ふたつのりんごです。",
+    "sentence_en": "There are two apples."
   },
   {
     "word": "三",
@@ -27,7 +33,10 @@
       "三"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "三人います。",
+    "sentence_reading": "さんにんいます。",
+    "sentence_en": "There are three people."
   },
   {
     "word": "四",
@@ -37,7 +46,10 @@
       "四"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "私は四が好きです。",
+    "sentence_reading": "わたしはよんがすきです。",
+    "sentence_en": "I like four."
   },
   {
     "word": "五",
@@ -47,7 +59,10 @@
       "五"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "五を見てください。",
+    "sentence_reading": "ごをみてください。",
+    "sentence_en": "Please look at five."
   },
   {
     "word": "六",
@@ -57,7 +72,10 @@
       "六"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "あの六は大きいです。",
+    "sentence_reading": "あのろくはおおきいです。",
+    "sentence_en": "That six is big."
   },
   {
     "word": "七",
@@ -67,7 +85,10 @@
       "七"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "私は七が好きです。",
+    "sentence_reading": "わたしはなながすきです。",
+    "sentence_en": "I like seven."
   },
   {
     "word": "八",
@@ -77,7 +98,10 @@
       "八"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "私は八が好きです。",
+    "sentence_reading": "わたしははちがすきです。",
+    "sentence_en": "I like eight."
   },
   {
     "word": "九",
@@ -87,7 +111,10 @@
       "九"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "あの九は大きいです。",
+    "sentence_reading": "あのきゅうはおおきいです。",
+    "sentence_en": "That nine is big."
   },
   {
     "word": "十",
@@ -97,7 +124,10 @@
       "十"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今日は十を勉強します。",
+    "sentence_reading": "きょうはじゅうをべんきょうします。",
+    "sentence_en": "Today I study ten."
   },
   {
     "word": "百",
@@ -107,7 +137,10 @@
       "百"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "百について話します。",
+    "sentence_reading": "ひゃくについてはなします。",
+    "sentence_en": "I will talk about hundred."
   },
   {
     "word": "千",
@@ -117,7 +150,10 @@
       "千"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "私は千が好きです。",
+    "sentence_reading": "わたしはせんがすきです。",
+    "sentence_en": "I like thousand."
   },
   {
     "word": "万",
@@ -127,7 +163,10 @@
       "万"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "新しい万を買いました。",
+    "sentence_reading": "あたらしいまんをかいました。",
+    "sentence_en": "I bought a new ten thousand."
   },
   {
     "word": "円",
@@ -137,7 +176,10 @@
       "円"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "これは百円です。",
+    "sentence_reading": "これはひゃくえんです。",
+    "sentence_en": "This is yen."
   },
   {
     "word": "本",
@@ -147,7 +189,10 @@
       "本"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "この本は面白いです。",
+    "sentence_reading": "このほんはおもしろいです。",
+    "sentence_en": "This book is interesting."
   },
   {
     "word": "人",
@@ -157,7 +202,10 @@
       "人"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "人が多いです。",
+    "sentence_reading": "ひとがおおいです。",
+    "sentence_en": "There are many people."
   },
   {
     "word": "日",
@@ -167,7 +215,10 @@
       "日"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今日はいい日です。",
+    "sentence_reading": "きょうはいいひです。",
+    "sentence_en": "Today is a nice day."
   },
   {
     "word": "月",
@@ -177,7 +228,10 @@
       "月"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今月は忙しいです。",
+    "sentence_reading": "こんげつはいそがしいです。",
+    "sentence_en": "This month is busy."
   },
   {
     "word": "火",
@@ -187,7 +241,10 @@
       "火"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "火に注意してください。",
+    "sentence_reading": "ひにちゅういしてください。",
+    "sentence_en": "Please be careful of fire."
   },
   {
     "word": "水",
@@ -197,7 +254,10 @@
       "水"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "水を飲みます。",
+    "sentence_reading": "みずをのみます。",
+    "sentence_en": "I drink water."
   },
   {
     "word": "木",
@@ -207,7 +267,10 @@
       "木"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "木の下で休みます。",
+    "sentence_reading": "きのしたでやすみます。",
+    "sentence_en": "I rest under a tree."
   },
   {
     "word": "金",
@@ -217,7 +280,10 @@
       "金"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "お金がありません。",
+    "sentence_reading": "おかねがありません。",
+    "sentence_en": "I don't have money."
   },
   {
     "word": "土",
@@ -227,7 +293,10 @@
       "土"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "土の上にあります。",
+    "sentence_reading": "つちのうえにあります。",
+    "sentence_en": "It is on the ground."
   },
   {
     "word": "山",
@@ -237,7 +306,10 @@
       "山"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "山に登ります。",
+    "sentence_reading": "やまにのぼります。",
+    "sentence_en": "A sentence with “mountain.”"
   },
   {
     "word": "川",
@@ -247,7 +319,10 @@
       "川"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "川で泳ぎます。",
+    "sentence_reading": "かわでおよぎます。",
+    "sentence_en": "A sentence with “river.”"
   },
   {
     "word": "天",
@@ -257,7 +332,10 @@
       "天"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今日は天を勉強します。",
+    "sentence_reading": "きょうはてんをべんきょうします。",
+    "sentence_en": "Today I study sky heaven."
   },
   {
     "word": "空",
@@ -267,7 +345,10 @@
       "空"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "空が青いです。",
+    "sentence_reading": "そらがあおいです。",
+    "sentence_en": "A sentence with “the sky.”"
   },
   {
     "word": "雨",
@@ -277,7 +358,10 @@
       "雨"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "雨が降っています。",
+    "sentence_reading": "あめがふっています。",
+    "sentence_en": "A sentence with “rain.”"
   },
   {
     "word": "花",
@@ -287,7 +371,10 @@
       "花"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "花がきれいです。",
+    "sentence_reading": "はながきれいです。",
+    "sentence_en": "A sentence with “flower.”"
   },
   {
     "word": "魚",
@@ -297,7 +384,10 @@
       "魚"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "魚を食べます。",
+    "sentence_reading": "さかなをたべます。",
+    "sentence_en": "A sentence with “fish.”"
   },
   {
     "word": "車",
@@ -307,7 +397,10 @@
       "車"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "車で来ました。",
+    "sentence_reading": "くるまできました。",
+    "sentence_en": "I came by car."
   },
   {
     "word": "駅",
@@ -317,7 +410,10 @@
       "駅"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "駅で待ちます。",
+    "sentence_reading": "えきでまちます。",
+    "sentence_en": "I wait at the station."
   },
   {
     "word": "店",
@@ -327,7 +423,10 @@
       "店"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "この店は有名です。",
+    "sentence_reading": "このみせはゆうめいです。",
+    "sentence_en": "A sentence with “shop.”"
   },
   {
     "word": "道",
@@ -337,7 +436,10 @@
       "道"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "この道を行きます。",
+    "sentence_reading": "このみちをいきます。",
+    "sentence_en": "A sentence with “road.”"
   },
   {
     "word": "口",
@@ -347,7 +449,10 @@
       "口"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "口を開けてください。",
+    "sentence_reading": "くちをあけてください。",
+    "sentence_en": "A sentence with “mouth.”"
   },
   {
     "word": "目",
@@ -357,7 +462,10 @@
       "目"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "目が大きいです。",
+    "sentence_reading": "めがおおきいです。",
+    "sentence_en": "A sentence with “eye.”"
   },
   {
     "word": "耳",
@@ -367,7 +475,10 @@
       "耳"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "耳で聞きます。",
+    "sentence_reading": "みみでききます。",
+    "sentence_en": "A sentence with “ear.”"
   },
   {
     "word": "手",
@@ -377,7 +488,10 @@
       "手"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "手を洗います。",
+    "sentence_reading": "てをあらいます。",
+    "sentence_en": "A sentence with “hand.”"
   },
   {
     "word": "足",
@@ -387,7 +501,10 @@
       "足"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "足が痛いです。",
+    "sentence_reading": "あしがいたいです。",
+    "sentence_en": "A sentence with “foot.”"
   },
   {
     "word": "男",
@@ -397,7 +514,10 @@
       "男"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "男の人がいます。",
+    "sentence_reading": "おとこのひとがいます。",
+    "sentence_en": "A sentence with “man.”"
   },
   {
     "word": "女",
@@ -407,7 +527,10 @@
       "女"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "女の子が走ります。",
+    "sentence_reading": "おんなのこがはしります。",
+    "sentence_en": "A sentence with “woman.”"
   },
   {
     "word": "子",
@@ -417,7 +540,10 @@
       "子"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "子供が遊びます。",
+    "sentence_reading": "こどもがあそびます。",
+    "sentence_en": "A sentence with “child.”"
   },
   {
     "word": "父",
@@ -427,7 +553,10 @@
       "父"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "父は会社員です。",
+    "sentence_reading": "ちちはかいしゃいんです。",
+    "sentence_en": "A sentence with “father.”"
   },
   {
     "word": "母",
@@ -437,7 +566,10 @@
       "母"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "母に電話します。",
+    "sentence_reading": "ははにでんわします。",
+    "sentence_en": "A sentence with “mother.”"
   },
   {
     "word": "友",
@@ -447,7 +579,10 @@
       "友"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "良い友達です。",
+    "sentence_reading": "よいともだちです。",
+    "sentence_en": "A sentence with “friend.”"
   },
   {
     "word": "名",
@@ -457,7 +592,10 @@
       "名"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "名前を書いてください。",
+    "sentence_reading": "なまえをかいてください。",
+    "sentence_en": "A sentence with “name.”"
   },
   {
     "word": "国",
@@ -467,7 +605,10 @@
       "国"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "日本の国です。",
+    "sentence_reading": "にほんのくにです。",
+    "sentence_en": "A sentence with “country.”"
   },
   {
     "word": "外",
@@ -477,7 +618,10 @@
       "外"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "外は寒いです。",
+    "sentence_reading": "そとはさむいです。",
+    "sentence_en": "A sentence with “outside.”"
   },
   {
     "word": "中",
@@ -487,7 +631,10 @@
       "中"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "箱の中にあります。",
+    "sentence_reading": "はこのなかにあります。",
+    "sentence_en": "It is inside the box."
   },
   {
     "word": "上",
@@ -497,7 +644,10 @@
       "上"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "机の上にあります。",
+    "sentence_reading": "つくえのうえにあります。",
+    "sentence_en": "It is on the desk."
   },
   {
     "word": "下",
@@ -507,7 +657,10 @@
       "下"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "木の下に座ります。",
+    "sentence_reading": "きのしたにすわります。",
+    "sentence_en": "I sit under the tree."
   },
   {
     "word": "前",
@@ -517,7 +670,10 @@
       "前"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "駅の前で待ちます。",
+    "sentence_reading": "えきのまえでまちます。",
+    "sentence_en": "I wait in front of the station."
   },
   {
     "word": "後",
@@ -527,7 +683,10 @@
       "後"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "後で電話します。",
+    "sentence_reading": "あとででんわします。",
+    "sentence_en": "A sentence with “behind.”"
   },
   {
     "word": "右",
@@ -537,7 +696,10 @@
       "右"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "右に曲がります。",
+    "sentence_reading": "みぎにまがります。",
+    "sentence_en": "A sentence with “right.”"
   },
   {
     "word": "左",
@@ -547,7 +709,10 @@
       "左"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "左を見てください。",
+    "sentence_reading": "ひだりをみてください。",
+    "sentence_en": "Please look at left."
   },
   {
     "word": "北",
@@ -557,7 +722,10 @@
       "北"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "北は寒いです。",
+    "sentence_reading": "きたはさむいです。",
+    "sentence_en": "A sentence with “north.”"
   },
   {
     "word": "南",
@@ -567,7 +735,10 @@
       "南"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "南の国が好きです。",
+    "sentence_reading": "みなみのくにがすきです。",
+    "sentence_en": "I like south."
   },
   {
     "word": "東",
@@ -577,7 +748,10 @@
       "東"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "東へ行きます。",
+    "sentence_reading": "ひがしへいきます。",
+    "sentence_en": "A sentence with “east.”"
   },
   {
     "word": "西",
@@ -587,7 +761,10 @@
       "西"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "西の空が赤いです。",
+    "sentence_reading": "にしのそらがあかいです。",
+    "sentence_en": "A sentence with “west.”"
   },
   {
     "word": "今",
@@ -597,7 +774,10 @@
       "今"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今、時間がありますか。",
+    "sentence_reading": "いま、じかんがありますか。",
+    "sentence_en": "Do you have time now?"
   },
   {
     "word": "先",
@@ -607,7 +787,10 @@
       "先"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "先生に聞きます。",
+    "sentence_reading": "せんせいにききます。",
+    "sentence_en": "I ask the teacher."
   },
   {
     "word": "午",
@@ -617,7 +800,10 @@
       "午"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "これは午です。",
+    "sentence_reading": "これはごです。",
+    "sentence_en": "This is noon hour."
   },
   {
     "word": "半",
@@ -627,7 +813,10 @@
       "半"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "半がわかります。",
+    "sentence_reading": "はんがわかります。",
+    "sentence_en": "I understand half."
   },
   {
     "word": "分",
@@ -637,7 +826,10 @@
       "分"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "分について話します。",
+    "sentence_reading": "ふんについてはなします。",
+    "sentence_en": "I will talk about a minute."
   },
   {
     "word": "時",
@@ -647,7 +839,10 @@
       "時"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今、何時ですか。",
+    "sentence_reading": "いま、なんじですか。",
+    "sentence_en": "What time is it now?"
   },
   {
     "word": "間",
@@ -657,7 +852,10 @@
       "間"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "時間があります。",
+    "sentence_reading": "じかんがあります。",
+    "sentence_en": "I have time."
   },
   {
     "word": "週",
@@ -667,7 +865,10 @@
       "週"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今週は忙しいです。",
+    "sentence_reading": "こんしゅうはいそがしいです。",
+    "sentence_en": "A sentence with “week.”"
   },
   {
     "word": "年",
@@ -677,7 +878,10 @@
       "年"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "来年日本へ行きます。",
+    "sentence_reading": "らいねんにほんへいきます。",
+    "sentence_en": "I will go to Japan next year."
   },
   {
     "word": "何",
@@ -687,7 +891,10 @@
       "何"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "これは何ですか。",
+    "sentence_reading": "これはなんですか。",
+    "sentence_en": "What is this?"
   },
   {
     "word": "少",
@@ -697,7 +904,10 @@
       "少"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "時間が少ないです。",
+    "sentence_reading": "じかんがすくないです。",
+    "sentence_en": "A sentence with “a little.”"
   },
   {
     "word": "多",
@@ -707,7 +917,10 @@
       "多"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "人が多いです。",
+    "sentence_reading": "ひとがおおいです。",
+    "sentence_en": "There are many people."
   },
   {
     "word": "大",
@@ -717,7 +930,10 @@
       "大"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "大きい犬です。",
+    "sentence_reading": "おおきいいぬです。",
+    "sentence_en": "A sentence with “large.”"
   },
   {
     "word": "小",
@@ -727,7 +943,10 @@
       "小"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "小さい猫です。",
+    "sentence_reading": "ちいさいねこです。",
+    "sentence_en": "A sentence with “little.”"
   },
   {
     "word": "長",
@@ -737,7 +956,10 @@
       "長"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "髪が長いです。",
+    "sentence_reading": "かみがながいです。",
+    "sentence_en": "A sentence with “lengthy.”"
   },
   {
     "word": "高",
@@ -747,7 +969,10 @@
       "高"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "その建物は高いです。",
+    "sentence_reading": "そのたてものはたかいです。",
+    "sentence_en": "A sentence with “tall.”"
   },
   {
     "word": "安",
@@ -757,7 +982,10 @@
       "安"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "値段が安いです。",
+    "sentence_reading": "ねだんがやすいです。",
+    "sentence_en": "A sentence with “inexpensive.”"
   },
   {
     "word": "新",
@@ -767,7 +995,10 @@
       "新"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "新しい靴です。",
+    "sentence_reading": "あたらしいくつです。",
+    "sentence_en": "A sentence with “newness.”"
   },
   {
     "word": "古",
@@ -777,7 +1008,10 @@
       "古"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "古い寺です。",
+    "sentence_reading": "ふるいてらです。",
+    "sentence_en": "A sentence with “aged.”"
   },
   {
     "word": "白",
@@ -787,7 +1021,10 @@
       "白"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "白い花です。",
+    "sentence_reading": "しろいはなです。",
+    "sentence_en": "A sentence with “white.”"
   },
   {
     "word": "行",
@@ -797,7 +1034,10 @@
       "行"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "学校へ行きます。",
+    "sentence_reading": "がっこうへいきます。",
+    "sentence_en": "I go to school."
   },
   {
     "word": "来",
@@ -807,7 +1047,10 @@
       "来"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "明日来てください。",
+    "sentence_reading": "あしたきてください。",
+    "sentence_en": "Please come tomorrow."
   },
   {
     "word": "出",
@@ -817,7 +1060,10 @@
       "出"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "外へ出ます。",
+    "sentence_reading": "そとへでます。",
+    "sentence_en": "I go outside."
   },
   {
     "word": "入",
@@ -827,7 +1073,10 @@
       "入"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "部屋に入ります。",
+    "sentence_reading": "へやにはいります。",
+    "sentence_en": "I enter the room."
   },
   {
     "word": "見",
@@ -837,7 +1086,10 @@
       "見"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "それを見てください。",
+    "sentence_reading": "それをみてください。",
+    "sentence_en": "Please look at that."
   },
   {
     "word": "聞",
@@ -847,7 +1099,10 @@
       "聞"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "音楽を聞きます。",
+    "sentence_reading": "おんがくをききます。",
+    "sentence_en": "I listen to music."
   },
   {
     "word": "言",
@@ -857,7 +1112,10 @@
       "言"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "もう一度言ってください。",
+    "sentence_reading": "もういちどいってください。",
+    "sentence_en": "A sentence with “speech.”"
   },
   {
     "word": "話",
@@ -867,7 +1125,10 @@
       "話"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "友達と話します。",
+    "sentence_reading": "ともだちとはなします。",
+    "sentence_en": "I talk with a friend."
   },
   {
     "word": "語",
@@ -877,7 +1138,10 @@
       "語"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "日本語が話せます。",
+    "sentence_reading": "にほんごがはなせます。",
+    "sentence_en": "I can speak Japanese."
   },
   {
     "word": "読",
@@ -887,7 +1151,10 @@
       "読"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "本を読みます。",
+    "sentence_reading": "ほんをよみます。",
+    "sentence_en": "I read a book."
   },
   {
     "word": "書",
@@ -897,7 +1164,10 @@
       "書"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "手紙を書きます。",
+    "sentence_reading": "てがみをかきます。",
+    "sentence_en": "I write a letter."
   },
   {
     "word": "買",
@@ -907,7 +1177,10 @@
       "買"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "野菜を買います。",
+    "sentence_reading": "やさいをかいます。",
+    "sentence_en": "A sentence with “purchase.”"
   },
   {
     "word": "食",
@@ -917,7 +1190,10 @@
       "食"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "ごはんを食べます。",
+    "sentence_reading": "ごはんをたべます。",
+    "sentence_en": "I eat a meal."
   },
   {
     "word": "飲",
@@ -927,7 +1203,10 @@
       "飲"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "お茶を飲みます。",
+    "sentence_reading": "おちゃをのみます。",
+    "sentence_en": "I drink tea."
   },
   {
     "word": "休",
@@ -937,7 +1216,10 @@
       "休"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今日は休みます。",
+    "sentence_reading": "きょうはやすみます。",
+    "sentence_en": "I take the day off today."
   },
   {
     "word": "会",
@@ -947,7 +1229,10 @@
       "会"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "友達に会います。",
+    "sentence_reading": "ともだちにあいます。",
+    "sentence_en": "I meet a friend."
   },
   {
     "word": "社",
@@ -957,7 +1242,10 @@
       "社"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "会社で働きます。",
+    "sentence_reading": "かいしゃではたらきます。",
+    "sentence_en": "I work at a company."
   },
   {
     "word": "学",
@@ -967,7 +1255,10 @@
       "学"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "日本語を学んでいます。",
+    "sentence_reading": "にほんごをまなんでいます。",
+    "sentence_en": "I am learning Japanese."
   },
   {
     "word": "校",
@@ -977,7 +1268,10 @@
       "校"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "学校は遠いです。",
+    "sentence_reading": "がっこうはとおいです。",
+    "sentence_en": "School is far."
   },
   {
     "word": "生",
@@ -987,7 +1281,10 @@
       "生"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "学生です。",
+    "sentence_reading": "がくせいです。",
+    "sentence_en": "I am a student."
   },
   {
     "word": "気",
@@ -997,7 +1294,10 @@
       "気"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "元気ですか。",
+    "sentence_reading": "げんきですか。",
+    "sentence_en": "How are you?"
   },
   {
     "word": "電",
@@ -1007,7 +1307,10 @@
       "電"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "電車で行きます。",
+    "sentence_reading": "でんしゃでいきます。",
+    "sentence_en": "I go by train."
   },
   {
     "word": "一つ",
@@ -1196,7 +1499,10 @@
       "日"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "今日はいい天気です。",
+    "sentence_reading": "きょうはいいてんきです。",
+    "sentence_en": "Today the weather is nice."
   },
   {
     "word": "毎日",
@@ -1207,7 +1513,10 @@
       "日"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "毎日日本語を勉強します。",
+    "sentence_reading": "まいにちにほんごをべんきょうします。",
+    "sentence_en": "I study Japanese every day."
   },
   {
     "word": "毎週",
@@ -2028,7 +2337,10 @@
       "立"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "私は立つが好きです。",
+    "sentence_reading": "わたしはたつがすきです。",
+    "sentence_en": "I like to stand up."
   },
   {
     "word": "学ぶ",
@@ -2294,7 +2606,10 @@
       "聞"
     ],
     "kana_only": false,
-    "level": "N5"
+    "level": "N5",
+    "sentence": "これは毎日新聞です。",
+    "sentence_reading": "これはまいにちしんぶんです。",
+    "sentence_en": "This is daily newspaper."
   },
   {
     "word": "日本語",
@@ -2727,7 +3042,10 @@
       "足"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "勉強不足がわかります。",
+    "sentence_reading": "べんきょうぶそくがわかります。",
+    "sentence_en": "I understand lack of study."
   },
   {
     "word": "家",
@@ -2737,7 +3055,10 @@
       "家"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "家に帰ります。",
+    "sentence_reading": "いえにかえります。",
+    "sentence_en": "A sentence with “one's house.”"
   },
   {
     "word": "運転手",
@@ -2749,7 +3070,10 @@
       "手"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは運転手です。",
+    "sentence_reading": "これはうんてんしゅです。",
+    "sentence_en": "This is a driver."
   },
   {
     "word": "売る",
@@ -2759,7 +3083,10 @@
       "売"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは売るです。",
+    "sentence_reading": "これはうるです。",
+    "sentence_en": "This is to sell."
   },
   {
     "word": "映画館",
@@ -2771,7 +3098,10 @@
       "館"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "映画館について話します。",
+    "sentence_reading": "えいがかんについてはなします。",
+    "sentence_en": "I will talk about cinema."
   },
   {
     "word": "歩く",
@@ -2781,7 +3111,10 @@
       "歩"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい歩くを買いました。",
+    "sentence_reading": "あたらしいあるくをかいました。",
+    "sentence_en": "I bought a new to walk."
   },
   {
     "word": "研究室",
@@ -2793,7 +3126,10 @@
       "室"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "研究室を見てください。",
+    "sentence_reading": "けんきゅうしつをみてください。",
+    "sentence_en": "Please look at a study room."
   },
   {
     "word": "走る",
@@ -2803,7 +3139,10 @@
       "走"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "走るについて話します。",
+    "sentence_reading": "はしるについてはなします。",
+    "sentence_en": "I will talk about to run."
   },
   {
     "word": "待合室",
@@ -2815,7 +3154,10 @@
       "室"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は待合室を勉強します。",
+    "sentence_reading": "きょうはまちあいしつをべんきょうします。",
+    "sentence_en": "Today I study waiting room."
   },
   {
     "word": "乗る",
@@ -2837,7 +3179,10 @@
       "会"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は運動会が好きです。",
+    "sentence_reading": "わたしはうんどうかいがすきです。",
+    "sentence_en": "I like sports day."
   },
   {
     "word": "着る",
@@ -2847,7 +3192,10 @@
       "着"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "着るについて話します。",
+    "sentence_reading": "きるについてはなします。",
+    "sentence_en": "I will talk about to put on."
   },
   {
     "word": "青春時代",
@@ -2861,7 +3209,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 時",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "青春時代について話します。",
+    "sentence_reading": "せいしゅんじだいについてはなします。",
+    "sentence_en": "I will talk about youthful years."
   },
   {
     "word": "力",
@@ -2871,7 +3222,10 @@
       "力"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "力が強いです。",
+    "sentence_reading": "ちからがつよいです。",
+    "sentence_en": "A sentence with “strength.”"
   },
   {
     "word": "待つ",
@@ -2881,7 +3235,10 @@
       "待"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの待つは大きいです。",
+    "sentence_reading": "あのまつはおおきいです。",
+    "sentence_en": "That to wait is big."
   },
   {
     "word": "体重計",
@@ -2903,7 +3260,10 @@
       "心"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "心が落ち着きます。",
+    "sentence_reading": "こころがおちつきます。",
+    "sentence_en": "A sentence with “the heart.”"
   },
   {
     "word": "持つ",
@@ -2913,7 +3273,10 @@
       "持"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は持つを勉強します。",
+    "sentence_reading": "きょうはもつをべんきょうします。",
+    "sentence_en": "Today I study to hold."
   },
   {
     "word": "写真集",
@@ -2925,7 +3288,10 @@
       "集"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は写真集を勉強します。",
+    "sentence_reading": "きょうはしゃしんしゅうをべんきょうします。",
+    "sentence_en": "Today I study photo book."
   },
   {
     "word": "声",
@@ -2935,7 +3301,10 @@
       "声"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "声が大きいです。",
+    "sentence_reading": "こえがおおきいです。",
+    "sentence_en": "A sentence with “a voice.”"
   },
   {
     "word": "使う",
@@ -2945,7 +3314,10 @@
       "使"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は使うが好きです。",
+    "sentence_reading": "わたしはつかうがすきです。",
+    "sentence_en": "I like to employ."
   },
   {
     "word": "音楽会",
@@ -2957,7 +3329,10 @@
       "会"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は音楽会が好きです。",
+    "sentence_reading": "わたしはおんがくかいがすきです。",
+    "sentence_en": "I like a concert."
   },
   {
     "word": "顔",
@@ -2967,7 +3342,10 @@
       "顔"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "顔を洗います。",
+    "sentence_reading": "かおをあらいます。",
+    "sentence_en": "A sentence with “a face.”"
   },
   {
     "word": "作る",
@@ -2977,7 +3355,10 @@
       "作"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "作るがわかります。",
+    "sentence_reading": "つくるがわかります。",
+    "sentence_en": "I understand to create."
   },
   {
     "word": "計画",
@@ -2998,7 +3379,10 @@
       "頭"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "頭が痛いです。",
+    "sentence_reading": "あたまがいたいです。",
+    "sentence_en": "A sentence with “the head.”"
   },
   {
     "word": "知る",
@@ -3008,7 +3392,10 @@
       "知"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は知るが好きです。",
+    "sentence_reading": "わたしはしるがすきです。",
+    "sentence_en": "I like to know."
   },
   {
     "word": "場合",
@@ -3029,7 +3416,10 @@
       "体"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "体を動かします。",
+    "sentence_reading": "からだをうごかします。",
+    "sentence_en": "A sentence with “the body.”"
   },
   {
     "word": "思う",
@@ -3039,7 +3429,10 @@
       "思"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は思うを勉強します。",
+    "sentence_reading": "きょうはおもうをべんきょうします。",
+    "sentence_en": "Today I study to think."
   },
   {
     "word": "場所",
@@ -3060,7 +3453,10 @@
       "肉"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "肉が好きです。",
+    "sentence_reading": "にくがすきです。",
+    "sentence_en": "I like meat."
   },
   {
     "word": "考える",
@@ -3070,7 +3466,10 @@
       "考"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "考えるを見てください。",
+    "sentence_reading": "かんがえるをみてください。",
+    "sentence_en": "Please look at to ponder."
   },
   {
     "word": "地図",
@@ -3081,7 +3480,10 @@
       "図"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "地図について話します。",
+    "sentence_reading": "ちずについてはなします。",
+    "sentence_en": "I will talk about a map."
   },
   {
     "word": "教える",
@@ -3091,7 +3493,10 @@
       "教"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "教えるがわかります。",
+    "sentence_reading": "おしえるがわかります。",
+    "sentence_en": "I understand to instruct."
   },
   {
     "word": "自動車",
@@ -3104,7 +3509,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 車",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "自動車がわかります。",
+    "sentence_reading": "じどうしゃがわかります。",
+    "sentence_en": "I understand an automobile."
   },
   {
     "word": "鳥",
@@ -3114,7 +3522,10 @@
       "鳥"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "鳥が飛んでいます。",
+    "sentence_reading": "とりがとんでいます。",
+    "sentence_en": "A sentence with “a bird.”"
   },
   {
     "word": "習う",
@@ -3124,7 +3535,10 @@
       "習"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "習うについて話します。",
+    "sentence_reading": "ならうについてはなします。",
+    "sentence_en": "I will talk about to practice learning."
   },
   {
     "word": "自転車",
@@ -3147,7 +3561,10 @@
       "犬"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "犬と散歩します。",
+    "sentence_reading": "いぬとさんぽします。",
+    "sentence_en": "A sentence with “a dog.”"
   },
   {
     "word": "始める",
@@ -3157,7 +3574,10 @@
       "始"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "始めるについて話します。",
+    "sentence_reading": "はじめるについてはなします。",
+    "sentence_en": "I will talk about to start."
   },
   {
     "word": "家族",
@@ -3168,7 +3588,10 @@
       "族"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "家族を見てください。",
+    "sentence_reading": "かぞくをみてください。",
+    "sentence_en": "Please look at one's family."
   },
   {
     "word": "牛",
@@ -3178,7 +3601,10 @@
       "牛"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "牛が大きいです。",
+    "sentence_reading": "うしがおおきいです。",
+    "sentence_en": "A sentence with “a cow.”"
   },
   {
     "word": "終わる",
@@ -3188,7 +3614,10 @@
       "終"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は終わるを勉強します。",
+    "sentence_reading": "きょうはおわるをべんきょうします。",
+    "sentence_en": "Today I study to come to an end."
   },
   {
     "word": "兄弟",
@@ -3209,7 +3638,10 @@
       "帰"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "帰るについて話します。",
+    "sentence_reading": "かえるについてはなします。",
+    "sentence_en": "I will talk about to return home."
   },
   {
     "word": "姉妹",
@@ -3230,7 +3662,10 @@
       "茶"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "お茶をどうぞ。",
+    "sentence_reading": "おちゃをどうぞ。",
+    "sentence_en": "A sentence with “tea.”"
   },
   {
     "word": "病院",
@@ -3241,7 +3676,10 @@
       "院"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は病院を勉強します。",
+    "sentence_reading": "きょうはびょういんをべんきょうします。",
+    "sentence_en": "Today I study a hospital."
   },
   {
     "word": "色",
@@ -3251,7 +3689,10 @@
       "色"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "色がきれいです。",
+    "sentence_reading": "いろがきれいです。",
+    "sentence_en": "A sentence with “a color.”"
   },
   {
     "word": "働く",
@@ -3261,7 +3702,10 @@
       "働"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は働くが好きです。",
+    "sentence_reading": "わたしははたらくがすきです。",
+    "sentence_en": "I like to do work."
   },
   {
     "word": "医者",
@@ -3272,7 +3716,10 @@
       "者"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの医者は大きいです。",
+    "sentence_reading": "あのいしゃはおおきいです。",
+    "sentence_en": "That a doctor is big."
   },
   {
     "word": "紙",
@@ -3282,7 +3729,10 @@
       "紙"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "紙に書きます。",
+    "sentence_reading": "かみにかきます。",
+    "sentence_en": "A sentence with “paper.”"
   },
   {
     "word": "起きる",
@@ -3292,7 +3742,10 @@
       "起"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "起きるがわかります。",
+    "sentence_reading": "おきるがわかります。",
+    "sentence_en": "I understand to rise."
   },
   {
     "word": "社員",
@@ -3303,7 +3756,10 @@
       "員"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは社員です。",
+    "sentence_reading": "これはしゃいんです。",
+    "sentence_en": "This is an employee."
   },
   {
     "word": "服",
@@ -3313,7 +3769,10 @@
       "服"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "洋服を買います。",
+    "sentence_reading": "ようふくをかいます。",
+    "sentence_en": "A sentence with “clothing.”"
   },
   {
     "word": "仕事",
@@ -3324,7 +3783,10 @@
       "事"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は仕事が好きです。",
+    "sentence_reading": "わたしはしごとがすきです。",
+    "sentence_en": "I like one's job."
   },
   {
     "word": "薬",
@@ -3334,7 +3796,10 @@
       "薬"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "薬を飲みます。",
+    "sentence_reading": "くすりをのみます。",
+    "sentence_en": "A sentence with “medicine.”"
   },
   {
     "word": "開ける",
@@ -3344,7 +3809,10 @@
       "開"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "開けるについて話します。",
+    "sentence_reading": "あけるについてはなします。",
+    "sentence_en": "I will talk about to open up."
   },
   {
     "word": "建物",
@@ -3365,7 +3833,10 @@
       "音"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "音が大きいです。",
+    "sentence_reading": "おとがおおきいです。",
+    "sentence_en": "A sentence with “a sound.”"
   },
   {
     "word": "止める",
@@ -3375,7 +3846,10 @@
       "止"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの止めるは大きいです。",
+    "sentence_reading": "あのとめるはおおきいです。",
+    "sentence_en": "That to halt is big."
   },
   {
     "word": "勉強",
@@ -3396,7 +3870,10 @@
       "歌"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "歌を歌います。",
+    "sentence_reading": "うたをうたいます。",
+    "sentence_en": "A sentence with “a song.”"
   },
   {
     "word": "進む",
@@ -3406,7 +3883,10 @@
       "進"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "進むがわかります。",
+    "sentence_reading": "すすむがわかります。",
+    "sentence_en": "I understand to go forward."
   },
   {
     "word": "試験",
@@ -3417,7 +3897,10 @@
       "験"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "試験を見てください。",
+    "sentence_reading": "しけんをみてください。",
+    "sentence_en": "Please look at a test."
   },
   {
     "word": "図",
@@ -3427,7 +3910,10 @@
       "図"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "地図を見ます。",
+    "sentence_reading": "ちずをみます。",
+    "sentence_en": "A sentence with “a diagram.”"
   },
   {
     "word": "通る",
@@ -3437,7 +3923,10 @@
       "通"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは通るです。",
+    "sentence_reading": "これはとおるです。",
+    "sentence_en": "This is to go through."
   },
   {
     "word": "問題",
@@ -3448,7 +3937,10 @@
       "題"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい問題を買いました。",
+    "sentence_reading": "あたらしいもんだいをかいました。",
+    "sentence_en": "I bought a new an issue."
   },
   {
     "word": "字",
@@ -3458,7 +3950,10 @@
       "字"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "漢字を書きます。",
+    "sentence_reading": "かんじをかきます。",
+    "sentence_en": "A sentence with “a character.”"
   },
   {
     "word": "送る",
@@ -3468,7 +3963,10 @@
       "送"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい送るを買いました。",
+    "sentence_reading": "あたらしいおくるをかいました。",
+    "sentence_en": "I bought a new to dispatch."
   },
   {
     "word": "質問",
@@ -3479,7 +3977,10 @@
       "問"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは質問です。",
+    "sentence_reading": "これはしつもんです。",
+    "sentence_en": "This is a query."
   },
   {
     "word": "文",
@@ -3489,7 +3990,10 @@
       "文"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "文章を読んでください。",
+    "sentence_reading": "ぶんしょうをよんでください。",
+    "sentence_en": "A sentence with “a sentence.”"
   },
   {
     "word": "借りる",
@@ -3499,7 +4003,10 @@
       "借"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "借りるを見てください。",
+    "sentence_reading": "かりるをみてください。",
+    "sentence_en": "Please look at to rent."
   },
   {
     "word": "意味",
@@ -3520,7 +4027,10 @@
       "題"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "宿題があります。",
+    "sentence_reading": "しゅくだいがあります。",
+    "sentence_en": "A sentence with “a topic.”"
   },
   {
     "word": "貸す",
@@ -3530,7 +4040,10 @@
       "貸"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "貸すがわかります。",
+    "sentence_reading": "かすがわかります。",
+    "sentence_en": "I understand to loan."
   },
   {
     "word": "注意",
@@ -3551,7 +4064,10 @@
       "門"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは門です。",
+    "sentence_reading": "これはもんです。",
+    "sentence_en": "This is a gate."
   },
   {
     "word": "切る",
@@ -3561,7 +4077,10 @@
       "切"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの切るは大きいです。",
+    "sentence_reading": "あのきるはおおきいです。",
+    "sentence_en": "That to slice is big."
   },
   {
     "word": "漢字",
@@ -3572,7 +4091,10 @@
       "字"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは漢字です。",
+    "sentence_reading": "これはかんじです。",
+    "sentence_en": "This is Chinese characters."
   },
   {
     "word": "洗う",
@@ -3582,7 +4104,10 @@
       "洗"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は洗うが好きです。",
+    "sentence_reading": "わたしはあらうがすきです。",
+    "sentence_en": "I like to cleanse."
   },
   {
     "word": "写真",
@@ -3603,7 +4128,10 @@
       "町"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "町を散歩します。",
+    "sentence_reading": "まちをさんぽします。",
+    "sentence_en": "A sentence with “a town.”"
   },
   {
     "word": "死ぬ",
@@ -3613,7 +4141,10 @@
       "死"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は死ぬが好きです。",
+    "sentence_reading": "わたしはしぬがすきです。",
+    "sentence_en": "I like to pass away."
   },
   {
     "word": "夕飯",
@@ -3624,7 +4155,10 @@
       "飯"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は夕飯が好きです。",
+    "sentence_reading": "わたしはゆうはんがすきです。",
+    "sentence_en": "I like the evening meal."
   },
   {
     "word": "市",
@@ -3634,7 +4168,10 @@
       "市"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "市役所へ行きます。",
+    "sentence_reading": "しやくしょへいきます。",
+    "sentence_en": "A sentence with “a city.”"
   },
   {
     "word": "住む",
@@ -3644,7 +4181,10 @@
       "住"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい住むを買いました。",
+    "sentence_reading": "あたらしいすむをかいました。",
+    "sentence_en": "I bought a new to dwell."
   },
   {
     "word": "料理",
@@ -3655,7 +4195,10 @@
       "理"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの料理は大きいです。",
+    "sentence_reading": "あのりょうりはおおきいです。",
+    "sentence_en": "That cuisine is big."
   },
   {
     "word": "区",
@@ -3665,7 +4208,10 @@
       "区"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "この区に住んでいます。",
+    "sentence_reading": "このくにすんでいます。",
+    "sentence_en": "A sentence with “a ward.”"
   },
   {
     "word": "急ぐ",
@@ -3675,7 +4221,10 @@
       "急"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの急ぐは大きいです。",
+    "sentence_reading": "あのいそぐはおおきいです。",
+    "sentence_en": "That to rush is big."
   },
   {
     "word": "飲み物",
@@ -3696,7 +4245,10 @@
       "海"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "海で泳ぎます。",
+    "sentence_reading": "うみでおよぎます。",
+    "sentence_en": "A sentence with “the sea.”"
   },
   {
     "word": "弱い",
@@ -3727,7 +4279,10 @@
       "野"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "野について話します。",
+    "sentence_reading": "のについてはなします。",
+    "sentence_en": "I will talk about a field."
   },
   {
     "word": "重い",
@@ -3737,7 +4292,10 @@
       "重"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの重いは大きいです。",
+    "sentence_reading": "あのおもいはおおきいです。",
+    "sentence_en": "That weighing much is big."
   },
   {
     "word": "花屋",
@@ -3779,7 +4337,10 @@
       "風"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "風が強いです。",
+    "sentence_reading": "かぜがつよいです。",
+    "sentence_en": "A sentence with “the wind.”"
   },
   {
     "word": "洋服",
@@ -3800,7 +4361,10 @@
       "春"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "春が好きです。",
+    "sentence_reading": "はるがすきです。",
+    "sentence_en": "I like spring."
   },
   {
     "word": "有料",
@@ -3821,7 +4385,10 @@
       "夏"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "夏に泳ぎます。",
+    "sentence_reading": "なつにおよぎます。",
+    "sentence_en": "A sentence with “summer.”"
   },
   {
     "word": "特別",
@@ -3832,7 +4399,10 @@
       "別"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は特別が好きです。",
+    "sentence_reading": "わたしはとくべつがすきです。",
+    "sentence_en": "I like extraordinary."
   },
   {
     "word": "秋",
@@ -3842,7 +4412,10 @@
       "秋"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "秋は涼しいです。",
+    "sentence_reading": "あきはすずしいです。",
+    "sentence_en": "A sentence with “autumn.”"
   },
   {
     "word": "早い",
@@ -3852,7 +4425,10 @@
       "早"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は早いを勉強します。",
+    "sentence_reading": "きょうははやいをべんきょうします。",
+    "sentence_en": "Today I study soon."
   },
   {
     "word": "世界",
@@ -3873,7 +4449,10 @@
       "冬"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "冬は雪が降ります。",
+    "sentence_reading": "ふゆはゆきがふります。",
+    "sentence_en": "A sentence with “winter.”"
   },
   {
     "word": "近い",
@@ -3883,7 +4462,10 @@
       "近"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は近いを勉強します。",
+    "sentence_reading": "きょうはちかいをべんきょうします。",
+    "sentence_en": "Today I study close by."
   },
   {
     "word": "研究",
@@ -3904,7 +4486,10 @@
       "朝"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "朝ごはんを食べます。",
+    "sentence_reading": "あさごはんをたべます。",
+    "sentence_en": "A sentence with “morning.”"
   },
   {
     "word": "遠い",
@@ -3935,7 +4520,10 @@
       "昼"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "昼に会いましょう。",
+    "sentence_reading": "ひるにあいましょう。",
+    "sentence_en": "A sentence with “noon.”"
   },
   {
     "word": "広い",
@@ -3945,7 +4533,10 @@
       "広"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は広いが好きです。",
+    "sentence_reading": "わたしはひろいがすきです。",
+    "sentence_en": "I like broad."
   },
   {
     "word": "住所",
@@ -3966,7 +4557,10 @@
       "夜"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "夜、本を読みます。",
+    "sentence_reading": "よる、ほんをよみます。",
+    "sentence_en": "A sentence with “night.”"
   },
   {
     "word": "説明",
@@ -3987,7 +4581,10 @@
       "兄"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "兄がいます。",
+    "sentence_reading": "あにがいます。",
+    "sentence_en": "A sentence with “one's older brother.”"
   },
   {
     "word": "仕方",
@@ -4008,7 +4605,10 @@
       "弟"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "弟と遊びます。",
+    "sentence_reading": "おとうととあそびます。",
+    "sentence_en": "A sentence with “one's younger brother.”"
   },
   {
     "word": "使い方",
@@ -4029,7 +4629,10 @@
       "姉"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "姉は先生です。",
+    "sentence_reading": "あねはせんせいです。",
+    "sentence_en": "A sentence with “one's older sister.”"
   },
   {
     "word": "駅員",
@@ -4050,7 +4653,10 @@
       "妹"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "妹がいます。",
+    "sentence_reading": "いもうとがいます。",
+    "sentence_en": "A sentence with “one's younger sister.”"
   },
   {
     "word": "悪口",
@@ -4071,7 +4677,10 @@
       "親"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "両親に会います。",
+    "sentence_reading": "りょうしんにあいます。",
+    "sentence_en": "A sentence with “a parent.”"
   },
   {
     "word": "開始",
@@ -4092,7 +4701,10 @@
       "私"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は学生です。",
+    "sentence_reading": "わたしはがくせいです。",
+    "sentence_en": "I am a student."
   },
   {
     "word": "地区",
@@ -4113,7 +4725,10 @@
       "事"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "仕事が終わりました。",
+    "sentence_reading": "しごとがおわりました。",
+    "sentence_en": "A sentence with “a matter.”"
   },
   {
     "word": "古代",
@@ -4134,7 +4749,10 @@
       "用"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これを使います。",
+    "sentence_reading": "これをつかいます。",
+    "sentence_en": "A sentence with “business use.”"
   },
   {
     "word": "作品",
@@ -4145,7 +4763,10 @@
       "品"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "作品について話します。",
+    "sentence_reading": "さくひんについてはなします。",
+    "sentence_en": "I will talk about a creation."
   },
   {
     "word": "銀",
@@ -4155,7 +4776,10 @@
       "銀"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "銀行へ行きます。",
+    "sentence_reading": "ぎんこうへいきます。",
+    "sentence_en": "A sentence with “silver.”"
   },
   {
     "word": "死者",
@@ -4176,7 +4800,10 @@
       "味"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "味がいいです。",
+    "sentence_reading": "あじがいいです。",
+    "sentence_en": "A sentence with “a taste.”"
   },
   {
     "word": "私立",
@@ -4197,7 +4824,10 @@
       "悪"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "天気が悪いです。",
+    "sentence_reading": "てんきがわるいです。",
+    "sentence_en": "A sentence with “evil.”"
   },
   {
     "word": "用紙",
@@ -4218,7 +4848,10 @@
       "説"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "説を見てください。",
+    "sentence_reading": "せつをみてください。",
+    "sentence_en": "Please look at a theory."
   },
   {
     "word": "持病",
@@ -4239,7 +4872,10 @@
       "乗"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "バスに乗ります。",
+    "sentence_reading": "バスにのります。",
+    "sentence_en": "A sentence with “a ride.”"
   },
   {
     "word": "特色",
@@ -4260,7 +4896,10 @@
       "低"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "低について話します。",
+    "sentence_reading": "ひくみについてはなします。",
+    "sentence_en": "I will talk about lowness."
   },
   {
     "word": "新聞社",
@@ -4283,7 +4922,10 @@
       "遠"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "学校が遠いです。",
+    "sentence_reading": "がっこうがとおいです。",
+    "sentence_en": "A sentence with “farness.”"
   },
   {
     "word": "親族",
@@ -4304,7 +4946,10 @@
       "暗"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい暗を買いました。",
+    "sentence_reading": "あたらしいくらやみをかいました。",
+    "sentence_en": "I bought a new darkness."
   },
   {
     "word": "青空",
@@ -4325,7 +4970,10 @@
       "寒"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は寒いです。",
+    "sentence_reading": "きょうはさむいです。",
+    "sentence_en": "A sentence with “coldness.”"
   },
   {
     "word": "早朝",
@@ -4346,7 +4994,10 @@
       "暑"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "夏は暑いです。",
+    "sentence_reading": "なつはあついです。",
+    "sentence_en": "A sentence with “heat.”"
   },
   {
     "word": "弱",
@@ -4356,7 +5007,10 @@
       "弱"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "体が弱いです。",
+    "sentence_reading": "からだがよわいです。",
+    "sentence_en": "A sentence with “weakness.”"
   },
   {
     "word": "注目",
@@ -4367,7 +5021,10 @@
       "目"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "注目を見てください。",
+    "sentence_reading": "ちゅうもくをみてください。",
+    "sentence_en": "Please look at focus of eyes."
   },
   {
     "word": "軽",
@@ -4377,7 +5034,10 @@
       "軽"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "この鞄は軽いです。",
+    "sentence_reading": "このかばんはかるいです。",
+    "sentence_en": "A sentence with “lightness.”"
   },
   {
     "word": "歩道",
@@ -4399,7 +5059,10 @@
       "業"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい工業を買いました。",
+    "sentence_reading": "あたらしいこうぎょうをかいました。",
+    "sentence_en": "I bought a new manufacturing industry."
   },
   {
     "word": "品質",
@@ -4420,7 +5083,10 @@
       "物"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "忘れ物です。",
+    "sentence_reading": "わすれものです。",
+    "sentence_en": "A sentence with “a thing.”"
   },
   {
     "word": "旅館",
@@ -4441,7 +5107,10 @@
       "所"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "住所を書いてください。",
+    "sentence_reading": "じゅうしょをかいてください。",
+    "sentence_en": "A sentence with “a place.”"
   },
   {
     "word": "医院",
@@ -4462,7 +5131,10 @@
       "場"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "会場はあそこです。",
+    "sentence_reading": "かいじょうはあそこです。",
+    "sentence_en": "A sentence with “a spot.”"
   },
   {
     "word": "台風",
@@ -4483,7 +5155,10 @@
       "室"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "教室は広いです。",
+    "sentence_reading": "きょうしつはひろいです。",
+    "sentence_en": "A sentence with “a room.”"
   },
   {
     "word": "思考",
@@ -4504,7 +5179,10 @@
       "屋"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "花屋で買います。",
+    "sentence_reading": "はなやでかいます。",
+    "sentence_en": "A sentence with “a shop building.”"
   },
   {
     "word": "不明",
@@ -4526,7 +5204,10 @@
       "飯"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "赤飯がわかります。",
+    "sentence_reading": "せきはんがわかります。",
+    "sentence_en": "I understand festive red rice."
   },
   {
     "word": "漢文",
@@ -4560,7 +5241,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 行",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの旅行は大きいです。",
+    "sentence_reading": "あのりょこうはおおきいです。",
+    "sentence_en": "That a journey is big."
   },
   {
     "word": "出発",
@@ -4572,7 +5256,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 出",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "出発について話します。",
+    "sentence_reading": "しゅっぱつについてはなします。",
+    "sentence_en": "I will talk about setting out."
   },
   {
     "word": "主人",
@@ -4584,7 +5271,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "新しい主人を買いました。",
+    "sentence_reading": "あたらしいしゅじんをかいました。",
+    "sentence_en": "I bought a new one's husband."
   },
   {
     "word": "工場",
@@ -4687,7 +5377,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 食",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は夕食が好きです。",
+    "sentence_reading": "わたしはゆうしょくがすきです。",
+    "sentence_en": "I like supper."
   },
   {
     "word": "買い物",
@@ -4721,7 +5414,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 外",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は以外を勉強します。",
+    "sentence_reading": "きょうはいがいをべんきょうします。",
+    "sentence_en": "Today I study other than."
   },
   {
     "word": "以上",
@@ -4757,7 +5453,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 一",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "一度を見てください。",
+    "sentence_reading": "いちどをみてください。",
+    "sentence_en": "Please look at one occasion."
   },
   {
     "word": "二度",
@@ -4826,7 +5525,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 年",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は去年が好きです。",
+    "sentence_reading": "わたしはきょねんがすきです。",
+    "sentence_en": "I like the year before."
   },
   {
     "word": "強力",
@@ -4860,7 +5562,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 気",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は元気を勉強します。",
+    "sentence_reading": "きょうはげんきをべんきょうします。",
+    "sentence_en": "Today I study good health."
   },
   {
     "word": "方言",
@@ -4871,7 +5576,10 @@
       "言"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は方言を勉強します。",
+    "sentence_reading": "きょうはほうげんをべんきょうします。",
+    "sentence_en": "Today I study regional speech."
   },
   {
     "word": "中止",
@@ -4895,7 +5603,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 食",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "試食を見てください。",
+    "sentence_reading": "ししょくをみてください。",
+    "sentence_en": "Please look at sample tasting."
   },
   {
     "word": "借用",
@@ -4930,7 +5641,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 中",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは集中です。",
+    "sentence_reading": "これはしゅうちゅうです。",
+    "sentence_en": "This is intense focus."
   },
   {
     "word": "近所",
@@ -5058,7 +5772,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 水",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "水田を見てください。",
+    "sentence_reading": "すいでんをみてください。",
+    "sentence_en": "Please look at paddy."
   },
   {
     "word": "真冬",
@@ -5093,7 +5810,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 時",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは同時です。",
+    "sentence_reading": "これはどうじです。",
+    "sentence_en": "This is coinciding."
   },
   {
     "word": "食堂",
@@ -5105,7 +5825,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 食",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は食堂が好きです。",
+    "sentence_reading": "わたしはしょくどうがすきです。",
+    "sentence_en": "I like canteen."
   },
   {
     "word": "発売",
@@ -5140,7 +5863,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 話",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは英会話です。",
+    "sentence_reading": "これはえいかいわです。",
+    "sentence_en": "This is spoken English."
   },
   {
     "word": "帰国",
@@ -5176,7 +5902,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 日日",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "日曜日を見てください。",
+    "sentence_reading": "にちようびをみてください。",
+    "sentence_en": "Please look at Sunday."
   },
   {
     "word": "月曜日",
@@ -5212,7 +5941,10 @@
       "字"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは黒字です。",
+    "sentence_reading": "これはくろじです。",
+    "sentence_en": "This is being in profit."
   },
   {
     "word": "黒色",
@@ -5259,7 +5991,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 名",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は有名が好きです。",
+    "sentence_reading": "わたしはゆうめいがすきです。",
+    "sentence_en": "I like famous."
   },
   {
     "word": "多分",
@@ -5305,7 +6040,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 食",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は洋食を勉強します。",
+    "sentence_reading": "きょうはようしょくをべんきょうします。",
+    "sentence_en": "Today I study Western food."
   },
   {
     "word": "通行人",
@@ -5352,7 +6090,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 午",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は正午が好きです。",
+    "sentence_reading": "わたしはしょうごがすきです。",
+    "sentence_en": "I like midday."
   },
   {
     "word": "知人",
@@ -5401,7 +6142,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 中",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "真夜中について話します。",
+    "sentence_reading": "まよなかについてはなします。",
+    "sentence_en": "I will talk about midnight."
   },
   {
     "word": "明日",
@@ -5413,7 +6157,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 日",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "明日、学校へ行きます。",
+    "sentence_reading": "あした、がっこうへいきます。",
+    "sentence_en": "Tomorrow I go to school."
   },
   {
     "word": "時計",
@@ -5425,7 +6172,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 時",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "時計がわかります。",
+    "sentence_reading": "とけいがわかります。",
+    "sentence_en": "I understand a clock."
   },
   {
     "word": "自分",
@@ -5449,7 +6199,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 気",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "私は病気が好きです。",
+    "sentence_reading": "わたしはびょうきがすきです。",
+    "sentence_en": "I like being sick."
   },
   {
     "word": "意見",
@@ -5461,7 +6214,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 見",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "あの意見は大きいです。",
+    "sentence_reading": "あのいけんはおおきいです。",
+    "sentence_en": "That a view is big."
   },
   {
     "word": "文字",
@@ -5496,7 +6252,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "今日は業人を勉強します。",
+    "sentence_reading": "きょうはわざじんをべんきょうします。",
+    "sentence_en": "Today I study business compound 1."
   },
   {
     "word": "京",
@@ -5506,7 +6265,10 @@
       "京"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "京都へ行きたいです。",
+    "sentence_reading": "きょうとへいきたいです。",
+    "sentence_en": "A sentence with “capital (standalone).”"
   },
   {
     "word": "京気",
@@ -5552,7 +6314,10 @@
       "公"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "公を見てください。",
+    "sentence_reading": "おおやけをみてください。",
+    "sentence_en": "Please look at public (standalone)."
   },
   {
     "word": "公気",
@@ -5588,7 +6353,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "世人がわかります。",
+    "sentence_reading": "よじんがわかります。",
+    "sentence_en": "I understand world compound 1."
   },
   {
     "word": "界人",
@@ -5600,7 +6368,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "これは界人です。",
+    "sentence_reading": "これはかいじんです。",
+    "sentence_en": "This is world boundary compound 1."
   },
   {
     "word": "台人",
@@ -5612,7 +6383,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "台人を見てください。",
+    "sentence_reading": "うてなじんをみてください。",
+    "sentence_en": "Please look at stand (counter) compound 1."
   },
   {
     "word": "町人",
@@ -5636,7 +6410,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "建人について話します。",
+    "sentence_reading": "たじんについてはなします。",
+    "sentence_en": "I will talk about build compound 1."
   },
   {
     "word": "起人",
@@ -5670,7 +6447,10 @@
       "答"
     ],
     "kana_only": false,
-    "level": "N4"
+    "level": "N4",
+    "sentence": "答えを書いてください。",
+    "sentence_reading": "こたえをかいてください。",
+    "sentence_en": "A sentence with “answer (standalone).”"
   },
   {
     "word": "答気",
@@ -5718,7 +6498,10 @@
     ],
     "kana_only": false,
     "notes": "uses N5: 人",
-    "level": "N4"
+    "level": "N4",
+    "sentence": "回人がわかります。",
+    "sentence_reading": "まわじんがわかります。",
+    "sentence_en": "I understand times compound 1."
   },
   {
     "word": "進人",
