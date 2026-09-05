@@ -303,6 +303,7 @@ var state = {
   sessionNew: [],
   sessionLocked: false,
   sessionDone: false,
+  pendingPractice: null, // char waiting for practice after book detour
   // practice / review overlay
   flow: null, // null | practice | sentence | review | summary
   practice: null,
@@ -848,7 +849,9 @@ function renderCard(card, isNew) {
       '<div class="mnemo"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(card.mnemonic) + '</p></div>' +
       wordBtn +
       '<div class="card-foot">' +
-        '<span class="hint">Tap card to continue</span>' +
+        (isNew
+          ? '<button class="btn-primary" data-act="continue-practice" data-stop style="width:auto;padding:8px 14px">Continue</button>'
+          : '<span class="hint">Tap card to continue</span>') +
         '<button class="link" data-act="open-book-char" data-char="' + esc(card.char) + '" data-stop>Book</button>' +
       '</div>' +
     '</div>'
@@ -1437,23 +1440,42 @@ function onClick(ev) {
   if (act === "change-level") { state.screen = "level"; state.card = null; state.flow = null; render(); return; }
   if (act === "pick-tile") { pickTile(t.getAttribute("data-key")); return; }
   if (act === "clear-slot") { clearSlot(Number(t.getAttribute("data-i"))); return; }
-  if (act === "dismiss-card") {
-    if (ev.target.closest("[data-stop]")) return;
-    var wasNew = state.celebrate;
-    var ch = state.card && state.card.char;
+  if (act === "continue-practice") {
+    var pch = state.card && state.card.char;
     state.card = null;
     state.celebrate = false;
-    if (wasNew && ch) startPracticeLadder(ch);
+    state.pendingPractice = null;
+    if (pch) startPracticeLadder(pch);
     else render();
+    return;
+  }
+  if (act === "dismiss-card") {
+    if (ev.target.closest("[data-stop]")) return;
+    // New discoveries must use Continue (starts practice).
+    if (state.celebrate) return;
+    state.card = null;
+    state.celebrate = false;
+    render();
     return;
   }
   if (act === "speak") { speakJa(t.getAttribute("data-text") || ""); return; }
   if (act === "open-book") { state.screen = "book"; state.bookFocus = null; state.card = null; render(); return; }
   if (act === "open-book-char") {
+    if (state.celebrate && state.card) state.pendingPractice = state.card.char;
     state.screen = "book"; state.bookFocus = t.getAttribute("data-char");
     state.card = null; state.celebrate = false; render(); return;
   }
-  if (act === "close-book") { state.screen = "workbench"; state.bookFocus = null; render(); return; }
+  if (act === "close-book") {
+    state.screen = "workbench"; state.bookFocus = null;
+    if (state.pendingPractice) {
+      var pending = state.pendingPractice;
+      state.pendingPractice = null;
+      startPracticeLadder(pending);
+      return;
+    }
+    render();
+    return;
+  }
   if (act === "close-book-focus") { state.bookFocus = null; render(); return; }
   if (act === "book-open") { state.bookFocus = t.getAttribute("data-char"); render(); return; }
   if (act === "toggle-hints") { state.hintsOn = !state.hintsOn; persistLevel(); render(); return; }
