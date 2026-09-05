@@ -1,845 +1,800 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Kanji Forge</title>
-  <style>
-    :root {
-      --bg: #f4f0e8;
-      --ink: #1a1a1a;
-      --muted: #8a8680;
-      --slot: #fff;
-      --slot-border: #cfc9bd;
-      --tile: #2a2a2a;
-      --tile-ink: #faf8f4;
-      --ok: #1f8a4c;
-      --bad: #c0392b;
-      --panel: #ebe6dc;
-      --accent: #b85c38;
-      --safe-bottom: env(safe-area-inset-bottom, 0px);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Kanji Forge</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<style>
+:root {
+  --bg:#12100e; --panel:#1f1b16; --panel2:#2a241d; --line:#3d342a; --ink:#f3ebe1;
+  --muted:#9d9080; --faint:#6d6256; --gold:#d4a24a; --gold-dim:#8a6a2e; --glow:#e8c36a;
+  --ok:#7cb87a; --slot:#16130f; --radius:14px;
+  --font:"DM Sans", system-ui, sans-serif;
+  --jp:"Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif;
+  --safe-b:env(safe-area-inset-bottom, 0px);
+  --safe-t:env(safe-area-inset-top, 0px);
+}
+* { box-sizing: border-box; }
+html, body { margin:0; min-height:100%; background:var(--bg); color:var(--ink); font-family:var(--font); }
+body {
+  background: radial-gradient(120% 70% at 50% -15%, #2b2218 0%, transparent 55%), var(--bg);
+  -webkit-tap-highlight-color: transparent;
+}
+button { font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0; }
+#app {
+  max-width:480px; margin:0 auto;
+  padding: calc(12px + var(--safe-t)) 14px calc(16px + var(--safe-b));
+  min-height:100dvh;
+}
+.screen-level {
+  min-height: calc(100dvh - 28px - var(--safe-t) - var(--safe-b));
+  display:flex; flex-direction:column; justify-content:center; gap:28px;
+}
+.brand { text-align:center; }
+.brand h1 { margin:0; font-size:clamp(2.5rem, 12vw, 3.3rem); letter-spacing:-0.03em; line-height:1; }
+.brand h1 span { color:var(--gold); }
+.brand p { margin:12px 0 0; color:var(--muted); }
+.choices { display:grid; gap:12px; }
+.choice {
+  text-align:left; padding:18px; border-radius:var(--radius);
+  background:linear-gradient(160deg, var(--panel2), var(--panel));
+  border:1px solid var(--line);
+}
+.choice:active { transform:scale(0.98); }
+.choice strong { display:block; font-size:1.4rem; margin-bottom:4px; }
+.choice span { color:var(--muted); font-size:0.9rem; }
+.backlink { text-align:center; color:var(--faint); font-size:0.85rem; text-decoration:none; }
+.backlink:hover { color:var(--muted); }
 
-    * { box-sizing: border-box; }
-    html, body {
-      margin: 0;
-      min-height: 100%;
-      background: var(--bg);
-      color: var(--ink);
-      font-family: "Hiragino Kaku Gothic ProN", "Noto Sans JP", sans-serif;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
-    }
+.shell {
+  display:flex; flex-direction:column; gap:12px;
+  min-height: calc(100dvh - 28px - var(--safe-t) - var(--safe-b));
+}
+.topbar { display:flex; justify-content:space-between; align-items:center; gap:8px; }
+.group { display:flex; align-items:center; gap:8px; }
+.pill {
+  font-size:0.78rem; font-weight:600; color:var(--muted);
+  padding:8px 11px; border-radius:999px; background:var(--panel); border:1px solid var(--line);
+}
+.pill b { color:var(--ink); }
+.ibtn {
+  height:40px; min-width:40px; padding:0 12px; border-radius:12px;
+  background:var(--panel); border:1px solid var(--line); font-weight:600; font-size:0.85rem;
+}
+.ibtn:active { background:var(--panel2); }
 
-    body {
-      display: flex;
-      justify-content: center;
-      padding: 12px 12px calc(16px + var(--safe-bottom));
-    }
+.anvil {
+  background:linear-gradient(180deg, #2c261f, #1b1713);
+  border:1px solid var(--line); border-radius:18px; padding:14px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+}
+.lbl {
+  font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+  color:var(--faint); font-weight:700; margin-bottom:8px;
+}
+.slots { display:flex; justify-content:center; align-items:center; gap:8px; min-height:86px; }
+.slots.shake { animation: shake 0.42s ease; }
+@keyframes shake {
+  0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 40%{transform:translateX(6px)}
+  60%{transform:translateX(-4px)} 80%{transform:translateX(4px)}
+}
+.slot {
+  width:76px; height:76px; border-radius:16px; background:var(--slot);
+  border:1.5px dashed var(--gold-dim);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;
+}
+.slot.filled { border-style:solid; border-color:var(--gold); background:#231e17; }
+.slot.pop { animation: pop 0.22s ease; }
+@keyframes pop { from { transform:scale(0.7); opacity:0; } to { transform:none; opacity:1; } }
+.slot .g { font-family:var(--jp); font-weight:700; font-size:1.85rem; line-height:1; }
+.slot .n { font-size:0.62rem; color:var(--muted); max-width:68px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.plus { color:var(--faint); font-weight:700; font-size:1.1rem; }
 
-    .app {
-      width: 100%;
-      max-width: 420px;
-      min-height: calc(100vh - 24px);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      position: relative;
-    }
+.reveal:empty { display:none; }
+.card {
+  background:linear-gradient(165deg, #2f2820, #1e1a15);
+  border:1px solid var(--gold-dim); border-radius:18px; padding:16px;
+  animation: cardIn 0.28s ease; box-shadow: 0 16px 40px rgba(0,0,0,0.35);
+}
+.card.new {
+  box-shadow: 0 0 0 1px rgba(232,195,106,0.35), 0 0 36px rgba(212,162,74,0.2), 0 16px 40px rgba(0,0,0,0.35);
+}
+@keyframes cardIn {
+  from { opacity:0; transform:translateY(8px) scale(0.98); }
+  to { opacity:1; transform:none; }
+}
+.badge {
+  display:inline-block; font-size:0.68rem; font-weight:700; letter-spacing:0.08em;
+  text-transform:uppercase; color:var(--gold); margin-bottom:6px;
+}
+.card-char {
+  font-family:var(--jp); font-weight:900;
+  font-size:clamp(4rem, 22vw, 5.4rem); line-height:1; text-align:center;
+}
+.card-mean { text-align:center; font-size:1.15rem; font-weight:600; margin:4px 0 12px; }
+.parts { display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:6px; margin-bottom:12px; }
+.mini {
+  min-width:48px; padding:6px 8px; border-radius:10px; background:var(--slot);
+  border:1px solid var(--line); display:flex; flex-direction:column; align-items:center;
+}
+.mini .g { font-family:var(--jp); font-weight:700; font-size:1.15rem; }
+.mini .n { font-size:0.6rem; color:var(--muted); }
+.mnemo { background:rgba(0,0,0,0.22); border-radius:12px; padding:10px 12px; margin-bottom:12px; }
+.mnemo .t { font-size:0.68rem; font-weight:600; color:var(--gold); margin-bottom:4px; }
+.mnemo p { margin:0; font-size:0.92rem; line-height:1.4; color:#e6ddd0; }
+.wordbtn {
+  width:100%; display:flex; align-items:center; gap:10px; text-align:left;
+  padding:10px 12px; border-radius:12px; background:var(--slot); border:1px solid var(--line);
+}
+.wordbtn .w { font-family:var(--jp); font-weight:700; font-size:1.25rem; }
+.wordbtn .meta { flex:1; min-width:0; }
+.wordbtn .rd { color:var(--gold); font-size:0.82rem; }
+.wordbtn .wm { color:var(--muted); font-size:0.78rem; }
+.wordbtn .spk { color:var(--faint); }
+.card-foot { display:flex; justify-content:space-between; align-items:center; margin-top:12px; gap:8px; }
+.card-foot .hint { color:var(--faint); font-size:0.75rem; }
+.link { color:var(--gold); font-size:0.85rem; font-weight:600; text-decoration:underline; text-underline-offset:3px; }
 
-    .topbar {
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      gap: 12px;
-    }
+.inv {
+  flex:1; min-height:200px; display:flex; flex-direction:column;
+  border:1px solid var(--line); border-radius:18px; overflow:hidden; background:#18150f;
+}
+.grid {
+  flex:1; overflow:auto; display:grid; gap:8px;
+  grid-template-columns:repeat(auto-fill, minmax(64px, 1fr));
+  padding:8px 10px 12px; align-content:start; -webkit-overflow-scrolling:touch;
+}
+.tile {
+  min-height:64px; min-width:56px; padding:8px 4px 6px; border-radius:12px;
+  background:var(--panel); border:1px solid var(--line);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+}
+.tile:active { transform:scale(0.96); }
+.tile.on { border-color:var(--gold); }
+.tile.nudge {
+  border-color:var(--glow);
+  box-shadow:0 0 0 2px rgba(232,195,106,0.35), 0 0 16px rgba(212,162,74,0.25);
+  animation:pulse 1.6s ease infinite;
+}
+@keyframes pulse {
+  0%,100% { box-shadow:0 0 0 2px rgba(232,195,106,0.3), 0 0 10px rgba(212,162,74,0.15); }
+  50% { box-shadow:0 0 0 3px rgba(232,195,106,0.5), 0 0 20px rgba(212,162,74,0.35); }
+}
+.tile.glow { animation:glow 1.4s ease; }
+@keyframes glow {
+  0% { box-shadow:none; }
+  30% { box-shadow:0 0 20px rgba(232,195,106,0.55); border-color:var(--glow); }
+  100% { box-shadow:none; }
+}
+.tile .g { font-family:var(--jp); font-weight:700; font-size:1.55rem; line-height:1; }
+.tile .n {
+  font-size:0.62rem; color:var(--muted); text-align:center; line-height:1.15;
+  max-width:100%; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;
+}
 
-    .back-kanji {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--muted);
-      text-decoration: none;
-      margin-right: 8px;
-    }
-    .back-kanji:hover { color: var(--accent); }
-
-    .brand {
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      color: var(--accent);
-      font-weight: 700;
-    }
-
-    .counter {
-      font-size: 0.8rem;
-      color: var(--muted);
-      font-variant-numeric: tabular-nums;
-    }
-
-    .counter strong {
-      color: var(--ink);
-      font-weight: 700;
-    }
-
-    .play {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      justify-content: center;
-    }
-
-    .meaning {
-      font-size: clamp(1.6rem, 6.5vw, 2.1rem);
-      font-weight: 700;
-      line-height: 1.25;
-      text-align: center;
-      letter-spacing: 0.01em;
-      min-height: 2.6em;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 4px;
-    }
-
-    .reading {
-      text-align: center;
-      font-size: 1.15rem;
-      color: var(--muted);
-      min-height: 1.4em;
-      letter-spacing: 0.06em;
-    }
-
-    .reading.show { color: var(--ink); }
-
-    .slots {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      min-height: 64px;
-      padding: 4px 0 8px;
-      pointer-events: none;
-    }
-
-    .slot {
-      width: 56px;
-      height: 56px;
-      border-radius: 10px;
-      border: 2px solid var(--slot-border);
-      background: var(--slot);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.75rem;
-      font-weight: 700;
-      transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
-      pointer-events: auto;
-    }
-
-    .slot.kana {
-      color: var(--muted);
-      background: var(--panel);
-      border-color: transparent;
-      font-weight: 500;
-    }
-
-    .slot.filled:not(.kana) {
-      background: var(--tile);
-      color: var(--tile-ink);
-      border-color: var(--tile);
-      cursor: pointer;
-    }
-
-    .slot.flash-ok {
-      background: var(--ok) !important;
-      border-color: var(--ok) !important;
-      color: #fff !important;
-    }
-
-    .slot.flash-bad {
-      background: var(--bad) !important;
-      border-color: var(--bad) !important;
-      color: #fff !important;
-    }
-
-    .reveal {
-      text-align: center;
-      min-height: 1.5em;
-      font-size: 1.05rem;
-      color: var(--bad);
-      letter-spacing: 0.04em;
-    }
-
-    .hand {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding: 8px 0 4px;
-    }
-
-    .tile {
-      width: 56px;
-      height: 56px;
-      border: none;
-      border-radius: 12px;
-      background: var(--tile);
-      color: var(--tile-ink);
-      font-family: inherit;
-      font-size: 1.75rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 3px 0 #111;
-      transition: transform 0.08s ease, opacity 0.12s ease;
-    }
-
-    .tile:active { transform: translateY(2px); box-shadow: 0 1px 0 #111; }
-    .tile:disabled {
-      opacity: 0.28;
-      cursor: default;
-      box-shadow: none;
-      transform: none;
-    }
-
-    .locked .tile { pointer-events: none; }
-    .locked .slot.filled:not(.kana) { pointer-events: none; }
-
-    .setup, .summary {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 18px;
-      padding: 8px 4px 24px;
-    }
-
-    .setup h1, .summary h1 {
-      margin: 0;
-      font-size: 1.8rem;
-      text-align: center;
-    }
-
-    .setup .lead {
-      margin: 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.4;
-    }
-
-    .level-picks {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .level-btn {
-      appearance: none;
-      border: 2px solid var(--slot-border);
-      border-radius: 16px;
-      background: var(--slot);
-      color: var(--ink);
-      font-family: inherit;
-      text-align: left;
-      padding: 16px 18px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .level-btn:active { transform: translateY(1px); }
-    .level-btn .lv {
-      display: block;
-      font-size: 1.35rem;
-      font-weight: 800;
-      letter-spacing: 0.02em;
-    }
-    .level-btn .desc {
-      display: block;
-      margin-top: 4px;
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .summary .score {
-      text-align: center;
-      font-size: 1.2rem;
-    }
-
-    .missed {
-      background: var(--panel);
-      border-radius: 14px;
-      padding: 14px 16px;
-      max-height: 45vh;
-      overflow: auto;
-    }
-
-    .missed h2 {
-      margin: 0 0 10px;
-      font-size: 0.95rem;
-      color: var(--muted);
-      font-weight: 600;
-    }
-
-    .missed ul {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .missed li {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .missed .w {
-      font-size: 1.25rem;
-      font-weight: 700;
-    }
-
-    .missed .m {
-      font-size: 0.9rem;
-      color: var(--muted);
-    }
-
-    .missed .empty {
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    .btn {
-      appearance: none;
-      border: none;
-      border-radius: 999px;
-      background: var(--accent);
-      color: #fff;
-      font-family: inherit;
-      font-size: 1.05rem;
-      font-weight: 700;
-      padding: 14px 22px;
-      cursor: pointer;
-      width: 100%;
-    }
-
-    .btn:active { transform: translateY(1px); opacity: 0.92; }
-    .btn.secondary {
-      background: transparent;
-      color: var(--accent);
-      border: 2px solid var(--accent);
-    }
-
-    .btn-row {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .next-wrap {
-      padding: 0 4px;
-    }
-
-    .loading, .error {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      color: var(--muted);
-      padding: 40px 12px;
-      line-height: 1.5;
-    }
-
-    .error { color: var(--bad); }
-  </style>
+.tools { display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+.tools .grow { flex:1; }
+.toggle {
+  display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px;
+  background:var(--panel); border:1px solid var(--line); font-size:0.8rem; font-weight:600; color:var(--muted);
+}
+.toggle.on { color:var(--ink); border-color:var(--gold-dim); }
+.toggle .dot { width:8px; height:8px; border-radius:50%; background:var(--faint); }
+.toggle.on .dot { background:var(--ok); }
+.book-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; }
+.btile {
+  aspect-ratio:1; border-radius:12px; background:var(--panel); border:1px solid var(--line);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; padding:6px; gap:2px;
+}
+.btile.lock { background:transparent; border:1.5px dashed var(--line); }
+.btile .g { font-family:var(--jp); font-weight:700; font-size:1.55rem; line-height:1; }
+.btile.lock .g { opacity:0.3; font-size:1.1rem; }
+.btile .h { font-size:0.58rem; color:var(--faint); text-align:center; line-height:1.2; max-height:2.4em; overflow:hidden; }
+.detail {
+  background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:14px; display:grid; gap:12px;
+}
+.detail h2 { margin:0; font-family:var(--jp); font-size:2.4rem; font-weight:900; }
+.words { display:grid; gap:8px; }
+.muted { color:var(--muted); font-size:0.85rem; }
+.toast {
+  position:fixed; left:50%; bottom:calc(18px + var(--safe-b)); transform:translateX(-50%);
+  background:var(--panel2); border:1px solid var(--line); padding:10px 14px; border-radius:999px;
+  font-size:0.82rem; z-index:40; pointer-events:none; box-shadow:0 8px 24px rgba(0,0,0,0.4);
+}
+.center { min-height:60vh; display:grid; place-items:center; color:var(--muted); text-align:center; padding:24px; }
+</style>
 </head>
 <body>
-  <div class="app" id="app">
-    <div class="loading">Loading Kanji Forge…</div>
-  </div>
+<div id="app"></div>
 
-  <script>
-    /* ============================================================
-       STATE
-       ============================================================ */
-    const LEVELS = {
-      N5: {
-        id: "N5",
-        label: "N5",
-        desc: "103 beginner kanji · everyday basics",
-        kanjiUrl: "kanji-n5.json",
-        wordsUrl: "words-n5.json",
-      },
-      N4: {
-        id: "N4",
-        label: "N4",
-        desc: "188 upper-beginner kanji · reading practice",
-        kanjiUrl: "kanji.json",
-        wordsUrl: "words.json",
-      },
-    };
+<script>
+/* ===================== DATA ===================== */
+const STORAGE_KEY = "kanjiforge";
+const MNEMONIC_LABELS = {
+  etymological: "based on origin",
+  phonetic: "one part is for sound",
+  invented: "memory aid only",
+};
 
-    const state = {
-      level: null, // "N5" | "N4"
-      kanji: [],
-      words: [],
-      kanjiByChar: Object.create(null),
+const state = {
+  ready: false,
+  error: null,
+  screen: "level",
+  level: null,
+  components: [],
+  recipes: [],
+  kanji: [],
+  words: [],
+  discovered: [],
+  discoveryOrder: [],
+  anvil: [null, null],
+  showThird: false,
+  shaking: false,
+  failStreak: 0,
+  nudgeKey: null,
+  glowKey: null,
+  hintsOn: true,
+  card: null,
+  celebrate: false,
+  bookFocus: null,
+  toast: null,
+};
 
-      daySize: 12,
-      completed: 0,
-      correctCount: 0,
-      missed: [],
-
-      screen: "setup", // setup | loading | play | summary | error
-      phase: "input",  // input | feedback
-      locked: false,
-      awaitingNext: false,
-
-      currentWord: null,
-      slots: [],
-      hand: [],
-      readingVisible: false,
-      revealText: "",
-      flash: null,
-
-      errorMessage: "",
-      _tileSeq: 0,
-      _feedbackTimer: null,
-    };
-
-    /* ============================================================
-       DATA LOADING
-       ============================================================ */
-    async function loadLevel(levelId) {
-      const level = LEVELS[levelId];
-      if (!level) throw new Error("Unknown level.");
-      state.screen = "loading";
-      state.level = levelId;
-      render();
-      try {
-        const [kanjiRes, wordsRes] = await Promise.all([
-          fetch(level.kanjiUrl),
-          fetch(level.wordsUrl),
-        ]);
-        if (!kanjiRes.ok || !wordsRes.ok) {
-          throw new Error(`Could not load ${level.kanjiUrl} / ${level.wordsUrl}. Serve this folder over HTTP.`);
-        }
-        const kanji = await kanjiRes.json();
-        const words = await wordsRes.json();
-        if (!Array.isArray(kanji) || !Array.isArray(words) || !kanji.length || !words.length) {
-          throw new Error("Kanji or words data is empty.");
-        }
-        state.kanji = kanji;
-        state.words = words.filter((w) => w && w.word && Array.isArray(w.kanji) && w.kanji.length > 0);
-        state.kanjiByChar = Object.create(null);
-        for (const entry of state.kanji) state.kanjiByChar[entry.char] = entry;
-        startNewDay();
-      } catch (err) {
-        state.screen = "error";
-        state.errorMessage = err.message || String(err);
-        render();
+function loadStore() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}") || {}; }
+  catch (e) { return {}; }
+}
+function persistLevel() {
+  if (!state.level) return;
+  const store = loadStore();
+  store[state.level] = {
+    discovered: state.discovered.slice(),
+    discoveryOrder: state.discoveryOrder.slice(),
+    hintsOn: state.hintsOn,
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(store));
+}
+async function loadData() {
+  try {
+    async function fetchJson(url) {
+      const r = await fetch(url);
+      if (!r.ok) throw new Error(url + " " + r.status);
+      return r.json();
+    }
+    const [components, recipes, kanji, words] = await Promise.all([
+      fetchJson("components.json"),
+      fetchJson("recipes.json"),
+      fetchJson("kanji.json"),
+      fetchJson("words.json"),
+    ]);
+    state.components = components;
+    state.recipes = recipes;
+    state.kanji = kanji;
+    state.words = words;
+    state.ready = true;
+  } catch (e) {
+    state.error = String(e && e.message ? e.message : e);
+  }
+}
+function scopeLevels(level) { return level === "N4" ? ["N5", "N4"] : ["N5"]; }
+function recipesForLevel(level) {
+  const s = new Set(scopeLevels(level));
+  return state.recipes.filter(function (r) { return s.has(r.level); });
+}
+function startersForLevel(level) {
+  return recipesForLevel(level).filter(function (r) {
+    return r.starter || !r.parts || r.parts.length === 0;
+  });
+}
+function kanjiMeta(ch) {
+  return state.kanji.find(function (k) { return k.char === ch; }) || { char: ch, meaning: "?", level: "?" };
+}
+function recipeFor(ch) {
+  return state.recipes.find(function (r) { return r.char === ch; });
+}
+function wordFor(word) {
+  return state.words.find(function (w) { return w.word === word; }) || null;
+}
+function wordsUsing(ch) {
+  return state.words.filter(function (w) { return (w.kanji || []).indexOf(ch) >= 0; });
+}
+function componentByToken(tok) {
+  return state.components.find(function (c) {
+    return c.id === tok || c.glyph === tok || c.display === tok;
+  }) || null;
+}
+function partLabel(tok) {
+  var c = componentByToken(tok);
+  if (c) return c.name;
+  var m = kanjiMeta(tok);
+  if (m.meaning && m.meaning !== "?") return m.meaning.split(/[,;/]/)[0].trim();
+  return tok;
+}
+function partGlyph(tok) {
+  var c = componentByToken(tok);
+  return c ? (c.display || c.glyph) : tok;
+}
+function tileFromComponent(c) {
+  return {
+    key: "c:" + c.id,
+    kind: "component",
+    glyph: c.display || c.glyph,
+    name: c.name,
+    match: [c.id, c.glyph, c.display].filter(Boolean),
+  };
+}
+function tileFromKanji(ch) {
+  var m = kanjiMeta(ch);
+  return {
+    key: "k:" + ch,
+    kind: "kanji",
+    glyph: ch,
+    name: (m.meaning || ch).split(/[,;/]/)[0].trim(),
+    match: [ch],
+  };
+}
+function inventoryTiles() {
+  var comps = state.components.map(tileFromComponent);
+  var order = state.discoveryOrder.length ? state.discoveryOrder : state.discovered;
+  var seen = {};
+  var out = [];
+  order.forEach(function (ch) {
+    if (state.discovered.indexOf(ch) < 0 || seen[ch]) return;
+    seen[ch] = true;
+    out.push(tileFromKanji(ch));
+  });
+  state.discovered.forEach(function (ch) {
+    if (seen[ch]) return;
+    out.push(tileFromKanji(ch));
+  });
+  return comps.concat(out);
+}
+function tileMatchesPart(tile, part) { return tile.match.indexOf(part) >= 0; }
+function findExactRecipe(tiles) {
+  if (tiles.length < 2 || tiles.length > 3) return null;
+  var pool = recipesForLevel(state.level).filter(function (r) {
+    return r.parts && r.parts.length === tiles.length;
+  });
+  for (var ri = 0; ri < pool.length; ri++) {
+    var r = pool[ri];
+    var used = [];
+    for (var i = 0; i < tiles.length; i++) used[i] = false;
+    function dfs(pi) {
+      if (pi === r.parts.length) return true;
+      for (var ti = 0; ti < tiles.length; ti++) {
+        if (used[ti]) continue;
+        if (!tileMatchesPart(tiles[ti], r.parts[pi])) continue;
+        used[ti] = true;
+        if (dfs(pi + 1)) return true;
+        used[ti] = false;
+      }
+      return false;
+    }
+    if (dfs(0)) return r;
+  }
+  return null;
+}
+function anyThreePartNeedsThird(tiles2) {
+  if (tiles2.length !== 2) return false;
+  var pool = recipesForLevel(state.level).filter(function (r) {
+    return r.parts && r.parts.length === 3;
+  });
+  for (var ri = 0; ri < pool.length; ri++) {
+    var parts = pool[ri].parts;
+    for (var i = 0; i < 3; i++) {
+      for (var j = 0; j < 3; j++) {
+        if (i === j) continue;
+        if (tileMatchesPart(tiles2[0], parts[i]) && tileMatchesPart(tiles2[1], parts[j])) return true;
+        if (tileMatchesPart(tiles2[1], parts[i]) && tileMatchesPart(tiles2[0], parts[j])) return true;
       }
     }
+  }
+  return false;
+}
+function speakJa(text) {
+  if (!text || !window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = "ja-JP";
+  var voices = window.speechSynthesis.getVoices();
+  for (var i = 0; i < voices.length; i++) {
+    if (voices[i].lang && voices[i].lang.indexOf("ja") === 0) { u.voice = voices[i]; break; }
+  }
+  window.speechSynthesis.speak(u);
+}
+function showToast(msg) {
+  state.toast = msg;
+  render();
+  setTimeout(function () {
+    if (state.toast === msg) { state.toast = null; render(); }
+  }, 2200);
+}
+</script>
 
-    /* ============================================================
-       RENDERING
-       ============================================================ */
-    function render() {
-      const app = document.getElementById("app");
-      if (state.screen === "loading") {
-        app.innerHTML = `<div class="loading">Loading ${escapeHtml(state.level || "")}…</div>`;
-        return;
-      }
-      if (state.screen === "error") {
-        app.innerHTML = `
-          <div class="error">${escapeHtml(state.errorMessage)}</div>
-          <button type="button" class="btn secondary" id="back-setup">Choose level</button>`;
-        document.getElementById("back-setup")?.addEventListener("click", goToSetup);
-        return;
-      }
-      if (state.screen === "setup") {
-        app.innerHTML = renderSetup();
-        bindSetup();
-        return;
-      }
-      if (state.screen === "summary") {
-        app.innerHTML = renderSummary();
-        bindSummary();
-        return;
-      }
-      app.innerHTML = renderPlay();
-      bindPlay();
+<script>
+/* ===================== RENDER ===================== */
+function esc(s) {
+  return String(s == null ? "" : s)
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function renderLevelScreen() {
+  var n5 = recipesForLevel("N5").length;
+  var n4 = recipesForLevel("N4").length;
+  return (
+    '<div class="screen-level">' +
+      '<div class="brand"><h1>Kanji <span>Forge</span></h1><p>Combine parts. Discover kanji.</p></div>' +
+      '<div class="choices">' +
+        '<button class="choice" data-act="pick-level" data-level="N5"><strong>N5</strong><span>Beginner set — ' + n5 + ' kanji</span></button>' +
+        '<button class="choice" data-act="pick-level" data-level="N4"><strong>N4</strong><span>Includes all of N5 — ' + n4 + ' kanji</span></button>' +
+      '</div>' +
+      '<a class="backlink" href="index.html#/kanji">← Back to Kanji</a>' +
+    '</div>'
+  );
+}
+
+function renderCard(card, isNew) {
+  var parts = (card.parts || []).map(function (p, i) {
+    return (i ? '<span class="plus">+</span>' : '') +
+      '<div class="mini"><div class="g">' + esc(partGlyph(p)) + '</div><div class="n">' + esc(partLabel(p)) + '</div></div>';
+  }).join("");
+  var w = card.wordObj;
+  var typeLabel = MNEMONIC_LABELS[card.mnemonic_type] || "memory aid only";
+  var wordBtn = "";
+  if (w) {
+    wordBtn =
+      '<button class="wordbtn" data-act="speak" data-text="' + esc(w.reading || w.word) + '" data-stop>' +
+        '<div class="w">' + esc(w.word) + '</div>' +
+        '<div class="meta"><div class="rd">' + esc(w.reading || "") + '</div><div class="wm">' + esc(w.meaning || "") + '</div></div>' +
+        '<div class="spk">♪</div>' +
+      '</button>';
+  }
+  return (
+    '<div class="card' + (isNew ? ' new' : '') + '" data-act="dismiss-card">' +
+      '<div class="badge">' + (isNew ? 'Discovered' : 'Forged') + '</div>' +
+      '<div class="card-char">' + esc(card.char) + '</div>' +
+      '<div class="card-mean">' + esc(card.meaning) + '</div>' +
+      '<div class="parts">' + parts + '</div>' +
+      '<div class="mnemo"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(card.mnemonic) + '</p></div>' +
+      wordBtn +
+      '<div class="card-foot">' +
+        '<span class="hint">Tap card to continue</span>' +
+        '<button class="link" data-act="open-book-char" data-char="' + esc(card.char) + '" data-stop>Book</button>' +
+      '</div>' +
+    '</div>'
+  );
+}
+
+function renderWorkbench() {
+  var total = recipesForLevel(state.level).length;
+  var found = state.discovered.length;
+  var slots = state.showThird ? 3 : 2;
+  var slotHtml = [];
+  for (var i = 0; i < slots; i++) {
+    var t = state.anvil[i];
+    if (i) slotHtml.push('<span class="plus">+</span>');
+    slotHtml.push(
+      '<button class="slot' + (t ? ' filled' : '') + (state.showThird && i === 2 ? ' pop' : '') +
+      '" data-act="clear-slot" data-i="' + i + '">' +
+      (t ? '<div class="g">' + esc(t.glyph) + '</div><div class="n">' + esc(t.name) + '</div>' : '') +
+      '</button>'
+    );
+  }
+  var selected = {};
+  state.anvil.forEach(function (t) { if (t) selected[t.key] = true; });
+  var tilesHtml = inventoryTiles().map(function (t) {
+    var cls = "tile";
+    if (selected[t.key]) cls += " on";
+    if (state.nudgeKey === t.key) cls += " nudge";
+    if (state.glowKey === t.key) cls += " glow";
+    return (
+      '<button class="' + cls + '" data-act="pick-tile" data-key="' + esc(t.key) + '">' +
+        '<div class="g">' + esc(t.glyph) + '</div><div class="n">' + esc(t.name) + '</div>' +
+      '</button>'
+    );
+  }).join("");
+
+  return (
+    '<div class="shell">' +
+      '<div class="topbar"><div class="group">' +
+        '<button class="ibtn" data-act="change-level" title="Change level">' + esc(state.level) + '</button>' +
+        '<div class="pill">Discovered <b>' + found + '</b> / ' + total + '</div>' +
+      '</div><div class="group"><button class="ibtn" data-act="open-book">Book</button></div></div>' +
+      '<div class="anvil"><div class="lbl">Anvil</div>' +
+        '<div class="slots' + (state.shaking ? ' shake' : '') + '">' + slotHtml.join("") + '</div>' +
+      '</div>' +
+      '<div class="reveal">' + (state.card ? renderCard(state.card, state.celebrate) : '') + '</div>' +
+      '<div class="inv"><div class="lbl">Inventory</div><div class="grid">' + tilesHtml + '</div></div>' +
+    '</div>'
+  );
+}
+
+function renderBook() {
+  var list = recipesForLevel(state.level);
+  var total = list.length;
+  var found = state.discovered.length;
+  var focus = state.bookFocus ? recipeFor(state.bookFocus) : null;
+  var focusMeta = state.bookFocus ? kanjiMeta(state.bookFocus) : null;
+  var detail = "";
+  if (focus && state.discovered.indexOf(focus.char) >= 0) {
+    var words = wordsUsing(focus.char);
+    var typeLabel = MNEMONIC_LABELS[focus.mnemonic_type] || "memory aid only";
+    var partsHtml = (focus.parts || []).map(function (p, i) {
+      return (i ? '<span class="plus">+</span>' : '') +
+        '<div class="mini"><div class="g">' + esc(partGlyph(p)) + '</div><div class="n">' + esc(partLabel(p)) + '</div></div>';
+    }).join("");
+    var wordRows = words.map(function (w) {
+      return (
+        '<button class="wordbtn" data-act="speak" data-text="' + esc(w.reading || w.word) + '">' +
+          '<div class="w">' + esc(w.word) + '</div>' +
+          '<div class="meta"><div class="rd">' + esc(w.reading || "") + '</div><div class="wm">' + esc(w.meaning || "") + '</div></div>' +
+          '<div class="spk">♪</div>' +
+        '</button>'
+      );
+    }).join("");
+    detail =
+      '<div class="detail">' +
+        '<div><h2>' + esc(focus.char) + '</h2><div class="muted">' + esc((focusMeta.meaning || "").split(/[,;/]/)[0]) + '</div></div>' +
+        '<div class="parts" style="justify-content:flex-start">' + (partsHtml || '<span class="muted">Starter</span>') + '</div>' +
+        '<div class="mnemo"><div class="t">' + esc(typeLabel) + '</div><p>' + esc(focus.mnemonic || "") + '</p></div>' +
+        '<div><div class="lbl" style="padding:0 0 8px">Words</div><div class="words">' + (wordRows || '<div class="muted">No words yet.</div>') + '</div></div>' +
+        '<button class="ibtn" data-act="close-book-focus">Close</button>' +
+      '</div>';
+  }
+  var grid = list.map(function (r) {
+    if (state.discovered.indexOf(r.char) >= 0) {
+      return '<button class="btile" data-act="book-open" data-char="' + esc(r.char) + '"><div class="g">' + esc(r.char) + '</div></button>';
     }
+    var hint = state.hintsOn ? ((r.parts || []).map(partLabel).join(" + ") || "starter") : "";
+    return '<div class="btile lock"><div class="g">?</div>' + (hint ? '<div class="h">' + esc(hint) + '</div>' : '') + '</div>';
+  }).join("");
 
-    function renderTopbar(rightHtml) {
-      const levelTag = state.level ? ` · ${state.level}` : "";
-      return `
-        <div class="topbar">
-          <div style="display:flex;align-items:baseline;gap:8px;min-width:0">
-            <a class="back-kanji" href="index.html#/kanji">← Kanji</a>
-            <div class="brand">Kanji Forge${escapeHtml(levelTag)}</div>
-          </div>
-          ${rightHtml}
-        </div>`;
-    }
+  return (
+    '<div class="shell">' +
+      '<div class="topbar"><div class="group">' +
+        '<button class="ibtn" data-act="close-book">←</button>' +
+        '<div class="pill">Book <b>' + found + '</b> / ' + total + '</div>' +
+      '</div></div>' +
+      '<div class="tools">' +
+        '<button class="toggle' + (state.hintsOn ? ' on' : '') + '" data-act="toggle-hints"><span class="dot"></span>Hints ' + (state.hintsOn ? 'on' : 'off') + '</button>' +
+        '<span class="grow"></span>' +
+        '<button class="ibtn" data-act="export">Export</button>' +
+        '<button class="ibtn" data-act="import">Import</button>' +
+      '</div>' +
+      detail +
+      '<div class="book-grid">' + grid + '</div>' +
+    '</div>'
+  );
+}
 
-    function renderSetup() {
-      return `
-        ${renderTopbar(`<div class="counter">Pick a level</div>`)}
-        <div class="setup">
-          <h1>Kanji Forge</h1>
-          <p class="lead">Build words from tiles. Choose N5 or N4 to start a 12-order day.</p>
-          <div class="level-picks">
-            ${Object.values(LEVELS).map((lv) => `
-              <button type="button" class="level-btn" data-level="${lv.id}">
-                <span class="lv">${escapeHtml(lv.label)}</span>
-                <span class="desc">${escapeHtml(lv.desc)}</span>
-              </button>`).join("")}
-          </div>
-        </div>`;
-    }
+function render() {
+  var root = document.getElementById("app");
+  if (!state.ready) {
+    root.innerHTML = state.error
+      ? '<div class="center">Could not load data.<br>' + esc(state.error) + '</div>'
+      : '<div class="center">Loading forge…</div>';
+    return;
+  }
+  var body = "";
+  if (state.screen === "level") body = renderLevelScreen();
+  else if (state.screen === "book") body = renderBook();
+  else body = renderWorkbench();
+  if (state.toast) body += '<div class="toast">' + esc(state.toast) + '</div>';
+  root.innerHTML = body;
+}
+</script>
 
-    function renderPlay() {
-      const w = state.currentWord;
-      const lockedClass = state.locked ? " locked" : "";
-      const readingClass = state.readingVisible ? "reading show" : "reading";
-      const readingText = state.readingVisible && w ? w.reading : "";
-      const flash = state.flash;
-
-      const slotsHtml = state.slots
-        .map((slot, i) => {
-          const classes = ["slot"];
-          if (slot.isKana) classes.push("kana");
-          if (slot.value) classes.push("filled");
-          if (flash === "ok") classes.push("flash-ok");
-          if (flash === "bad") classes.push("flash-bad");
-          const content = slot.value || "";
-          return `<div class="${classes.join(" ")}" data-slot="${i}" role="${slot.isKana || !slot.value ? "presentation" : "button"}">${escapeHtml(content)}</div>`;
-        })
-        .join("");
-
-      const handHtml = state.hand
-        .map((tile) => {
-          return `<button type="button" class="tile" data-tile="${tile.id}" ${tile.used || state.locked ? "disabled" : ""}>${escapeHtml(tile.char)}</button>`;
-        })
-        .join("");
-
-      const nextBtn = state.awaitingNext
-        ? `<div class="next-wrap"><button type="button" class="btn" id="next-order">Next</button></div>`
-        : "";
-
-      return `
-        ${renderTopbar(`
-          <div class="counter">
-            <strong>${state.completed}</strong>/${state.daySize}
-            · <strong>${state.correctCount}</strong> correct
-          </div>`)}
-        <div class="play${lockedClass}">
-          <div class="meaning">${escapeHtml(w ? w.meaning : "")}</div>
-          <div class="${readingClass}">${escapeHtml(readingText)}</div>
-          <div class="slots">${slotsHtml}</div>
-          <div class="reveal">${escapeHtml(state.revealText)}</div>
-          ${nextBtn}
-          <div class="hand">${handHtml}</div>
-        </div>`;
-    }
-
-    function renderSummary() {
-      const missed = state.missed;
-      let listHtml;
-      if (!missed.length) {
-        listHtml = `<p class="empty">No misses. Clean forge today.</p>`;
-      } else {
-        listHtml = `<ul>${missed
-          .map(
-            (m) => `<li>
-              <span class="w">${escapeHtml(m.word)}　${escapeHtml(m.reading)}</span>
-              <span class="m">${escapeHtml(m.meaning)}</span>
-            </li>`
-          )
-          .join("")}</ul>`;
-      }
-      return `
-        ${renderTopbar(`<div class="counter">${escapeHtml(state.level || "")} · Day complete</div>`)}
-        <div class="summary">
-          <h1>End of day</h1>
-          <div class="score"><strong>${state.correctCount}</strong> / ${state.daySize} correct</div>
-          <div class="missed">
-            <h2>Missed</h2>
-            ${listHtml}
-          </div>
-          <div class="btn-row">
-            <button type="button" class="btn" id="new-day">New Day</button>
-            <button type="button" class="btn secondary" id="change-level">Change level</button>
-          </div>
-        </div>`;
-    }
-
-    function bindSetup() {
-      document.querySelectorAll(".level-btn").forEach((btn) => {
-        btn.addEventListener("click", () => loadLevel(btn.getAttribute("data-level")));
-      });
-    }
-
-    function bindPlay() {
-      document.querySelectorAll(".tile").forEach((btn) => {
-        btn.addEventListener("click", () => onTileTap(btn.getAttribute("data-tile")));
-      });
-      document.querySelectorAll(".slot.filled:not(.kana)").forEach((el) => {
-        el.addEventListener("click", () => onSlotTap(Number(el.getAttribute("data-slot"))));
-      });
-      const next = document.getElementById("next-order");
-      if (next) next.addEventListener("click", () => advanceAfterFeedback());
-    }
-
-    function bindSummary() {
-      document.getElementById("new-day")?.addEventListener("click", () => startNewDay());
-      document.getElementById("change-level")?.addEventListener("click", () => goToSetup());
-    }
-
-    function escapeHtml(s) {
-      return String(s ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;");
-    }
-
-    /* ============================================================
-       GAME LOGIC
-       ============================================================ */
-    function goToSetup() {
-      clearFeedbackTimer();
-      state.screen = "setup";
-      state.level = null;
-      state.kanji = [];
-      state.words = [];
-      state.kanjiByChar = Object.create(null);
-      state.completed = 0;
-      state.correctCount = 0;
-      state.missed = [];
-      state.currentWord = null;
-      state.slots = [];
-      state.hand = [];
-      state.awaitingNext = false;
-      state.locked = false;
-      state.phase = "input";
-      state.flash = null;
-      state.revealText = "";
-      state.readingVisible = false;
-      render();
-    }
-
-    function startNewDay() {
-      clearFeedbackTimer();
-      state.completed = 0;
-      state.correctCount = 0;
-      state.missed = [];
-      state.screen = "play";
-      state.phase = "input";
-      state.locked = false;
-      state.awaitingNext = false;
-      state.flash = null;
-      state.revealText = "";
-      state.readingVisible = false;
-      dealOrder();
-      render();
-    }
-
-    function dealOrder() {
-      clearFeedbackTimer();
-      state.phase = "input";
-      state.locked = false;
-      state.awaitingNext = false;
-      state.flash = null;
-      state.revealText = "";
-      state.readingVisible = false;
-
-      const word = pickRandom(state.words);
-      state.currentWord = word;
-      state.slots = buildSlots(word.word);
-      state.hand = buildHand(word);
-    }
-
-    function buildSlots(wordStr) {
-      return [...wordStr].map((ch) => {
-        const isKana = isKanaChar(ch);
-        return {
-          expected: ch,
-          isKana,
-          value: isKana ? ch : null,
-          tileId: null,
-        };
-      });
-    }
-
-    function isKanaChar(ch) {
-      return /[\u3040-\u309F\u30A0-\u30FF]/.test(ch);
-    }
-
-    function buildHand(word) {
-      const answerKanji = unique(word.kanji.filter((c) => !isKanaChar(c)));
-      const used = new Set(answerKanji);
-
-      const lookalikePool = [];
-      for (const ch of answerKanji) {
-        const entry = state.kanjiByChar[ch];
-        if (!entry || !Array.isArray(entry.lookalikes)) continue;
-        for (const look of entry.lookalikes) {
-          if (!used.has(look) && lookalikePool.indexOf(look) === -1) lookalikePool.push(look);
-        }
-      }
-      shuffleInPlace(lookalikePool);
-
-      const decoys = [];
-      while (decoys.length < 2 && lookalikePool.length) {
-        const look = lookalikePool.shift();
-        decoys.push(look);
-        used.add(look);
-      }
-
-      const randomPool = state.kanji
-        .map((k) => k.char)
-        .filter((c) => !used.has(c));
-      shuffleInPlace(randomPool);
-      while (answerKanji.length + decoys.length < 7 && randomPool.length) {
-        const ch = randomPool.shift();
-        decoys.push(ch);
-        used.add(ch);
-      }
-
-      const chars = [...answerKanji, ...decoys];
-      while (chars.length < 7 && state.kanji.length) {
-        const fallback = state.kanji[Math.floor(Math.random() * state.kanji.length)].char;
-        if (!chars.includes(fallback)) chars.push(fallback);
-        else break;
-      }
-
-      shuffleInPlace(chars);
-      return chars.slice(0, 7).map((char) => ({
-        id: `t${++state._tileSeq}`,
-        char,
-        used: false,
-      }));
-    }
-
-    function onTileTap(tileId) {
-      if (state.locked || state.phase !== "input") return;
-      const tile = state.hand.find((t) => t.id === tileId);
-      if (!tile || tile.used) return;
-
-      const slotIndex = state.slots.findIndex((s) => !s.isKana && !s.value);
-      if (slotIndex === -1) return;
-
-      state.slots[slotIndex].value = tile.char;
-      state.slots[slotIndex].tileId = tile.id;
-      tile.used = true;
-      render();
-
-      if (allKanjiSlotsFilled()) checkAnswer();
-    }
-
-    function onSlotTap(slotIndex) {
-      if (state.locked || state.phase !== "input") return;
-      const slot = state.slots[slotIndex];
-      if (!slot || slot.isKana || !slot.value) return;
-
-      const tile = state.hand.find((t) => t.id === slot.tileId) ||
-        state.hand.find((t) => t.used && t.char === slot.value);
-      if (tile) tile.used = false;
-      slot.value = null;
-      slot.tileId = null;
-      render();
-    }
-
-    function allKanjiSlotsFilled() {
-      return state.slots.every((s) => s.isKana || s.value);
-    }
-
-    function assembledWord() {
-      return state.slots.map((s) => s.value || "").join("");
-    }
-
-    function checkAnswer() {
-      state.locked = true;
-      state.phase = "feedback";
-      const got = assembledWord();
-      const want = state.currentWord.word;
-      const ok = got === want;
-
-      state.completed += 1;
-      state.readingVisible = true;
-
-      if (ok) {
-        state.correctCount += 1;
-        state.flash = "ok";
-        state.revealText = "";
-        state.awaitingNext = false;
-        render();
-        state._feedbackTimer = setTimeout(() => advanceAfterFeedback(), 1000);
-      } else {
-        state.flash = "bad";
-        state.revealText = `${want}　${state.currentWord.reading}`;
-        state.missed.push({
-          word: want,
-          reading: state.currentWord.reading,
-          meaning: state.currentWord.meaning,
-        });
-        state.awaitingNext = true;
-        render();
-      }
-    }
-
-    function advanceAfterFeedback() {
-      clearFeedbackTimer();
-      state.awaitingNext = false;
-      if (state.completed >= state.daySize) {
-        state.screen = "summary";
-        state.currentWord = null;
-        state.slots = [];
-        state.hand = [];
-        render();
-        return;
-      }
-      dealOrder();
-      render();
-    }
-
-    function clearFeedbackTimer() {
-      if (state._feedbackTimer) {
-        clearTimeout(state._feedbackTimer);
-        state._feedbackTimer = null;
-      }
-    }
-
-    function pickRandom(arr) {
-      return arr[Math.floor(Math.random() * arr.length)];
-    }
-
-    function unique(arr) {
-      return [...new Set(arr)];
-    }
-
-    function shuffleInPlace(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        const tmp = arr[i];
-        arr[i] = arr[j];
-        arr[j] = tmp;
-      }
-      return arr;
-    }
-
-    // Start on level picker — do not auto-load a day
+<script>
+/* ===================== LOGIC ===================== */
+function clearAnvil() {
+  state.showThird = false;
+  state.anvil = [null, null];
+}
+function buildCard(recipe) {
+  var meta = kanjiMeta(recipe.char);
+  var meaning = (meta.meaning || "").split(/[,;/]/)[0].trim();
+  var wordObj = wordFor(recipe.starter_word) || {
+    word: recipe.starter_word || "",
+    reading: "",
+    meaning: "",
+  };
+  return {
+    char: recipe.char,
+    meaning: meaning,
+    parts: recipe.parts || [],
+    mnemonic: recipe.mnemonic || "",
+    mnemonic_type: recipe.mnemonic_type || "invented",
+    wordObj: wordObj,
+  };
+}
+function discover(recipe, isNew) {
+  if (isNew) {
+    state.discovered.push(recipe.char);
+    state.discoveryOrder.push(recipe.char);
+    state.glowKey = "k:" + recipe.char;
+    persistLevel();
+    setTimeout(function () { state.glowKey = null; render(); }, 1400);
+  }
+  state.failStreak = 0;
+  state.nudgeKey = null;
+  state.card = buildCard(recipe);
+  state.celebrate = isNew;
+  clearAnvil();
+  render();
+  var w = wordFor(recipe.starter_word);
+  if (w && w.reading) speakJa(w.reading);
+}
+function failCombine() {
+  state.shaking = true;
+  state.failStreak += 1;
+  render();
+  setTimeout(function () {
+    state.shaking = false;
+    clearAnvil();
+    maybeNudge();
     render();
+  }, 420);
+}
+function maybeNudge() {
+  if (state.failStreak < 5) return;
+  var undiscovered = recipesForLevel(state.level).filter(function (r) {
+    return r.parts && r.parts.length >= 2 && state.discovered.indexOf(r.char) < 0;
+  });
+  if (!undiscovered.length) { state.nudgeKey = null; return; }
+  var target = undiscovered[Math.floor(Math.random() * undiscovered.length)];
+  var part = target.parts[Math.floor(Math.random() * target.parts.length)];
+  var tiles = inventoryTiles();
+  var hit = null;
+  for (var i = 0; i < tiles.length; i++) {
+    if (tileMatchesPart(tiles[i], part)) { hit = tiles[i]; break; }
+  }
+  state.nudgeKey = hit ? hit.key : null;
+  state.failStreak = 0;
+}
+function tryResolveAnvil() {
+  var filled = state.anvil.filter(Boolean);
+  if (filled.length === 2 && !state.showThird) {
+    var exact = findExactRecipe(filled);
+    if (exact) { discover(exact, state.discovered.indexOf(exact.char) < 0); return; }
+    if (anyThreePartNeedsThird(filled)) {
+      state.showThird = true;
+      state.anvil = [state.anvil[0], state.anvil[1], null];
+      render();
+      return;
+    }
+    failCombine();
+    return;
+  }
+  if (filled.length === 3) {
+    var exact3 = findExactRecipe(filled);
+    if (exact3) discover(exact3, state.discovered.indexOf(exact3.char) < 0);
+    else failCombine();
+  }
+}
+function pickTile(key) {
+  if (state.card) return;
+  var tiles = inventoryTiles();
+  var tile = null;
+  for (var i = 0; i < tiles.length; i++) if (tiles[i].key === key) { tile = tiles[i]; break; }
+  if (!tile) return;
+  for (var j = 0; j < state.anvil.length; j++) {
+    if (state.anvil[j] && state.anvil[j].key === key) return;
+  }
+  var slots = state.showThird ? 3 : 2;
+  while (state.anvil.length < slots) state.anvil.push(null);
+  var idx = -1;
+  for (var k = 0; k < slots; k++) if (!state.anvil[k]) { idx = k; break; }
+  if (idx < 0) return;
+  state.anvil[idx] = tile;
+  state.nudgeKey = null;
+  render();
+  var filled = state.anvil.filter(Boolean).length;
+  if (filled === 2 || filled === 3) setTimeout(tryResolveAnvil, 70);
+}
+function clearSlot(i) {
+  if (state.card) return;
+  if (!state.anvil[i]) return;
+  state.anvil[i] = null;
+  var filled = state.anvil.filter(Boolean).length;
+  if (state.showThird && filled < 2) {
+    state.showThird = false;
+    state.anvil = [state.anvil[0] || null, state.anvil[1] || null];
+  }
+  render();
+}
+function startLevel(level) {
+  state.level = level;
+  state.screen = "workbench";
+  state.card = null;
+  state.celebrate = false;
+  state.bookFocus = null;
+  state.failStreak = 0;
+  state.nudgeKey = null;
+  state.glowKey = null;
+  clearAnvil();
 
-    window.__forge = { state, render, loadLevel, startNewDay, dealOrder, buildHand, buildSlots, goToSetup };
-  </script>
+  var saved = loadStore()[level] || {};
+  state.hintsOn = saved.hintsOn !== false;
+  var starters = startersForLevel(level).map(function (r) { return r.char; });
+  var savedDisc = Array.isArray(saved.discovered) ? saved.discovered : [];
+  var savedOrder = Array.isArray(saved.discoveryOrder) ? saved.discoveryOrder : [];
+  var scope = {};
+  recipesForLevel(level).forEach(function (r) { scope[r.char] = true; });
+  var discMap = {};
+  starters.concat(savedDisc).forEach(function (c) { if (scope[c]) discMap[c] = true; });
+  state.discovered = Object.keys(discMap);
+  var order = [];
+  function pushUnique(c) { if (scope[c] && discMap[c] && order.indexOf(c) < 0) order.push(c); }
+  starters.forEach(pushUnique);
+  savedOrder.forEach(pushUnique);
+  state.discovered.forEach(pushUnique);
+  state.discoveryOrder = order;
+  persistLevel();
+  render();
+}
+function exportProgress() {
+  var data = localStorage.getItem(STORAGE_KEY) || "{}";
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(data).then(
+      function () { showToast("Progress copied"); },
+      function () { prompt("Copy your progress JSON:", data); }
+    );
+  } else {
+    prompt("Copy your progress JSON:", data);
+  }
+}
+function importProgress() {
+  var raw = prompt("Paste progress JSON:");
+  if (raw == null || !String(raw).trim()) return;
+  try {
+    var parsed = JSON.parse(raw);
+    if (!parsed || typeof parsed !== "object") throw new Error("bad");
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(parsed));
+    if (state.level) startLevel(state.level);
+    else render();
+    showToast("Progress imported");
+  } catch (e) {
+    showToast("Import failed");
+  }
+}
+function onClick(ev) {
+  var t = ev.target.closest("[data-act]");
+  if (!t) return;
+  var act = t.getAttribute("data-act");
+  if (act === "pick-level") { startLevel(t.getAttribute("data-level")); return; }
+  if (act === "change-level") { state.screen = "level"; state.card = null; render(); return; }
+  if (act === "pick-tile") { pickTile(t.getAttribute("data-key")); return; }
+  if (act === "clear-slot") { clearSlot(Number(t.getAttribute("data-i"))); return; }
+  if (act === "dismiss-card") {
+    if (ev.target.closest("[data-stop]")) return;
+    state.card = null; state.celebrate = false; render(); return;
+  }
+  if (act === "speak") { speakJa(t.getAttribute("data-text") || ""); return; }
+  if (act === "open-book") { state.screen = "book"; state.bookFocus = null; state.card = null; render(); return; }
+  if (act === "open-book-char") {
+    state.screen = "book"; state.bookFocus = t.getAttribute("data-char");
+    state.card = null; state.celebrate = false; render(); return;
+  }
+  if (act === "close-book") { state.screen = "workbench"; state.bookFocus = null; render(); return; }
+  if (act === "close-book-focus") { state.bookFocus = null; render(); return; }
+  if (act === "book-open") { state.bookFocus = t.getAttribute("data-char"); render(); return; }
+  if (act === "toggle-hints") { state.hintsOn = !state.hintsOn; persistLevel(); render(); return; }
+  if (act === "export") { exportProgress(); return; }
+  if (act === "import") { importProgress(); return; }
+}
+document.getElementById("app").addEventListener("click", onClick);
+if (window.speechSynthesis) window.speechSynthesis.onvoiceschanged = function () {};
+(async function boot() {
+  render();
+  await loadData();
+  render();
+})();
+</script>
 </body>
 </html>
