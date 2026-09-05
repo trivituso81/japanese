@@ -174,6 +174,15 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .toggle .dot { width:8px; height:8px; border-radius:50%; background:var(--faint); }
 .toggle.on .dot { background:var(--ok); }
 .tools .note { font-size:0.75rem; color:var(--faint); }
+.anvil-hint {
+  margin-top:10px; display:flex; flex-wrap:wrap; align-items:center; gap:8px;
+  font-size:0.88rem; color:var(--muted);
+}
+.anvil-hint b { color:var(--gold); font-weight:700; }
+.anvil-hint .linkish {
+  padding:4px 10px; border-radius:999px; border:1px solid var(--line);
+  background:var(--slot); color:var(--ink); font-size:0.75rem; font-weight:600;
+}
 .book-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; }
 .btile {
   aspect-ratio:1; border-radius:12px; background:var(--panel); border:1px solid var(--line);
@@ -296,6 +305,7 @@ var state = {
   nudgeKey: null,
   glowKey: null,
   hintsOn: true,
+  hintIdx: 0,
   card: null,
   celebrate: false,
   bookFocus: null,
@@ -427,6 +437,60 @@ function inventoryTiles() {
     out.push(tileFromKanji(ch));
   });
   return comps.concat(out);
+}
+/** Undiscovered recipes the player can forge with current inventory. */
+function craftableRecipes() {
+  var tiles = inventoryTiles();
+  var out = [];
+  var pool = recipesForLevel(state.level);
+  for (var i = 0; i < pool.length; i++) {
+    var r = pool[i];
+    if (!r.parts || r.parts.length < 2) continue;
+    if (state.discovered.indexOf(r.char) >= 0) continue;
+    var used = {};
+    var ok = true;
+    for (var pi = 0; pi < r.parts.length; pi++) {
+      var hit = -1;
+      for (var ti = 0; ti < tiles.length; ti++) {
+        if (used[ti]) continue;
+        if (tileMatchesPart(tiles[ti], r.parts[pi])) { hit = ti; break; }
+      }
+      if (hit < 0) { ok = false; break; }
+      used[hit] = true;
+    }
+    if (ok) out.push(r);
+  }
+  return out;
+}
+function anvilHintPool() {
+  var pool = craftableRecipes();
+  var filled = state.anvil.filter(Boolean);
+  if (filled.length === 1) {
+    var focused = pool.filter(function (r) {
+      return (r.parts || []).some(function (p) { return tileMatchesPart(filled[0], p); });
+    });
+    if (focused.length) return focused;
+  }
+  return pool;
+}
+function renderAnvilHint() {
+  if (!state.hintsOn) return "";
+  if (state.sessionLocked || state.sessionDone) return "";
+  var pool = anvilHintPool();
+  if (!pool.length) {
+    return '<div class="anvil-hint">No ready combines — discover more parts, or check Book.</div>';
+  }
+  var idx = ((state.hintIdx % pool.length) + pool.length) % pool.length;
+  var r = pool[idx];
+  var label = (r.parts || []).map(partLabel).join(" + ");
+  return (
+    '<div class="anvil-hint">' +
+      '<span>Try <b>' + esc(label) + '</b></span>' +
+      (pool.length > 1
+        ? '<button class="linkish" data-act="next-hint">Another</button>'
+        : '') +
+    '</div>'
+  );
 }
 function tileMatchesPart(tile, part) { return tile.match.indexOf(part) >= 0; }
 function findExactRecipe(tiles) {
@@ -1096,11 +1160,12 @@ function renderWorkbench() {
       '</div><div class="group"><button class="ibtn" data-act="open-book">Book</button></div></div>' +
       '<div class="tools">' +
         '<button class="toggle' + (state.hintsOn ? ' on' : '') + '" data-act="toggle-hints"><span class="dot"></span>Hints ' + (state.hintsOn ? 'on' : 'off') + '</button>' +
-        '<span class="note">Shows recipes on locked tiles in Book</span>' +
+        '<span class="note">One tip for the anvil · recipes also on locked Book tiles</span>' +
       '</div>' +
       '<div class="anvil"><div class="lbl">Anvil</div>' +
         '<div class="slots' + (state.shaking ? ' shake' : '') + (locked ? ' locked' : '') + '">' + slotHtml.join("") + '</div>' +
         lockBanner +
+        renderAnvilHint() +
       '</div>' +
       '<div class="reveal">' + (state.card ? renderCard(state.card, state.celebrate) : '') + '</div>' +
       '<div class="inv"><div class="lbl">Inventory</div><div class="grid' + (locked ? ' locked' : '') + '">' + tilesHtml + '</div></div>' +
@@ -1483,7 +1548,18 @@ function onClick(ev) {
   }
   if (act === "close-book-focus") { state.bookFocus = null; render(); return; }
   if (act === "book-open") { state.bookFocus = t.getAttribute("data-char"); render(); return; }
-  if (act === "toggle-hints") { state.hintsOn = !state.hintsOn; persistLevel(); render(); return; }
+  if (act === "toggle-hints") {
+    state.hintsOn = !state.hintsOn;
+    state.hintIdx = 0;
+    persistLevel();
+    render();
+    return;
+  }
+  if (act === "next-hint") {
+    state.hintIdx = (state.hintIdx || 0) + 1;
+    render();
+    return;
+  }
   if (act === "export") { exportProgress(); return; }
   if (act === "import") { importProgress(); return; }
   if (act === "practice-answer") { answerPractice(Number(t.getAttribute("data-i"))); return; }
