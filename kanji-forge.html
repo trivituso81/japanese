@@ -173,18 +173,7 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .toggle.on { color:var(--ink); border-color:var(--gold-dim); }
 .toggle .dot { width:8px; height:8px; border-radius:50%; background:var(--faint); }
 .toggle.on .dot { background:var(--ok); }
-.hint-panel {
-  margin-top:10px; padding:10px 12px; border-radius:12px;
-  background:rgba(212,162,74,0.08); border:1px solid var(--gold-dim);
-}
-.hint-panel .lbl { margin-bottom:6px; }
-.hint-list { display:flex; flex-wrap:wrap; gap:6px; }
-.hint-chip {
-  font-size:0.72rem; color:var(--muted); padding:5px 8px; border-radius:999px;
-  background:var(--slot); border:1px solid var(--line); line-height:1.2;
-}
-.hint-chip b { color:var(--gold); font-weight:700; }
-.hint-empty { margin:0; font-size:0.8rem; color:var(--faint); }
+.tools .note { font-size:0.75rem; color:var(--faint); }
 .book-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(72px, 1fr)); gap:8px; }
 .btile {
   aspect-ratio:1; border-radius:12px; background:var(--panel); border:1px solid var(--line);
@@ -438,48 +427,6 @@ function inventoryTiles() {
     out.push(tileFromKanji(ch));
   });
   return comps.concat(out);
-}
-/** Undiscovered recipes whose parts are all currently in inventory. */
-function craftableHintRecipes(limit) {
-  var tiles = inventoryTiles();
-  var out = [];
-  var pool = recipesForLevel(state.level);
-  for (var i = 0; i < pool.length; i++) {
-    var r = pool[i];
-    if (!r.parts || r.parts.length < 2) continue;
-    if (state.discovered.indexOf(r.char) >= 0) continue;
-    var used = {};
-    var ok = true;
-    for (var pi = 0; pi < r.parts.length; pi++) {
-      var hit = -1;
-      for (var ti = 0; ti < tiles.length; ti++) {
-        if (used[ti]) continue;
-        if (tileMatchesPart(tiles[ti], r.parts[pi])) { hit = ti; break; }
-      }
-      if (hit < 0) { ok = false; break; }
-      used[hit] = true;
-    }
-    if (!ok) continue;
-    out.push(r);
-    if (limit && out.length >= limit) break;
-  }
-  return out;
-}
-function renderHintPanel() {
-  if (!state.hintsOn) return "";
-  var crafts = craftableHintRecipes(8);
-  var chips = crafts.map(function (r) {
-    var label = (r.parts || []).map(partLabel).join(" + ");
-    return '<span class="hint-chip">' + esc(label) + ' <b>→ ?</b></span>';
-  }).join("");
-  return (
-    '<div class="hint-panel">' +
-      '<div class="lbl">Hints</div>' +
-      (chips
-        ? '<div class="hint-list">' + chips + '</div>'
-        : '<p class="hint-empty">No ready combines. Open Book for locked-kanji recipes.</p>') +
-    '</div>'
-  );
 }
 function tileMatchesPart(tile, part) { return tile.match.indexOf(part) >= 0; }
 function findExactRecipe(tiles) {
@@ -1149,11 +1096,11 @@ function renderWorkbench() {
       '</div><div class="group"><button class="ibtn" data-act="open-book">Book</button></div></div>' +
       '<div class="tools">' +
         '<button class="toggle' + (state.hintsOn ? ' on' : '') + '" data-act="toggle-hints"><span class="dot"></span>Hints ' + (state.hintsOn ? 'on' : 'off') + '</button>' +
+        '<span class="note">Shows recipes on locked tiles in Book</span>' +
       '</div>' +
       '<div class="anvil"><div class="lbl">Anvil</div>' +
         '<div class="slots' + (state.shaking ? ' shake' : '') + (locked ? ' locked' : '') + '">' + slotHtml.join("") + '</div>' +
         lockBanner +
-        renderHintPanel() +
       '</div>' +
       '<div class="reveal">' + (state.card ? renderCard(state.card, state.celebrate) : '') + '</div>' +
       '<div class="inv"><div class="lbl">Inventory</div><div class="grid' + (locked ? ' locked' : '') + '">' + tilesHtml + '</div></div>' +
