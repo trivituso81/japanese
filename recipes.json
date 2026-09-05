@@ -921,7 +921,7 @@
       "売"
     ],
     "mnemonic": "Speech for what is sold: read.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "etymological",
     "starter_word": "読"
   },
   {
@@ -1608,7 +1608,7 @@
       "毎"
     ],
     "mnemonic": "Water with every: sea.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "etymological",
     "starter_word": "海"
   },
   {
@@ -1743,7 +1743,7 @@
       "台"
     ],
     "mnemonic": "Woman and pedestal sound: begin.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "invented",
     "starter_word": "始める"
   },
   {
@@ -1777,7 +1777,7 @@
       "冬"
     ],
     "mnemonic": "Thread of winter: end.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "etymological",
     "starter_word": "終わる"
   },
   {
@@ -1811,7 +1811,10 @@
     ],
     "mnemonic": "Person by the main: reside.",
     "mnemonic_type": "phonetic",
-    "starter_word": "住む"
+    "starter_word": "住む",
+    "sound_part": "主",
+    "family_reading": "シュ",
+    "reading_drift": true
   },
   {
     "char": "真",
@@ -2216,7 +2219,10 @@
     ],
     "mnemonic": "Water toward the main: pour.",
     "mnemonic_type": "phonetic",
-    "starter_word": "注目"
+    "starter_word": "注目",
+    "sound_part": "主",
+    "family_reading": "シュ",
+    "reading_drift": true
   },
   {
     "char": "帰",
@@ -2655,7 +2661,7 @@
       "市"
     ],
     "mnemonic": "Woman and city sound: older sister.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "invented",
     "starter_word": "姉"
   },
   {
@@ -2855,7 +2861,7 @@
       "者"
     ],
     "mnemonic": "Sun and one who: hot.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "etymological",
     "starter_word": "暑"
   },
   {
@@ -2899,7 +2905,7 @@
       "先"
     ],
     "mnemonic": "Water ahead: wash.",
-    "mnemonic_type": "phonetic",
+    "mnemonic_type": "etymological",
     "starter_word": "洗う"
   },
   {

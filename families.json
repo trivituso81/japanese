@@ -1,0 +1,28 @@
+{
+  "generated": "2026-09-05",
+  "family_count": 1,
+  "families": [
+    {
+      "sound_part": "主",
+      "family_reading": "シュ",
+      "members": [
+        {
+          "char": "住",
+          "onyomi": "ジュウ",
+          "reading_drift": true,
+          "family_reading": "シュ",
+          "level": "N4",
+          "starter_word": "住む"
+        },
+        {
+          "char": "注",
+          "onyomi": "チュウ",
+          "reading_drift": true,
+          "family_reading": "シュ",
+          "level": "N4",
+          "starter_word": "注目"
+        }
+      ]
+    }
+  ]
+}
