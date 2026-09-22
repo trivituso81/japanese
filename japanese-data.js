@@ -7559,10 +7559,10 @@ const CONTENT = {
     ],
     drills: [
       ["I was surprised to hear the news.", "ニュースを 聞{き}いて、びっくりしました。", "the て-form gives the cause of a feeling"],
-      ["I can't see my family, so I miss them.", "家族{かぞく}に 会{あ}えなくて、寂{さび}しいです。", "a negative verb becomes 〜なくて"],
-      ["Saturday is inconvenient for me, so I cannot come.", "土曜日{どようび}は 都合{つごう}が 悪{わる}くて、行{い}けません。", "an い-adjective becomes 〜くて; the result is a potential"],
-      ["The story was complicated, so I could not understand it well.", "話{はなし}が 複雑{ふくざつ}で、よく わかりませんでした。", "a な-adjective becomes 〜で"],
-      ["It's dangerous, so please don't touch the machine.", "危{あぶ}ないですから、機械{きかい}に 触{さわ}らないで ください。", "a request follows, so から — 危{あぶ}なくて is not possible"],
+      ["I can't see my family and I feel lonely.", "家族{かぞく}に 会{あ}えなくて、寂{さび}しいです。", "a negative verb becomes 〜なくて"],
+      ["Saturday is inconvenient for me and I cannot go.", "土曜日{どようび}は 都合{つごう}が 悪{わる}くて、行{い}けません。", "an い-adjective becomes 〜くて; the result is a potential"],
+      ["The story was complicated and I could not understand it well.", "話{はなし}が 複雑{ふくざつ}で、よく わかりませんでした。", "a な-adjective becomes 〜で"],
+      ["I failed the examination and was disappointed.", "試験{しけん}に 失敗{しっぱい}して、がっかりしました。", "a verb-て clause before a feeling you do not choose"],
       ["I was late for the lesson and was scolded by the teacher.", "授業{じゅぎょう}に 遅{おく}れて、先生{せんせい}に しかられました。", "a passive result: nothing here was willed"],
     ]
   },
@@ -7603,7 +7603,7 @@ const CONTENT = {
       ["I'm ill today, so may I go home early?", "きょうは 病気{びょうき}なので、早{はや}く 帰{かえ}っても いいですか。", "a noun takes な before ので"],
       ["This room is quiet, so I can study well here.", "この 部屋{へや}は 静{しず}かなので、よく 勉強{べんきょう}できます。", "な-adjectives also take な"],
       ["The trains have stopped, so I ended up being late.", "電車{でんしゃ}が 止{と}まって いるので、遅{おく}れて しまいました。", ""],
-      ["Don't touch the machine — it's dangerous.", "危{あぶ}ないから、機械{きかい}に 触{さわ}るな。", "only から can stand before an imperative or prohibitive"],
+      ["This bag is heavy, so please help me.", "この かばんは 重{おも}いので、手伝{てつだ}って ください。", "an い-adjective takes ので directly"],
     ]
   },
   {
@@ -7618,10 +7618,10 @@ const CONTENT = {
       ["映画{えいが}の 途中{とちゅう}で 出{で}て しまいました。", "I left partway through the film."],
     ],
     drills: [
-      ["On the way here there was an accident and the bus was delayed.", "来{く}る 途中{とちゅう}で 事故{じこ}が あって、バスが 遅{おく}れて しまいました。", "the dictionary form before 途中{とちゅう}で"],
+      ["On the way here there was an accident and the bus ended up being late.", "来{く}る 途中{とちゅう}で 事故{じこ}が あって、バスが 遅{おく}れて しまいました。", "the dictionary form before 途中{とちゅう}で"],
       ["I felt ill partway through the meeting.", "会議{かいぎ}の 途中{とちゅう}で 気分{きぶん}が 悪{わる}く なりました。", "a noun takes の"],
       ["I met a friend on the way to school.", "学校{がっこう}へ 行{い}く 途中{とちゅう}で 友{とも}だちに 会{あ}いました。", ""],
-      ["I left partway through the film.", "映画{えいが}の 途中{とちゅう}で 出{で}て しまいました。", ""],
+      ["I ended up leaving partway through the film.", "映画{えいが}の 途中{とちゅう}で 出{で}て しまいました。", ""],
       ["It rained on the way home.", "うちへ 帰{かえ}る 途中{とちゅう}で 雨{あめ}が 降{ふ}りました。", ""],
       ["Please buy some bread on the way to the office.", "会社{かいしゃ}へ 行{い}く 途中{とちゅう}で パンを 買{か}って ください。", "a request is fine here — this is not a reason clause"],
     ]
