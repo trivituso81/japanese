@@ -6523,8 +6523,8 @@ const CONTENT = {
     drills: [
       ["There's a memo left on the desk.", "机{つくえ}の 上{うえ}に メモが 置{お}いて あります。", "someone put it there on purpose"],
       ["This month's schedule is written on the calendar.", "カレンダーに 今月{こんげつ}の 予定{よてい}が 書{か}いて あります。", ""],
-      ["Where's the memo? — It's been put on the desk.", "メモは 机{つくえ}の 上{うえ}に 置{お}いて あります。", "the topic comes first with は"],
-      ["I've already booked the hotel.", "ホテルは もう 予約{よやく}して あります。", "もう ～て あります for preparations already made"],
+      ["The guidebook has been put in the drawer.", "ガイドブックは 引{ひ}き出{だ}しに 入{い}れて あります。", "は, because the thing acted on is taken up as the topic"],
+      ["The hotel is already booked.", "ホテルは もう 予約{よやく}して あります。", "もう ～て あります for preparations already made"],
       ["The window has been closed.", "窓{まど}が 閉{し}めて あります。", "compare 窓{まど}が 閉{し}まって います, which only reports the state"],
       ["A map is put up on the wall.", "壁{かべ}に 地図{ちず}が 貼{は}って あります。", ""],
     ]
@@ -6541,12 +6541,12 @@ const CONTENT = {
       ["次{つぎ}の 会議{かいぎ}までに 何{なに}を して おいたら いいですか。", "What should I do before the next meeting?"],
     ],
     drills: [
-      ["I'll buy the tickets before the trip.", "旅行{りょこう}の まえに 切符{きっぷ}を 買{か}って おきます。", "getting a necessary job done in advance"],
-      ["When you've finished with the scissors, please put them back where they were.", "はさみを 使{つか}ったら、元{もと}の 所{ところ}に 戻{もど}して おいて ください。", "leaving things ready for the next person"],
-      ["There's a meeting tomorrow, so please leave the chairs as they are.", "あした 会議{かいぎ}が ありますから、いすは この ままに して おいて ください。", "leaving a state alone on purpose"],
-      ["What should I do before the next meeting?", "次{つぎ}の 会議{かいぎ}までに 何{なに}を して おいたら いいですか。", "with Lesson 26's ～たら いいですか"],
+      ["I'll buy the tickets in advance, before the trip.", "旅行{りょこう}の まえに 切符{きっぷ}を 買{か}って おきます。", "getting a necessary job done in advance"],
+      ["When you finish using the scissors, please put them back where they were.", "はさみを 使{つか}ったら、元{もと}の 所{ところ}に 戻{もど}して おいて ください。", "leaving things ready for the next person"],
+      ["There's a meeting here tomorrow, so please leave the chairs as they are.", "あした 会議{かいぎ}が ありますから、いすは この ままに して おいて ください。", "leaving a state alone on purpose"],
+      ["What should I get done before the next meeting?", "次{つぎ}の 会議{かいぎ}までに 何{なに}を して おいたら いいですか。", "with Lesson 26's ～たら いいですか"],
       ["Please read these materials beforehand.", "この 資料{しりょう}を 読{よ}んで おいて ください。", ""],
-      ["I'll tidy the room before my friends come.", "友{とも}だちが 来{く}る まえに、部屋{へや}を 片{かた}づけて おきます。", ""],
+      ["I'll get the room tidied before my friends come.", "友{とも}だちが 来{く}る まえに、部屋{へや}を 片付{かたづ}けて おきます。", ""],
     ]
   },
   {
@@ -6566,7 +6566,7 @@ const CONTENT = {
       ["Mr Tanaka is still at the office.", "田中{たなか}さんは まだ 会社{かいしゃ}に います。", ""],
       ["There's still time.", "まだ 時間{じかん}が あります。", ""],
       ["I haven't decided yet.", "まだ 決{き}めて いません。", "まだ with a negative is 'not yet'"],
-      ["Are you still eating?", "まだ 食{た}べて いるんですか。", ""],
+      ["Are you still eating?", "まだ 食{た}べて いますか。", ""],
     ]
   },
   {
@@ -6581,12 +6581,12 @@ const CONTENT = {
       ["来月{らいげつ} 結婚{けっこん}するんです。…それは おめでとう ございます。", "I'm getting married next month. …Congratulations!"],
     ],
     drills: [
-      ["I'd like to see a musical on Broadway…", "ブロードウェイで ミュージカルを 見{み}たいと 思{おも}うんですが……。", "～んですが leaves the request itself unsaid"],
+      ["I'd like to see a musical on Broadway. — That sounds nice.", "ブロードウェイで ミュージカルを 見{み}たいです。…それは いいですね。", "the comment answers the remark, not anything in the room"],
       ["That sounds nice.", "それは いいですね。", "それ picks up what was just said"],
-      ["Sometimes I get a headache.", "時々{ときどき} 頭{あたま}が 痛{いた}く なるんです。", ""],
+      ["Sometimes I get a headache. — That's bad.", "時々{ときどき} 頭{あたま}が 痛{いた}く なります。…それは いけませんね。", "いけませんね is the set response to bad news"],
       ["That's bad.", "それは いけませんね。", ""],
-      ["I'm getting married next month.", "来月{らいげつ} 結婚{けっこん}するんです。", ""],
-      ["That's wonderful — congratulations.", "それは おめでとう ございます。", ""],
+      ["I'm getting married next month. — Congratulations!", "来月{らいげつ} 結婚{けっこん}します。…それは おめでとう ございます。", "おめでとう ございます for good news"],
+      ["That's wonderful, congratulations.", "それは おめでとう ございます。", ""],
     ]
   },
 ]},
