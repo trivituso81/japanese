@@ -2296,10 +2296,10 @@ document.addEventListener("DOMContentLoaded", function () {
   /* a group of choices where exactly one is taken */
   .seg { display: flex; flex-wrap: wrap; gap: 6px; }
   /* a switch reads across rather than down, and its label belongs beside it */
-  .opt.check { flex-direction: row; align-items: center; gap: 8px; padding-bottom: 7px; }
+  .opt.check { flex-direction: column; align-items: flex-start; gap: 10px; padding-bottom: 7px; }
   .opt.check label { display: flex; align-items: center; gap: 8px; cursor: pointer;
     user-select: none; font-size: 14px; color: var(--text); }
-  .opt.check input { width: 16px; height: 16px; margin: 0; cursor: pointer; }
+  .opt.check input { width: 16px; height: 16px; margin: 0; cursor: pointer; flex: 0 0 auto; }
   /* the one control that starts things, held to the right so the eye always
      finds it in the same place */
   .opt.start { margin-left: auto; }
@@ -4916,17 +4916,29 @@ function scopeLabel(s) {
 }
 const isRange = s => s === "all" || /^\d+-\d+$/.test(String(s));
 
-/* deck = every vocabulary entry in scope, as stable card ids */
-function deck(ns, includeProper) {
+/* deck = every vocabulary entry in scope, as stable card ids.
+   keyOnly keeps entries tagged with a truthy 4th tuple slot (絵カード). */
+function deck(ns, includeProper, keyOnly) {
   const out = [];
   for (const n of ns) {
     const v = VOCAB[n];
     if (!v) continue;
-    v.v.forEach((e, i) => out.push({ id: `${n}:v:${i}`, e, n }));
-    if (includeProper && v.p) v.p.forEach((e, i) => out.push({ id: `${n}:p:${i}`, e, n }));
+    v.v.forEach((e, i) => {
+      if (keyOnly && !e[3]) return;
+      out.push({ id: `${n}:v:${i}`, e, n });
+    });
+    if (includeProper && v.p) v.p.forEach((e, i) => {
+      if (keyOnly && !e[3]) return;
+      out.push({ id: `${n}:p:${i}`, e, n });
+    });
   }
   return out;
 }
+const hasKeyVocab = ns => ns.some(n => {
+  const v = VOCAB[n];
+  return !!v && (
+    (v.v || []).some(e => e[3]) || (v.p || []).some(e => e[3]));
+});
 const boxOf = id => (S.cards[id] && S.cards[id].box) || 0;
 
 function vocabScore(n) {
@@ -4950,10 +4962,10 @@ function rememberCardMisses(scope, ids) {
   if (list.length) S.cardMisses[key] = list;
   else delete S.cardMisses[key];
 }
-function cardMissesFor(scope, ns, proper) {
+function cardMissesFor(scope, ns, proper, keyOnly) {
   const saved = (S.cardMisses && S.cardMisses[String(scope)]) || [];
   if (!saved.length) return [];
-  const live = new Set(deck(ns, !!proper).map(c => c.id));
+  const live = new Set(deck(ns, !!proper, !!keyOnly).map(c => c.id));
   return saved.filter(id => live.has(id));
 }
 
@@ -6321,13 +6333,15 @@ function renderCards(scope) {
   document.body.dataset.view = "cards";
   showBotnav();
   const size = range ? 30 : 20;
-  CARD = { scope, ns, dir: "jp-en", order: "random", proper: false, size,
+  const showKey = hasKeyVocab(ns);
+  CARD = { scope, ns, dir: "jp-en", order: "random", proper: false, keyOnly: false, size,
            round: [], i: 0, shown: false, total: 0, retired: 0, firstTry: 0,
            missed: new Set(), attempts: {}, prev: null, animating: false,
            playing: false };
   const title = range ? scopeLabel(scope) : `Lesson ${ns[0]}`;
-  const missIds = cardMissesFor(scope, ns, false);
+  const missIds = cardMissesFor(scope, ns, false, false);
   const unlearnedN = deck(ns, false).filter(c => boxOf(c.id) < LEARNED_BOX).length;
+  const keyN = showKey ? deck(ns, false, true).length : 0;
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
       <div>
@@ -6346,7 +6360,9 @@ function renderCards(scope) {
             <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("") },
         { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
           `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
-        { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>` },
+        { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>${
+          showKey ? `<label><input type="checkbox" id="keyOnly"> Key vocabulary only${
+            keyN ? ` · ${keyN}` : ""}</label>` : ""}` },
         missIds.length && {
           start: `<button class="btn primary" id="retryMiss">Retry ${missIds.length} you missed</button>
             <button class="btn" id="deal">New round</button>`
@@ -6381,18 +6397,24 @@ function renderCards(scope) {
     CARD.stale = true;
     refreshDeal();
   });
+  const keyOnlyEl = document.getElementById("keyOnly");
+  if (keyOnlyEl) keyOnlyEl.addEventListener("change", e => {
+    CARD.keyOnly = e.target.checked;
+    CARD.stale = true;
+    refreshDeal();
+  });
   const deal = document.getElementById("deal");
   if (deal) deal.addEventListener("click", () => { unlockTts(); startSession(); });
   const retryMiss = document.getElementById("retryMiss");
   if (retryMiss) retryMiss.addEventListener("click", () => {
     unlockTts();
-    const ids = cardMissesFor(CARD.scope, CARD.ns, CARD.proper);
+    const ids = cardMissesFor(CARD.scope, CARD.ns, CARD.proper, CARD.keyOnly);
     startSession(ids.length ? new Set(ids) : undefined);
   });
   const retryUnlearned = document.getElementById("retryUnlearned");
   if (retryUnlearned) retryUnlearned.addEventListener("click", () => {
     unlockTts();
-    const ids = deck(CARD.ns, CARD.proper)
+    const ids = deck(CARD.ns, CARD.proper, CARD.keyOnly)
       .filter(c => boxOf(c.id) < LEARNED_BOX)
       .map(c => c.id);
     startSession(ids.length ? new Set(ids) : undefined);
@@ -6419,7 +6441,7 @@ function refreshDeal() {
 /* Order decides which cards make the cut. The sitting itself is always
    shuffled, so a new round is never the same sequence as the last. */
 function buildRound(only) {
-  const d = deck(CARD.ns, CARD.proper);
+  const d = deck(CARD.ns, CARD.proper, CARD.keyOnly);
   let pool;
   if (only) pool = d.filter(c => only.has(c.id));
   else if (CARD.order === "random") pool = shuffle(d);

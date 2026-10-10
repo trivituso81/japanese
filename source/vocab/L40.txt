@@ -61,6 +61,13 @@ VOCAB
 てに いれます II|手に 入れます|obtain, get
 いまでも|今でも|even now
 うわさします III||gossip
+うまく いきます I||go well
+でます II|出ます|leave, go out
+そうだんします III|相談します|consult
+てんきよほう|天気予報|weather forecast
+はっぴょうかい|発表会|presentation meeting
+おとしより|お年寄り|elderly people
+たなばたまつり|七夕祭り|Tanabata Festival
 PROPER
 ゴッホ||Vincent van Gogh, Dutch painter (1853-90)
 ゆきまつり|雪祭り|Snow Festival in Sapporo
