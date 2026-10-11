@@ -70,6 +70,8 @@ browsers or a laptop and a phone.
 | `index.html` | The study guide. This is the page to open. |
 | `japanese-data.js` | Every lesson, word, grammar point, example and drill. Both pages read it, so keep it beside them. |
 | `japanese.html` | The earlier, simpler progress tracker. Linked from the footer; safe to delete if you never use it. |
+| `toki/` | **TOKI** — Japanese history learning app (stories, review games, local progress). Open `toki/index.html` or `https://trivituso81.github.io/japanese/toki/`. |
+| `kanji-forge.html` | Kanji Forge discovery game (N5 / N4). Linked from the Kanji screen. |
 | `source/vocab/` | The raw vocabulary transcriptions the data file was built from. Not used at runtime — kept so the wordlists can be checked against the books. |
 
 ## On an iPhone
