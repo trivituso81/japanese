@@ -1,0 +1,32 @@
+{
+  "content_validation": {
+    "eras": 18,
+    "missions": 90,
+    "readingCards": 270,
+    "questions": 180,
+    "sources": 48
+  },
+  "all_missions": {
+    "completed": 90,
+    "xp": 3150,
+    "stamps": 18,
+    "questions": 180
+  },
+  "spaced_recall": {
+    "immediate": 1,
+    "spaced": 2,
+    "wrong": 0,
+    "delay": 600000
+  },
+  "replay_no_xp": true,
+  "phrase_lab": {
+    "done": 12,
+    "correct": 12
+  },
+  "mixed_recall": 10,
+  "backup_roundtrip": true,
+  "malformed_backup_rejected": true,
+  "all_scenario_paths": 162,
+  "runtime_errors": [],
+  "test_scope": "Chromium DOM with serialized localStorage adapter. Sandbox policy prevented HTTP/file navigation, so actual Safari, native localStorage durability, and service-worker installation/offline operation were not verified."
+}
