@@ -1597,7 +1597,19 @@ document.addEventListener("DOMContentLoaded", function () {
     flex-direction: column;
     gap: 8px;
   }
-  .home-extra-apps .k-forge-entry { margin: 0; }
+  .home-extra-apps .k-forge-entry {
+    margin: 0;
+    text-decoration: none;
+    color: inherit;
+  }
+  .home-extra-apps .k-forge-entry .toki-entry-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--seal);
+  }
+  .home-extra-apps a.k-forge-entry:hover .toki-entry-title {
+    text-decoration: underline;
+  }
 
   /* Full browse + character study pages — phone-first scrolling real estate */
   body[data-view="kanji-study"] header.masthead,
@@ -5923,10 +5935,10 @@ function renderHome() {
       </div>
 
       <div class="home-extra-apps" aria-label="More apps">
-        <p class="k-forge-entry">
-          <a href="toki/">TOKI · Japanese history</a>
+        <a class="k-forge-entry" href="toki/">
+          <span class="toki-entry-title">TOKI · Japanese history</span>
           <span>Stories, review games, and era stamps — opens in its own app</span>
-        </p>
+        </a>
       </div>
     </section>`;
 
