@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさん">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016y">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016y">
-<link rel="manifest" href="site.webmanifest?v=20261016y">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016z">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016z">
+<link rel="manifest" href="site.webmanifest?v=20261016z">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261016y";
+window.__BUILD__ = "20261016z";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261016y";
+  var v = window.__BUILD__ || "20261016z";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261016y"));
+    + encodeURIComponent(window.__BUILD__ || "20261016z"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261016y") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261016z") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -344,6 +344,17 @@ document.addEventListener("DOMContentLoaded", function () {
     display: flex; flex-direction: column;
     flex: 1 1 auto; min-height: 0;
     padding: 4px 0 0; gap: 12px;
+  }
+  .home-sync-banner {
+    display: flex; flex-direction: column; gap: 8px;
+    padding: 12px 14px; border: 2px solid var(--accent-deep);
+    border-radius: var(--radius-sm); background: var(--accent-soft);
+    box-shadow: 2px 2px 0 var(--shadow-ink);
+  }
+  .home-sync-banner p { margin: 0; font-size: 14px; line-height: 1.45; color: var(--text); }
+  .home-sync-banner .btn { width: 100%; min-height: 48px; }
+  .home-sync-ok {
+    margin: 0; font-size: 12.5px; color: var(--text-soft); line-height: 1.4;
   }
   .home-top {
     display: flex; align-items: flex-end; justify-content: space-between;
@@ -3236,10 +3247,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261016y" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261016z" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016y#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016z#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3259,7 +3270,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261016y" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261016z" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3361,7 +3372,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261016y"></script>
+<script src="firebase-config.js?v=20261016z"></script>
 <script>
 /* ============================================================
    State
@@ -3641,6 +3652,8 @@ let cloudLoadPopupPromise = null;
 let cloudDirty = false; /* local progress waiting for a successful Google push */
 let cloudHydrating = false; /* block empty home until first Google pull finishes */
 let cloudSkipNextRoute = false;
+let googleAutoPullDone = false; /* one auto Download-from-Google per signed-in empty home */
+let lastGooglePullInfo = ""; /* shown on home so a silent empty state is impossible */
 const CLOUD_CHECK_MIN_MS = 8000;
 
 function showCloudHydrate(msg) {
@@ -3766,7 +3779,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261016y" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261016z" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -3852,6 +3865,15 @@ function bindCloudAuth() {
         setTimeout(() => { try { quietCloudSync(); } catch (e) {} }, 0);
       } else if (cloudDirty) {
         flushCloudSync();
+      }
+    } else {
+      googleAutoPullDone = false;
+      lastGooglePullInfo = "";
+      /* Signed out (or auth hint was stale): never leave the hydrate sheet up. */
+      if (cloudHydrating && !cloudCheckBusy && !cloudSyncDialogOpen) {
+        hideCloudHydrate();
+        cloudSkipNextRoute = false;
+        pendingCloudSyncReason = null;
       }
     }
     updateCloudUi();
@@ -3982,31 +4004,43 @@ function cloudFromRestDoc(doc) {
   const clientUpdatedAt = num("clientUpdatedAt");
   if (clientUpdatedAt > updatedAt) updatedAt = clientUpdatedAt;
   let raw = null;
+  let parseErr = "";
   const pj = str("progressJson");
   if (pj) {
     try { raw = JSON.parse(pj); }
-    catch (err) { raw = null; }
+    catch (err) {
+      raw = null;
+      parseErr = (err && err.message) || "invalid JSON";
+    }
   }
   if (!raw && f.progress && f.progress.mapValue && f.progress.mapValue.fields) {
     /* Ignore legacy nested map — progressJson is the source of truth. */
   }
   const weight = num("weight");
+  const floorWeight = num("floorWeight");
   if (!raw) {
     return {
       progress: blank(),
       weight,
+      floorWeight,
       updatedAt,
       email: str("email"),
-      empty: true
+      empty: true,
+      unreadable: !!(pj || weight > 0 || floorWeight > 0),
+      parseErr,
+      jsonLen: pj ? pj.length : 0
     };
   }
   const progress = migrate(Object.assign(blank(), raw));
   return {
     progress,
     weight: weight || progressWeight(progress),
+    floorWeight,
     updatedAt,
     email: str("email"),
-    empty: progressWeight(progress) === 0
+    empty: progressWeight(progress) === 0,
+    unreadable: false,
+    jsonLen: pj.length
   };
 }
 
@@ -4077,9 +4111,15 @@ async function pushCloudRest(uid, snapshot, localTs, localWeight) {
 function parseCloudSnapData(data) {
   data = data || {};
   let raw = null;
-  if (typeof data.progressJson === "string" && data.progressJson) {
-    try { raw = JSON.parse(data.progressJson); }
-    catch (err) { raw = null; }
+  let parseErr = "";
+  const pj = (typeof data.progressJson === "string" && data.progressJson)
+    ? data.progressJson : "";
+  if (pj) {
+    try { raw = JSON.parse(pj); }
+    catch (err) {
+      raw = null;
+      parseErr = (err && err.message) || "invalid JSON";
+    }
   }
   if (!raw && data.progress && typeof data.progress === "object") raw = data.progress;
   let updatedAt = 0;
@@ -4093,22 +4133,31 @@ function parseCloudSnapData(data) {
   if (typeof data.clientUpdatedAt === "number" && data.clientUpdatedAt > updatedAt) {
     updatedAt = data.clientUpdatedAt;
   }
+  const weight = typeof data.weight === "number" ? data.weight : 0;
+  const floorWeight = typeof data.floorWeight === "number" ? data.floorWeight : 0;
   if (!raw) {
     return {
       progress: blank(),
-      weight: typeof data.weight === "number" ? data.weight : 0,
+      weight,
+      floorWeight,
       updatedAt,
       email: data.email || "",
-      empty: true
+      empty: true,
+      unreadable: !!(pj || weight > 0 || floorWeight > 0),
+      parseErr,
+      jsonLen: pj ? pj.length : 0
     };
   }
   const progress = migrate(Object.assign(blank(), raw));
   return {
     progress,
-    weight: typeof data.weight === "number" ? data.weight : progressWeight(progress),
+    weight: weight || progressWeight(progress),
+    floorWeight,
     updatedAt,
     email: data.email || "",
-    empty: progressWeight(progress) === 0
+    empty: progressWeight(progress) === 0,
+    unreadable: false,
+    jsonLen: pj.length
   };
 }
 
@@ -4161,7 +4210,23 @@ async function pullCloudAuthoritative(uid) {
 function cloudHasProgress(cloud) {
   if (!cloud) return false;
   if (progressWeight(cloud.progress) > 0) return true;
+  /* weight/floor without parseable progressJson is NOT “empty” — it is broken.
+     Treating it as empty used to skip download and look like a blank account. */
+  if (cloud.unreadable) return false;
   return !!(cloud.weight > 0 && !cloud.empty);
+}
+
+function cloudPullSummary(cloud, user) {
+  const who = (user && (user.email || user.uid)) || "Google";
+  if (!cloud) return "No Google doc for " + who;
+  const w = Math.max(cloud.weight || 0, progressWeight(cloud.progress), cloud.floorWeight || 0);
+  if (cloud.unreadable) {
+    return "Google doc unreadable for " + who + " (weight " + w
+      + ", json " + (cloud.jsonLen || 0) + "B"
+      + (cloud.parseErr ? ": " + cloud.parseErr : "") + ")";
+  }
+  if (!cloudHasProgress(cloud)) return "Google empty for " + who + " (weight " + w + ")";
+  return "Google has " + describeProgress(cloud.progress) + " for " + who;
 }
 
 function hasForceCloudPush() {
@@ -4209,7 +4274,7 @@ async function commitCloudDoc(uid, snapshot, localTs, localWeight, opts) {
        older empty doc and upload it over the restore. */
     if (cloudDb) {
       try {
-        await cloudDocRef(uid).set({
+        const sdkPayload = {
           progressJson: JSON.stringify(snapshot),
           weight: localWeight,
           floorWeight: localWeight,
@@ -4217,7 +4282,9 @@ async function commitCloudDoc(uid, snapshot, localTs, localWeight, opts) {
           schema: CLOUD_SCHEMA,
           email: (requireCloudUser() && requireCloudUser().email) || null,
           updatedAt: firebase.firestore.FieldValue.serverTimestamp()
-        });
+        };
+        if (hasForceCloudPush()) sdkPayload.restoreNonce = String(Date.now());
+        await cloudDocRef(uid).set(sdkPayload);
       } catch (e) { /* non-fatal — REST is source of truth */ }
     }
     return confirmed;
@@ -4233,6 +4300,7 @@ async function commitCloudDoc(uid, snapshot, localTs, localWeight, opts) {
     schema: CLOUD_SCHEMA,
     email: (user && user.email) || null
   };
+  if (hasForceCloudPush()) payload.restoreNonce = String(Date.now());
   await cloudDocRef(uid).set(payload);
   return payload;
 }
@@ -4443,6 +4511,7 @@ async function reconcileCloud(reason) {
     hideCloudHydrate();
     if (!pullOk) {
       authError = "Could not check Google save. " + cloudErrDetail(pullErr);
+      lastGooglePullInfo = authError;
       updateCloudUi();
       await showCloudSyncPopup({
         title: "Could not check Google save",
@@ -4459,21 +4528,45 @@ async function reconcileCloud(reason) {
     }
 
     let cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
-    let cloudW = cloud ? Math.max(cloud.weight || 0, progressWeight(cloud.progress)) : 0;
+    let cloudW = cloud ? Math.max(cloud.weight || 0, progressWeight(cloud.progress), cloud.floorWeight || 0) : 0;
     const cloudEmpty = !cloudHasProgress(cloud);
     if (cloudW) rememberCloudFloor(cloudW);
+    lastGooglePullInfo = cloudPullSummary(cloud, user);
 
-    /* Nothing on either side — still confirm so a refresh is never silent. */
-    if (localW === 0 && cloudEmpty) {
+    /* Doc exists with weight/floor but progressJson would not parse — never
+       treat that as a blank account (that path looked like sync “worked”
+       then showed Lesson 40 at 0%). */
+    if (cloud && cloud.unreadable) {
+      authError = lastGooglePullInfo;
+      updateCloudUi();
       await showCloudSyncPopup({
-        title: "You're up to date",
-        message: "No study progress is saved on this device or Google yet.\n\nAccount: "
-          + (user.email || user.uid),
+        title: "Google save unreadable",
+        message: lastGooglePullInfo
+          + "\n\nDo not study on this blank screen. Open Settings → Restore progress and paste your backup, or try Download from Google again.\n\nBuild "
+          + (window.__BUILD__ || ""),
         localTs,
         cloudTs
       });
       cloudHomePopupArmed = false;
       pendingCloudSyncReason = null;
+      route();
+      return;
+    }
+
+    /* Nothing on either side — still confirm so a refresh is never silent. */
+    if (localW === 0 && cloudEmpty) {
+      await showCloudSyncPopup({
+        title: "Nothing on Google",
+        message: "No study progress is saved on Google for "
+          + (user.email || user.uid)
+          + ".\n\nIf you just restored, the account copy is missing — Restore again and wait for the overwrite watch to finish.\n\nUse Safari (not the Cursor in-app browser) for the fresh-window test.\n\nBuild "
+          + (window.__BUILD__ || ""),
+        localTs,
+        cloudTs
+      });
+      cloudHomePopupArmed = false;
+      pendingCloudSyncReason = null;
+      route();
       return;
     }
 
@@ -4710,6 +4803,7 @@ async function quietCloudSync() {
   } finally {
     cloudCheckBusy = false;
     updateCloudUi();
+    runPendingCloudSync();
   }
 }
 
@@ -4748,7 +4842,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016y"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016z"));
     return;
   }
   const start = () => {
@@ -4762,7 +4856,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016y"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016z"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -6315,19 +6409,42 @@ function renderHome() {
   const vBadges = verbBadgeCensus();
   const authState = authUiState();
   const authUser = requireCloudUser();
+  const localW = progressWeight(S);
   const authLabel = authState === "in" ? "Signed in with Google"
     : authState === "pending" ? "Connecting to Google" : "Signed out";
   const authTitle = authState === "in" ? ((authUser && authUser.email) || "Signed in")
     : authState === "pending" ? "Connecting…" : "Signed out — tap to sign in";
 
+  /* Safety net: signed in but empty local must never be a silent end state.
+     Auto-download once, and keep a visible banner until progress appears. */
+  if (authUser && localW === 0 && !googleAutoPullDone && !cloudHydrating
+      && !cloudCheckBusy && !cloudSyncDialogOpen && !pendingCloudSyncReason) {
+    googleAutoPullDone = true;
+    lastGooglePullInfo = lastGooglePullInfo || "Downloading from Google…";
+    setTimeout(() => {
+      if (progressWeight(S) > 0 || cloudCheckBusy || cloudSyncDialogOpen) return;
+      Promise.resolve(forceDownloadFromGoogle()).catch(err => console.warn(err));
+    }, 250);
+  }
+
   const filterOpts = LESSONS.map(l =>
     `<option value="${l.n}"${filter === l.n ? " selected" : ""}>${l.n}</option>`).join("");
+
+  const emptySyncBanner = (authUser && localW === 0)
+    ? `<div class="home-sync-banner" role="status">
+        <p><b>Signed in as ${esc(authUser.email || authUser.uid)}</b> but this browser has no progress yet.</p>
+        <p>${esc(lastGooglePullInfo || "Downloading from Google…")}</p>
+        <button type="button" class="btn primary" id="homePullGoogle">Download from Google now</button>
+      </div>`
+    : (authUser
+      ? `<p class="home-sync-ok">Signed in as ${esc(authUser.email || authUser.uid)} · local ${localW} · build ${esc(window.__BUILD__ || "")}</p>`
+      : "");
 
   document.getElementById("view").innerHTML = `
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261016y" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261016z" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -6361,6 +6478,8 @@ function renderHome() {
           </div>
         </div>
       </div>
+
+      ${emptySyncBanner}
 
       <div class="home-lesson-frame" aria-label="Lesson progress">
         <div class="home-filter">
@@ -6423,6 +6542,13 @@ function renderHome() {
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   const pullBtn = document.getElementById("exppull");
   if (pullBtn) pullBtn.addEventListener("click", () => forceDownloadFromGoogle());
+  const homePull = document.getElementById("homePullGoogle");
+  if (homePull) {
+    homePull.addEventListener("click", () => {
+      googleAutoPullDone = false;
+      Promise.resolve(forceDownloadFromGoogle()).catch(err => console.warn(err));
+    });
+  }
   wireCloudSettings();
   /* Auto Restore progress sheet on empty boot is disabled — use Settings
      or the welcome Restore button when needed. */
@@ -6616,19 +6742,41 @@ async function forceDownloadFromGoogle() {
     alert("Sign in with Google first.");
     return;
   }
+  if (cloudCheckBusy || cloudSyncDialogOpen) {
+    lastGooglePullInfo = "Sync already running — wait a moment, then try again.";
+    updateCloudUi();
+    return;
+  }
+  cloudCheckBusy = true;
   showCloudHydrate("Downloading from Google…");
   try {
     const cloud = await pullCloudAuthoritative(user.uid);
+    lastGooglePullInfo = cloudPullSummary(cloud, user);
     hideCloudHydrate();
+    if (cloud && cloud.unreadable) {
+      await showCloudSyncPopup({
+        title: "Google save unreadable",
+        message: lastGooglePullInfo
+          + "\n\nBuild " + (window.__BUILD__ || ""),
+        localTs: +localStorage.getItem(KEY_SAVED) || 0,
+        cloudTs: cloud.updatedAt || 0,
+        skipPending: true
+      });
+      route();
+      return;
+    }
     if (!cloudHasProgress(cloud)) {
       await showCloudSyncPopup({
         title: "Nothing on Google",
         message: "Account " + (user.email || user.uid)
-          + " has no study progress yet.\n\nBuild " + (window.__BUILD__ || ""),
+          + " has no study progress yet.\n\n"
+          + lastGooglePullInfo
+          + "\n\nBuild " + (window.__BUILD__ || ""),
         localTs: +localStorage.getItem(KEY_SAVED) || 0,
         cloudTs: cloud ? (cloud.updatedAt || 0) : 0,
         skipPending: true
       });
+      route();
       return;
     }
     S = cloud.progress;
@@ -6649,6 +6797,7 @@ async function forceDownloadFromGoogle() {
     route();
   } catch (e) {
     hideCloudHydrate();
+    lastGooglePullInfo = "Download failed: " + cloudErrDetail(e);
     await showCloudSyncPopup({
       title: "Download failed",
       message: cloudErrDetail(e) + "\n\nBuild " + (window.__BUILD__ || ""),
@@ -6656,6 +6805,11 @@ async function forceDownloadFromGoogle() {
       cloudTs: 0,
       skipPending: true
     });
+    route();
+  } finally {
+    cloudCheckBusy = false;
+    updateCloudUi();
+    runPendingCloudSync();
   }
 }
 
@@ -6739,10 +6893,12 @@ async function applyImportedProgress(incoming) {
   if (ok && expectedW > 0) {
     showCloudHydrate("Watching Google save for overwrites…");
     let wiped = false;
-    for (let i = 0; i < 8; i++) {
+    let finalCloud = restProof;
+    for (let i = 0; i < 12; i++) {
       await sleep(2000);
       try {
         const again = await pullCloudRest(user.uid);
+        finalCloud = again || finalCloud;
         const w = progressWeight(again && again.progress);
         if (w < expectedW) {
           wiped = true;
@@ -6768,11 +6924,24 @@ async function applyImportedProgress(incoming) {
     }
     hideCloudHydrate();
     if (!wiped) {
+      lastGooglePullInfo = cloudPullSummary(finalCloud, user);
       try {
         sessionStorage.setItem(KEY + ":lastRestoreOk", JSON.stringify({
           email: who, weight: expectedW, at: Date.now(), build: window.__BUILD__ || ""
         }));
       } catch (e) {}
+      await showCloudSyncPopup({
+        title: "Google still has your save",
+        message: "Build " + (window.__BUILD__ || "") + " — final check for " + who + ":\n"
+          + describeProgress((finalCloud && finalCloud.progress) || S)
+          + "\n\nNow close this tab. Open Safari → Private → "
+          + "https://trivituso81.github.io/japanese/?v=" + (window.__BUILD__ || "")
+          + " and sign in as " + who
+          + ".\n\nDo not use the Cursor in-app browser for this test (it has separate storage).",
+        localTs: +localStorage.getItem(KEY_SAVED) || Date.now(),
+        cloudTs: (finalCloud && finalCloud.updatedAt) || cloudLastPush || Date.now(),
+        skipPending: true
+      });
     }
   }
 }
@@ -10698,6 +10867,23 @@ function setLoadStatus(msg) {
   }
 }
 
+function expectingCloudHydrateOnBoot() {
+  if (progressWeight(S) > 0) return false;
+  try {
+    if (sessionStorage.getItem(KEY + ":justSignedIn") === "1") return true;
+    if (localStorage.getItem(KEY_EXPECT_AUTH) === "1") return true;
+    if (/(?:^|[?&])signedin=1(?:&|$)/.test(location.search || "")) return true;
+    const hint = localStorage.getItem(KEY_AUTH_HINT);
+    if (hint) {
+      const obj = JSON.parse(hint);
+      if (obj && obj.uid && (!obj.at || Date.now() - obj.at < 1000 * 60 * 60 * 24 * 30)) {
+        return true;
+      }
+    }
+  } catch (e) {}
+  return false;
+}
+
 function bootApp() {
   setLoadStatus("");
   wireFurigana();
@@ -10705,7 +10891,15 @@ function bootApp() {
   wireKanjiKeyboard();
   wireBackupSheet();
   initCloud();
-  route();
+  /* Empty local + returning Google session: block the Lesson-40 zeros paint
+     until reconcile finishes. Painting first made fresh logins look broken. */
+  if (expectingCloudHydrateOnBoot()) {
+    showCloudHydrate("Loading progress from Google…");
+    cloudSkipNextRoute = true;
+    requestCloudSyncPopup("signin");
+  } else {
+    route();
+  }
   /* Cold-start save-state OK dialog is disabled. */
   cloudLoadPopupDone = true;
   cloudHomePopupArmed = false;
@@ -10752,7 +10946,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261016y&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261016z&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
