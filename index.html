@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさんの勉強ガイド">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016f">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016f">
-<link rel="manifest" href="site.webmanifest?v=20261016f">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016g">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016g">
+<link rel="manifest" href="site.webmanifest?v=20261016g">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261016f";
+window.__BUILD__ = "20261016g";
 (function () {
   try {
     var u = new URL(location.href);
@@ -131,7 +131,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261016f";
+  var v = window.__BUILD__ || "20261016g";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -140,7 +140,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261016f"));
+    + encodeURIComponent(window.__BUILD__ || "20261016g"));
 }
 
 function staticRestoreFromText() {
@@ -153,7 +153,7 @@ function staticRestoreFromText() {
     localStorage.setItem("mnn-study-v1", raw);
     localStorage.setItem("mnn-study-v1:guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261016f") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261016g") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1085,9 +1085,10 @@ document.addEventListener("DOMContentLoaded", function () {
     width: 100%; font-size: 15.5px; padding: 14px 18px; min-height: 50px;
   }
 
-  /* Setup + play shells shared by flashcards and kanji drill */
+  /* Setup + play shells shared by flashcards, kanji, and grammar drill */
   body[data-view="cards"] .wrap,
-  body[data-view="kanji"] .wrap {
+  body[data-view="kanji"] .wrap,
+  body[data-view="drill"] .wrap {
     min-height: 100dvh;
     padding-top: max(14px, env(safe-area-inset-top, 0px));
     padding-bottom: calc(var(--botnav-h, 58px) + 12px + env(safe-area-inset-bottom, 0px));
@@ -1098,7 +1099,23 @@ document.addEventListener("DOMContentLoaded", function () {
   body[data-view="cards"] footer.foot,
   body[data-view="kanji"] .topnav,
   body[data-view="kanji"] .crumbs,
-  body[data-view="kanji"] footer.foot { display: none !important; }
+  body[data-view="kanji"] footer.foot,
+  body[data-view="drill"] .topnav,
+  body[data-view="drill"] .crumbs,
+  body[data-view="drill"] footer.foot { display: none !important; }
+  body[data-view="drill"] #view {
+    flex: 1 1 auto; display: flex; flex-direction: column; min-height: 0;
+  }
+  .drill-points { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+  .drill-points .dp-tools {
+    display: flex; flex-wrap: wrap; gap: 12px 16px; align-items: center;
+    margin-bottom: 2px;
+  }
+  .drill-points .dp-tools .linkish {
+    font: inherit; font-size: 13px; font-weight: 600; color: var(--accent-deep);
+    background: none; border: none; padding: 0; cursor: pointer;
+  }
+  .drill-points .dp-count { font-size: 13px; color: var(--text-faint); margin-left: auto; }
   /* Flashcard setup/play keep the portrait + site title; section JP is set in paintNav. */
   body[data-view="cards"] .masthead-inner h1,
   body[data-view="cards-play"] .masthead-inner h1 {
@@ -2926,9 +2943,10 @@ document.addEventListener("DOMContentLoaded", function () {
     .home-progress button,
     .home-progress label { font-size: 13px; }
 
-    /* Flashcard / kanji setup */
+    /* Flashcard / kanji / grammar setup */
     body[data-view="cards"] .wrap,
-    body[data-view="kanji"] .wrap {
+    body[data-view="kanji"] .wrap,
+    body[data-view="drill"] .wrap {
       padding-left: max(36px, env(safe-area-inset-left, 0px));
       padding-right: max(36px, env(safe-area-inset-right, 0px));
     }
@@ -3165,10 +3183,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261016f" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261016g" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016f#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016g#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3188,7 +3206,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261016f" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261016g" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3283,7 +3301,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261016f"></script>
+<script src="firebase-config.js?v=20261016g"></script>
 <script>
 /* ============================================================
    State
@@ -3655,7 +3673,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261016f" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261016g" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -4170,7 +4188,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016f"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016g"));
     return;
   }
   const start = () => {
@@ -4184,7 +4202,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016f"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016g"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5749,7 +5767,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261016f" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261016g" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -6902,6 +6920,7 @@ function judgeAnswer(typed, jp, en) {
    Grammar drill
    ============================================================ */
 let DRILL = null;
+let DRILL_SETUP = null;
 const DRILL_SIZE = 10;
 
 function renderDrill(scope, sweep, lessonVocab) {
@@ -6910,10 +6929,6 @@ function renderDrill(scope, sweep, lessonVocab) {
   const bank = drillBank(ns, bankOpts);
   if (!bank.length) return notFound();
   const range = isRange(scope);
-  crumbs(range
-    ? [["#/lessons", "Lessons"], [null, sweep ? "Diagnostic sweep" : "Mixed drill"]]
-    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`],
-       [null, lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
 
   /* A set parked at this very address is picked up rather than thrown away.
      Answers are banked question by question, so dealing a fresh set over the
@@ -6927,7 +6942,136 @@ function renderDrill(scope, sweep, lessonVocab) {
       && !!s.lessonVocab === !!lessonVocab)
     return resumeDrill();
 
+  /* Single-lesson drills open a flashcard-style preface so the learner can
+     choose which grammar points to include. Ranges and sweeps still start
+     immediately — they are not organised by one lesson's point list. */
+  if (!range && !sweep) return renderDrillSetup(scope, ns, !!lessonVocab);
+
+  crumbs(range
+    ? [["#/lessons", "Lessons"], [null, sweep ? "Diagnostic sweep" : "Mixed drill"]]
+    : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`],
+       [null, lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
   newDrill(scope, ns, bank, null, sweep, null, lessonVocab);
+}
+
+function drillSetupBank(n, lessonVocab) {
+  return drillBank([n], lessonVocab ? { lessonVocab: true } : null);
+}
+
+function drillSetupPointIds(bank) {
+  return [...new Set(bank.map(q => q.pi))].sort((a, b) => a - b);
+}
+
+function renderDrillSetup(scope, ns, lessonVocab) {
+  const n = ns[0];
+  if (!n) return notFound();
+  setHomeFilter(n);
+  document.getElementById("crumbs").innerHTML = "";
+  document.body.dataset.view = "drill";
+  showBotnav();
+  const bank = drillSetupBank(n, lessonVocab);
+  if (!bank.length) return notFound();
+  const pointIds = drillSetupPointIds(bank);
+  DRILL_SETUP = {
+    scope, n, ns: [n], lessonVocab: !!lessonVocab,
+    selected: new Set(pointIds), size: DRILL_SIZE
+  };
+  paintDrillSetup();
+}
+
+function paintDrillSetup() {
+  if (!DRILL_SETUP) return;
+  const { n, lessonVocab, selected, size } = DRILL_SETUP;
+  const bank = drillSetupBank(n, lessonVocab);
+  const pointIds = drillSetupPointIds(bank);
+  /* Drop selections that vanished after toggling lesson-vocab. */
+  [...selected].forEach(pi => { if (!pointIds.includes(pi)) selected.delete(pi); });
+  const pts = points(n) || [];
+  const qCount = bank.filter(q => selected.has(q.pi)).length;
+  const pointChecks = pointIds.map(pi => {
+    const p = pts[pi] || {};
+    const lab = homeGrammarLabel(p) || plain(p.pattern || `Point ${pi + 1}`);
+    const full = plain(p.pattern || lab);
+    const pctN = homeGrammarPointPct(n, pi);
+    const checked = selected.has(pi) ? " checked" : "";
+    return `<label title="${esc(full)}">
+      <input type="checkbox" class="dpt" data-pi="${pi}"${checked}>
+      <span><b>${pi + 1}.</b> ${esc(lab)}${pctN ? ` · ${pctN}%` : ""}</span>
+    </label>`;
+  }).join("");
+  const hasReview = drillBank([n]).some(q => q.tier === "review");
+  document.getElementById("view").innerHTML = `
+    <section class="cards-setup">
+      <div>
+        <p class="cards-kicker">Grammar drill</p>
+        <h1 class="cards-title">Lesson ${n}</h1>
+      </div>
+      ${optionsPanel([
+        { k: "Grammar points", html: `
+          <div class="drill-points">
+            <div class="dp-tools">
+              <button type="button" class="linkish" id="drillSelectAll">Select all</button>
+              <button type="button" class="linkish" id="drillSelectNone">Clear</button>
+              <span class="dp-count" id="drillPointCount">${selected.size} of ${pointIds.length}</span>
+            </div>
+            <div class="opt check" id="drillPointList">${pointChecks}</div>
+          </div>` },
+        { k: "Session", seg: [5, 10, 0].map(s =>
+          `<button type="button" class="btn dsize" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`
+        ).join("") },
+        hasReview && { check: `<label><input type="checkbox" id="drillLessonVocab"${
+          lessonVocab ? " checked" : ""}> Lesson vocabulary only</label>` },
+        { start: `<button type="button" class="btn primary" id="drillStart"${
+          qCount ? "" : " disabled"}>Start${qCount
+            ? ` · ${Math.min(size || qCount, qCount)} question${Math.min(size || qCount, qCount) === 1 ? "" : "s"}`
+            : ""}</button>` }
+      ])}
+    </section>`;
+
+  document.querySelectorAll(".dpt").forEach(inp => {
+    inp.addEventListener("change", () => {
+      const pi = +inp.dataset.pi;
+      if (inp.checked) selected.add(pi);
+      else selected.delete(pi);
+      paintDrillSetup();
+    });
+  });
+  const all = document.getElementById("drillSelectAll");
+  if (all) all.addEventListener("click", () => {
+    pointIds.forEach(pi => selected.add(pi));
+    paintDrillSetup();
+  });
+  const none = document.getElementById("drillSelectNone");
+  if (none) none.addEventListener("click", () => {
+    selected.clear();
+    paintDrillSetup();
+  });
+  document.querySelectorAll(".btn.dsize").forEach(b => {
+    b.addEventListener("click", () => {
+      DRILL_SETUP.size = +b.dataset.size;
+      paintDrillSetup();
+    });
+  });
+  const lv = document.getElementById("drillLessonVocab");
+  if (lv) lv.addEventListener("change", e => {
+    DRILL_SETUP.lessonVocab = e.target.checked;
+    const next = drillSetupPointIds(drillSetupBank(n, DRILL_SETUP.lessonVocab));
+    DRILL_SETUP.selected = new Set(next);
+    paintDrillSetup();
+  });
+  const start = document.getElementById("drillStart");
+  if (start) start.addEventListener("click", () => startDrillFromSetup());
+}
+
+function startDrillFromSetup() {
+  if (!DRILL_SETUP) return;
+  const { scope, n, selected, size, lessonVocab } = DRILL_SETUP;
+  const bank = drillSetupBank(n, lessonVocab).filter(q => selected.has(q.pi));
+  if (!bank.length) return;
+  crumbs([["#/lessons", "Lessons"], [`#/lesson/${n}`, `Lesson ${n}`],
+    [null, lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
+  document.body.dataset.view = "drill-play";
+  newDrill(scope, [n], bank, null, false, null, lessonVocab, size || bank.length);
 }
 
 /* One question per lesson, every lesson in range: the sweep is a map of where
@@ -7064,12 +7208,14 @@ function groupBy(list, key) {
 }
 const pickOne = list => list.splice(Math.floor(Math.random() * list.length), 1)[0];
 
-function newDrill(scope, ns, bank, only, sweep, focus, lessonVocab) {
+function newDrill(scope, ns, bank, only, sweep, focus, lessonVocab, size) {
+  const want = size > 0 ? size : DRILL_SIZE;
   let qs;
-  if (only && only.length) qs = shuffle(only).slice(0, Math.max(DRILL_SIZE, only.length));
+  if (only && only.length) qs = shuffle(only).slice(0, Math.max(want, only.length));
   else if (sweep) qs = sweepQuestions(ns, bank.slice());
-  else if (isRange(scope)) qs = mixedQuestions(ns, bank.slice(), DRILL_SIZE);
-  else qs = lessonQuestions(bank.slice(), DRILL_SIZE);
+  else if (isRange(scope)) qs = mixedQuestions(ns, bank.slice(), want);
+  else qs = lessonQuestions(bank.slice(), want);
+  document.body.dataset.view = "drill-play";
   DRILL = { scope, ns, bank, sweep: !!sweep, focus: focus || null,
             lessonVocab: !!lessonVocab,
             qs: sweep ? qs : shuffle(qs), i: 0, typed: "", verdict: null, answers: [] };
@@ -7130,6 +7276,7 @@ function resumeDrill() {
     ? [["#/lessons", "Lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
     : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`],
        [null, s.lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
+  document.body.dataset.view = "drill-play";
   DRILL = { scope: s.scope, ns, bank: drillBank(ns, bankOpts), sweep: s.sweep,
             focus: s.focus || null, lessonVocab: !!s.lessonVocab,
             qs: s.qs, i: s.i, typed: "", verdict: null, answers: s.answers };
@@ -9714,6 +9861,7 @@ function paintNav(section) {
   if (jp) {
     const h = location.hash || "#/";
     if (/^#\/cards\//.test(h)) jp.textContent = "みんなの日本語のフラッシュカード";
+    else if (/^#\/drill\//.test(h) && !/^#\/drill\/resume/.test(h)) jp.textContent = "みんなの日本語の文法";
     else if (section === "#/kanji") jp.textContent = "漢字";
     else if (section === "#/verbs") jp.textContent = "動詞";
     else jp.textContent = "みんなの日本語";
@@ -9868,7 +10016,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261016f&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261016g&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
