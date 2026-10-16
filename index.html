@@ -5849,8 +5849,8 @@ function renderHome() {
   });
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   wireCloudSettings();
-  maybeOfferRestore();
-  /* Homepage paint no longer arms the load sync popup. */
+  /* Auto Restore progress sheet on empty boot is disabled — use Settings
+     or the welcome Restore button when needed. */
   runPendingCloudSync();
   requestAnimationFrame(() => wireVerbBadgeFit());
 }
@@ -5939,16 +5939,6 @@ function closeBackupSheet() {
   const sheet = document.getElementById("backupSheet");
   if (!sheet) return;
   sheet.hidden = true;
-}
-
-let _offeredRestore = false;
-function maybeOfferRestore() {
-  if (_offeredRestore) return;
-  if (progressWeight(S) > 0) return;
-  _offeredRestore = true;
-  /* Home-screen apps on iPhone often boot with empty storage even when
-     Safari still has the old save — offer restore immediately. */
-  openBackupSheet("restore");
 }
 
 function openBackupSheet(mode) {
