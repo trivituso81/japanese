@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさん">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016x">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016x">
-<link rel="manifest" href="site.webmanifest?v=20261016x">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016y">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016y">
+<link rel="manifest" href="site.webmanifest?v=20261016y">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261016x";
+window.__BUILD__ = "20261016y";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261016x";
+  var v = window.__BUILD__ || "20261016y";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261016x"));
+    + encodeURIComponent(window.__BUILD__ || "20261016y"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261016x") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261016y") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1040,6 +1040,23 @@ document.addEventListener("DOMContentLoaded", function () {
     padding: 18px; box-sizing: border-box;
   }
   .cloud-sync-sheet[hidden] { display: none !important; }
+  .cloud-hydrate-sheet {
+    position: fixed; inset: 0; z-index: 10001;
+    background: rgba(238, 242, 248, .96);
+    display: flex; align-items: center; justify-content: center;
+    padding: 24px; box-sizing: border-box;
+  }
+  .cloud-hydrate-sheet[hidden] { display: none !important; }
+  .cloud-hydrate-card {
+    width: min(360px, 100%); text-align: center;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .cloud-hydrate-msg {
+    margin: 0; font-family: var(--serif); font-size: 1.25rem; font-weight: 600;
+  }
+  .cloud-hydrate-sub {
+    margin: 0; font-size: 14px; color: var(--text-soft); line-height: 1.45;
+  }
   .cloud-sync-card {
     width: min(400px, 100%);
     background: var(--bg); color: var(--text);
@@ -3219,10 +3236,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261016x" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261016y" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016x#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016y#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3242,7 +3259,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261016x" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261016y" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3335,9 +3352,16 @@ document.addEventListener("DOMContentLoaded", function () {
   </div>
 </div>
 
+<div class="cloud-hydrate-sheet" id="cloudHydrateSheet" hidden>
+  <div class="cloud-hydrate-card" role="status" aria-live="polite">
+    <p class="cloud-hydrate-msg" id="cloudHydrateMsg">Loading progress from Google…</p>
+    <p class="cloud-hydrate-sub">Stay on this screen until sync finishes.</p>
+  </div>
+</div>
+
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261016x"></script>
+<script src="firebase-config.js?v=20261016y"></script>
 <script>
 /* ============================================================
    State
@@ -3615,7 +3639,30 @@ let cloudAuthReadyWaiters = [];
 let cloudLoadPopupDone = false;
 let cloudLoadPopupPromise = null;
 let cloudDirty = false; /* local progress waiting for a successful Google push */
+let cloudHydrating = false; /* block empty home until first Google pull finishes */
+let cloudSkipNextRoute = false;
 const CLOUD_CHECK_MIN_MS = 8000;
+
+function showCloudHydrate(msg) {
+  cloudHydrating = true;
+  const sheet = document.getElementById("cloudHydrateSheet");
+  const el = document.getElementById("cloudHydrateMsg");
+  if (el && msg) el.textContent = msg;
+  if (!sheet) return;
+  if (sheet.parentElement !== document.body) document.body.appendChild(sheet);
+  sheet.removeAttribute("hidden");
+  sheet.hidden = false;
+  sheet.style.setProperty("display", "flex", "important");
+}
+
+function hideCloudHydrate() {
+  cloudHydrating = false;
+  const sheet = document.getElementById("cloudHydrateSheet");
+  if (!sheet) return;
+  sheet.hidden = true;
+  sheet.setAttribute("hidden", "");
+  sheet.style.removeProperty("display");
+}
 const CLOUD_FORCE_REASONS = { boot: 1, refresh: 1, signin: 1, home: 1, resume: 1 };
 const CLOUD_PULL_TIMEOUT_MS = 2500;
 
@@ -3719,7 +3766,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261016x" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261016y" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -3783,11 +3830,14 @@ function bindCloudAuth() {
           at: Date.now()
         }));
       } catch (e) {}
-      /* Empty local + signed in: always run the full reconcile dialog path
-         (REST load). Quiet sync alone used to time out into a blank home. */
+      /* Empty local + signed in: block the UI and run reconcile before home
+         paints. Painting an empty Lesson-40 dashboard first made it look
+         like Google load “failed” even when a dialog was still coming. */
       const localEmpty = progressWeight(S) === 0;
       if (!wasIn && (intentionalSignIn || localEmpty)) {
         cloudLastCheckedAt = 0;
+        showCloudHydrate("Loading progress from Google…");
+        cloudSkipNextRoute = true;
         if (cloudSyncDialogOpen) {
           pendingCloudSyncReason = intentionalSignIn ? "signin" : "home";
           const ok = document.getElementById("cloudSyncOk");
@@ -3796,6 +3846,8 @@ function bindCloudAuth() {
           cloudLoadPopupDone = false;
           requestCloudSyncPopup(intentionalSignIn ? "signin" : "home");
         }
+        updateCloudUi();
+        return; /* do not route() to an empty home underneath the hydrate */
       } else if (!wasIn) {
         setTimeout(() => { try { quietCloudSync(); } catch (e) {} }, 0);
       } else if (cloudDirty) {
@@ -3803,6 +3855,10 @@ function bindCloudAuth() {
       }
     }
     updateCloudUi();
+    if (cloudSkipNextRoute) {
+      cloudSkipNextRoute = false;
+      return;
+    }
     route();
   });
 }
@@ -3829,10 +3885,9 @@ function initCloud() {
       try {
         await cloudAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL);
       } catch (e) { /* keep default persistence */ }
-      /* Queue writes while offline / briefly suspended (common on iPhone). */
-      try {
-        await cloudDb.enablePersistence({ synchronizeTabs: true });
-      } catch (e) { /* failed-precondition = multiple tabs; unimplemented = bad browser */ }
+      /* Do NOT enable Firestore IndexedDB persistence. It caused false “saved
+         to Google” confirms and empty-cache reads that looked like a blank
+         account — exactly the restore bug. Network reads/writes only. */
       bindCloudAuth();
       runPendingCloudSync();
       const markReady = () => {
@@ -3985,6 +4040,7 @@ async function pushCloudRest(uid, snapshot, localTs, localWeight) {
   }
   const token = await cloudIdToken(true);
   const nowIso = new Date().toISOString();
+  const restoreNonce = hasForceCloudPush() ? String(Date.now()) : "";
   const body = {
     fields: {
       progressJson: { stringValue: progressJson },
@@ -3998,8 +4054,9 @@ async function pushCloudRest(uid, snapshot, localTs, localWeight) {
         : { nullValue: null }
     }
   };
+  if (restoreNonce) body.fields.restoreNonce = { stringValue: restoreNonce };
   /* updateMask replaces listed fields and clears legacy `progress` maps. */
-  const masks = ["progressJson", "weight", "floorWeight", "clientUpdatedAt", "schema", "updatedAt", "email", "progress"];
+  const masks = ["progressJson", "weight", "floorWeight", "clientUpdatedAt", "schema", "updatedAt", "email", "progress", "restoreNonce"];
   const qs = masks.map(p => "updateMask.fieldPaths=" + encodeURIComponent(p)).join("&");
   const res = await fetch(url + (url.indexOf("?") >= 0 ? "&" : "?") + qs, {
     method: "PATCH",
@@ -4297,9 +4354,10 @@ function formatSyncTime(ts) {
   }
 }
 
-function showCloudSyncPopup({ title, message, localTs, cloudTs, cloudLabel }) {
+function showCloudSyncPopup({ title, message, localTs, cloudTs, cloudLabel, skipPending }) {
   return new Promise(resolve => {
     try { closeBackupSheet(); } catch (e) {}
+    hideCloudHydrate();
     const sheet = document.getElementById("cloudSyncSheet");
     const titleEl = document.getElementById("cloudSyncTitle");
     const msgEl = document.getElementById("cloudSyncMsg");
@@ -4341,7 +4399,10 @@ function showCloudSyncPopup({ title, message, localTs, cloudTs, cloudLabel }) {
       sheet.style.removeProperty("z-index");
       cloudSyncDialogOpen = false;
       resolve();
-      try { runPendingCloudSync(); } catch (e) {}
+      /* Restore success must not kick off another reconcile that can race. */
+      if (!skipPending) {
+        try { runPendingCloudSync(); } catch (e) {}
+      }
     };
     ok.addEventListener("click", finish);
     setTimeout(() => { try { ok.focus(); } catch (e) {} }, 0);
@@ -4379,6 +4440,7 @@ async function reconcileCloud(reason) {
       cloud = null;
       pullOk = false;
     }
+    hideCloudHydrate();
     if (!pullOk) {
       authError = "Could not check Google save. " + cloudErrDetail(pullErr);
       updateCloudUi();
@@ -4544,7 +4606,9 @@ async function reconcileCloud(reason) {
     updateCloudUi();
     route();
   } finally {
+    hideCloudHydrate();
     cloudCheckBusy = false;
+    cloudSkipNextRoute = false;
     updateCloudUi();
     runPendingCloudSync();
   }
@@ -4684,7 +4748,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016x"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016y"));
     return;
   }
   const start = () => {
@@ -4698,7 +4762,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016x"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016y"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -6263,7 +6327,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261016x" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261016y" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -6291,6 +6355,7 @@ function renderHome() {
               <button type="button" id="exp" role="menuitem">Copy backup</button>
               <button type="button" id="expshare" role="menuitem">Share</button>
               <button type="button" id="exprestore" role="menuitem">Restore progress</button>
+              <button type="button" id="exppull" role="menuitem">Download from Google</button>
               <a href="toki/" role="menuitem">TOKI · Japanese history</a>
             </div>
           </div>
@@ -6356,6 +6421,8 @@ function renderHome() {
     shareProgressBackup();
   });
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
+  const pullBtn = document.getElementById("exppull");
+  if (pullBtn) pullBtn.addEventListener("click", () => forceDownloadFromGoogle());
   wireCloudSettings();
   /* Auto Restore progress sheet on empty boot is disabled — use Settings
      or the welcome Restore button when needed. */
@@ -6543,6 +6610,55 @@ function wireBackupSheet() {
   });
 }
 
+async function forceDownloadFromGoogle() {
+  const user = requireCloudUser();
+  if (!user) {
+    alert("Sign in with Google first.");
+    return;
+  }
+  showCloudHydrate("Downloading from Google…");
+  try {
+    const cloud = await pullCloudAuthoritative(user.uid);
+    hideCloudHydrate();
+    if (!cloudHasProgress(cloud)) {
+      await showCloudSyncPopup({
+        title: "Nothing on Google",
+        message: "Account " + (user.email || user.uid)
+          + " has no study progress yet.\n\nBuild " + (window.__BUILD__ || ""),
+        localTs: +localStorage.getItem(KEY_SAVED) || 0,
+        cloudTs: cloud ? (cloud.updatedAt || 0) : 0,
+        skipPending: true
+      });
+      return;
+    }
+    S = cloud.progress;
+    save({ force: true });
+    clearTimeout(cloudSyncTimer);
+    cloudSyncTimer = null;
+    cloudDirty = false;
+    rememberCloudFloor(Math.max(cloud.weight || 0, progressWeight(S)));
+    try { localStorage.setItem(KEY_CLOUD_AT, String(cloud.updatedAt || Date.now())); } catch (e) {}
+    await showCloudSyncPopup({
+      title: "Loaded from Google",
+      message: "Build " + (window.__BUILD__ || "") + " — downloaded for "
+        + (user.email || "Google account") + ":\n" + describeProgress(S),
+      localTs: +localStorage.getItem(KEY_SAVED) || Date.now(),
+      cloudTs: cloud.updatedAt || Date.now(),
+      skipPending: true
+    });
+    route();
+  } catch (e) {
+    hideCloudHydrate();
+    await showCloudSyncPopup({
+      title: "Download failed",
+      message: cloudErrDetail(e) + "\n\nBuild " + (window.__BUILD__ || ""),
+      localTs: +localStorage.getItem(KEY_SAVED) || 0,
+      cloudTs: 0,
+      skipPending: true
+    });
+  }
+}
+
 async function applyImportedProgress(incoming) {
   const next = migrate(Object.assign(blank(), incoming));
   const signedIn = !!requireCloudUser();
@@ -6602,21 +6718,63 @@ async function applyImportedProgress(incoming) {
   }
   updateCloudUi();
   const who = (user.email || user.uid || "Google account");
+  const expectedW = ok ? progressWeight(restProof.progress) : 0;
   await showCloudSyncPopup({
     title: ok ? "Restored and saved to Google" : "Restore saved here — Google upload failed",
     message: ok
       ? ("Build " + (window.__BUILD__ || "") + " — confirmed for " + who
         + " via direct account read:\n"
         + describeProgress(restProof.progress)
-        + "\n\nClose this tab, open a fresh incognito window, sign in as "
+        + "\n\nKeep this tab open ~15s while we watch for an overwrite, then close it and open a fresh incognito window signed in as "
         + who
-        + ", and you should get “Loaded from Google” with the same counts.")
+        + ".")
       : ((authError || "Keep this tab open on Wi‑Fi and try Restore again. Until this says saved, another device will not see this backup.")
         + "\n\nBuild " + (window.__BUILD__ || "")),
     localTs: +localStorage.getItem(KEY_SAVED) || Date.now(),
     cloudTs: ok ? ((restProof && restProof.updatedAt) || cloudLastPush || Date.now())
-      : (+localStorage.getItem(KEY_CLOUD_AT) || 0)
+      : (+localStorage.getItem(KEY_CLOUD_AT) || 0),
+    skipPending: true
   });
+  /* If anything wipes Google right after restore, catch it and re-upload. */
+  if (ok && expectedW > 0) {
+    showCloudHydrate("Watching Google save for overwrites…");
+    let wiped = false;
+    for (let i = 0; i < 8; i++) {
+      await sleep(2000);
+      try {
+        const again = await pullCloudRest(user.uid);
+        const w = progressWeight(again && again.progress);
+        if (w < expectedW) {
+          wiped = true;
+          markForceCloudPush();
+          const reOk = await pushCloud(user.uid, { force: true, skipPull: true, verify: true });
+          hideCloudHydrate();
+          await showCloudSyncPopup({
+            title: reOk ? "Google save was overwritten — repaired" : "Google save was overwritten",
+            message: reOk
+              ? ("Something cleared your account copy after restore (weight "
+                + w + " < " + expectedW + "). It has been uploaded again for "
+                + who + ".")
+              : ("Something cleared your account copy after restore (weight "
+                + w + " < " + expectedW + "). Re-upload failed: "
+                + (authError || "unknown error")),
+            localTs: +localStorage.getItem(KEY_SAVED) || Date.now(),
+            cloudTs: cloudLastPush || Date.now(),
+            skipPending: true
+          });
+          break;
+        }
+      } catch (e) { /* keep watching */ }
+    }
+    hideCloudHydrate();
+    if (!wiped) {
+      try {
+        sessionStorage.setItem(KEY + ":lastRestoreOk", JSON.stringify({
+          email: who, weight: expectedW, at: Date.now(), build: window.__BUILD__ || ""
+        }));
+      } catch (e) {}
+    }
+  }
 }
 
 /* Kept as a thin alias for older wiring / README wording. */
@@ -10594,7 +10752,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261016x&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261016y&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the

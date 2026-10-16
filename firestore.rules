@@ -1,9 +1,27 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    /* Each signed-in Google account may only read/write its own progress doc. */
+    /* Each signed-in Google account may only read/write its own progress doc.
+       Weaker uploads cannot replace a heavier save unless restoreNonce is set
+       (intentional Restore from backup). This blocks the empty-cache wipe. */
     match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+      allow read: if request.auth != null && request.auth.uid == userId;
+
+      allow create: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.keys().hasAll(['progressJson', 'weight'])
+        && request.resource.data.weight is int
+        && request.resource.data.weight >= 0;
+
+      allow update: if request.auth != null && request.auth.uid == userId
+        && request.resource.data.keys().hasAll(['progressJson', 'weight'])
+        && request.resource.data.weight is int
+        && (
+          !('weight' in resource.data)
+          || request.resource.data.weight >= resource.data.weight
+          || request.resource.data.keys().hasAny(['restoreNonce'])
+        );
+
+      allow delete: if false;
     }
   }
 }
