@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさん">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016u">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016u">
-<link rel="manifest" href="site.webmanifest?v=20261016u">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016v">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016v">
+<link rel="manifest" href="site.webmanifest?v=20261016v">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261016u";
+window.__BUILD__ = "20261016v";
 (function () {
   try {
     var u = new URL(location.href);
@@ -131,7 +131,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261016u";
+  var v = window.__BUILD__ || "20261016v";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -140,7 +140,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261016u"));
+    + encodeURIComponent(window.__BUILD__ || "20261016v"));
 }
 
 function staticRestoreFromText() {
@@ -159,7 +159,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261016u") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261016v") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3199,10 +3199,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261016u" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261016v" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016u#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016v#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3222,7 +3222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261016u" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261016v" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3317,7 +3317,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261016u"></script>
+<script src="firebase-config.js?v=20261016v"></script>
 <script>
 /* ============================================================
    State
@@ -3697,7 +3697,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261016u" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261016v" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -3864,15 +3864,137 @@ function cloudErrDetail(e) {
   return (code ? code + ": " : "") + msg;
 }
 
-async function pullCloud(uid) {
-  let snap;
-  try {
-    snap = await cloudDocRef(uid).get({ source: "server" });
-  } catch (e) {
-    snap = await cloudDocRef(uid).get();
+function cloudProjectId() {
+  return (window.FIREBASE_CONFIG && window.FIREBASE_CONFIG.projectId) || "";
+}
+
+function cloudRestDocUrl(uid) {
+  const projectId = cloudProjectId();
+  if (!projectId || !uid) return "";
+  const key = (window.FIREBASE_CONFIG && window.FIREBASE_CONFIG.apiKey) || "";
+  let url = "https://firestore.googleapis.com/v1/projects/" + encodeURIComponent(projectId)
+    + "/databases/(default)/documents/users/" + encodeURIComponent(uid);
+  if (key) url += "?key=" + encodeURIComponent(key);
+  return url;
+}
+
+async function cloudIdToken(force) {
+  const user = requireCloudUser();
+  if (!user || typeof user.getIdToken !== "function") {
+    throw new Error("Not signed in to Google.");
   }
-  if (!snap.exists) return null;
-  const data = snap.data() || {};
+  return user.getIdToken(!!force);
+}
+
+/* Decode a Firestore REST document into the same shape as pullCloud(). */
+function cloudFromRestDoc(doc) {
+  if (!doc || !doc.fields) return null;
+  const f = doc.fields;
+  const str = k => (f[k] && typeof f[k].stringValue === "string") ? f[k].stringValue : "";
+  const num = k => {
+    if (!f[k]) return 0;
+    if (f[k].integerValue != null) return Number(f[k].integerValue) || 0;
+    if (f[k].doubleValue != null) return Number(f[k].doubleValue) || 0;
+    return 0;
+  };
+  let updatedAt = 0;
+  if (f.updatedAt && f.updatedAt.timestampValue) {
+    updatedAt = Date.parse(f.updatedAt.timestampValue) || 0;
+  }
+  const clientUpdatedAt = num("clientUpdatedAt");
+  if (clientUpdatedAt > updatedAt) updatedAt = clientUpdatedAt;
+  let raw = null;
+  const pj = str("progressJson");
+  if (pj) {
+    try { raw = JSON.parse(pj); }
+    catch (err) { raw = null; }
+  }
+  if (!raw && f.progress && f.progress.mapValue && f.progress.mapValue.fields) {
+    /* Ignore legacy nested map — progressJson is the source of truth. */
+  }
+  const weight = num("weight");
+  if (!raw) {
+    return {
+      progress: blank(),
+      weight,
+      updatedAt,
+      email: str("email"),
+      empty: true
+    };
+  }
+  const progress = migrate(Object.assign(blank(), raw));
+  return {
+    progress,
+    weight: weight || progressWeight(progress),
+    updatedAt,
+    email: str("email"),
+    empty: progressWeight(progress) === 0
+  };
+}
+
+/* Authoritative HTTPS read — bypasses IndexedDB persistence / SDK cache. */
+async function pullCloudRest(uid) {
+  const url = cloudRestDocUrl(uid);
+  if (!url) throw new Error("Missing Firebase project id.");
+  const token = await cloudIdToken(false);
+  const res = await fetch(url, {
+    method: "GET",
+    headers: { Authorization: "Bearer " + token },
+    cache: "no-store"
+  });
+  if (res.status === 404) return null;
+  if (!res.ok) {
+    const body = await res.text().catch(() => "");
+    throw new Error("Google read failed (" + res.status + "). " + body.slice(0, 180));
+  }
+  return cloudFromRestDoc(await res.json());
+}
+
+/* Authoritative HTTPS write for restores — does not use SDK persistence. */
+async function pushCloudRest(uid, snapshot, localTs, localWeight) {
+  const url = cloudRestDocUrl(uid);
+  if (!url) throw new Error("Missing Firebase project id.");
+  const user = requireCloudUser();
+  const progressJson = JSON.stringify(snapshot);
+  if (progressJson.length > 900000) {
+    throw new Error("This backup is too large for Google save ("
+      + Math.round(progressJson.length / 1000) + " KB). Use a smaller export.");
+  }
+  const token = await cloudIdToken(true);
+  const nowIso = new Date().toISOString();
+  const body = {
+    fields: {
+      progressJson: { stringValue: progressJson },
+      weight: { integerValue: String(localWeight) },
+      clientUpdatedAt: { integerValue: String(localTs || Date.now()) },
+      schema: { integerValue: String(CLOUD_SCHEMA) },
+      updatedAt: { timestampValue: nowIso },
+      email: (user && user.email)
+        ? { stringValue: user.email }
+        : { nullValue: null }
+    }
+  };
+  /* updateMask replaces listed fields and clears legacy `progress` maps. */
+  const masks = ["progressJson", "weight", "clientUpdatedAt", "schema", "updatedAt", "email", "progress"];
+  const qs = masks.map(p => "updateMask.fieldPaths=" + encodeURIComponent(p)).join("&");
+  const res = await fetch(url + (url.indexOf("?") >= 0 ? "&" : "?") + qs, {
+    method: "PATCH",
+    headers: {
+      Authorization: "Bearer " + token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body),
+    cache: "no-store"
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error("Google write failed (" + res.status + "). " + text.slice(0, 220));
+  }
+  return cloudFromRestDoc(await res.json());
+}
+
+function parseCloudSnapData(data) {
+  data = data || {};
   let raw = null;
   if (typeof data.progressJson === "string" && data.progressJson) {
     try { raw = JSON.parse(data.progressJson); }
@@ -3891,7 +4013,6 @@ async function pullCloud(uid) {
     updatedAt = data.clientUpdatedAt;
   }
   if (!raw) {
-    /* Doc exists but progress payload missing — still surface the save time. */
     return {
       progress: blank(),
       weight: typeof data.weight === "number" ? data.weight : 0,
@@ -3905,8 +4026,34 @@ async function pullCloud(uid) {
     progress,
     weight: typeof data.weight === "number" ? data.weight : progressWeight(progress),
     updatedAt,
-    email: data.email || ""
+    email: data.email || "",
+    empty: progressWeight(progress) === 0
   };
+}
+
+async function pullCloud(uid, opts) {
+  const preferRest = !!(opts && opts.rest);
+  if (preferRest) {
+    try { return await pullCloudRest(uid); }
+    catch (e) { console.warn("REST pull failed, trying SDK", e); }
+  }
+  let snap;
+  try {
+    snap = await cloudDocRef(uid).get({ source: "server" });
+  } catch (e) {
+    /* Avoid cache fallback when the caller needs the real account copy
+       (fresh browser / empty local). Cache can be empty or stale. */
+    if (opts && opts.serverOnly) throw e;
+    snap = await cloudDocRef(uid).get();
+  }
+  if (!snap.exists) return null;
+  return parseCloudSnapData(snap.data() || {});
+}
+
+function cloudHasProgress(cloud) {
+  if (!cloud) return false;
+  if (progressWeight(cloud.progress) > 0) return true;
+  return !!(cloud.weight > 0 && !cloud.empty);
 }
 
 function hasForceCloudPush() {
@@ -3927,12 +4074,46 @@ function clearForceCloudPush() {
   catch (e) {}
 }
 
-/* Persistence can resolve set() once the write is only in the local cache.
-   Restores must wait until the backend actually has the new progressJson, or
-   a second browser signed into Google still sees the old/empty account copy. */
+/* Ordinary study syncs use the SDK (fast, offline-friendly). Restores use
+   REST write + REST read so IndexedDB persistence cannot fake a success. */
 async function commitCloudDoc(uid, snapshot, localTs, localWeight, opts) {
-  if (!cloudDb) throw new Error("Firestore is not ready.");
   const verify = !!(opts && opts.verify);
+  const useRest = !!(opts && opts.rest) || verify;
+  if (useRest) {
+    const written = await pushCloudRest(uid, snapshot, localTs, localWeight);
+    /* Confirm with a second REST GET (separate request, no SDK cache). */
+    await sleep(400);
+    let confirmed = null;
+    let lastErr = null;
+    for (let i = 0; i < 3; i++) {
+      try {
+        confirmed = await pullCloudRest(uid);
+        if (confirmed && progressWeight(confirmed.progress) >= localWeight) break;
+      } catch (e) {
+        lastErr = e;
+      }
+      await sleep(500 * (i + 1));
+    }
+    if (!confirmed || progressWeight(confirmed.progress) < localWeight) {
+      throw lastErr || new Error("Google REST confirm did not see the restored progress.");
+    }
+    /* Keep the SDK cache in sync so a later cached pull cannot resurrect an
+       older empty doc and upload it over the restore. */
+    if (cloudDb) {
+      try {
+        await cloudDocRef(uid).set({
+          progressJson: JSON.stringify(snapshot),
+          weight: localWeight,
+          clientUpdatedAt: localTs || Date.now(),
+          schema: CLOUD_SCHEMA,
+          email: (requireCloudUser() && requireCloudUser().email) || null,
+          updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      } catch (e) { /* non-fatal — REST is source of truth */ }
+    }
+    return confirmed;
+  }
+  if (!cloudDb) throw new Error("Firestore is not ready.");
   const user = requireCloudUser();
   const payload = {
     progressJson: JSON.stringify(snapshot),
@@ -3942,55 +4123,15 @@ async function commitCloudDoc(uid, snapshot, localTs, localWeight, opts) {
     schema: CLOUD_SCHEMA,
     email: (user && user.email) || null
   };
-  /* Replace the whole user doc — avoid merge leaving a stale nested
-     `progress` map from older clients that readers might fall back to. */
   await cloudDocRef(uid).set(payload);
-  if (!verify) return payload;
-  if (typeof cloudDb.waitForPendingWrites === "function") {
-    await Promise.race([
-      cloudDb.waitForPendingWrites(),
-      sleep(20000).then(() => {
-        throw new Error("Google upload is still pending (check your connection).");
-      })
-    ]);
-  }
-  let snap = null;
-  try {
-    snap = await Promise.race([
-      cloudDocRef(uid).get({ source: "server" }),
-      sleep(10000).then(() => {
-        throw new Error("Could not confirm the Google save on the server.");
-      })
-    ]);
-  } catch (e) {
-    /* One retry — mobile networks often drop the first confirmation read. */
-    await sleep(600);
-    snap = await cloudDocRef(uid).get({ source: "server" });
-  }
-  if (!snap || !snap.exists) throw new Error("Google save missing after upload.");
-  const data = snap.data() || {};
-  const remoteW = typeof data.weight === "number" ? data.weight : 0;
-  if (remoteW < localWeight) {
-    throw new Error("Google still has an older save after upload.");
-  }
-  let raw = null;
-  if (typeof data.progressJson === "string" && data.progressJson) {
-    try { raw = JSON.parse(data.progressJson); }
-    catch (err) { raw = null; }
-  }
-  if (!raw) throw new Error("Google save has no progress payload.");
-  const remoteProgress = migrate(Object.assign(blank(), raw));
-  if (progressWeight(remoteProgress) < localWeight) {
-    throw new Error("Google save did not match the progress on this device.");
-  }
-  return data;
+  return payload;
 }
 
 async function pushCloud(uid, opts) {
   if (!uid) return false;
   const force = !!(opts && opts.force) || hasForceCloudPush();
   const skipPull = !!(opts && opts.skipPull) || force;
-  /* Force / restore uploads must be server-confirmed. Ordinary debounced
+  /* Force / restore uploads must be REST-confirmed. Ordinary debounced
      study syncs stay fast (local persistence is enough there). */
   const verify = force || !!(opts && opts.verify);
   const snapshot = cloudProgressSnapshot(S);
@@ -3999,7 +4140,7 @@ async function pushCloud(uid, opts) {
     if (force) authError = "Nothing to upload — restored progress looks empty.";
     return false;
   }
-  if (!cloudDb) {
+  if (!cloudDb && !verify) {
     authError = "Could not save progress to Google. Firestore is not ready yet.";
     cloudDirty = true;
     return false;
@@ -4039,12 +4180,16 @@ async function pushCloud(uid, opts) {
       return false;
     }
 
-    await commitCloudDoc(uid, snapshot, localTs, localWeight, { verify });
+    const committed = await commitCloudDoc(uid, snapshot, localTs, localWeight, {
+      verify,
+      rest: verify
+    });
     cloudLastPush = Date.now();
     cloudDirty = false;
     clearForceCloudPush();
+    const cloudAt = (committed && committed.updatedAt) || Math.max(localTs, cloudLastPush);
     try {
-      localStorage.setItem(KEY_CLOUD_AT, String(Math.max(localTs, cloudLastPush)));
+      localStorage.setItem(KEY_CLOUD_AT, String(cloudAt));
     } catch (e) {}
     return true;
   } catch (e) {
@@ -4142,15 +4287,43 @@ async function reconcileCloud(reason) {
   try {
     let cloud = null;
     const localTs = +localStorage.getItem(KEY_SAVED) || 0;
-    try {
-      cloud = await Promise.race([
-        pullCloud(user.uid),
-        sleep(CLOUD_PULL_TIMEOUT_MS).then(() => {
-          throw new Error("Google save check timed out.");
-        })
-      ]);
-    } catch (e) {
-      authError = "Could not check Google save. " + cloudErrDetail(e);
+    const localW = progressWeight(S);
+    /* Fresh / empty device: read Google via REST (never trust an empty SDK
+       cache that would claim the account has no progress). */
+    const pullOpts = localW === 0
+      ? { rest: true, serverOnly: true }
+      : null;
+    let pullErr = null;
+    for (let attempt = 0; attempt < (localW === 0 ? 4 : 1); attempt++) {
+      try {
+        cloud = await Promise.race([
+          pullCloud(user.uid, pullOpts),
+          sleep(localW === 0 ? 8000 : CLOUD_PULL_TIMEOUT_MS).then(() => {
+            throw new Error("Google save check timed out.");
+          })
+        ]);
+        pullErr = null;
+        break;
+      } catch (e) {
+        pullErr = e;
+        cloud = null;
+        if (localW === 0) await sleep(600 * (attempt + 1));
+      }
+    }
+    if (pullErr && localW === 0) {
+      authError = "Could not check Google save. " + cloudErrDetail(pullErr);
+      updateCloudUi();
+      await showCloudSyncPopup({
+        title: "Could not check Google save",
+        message: authError + "\n\nYour account may still have progress — stay online and sign in again.",
+        localTs,
+        cloudTs: 0
+      });
+      cloudHomePopupArmed = false;
+      return;
+    }
+    if (pullErr && !cloud) {
+      authError = "Could not check Google save. " + cloudErrDetail(pullErr);
       updateCloudUi();
       await showCloudSyncPopup({
         title: "Could not check Google save",
@@ -4163,9 +4336,8 @@ async function reconcileCloud(reason) {
     }
 
     let cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
-    const localW = progressWeight(S);
-    let cloudW = cloud ? cloud.weight : 0;
-    const cloudEmpty = !cloud || cloud.empty || cloudW === 0;
+    let cloudW = cloud ? Math.max(cloud.weight || 0, progressWeight(cloud.progress)) : 0;
+    const cloudEmpty = !cloudHasProgress(cloud);
 
     /* Nothing on either side — still confirm so a refresh is never silent. */
     if (localW === 0 && cloudEmpty) {
@@ -4177,6 +4349,26 @@ async function reconcileCloud(reason) {
       });
       cloudHomePopupArmed = false;
       pendingCloudSyncReason = null;
+      return;
+    }
+
+    /* Empty device + Google has progress: always download (this is the
+       “new incognito → sign in” path that was showing a blank guide). */
+    if (localW === 0 && !cloudEmpty) {
+      S = cloud.progress;
+      save({ force: true });
+      cloudDirty = false;
+      try { localStorage.setItem(KEY_CLOUD_AT, String(cloudTs || Date.now())); } catch (e) {}
+      await showCloudSyncPopup({
+        title: "Loaded from Google",
+        message: "Restored progress from your Google account:\n" + describeProgress(S),
+        localTs: +localStorage.getItem(KEY_SAVED) || Date.now(),
+        cloudTs: cloudTs || Date.now()
+      });
+      cloudHomePopupArmed = false;
+      pendingCloudSyncReason = null;
+      updateCloudUi();
+      route();
       return;
     }
 
@@ -4197,10 +4389,7 @@ async function reconcileCloud(reason) {
       }
       let savedAt = cloudLastPush || Date.now();
       try {
-        const again = await Promise.race([
-          pullCloud(user.uid),
-          sleep(2000).then(() => null)
-        ]);
+        const again = await pullCloudRest(user.uid);
         if (again && again.updatedAt) savedAt = again.updatedAt;
       } catch (e) {}
       await showCloudSyncPopup({
@@ -4223,7 +4412,7 @@ async function reconcileCloud(reason) {
       await showCloudSyncPopup({
         title: uploaded ? "Restored progress saved to Google" : "Could not save restore to Google",
         message: uploaded
-          ? "The backup you restored is now your Google copy too."
+          ? "The backup you restored is now your Google copy too.\n" + describeProgress(S)
           : (authError || "Sign-in worked, but uploading the restored backup failed. Check your connection and try Restore again while signed in."),
         localTs: +localStorage.getItem(KEY_SAVED) || localTs,
         cloudTs: uploaded ? (cloudLastPush || Date.now()) : cloudTs
@@ -4328,16 +4517,24 @@ async function quietCloudSync() {
     let cloud = null;
     try {
       cloud = await Promise.race([
-        pullCloud(user.uid),
-        sleep(3000).then(() => null)
+        pullCloud(user.uid, localW === 0 ? { rest: true, serverOnly: true } : null),
+        sleep(localW === 0 ? 8000 : 3000).then(() => null)
       ]);
     } catch (e) {
       cloud = null;
     }
     const cloudTs = cloud ? (cloud.updatedAt || 0) : 0;
-    const cloudW = cloud ? cloud.weight : 0;
-    const cloudEmpty = !cloud || cloud.empty || cloudW === 0;
+    const cloudW = cloud ? Math.max(cloud.weight || 0, progressWeight(cloud.progress)) : 0;
+    const cloudEmpty = !cloudHasProgress(cloud);
 
+    if (localW === 0 && !cloudEmpty) {
+      S = cloud.progress;
+      save({ force: true });
+      cloudDirty = false;
+      try { localStorage.setItem(KEY_CLOUD_AT, String(cloudTs || Date.now())); } catch (e) {}
+      route();
+      return;
+    }
     if (localW > 0 && (cloudEmpty || localTs >= cloudTs)) {
       await pushCloud(user.uid, { force: true });
       return;
@@ -4394,7 +4591,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016u"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016v"));
     return;
   }
   const start = () => {
@@ -4408,7 +4605,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016u"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016v"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5973,7 +6170,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261016u" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261016v" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -6297,14 +6494,28 @@ async function applyImportedProgress(incoming) {
     await sleep(800);
     ok = await pushCloud(user.uid, { force: true, skipPull: true, verify: true });
   }
+  /* Final REST proof for the dialog — never claim success from SDK alone. */
+  let restProof = null;
+  if (ok) {
+    try { restProof = await pullCloudRest(user.uid); }
+    catch (e) { restProof = null; }
+    if (!restProof || progressWeight(restProof.progress) < progressWeight(S)) {
+      ok = false;
+      authError = "Upload finished but a direct Google read did not see this backup yet. Stay online and tap Restore again.";
+      markForceCloudPush();
+    }
+  }
   updateCloudUi();
   await showCloudSyncPopup({
     title: ok ? "Restored and saved to Google" : "Restore saved here — Google upload failed",
     message: ok
-      ? "This backup is now on your Google account. A new browser signed into the same account should load it after sign-in."
-      : (authError || "Keep this tab open on Wi‑Fi and try Restore again. Until status says synced, another device will not see this backup."),
+      ? ("Confirmed on Google via direct account read:\n"
+        + describeProgress(restProof.progress)
+        + "\n\nNow open a fresh browser, sign in with the same Google account, and you should get “Loaded from Google”.")
+      : (authError || "Keep this tab open on Wi‑Fi and try Restore again. Until this says saved, another device will not see this backup."),
     localTs: +localStorage.getItem(KEY_SAVED) || Date.now(),
-    cloudTs: ok ? (cloudLastPush || Date.now()) : (+localStorage.getItem(KEY_CLOUD_AT) || 0)
+    cloudTs: ok ? ((restProof && restProof.updatedAt) || cloudLastPush || Date.now())
+      : (+localStorage.getItem(KEY_CLOUD_AT) || 0)
   });
 }
 
@@ -10283,7 +10494,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261016u&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261016v&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
