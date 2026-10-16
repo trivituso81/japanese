@@ -3510,32 +3510,23 @@ function requestPersistentStorage() {
 }
 
 /* Flush on background / close — iOS Safari is eager to suspend tabs.
-   After a longer absence, compare Google vs this device and show a sync popup. */
-let cloudHiddenAt = 0;
-const CLOUD_RESUME_AWAY_MS = 2 * 60 * 1000;
+   Do not re-check Google or show a sync popup when returning to the app. */
 window.addEventListener("pagehide", () => { save(); flushCloudSync(); });
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") {
-    cloudHiddenAt = Date.now();
     save();
     flushCloudSync();
-  } else {
-    const away = cloudHiddenAt ? Date.now() - cloudHiddenAt : 0;
-    cloudHiddenAt = 0;
-    if (away >= CLOUD_RESUME_AWAY_MS) {
-      cloudHomePopupArmed = true;
-      cloudLoadPopupDone = false;
-      ensureLoadSyncPopup("resume");
-    }
   }
 });
 
 /* ============================================================
    Google sign-in + Firestore sync
 
-   Sign in once. On sign-in, page refresh, or return after a while away,
-   compare this device’s last-save time with the Google account copy
-   (Firestore users/{uid}) and show a forced-OK popup:
+   Sign in once. Auto sync-check popups on cold start / home paint /
+   bfcache restore / return-after-away are disabled — progress stays on
+   this device (and still flushes quietly while signed in). After a real
+   Google sign-in, compare this device’s last-save time with the account
+   copy (Firestore users/{uid}) and show a forced-OK popup:
 
      • Local same or newer → “You’re on the most up-to-date version.”
        then keep/push local and refresh the screen
@@ -3608,110 +3599,13 @@ function runPendingCloudSync() {
   reconcileCloud(reason);
 }
 
-/* Show the save-state OK dialog on every cold load / refresh.
-   Prefer a Google comparison when signed in; otherwise confirm local save.
-   Wait for Firebase auth to actually answer — an early “ready” timer used to
-   unlock the guest dialog before IndexedDB restored the Google session. */
-async function ensureLoadSyncPopup(reason) {
-  if (cloudSyncDialogOpen) return;
-  if (cloudLoadPopupDone) return;
-  if (cloudLoadPopupPromise) return cloudLoadPopupPromise;
-  cloudHomePopupArmed = true;
-  cloudLoadPopupPromise = (async () => {
-    try {
-      await sleep(250);
-      if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
-      if (typeof useWelcomeLanding === "function" && useWelcomeLanding()) return;
-
-      let justSignedIn = false;
-      let expectAuth = false;
-      try {
-        justSignedIn = sessionStorage.getItem(KEY + ":justSignedIn") === "1"
-          || /(?:^|[?&])signedin=1(?:&|$)/.test(location.search || "");
-        expectAuth = justSignedIn || localStorage.getItem(KEY_EXPECT_AUTH) === "1";
-      } catch (e) {}
-
-      /* Wait until onAuthStateChanged has fired (or Firebase failed), then
-         poll so a slow IndexedDB restore can still win — especially on iPhone
-         Safari after signin.html Continue. */
-      const ios = isIOSDevice();
-      const waitMs = expectAuth ? (ios ? 22000 : 15000) : (ios ? 9000 : 6000);
-      try {
-        await Promise.race([whenCloudAuthReady(), sleep(waitMs)]);
-      } catch (e) {}
-
-      const pollUntil = Date.now() + (expectAuth ? (ios ? 12000 : 8000) : (ios ? 2000 : 800));
-      while (Date.now() < pollUntil) {
-        if (cloudAuth && cloudAuth.currentUser) cloudUser = cloudAuth.currentUser;
-        if (requireCloudUser() && cloudDb) break;
-        /* Auth bound and settled with no user — stop polling unless we
-           were told a sign-in was in flight. */
-        if (cloudAuthResolved && cloudAuth && !expectAuth && !requireCloudUser()) break;
-        await sleep(200);
-      }
-      if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
-
-      const user = requireCloudUser();
-      if (user) {
-        /* User restored: wait briefly for Firestore bind before syncing. */
-        const dbUntil = Date.now() + (expectAuth ? (ios ? 8000 : 5000) : 1500);
-        while (!cloudDb && Date.now() < dbUntil) await sleep(100);
-        if (cloudDb) {
-          try {
-            sessionStorage.removeItem(KEY + ":justSignedIn");
-            localStorage.removeItem(KEY_EXPECT_AUTH);
-          } catch (e) {}
-          cloudLastCheckedAt = 0;
-          await reconcileCloud(reason === "resume" ? "resume" : (expectAuth || justSignedIn ? "signin" : "boot"));
-          return;
-        }
-      }
-
-      if (cloudLoadPopupDone || cloudSyncDialogOpen) return;
-      const hasProgress = progressWeight(S) > 0;
-      const isGuest = localStorage.getItem(KEY_GUEST) === "1";
-      if (!hasProgress && !isGuest && !expectAuth) return;
-
-      let authHint = null;
-      try {
-        authHint = JSON.parse(localStorage.getItem(KEY_AUTH_HINT) || "null");
-      } catch (e) {}
-
-      const firebaseUp = !!(cloudAuth && cloudDb);
-      /* Never label Google as “not signed in” right after a handoff that
-         left an auth hint — that was the confusing save popup. */
-      const cloudLabel = user
-        ? ((user.email || "signed in") + (cloudDb ? "" : " · connecting…"))
-        : expectAuth
-          ? (authHint && authHint.email ? `session lost (${authHint.email})` : "session not restored")
-          : "not signed in";
-      await showCloudSyncPopup({
-        title: user && !cloudDb
-          ? "Signed in — still connecting"
-          : expectAuth
-            ? "Sign-in did not stick"
-            : "Progress on this device",
-        message: user && !cloudDb
-          ? "Google sign-in worked, but Firestore is still loading on this page. Tap OK, then open the gear menu and try Save / sync again in a moment."
-          : expectAuth
-            ? (firebaseUp
-              ? "Google sign-in worked on the sign-in page, but this screen could not restore the session. Stay in the same Safari tab or home-screen icon you signed in with (browser and home-screen app do not share login), then try Sign in again."
-              : "Could not reach Google on this page. Check your connection, then try Sign in again from the account button.")
-            : "Your study progress is saved on this phone. Sign in with Google to back it up to your account (Firestore — not Google Drive).",
-        localTs: +localStorage.getItem(KEY_SAVED) || 0,
-        cloudTs: 0,
-        cloudLabel
-      });
-      try {
-        sessionStorage.removeItem(KEY + ":justSignedIn");
-        localStorage.removeItem(KEY_EXPECT_AUTH);
-      } catch (e) {}
-      cloudHomePopupArmed = false;
-    } finally {
-      cloudLoadPopupPromise = null;
-    }
-  })();
-  return cloudLoadPopupPromise;
+/* Auto save-state / Google-compare dialogs on cold load, home paint,
+   bfcache restore, and return-after-away are turned off. Sign-in still
+   triggers reconcileCloud via requestCloudSyncPopup("signin"). */
+async function ensureLoadSyncPopup(_reason) {
+  cloudLoadPopupDone = true;
+  cloudHomePopupArmed = false;
+  cloudLoadPopupPromise = null;
 }
 /* Paint the app immediately. Firebase is optional and loads afterward. */
 let authReady = true;
@@ -3816,6 +3710,12 @@ function bindCloudAuth() {
     const wasIn = !!cloudUser;
     cloudUser = user;
     if (user) {
+      let intentionalSignIn = false;
+      try {
+        intentionalSignIn = sessionStorage.getItem(KEY + ":justSignedIn") === "1"
+          || localStorage.getItem(KEY_EXPECT_AUTH) === "1"
+          || /(?:^|[?&])signedin=1(?:&|$)/.test(location.search || "");
+      } catch (e) {}
       localStorage.removeItem(KEY_GUEST);
       try {
         localStorage.removeItem(KEY_EXPECT_AUTH);
@@ -3825,16 +3725,15 @@ function bindCloudAuth() {
           at: Date.now()
         }));
       } catch (e) {}
-      /* Session restored or fresh sign-in after cloudUser was empty. */
-      if (!wasIn) {
+      /* Only reconcile after an intentional Google sign-in. Silent session
+         restore on cold start / return must not open the sync popup. */
+      if (!wasIn && intentionalSignIn) {
         cloudLastCheckedAt = 0;
         if (cloudSyncDialogOpen) {
           pendingCloudSyncReason = "signin";
           const ok = document.getElementById("cloudSyncOk");
           if (ok) setTimeout(() => { try { ok.click(); } catch (e) {} }, 0);
-        } else if (cloudAuthResolved) {
-          /* Initial restore is handled by ensureLoadSyncPopup; only re-arm
-             after auth was already settled (true late sign-in). */
+        } else {
           cloudLoadPopupDone = false;
           requestCloudSyncPopup("signin");
         }
@@ -4268,6 +4167,7 @@ function cloudStatusLine() {
 
 function signInGoogle() {
   authError = "";
+  try { localStorage.setItem(KEY_EXPECT_AUTH, "1"); } catch (e) {}
   const mobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent)
     || window.navigator.standalone
     || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
@@ -4293,6 +4193,7 @@ function signInGoogle() {
         location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261011d"));
         return;
       }
+      try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
       authError = authErrorMessage(e);
       alert(authError);
       route();
@@ -5949,9 +5850,8 @@ function renderHome() {
   document.getElementById("exprestore").addEventListener("click", () => openBackupSheet("restore"));
   wireCloudSettings();
   maybeOfferRestore();
-  /* Homepage paint retries the load sync popup after auth restores. */
+  /* Homepage paint no longer arms the load sync popup. */
   runPendingCloudSync();
-  if (cloudHomePopupArmed && !cloudLoadPopupDone) ensureLoadSyncPopup("home");
   requestAnimationFrame(() => wireVerbBadgeFit());
 }
 
@@ -9900,12 +9800,7 @@ window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); })
 window.addEventListener("pageshow", ev => {
   const h = location.hash || "#/";
   if (h === "#/" || h === "#" || h === "") route();
-  /* Cold load is handled by bootApp. Re-arm only on bfcache restore so we
-     do not clear a popup that just opened (or open two). */
-  if (ev.persisted) {
-    cloudLoadPopupDone = false;
-    ensureLoadSyncPopup("refresh");
-  }
+  /* Auto sync popup on bfcache restore is disabled. */
 });
 function loadStudyData() {
   return new Promise((resolve, reject) => {
@@ -9943,9 +9838,9 @@ function bootApp() {
   wireBackupSheet();
   initCloud();
   route();
-  /* Always arm the save-state OK dialog on cold start. */
-  cloudLoadPopupDone = false;
-  ensureLoadSyncPopup("boot");
+  /* Cold-start save-state OK dialog is disabled. */
+  cloudLoadPopupDone = true;
+  cloudHomePopupArmed = false;
   try {
     if (sessionStorage.getItem("mnn-study-v1:signin") === "1") {
       sessionStorage.removeItem("mnn-study-v1:signin");
