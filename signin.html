@@ -53,7 +53,7 @@
   }
   [hidden] { display: none !important; }
 </style>
-<script src="firebase-config.js?v=20261016b"></script>
+<script src="firebase-config.js?v=20261016d"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
@@ -70,12 +70,12 @@
   <button type="button" class="primary" id="continueHome" hidden>Continue</button>
   <button type="button" class="link" id="tryAgain" hidden>Try again</button>
   <button type="button" class="link" id="signOutBtn" hidden>Sign out</button>
-  <a class="link" id="back" href="./index.html?v=20261016b#/">Back to study guide</a>
+  <a class="link" id="back" href="./index.html?v=20261016d#/">Back to study guide</a>
   <button type="button" class="link" id="exitBtn" hidden>Exit</button>
 </main>
 <script>
 (function () {
-  var BUILD = "20261016b";
+  var BUILD = "20261016d";
   var KEY = "mnn-study-v1";
   var KEY_JUST = KEY + ":justSignedIn";
   var KEY_EXPECT = KEY + ":expectAuth";
@@ -115,16 +115,13 @@
     signingIn = false;
     card.setAttribute("data-state", "ready");
     title.textContent = "Sign in with Google";
-    lead.textContent = IS_IOS
-      ? "Tap the Google button. Safari will open your account picker, then bring you back here."
-      : "Tap the Google button below. After you pick your account, this page will finish signing you in.";
+    lead.textContent = "Tap the Google button below. After you pick your account, this page will finish signing you in.";
     detail.textContent = "Progress backs up to your Google account via Firebase (not Google Drive).";
-    status.textContent = gisReady
-      ? "Ready. Tap the Google button (or Continue below)."
-      : "Ready. Tap Continue with Google.";
+    status.textContent = "Ready. Tap Continue with Google.";
     err.textContent = "";
+    /* One CTA: GIS button when ready; custom button only as fallback. */
     setVisible(gisBtn, gisReady);
-    setVisible(go, true);
+    setVisible(go, !gisReady);
     go.disabled = false;
     setVisible(continueHome, false);
     setVisible(tryAgain, false);
@@ -285,10 +282,6 @@
   function renderGis() {
     if (!CLIENT_ID || !window.google || !google.accounts || !google.accounts.id) return false;
     try {
-      /* Google requires an exact Authorized redirect URI match. Never include
-         ?v= / ?r= query params — those change every deploy and cause
-         Error 400: redirect_uri_mismatch. */
-      var loginUri = location.origin + location.pathname;
       google.accounts.id.initialize({
         client_id: CLIENT_ID,
         callback: function (response) {
@@ -298,10 +291,10 @@
         auto_select: false,
         cancel_on_tap_outside: true,
         context: "signin",
-        /* Redirect on iPhone — Firebase redirect via firebaseapp.com breaks on
-           Safari 16.1+ (third-party storage). GIS redirect stays same-origin. */
-        ux_mode: IS_IOS ? "redirect" : "popup",
-        login_uri: loginUri,
+        /* Always popup — GIS redirect POSTs the credential to login_uri, and
+           GitHub Pages returns 405 Method Not Allowed for POST. Popup returns
+           the ID token to this callback on the same page instead. */
+        ux_mode: "popup",
         use_fedcm_for_prompt: false
       });
       google.accounts.id.renderButton(gisBtn, {
