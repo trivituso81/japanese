@@ -9,12 +9,12 @@ service cloud.firestore {
 
       allow create: if request.auth != null && request.auth.uid == userId
         && request.resource.data.keys().hasAll(['progressJson', 'weight'])
-        && request.resource.data.weight is int
+        && request.resource.data.weight is number
         && request.resource.data.weight >= 0;
 
       allow update: if request.auth != null && request.auth.uid == userId
         && request.resource.data.keys().hasAll(['progressJson', 'weight'])
-        && request.resource.data.weight is int
+        && request.resource.data.weight is number
         && (
           !('weight' in resource.data)
           || request.resource.data.weight >= resource.data.weight
