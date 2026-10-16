@@ -14,9 +14,9 @@
 <meta name="application-name" content="トムさん">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016s">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016s">
-<link rel="manifest" href="site.webmanifest?v=20261016s">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261016t">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261016t">
+<link rel="manifest" href="site.webmanifest?v=20261016t">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261016s";
+window.__BUILD__ = "20261016t";
 (function () {
   try {
     var u = new URL(location.href);
@@ -131,7 +131,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261016s";
+  var v = window.__BUILD__ || "20261016t";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -140,7 +140,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261016s"));
+    + encodeURIComponent(window.__BUILD__ || "20261016t"));
 }
 
 function staticRestoreFromText() {
@@ -150,10 +150,16 @@ function staticRestoreFromText() {
     if (!raw) throw new Error("Paste your backup text first.");
     var obj = JSON.parse(raw);
     if (!obj || typeof obj !== "object" || Array.isArray(obj)) throw new Error("That does not look like a backup.");
-    localStorage.setItem("mnn-study-v1", raw);
-    localStorage.setItem("mnn-study-v1:guest", "1");
+    var key = "mnn-study-v1";
+    localStorage.setItem(key, raw);
+    localStorage.setItem(key + ":bak", raw);
+    localStorage.setItem(key + ":savedAt", String(Date.now()));
+    /* After reload + Google sign-in, force-upload this restore (do not pull
+       an older Google copy back over it). */
+    localStorage.setItem(key + ":cloudPushForce", "1");
+    localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261016s") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261016t") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3193,10 +3199,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261016s" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261016t" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016s#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261016t#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3216,7 +3222,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261016s" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261016t" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3311,7 +3317,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261016s"></script>
+<script src="firebase-config.js?v=20261016t"></script>
 <script>
 /* ============================================================
    State
@@ -3563,6 +3569,9 @@ const KEY_EXPECT_AUTH = KEY + ":expectAuth";
 const KEY_AUTH_HINT = KEY + ":authHint";
 const KEY_CLOUD_DECLINED = KEY + ":cloudDeclinedTs";
 const KEY_CLOUD_AT = KEY + ":cloudAt";
+/* Set when the learner intentionally replaces local progress (Restore).
+   Until a force-upload succeeds, never pull Google over that restore. */
+const KEY_CLOUD_PUSH_FORCE = KEY + ":cloudPushForce";
 const FIREBASE_SDK = [
   "https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js",
   "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js",
@@ -3688,7 +3697,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261016s" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261016t" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -3900,10 +3909,28 @@ async function pullCloud(uid) {
   };
 }
 
+function hasForceCloudPush() {
+  try { return localStorage.getItem(KEY_CLOUD_PUSH_FORCE) === "1"; }
+  catch (e) { return false; }
+}
+
+function markForceCloudPush() {
+  cloudDirty = true;
+  try {
+    localStorage.setItem(KEY_CLOUD_PUSH_FORCE, "1");
+    localStorage.setItem(KEY_SAVED, String(Date.now()));
+  } catch (e) {}
+}
+
+function clearForceCloudPush() {
+  try { localStorage.removeItem(KEY_CLOUD_PUSH_FORCE); }
+  catch (e) {}
+}
+
 async function pushCloud(uid, opts) {
   if (!uid) return false;
-  const force = !!(opts && opts.force);
-  const skipPull = !!(opts && opts.skipPull);
+  const force = !!(opts && opts.force) || hasForceCloudPush();
+  const skipPull = !!(opts && opts.skipPull) || force;
   const snapshot = cloudProgressSnapshot(S);
   const localWeight = progressWeight(snapshot);
   if (localWeight === 0) return false;
@@ -3929,7 +3956,8 @@ async function pushCloud(uid, opts) {
         console.warn("cloud pull before push failed; uploading anyway", e);
       }
     }
-    /* Never clobber a newer Google copy unless the user already accepted. */
+    /* Never clobber a newer Google copy unless the user already accepted
+       (or intentionally restored a backup that must replace Google). */
     if (!force && cloudTs > localTs) {
       cloudDirty = false;
       setTimeout(() => { try { quietCloudSync(); } catch (e) {} }, 0);
@@ -3959,6 +3987,7 @@ async function pushCloud(uid, opts) {
     }
     cloudLastPush = Date.now();
     cloudDirty = false;
+    clearForceCloudPush();
     try {
       localStorage.setItem(KEY_CLOUD_AT, String(Math.max(localTs, cloudLastPush)));
     } catch (e) {}
@@ -4133,6 +4162,24 @@ async function reconcileCloud(reason) {
       return;
     }
 
+    /* Restored backup waiting to upload — do not download Google over it. */
+    if (hasForceCloudPush() && localW > 0) {
+      const uploaded = await pushCloud(user.uid, { force: true, skipPull: true });
+      await showCloudSyncPopup({
+        title: uploaded ? "Restored progress saved to Google" : "Could not save restore to Google",
+        message: uploaded
+          ? "The backup you restored is now your Google copy too."
+          : (authError || "Sign-in worked, but uploading the restored backup failed. Check your connection and try Restore again while signed in."),
+        localTs: +localStorage.getItem(KEY_SAVED) || localTs,
+        cloudTs: uploaded ? (cloudLastPush || Date.now()) : cloudTs
+      });
+      cloudHomePopupArmed = false;
+      pendingCloudSyncReason = null;
+      updateCloudUi();
+      route();
+      return;
+    }
+
     const cloudNewer = !!(cloud && cloudW > 0 && cloudTs > localTs);
 
     if (cloudNewer) {
@@ -4218,6 +4265,11 @@ async function quietCloudSync() {
   try {
     const localTs = +localStorage.getItem(KEY_SAVED) || 0;
     const localW = progressWeight(S);
+    /* A Restore from backup must win over whatever Google still has. */
+    if (hasForceCloudPush() && localW > 0) {
+      await pushCloud(user.uid, { force: true, skipPull: true });
+      return;
+    }
     let cloud = null;
     try {
       cloud = await Promise.race([
@@ -4287,7 +4339,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016s"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016t"));
     return;
   }
   const start = () => {
@@ -4301,7 +4353,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016s"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261016t"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5866,7 +5918,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261016s" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261016t" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -6145,15 +6197,30 @@ function wireBackupSheet() {
 
 function applyImportedProgress(incoming) {
   const next = migrate(Object.assign(blank(), incoming));
+  const signedIn = !!requireCloudUser();
   if (!confirm(
     `Replace the progress on this phone?\n\n` +
     `Now:      ${describeProgress(S)}\n` +
     `Backup:   ${describeProgress(next)}\n\n` +
-    `This cannot be undone.`)) return;
+    (signedIn
+      ? `This will also replace the copy on your Google account.\n`
+      : `Sign in afterward so Google gets this backup too.\n`) +
+    `\nThis cannot be undone.`)) return;
   S = next;
   save({ force: true });
+  /* Intentional restore must upload even when Google still has a “newer” or
+     heavier copy — otherwise Restore only sticks until the next sync pull. */
+  markForceCloudPush();
   closeBackupSheet();
-  if (cloudUser) flushCloudSync();
+  const user = requireCloudUser();
+  if (user) {
+    pushCloud(user.uid, { force: true, skipPull: true }).then(ok => {
+      updateCloudUi();
+      if (!ok && authError) {
+        try { alert(authError); } catch (e) {}
+      }
+    });
+  }
   route();
 }
 
@@ -10129,7 +10196,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261016s&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261016t&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
