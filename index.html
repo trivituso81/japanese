@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017r">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017r">
-<link rel="manifest" href="site.webmanifest?v=20261017r">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017s">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017s">
+<link rel="manifest" href="site.webmanifest?v=20261017s">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017r";
+window.__BUILD__ = "20261017s";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017r";
+  var v = window.__BUILD__ || "20261017s";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017r"));
+    + encodeURIComponent(window.__BUILD__ || "20261017s"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017r") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017s") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3586,10 +3586,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017r" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017s" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017r#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017s#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3610,7 +3610,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017r" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017s" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3715,7 +3715,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017r"></script>
+<script src="firebase-config.js?v=20261017s"></script>
 <script>
 /* ============================================================
    State
@@ -5300,7 +5300,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017r"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017s"));
     return;
   }
   const start = () => {
@@ -5314,7 +5314,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017r"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017s"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -8691,6 +8691,69 @@ function phraseVariants(form) {
   return [...out];
 }
 
+/* Near-synonym verb packs. English "check" is used for both 調べる and
+   確かめる in the drills, and チェックする is everyday Japanese for the
+   same idea — accept any of the three. Longer forms are listed first so
+   replacements do not shred 調べてみて into 調べ + てみて pieces.
+
+   Not listed on purpose: 教える ↔ 聞く. Those reverse the flow of
+   information (tell/teach vs ask/hear) and must stay distinct. */
+const VERB_SYNONYM_GROUPS = [
+  [
+    "調べてみてください", "しらべてみてください",
+    "確かめてみてください", "たしかめてみてください",
+    "チェックしてみてください"
+  ],
+  [
+    "調べてみます", "しらべてみます",
+    "確かめてみます", "たしかめてみます",
+    "チェックしてみます"
+  ],
+  [
+    "調べてください", "しらべてください",
+    "確かめてください", "たしかめてください",
+    "チェックしてください"
+  ],
+  [
+    "調べている", "しらべている",
+    "確かめている", "たしかめている",
+    "チェックしている"
+  ],
+  [
+    "調べます", "しらべます",
+    "確かめます", "たしかめます",
+    "チェックします"
+  ],
+  [
+    "調べた", "しらべた",
+    "確かめた", "たしかめた",
+    "チェックした"
+  ],
+  [
+    "調べる", "しらべる",
+    "確かめる", "たしかめる",
+    "チェックする"
+  ],
+  [
+    "調べて", "しらべて",
+    "確かめて", "たしかめて",
+    "チェックして"
+  ]
+];
+
+function verbSynonymVariants(form) {
+  const out = new Set([form]);
+  VERB_SYNONYM_GROUPS.forEach(group => {
+    const hit = group.find(g => form.includes(g));
+    if (!hit) return;
+    group.forEach(alt => {
+      if (alt === hit) return;
+      out.add(form.split(hit).join(alt));
+    });
+  });
+  return [...out];
+}
+
 /* Hiragana in model answers that also have a common kanji spelling. The
    textbook often writes place names in kana (さくら大学) but learners may
    use kanji (桜大学). Furigana notation handles most words; this catches
@@ -8715,7 +8778,11 @@ function kanaKanjiVariants(form) {
 function answerVariants(form) {
   const out = new Set();
   topicVariants(form).forEach(f => {
-    phraseVariants(f).forEach(v => kanaKanjiVariants(v).forEach(x => out.add(x)));
+    phraseVariants(f).forEach(v => {
+      verbSynonymVariants(v).forEach(w => {
+        kanaKanjiVariants(w).forEach(x => out.add(x));
+      });
+    });
   });
   return [...out];
 }
@@ -12288,7 +12355,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017r&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017s&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
