@@ -77,7 +77,7 @@ browsers or a laptop and a phone.
 ## On an iPhone
 
 Open the site in **Safari**, tap **Share → Add to Home Screen**. The home-screen
-name is **トムさん** (short so it fits under the icon), with an anime icon of Tom filling
+name is **トム日本語** (short so it fits under the icon), with an anime icon of Tom filling
 the badge (plus the red **和** mark). Inside the app, the home corner uses a face-crop
 of the same character with that mark. If an older icon is already there, delete it
 and add the site again so iOS picks up the new art.
