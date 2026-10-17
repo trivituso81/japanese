@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017o">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017o">
-<link rel="manifest" href="site.webmanifest?v=20261017o">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017p">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017p">
+<link rel="manifest" href="site.webmanifest?v=20261017p">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017o";
+window.__BUILD__ = "20261017p";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017o";
+  var v = window.__BUILD__ || "20261017p";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017o"));
+    + encodeURIComponent(window.__BUILD__ || "20261017p"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017o") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017p") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3586,10 +3586,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017o" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017p" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017o#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017p#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3610,7 +3610,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017o" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017p" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3715,7 +3715,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017o"></script>
+<script src="firebase-config.js?v=20261017p"></script>
 <script>
 /* ============================================================
    State
@@ -3726,6 +3726,10 @@ document.addEventListener("DOMContentLoaded", function () {
 const KEY = "mnn-study-v1";
 const KEY_BAK = KEY + ":bak";
 const KEY_SAVED = KEY + ":savedAt";
+/* Remembers which play screen was live when the app was backgrounded, so a
+   PWA reload that lands on the hashless start_url can jump straight back in. */
+const KEY_ACTIVE_PLAY = KEY + ":activePlay";
+const ACTIVE_PLAY_MAX_MS = 8 * 60 * 60 * 1000;
 const OVERALL = [
   { id: "todo",       label: "Not started" },
   { id: "learning",   label: "Learning" },
@@ -4022,12 +4026,121 @@ function hideCloudHydrate() {
 const CLOUD_FORCE_REASONS = { boot: 1, refresh: 1, signin: 1, home: 1, resume: 1 };
 const CLOUD_PULL_TIMEOUT_MS = 2500;
 
+function setActivePlay(href) {
+  if (!href) return;
+  try {
+    localStorage.setItem(KEY_ACTIVE_PLAY, JSON.stringify({ href, ts: Date.now() }));
+  } catch (e) {}
+}
+function clearActivePlay() {
+  try { localStorage.removeItem(KEY_ACTIVE_PLAY); } catch (e) {}
+}
+function readActivePlay() {
+  try {
+    const o = JSON.parse(localStorage.getItem(KEY_ACTIVE_PLAY) || "null");
+    if (!o || !o.href) return null;
+    if (Date.now() - (o.ts || 0) > ACTIVE_PLAY_MAX_MS) {
+      clearActivePlay();
+      return null;
+    }
+    return o;
+  } catch (e) {
+    return null;
+  }
+}
+
+/* Park the in-progress round before the tab is frozen, and remember which
+   resume URL to open if iOS reloads the PWA at the hashless start_url. */
+function parkPlayOnBackground() {
+  const view = document.body.dataset.view || "";
+  if (DRILL && view === "drill-play") {
+    saveSession();
+    setActivePlay("#/drill/resume");
+  } else if (CARD && CARD.playing && view === "cards-play") {
+    saveCardSession();
+    setActivePlay("#/cards/resume");
+  } else if (VERB && /^#\/verbs\/drill\//.test(location.hash || "")) {
+    saveVerbSession();
+    setActivePlay("#/verbs/resume");
+  } else if (KDRILL && view === "kanji-play") {
+    saveKanjiSession();
+    setActivePlay("#/kanji/resume");
+  }
+}
+
+/* Cold start / hashless PWA return: reopen the round that was live. */
+function tryRestoreActivePlay() {
+  const h = location.hash || "#/";
+  const bare = (h === "#/" || h === "#" || h === "");
+  const active = readActivePlay();
+  if (!active) return false;
+  const href = active.href;
+  const parked =
+    (href === "#/drill/resume" && RESUMABLE.grammar.read()) ||
+    (href === "#/cards/resume" && RESUMABLE.cards.read()) ||
+    (href === "#/verbs/resume" && RESUMABLE.verbs.read()) ||
+    (href === "#/kanji/resume" && RESUMABLE.kanji.read());
+  if (!parked) {
+    clearActivePlay();
+    return false;
+  }
+  /* Bare home (typical PWA reload) — go straight back into the round. */
+  if (bare) {
+    goto(href);
+    return true;
+  }
+  /* Same activity's setup URL after a reload — skip the preface. */
+  if (href === "#/drill/resume" && /^#\/(drill|sweep)\//.test(h) && !/\/resume$/.test(h)) {
+    goto(href);
+    return true;
+  }
+  if (href === "#/cards/resume" && /^#\/cards\//.test(h) && h !== "#/cards/resume") {
+    goto(href);
+    return true;
+  }
+  return false;
+}
+
+/* Auth and other re-routes must not tear down a live play screen. */
+function preserveLivePlay(h) {
+  const view = document.body.dataset.view || "";
+  if (DRILL && view === "drill-play") {
+    if (h === "#/drill/resume" || h === "#/resume") return true;
+    const m = h.match(SCOPE_RE);
+    if (m && (m[1] === "drill" || m[1] === "sweep")
+        && String(m[2]) === String(DRILL.scope)
+        && !!DRILL.sweep === (m[1] === "sweep")
+        && !!DRILL.lessonVocab === (m[3] === "lv")) {
+      return true;
+    }
+  }
+  if (CARD && CARD.playing && view === "cards-play") {
+    if (h === "#/cards/resume") return true;
+    const m = h.match(SCOPE_RE);
+    if (m && m[1] === "cards" && String(m[2]) === String(CARD.scope)) return true;
+  }
+  if (VERB && VERB.list) {
+    if (h === "#/verbs/resume") return true;
+    const vd = h.match(VDRILL_RE);
+    if (vd && vd[1] === VERB.form) return true;
+  }
+  if (KDRILL && view === "kanji-play") {
+    if (h === "#/kanji/resume" || h === "#/kanji/drill") return true;
+  }
+  return false;
+}
+
 /* Flush on background / close — iOS Safari is eager to suspend tabs.
    Urgent flushes skip the pre-push pull so the write can start before the
    tab is frozen. On return, retry any dirty progress. */
-window.addEventListener("pagehide", () => { save(); flushCloudSync({ urgent: true }); });
+window.addEventListener("pagehide", () => {
+  parkPlayOnBackground();
+  save();
+  flushCloudSync({ urgent: true });
+});
 document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "hidden") {
+    parkPlayOnBackground();
     save();
     flushCloudSync({ urgent: true });
   } else if (cloudDirty || requireCloudUser()) {
@@ -4290,6 +4403,7 @@ function cloudDocRef(uid) {
 function cloudProgressSnapshot(s) {
   const copy = JSON.parse(JSON.stringify(s || blank()));
   delete copy.session;
+  delete copy.csession;
   delete copy.vsession;
   delete copy.ksession;
   return copy;
@@ -5186,7 +5300,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017o"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017p"));
     return;
   }
   const start = () => {
@@ -5200,7 +5314,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017o"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017p"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -6531,6 +6645,17 @@ const RESUMABLE = {
     },
     drop: clearSession
   },
+  cards: {
+    read() {
+      const s = S.csession;
+      if (!s || !s.round || !s.round.length) return null;
+      return { what: `flashcards · ${scopeLabel(s.scope)}`,
+               done: s.passDone || 0,
+               total: s.passSize || s.total || s.round.length,
+               href: "#/cards/resume" };
+    },
+    drop: clearCardSession
+  },
   verbs: {
     read() {
       const s = S.vsession;
@@ -6551,7 +6676,7 @@ const RESUMABLE = {
     drop: clearKanjiSession
   }
 };
-const RESUME_KINDS = ["grammar", "verbs", "kanji"];
+const RESUME_KINDS = ["grammar", "cards", "verbs", "kanji"];
 
 function resumeCards(kinds) {
   return (kinds || RESUME_KINDS).map(k => {
@@ -6577,6 +6702,7 @@ function wireResume(redraw) {
   document.querySelectorAll("[data-drop]").forEach(b =>
     b.addEventListener("click", () => {
       RESUMABLE[b.dataset.drop].drop();
+      clearActivePlay();
       (redraw || route)();
     }));
 }
@@ -7205,6 +7331,8 @@ function renderHome() {
 
       ${emptySyncBanner}
 
+      ${resumeCards(["grammar", "cards"])}
+
       <div class="home-lesson-frame" aria-label="Lesson progress">
         ${tomBuddy({ pose: "peek", size: "sm", cls: "tom-lesson-peek", line: tomLine(filterLesson % 2 ? "vocab" : "grammar") })}
         <div class="home-filter">
@@ -7275,6 +7403,7 @@ function renderHome() {
     });
   }
   wireCloudSettings();
+  wireResume(renderHome);
   /* Auto Restore progress sheet on empty boot is disabled — use Settings
      or the welcome Restore button when needed. */
   runPendingCloudSync();
@@ -8014,6 +8143,73 @@ function startSession(only) {
   CARD.missOnly = !!(only && only.size);
   /* A full new round replaces the previous miss list as answers come in. */
   if (!CARD.missOnly) rememberCardMisses(CARD.scope, []);
+  saveCardSession();
+  drawCard();
+}
+
+function saveCardSession() {
+  if (!CARD || !CARD.playing) return;
+  if (!CARD.round || !CARD.round.length) return clearCardSession();
+  S.csession = {
+    scope: CARD.scope,
+    dir: CARD.dir,
+    order: CARD.order,
+    proper: !!CARD.proper,
+    keyOnly: !!CARD.keyOnly,
+    size: CARD.size,
+    round: CARD.round.map(c => ({ id: c.id, n: c.n, e: c.e, dir: c.dir })),
+    i: CARD.i | 0,
+    pass: CARD.pass || 1,
+    passSize: CARD.passSize || CARD.total || CARD.round.length,
+    passDone: CARD.passDone || 0,
+    firstTry: CARD.firstTry || 0,
+    total: CARD.total || CARD.round.length,
+    missed: [...(CARD.missed || [])],
+    graded: [...(CARD.graded || [])],
+    attempts: Object.assign({}, CARD.attempts || {}),
+    shown: !!CARD.shown,
+    missOnly: !!CARD.missOnly,
+    ts: Date.now()
+  };
+  setActivePlay("#/cards/resume");
+  save();
+}
+function clearCardSession() {
+  delete S.csession;
+  clearActivePlay();
+  save();
+}
+function resumeCardSession() {
+  const s = S.csession;
+  if (!s || !s.round || !s.round.length) {
+    clearCardSession();
+    return goto("#/");
+  }
+  const ns = scopeOf(s.scope).filter(n => VOCAB[n]);
+  if (!ns.length) {
+    clearCardSession();
+    return goto("#/");
+  }
+  if (!isRange(s.scope) && ns[0]) setHomeFilter(ns[0]);
+  CARD = {
+    scope: s.scope, ns, dir: s.dir || "jp-en", order: s.order || "random",
+    proper: !!s.proper, keyOnly: !!s.keyOnly, size: s.size || 0,
+    round: s.round.map(c => ({ id: c.id, n: c.n, e: c.e, dir: c.dir })),
+    i: Math.min(s.i | 0, s.round.length - 1),
+    pass: s.pass || 1,
+    passSize: s.passSize || s.total || s.round.length,
+    passDone: s.passDone || 0,
+    firstTry: s.firstTry || 0,
+    total: s.total || s.round.length,
+    shown: !!s.shown,
+    missed: new Set(s.missed || []),
+    graded: new Set(s.graded || []),
+    attempts: Object.assign({}, s.attempts || {}),
+    prev: null, animating: false, stale: false, missOnly: !!s.missOnly,
+    playing: true
+  };
+  setActivePlay("#/cards/resume");
+  enterCardPlay();
   drawCard();
 }
 
@@ -8083,6 +8279,7 @@ function answerCard(known) {
      even if this sitting is left halfway. */
   rememberCardMisses(CARD.scope, CARD.missed);
   save();
+  saveCardSession();
   drawCard();
 }
 
@@ -8097,6 +8294,7 @@ function undoCard() {
   CARD.prev = null; CARD.shown = p.shown;
   rememberCardMisses(CARD.scope, CARD.missed);
   save();
+  saveCardSession();
   drawCard();
 }
 
@@ -8270,7 +8468,7 @@ function drawSessionEnd(stage) {
     startSession(new Set(CARD.missed));
   });
   document.getElementById("settings").addEventListener("click", () => renderCards(CARD.scope));
-  save();
+  clearCardSession();
 }
 
 /* Drag the card left or right. Vertical page scroll is locked during
@@ -8584,7 +8782,7 @@ function renderDrill(scope, sweep, lessonVocab) {
      preface first — a mid-round continue is offered there (and via
      #/drill/resume) so choosing grammar points is never skipped. */
   const s = S.session;
-  if ((range || sweep) && s && s.qs && s.i > 0 && s.i < s.qs.length && !s.focus
+  if ((range || sweep) && s && s.qs && s.i >= 0 && s.i < s.qs.length && !s.focus
       && s.scope === scope && !!s.sweep === !!sweep
       && !!s.lessonVocab === !!lessonVocab)
     return resumeDrill();
@@ -8629,7 +8827,7 @@ function renderDrillSetup(scope, ns, lessonVocab) {
 
 function parkedSingleLessonDrill(scope, lessonVocab, mode) {
   const s = S.session;
-  if (!s || !s.qs || !(s.i > 0) || s.i >= s.qs.length || s.focus) return null;
+  if (!s || !s.qs || s.i < 0 || s.i >= s.qs.length || s.focus) return null;
   if (s.scope !== scope || s.sweep || !!s.lessonVocab !== !!lessonVocab) return null;
   if ((s.mode || "translate") !== (mode || "translate")) return null;
   if (isRange(s.scope)) return null;
@@ -8962,13 +9160,19 @@ function saveSession() {
   S.session = { scope: DRILL.scope, sweep: DRILL.sweep, focus: DRILL.focus,
                 lessonVocab: !!DRILL.lessonVocab, mode: DRILL.mode || "translate",
                 qs: DRILL.qs, i: DRILL.i, answers: DRILL.answers, ts: Date.now() };
+  setActivePlay("#/drill/resume");
   save();
 }
-function clearSession() { delete S.session; save(); }
+function clearSession() {
+  delete S.session;
+  clearActivePlay();
+  save();
+}
 
 function resumeDrill() {
   const s = S.session;
   if (!s || !s.qs || s.i >= s.qs.length) return goto("#/");
+  setActivePlay("#/drill/resume");
   const bankOpts = s.lessonVocab ? { lessonVocab: true } : null;
   const mode = s.mode || "translate";
   const ns = scopeOf(s.scope).filter(n => drillModeBank(mode, [n], bankOpts).length);
@@ -10131,9 +10335,14 @@ function saveVerbSession() {
   S.vsession = { form: VERB.form, ceiling: VERB.ceiling, prompt: VERB.prompt,
     ids: VERB.list.map(v => `${v.ms}|${v.kanji}`), i: VERB.i,
     answers: VERB.answers, focus: VERB.focus, ts: Date.now() };
+  setActivePlay("#/verbs/resume");
   save();
 }
-function clearVerbSession() { delete S.vsession; save(); }
+function clearVerbSession() {
+  delete S.vsession;
+  clearActivePlay();
+  save();
+}
 /* Rebuilds the parked round and then redirects onto the drill's own address,
    so the bar reads the same during a resumed round as during a fresh one. */
 function resumeVerbs() {
@@ -11526,9 +11735,14 @@ function saveKanjiSession() {
   if (KDRILL.i >= KDRILL.list.length) return clearKanjiSession();
   S.ksession = { level: KDRILL.level, chars: KDRILL.list.map(k => k.c), i: KDRILL.i,
                  answers: KDRILL.answers, focus: KDRILL.focus, ts: Date.now() };
+  setActivePlay("#/kanji/resume");
   save();
 }
-function clearKanjiSession() { delete S.ksession; save(); }
+function clearKanjiSession() {
+  delete S.ksession;
+  clearActivePlay();
+  save();
+}
 function resumeKanji() {
   const s = S.ksession;
   if (!s) return goto("#/kanji");
@@ -11786,6 +12000,7 @@ function drawKanjiEnd(stage) {
      #/                      dashboard
      #/lesson/<n>            one lesson
      #/cards/<scope>         flashcards
+     #/cards/resume          pick up a parked flashcard round
      #/drill/<scope>         grammar drill
      #/drill/<n>/lv          same, lesson-vocab prompts only
      #/sweep/<scope>         diagnostic sweep
@@ -11810,6 +12025,7 @@ const VDRILL_RE = /^#\/verbs\/drill\/([a-z_]+)$/;
    dashboard in place, so this is always the view actually on screen. */
 function viewName(h, m) {
   if (h === "#/resume" || h === "#/drill/resume") return "drill";
+  if (h === "#/cards/resume") return "cards";
   if (/^#\/verbs/.test(h)) return "verbs";
   if (/^#\/kanji\/(drill|resume)/.test(h)) return "kanji-play";
   if (/^#\/kanji\/(browse|c\/)/.test(h)) return "kanji-study";
@@ -11871,6 +12087,11 @@ function notFound() {
 
 function route() {
   const h = location.hash || "#/";
+  /* Firebase auth can re-fire on foreground; keep the live round intact. */
+  if (preserveLivePlay(h)) {
+    paintNav(navSection(h));
+    return;
+  }
   const m = h.match(SCOPE_RE);
   const vd = h.match(VDRILL_RE);
   CARD = m && m[1] === "cards" ? CARD : null;
@@ -11885,11 +12106,15 @@ function route() {
   paintNav(navSection(h));
 
   if (h === "#/" || h === "#" || h === "") {
+    /* Choosing Home on purpose dismisses the auto-resume latch; the unfinished
+       round still appears as a Pick-it-up card when one is parked. */
+    clearActivePlay();
     if (useWelcomeLanding()) return renderWelcomeLanding();
     return renderHome();
   }
   if (h === "#/lessons") return renderLessons();
   if (h === "#/resume" || h === "#/drill/resume") return resumeDrill();
+  if (h === "#/cards/resume") return resumeCardSession();
   if (h === "#/verbs") { VERB = null; return renderVerbs(); }
   if (h === "#/verbs/resume") return resumeVerbs();
   if (vd) return verbDrillRoute(vd[1]);
@@ -11910,10 +12135,15 @@ function route() {
 }
 window.addEventListener("hashchange", () => { if (!ignoreHashchange) route(); });
 /* bfcache / browser-back can restore a painted home without re-running route;
-   pull fresh numbers whenever home is showing again. */
+   pull fresh numbers whenever home is showing again. After a PWA kill, the
+   start_url has no hash — restore the parked round instead of the dashboard. */
 window.addEventListener("pageshow", ev => {
   const h = location.hash || "#/";
-  if (h === "#/" || h === "#" || h === "") route();
+  if (h === "#/" || h === "#" || h === "") {
+    if (!tryRestoreActivePlay()) route();
+  } else {
+    tryRestoreActivePlay();
+  }
   /* Auto sync popup on bfcache restore is disabled. */
 });
 function loadStudyData() {
@@ -11974,7 +12204,7 @@ function bootApp() {
     showCloudHydrate("Loading progress from Google…");
     cloudSkipNextRoute = true;
     requestCloudSyncPopup("signin");
-  } else {
+  } else if (!tryRestoreActivePlay()) {
     route();
   }
   /* Cold-start save-state OK dialog is disabled. */
@@ -12023,7 +12253,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017o&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017p&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
