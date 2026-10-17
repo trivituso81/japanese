@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017j">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017j">
-<link rel="manifest" href="site.webmanifest?v=20261017j">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017k">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017k">
+<link rel="manifest" href="site.webmanifest?v=20261017k">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017j";
+window.__BUILD__ = "20261017k";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017j";
+  var v = window.__BUILD__ || "20261017k";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017j"));
+    + encodeURIComponent(window.__BUILD__ || "20261017k"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017j") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017k") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1179,6 +1179,52 @@ document.addEventListener("DOMContentLoaded", function () {
     background: none; border: none; padding: 0; cursor: pointer;
   }
   .drill-points .dp-count { font-size: 13px; color: var(--text-faint); margin-left: auto; }
+  .drill-mode-hint {
+    margin: 4px 0 0; font-family: var(--serif); font-size: 13.5px;
+    color: var(--text-soft); line-height: 1.55;
+  }
+  .arrange-slots, .arrange-pool {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    min-height: 52px; padding: 12px; border: 1px dashed var(--rule-strong);
+    border-radius: var(--radius-sm); background: var(--bg);
+  }
+  .arrange-slots { margin: 8px 0 16px; border-style: solid; min-height: 64px; }
+  .arrange-pool { margin: 8px 0 0; background: var(--bg-soft); }
+  .arrange-placeholder {
+    color: var(--text-faint); font-size: 13.5px; font-family: var(--serif);
+  }
+  .arrange-tile {
+    font-family: var(--jp-mincho); font-size: 18px; line-height: 1.7;
+    padding: 6px 12px; border: 1px solid var(--rule-strong); border-radius: var(--radius-sm);
+    background: var(--bg); color: var(--text); cursor: grab; user-select: none;
+    touch-action: manipulation;
+  }
+  .arrange-tile.in-slot { background: var(--bg-soft); border-color: var(--accent); }
+  .arrange-tile.dragging { opacity: .45; }
+  .arrange-tile:active { cursor: grabbing; }
+  .choice-stem {
+    font-family: var(--jp-mincho); font-size: 22px; line-height: 2.05;
+    margin: 8px 0 18px; letter-spacing: .02em;
+  }
+  .drill-blank {
+    display: inline-block; min-width: 2.5em; padding: 0 .2em;
+    border-bottom: 2px solid var(--accent); color: var(--accent-deep);
+    font-weight: 600; letter-spacing: .12em;
+  }
+  .choice-opts {
+    display: flex; flex-direction: column; gap: 8px; margin: 4px 0 0;
+  }
+  .choice-opts .choice-opt {
+    justify-content: flex-start; text-align: left;
+    font-family: var(--jp-mincho); font-size: 18px; line-height: 1.7;
+    padding: 12px 14px; text-transform: none; letter-spacing: .02em;
+    white-space: normal; height: auto; min-height: 48px;
+  }
+  @media (min-width: 720px) {
+    .choice-opts {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+    }
+  }
   /* Flashcard setup/play keep the portrait + site title; section JP is set in paintNav. */
   body[data-view="cards"] .masthead-inner h1,
   body[data-view="cards-play"] .masthead-inner h1 {
@@ -3532,10 +3578,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017j" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017k" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017j#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017k#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3556,7 +3602,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017j" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017k" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3661,7 +3707,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017j"></script>
+<script src="firebase-config.js?v=20261017k"></script>
 <script>
 /* ============================================================
    State
@@ -5132,7 +5178,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017j"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017k"));
     return;
   }
   const start = () => {
@@ -5146,7 +5192,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017j"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017k"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5846,6 +5892,210 @@ function drillBank(ns, opts) {
                pattern: p.pattern, n, tier });
   }));
   return out;
+}
+
+/* Grammar drill modes beyond translate. Arrange and multiple-choice are built
+   at runtime from each point's drills (and examples), capped at 30 unique
+   Japanese sentences per grammar point. */
+const DRILL_MODE_TARGET = 30;
+const DRILL_MODES = [
+  { id: "translate", label: "Translate" },
+  { id: "arrange", label: "Arrange" },
+  { id: "choice", label: "Multiple choice" }
+];
+
+function segmentJp(jp) {
+  const spaced = String(jp || "").trim().split(/[\s\u3000]+/).filter(Boolean);
+  if (spaced.length >= 2) return spaced;
+  if (!spaced.length) return [];
+  /* Unspaced answers still need phrase tiles: split after common particles. */
+  return splitAfterParticles(spaced[0]);
+}
+
+function splitAfterParticles(jp) {
+  const blocks = [];
+  const stash = s => {
+    blocks.push(s);
+    return `\uE000${blocks.length - 1}\uE001`;
+  };
+  let masked = String(jp).replace(/([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g, (_, k, y) =>
+    stash(`${k}{${y}}`));
+  /* Lock polite endings first so the で in です is never read as a particle. */
+  const ENDINGS = [
+    "じゃ ありません", "では ありません", "じゃありません", "ではありません",
+    "ませんか", "ましたか", "でしたか", "ましょう", "ません", "ました",
+    "でした", "ですか", "ますか", "です", "ます"
+  ];
+  ENDINGS.forEach(end => {
+    masked = masked.split(end).join(stash(end));
+  });
+  masked = masked
+    .replace(/(から|まで|より)/g, "$1\u241E")
+    .replace(/([はがをにへでとも])(?!\u241E|$)/g, "$1\u241E");
+  let parts = masked.split("\u241E").map(s => s.trim()).filter(Boolean)
+    .map(s => s.replace(/\uE000(\d+)\uE001/g, (_, i) => blocks[+i]));
+  /* Fold punctuation-only tiles onto the previous phrase. */
+  const hasWord = s => /[ぁ-んァ-ン一-龯A-Za-z0-9]/.test(String(s).replace(/[{}]/g, ""));
+  const folded = [];
+  parts.forEach(p => {
+    if (!folded.length) folded.push(p);
+    else if (!hasWord(p)) folded[folded.length - 1] += p;
+    else folded.push(p.replace(/^[、，,\s]+/, ""));
+  });
+  parts = folded.filter(Boolean);
+  if (parts.length >= 2) return parts;
+  /* Short unspaced lines: peel a polite ending into its own tile. */
+  const one = String(jp);
+  for (const end of ENDINGS) {
+    const idx = one.lastIndexOf(end);
+    if (idx > 0) {
+      const left = one.slice(0, idx).trim();
+      const right = one.slice(idx).trim();
+      if (left && right) return [left, right];
+    }
+  }
+  return [one];
+}
+
+function jpDedupeKey(jp) {
+  return normJa(jp);
+}
+
+/* Drills first, then examples not already covered — one row per unique JP. */
+function pointSentenceRows(n, p, pi, lessonOnly) {
+  const seen = new Set();
+  const rows = [];
+  const push = (en, jp, note, tier, tag) => {
+    const key = jpDedupeKey(jp);
+    if (!key || seen.has(key)) return;
+    seen.add(key);
+    rows.push({
+      en: en || "", jp, note: note || "", tier, pi, n,
+      pattern: p.pattern, id: `${n}:${pi}:${tag}`
+    });
+  };
+  (p.drills || []).forEach((d, di) => {
+    const tier = d[3] === "review" ? "review" : "lesson";
+    if (lessonOnly && tier === "review") return;
+    push(d[0], d[1], d[2] || "", tier, `d${di}`);
+  });
+  (p.examples || []).forEach((ex, ei) => {
+    /* examples are [jp, en] */
+    push(ex[1] || "", ex[0], "", "lesson", `e${ei}`);
+  });
+  return rows;
+}
+
+function arrangeBank(ns, opts) {
+  const lessonOnly = !!(opts && opts.lessonVocab);
+  const out = [];
+  for (const n of ns) (points(n) || []).forEach((p, pi) => {
+    const rows = pointSentenceRows(n, p, pi, lessonOnly)
+      .map(r => ({ ...r, parts: segmentJp(r.jp) }))
+      .filter(r => r.parts.length >= 2)
+      .slice(0, DRILL_MODE_TARGET);
+    rows.forEach(r => out.push({
+      mode: "arrange", en: r.en, jp: r.jp, parts: r.parts, note: r.note,
+      pi: r.pi, id: r.id, pattern: r.pattern, n: r.n, tier: r.tier
+    }));
+  });
+  return out;
+}
+
+function choiceBlankIndex(parts, pattern) {
+  const pat = bare(pattern || "");
+  const scored = parts.map((part, i) => {
+    const b = plain(part).replace(/[。．.？?！!、，,]+$/g, "");
+    if (!b) return { i, score: -99 };
+    let score = 1;
+    if (/^(は|が|を|に|へ|で|と|も|から|まで|より|の|か|や|ね|よ|を|って)$/.test(b))
+      score += 4;
+    if (pat && pat.indexOf(b) >= 0) score += 2;
+    if (i === 0) score -= 0.5;
+    if (/[。．.？?！!]$/.test(plain(part))) score -= 3;
+    /* Prefer a mid/late content piece over a lone period tile. */
+    if (parts.length >= 3 && i === parts.length - 1) score -= 0.25;
+    return { i, score };
+  }).filter(x => x.score > -50);
+  scored.sort((a, b) => b.score - a.score || a.i - b.i);
+  return scored.length ? scored[0].i : 0;
+}
+
+function choiceDistractors(answer, pool, need) {
+  const key = jpDedupeKey(answer);
+  const out = [];
+  const seen = new Set([key]);
+  for (const cand of pool) {
+    const k = jpDedupeKey(cand);
+    if (!k || seen.has(k)) continue;
+    seen.add(k);
+    out.push(cand);
+    if (out.length >= need) break;
+  }
+  /* Last-resort particle swaps so a short point still gets four choices. */
+  const FALLBACK = ["は", "が", "を", "に", "で", "と", "も", "から", "の", "へ"];
+  for (const f of FALLBACK) {
+    if (out.length >= need) break;
+    const k = jpDedupeKey(f);
+    if (seen.has(k)) continue;
+    seen.add(k);
+    out.push(f);
+  }
+  return out.slice(0, need);
+}
+
+function makeChoiceItem(r, blankI, rows, segmentPool) {
+  const answer = r.parts[blankI];
+  if (!answer || !/[ぁ-んァ-ン一-龯A-Za-z0-9]/.test(plain(answer))) return null;
+  const sameSlot = rows.filter(x => x.id !== r.id)
+    .map(x => x.parts[blankI] || "").filter(Boolean);
+  const distractors = choiceDistractors(answer, sameSlot.concat(segmentPool), 3);
+  if (distractors.length < 3) return null;
+  return {
+    mode: "choice", en: r.en, jp: r.jp, parts: r.parts, blankI, answer,
+    options: shuffle([answer].concat(distractors)), note: r.note,
+    pi: r.pi, id: `${r.id}:b${blankI}`, pattern: r.pattern,
+    n: r.n, tier: r.tier
+  };
+}
+
+function choiceBank(ns, opts) {
+  const lessonOnly = !!(opts && opts.lessonVocab);
+  const out = [];
+  for (const n of ns) (points(n) || []).forEach((p, pi) => {
+    const rows = pointSentenceRows(n, p, pi, lessonOnly)
+      .map(r => ({ ...r, parts: segmentJp(r.jp) }))
+      .filter(r => r.parts.length >= 2);
+    const segmentPool = rows.flatMap(r => r.parts);
+    const primary = [];
+    rows.forEach(r => {
+      const item = makeChoiceItem(r, choiceBlankIndex(r.parts, r.pattern), rows, segmentPool);
+      if (item) primary.push(item);
+    });
+    /* Prefer one item per unique sentence, then fill toward 30 with other blanks. */
+    const picked = primary.slice(0, DRILL_MODE_TARGET);
+    if (picked.length < DRILL_MODE_TARGET) {
+      const used = new Set(picked.map(q => `${q.id}`));
+      for (const r of rows) {
+        if (picked.length >= DRILL_MODE_TARGET) break;
+        for (let bi = 0; bi < r.parts.length; bi++) {
+          if (picked.length >= DRILL_MODE_TARGET) break;
+          const item = makeChoiceItem(r, bi, rows, segmentPool);
+          if (!item || used.has(item.id)) continue;
+          used.add(item.id);
+          picked.push(item);
+        }
+      }
+    }
+    picked.forEach(q => out.push(q));
+  });
+  return out;
+}
+
+function drillModeBank(mode, ns, opts) {
+  if (mode === "arrange") return arrangeBank(ns, opts);
+  if (mode === "choice") return choiceBank(ns, opts);
+  return drillBank(ns, opts);
 }
 
 /* ============================================================
@@ -8240,8 +8490,9 @@ function renderDrill(scope, sweep, lessonVocab) {
   newDrill(scope, ns, bank, null, sweep, null, lessonVocab);
 }
 
-function drillSetupBank(n, lessonVocab) {
-  return drillBank([n], lessonVocab ? { lessonVocab: true } : null);
+function drillSetupBank(n, lessonVocab, mode) {
+  const opts = lessonVocab ? { lessonVocab: true } : null;
+  return drillModeBank(mode || "translate", [n], opts);
 }
 
 function drillSetupPointIds(bank) {
@@ -8255,20 +8506,21 @@ function renderDrillSetup(scope, ns, lessonVocab) {
   document.getElementById("crumbs").innerHTML = "";
   document.body.dataset.view = "drill";
   showBotnav();
-  const bank = drillSetupBank(n, lessonVocab);
+  const bank = drillSetupBank(n, lessonVocab, "translate");
   if (!bank.length) return notFound();
   const pointIds = drillSetupPointIds(bank);
   DRILL_SETUP = {
     scope, n, ns: [n], lessonVocab: !!lessonVocab,
-    selected: new Set(pointIds), size: DRILL_SIZE
+    selected: new Set(pointIds), size: DRILL_SIZE, mode: "translate"
   };
   paintDrillSetup();
 }
 
-function parkedSingleLessonDrill(scope, lessonVocab) {
+function parkedSingleLessonDrill(scope, lessonVocab, mode) {
   const s = S.session;
   if (!s || !s.qs || !(s.i > 0) || s.i >= s.qs.length || s.focus) return null;
   if (s.scope !== scope || s.sweep || !!s.lessonVocab !== !!lessonVocab) return null;
+  if ((s.mode || "translate") !== (mode || "translate")) return null;
   if (isRange(s.scope)) return null;
   return s;
 }
@@ -8276,28 +8528,38 @@ function parkedSingleLessonDrill(scope, lessonVocab) {
 function paintDrillSetup() {
   if (!DRILL_SETUP) return;
   const { scope, n, lessonVocab, selected, size } = DRILL_SETUP;
-  const bank = drillSetupBank(n, lessonVocab);
-  const pointIds = drillSetupPointIds(bank);
+  const mode = DRILL_SETUP.mode || "translate";
+  const bank = drillSetupBank(n, lessonVocab, mode);
+  /* Point list stays based on translate bank so switching mode does not
+     hide grammar points that only lack arrange/choice material. */
+  const pointIds = drillSetupPointIds(drillSetupBank(n, lessonVocab, "translate"));
   /* Drop selections that vanished after toggling lesson-vocab. */
   [...selected].forEach(pi => { if (!pointIds.includes(pi)) selected.delete(pi); });
   const pts = points(n) || [];
   const qCount = bank.filter(q => selected.has(q.pi)).length;
-  const parked = parkedSingleLessonDrill(scope, lessonVocab);
+  const parked = parkedSingleLessonDrill(scope, lessonVocab, mode);
   const pointChecks = pointIds.map(pi => {
     const p = pts[pi] || {};
     const lab = homeGrammarLabel(p) || plain(p.pattern || `Point ${pi + 1}`);
     const full = plain(p.pattern || lab);
     const pctN = homeGrammarPointPct(n, pi);
     const checked = selected.has(pi) ? " checked" : "";
+    const modeN = bank.filter(q => q.pi === pi).length;
+    const modeHint = mode === "translate" ? "" : ` · ${modeN}`;
     return `<label title="${esc(full)}">
       <input type="checkbox" class="dpt" data-pi="${pi}"${checked}>
-      <span><b>${pi + 1}.</b> ${esc(lab)}${pctN ? ` · ${pctN}%` : ""}</span>
+      <span><b>${pi + 1}.</b> ${esc(lab)}${pctN ? ` · ${pctN}%` : ""}${modeHint}</span>
     </label>`;
   }).join("");
   const hasReview = drillBank([n]).some(q => q.tier === "review");
   const startLabel = qCount
     ? `Start · ${Math.min(size || qCount, qCount)} question${Math.min(size || qCount, qCount) === 1 ? "" : "s"}`
     : "Start";
+  const modeHint = mode === "translate"
+    ? ""
+    : `<p class="drill-mode-hint">${mode === "arrange"
+      ? "Drag or tap phrases into order. Up to 30 unique sentences per grammar point."
+      : "Fill the blank. Up to 30 unique sentences per grammar point."}</p>`;
   syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
@@ -8307,6 +8569,9 @@ function paintDrillSetup() {
         <h1 class="cards-title">Lesson ${n}</h1>
       </div>
       ${optionsPanel([
+        { k: "Drill type", seg: DRILL_MODES.map(m =>
+          `<button type="button" class="btn dmode" data-mode="${m.id}" aria-pressed="${m.id === mode}">${m.label}</button>`
+        ).join("") },
         { k: "Grammar points", html: `
           <div class="drill-points">
             <div class="dp-tools">
@@ -8315,6 +8580,7 @@ function paintDrillSetup() {
               <span class="dp-count" id="drillPointCount">${selected.size} of ${pointIds.length}</span>
             </div>
             <div class="opt check" id="drillPointList">${pointChecks}</div>
+            ${modeHint}
           </div>` },
         { k: "Session", seg: [5, 10, 0].map(s =>
           `<button type="button" class="btn dsize" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`
@@ -8346,6 +8612,12 @@ function paintDrillSetup() {
     selected.clear();
     paintDrillSetup();
   });
+  document.querySelectorAll(".btn.dmode").forEach(b => {
+    b.addEventListener("click", () => {
+      DRILL_SETUP.mode = b.dataset.mode;
+      paintDrillSetup();
+    });
+  });
   document.querySelectorAll(".btn.dsize").forEach(b => {
     b.addEventListener("click", () => {
       DRILL_SETUP.size = +b.dataset.size;
@@ -8355,7 +8627,7 @@ function paintDrillSetup() {
   const lv = document.getElementById("drillLessonVocab");
   if (lv) lv.addEventListener("change", e => {
     DRILL_SETUP.lessonVocab = e.target.checked;
-    const next = drillSetupPointIds(drillSetupBank(n, DRILL_SETUP.lessonVocab));
+    const next = drillSetupPointIds(drillSetupBank(n, DRILL_SETUP.lessonVocab, "translate"));
     DRILL_SETUP.selected = new Set(next);
     paintDrillSetup();
   });
@@ -8368,14 +8640,17 @@ function paintDrillSetup() {
 function startDrillFromSetup() {
   if (!DRILL_SETUP) return;
   const { scope, n, selected, size, lessonVocab } = DRILL_SETUP;
-  const bank = drillSetupBank(n, lessonVocab).filter(q => selected.has(q.pi));
+  const mode = DRILL_SETUP.mode || "translate";
+  const bank = drillSetupBank(n, lessonVocab, mode).filter(q => selected.has(q.pi));
   if (!bank.length) return;
   /* A fresh Start replaces any parked round for this lesson. */
-  if (parkedSingleLessonDrill(scope, lessonVocab)) clearSession();
+  if (parkedSingleLessonDrill(scope, lessonVocab, mode)) clearSession();
+  const modeLabel = mode === "arrange" ? " · arrange"
+    : mode === "choice" ? " · multiple choice" : "";
   crumbs([["#/lessons", "Lessons"], [`#/lesson/${n}`, `Lesson ${n}`],
-    [null, lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
+    [null, (lessonVocab ? "Grammar drill · lesson words" : "Grammar drill") + modeLabel]]);
   document.body.dataset.view = "drill-play";
-  newDrill(scope, [n], bank, null, false, null, lessonVocab, size || bank.length);
+  newDrill(scope, [n], bank, null, false, null, lessonVocab, size || bank.length, mode);
 }
 
 /* One question per lesson, every lesson in range: the sweep is a map of where
@@ -8512,7 +8787,7 @@ function groupBy(list, key) {
 }
 const pickOne = list => list.splice(Math.floor(Math.random() * list.length), 1)[0];
 
-function newDrill(scope, ns, bank, only, sweep, focus, lessonVocab, size) {
+function newDrill(scope, ns, bank, only, sweep, focus, lessonVocab, size, mode) {
   const want = size > 0 ? size : DRILL_SIZE;
   let qs;
   if (only && only.length) qs = shuffle(only).slice(0, Math.max(want, only.length));
@@ -8521,7 +8796,7 @@ function newDrill(scope, ns, bank, only, sweep, focus, lessonVocab, size) {
   else qs = lessonQuestions(bank.slice(), want);
   document.body.dataset.view = "drill-play";
   DRILL = { scope, ns, bank, sweep: !!sweep, focus: focus || null,
-            lessonVocab: !!lessonVocab,
+            lessonVocab: !!lessonVocab, mode: mode || "translate",
             qs: sweep ? qs : shuffle(qs), i: 0, typed: "", verdict: null, answers: [] };
   markAsked(DRILL.qs);
   saveSession();
@@ -8564,8 +8839,8 @@ function saveSession() {
   if (!DRILL) return;
   if (DRILL.i >= DRILL.qs.length) return clearSession();
   S.session = { scope: DRILL.scope, sweep: DRILL.sweep, focus: DRILL.focus,
-                lessonVocab: !!DRILL.lessonVocab, qs: DRILL.qs,
-                i: DRILL.i, answers: DRILL.answers, ts: Date.now() };
+                lessonVocab: !!DRILL.lessonVocab, mode: DRILL.mode || "translate",
+                qs: DRILL.qs, i: DRILL.i, answers: DRILL.answers, ts: Date.now() };
   save();
 }
 function clearSession() { delete S.session; save(); }
@@ -8574,15 +8849,18 @@ function resumeDrill() {
   const s = S.session;
   if (!s || !s.qs || s.i >= s.qs.length) return goto("#/");
   const bankOpts = s.lessonVocab ? { lessonVocab: true } : null;
-  const ns = scopeOf(s.scope).filter(n => drillBank([n], bankOpts).length);
+  const mode = s.mode || "translate";
+  const ns = scopeOf(s.scope).filter(n => drillModeBank(mode, [n], bankOpts).length);
   const range = isRange(s.scope);
+  const modeLabel = mode === "arrange" ? " · arrange"
+    : mode === "choice" ? " · multiple choice" : "";
   crumbs(range
     ? [["#/lessons", "Lessons"], [null, s.sweep ? "Diagnostic sweep" : "Mixed drill"]]
     : [["#/lessons", "Lessons"], [`#/lesson/${ns[0]}`, `Lesson ${ns[0]}`],
-       [null, s.lessonVocab ? "Grammar drill · lesson words" : "Grammar drill"]]);
+       [null, (s.lessonVocab ? "Grammar drill · lesson words" : "Grammar drill") + modeLabel]]);
   document.body.dataset.view = "drill-play";
-  DRILL = { scope: s.scope, ns, bank: drillBank(ns, bankOpts), sweep: s.sweep,
-            focus: s.focus || null, lessonVocab: !!s.lessonVocab,
+  DRILL = { scope: s.scope, ns, bank: drillModeBank(mode, ns, bankOpts), sweep: s.sweep,
+            focus: s.focus || null, lessonVocab: !!s.lessonVocab, mode,
             qs: s.qs, i: s.i, typed: "", verdict: null, answers: s.answers };
   drawDrill();
 }
@@ -8594,9 +8872,12 @@ function drawDrill() {
   const range = isRange(scope) || !!DRILL.focus;
   const view = document.getElementById("view");
   const l = range ? null : lessonById(DRILL.ns[0]);
+  const mode = DRILL.mode || "translate";
   const heading = DRILL.focus ? `Focused drill · ${DRILL.focus}`
     : sweep ? `Diagnostic sweep · ${scopeLabel(scope)}`
     : range ? `Mixed drill · ${scopeLabel(scope)}`
+    : mode === "arrange" ? `Arrange · Lesson ${DRILL.ns[0]}`
+    : mode === "choice" ? `Multiple choice · Lesson ${DRILL.ns[0]}`
     : `Grammar drill · Lesson ${DRILL.ns[0]}`;
 
   // a freshly marked answer is shown before anything else, including the
@@ -8667,18 +8948,21 @@ function drawDrill() {
       ]
     });
     document.getElementById("againAll").addEventListener("click", () =>
-      newDrill(scope, DRILL.ns, DRILL.bank, null, sweep, null, DRILL.lessonVocab));
+      newDrill(scope, DRILL.ns, DRILL.bank, null, sweep, null, DRILL.lessonVocab, null, DRILL.mode));
     const am = document.getElementById("againMissed");
     if (am) am.addEventListener("click", () =>
-      newDrill(scope, DRILL.ns, DRILL.bank, missed, false, null, DRILL.lessonVocab));
+      newDrill(scope, DRILL.ns, DRILL.bank, missed, false, null, DRILL.lessonVocab, null, DRILL.mode));
     const fx = document.getElementById("focus");
     if (fx) fx.addEventListener("click", () =>
-      newDrill(scope, focusNs, drillBank(focusNs), focusQs, false, focusLabel));
+      newDrill(scope, focusNs, drillBank(focusNs), focusQs, false, focusLabel, false, null, "translate"));
     return;
   }
 
   const score = runningScore(DRILL.answers);
   const q = qs[i];
+  if (mode === "arrange") return drawArrangeQuestion(view, heading, score, q, i, qs.length);
+  if (mode === "choice") return drawChoiceQuestion(view, heading, score, q, i, qs.length);
+
   /* A sweep of all fifty lessons is a long sitting, and its whole output is
      the lesson map. Once enough of it is answered to be worth reading, you
      can stop and have the map for what you did. */
@@ -8730,6 +9014,208 @@ function drawDrill() {
     DRILL.typed = "";
     drawDrill();
   });
+}
+
+function choiceStemHtml(parts, blankI) {
+  return parts.map((part, i) => i === blankI
+    ? `<span class="drill-blank" aria-label="blank">＿＿</span>`
+    : `<span class="jp">${ruby(part)}</span>`
+  ).join('<span class="drill-gap"> </span>');
+}
+
+function finishDrillAnswer(q, j, yours) {
+  DRILL.answers.push({ q, ok: j.ok, verdict: j.verdict, off: j.off || 0, yours: yours || "" });
+  recordAnswer(q.n, j.ok, q.pi);
+  DRILL.typed = "";
+  DRILL.arrangeFor = null;
+  DRILL.arrangeOrder = null;
+  DRILL.arrangePool = null;
+  DRILL.i++;
+  DRILL.verdict = j;
+  saveSession();
+  drawDrill();
+}
+
+function submitArrange(q) {
+  unlockTts();
+  const order = DRILL.arrangeOrder || [];
+  const pool = DRILL.arrangePool || [];
+  if (!order.length || pool.length) {
+    return finishDrillAnswer(q, { verdict: "blank", ok: false, off: 0 }, order.join(" "));
+  }
+  const yours = order.join(" ");
+  const j = judgeAnswer(yours, q.jp, q.en);
+  finishDrillAnswer(q, j, yours);
+}
+
+function submitChoice(q, picked) {
+  unlockTts();
+  if (!picked) {
+    return finishDrillAnswer(q, { verdict: "blank", ok: false, off: 0 }, "");
+  }
+  const ok = jpDedupeKey(picked) === jpDedupeKey(q.answer);
+  finishDrillAnswer(q, {
+    verdict: ok ? "correct" : "wrong",
+    ok,
+    off: ok ? 0 : 1
+  }, picked);
+}
+
+function paintArrangeBoard() {
+  const slots = document.getElementById("arrangeSlots");
+  const pool = document.getElementById("arrangePool");
+  const go = document.getElementById("submit");
+  if (!slots || !pool) return;
+  const order = DRILL.arrangeOrder || [];
+  const rest = DRILL.arrangePool || [];
+  slots.innerHTML = order.length
+    ? order.map((part, i) =>
+      `<button type="button" class="arrange-tile in-slot" draggable="true" data-from="order" data-i="${i}">${ruby(part)}</button>`
+    ).join("")
+    : `<span class="arrange-placeholder">Tap or drag phrases here</span>`;
+  pool.innerHTML = rest.map((part, i) =>
+    `<button type="button" class="arrange-tile in-pool" draggable="true" data-from="pool" data-i="${i}">${ruby(part)}</button>`
+  ).join("");
+  if (go) go.disabled = !(order.length && !rest.length);
+  wireArrangeInteractions();
+}
+
+function wireArrangeInteractions() {
+  const q = DRILL.qs[DRILL.i];
+  document.querySelectorAll(".arrange-tile").forEach(tile => {
+    tile.addEventListener("click", () => {
+      const from = tile.dataset.from;
+      const idx = +tile.dataset.i;
+      if (from === "pool") {
+        const [part] = DRILL.arrangePool.splice(idx, 1);
+        DRILL.arrangeOrder.push(part);
+      } else {
+        const [part] = DRILL.arrangeOrder.splice(idx, 1);
+        DRILL.arrangePool.push(part);
+      }
+      paintArrangeBoard();
+    });
+    tile.addEventListener("dragstart", e => {
+      e.dataTransfer.setData("text/plain", `${tile.dataset.from}:${tile.dataset.i}`);
+      e.dataTransfer.effectAllowed = "move";
+      tile.classList.add("dragging");
+    });
+    tile.addEventListener("dragend", () => tile.classList.remove("dragging"));
+  });
+  const slots = document.getElementById("arrangeSlots");
+  const poolEl = document.getElementById("arrangePool");
+  const onDrop = (target, e) => {
+    e.preventDefault();
+    const raw = e.dataTransfer.getData("text/plain") || "";
+    const [from, iStr] = raw.split(":");
+    const idx = +iStr;
+    if (from !== "pool" && from !== "order") return;
+    const list = from === "pool" ? DRILL.arrangePool : DRILL.arrangeOrder;
+    if (!(idx >= 0) || idx >= list.length) return;
+    const [part] = list.splice(idx, 1);
+    if (target === "order") DRILL.arrangeOrder.push(part);
+    else DRILL.arrangePool.push(part);
+    paintArrangeBoard();
+  };
+  [slots, poolEl].forEach((el, which) => {
+    if (!el) return;
+    el.addEventListener("dragover", e => { e.preventDefault(); e.dataTransfer.dropEffect = "move"; });
+    el.addEventListener("drop", e => onDrop(which === 0 ? "order" : "pool", e));
+  });
+  /* Reorder within the answer row by dropping onto a slot tile. */
+  slots.querySelectorAll(".arrange-tile").forEach(tile => {
+    tile.addEventListener("dragover", e => { e.preventDefault(); e.stopPropagation(); });
+    tile.addEventListener("drop", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      const raw = e.dataTransfer.getData("text/plain") || "";
+      const [from, iStr] = raw.split(":");
+      const fromI = +iStr;
+      const toI = +tile.dataset.i;
+      if (from === "order" && fromI !== toI) {
+        const [part] = DRILL.arrangeOrder.splice(fromI, 1);
+        DRILL.arrangeOrder.splice(toI, 0, part);
+      } else if (from === "pool") {
+        const [part] = DRILL.arrangePool.splice(fromI, 1);
+        DRILL.arrangeOrder.splice(toI, 0, part);
+      }
+      paintArrangeBoard();
+    });
+  });
+}
+
+function drawArrangeQuestion(view, heading, score, q, i, total) {
+  if (DRILL.arrangeFor !== i) {
+    DRILL.arrangeFor = i;
+    DRILL.arrangeOrder = [];
+    DRILL.arrangePool = shuffle((q.parts || segmentJp(q.jp)).slice());
+  }
+  syncTomFloat(null);
+  view.innerHTML = drillStage({
+    heading: esc(heading),
+    sub: "Arrange the phrases into the correct Japanese sentence.",
+    left: `Question <b>${i + 1}</b> of <b>${total}</b>`,
+    right: score,
+    done: i, total,
+    body: `
+      <div class="qbox arrange-q">
+        ${tomBuddy({ pose: "think", size: "sm", cls: "tom-drill", line: tomLine("drill") })}
+        <div class="qnum">English</div>
+        <p class="qen">${ruby(q.en || plain(q.pattern))}</p>
+        <div class="qnum">Your sentence</div>
+        <div class="arrange-slots" id="arrangeSlots"></div>
+        <div class="qnum">Phrases</div>
+        <div class="arrange-pool" id="arrangePool"></div>
+        <div class="rowacts">
+          <button class="btn primary" id="submit" disabled>Check</button>
+          <button class="btn" id="skip">Skip</button>
+          <span class="keys">Tap a phrase to place or return it</span>
+        </div>
+      </div>`
+  });
+  paintArrangeBoard();
+  document.getElementById("submit").addEventListener("click", () => {
+    if (!(DRILL.arrangeOrder || []).length || (DRILL.arrangePool || []).length) return;
+    submitArrange(q);
+  });
+  document.getElementById("skip").addEventListener("click", () => {
+    DRILL.arrangeOrder = [];
+    DRILL.arrangePool = (q.parts || []).slice();
+    submitArrange(q);
+  });
+}
+
+function drawChoiceQuestion(view, heading, score, q, i, total) {
+  syncTomFloat(null);
+  const opts = (q.options || []).map((opt, oi) =>
+    `<button type="button" class="btn choice-opt" data-oi="${oi}">${ruby(opt)}</button>`
+  ).join("");
+  view.innerHTML = drillStage({
+    heading: esc(heading),
+    sub: "Choose the word or phrase that fills the blank.",
+    left: `Question <b>${i + 1}</b> of <b>${total}</b>`,
+    right: score,
+    done: i, total,
+    body: `
+      <div class="qbox choice-q">
+        ${tomBuddy({ pose: "think", size: "sm", cls: "tom-drill", line: tomLine("drill") })}
+        <div class="qnum">English</div>
+        <p class="qen">${ruby(q.en || plain(q.pattern))}</p>
+        <div class="qnum">Japanese</div>
+        <p class="choice-stem jp">${choiceStemHtml(q.parts || segmentJp(q.jp), q.blankI)}</p>
+        <div class="choice-opts">${opts}</div>
+        <div class="rowacts">
+          <button class="btn" id="skip">Skip</button>
+        </div>
+      </div>`
+  });
+  document.querySelectorAll(".choice-opt").forEach(b => {
+    b.addEventListener("click", () => {
+      const opt = q.options[+b.dataset.oi];
+      submitChoice(q, opt);
+    });
+  });
+  document.getElementById("skip").addEventListener("click", () => submitChoice(q, ""));
 }
 
 const VERDICTS = {
@@ -11394,7 +11880,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017j&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017k&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
