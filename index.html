@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017k">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017k">
-<link rel="manifest" href="site.webmanifest?v=20261017k">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017l">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017l">
+<link rel="manifest" href="site.webmanifest?v=20261017l">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017k";
+window.__BUILD__ = "20261017l";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017k";
+  var v = window.__BUILD__ || "20261017l";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017k"));
+    + encodeURIComponent(window.__BUILD__ || "20261017l"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017k") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017l") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3578,10 +3578,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017k" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017l" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017k#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017l#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3602,7 +3602,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017k" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017l" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3707,7 +3707,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017k"></script>
+<script src="firebase-config.js?v=20261017l"></script>
 <script>
 /* ============================================================
    State
@@ -5178,7 +5178,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017k"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017l"));
     return;
   }
   const start = () => {
@@ -5192,7 +5192,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017k"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017l"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5905,11 +5905,100 @@ const DRILL_MODES = [
 ];
 
 function segmentJp(jp) {
-  const spaced = String(jp || "").trim().split(/[\s\u3000]+/).filter(Boolean);
-  if (spaced.length >= 2) return spaced;
-  if (!spaced.length) return [];
-  /* Unspaced answers still need phrase tiles: split after common particles. */
-  return splitAfterParticles(spaced[0]);
+  let parts = String(jp || "").trim().split(/[\s\u3000]+/).filter(Boolean);
+  if (!parts.length) return [];
+  /* Clause cuts first (か、 / ように、 / …). Particle splitting is a fallback
+     for a single unspaced blob that still has no boundaries. */
+  parts = parts.flatMap(splitClauseBoundaries);
+  if (parts.length === 1) {
+    const cut = splitAfterParticles(parts[0]);
+    if (cut.length > 1) parts = cut.flatMap(splitClauseBoundaries);
+  }
+  return foldArrangeParts(parts);
+}
+
+function foldArrangeParts(parts) {
+  /* Fullwidth digits (１０４) count as word content — otherwise a split
+     before them is immediately glued back on. */
+  const hasWord = s => /[ぁ-んァ-ン一-龯A-Za-z0-9０-９]/.test(String(s).replace(/[{}]/g, ""));
+  const folded = [];
+  parts.forEach(p => {
+    let t = String(p || "").trim();
+    if (!t) return;
+    if (!folded.length) { folded.push(t); return; }
+    if (!hasWord(t)) { folded[folded.length - 1] += t; return; }
+    /* Keep a leading comma on the previous tile instead of dropping it. */
+    const lead = t.match(/^[、，,]+/);
+    if (lead) {
+      folded[folded.length - 1] += lead[0];
+      t = t.slice(lead[0].length).trim();
+      if (!t) return;
+    }
+    folded.push(t);
+  });
+  return folded.filter(Boolean);
+}
+
+/* Further cut a single tile at clause / embedded-question boundaries so
+   Arrange gets more (and fairer) pieces than raw textbook spacing alone. */
+function splitClauseBoundaries(chunk) {
+  const blocks = [];
+  const stash = s => {
+    blocks.push(s);
+    return `\uE000${blocks.length - 1}\uE001`;
+  };
+  let s = String(chunk).replace(/([\u4e00-\u9fff々〆ヶ]+)\{([^}]+)\}/g, (_, k, y) =>
+    stash(`${k}{${y}}`));
+  /* Keep polite / question endings intact (ですか must not become です | か). */
+  [
+    "じゃ ありません", "では ありません", "じゃありません", "ではありません",
+    "ませんか", "ましたか", "でしたか", "ましょうか", "でしょうか",
+    "ましょう", "ません", "ました", "でした", "ですか", "ますか", "です", "ます"
+  ].forEach(end => { s = s.split(end).join(stash(end)); });
+  /* Lock かどうか / どうか before the plain-form か cutter (うか would match),
+     and always end that tile before whatever follows. */
+  ["かどうか、", "かどうか", "どうか、", "どうか"].forEach(w => {
+    s = s.split(w).join(stash(w) + "\u241E");
+  });
+
+  const markAfter = (re) => {
+    s = s.replace(re, m => m + "\u241E");
+  };
+  /* Clause connectors — trailing 、 stays on the left tile. */
+  [
+    /ように、/g,
+    /ために、/g,
+    /のに、/g,
+    /ので、/g,
+    /だけど、/g,
+    /けれど、/g,
+    /けど、/g,
+    /から、/g,
+    /ても、/g,
+    /では、/g,
+    /には、/g,
+    /とは、/g,
+    /ですから、/g,
+    /ですが、/g,
+    /でも、/g,
+    /とか、/g,
+    /それから、/g
+  ].forEach(re => markAfter(re));
+
+  /* Plain-form (dict / ta / nai / i-adj) + か — own tile, cut off from the
+     next verb/clause. Prefer か、; bare か only when a new word (kanji / 「)
+     follows, so かたかな etc. are not torn apart. */
+  markAfter(/(?:[うくぐすつぬぶむる]|い|た|だ|ない)か、/g);
+  markAfter(/(?:[うくぐすつぬぶむる]|い|た|だ|ない)か(?=[\u4e00-\u9fff「])/g);
+
+  /* Remaining commas / mid-string periods are clause breaks. Include
+     fullwidth digits so ように、１０４… still splits. */
+  markAfter(/、(?=[\u4e00-\u9fffぁ-んァ-ン０-９0-9「A-Za-z\uE000])/g);
+  markAfter(/[。．](?=[\u4e00-\u9fffぁ-んァ-ン０-９0-9「A-Za-z\uE000])/g);
+
+  let parts = s.split("\u241E").map(x => x.trim()).filter(Boolean)
+    .map(x => x.replace(/\uE000(\d+)\uE001/g, (_, i) => blocks[+i]));
+  return foldArrangeParts(parts);
 }
 
 function splitAfterParticles(jp) {
@@ -5934,15 +6023,7 @@ function splitAfterParticles(jp) {
     .replace(/([はがをにへでとも])(?!\u241E|$)/g, "$1\u241E");
   let parts = masked.split("\u241E").map(s => s.trim()).filter(Boolean)
     .map(s => s.replace(/\uE000(\d+)\uE001/g, (_, i) => blocks[+i]));
-  /* Fold punctuation-only tiles onto the previous phrase. */
-  const hasWord = s => /[ぁ-んァ-ン一-龯A-Za-z0-9]/.test(String(s).replace(/[{}]/g, ""));
-  const folded = [];
-  parts.forEach(p => {
-    if (!folded.length) folded.push(p);
-    else if (!hasWord(p)) folded[folded.length - 1] += p;
-    else folded.push(p.replace(/^[、，,\s]+/, ""));
-  });
-  parts = folded.filter(Boolean);
+  parts = foldArrangeParts(parts);
   if (parts.length >= 2) return parts;
   /* Short unspaced lines: peel a polite ending into its own tile. */
   const one = String(jp);
@@ -11880,7 +11961,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017k&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017l&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
