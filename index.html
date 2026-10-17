@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017b">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017b">
-<link rel="manifest" href="site.webmanifest?v=20261017b">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017c">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017c">
+<link rel="manifest" href="site.webmanifest?v=20261017c">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017b";
+window.__BUILD__ = "20261017c";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017b";
+  var v = window.__BUILD__ || "20261017c";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017b"));
+    + encodeURIComponent(window.__BUILD__ || "20261017c"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017b") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017c") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -305,8 +305,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   .masthead-inner .mascot {
     flex: none; height: 2.7em; width: 2.7em; max-height: 56px; max-width: 56px;
-    object-fit: cover; object-position: center center;
-    border-radius: 18%;
+    object-fit: contain; object-position: center center;
+    background: transparent;
     pointer-events: none; user-select: none;
   }
   h1 { font-family: var(--serif); font-size: 34px; line-height: 1.22; letter-spacing: -0.01em;
@@ -367,8 +367,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   .home-brand .mascot {
     flex: none; height: clamp(52px, 16vw, 72px); width: clamp(52px, 16vw, 72px);
-    object-fit: cover; object-position: center center;
-    border-radius: 18%;
+    object-fit: contain; object-position: center center;
+    background: transparent;
     pointer-events: none; user-select: none;
   }
   .home-brand .brand {
@@ -473,8 +473,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   .welcome-gate .welcome-mascot {
     width: clamp(72px, 22vw, 96px); height: clamp(72px, 22vw, 96px);
-    object-fit: cover; object-position: center center;
-    border-radius: 18%;
+    object-fit: contain; object-position: center center;
+    background: transparent;
     pointer-events: none;
   }
   .welcome-gate h2 {
@@ -3247,10 +3247,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017b" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017c" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017b#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017c#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3270,7 +3270,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261017b" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261017c" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3372,7 +3372,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017b"></script>
+<script src="firebase-config.js?v=20261017c"></script>
 <script>
 /* ============================================================
    State
@@ -3779,7 +3779,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261017b" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261017c" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -4842,7 +4842,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017b"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017c"));
     return;
   }
   const start = () => {
@@ -4856,7 +4856,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017b"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017c"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -6444,7 +6444,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261017b" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261017c" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -10946,7 +10946,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017b&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017c&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
