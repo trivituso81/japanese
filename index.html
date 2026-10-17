@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017v">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017v">
-<link rel="manifest" href="site.webmanifest?v=20261017v">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017w">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017w">
+<link rel="manifest" href="site.webmanifest?v=20261017w">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017v";
+window.__BUILD__ = "20261017w";
 (function () {
   try {
     var u = new URL(location.href);
@@ -55,14 +55,18 @@ window.__BUILD__ = "20261017v";
     }
     /* GitHub Pages CDN may serve a stale index.html for up to ~10 minutes.
        build.txt is fetched with cache:no-store + a unique query so an old
-       HTML shell upgrades itself instead of claiming a fake Google save. */
-    if (!sessionStorage.getItem("mnn-build-checked:" + window.__BUILD__)) {
+       HTML shell upgrades itself instead of claiming a fake Google save.
+       Home-screen (standalone) shells re-check every cold open — their
+       start_url can pin an old ?v= and Safari may keep that HTML body. */
+    var buildCheckKey = "mnn-build-checked:" + window.__BUILD__;
+    var shouldCheck = standalone || !sessionStorage.getItem(buildCheckKey);
+    if (shouldCheck) {
       fetch("build.txt?r=" + Date.now(), { cache: "no-store", credentials: "same-origin" })
         .then(function (res) { return res.ok ? res.text() : ""; })
         .then(function (text) {
           var latest = String(text || "").trim();
           if (!latest || latest === window.__BUILD__) {
-            try { sessionStorage.setItem("mnn-build-checked:" + window.__BUILD__, "1"); } catch (e) {}
+            try { sessionStorage.setItem(buildCheckKey, "1"); } catch (e) {}
             return;
           }
           var next = new URL(location.href);
@@ -151,7 +155,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017v";
+  var v = window.__BUILD__ || "20261017w";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +164,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017v"));
+    + encodeURIComponent(window.__BUILD__ || "20261017w"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +183,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017v") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017w") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3604,10 +3608,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017v" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017w" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017v#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017w#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3628,7 +3632,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017v" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017w" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3733,7 +3737,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017v"></script>
+<script src="firebase-config.js?v=20261017w"></script>
 <script>
 /* ============================================================
    State
@@ -5318,7 +5322,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017v"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017w"));
     return;
   }
   const start = () => {
@@ -5332,7 +5336,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017v"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017w"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -12501,7 +12505,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017v&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017w&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
