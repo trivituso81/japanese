@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017t">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017t">
-<link rel="manifest" href="site.webmanifest?v=20261017t">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017u">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017u">
+<link rel="manifest" href="site.webmanifest?v=20261017u">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017t";
+window.__BUILD__ = "20261017u";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017t";
+  var v = window.__BUILD__ || "20261017u";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017t"));
+    + encodeURIComponent(window.__BUILD__ || "20261017u"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017t") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017u") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1187,6 +1187,17 @@ document.addEventListener("DOMContentLoaded", function () {
     flex: 0 0 auto; font-size: 12px; opacity: .75;
   }
   .drill-points .opt.check label .donly:hover { opacity: 1; }
+  /* Flashcard word picker — same tools as grammar points, scrollable list */
+  .cards-setup .opt:has(.card-words) { flex: 1 1 100%; width: 100%; min-width: 0; }
+  .card-words .opt.check {
+    max-height: min(42vh, 380px); overflow-y: auto;
+    -webkit-overflow-scrolling: touch; width: 100%; padding-right: 2px;
+  }
+  .card-words .opt.check label .cw-jp { font-family: var(--jp-mincho); }
+  .card-words .opt.check label .cw-rd {
+    font-family: var(--jp); font-size: 12px; color: var(--text-faint); font-weight: 400;
+  }
+  .card-words .opt.check label .cw-en { color: var(--text-soft); font-weight: 400; }
   .drill-mode-hint {
     margin: 4px 0 0; font-family: var(--serif); font-size: 13.5px;
     color: var(--text-soft); line-height: 1.55;
@@ -3586,10 +3597,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017t" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017u" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017t#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017u#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3610,7 +3621,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017t" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017u" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3715,7 +3726,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017t"></script>
+<script src="firebase-config.js?v=20261017u"></script>
 <script>
 /* ============================================================
    State
@@ -5300,7 +5311,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017t"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017u"));
     return;
   }
   const start = () => {
@@ -5314,7 +5325,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017t"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017u"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -8004,6 +8015,37 @@ const ORDERS = [
 const reduceMotion = () => !!(window.matchMedia &&
   window.matchMedia("(prefers-reduced-motion: reduce)").matches);
 
+function cardWordCheckLabel(c, range) {
+  const [reading, kanji, en] = c.e;
+  const r = splitVocabReading(reading);
+  const k = splitVocabReading(kanji);
+  const head = k.word || r.word || reading || "";
+  const rd = (k.word && r.word) ? r.word : "";
+  const lesson = range ? `<span class="cw-rd">L${c.n}</span> ` : "";
+  return `${lesson}<span class="cw-jp">${esc(head)}</span>${
+    rd ? ` <span class="cw-rd">${esc(rd)}</span>` : ""} <span class="cw-en">· ${esc(en)}</span>`;
+}
+
+function syncCardSelectedToDeck() {
+  if (!CARD) return [];
+  const words = deck(CARD.ns, CARD.proper, CARD.keyOnly);
+  const live = new Set(words.map(c => c.id));
+  if (!CARD.selected) CARD.selected = new Set(live);
+  else {
+    [...CARD.selected].forEach(id => { if (!live.has(id)) CARD.selected.delete(id); });
+    /* Filters that grow the deck (e.g. proper nouns on) check the new words in. */
+    words.forEach(c => { if (!CARD.selected.has(c.id) && !CARD._wordPickTouched) CARD.selected.add(c.id); });
+  }
+  return words;
+}
+
+function refreshCardWordCount() {
+  const el = document.getElementById("cardWordCount");
+  if (!el || !CARD) return;
+  const total = document.querySelectorAll(".cwt").length;
+  el.textContent = `${CARD.selected ? CARD.selected.size : 0} of ${total}`;
+}
+
 function renderCards(scope) {
   const ns = scopeOf(scope).filter(n => VOCAB[n]);
   if (!ns.length) return notFound();   // no word list in range: a dead address
@@ -8015,15 +8057,45 @@ function renderCards(scope) {
   document.body.dataset.view = "cards";
   showBotnav();
   const size = range ? 30 : 20;
-  const showKey = hasKeyVocab(ns);
+  const words = deck(ns, false, false);
   CARD = { scope, ns, dir: "jp-en", order: "random", proper: false, keyOnly: false, size,
+           selected: new Set(words.map(c => c.id)), _wordPickTouched: false,
            round: [], i: 0, shown: false, total: 0, retired: 0, firstTry: 0,
            missed: new Set(), attempts: {}, prev: null, animating: false,
-           playing: false };
+           playing: false, stale: false };
+  paintCardsSetup();
+}
+
+/* Settings no longer deal a new round the instant they are touched. Each
+   answer's box is banked as it is given, so the record always survives, but
+   your place in the deck does not — and losing it to a stray tap on a
+   setting halfway through a deck is a nasty surprise. Nothing happens until
+   the one primary button is pressed, and it says what it is about to do. */
+function paintCardsSetup() {
+  if (!CARD || CARD.playing) return;
+  const { scope, ns, dir, order, size, proper, keyOnly } = CARD;
+  const range = isRange(scope);
+  const showKey = hasKeyVocab(ns);
   const title = range ? scopeLabel(scope) : `Lesson ${ns[0]}`;
-  const missIds = cardMissesFor(scope, ns, false, false);
-  const unlearnedN = deck(ns, false).filter(c => boxOf(c.id) < LEARNED_BOX).length;
+  const words = syncCardSelectedToDeck();
+  /* After a filter change that shrinks the deck, keep whatever still fits;
+     first paint and "Select all" leave every live word checked. */
+  if (!CARD._wordPickTouched) {
+    CARD.selected = new Set(words.map(c => c.id));
+  }
+  const missIds = cardMissesFor(scope, ns, proper, keyOnly);
+  const fullN = deck(ns, proper, keyOnly).length;
+  const unlearnedN = deck(ns, proper, keyOnly)
+    .filter(c => boxOf(c.id) < LEARNED_BOX).length;
   const keyN = showKey ? deck(ns, false, true).length : 0;
+  const wordChecks = words.map(c => {
+    const checked = CARD.selected.has(c.id) ? " checked" : "";
+    return `<label>
+      <input type="checkbox" class="cwt" data-id="${esc(c.id)}"${checked}>
+      <span>${cardWordCheckLabel(c, range)}</span>
+      <button type="button" class="linkish donly" data-id="${esc(c.id)}">only</button>
+    </label>`;
+  }).join("");
   syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
@@ -8034,38 +8106,42 @@ function renderCards(scope) {
       </div>
       ${optionsPanel([
         { k: "Direction", seg: `
-          <button class="btn dir" data-dir="jp-en" aria-pressed="true" aria-label="Japanese to English">
+          <button class="btn dir" data-dir="jp-en" aria-pressed="${dir === "jp-en"}" aria-label="Japanese to English">
             <span class="t-wide">Japanese → English</span><span class="t-narrow">JA → EN</span></button>
-          <button class="btn dir" data-dir="en-jp" aria-pressed="false" aria-label="English to Japanese">
+          <button class="btn dir" data-dir="en-jp" aria-pressed="${dir === "en-jp"}" aria-label="English to Japanese">
             <span class="t-wide">English → Japanese</span><span class="t-narrow">EN → JA</span></button>
-          <button class="btn dir" data-dir="mixed" aria-pressed="false">Mixed</button>` },
+          <button class="btn dir" data-dir="mixed" aria-pressed="${dir === "mixed"}">Mixed</button>` },
         { k: "Order", seg: ORDERS.map(([id, wide, narrow]) =>
-          `<button class="btn ord" data-ord="${id}" aria-pressed="${id === "random"}">
+          `<button class="btn ord" data-ord="${id}" aria-pressed="${id === order}">
             <span class="t-wide">${wide}</span><span class="t-narrow">${narrow}</span></button>`).join("") },
         { k: "Session", seg: (range ? [10, 30, 60, 0] : [10, 20, 0]).map(s =>
           `<button class="btn size" data-size="${s}" aria-pressed="${s === size}">${s || "All"}</button>`).join("") },
-        { check: `<label><input type="checkbox" id="proper"> Include proper nouns</label>${
-          showKey ? `<label><input type="checkbox" id="keyOnly"> Key vocabulary only${
+        { check: `<label><input type="checkbox" id="proper"${proper ? " checked" : ""}> Include proper nouns</label>${
+          showKey ? `<label><input type="checkbox" id="keyOnly"${keyOnly ? " checked" : ""}> Key vocabulary only${
             keyN ? ` · ${keyN}` : ""}</label>` : ""}` },
+        { k: "Words", html: `
+          <div class="drill-points card-words">
+            <div class="dp-tools">
+              <button type="button" class="linkish" id="cardSelectAll">Select all</button>
+              <button type="button" class="linkish" id="cardSelectNone">Clear</button>
+              <span class="dp-count" id="cardWordCount">${CARD.selected.size} of ${words.length}</span>
+            </div>
+            <div class="opt check" id="cardWordList">${wordChecks}</div>
+          </div>` },
         missIds.length && {
           start: `<button class="btn primary" id="retryMiss">Retry ${missIds.length} you missed</button>
             <button class="btn" id="deal">New round</button>`
         },
-        !missIds.length && unlearnedN > 0 && unlearnedN < deck(ns, false).length && {
+        !missIds.length && unlearnedN > 0 && unlearnedN < fullN && {
           start: `<button class="btn primary" id="retryUnlearned">Practice ${unlearnedN} still learning</button>
             <button class="btn" id="deal">Full deck</button>`
         },
-        !missIds.length && !(unlearnedN > 0 && unlearnedN < deck(ns, false).length) && {
+        !missIds.length && !(unlearnedN > 0 && unlearnedN < fullN) && {
           start: `<button class="btn primary" id="deal">Start</button>`
         }
       ])}
     </section>`;
 
-  /* Settings no longer deal a new round the instant they are touched. Each
-     answer's box is banked as it is given, so the record always survives, but
-     your place in the deck does not — and losing it to a stray tap on a
-     setting halfway through a deck is a nasty surprise. Nothing happens until
-     the one primary button is pressed, and it says what it is about to do. */
   const group = (sel, apply) => document.querySelectorAll(sel).forEach(b =>
     b.addEventListener("click", () => {
       apply(b);
@@ -8078,13 +8154,57 @@ function renderCards(scope) {
   group(".btn.size", b => CARD.size = +b.dataset.size);
   document.getElementById("proper").addEventListener("change", e => {
     CARD.proper = e.target.checked;
+    CARD._wordPickTouched = false;
     CARD.stale = true;
-    refreshDeal();
+    paintCardsSetup();
   });
   const keyOnlyEl = document.getElementById("keyOnly");
   if (keyOnlyEl) keyOnlyEl.addEventListener("change", e => {
     CARD.keyOnly = e.target.checked;
+    CARD._wordPickTouched = false;
     CARD.stale = true;
+    paintCardsSetup();
+  });
+  document.querySelectorAll(".cwt").forEach(inp => {
+    inp.addEventListener("change", () => {
+      CARD._wordPickTouched = true;
+      if (inp.checked) CARD.selected.add(inp.dataset.id);
+      else CARD.selected.delete(inp.dataset.id);
+      CARD.stale = true;
+      refreshCardWordCount();
+      refreshDeal();
+    });
+  });
+  document.querySelectorAll(".card-words .donly").forEach(btn => {
+    btn.addEventListener("click", e => {
+      e.preventDefault();
+      e.stopPropagation();
+      CARD._wordPickTouched = true;
+      CARD.selected = new Set([btn.dataset.id]);
+      CARD.stale = true;
+      document.querySelectorAll(".cwt").forEach(inp => {
+        inp.checked = inp.dataset.id === btn.dataset.id;
+      });
+      refreshCardWordCount();
+      refreshDeal();
+    });
+  });
+  const all = document.getElementById("cardSelectAll");
+  if (all) all.addEventListener("click", () => {
+    CARD._wordPickTouched = false;
+    CARD.selected = new Set(words.map(c => c.id));
+    CARD.stale = true;
+    document.querySelectorAll(".cwt").forEach(inp => { inp.checked = true; });
+    refreshCardWordCount();
+    refreshDeal();
+  });
+  const none = document.getElementById("cardSelectNone");
+  if (none) none.addEventListener("click", () => {
+    CARD._wordPickTouched = true;
+    CARD.selected = new Set();
+    CARD.stale = true;
+    document.querySelectorAll(".cwt").forEach(inp => { inp.checked = false; });
+    refreshCardWordCount();
     refreshDeal();
   });
   const deal = document.getElementById("deal");
@@ -8092,17 +8212,22 @@ function renderCards(scope) {
   const retryMiss = document.getElementById("retryMiss");
   if (retryMiss) retryMiss.addEventListener("click", () => {
     unlockTts();
-    const ids = cardMissesFor(CARD.scope, CARD.ns, CARD.proper, CARD.keyOnly);
-    startSession(ids.length ? new Set(ids) : undefined);
+    const ids = cardMissesFor(CARD.scope, CARD.ns, CARD.proper, CARD.keyOnly)
+      .filter(id => !CARD.selected || CARD.selected.has(id));
+    if (!ids.length) return;
+    startSession(new Set(ids));
   });
   const retryUnlearned = document.getElementById("retryUnlearned");
   if (retryUnlearned) retryUnlearned.addEventListener("click", () => {
     unlockTts();
     const ids = deck(CARD.ns, CARD.proper, CARD.keyOnly)
       .filter(c => boxOf(c.id) < LEARNED_BOX)
+      .filter(c => !CARD.selected || CARD.selected.has(c.id))
       .map(c => c.id);
-    startSession(ids.length ? new Set(ids) : undefined);
+    if (!ids.length) return;
+    startSession(new Set(ids));
   });
+  refreshDeal();
 }
 
 /* Enter the full-viewport play shell once a round begins. */
@@ -8118,16 +8243,24 @@ function enterCardPlay() {
 function refreshDeal() {
   const b = document.getElementById("deal");
   if (!b || !CARD) return;
+  const n = CARD.selected ? CARD.selected.size : 0;
+  const take = n ? (CARD.size ? Math.min(CARD.size, n) : n) : 0;
+  b.disabled = n === 0;
   const underway = CARD.playing && CARD.total && (CARD.pass > 1 || CARD.passDone > 0) && CARD.round.length;
-  b.textContent = CARD.stale && underway ? "Restart with these settings" : "Start";
+  const label = b.textContent || "";
+  if (CARD.stale && underway) b.textContent = "Restart with these settings";
+  else if (b.classList.contains("primary") || /^Start/.test(label) || label === "Restart with these settings")
+    b.textContent = take ? `Start · ${take}` : "Start";
 }
 
 /* Order decides which cards make the cut. The sitting itself is always
    shuffled, so a new round is never the same sequence as the last. */
 function buildRound(only) {
-  const d = deck(CARD.ns, CARD.proper, CARD.keyOnly);
+  const d0 = deck(CARD.ns, CARD.proper, CARD.keyOnly);
+  const d = only ? d0.filter(c => only.has(c.id))
+    : (CARD.selected ? d0.filter(c => CARD.selected.has(c.id)) : d0);
   let pool;
-  if (only) pool = d.filter(c => only.has(c.id));
+  if (only) pool = d;
   else if (CARD.order === "random") pool = shuffle(d);
   else if (CARD.order === "book") {
     // work forward through the book rather than restarting at lesson 1 each time
@@ -12363,7 +12496,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017t&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017u&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
