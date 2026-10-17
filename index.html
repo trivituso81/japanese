@@ -3404,8 +3404,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   .cards-setup .tom-setup .tom-buddy { margin: 0 auto 2px; }
 
-  /* Flashcard play — peeks over the card */
-  .card-play .deck { position: relative; }
+  /* Flashcard play — peeks over the card (deck usually clips; let Tom lean out) */
+  .card-play .deck { position: relative; overflow: visible; }
   .card-play .tom-buddy.pose-peek-card { pointer-events: none; }
 
   /* Grammar question box */
