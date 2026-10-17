@@ -13,8 +13,10 @@
 <script>
 (function () {
   var SILENT = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
-  var FETCH_MS = 2000;
-  var PLAY_MS = 2000;
+  /* Keep in step with index.html TTS_FETCH_MS / TTS_PLAY_MS. Parent waits
+     longer than FETCH+PLAY so it does not kill a slow-but-working download. */
+  var FETCH_MS = 2500;
+  var PLAY_MS = 2500;
   var audio = document.createElement("audio");
   audio.setAttribute("playsinline", "");
   audio.setAttribute("webkit-playsinline", "");
@@ -121,6 +123,7 @@
       try { fetchAbort.abort(); } catch (e) {}
       fetchAbort = null;
     }
+    try { audio.pause(); } catch (e) {}
     var url = ttsUrl(q);
     if (typeof fetch !== "function") {
       playBlobOrSrc(seq, q, url);
@@ -131,6 +134,7 @@
     var fetchTimer = setTimeout(function () {
       try { if (ctrl) ctrl.abort(); } catch (e) {}
     }, FETCH_MS);
+    var usedDirect = false;
     fetch(url, {
       referrerPolicy: "no-referrer",
       cache: "no-store",
@@ -151,7 +155,12 @@
       .catch(function () {
         clearTimeout(fetchTimer);
         if (seq !== speakSeq) return;
-        /* Direct <audio src> as one quick retry, then parent falls back. */
+        /* One direct <audio src> retry, then parent Web-Speech fallback. */
+        if (usedDirect) {
+          fail(seq, q, "fetch-failed");
+          return;
+        }
+        usedDirect = true;
         playBlobOrSrc(seq, q, url);
       });
   }
