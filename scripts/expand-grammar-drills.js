@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/* Expand CONTENT drills so every grammar point in lessons 1–39 has ≥30
+/* Expand CONTENT drills so every grammar point in lessons 1–40 has ≥30
    distinct phrases using that lesson's vocabulary or earlier lessons'. */
 "use strict";
 
@@ -10,7 +10,7 @@ const vm = require("vm");
 const ROOT = path.resolve(__dirname, "..");
 const DATA = path.join(ROOT, "japanese-data.js");
 const MIN = 30;
-const MAX_LESSON = 39;
+const MAX_LESSON = 40;
 
 const src = fs.readFileSync(DATA, "utf8");
 const ctx = { console };
@@ -797,6 +797,156 @@ function templatesFor(point, lesson) {
         `${tool.d}で ${verb.d}。`,
         "で marks the tool or means",
         tool.lesson < lesson || verb.lesson < lesson ? "review" : "lesson"
+      ];
+    });
+  }
+
+  /* ---- Lesson 40 ---- */
+  if (/embedded question|疑問詞/.test(pat + short) && /普通形/.test(pat)) {
+    const frames = [
+      ["what time", "何時{なんじ}に", "arrive", "到着{とうちゃく}する"],
+      ["who", "だれが", "come", "来{く}る"],
+      ["where", "どこで", "do it", "する"],
+      ["when", "いつ", "meet", "会{あ}う"],
+      ["how", "どう", "read it", "読{よ}む"],
+      ["how much", "いくら", "cost", "かかる"],
+      ["which", "どちらが", "be good", "いい"],
+      ["why", "どうして", "be late", "遅{おく}れる"]
+    ];
+    const tails = [
+      ["please check", "調{しら}べて ください"],
+      ["please tell me", "教{おし}えて ください"],
+      ["I don't know", "わかりません"],
+      ["please ask", "聞{き}いて ください"],
+      ["we are talking about", "話{はな}して います"],
+      ["do you remember", "覚{おぼ}えて いますか"]
+    ];
+    add((P, i) => {
+      const [qEn, qJp, vEn, vJp] = frames[i % frames.length];
+      const [tEn, tJp] = tails[i % tails.length];
+      const thing = pick(poolByCat(P, "thing", lesson), i);
+      const place = pick(poolByCat(P, "place", lesson), i);
+      const topic = thing || place;
+      const topicJp = topic ? `${topic.d}は ` : "";
+      const topicEn = topic ? `${shortEn(topic.en)} ` : "";
+      return [
+        `${tEn[0].toUpperCase()}${tEn.slice(1)} ${qEn} ${topicEn}${vEn}.`,
+        `${topicJp}${qJp} ${vJp}か、${tJp}。`,
+        "plain form, then か",
+        topic && topic.lesson < lesson ? "review" : "lesson"
+      ];
+    });
+  }
+
+  if (/whether or not|か どうか/.test(pat + short)) {
+    add((P, i) => {
+      const verb = pick(poolByCat(P, "verb", lesson), i);
+      const tails = [
+        ["I don't know", "わかりません"],
+        ["please check", "調{しら}べて ください"],
+        ["please tell me", "教{おし}えて ください"],
+        ["I haven't decided yet", "まだ 決{き}めて いません"],
+        ["please make sure", "確{たし}かめて ください"],
+        ["please reply", "返事{へんじ}を ください"]
+      ];
+      const [tEn, tJp] = tails[i % tails.length];
+      if (!verb) return null;
+      const dict = conjugateFromMasu(verb.d, "dict") || bare(verb.d).replace(/ます$/, "る");
+      return [
+        `${tEn[0].toUpperCase()}${tEn.slice(1)} whether or not I/you will ${shortEn(verb.en)}.`,
+        `${dict}か どうか、${tJp}。`,
+        "か どうか after a plain form",
+        verb.lesson < lesson ? "review" : "lesson"
+      ];
+    });
+  }
+
+  if (pat === "Vて-form みます" || short === "try and see") {
+    add((P, i) => {
+      const verb = pick(poolByCat(P, "verb", lesson), i);
+      if (!verb) return null;
+      const te = conjugateFromMasu(verb.d, "te");
+      if (!te) return null;
+      const modes = [
+        [`I'll try to ${shortEn(verb.en)}.`, `${te} みます。`],
+        [`I want to try ${shortEn(verb.en)}ing.`, `${te} みたいです。`],
+        [`Please try ${shortEn(verb.en)}ing.`, `${te} みて ください。`],
+        [`I tried ${shortEn(verb.en)}ing.`, `${te} みました。`]
+      ];
+      const [en, jp] = modes[i % modes.length];
+      return [en, jp, "て-form + みます", verb.lesson < lesson ? "review" : "lesson"];
+    });
+  }
+
+  if (/adjective to noun|～さ/.test(pat + short) || /い-adj.*さ/.test(pat)) {
+    const adjs = [
+      ["高{たか}い", "高{たか}さ", "height"],
+      ["長{なが}い", "長{なが}さ", "length"],
+      ["大{おお}きい", "大{おお}きさ", "size"],
+      ["重{おも}い", "重{おも}さ", "weight"],
+      ["広{ひろ}い", "広{ひろ}さ", "width"],
+      ["速{はや}い", "速{はや}さ", "speed"],
+      ["強{つよ}い", "強{つよ}さ", "strength"],
+      ["熱{あつ}い", "熱{あつ}さ", "heat"],
+      ["寒{さむ}い", "寒{さむ}さ", "coldness"],
+      ["深{ふか}い", "深{ふか}さ", "depth"],
+      ["短{みじか}い", "短{みじか}さ", "shortness"],
+      ["軽{かる}い", "軽{かる}さ", "lightness"],
+      ["低{ひく}い", "低{ひく}さ", "lowness"],
+      ["面白{おもしろ}い", "面白{おもしろ}さ", "interest"],
+      ["難し{むずかし}い", "難し{むずかし}さ", "difficulty"],
+      ["楽し{たのし}い", "楽し{たのし}さ", "fun"]
+    ];
+    add((P, i) => {
+      const [, noun, nounEn] = adjs[i % adjs.length];
+      const thing = pick(poolByCat(P, "thing", lesson).concat(poolByCat(P, "place", lesson)), i);
+      if (!thing) {
+        return [
+          `Please tell me the ${nounEn}.`,
+          `${noun}を 教{おし}えて ください。`,
+          "い-adjective → ～さ",
+          "lesson"
+        ];
+      }
+      const modes = [
+        [
+          `What is the ${nounEn} of ${shortEn(thing.en)}?`,
+          `${thing.d}の ${noun}は どのくらいですか。`
+        ],
+        [
+          `Please measure the ${nounEn} of ${shortEn(thing.en)}.`,
+          `${thing.d}の ${noun}を 測{はか}って ください。`
+        ],
+        [
+          `The ${nounEn} of ${shortEn(thing.en)} is amazing.`,
+          `${thing.d}の ${noun}は すごいです。`
+        ]
+      ];
+      const [en, jp] = modes[i % modes.length];
+      return [en, jp, "い-adjective → ～さ", thing.lesson < lesson ? "review" : "lesson"];
+    });
+  }
+
+  if (/asking for assessment|どうでしょうか/.test(pat + short)) {
+    add((P, i) => {
+      const thing = pick(
+        poolByCat(P, "thing", lesson)
+          .concat(poolByCat(P, "place", lesson))
+          .concat(poolByCat(P, "person", lesson)),
+        i
+      );
+      if (!thing) return null;
+      const modes = [
+        [`How is ${shortEn(thing.en)}?`, `${thing.d}は どうでしょうか。`],
+        [`How will ${shortEn(thing.en)} be?`, `${thing.d}は どうでしょうか。`],
+        [`How was ${shortEn(thing.en)}?`, `${thing.d}は どうだったでしょうか。`]
+      ];
+      const [en, jp] = modes[i % modes.length];
+      return [
+        en,
+        jp,
+        "どうでしょうか is gentler than どうですか",
+        thing.lesson < lesson ? "review" : "lesson"
       ];
     });
   }
