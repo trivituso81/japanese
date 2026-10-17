@@ -48,6 +48,27 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
 .choice span { color:var(--muted); font-size:0.9rem; }
 .backlink { text-align:center; color:var(--faint); font-size:0.85rem; text-decoration:none; }
 
+/* Always-on exit back to the main Minna study guide */
+.app-chrome {
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+  margin: 0 0 12px; padding: 0 0 10px;
+  border-bottom: 1px solid var(--line);
+  position: sticky; top: 0; z-index: 20;
+  background: linear-gradient(180deg, var(--bg) 70%, transparent);
+  padding-top: 2px;
+}
+.app-chrome .exit {
+  display:inline-flex; align-items:center; gap:6px;
+  font-size:0.84rem; font-weight:600; color:var(--gold);
+  text-decoration:none; padding:8px 10px; margin:-8px -10px;
+  border-radius:10px;
+}
+.app-chrome .exit:active { background: var(--panel); }
+.app-chrome .app-name {
+  font-size:0.78rem; font-weight:700; letter-spacing:0.04em;
+  text-transform:uppercase; color:var(--faint);
+}
+
 .shell { display:flex; flex-direction:column; gap:12px; min-height: calc(100dvh - 28px - var(--safe-t) - var(--safe-b)); }
 .topbar { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
 .group { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
@@ -874,6 +895,19 @@ function esc(s) {
     .replace(/"/g, "&quot;");
 }
 
+function homeHref() {
+  return "index.html#/kanji";
+}
+
+function renderAppChrome() {
+  return (
+    '<header class="app-chrome">' +
+      '<a class="exit" href="' + homeHref() + '">← Study guide</a>' +
+      '<span class="app-name">Kanji Forge</span>' +
+    '</header>'
+  );
+}
+
 function renderLevelScreen() {
   var n5 = recipesForLevel("N5").length;
   var n4 = recipesForLevel("N4").length;
@@ -884,7 +918,6 @@ function renderLevelScreen() {
         '<button class="choice" data-act="pick-level" data-level="N5"><strong>N5</strong><span>Beginner set — ' + n5 + ' kanji</span></button>' +
         '<button class="choice" data-act="pick-level" data-level="N4"><strong>N4</strong><span>Includes all of N5 — ' + n4 + ' kanji</span></button>' +
       '</div>' +
-      '<a class="backlink" href="index.html#/kanji">← Back to Kanji</a>' +
     '</div>'
   );
 }
@@ -1234,9 +1267,9 @@ function renderBook() {
 function render() {
   var root = document.getElementById("app");
   if (!state.ready) {
-    root.innerHTML = state.error
+    root.innerHTML = renderAppChrome() + (state.error
       ? '<div class="center">Could not load data.<br>' + esc(state.error) + '</div>'
-      : '<div class="center">Loading forge…</div>';
+      : '<div class="center">Loading forge…</div>');
     return;
   }
   var body = "";
@@ -1244,7 +1277,7 @@ function render() {
   else if (state.screen === "book") body = renderBook();
   else body = renderWorkbench();
   if (state.toast) body += '<div class="toast">' + esc(state.toast) + '</div>';
-  root.innerHTML = body;
+  root.innerHTML = renderAppChrome() + body;
 }
 </script>
 

@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017d">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017d">
-<link rel="manifest" href="site.webmanifest?v=20261017d">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017g">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017g">
+<link rel="manifest" href="site.webmanifest?v=20261017g">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017d";
+window.__BUILD__ = "20261017g";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017d";
+  var v = window.__BUILD__ || "20261017g";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017d"));
+    + encodeURIComponent(window.__BUILD__ || "20261017g"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017d") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017g") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -1653,26 +1653,37 @@ document.addEventListener("DOMContentLoaded", function () {
     flex: 1 1 120px; border: none; padding: 10px 8px; text-align: center;
   }
   .k-forge-entry {
-    margin: 4px 0 0;
-    padding: 12px 14px;
+    margin: 0;
+    padding: 14px 16px;
     border-radius: var(--radius-sm);
-    border: 1.5px dashed var(--rule-strong);
+    border: 1.5px solid var(--rule-strong);
     background: var(--bg-soft);
     display: flex;
     flex-direction: column;
     gap: 4px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color .15s ease, background .15s ease;
   }
-  .k-forge-entry a {
-    font-size: 15px;
+  a.k-forge-entry:hover,
+  a.k-forge-entry:focus-visible {
+    border-color: var(--seal);
+    background: var(--bg);
+    outline: none;
+  }
+  .k-forge-entry .k-forge-title {
+    font-size: 16px;
     font-weight: 700;
     color: var(--seal);
-    text-decoration: none;
   }
-  .k-forge-entry a:hover { text-decoration: underline; }
-  .k-forge-entry span {
-    font-size: 12px;
+  .k-forge-entry .k-forge-title span {
+    font-weight: 600;
     color: var(--text-soft);
-    line-height: 1.35;
+  }
+  .k-forge-entry .k-forge-desc {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    line-height: 1.4;
   }
   /* Full browse + character study pages — phone-first scrolling real estate */
   body[data-view="kanji-study"] header.masthead,
@@ -3247,10 +3258,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017d" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017g" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017d#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017g#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3270,7 +3281,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261017d" alt="" width="96" height="96" decoding="async">
+    <img class="welcome-mascot" src="mascot.png?v=20261017g" alt="" width="96" height="96" decoding="async">
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3372,7 +3383,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017d"></script>
+<script src="firebase-config.js?v=20261017g"></script>
 <script>
 /* ============================================================
    State
@@ -3779,7 +3790,7 @@ function renderWelcomeLanding() {
   document.body.dataset.view = "dash";
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261017d" alt="" width="96" height="96" decoding="async">
+      <img class="welcome-mascot" src="mascot.png?v=20261017g" alt="" width="96" height="96" decoding="async">
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -4842,7 +4853,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017d"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017g"));
     return;
   }
   const start = () => {
@@ -4856,7 +4867,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017d"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017g"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -6444,7 +6455,7 @@ function renderHome() {
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261017d" alt="" width="72" height="72"
+          <img class="mascot" src="mascot.png?v=20261017g" alt="" width="72" height="72"
             decoding="async" aria-hidden="true">
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
@@ -10078,6 +10089,14 @@ function renderKanji() {
         <p class="pace">${pace.week ? `<b>${esc(pace.week)}</b>` : ""}${pace.eta ? esc(pace.eta) : ""}</p>
       </div>
 
+      <section class="k-land-sec" aria-label="N4 kanji app">
+        <p class="k">N4 kanji app</p>
+        <a class="k-forge-entry" href="kanji-forge.html">
+          <span class="k-forge-title">Kanji Forge <span>· N5 / N4</span></span>
+          <span class="k-forge-desc">Separate discovery game — combine parts, forge kanji, build your book.</span>
+        </a>
+      </section>
+
       <section class="k-land-practice" aria-label="Practice settings">
         <div class="row">
           <span class="lab">Level</span>
@@ -10102,10 +10121,6 @@ function renderKanji() {
           <button type="button" class="btn primary" id="kstartMain">Start practice</button>
           <a class="kanji-browse-link" href="#/kanji/browse/${focusId}">Browse characters</a>
         </div>
-        <p class="k-forge-entry">
-          <a href="kanji-forge.html">Kanji Forge</a>
-          <span>N5 / N4 reading game — build words from tiles</span>
-        </p>
       </section>
     </section>`;
 
@@ -10946,7 +10961,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017d&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017g&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
