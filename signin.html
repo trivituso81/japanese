@@ -52,14 +52,41 @@
     appearance: none; -webkit-appearance: none;
   }
   [hidden] { display: none !important; }
+  .tom-buddy {
+    display: flex; flex-direction: column; align-items: center;
+    margin: 0 auto 4px; position: relative; pointer-events: none;
+  }
+  .tom-buddy .tom-face {
+    width: 72px; height: 72px; object-fit: contain;
+    animation: tom-wave 1.2s ease-in-out infinite;
+  }
+  .tom-buddy .tom-bubble {
+    position: absolute; left: 50%; bottom: calc(100% - 2px);
+    transform: translateX(-50%);
+    padding: 5px 9px; font-size: 12px; font-weight: 700;
+    background: #fff; border: 2px solid var(--text); border-radius: 12px;
+    white-space: nowrap; box-shadow: 2px 2px 0 rgba(18,20,26,.12);
+  }
+  @keyframes tom-wave {
+    0%, 100% { transform: rotate(0); }
+    25% { transform: rotate(8deg) translateY(-3px); }
+    75% { transform: rotate(-6deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tom-buddy .tom-face { animation: none; }
+  }
 </style>
-<script src="firebase-config.js?v=20261017h"></script>
+<script src="firebase-config.js?v=20261017i"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
 <script src="https://accounts.google.com/gsi/client" async defer></script>
 </head>
 <body>
 <main id="card" data-state="checking">
+  <div class="tom-buddy" aria-hidden="true">
+    <img class="tom-face" src="mascot.png?v=20261017i" alt="" width="72" height="72" decoding="async">
+    <span class="tom-bubble">サインイン！</span>
+  </div>
   <h1 id="title">Sign in with Google</h1>
   <p id="lead">Tap the Google button below. After you pick your account, this page will finish signing you in.</p>
   <p id="detail">Progress backs up to your Google account via Firebase (not Google Drive).</p>
@@ -70,12 +97,12 @@
   <button type="button" class="primary" id="continueHome" hidden>Continue</button>
   <button type="button" class="link" id="tryAgain" hidden>Try again</button>
   <button type="button" class="link" id="signOutBtn" hidden>Sign out</button>
-  <a class="link" id="back" href="./index.html?v=20261017h#/">Back to study guide</a>
+  <a class="link" id="back" href="./index.html?v=20261017i#/">Back to study guide</a>
   <button type="button" class="link" id="exitBtn" hidden>Exit</button>
 </main>
 <script>
 (function () {
-  var BUILD = "20261017h";
+  var BUILD = "20261017i";
   var KEY = "mnn-study-v1";
   var KEY_JUST = KEY + ":justSignedIn";
   var KEY_EXPECT = KEY + ":expectAuth";

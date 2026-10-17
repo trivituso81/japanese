@@ -38,10 +38,36 @@
   }
   button.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
   .hint { font-size: 13px; }
+  .tom-buddy {
+    display: flex; flex-direction: column; align-items: center;
+    margin: 0 auto 6px; position: relative; pointer-events: none;
+  }
+  .tom-buddy .tom-face {
+    width: 64px; height: 64px; object-fit: contain;
+    animation: tom-bob 2.6s ease-in-out infinite;
+  }
+  .tom-buddy .tom-bubble {
+    position: absolute; left: 50%; bottom: calc(100% - 2px);
+    transform: translateX(-50%);
+    padding: 5px 9px; font-size: 12px; font-weight: 700;
+    background: #fff; border: 2px solid var(--ink); border-radius: 12px;
+    white-space: nowrap; box-shadow: 2px 2px 0 rgba(18,20,26,.12);
+  }
+  @keyframes tom-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tom-buddy .tom-face { animation: none; }
+  }
 </style>
 </head>
 <body>
 <main>
+  <div class="tom-buddy" aria-hidden="true">
+    <img class="tom-face" src="mascot.png?v=20261017i" alt="" width="64" height="64" decoding="async">
+    <span class="tom-bubble">バックアップ！</span>
+  </div>
   <h1>Copy study progress</h1>
   <p id="status" class="status">Looking for saved progress on this device…</p>
   <p class="hint">Open this page from the <b>same place</b> you study (home-screen icon or Safari). iPhone sometimes keeps home-screen data separate from Safari.</p>
@@ -50,7 +76,7 @@
     <button type="button" class="primary" id="copy">Copy backup</button>
     <button type="button" id="share">Share backup</button>
     <button type="button" id="select">Select all</button>
-    <a class="btn" id="home" href="./index.html?v=20260828y#/">Back to study guide</a>
+    <a class="btn" id="home" href="./index.html?v=20261017i#/">Back to study guide</a>
   </div>
   <p class="hint">After copying: sign in with Google on any device → gear → Restore progress → paste. Progress then syncs to your account.</p>
 </main>
