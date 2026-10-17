@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017l">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017l">
-<link rel="manifest" href="site.webmanifest?v=20261017l">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017m">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017m">
+<link rel="manifest" href="site.webmanifest?v=20261017m">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017l";
+window.__BUILD__ = "20261017m";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017l";
+  var v = window.__BUILD__ || "20261017m";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017l"));
+    + encodeURIComponent(window.__BUILD__ || "20261017m"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017l") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017m") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3578,10 +3578,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017l" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017m" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017l#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017m#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3602,7 +3602,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017l" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017m" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3707,7 +3707,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017l"></script>
+<script src="firebase-config.js?v=20261017m"></script>
 <script>
 /* ============================================================
    State
@@ -5178,7 +5178,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017l"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017m"));
     return;
   }
   const start = () => {
@@ -5192,7 +5192,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017l"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017m"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -8355,10 +8355,15 @@ const KANA_FOLD = [
   [/子供/g, "こども"], [/子ども/g, "こども"]
 ];
 
+/* Drop textbook 漢字{かんじ} markup, keeping the kanji (or plain text). */
+const stripFuriMarkup = s => String(s == null ? "" : s).replace(/\{[^}]*\}/g, "");
+
 /* Copy readings from the model onto matching kanji in a typed answer so the
    verdict can show furigana even when the learner did not type {…} markup. */
 function annotateWithModelFuri(typed, modelJp) {
-  const s = String(typed == null ? "" : typed);
+  /* Strip any existing {…} first — Arrange tiles already carry markup, and
+     re-annotating on top left literal "{かんじ}" beside the ruby. */
+  const s = stripFuriMarkup(typed);
   if (!s) return "";
   const map = new Map();
   parseFuriParts(modelJp).forEach(p => { if (p.k) map.set(p.k, p.y); });
@@ -8389,7 +8394,7 @@ function annotateWithModelFuri(typed, modelJp) {
 }
 
 function normJa(s) {
-  let x = String(s == null ? "" : s);
+  let x = stripFuriMarkup(s);
   KANA_FOLD.forEach(([re, to]) => { x = x.replace(re, to); });
   return x
     .replace(/[〜～]/g, "~")
@@ -9008,7 +9013,9 @@ function drawDrill() {
             ${range ? `<td data-col="key"><a href="#/lesson/${a.q.n}">L${a.q.n}</a></td>` : ""}
             <td data-col="gloss"><b>${ruby(a.q.en)}</b></td>
             <td data-col="answer" class="jp">${ruby(a.q.jp)}${a.yours
-              ? `<div class="yours">you: ${ruby(annotateWithModelFuri(a.yours, a.q.jp))}${a.verdict === "near"
+              ? `<div class="yours">you: ${a.q.mode === "arrange"
+                  ? esc(stripFuriMarkup(a.yours))
+                  : ruby(annotateWithModelFuri(a.yours, a.q.jp))}${a.verdict === "near"
                   ? ` <span class="vtag">${a.off} off</span>` : ""}</div>`
               : `<div class="yours">skipped</div>`}</td>
             <td data-col="meta" class="jp">${ruby(a.q.pattern)}</td>
@@ -9121,10 +9128,12 @@ function submitArrange(q) {
   unlockTts();
   const order = DRILL.arrangeOrder || [];
   const pool = DRILL.arrangePool || [];
+  /* Store the assembled sentence without {…} markup — furigana belongs on
+     the model answer only. Judging also ignores markup via normJa. */
+  const yours = stripFuriMarkup(order.join(" "));
   if (!order.length || pool.length) {
-    return finishDrillAnswer(q, { verdict: "blank", ok: false, off: 0 }, order.join(" "));
+    return finishDrillAnswer(q, { verdict: "blank", ok: false, off: 0 }, yours);
   }
-  const yours = order.join(" ");
   const j = judgeAnswer(yours, q.jp, q.en);
   finishDrillAnswer(q, j, yours);
 }
@@ -9317,8 +9326,11 @@ function drawVerdict(view, heading, range, score) {
   const say = a.verdict === "near"
     ? `Only ${a.off} character${a.off > 1 ? "s" : ""} away from the model answer — check it closely, a single character is usually a particle.`
     : v.say;
+  /* Arrange: plain assembled sentence, no furigana. Translate: copy readings
+     from the model onto what they typed. Model answer always keeps ruby. */
+  const arrangeYours = (a.q && a.q.mode === "arrange") || (DRILL.mode === "arrange");
   const yoursHtml = a.yours
-    ? ruby(annotateWithModelFuri(a.yours, q.jp))
+    ? (arrangeYours ? esc(stripFuriMarkup(a.yours)) : ruby(annotateWithModelFuri(a.yours, q.jp)))
     : "";
   const speakReading = speakableFromFuri(q.jp);
   const speakKanji = plain(q.jp);
@@ -11961,7 +11973,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017l&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017m&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
