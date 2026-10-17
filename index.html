@@ -9418,6 +9418,16 @@ function submitChoice(q, picked) {
   }, picked);
 }
 
+/* Speak one Arrange tile (kana from furigana markup when present). */
+function speakArrangePart(part) {
+  if (!part) return;
+  ensureSpeakAudio();
+  unlockTts();
+  const reading = speakableFromFuri(part);
+  const kanji = stripFuriMarkup(part);
+  if (reading || kanji) speakJapanese(reading, kanji);
+}
+
 function paintArrangeBoard() {
   const slots = document.getElementById("arrangeSlots");
   const pool = document.getElementById("arrangePool");
@@ -9438,14 +9448,18 @@ function paintArrangeBoard() {
 }
 
 function wireArrangeInteractions() {
-  const q = DRILL.qs[DRILL.i];
   document.querySelectorAll(".arrange-tile").forEach(tile => {
+    /* Prime iOS TTS on the same gesture that places the tile. */
+    const arm = () => { ensureSpeakAudio(); unlockTts(); };
+    tile.addEventListener("pointerdown", arm);
+    tile.addEventListener("touchstart", arm, { passive: true });
     tile.addEventListener("click", () => {
       const from = tile.dataset.from;
       const idx = +tile.dataset.i;
       if (from === "pool") {
         const [part] = DRILL.arrangePool.splice(idx, 1);
         DRILL.arrangeOrder.push(part);
+        speakArrangePart(part);
       } else {
         const [part] = DRILL.arrangeOrder.splice(idx, 1);
         DRILL.arrangePool.push(part);
@@ -9470,8 +9484,12 @@ function wireArrangeInteractions() {
     const list = from === "pool" ? DRILL.arrangePool : DRILL.arrangeOrder;
     if (!(idx >= 0) || idx >= list.length) return;
     const [part] = list.splice(idx, 1);
-    if (target === "order") DRILL.arrangeOrder.push(part);
-    else DRILL.arrangePool.push(part);
+    if (target === "order") {
+      DRILL.arrangeOrder.push(part);
+      speakArrangePart(part);
+    } else {
+      DRILL.arrangePool.push(part);
+    }
     paintArrangeBoard();
   };
   [slots, poolEl].forEach((el, which) => {
@@ -9495,6 +9513,7 @@ function wireArrangeInteractions() {
       } else if (from === "pool") {
         const [part] = DRILL.arrangePool.splice(fromI, 1);
         DRILL.arrangeOrder.splice(toI, 0, part);
+        speakArrangePart(part);
       }
       paintArrangeBoard();
     });
