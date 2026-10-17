@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017h">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017h">
-<link rel="manifest" href="site.webmanifest?v=20261017h">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017i">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017i">
+<link rel="manifest" href="site.webmanifest?v=20261017i">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017h";
+window.__BUILD__ = "20261017i";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017h";
+  var v = window.__BUILD__ || "20261017i";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017h"));
+    + encodeURIComponent(window.__BUILD__ || "20261017i"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017h") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017i") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -781,6 +781,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   /* Kanji home tile — level bars card (known / shaky / new) */
   .home-track-stats .stat.kanji-home {
+    position: relative;
     align-items: stretch;
     justify-content: flex-start;
     text-align: left;
@@ -790,6 +791,7 @@ document.addEventListener("DOMContentLoaded", function () {
     border: 2px solid var(--text);
     background: #fafaf8;
     box-shadow: 6px 6px 0 #0c5a6c;
+    overflow: visible;
   }
   .home-track-stats .stat.kanji-home::before { display: none; }
   .home-track-stats .stat.kanji-home:hover,
@@ -3237,6 +3239,278 @@ document.addEventListener("DOMContentLoaded", function () {
     .k-code-glyph { font-size: clamp(5rem, 14vh, 7rem); }
   }
 
+  /* ── Tom buddy: avatar that peeks, cheers, and kibitzes ─────────────── */
+  .tom-buddy {
+    position: relative; display: inline-flex; flex-direction: column;
+    align-items: center; gap: 0; pointer-events: none; user-select: none;
+    z-index: 2;
+  }
+  .tom-buddy .tom-face {
+    display: block; width: var(--tom-size, 64px); height: var(--tom-size, 64px);
+    object-fit: contain; object-position: center bottom;
+    background: transparent;
+    filter: drop-shadow(0 2px 0 rgba(18, 20, 26, .12));
+  }
+  .tom-buddy.size-xs { --tom-size: 36px; }
+  .tom-buddy.size-sm { --tom-size: 48px; }
+  .tom-buddy.size-md { --tom-size: 64px; }
+  .tom-buddy.size-lg { --tom-size: 80px; }
+  .tom-buddy.size-xl { --tom-size: 96px; }
+  .tom-buddy .tom-bubble {
+    position: absolute; left: 50%; bottom: calc(100% - 4px);
+    transform: translateX(-50%);
+    max-width: 11em; padding: 5px 9px;
+    font-family: var(--ui); font-size: 11.5px; font-weight: 700;
+    line-height: 1.25; letter-spacing: .01em; white-space: nowrap;
+    color: var(--text); background: #fff;
+    border: 2px solid var(--text); border-radius: 12px 12px 12px 4px;
+    box-shadow: 2px 2px 0 var(--shadow-ink);
+    animation: tom-bubble-pop .35s ease-out both;
+  }
+  .tom-buddy .tom-bubble::after {
+    content: ""; position: absolute; left: 14px; bottom: -7px;
+    width: 8px; height: 8px; background: #fff;
+    border-right: 2px solid var(--text); border-bottom: 2px solid var(--text);
+    transform: rotate(45deg);
+  }
+  .tom-buddy.pose-idle .tom-face { animation: tom-bob 2.8s ease-in-out infinite; }
+  .tom-buddy.pose-wave .tom-face { animation: tom-wave 1.1s ease-in-out infinite; }
+  .tom-buddy.pose-bob .tom-face { animation: tom-bob 1.8s ease-in-out infinite; }
+  .tom-buddy.pose-cheer .tom-face {
+    animation: tom-cheer .7s ease-out both;
+  }
+  .tom-buddy.pose-wince .tom-face {
+    transform: rotate(-8deg) scale(.96);
+    filter: drop-shadow(0 2px 0 rgba(18, 20, 26, .12)) saturate(.85);
+  }
+  .tom-buddy.pose-think .tom-face {
+    animation: tom-think 2.4s ease-in-out infinite;
+  }
+  .tom-buddy.pose-peek .tom-face,
+  .tom-buddy.pose-peek-br .tom-face,
+  .tom-buddy.pose-peek-bl .tom-face {
+    animation: tom-peek 2.6s ease-in-out infinite;
+  }
+  .tom-buddy.pose-peek-card {
+    position: absolute; right: 10px; top: -18px; z-index: 3;
+  }
+  .tom-buddy.pose-peek-card .tom-face {
+    width: 52px; height: 52px;
+    animation: tom-peek-card 2.2s ease-in-out infinite;
+  }
+  .tom-buddy.pose-peek-card .tom-bubble {
+    left: auto; right: 0; transform: none; bottom: calc(100% + 2px);
+    border-radius: 12px 12px 4px 12px;
+  }
+  .tom-buddy.pose-peek-card .tom-bubble::after { left: auto; right: 16px; }
+  .tom-buddy.pose-nudge .tom-face { animation: tom-nudge 1.6s ease-in-out infinite; }
+  .tom-buddy.mood-yes .tom-face { animation: tom-cheer .55s ease-out both; }
+  .tom-buddy.mood-no .tom-face {
+    animation: tom-shake .45s ease-out both;
+  }
+
+  @keyframes tom-bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  @keyframes tom-wave {
+    0%, 100% { transform: rotate(0deg) translateY(0); }
+    25% { transform: rotate(8deg) translateY(-3px); }
+    75% { transform: rotate(-6deg) translateY(-2px); }
+  }
+  @keyframes tom-cheer {
+    0% { transform: translateY(8px) scale(.9); }
+    40% { transform: translateY(-10px) scale(1.08); }
+    70% { transform: translateY(-2px) scale(1.02); }
+    100% { transform: translateY(0) scale(1); }
+  }
+  @keyframes tom-think {
+    0%, 100% { transform: rotate(-4deg) translateY(0); }
+    50% { transform: rotate(5deg) translateY(-3px); }
+  }
+  @keyframes tom-peek {
+    0%, 100% { transform: translateY(6px); }
+    50% { transform: translateY(0); }
+  }
+  @keyframes tom-peek-card {
+    0%, 100% { transform: translateY(4px) rotate(4deg); }
+    50% { transform: translateY(-2px) rotate(-3deg); }
+  }
+  @keyframes tom-nudge {
+    0%, 100% { transform: translateX(0); }
+    40% { transform: translateX(4px); }
+    60% { transform: translateX(-2px); }
+  }
+  @keyframes tom-shake {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-4px) rotate(-6deg); }
+    75% { transform: translateX(4px) rotate(6deg); }
+  }
+  @keyframes tom-bubble-pop {
+    from { opacity: 0; scale: .7; }
+    to { opacity: 1; scale: 1; }
+  }
+
+  /* Home brand — buddy chats beside the title */
+  .home-brand .tom-buddy { flex: none; align-self: flex-end; }
+  .home-brand .tom-buddy .tom-face {
+    width: clamp(52px, 16vw, 72px); height: clamp(52px, 16vw, 72px);
+  }
+  @media (max-width: 430px) {
+    .home-brand .tom-buddy .tom-face {
+      width: clamp(44px, 14vw, 58px); height: clamp(44px, 14vw, 58px);
+    }
+    .home-brand .tom-buddy .tom-bubble { font-size: 10.5px; padding: 4px 7px; }
+  }
+  .home-brand .mascot { display: none; } /* replaced by .tom-buddy */
+
+  /* Lesson frame — peeks from the bottom-right of the lesson card */
+  .home-lesson-frame { position: relative; }
+  .home-lesson-frame > .tom-buddy.tom-lesson-peek {
+    position: absolute; right: 8px; bottom: -6px; z-index: 4;
+  }
+  .home-lesson-frame > .tom-buddy.tom-lesson-peek .tom-face {
+    width: 44px; height: 44px;
+  }
+  .home-lesson-frame > .tom-buddy.tom-lesson-peek .tom-bubble {
+    white-space: normal; text-align: center; max-width: 7.5em;
+    font-size: 10.5px; bottom: calc(100% + 2px);
+  }
+
+  /* Tile corner peeks */
+  .ltile { position: relative; overflow: visible; }
+  .ltile .tom-buddy.tom-tile {
+    position: absolute; right: -6px; top: -10px;
+  }
+  .ltile .tom-buddy.tom-tile .tom-face { width: 34px; height: 34px; }
+  .ltile.grammar .tom-buddy.tom-tile { right: auto; left: -6px; }
+  .ltile .tom-buddy.tom-tile .tom-bubble { display: none; }
+
+  /* Track stats (kanji / verbs) */
+  .home-track-stats .stat { position: relative; overflow: visible; }
+  .home-track-stats .tom-buddy.tom-stat {
+    position: absolute; right: 6px; top: -8px;
+  }
+  .home-track-stats .tom-buddy.tom-stat .tom-face { width: 32px; height: 32px; }
+  .home-track-stats .tom-buddy.tom-stat .tom-bubble { display: none; }
+
+  /* Welcome gate */
+  .welcome-gate .tom-buddy { margin-bottom: 4px; }
+  .welcome-gate .welcome-mascot { display: none; } /* JS welcome uses .tom-buddy */
+
+  /* Setup landings */
+  .cards-setup .tom-setup {
+    display: flex; flex-direction: column; align-items: center; gap: 8px;
+  }
+  .cards-setup .tom-setup .tom-buddy { margin: 0 auto 2px; }
+
+  /* Flashcard play — peeks over the card (deck usually clips; let Tom lean out) */
+  .card-play .deck { position: relative; overflow: visible; }
+  .card-play .tom-buddy.pose-peek-card { pointer-events: none; }
+
+  /* Grammar question box */
+  .qbox { position: relative; }
+  .qbox > .tom-buddy.tom-drill {
+    position: absolute; right: 8px; top: -22px;
+  }
+  .qbox > .tom-buddy.tom-drill .tom-face { width: 48px; height: 48px; }
+  .qbox.verdict.ok > .tom-buddy.tom-drill .tom-face { animation: tom-cheer .55s ease-out both; }
+  .qbox.verdict.no > .tom-buddy.tom-drill .tom-face,
+  .qbox.verdict.near > .tom-buddy.tom-drill .tom-face {
+    animation: tom-shake .45s ease-out both;
+  }
+  .vcard, .verdict { position: relative; }
+  .vcard > .tom-buddy.tom-drill,
+  .verdict > .tom-buddy.tom-drill {
+    position: absolute; right: 8px; top: -18px;
+  }
+  .vcard > .tom-buddy.tom-drill .tom-face,
+  .verdict > .tom-buddy.tom-drill .tom-face { width: 48px; height: 48px; }
+  .k-type-glyph { position: relative; }
+  .k-type-glyph > .tom-buddy.tom-kanji-type {
+    position: absolute; right: 4%; top: -8px;
+  }
+  .k-type-glyph > .tom-buddy.tom-kanji-type .tom-face { width: 44px; height: 44px; }
+  .k-browse-head, .k-code-hero { position: relative; padding-right: 64px; }
+  .k-browse-head .tom-buddy,
+  .k-code-hero .tom-buddy.tom-study {
+    position: absolute; right: 0; top: 0;
+  }
+  .k-browse-head .tom-buddy .tom-face,
+  .k-code-hero .tom-buddy.tom-study .tom-face { width: 52px; height: 52px; }
+  .k-browse-head .tom-buddy .tom-bubble,
+  .k-code-hero .tom-buddy.tom-study .tom-bubble {
+    left: auto; right: 0; transform: none;
+    border-radius: 12px 12px 4px 12px;
+    max-width: 8em; white-space: normal; text-align: center;
+  }
+  .k-browse-head .tom-buddy .tom-bubble::after,
+  .k-code-hero .tom-buddy.tom-study .tom-bubble::after {
+    left: auto; right: 16px;
+  }
+
+  /* Results / summary */
+  .results { position: relative; }
+  .results .tom-buddy.tom-results {
+    display: flex; margin: 0 auto 10px; justify-content: center;
+  }
+
+  /* Lesson page grammar intro */
+  .tom-lesson-head {
+    display: flex; align-items: center; gap: 12px; margin: 8px 0 4px;
+  }
+  .tom-lesson-head .tom-buddy { flex: none; }
+  .tom-lesson-head .tom-buddy .tom-face { width: 52px; height: 52px; }
+  .tom-lesson-head h2.view { margin: 0; flex: 1; }
+
+  /* Section landings (verbs / kanji / lessons) */
+  .tom-land-head {
+    display: flex; align-items: flex-start; gap: 12px; margin: 0 0 10px;
+  }
+  .tom-land-head .tom-buddy { flex: none; margin-top: 2px; }
+  .tom-land-head .tom-land-copy { flex: 1; min-width: 0; }
+  .k-land-head { position: relative; padding-right: 78px; min-height: 52px; }
+  .k-land-head .tom-buddy.tom-kanji {
+    position: absolute; right: 0; top: 0;
+  }
+  .k-land-head .tom-buddy.tom-kanji .tom-face { width: 56px; height: 56px; }
+  /* Bubble sits left of the face so it is not clipped by the masthead. */
+  .k-land-head .tom-buddy.tom-kanji .tom-bubble {
+    left: auto; right: calc(100% + 6px); top: 10px; bottom: auto;
+    transform: none; border-radius: 12px 12px 4px 12px;
+    max-width: 7.5em; white-space: normal; text-align: center;
+  }
+  .k-land-head .tom-buddy.tom-kanji .tom-bubble::after {
+    left: auto; right: -6px; bottom: auto; top: 12px;
+    transform: rotate(-45deg);
+  }
+
+  /* Masthead bob */
+  .masthead-inner .mascot {
+    animation: tom-bob 3.2s ease-in-out infinite;
+  }
+
+  /* Floating kibitzer for pages without an embedded buddy */
+  .tom-float {
+    position: fixed; z-index: 40; right: 10px;
+    bottom: calc(var(--botnav-h, 58px) + 10px + env(safe-area-inset-bottom, 0px));
+    pointer-events: none;
+  }
+  .tom-float .tom-buddy .tom-face { width: 46px; height: 46px; }
+  .tom-float .tom-buddy .tom-bubble {
+    font-size: 10.5px; max-width: 8.5em; white-space: normal; text-align: center;
+  }
+  body[data-view="dash"] .tom-float,
+  body[data-view="cards-play"] .tom-float,
+  body[data-view="kanji-play"] .tom-float,
+  body[data-view="drill-play"] .tom-float { display: none !important; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tom-buddy .tom-face,
+    .tom-buddy .tom-bubble,
+    .masthead-inner .mascot { animation: none !important; }
+  }
+
   /* A page this quiet should not lurch when it moves. */
   @media (prefers-reduced-motion: reduce) {
     * { transition: none !important; animation: none !important; }
@@ -3258,10 +3532,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017h" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017i" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017h#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017i#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3281,7 +3555,10 @@ document.addEventListener("DOMContentLoaded", function () {
 <!-- Static welcome: if this device already has progress, Copy is the main action. -->
 <main id="view">
   <section class="welcome-gate">
-    <img class="welcome-mascot" src="mascot.png?v=20261017h" alt="" width="96" height="96" decoding="async">
+    <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
+      <img class="tom-face" src="mascot.png?v=20261017i" alt="" width="96" height="96" decoding="async">
+      <span class="tom-bubble">ようこそ！</span>
+    </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
     <p class="welcome-lead" id="staticProgressHint" hidden>
       This device already has your study progress. Do <b>not</b> need “Continue”.
@@ -3344,6 +3621,7 @@ document.addEventListener("DOMContentLoaded", function () {
   </a>
 </nav>
 
+<aside class="tom-float" id="tomFloat" hidden aria-hidden="true"></aside>
 <div class="k-type-frame" id="kframe" hidden></div>
 <div class="backup-sheet" id="backupSheet" hidden>
   <div class="backup-card" role="dialog" aria-modal="true" aria-labelledby="backupTitle">
@@ -3383,7 +3661,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017h"></script>
+<script src="firebase-config.js?v=20261017i"></script>
 <script>
 /* ============================================================
    State
@@ -3788,9 +4066,10 @@ function useWelcomeLanding() {
 function renderWelcomeLanding() {
   document.getElementById("crumbs").innerHTML = "";
   document.body.dataset.view = "dash";
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="welcome-gate">
-      <img class="welcome-mascot" src="mascot.png?v=20261017h" alt="" width="96" height="96" decoding="async">
+      ${tomBuddy({ pose: "wave", size: "xl", line: tomLine("welcome") })}
       <h2>トムさんの勉強ガイド<br>へようこそ</h2>
       <p class="welcome-lead">みんなの日本語 — flashcards, grammar drills, verbs and kanji.<br>
         Sign in to sync across devices. Already studying on this phone?
@@ -4853,7 +5132,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017h"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017i"));
     return;
   }
   const start = () => {
@@ -4867,7 +5146,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017h"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017i"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5673,6 +5952,7 @@ function lessonVocabTile(n, vs) {
     .map(([cls, c]) => `<i class="${cls}" style="flex:${c}"></i>`).join("");
   return `<a class="ltile vocab" href="#/cards/${n}"
     aria-label="${esc(`Lesson vocabulary ${pctN}%. ${mastered} of ${total} words mastered`)}">
+    ${tomBuddy({ pose: "peek", size: "xs", cls: "tom-tile", line: false })}
     <div class="lt-top">
       <h2 class="lt-title">Vocabulary</h2>
       <div class="lt-hero"><span class="n">${pctN}</span><span class="u">%</span></div>
@@ -5703,6 +5983,7 @@ function lessonGrammarTile(n) {
     : `<p class="lt-empty">No grammar points in this lesson.</p>`;
   return `<a class="ltile grammar" href="#/drill/${n}"
     aria-label="${esc(`Lesson grammar ${avg}%. ${done} of ${pts.length} points mastered`)}">
+    ${tomBuddy({ pose: "think", size: "xs", cls: "tom-tile", line: false })}
     <div class="lt-top">
       <h2 class="lt-title">Grammar</h2>
       <div class="lt-hero"><span class="n">${avg}</span><span class="u">%</span></div>
@@ -5789,9 +6070,79 @@ function emptyState(o) {
     o.actions && o.actions.filter(Boolean).length ? actionRow(o.actions) : ""}</div>`;
 }
 
+/* ── Tom buddy helpers ─────────────────────────────────────────────────── */
+function tomSrc() {
+  return "mascot.png?v=" + encodeURIComponent(window.__BUILD__ || "");
+}
+const TOM_LINES = {
+  home: ["今日もがんばろう！", "Ready when you are!", "どの課いく？", "Let's study!"],
+  vocab: ["単語タイム！", "Flip 'em!", "覚えよう！"],
+  grammar: ["文法、いくぞ！", "Particles…", "考えてる…"],
+  cards: ["Ready!", "めくって！", "I got your back."],
+  cardsFlip: ["どう？", "Know it?", "えーい！"],
+  cardsYes: ["いいね！", "やった！", "Nice!"],
+  cardsNo: ["もう一回！", "It's OK!", "また後で！"],
+  drill: ["考えて…", "書いてみて！", "頑張って！"],
+  drillOk: ["正解！", "すごい！", "Perfect!"],
+  drillNo: ["あとちょっと…", "Check it!", "次いこう！"],
+  resultsPerfect: ["完璧！", "Clean sweep!", "天才！？"],
+  resultsGood: ["よくできた！", "Nice work!", "いい調子！"],
+  resultsEncourage: ["またやろう！", "Progress!", "一歩ずつ！"],
+  lesson: ["この課いける！", "Grammar time!", "よ〜し！"],
+  lessons: ["五十課、いける！", "Pick a lesson!", "Jump in!"],
+  verbs: ["活用タイム！", "て-form!", "動詞、いく！"],
+  kanji: ["漢字、いける！", "一文字ずつ！", "Forge on!"],
+  welcome: ["ようこそ！", "Hello!", "一緒に勉強！"],
+  notFound: ["道に迷った？", "Wrong turn!", "ホームへ！"]
+};
+function tomLine(key) {
+  const list = TOM_LINES[key] || TOM_LINES.home;
+  return list[Math.floor(Math.random() * list.length)];
+}
+function tomBuddy(opts) {
+  const o = opts || {};
+  const pose = o.pose || "idle";
+  const size = o.size || "md";
+  const line = o.line === false ? "" : (o.line || "");
+  const cls = ["tom-buddy", "size-" + size, "pose-" + pose]
+    .concat(o.cls ? String(o.cls).split(/\s+/) : []).filter(Boolean).join(" ");
+  const id = o.id ? ` id="${esc(o.id)}"` : "";
+  const bubble = line
+    ? `<span class="tom-bubble">${esc(line)}</span>`
+    : "";
+  return `<div class="${cls}"${id} aria-hidden="true">
+    <img class="tom-face" src="${tomSrc()}" alt="" width="96" height="96" decoding="async">
+    ${bubble}
+  </div>`;
+}
+function tomResultsBuddy(right, total) {
+  if (!total) return tomBuddy({ pose: "encourage", line: tomLine("resultsEncourage"), size: "lg", cls: "tom-results" });
+  const pctN = right / total;
+  if (pctN >= 1) return tomBuddy({ pose: "cheer", line: tomLine("resultsPerfect"), size: "lg", cls: "tom-results" });
+  if (pctN >= 0.7) return tomBuddy({ pose: "cheer", line: tomLine("resultsGood"), size: "lg", cls: "tom-results" });
+  return tomBuddy({ pose: "bob", line: tomLine("resultsEncourage"), size: "lg", cls: "tom-results" });
+}
+function syncTomFloat(key, pose) {
+  const el = document.getElementById("tomFloat");
+  if (!el) return;
+  if (!key) {
+    el.hidden = true;
+    el.innerHTML = "";
+    return;
+  }
+  el.hidden = false;
+  el.innerHTML = tomBuddy({
+    pose: pose || "peek",
+    line: tomLine(key),
+    size: "sm",
+    cls: "tom-float-buddy"
+  });
+}
+
 /* The panel alone, for callers that already have a heading on the page. */
 function summaryPanel(o) {
   return `<div class="stage"><div class="results">
+    ${tomResultsBuddy(o.right, o.total)}
     <div class="bigscore">${o.right}<span class="of"> / ${o.total}</span></div>
     <p class="hintline">${o.lead}</p>
     ${o.body || ""}
@@ -6238,6 +6589,7 @@ function kanjiHomeStat(levels, href) {
   }).join("; ");
   return `<a class="stat kanji-home" href="${href}"
     aria-label="${esc(`Kanji ${known} of ${total}. ${aria}`)}">
+    ${tomBuddy({ pose: "bob", size: "xs", cls: "tom-stat", line: false })}
     <div class="kh-head">
       <span class="kh-title">Kanji</span>
     </div>
@@ -6377,7 +6729,12 @@ function wireVerbBadgeFit() {
 
 function homeStat(k, viz, valHtml, sub, href, cls) {
   const extra = cls ? ` ${cls}` : "";
-  const inner = `<div class="k">${esc(k)}</div>
+  const peek = (cls === "verbs-home")
+    ? tomBuddy({ pose: "nudge", size: "xs", cls: "tom-stat", line: false })
+    : (String(cls || "").includes("kanji") || k === "Kanji")
+      ? tomBuddy({ pose: "bob", size: "xs", cls: "tom-stat", line: false })
+      : "";
+  const inner = `${peek}<div class="k">${esc(k)}</div>
     <div class="viz">${viz}</div>
     <div class="meta">
       <div class="val">${valHtml}</div>
@@ -6451,12 +6808,12 @@ function renderHome() {
       ? `<p class="home-sync-ok">Signed in as ${esc(authUser.email || authUser.uid)} · local ${localW} · build ${esc(window.__BUILD__ || "")}</p>`
       : "");
 
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="home-landing">
       <div class="home-top">
         <div class="home-brand">
-          <img class="mascot" src="mascot.png?v=20261017h" alt="" width="72" height="72"
-            decoding="async" aria-hidden="true">
+          ${tomBuddy({ pose: "wave", size: "lg", line: tomLine("home"), cls: "tom-home" })}
           <h1 class="brand">トムさんの勉強ガイド</h1>
         </div>
         <div class="home-settings-bar">
@@ -6493,6 +6850,7 @@ function renderHome() {
       ${emptySyncBanner}
 
       <div class="home-lesson-frame" aria-label="Lesson progress">
+        ${tomBuddy({ pose: "peek", size: "sm", cls: "tom-lesson-peek", line: tomLine(filterLesson % 2 ? "vocab" : "grammar") })}
         <div class="home-filter">
           <div class="home-filter-lesson">
             <label for="homefilter">Lesson</label>
@@ -6573,7 +6931,15 @@ function renderLessons() {
      always the one you are on. The jump is derived from your progress, not
      from a flag in the data. */
   const cur = currentLesson();
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
+    <div class="tom-land-head">
+      ${tomBuddy({ pose: "nudge", size: "md", line: tomLine("lessons") })}
+      <div class="tom-land-copy">
+        <h2 class="view" style="margin:0">Lesson directory</h2>
+        <p class="viewsub" style="margin:4px 0 0">五十課 — jump in anywhere.</p>
+      </div>
+    </div>
     <div class="toolbar">
       <input type="search" id="q" placeholder="Search lessons, patterns, titles" value="${esc(query)}">
       ${cur ? `<button class="btn" id="jump">Jump to Lesson ${cur}</button>` : ""}
@@ -7085,8 +7451,12 @@ function renderLesson(n) {
         <span class="lt">${esc(next.title)}</span></a>` : ""}
     </nav>` : "";
 
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = head + gapNote +
-    `<h2 class="view minor">Grammar points</h2>` + grammar + vocab + lnav;
+    `<div class="tom-lesson-head">
+      ${tomBuddy({ pose: "think", size: "md", line: tomLine("lesson") })}
+      <h2 class="view minor">Grammar points</h2>
+    </div>` + grammar + vocab + lnav;
 
   const drillOpt = document.getElementById("drillLessonVocab");
   const drillBtn = document.getElementById("lessonDrillBtn");
@@ -7147,9 +7517,11 @@ function renderCards(scope) {
   const missIds = cardMissesFor(scope, ns, false, false);
   const unlearnedN = deck(ns, false).filter(c => boxOf(c.id) < LEARNED_BOX).length;
   const keyN = showKey ? deck(ns, false, true).length : 0;
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
-      <div>
+      <div class="tom-setup">
+        ${tomBuddy({ pose: "bob", size: "lg", line: tomLine("cards"), id: "tomCardsSetup" })}
         <p class="cards-kicker">Flashcards</p>
         <h1 class="cards-title">${esc(title)}</h1>
       </div>
@@ -7305,6 +7677,13 @@ function revealCard() {
 /* Buttons and swipes share this so both animate the same way. */
 function commitCard(known) {
   if (CARD.animating) return;
+  const buddy = document.getElementById("tomCardBuddy");
+  if (buddy) {
+    buddy.classList.remove("mood-yes", "mood-no", "pose-peek-card");
+    buddy.classList.add(known ? "mood-yes" : "mood-no", "pose-cheer");
+    const bubble = buddy.querySelector(".tom-bubble");
+    if (bubble) bubble.textContent = known ? tomLine("cardsYes") : tomLine("cardsNo");
+  }
   const face = document.getElementById("face");
   if (!face || reduceMotion()) return answerCard(known);
   CARD.animating = true;
@@ -7445,6 +7824,13 @@ function drawCard() {
     done: CARD.passDone, total: CARD.passSize,
     body: `
     <div class="deck">
+      ${tomBuddy({
+        pose: "peek-card",
+        size: "sm",
+        id: "tomCardBuddy",
+        line: CARD.shown ? tomLine("cardsFlip") : tomLine("cards"),
+        cls: CARD.shown ? "mood-yes" : ""
+      })}
       <span class="swipetag tag-no">Don't know</span>
       <span class="swipetag tag-yes">Know</span>
       <div class="card${CARD.shown ? " live" : " tappable"}" id="face">
@@ -7912,9 +8298,11 @@ function paintDrillSetup() {
   const startLabel = qCount
     ? `Start · ${Math.min(size || qCount, qCount)} question${Math.min(size || qCount, qCount) === 1 ? "" : "s"}`
     : "Start";
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="cards-setup">
-      <div>
+      <div class="tom-setup">
+        ${tomBuddy({ pose: "think", size: "lg", line: tomLine("grammar") })}
         <p class="cards-kicker">Grammar drill</p>
         <h1 class="cards-title">Lesson ${n}</h1>
       </div>
@@ -8295,6 +8683,7 @@ function drawDrill() {
      the lesson map. Once enough of it is answered to be worth reading, you
      can stop and have the map for what you did. */
   const stopEarly = sweep && DRILL.answers.length >= 5;
+  syncTomFloat(null);
   view.innerHTML = drillStage({
     heading: esc(heading),
     sub: sweep
@@ -8305,6 +8694,7 @@ function drawDrill() {
     done: i, total: qs.length,
     body: `
       <div class="qbox">
+        ${tomBuddy({ pose: "think", size: "sm", cls: "tom-drill", line: tomLine("drill") })}
         <div class="qnum">English</div>
         <p class="qen">${ruby(q.en)}</p>
         <textarea class="jp" id="ans" placeholder="日本語で書いて ください"></textarea>
@@ -8367,6 +8757,7 @@ function drawVerdict(view, heading, range, score) {
   const speakKanji = plain(q.jp);
 
   stopSpeaking();
+  syncTomFloat(null);
   view.innerHTML = drillStage({
     heading: esc(heading),
     sub: "One attempt each — read the model answer before moving on.",
@@ -8375,6 +8766,12 @@ function drawVerdict(view, heading, range, score) {
     done: DRILL.i, total: DRILL.qs.length,
     body: `
       <div class="qbox verdict ${v.cls}">
+        ${tomBuddy({
+          pose: a.ok ? "cheer" : "wince",
+          size: "sm",
+          cls: "tom-drill",
+          line: a.ok ? tomLine("drillOk") : tomLine("drillNo")
+        })}
         <div class="vhead"><b>${a.ok ? "Correct" : v.head}</b>
           ${a.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
         <p class="qen">${ruby(q.en)}</p>
@@ -8924,7 +9321,15 @@ function renderVerbs() {
     </tr>`;
   }).join("");
 
+  syncTomFloat(null);
   view.innerHTML = `
+    <div class="tom-land-head">
+      ${tomBuddy({ pose: "nudge", size: "md", line: tomLine("verbs") })}
+      <div class="tom-land-copy">
+        <h2 class="view" style="margin:0">Verb conjugations</h2>
+        <p class="viewsub" style="margin:4px 0 0">Pick a form — トム is warming up.</p>
+      </div>
+    </div>
     ${resumeCards(["verbs"])}
 
     <div class="vopts-fold${vOptsOpen ? " is-open" : ""}">
@@ -9405,6 +9810,7 @@ function drawVerb() {
     const speakReading = answer && answer.kana ? answer.kana : "";
     const speakKanji = answer && (answer.kanji || answer.kana) ? (answer.kanji || answer.kana) : "";
     stopSpeaking();
+    syncTomFloat(null);
     view.innerHTML = drillStage({
       heading: esc(meta.label),
       sub: "One attempt each — listen to the correct form before moving on.",
@@ -9413,6 +9819,12 @@ function drawVerb() {
       done: VERB.i, total,
       body: `
       <div class="verdict ${ok ? "ok" : "no"}">
+        ${tomBuddy({
+          pose: ok ? "cheer" : "wince",
+          size: "sm",
+          cls: "tom-drill",
+          line: ok ? tomLine("drillOk") : tomLine("drillNo")
+        })}
         <div class="vhead"><b>${ok ? "Correct" : "Not quite"}</b>
           ${last.overridden ? `<span class="vtag">marked by hand</span>` : ""}</div>
         <div class="vrow"><span class="vtag">prompt</span>
@@ -9461,6 +9873,7 @@ function drawVerb() {
   const p = verbPrompt(v, promptStyle);
   const speakSrc = verbPromptSpeak(v, promptStyle);
   stopSpeaking();
+  syncTomFloat(null);
   view.innerHTML = drillStage({
     heading: esc(meta.label),
     sub: `Verbs to Lesson ${VERB.ceiling}${VERB.focus
@@ -9473,6 +9886,7 @@ function drawVerb() {
     done: VERB.i, total,
     body: `
     <div class="vcard">
+      ${tomBuddy({ pose: "think", size: "sm", cls: "tom-drill", line: tomLine("verbs") })}
       <div class="vask">Give the <b>${esc(meta.label)}</b></div>
       <div class="vword-row">
         <div class="vword ${VERB.prompt === "en" ? "en" : ""}">${p.html}</div>
@@ -10043,11 +10457,13 @@ function renderKanji() {
       ? `<button type="button" class="primary-act" id="kstart">Practice ${Math.min(o.count, focus.unknown)} new</button>`
       : `<button type="button" class="primary-act" id="kstart">Practice again</button>`;
 
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="k-land">
       ${resumeCards(["kanji"])}
 
       <header class="k-land-head">
+        ${tomBuddy({ pose: "cheer", size: "md", cls: "tom-kanji", line: tomLine("kanji") })}
         <p class="k">Kanji</p>
         <p class="scope">${esc(scopeLabels)} · ${scope.total} in scope</p>
       </header>
@@ -10280,10 +10696,12 @@ function renderKanjiBrowse(levelId) {
     </tr>`;
   }).join("");
 
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <section class="k-browse-page">
       <a class="k-study-back" href="#/kanji">← Kanji</a>
       <div class="k-browse-head">
+        ${tomBuddy({ pose: "peek", size: "md", line: tomLine("kanji") })}
         <h1>Browse characters</h1>
         <p class="sub">${set.length} in ${esc(level.label)} · tap a row to study it</p>
       </div>
@@ -10372,9 +10790,11 @@ function renderKanjiDetail(raw) {
         </div>
       </section>` : "";
 
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
     <article class="k-code">
       <header class="k-code-hero">
+        ${tomBuddy({ pose: "bob", size: "md", cls: "tom-study", line: tomLine("kanji") })}
         <p class="k-code-glyph" lang="ja">${esc(k.c)}</p>
         <h1 class="k-code-mean">${esc(k.en)}</h1>
         ${k.ex && k.ex.w
@@ -10513,6 +10933,12 @@ function drawKanji() {
       done: Math.min(KDRILL.i, total), total,
       body: `
       <div class="deck">
+        ${tomBuddy({
+          pose: "peek-card",
+          size: "sm",
+          line: ok ? tomLine("drillOk") : tomLine("drillNo"),
+          cls: ok ? "mood-yes" : "mood-no"
+        })}
         <div class="card" id="face">
           <div class="card-face">
             <div class="kbig-face">${esc(k.c)}</div>
@@ -10569,6 +10995,7 @@ function drawKanji() {
       ${undoButton("kundo", !KDRILL.answers.length)}
     </div>
     <div class="k-type-glyph">
+      ${tomBuddy({ pose: "think", size: "sm", cls: "tom-kanji-type", line: tomLine("kanji") })}
       ${lastOk ? `<p class="tick"><span class="jpline">${esc(lastOk.c)}</span>
         ${esc(lastOk.en)}</p>` : ""}
       <div class="kbig-face">${esc(k.c)}</div>
@@ -10792,10 +11219,16 @@ function notFound() {
   crumbs([["#/", "Home"], [null, "Not found"]]);
   document.body.dataset.view = "dash";
   paintNav(null);   // a bad address belongs to no track
+  syncTomFloat(null);
   document.getElementById("view").innerHTML = `
-    <h2 class="view">Nothing at that address</h2>
-    <p class="viewsub">The link <code>${esc(location.hash || "#/")}</code> does not name a screen
-      in this guide. It may be an old bookmark from before a section was renamed.</p>
+    <div class="tom-land-head">
+      ${tomBuddy({ pose: "wince", size: "lg", line: tomLine("notFound") })}
+      <div class="tom-land-copy">
+        <h2 class="view" style="margin:0">Nothing at that address</h2>
+        <p class="viewsub" style="margin:4px 0 0">The link <code>${esc(location.hash || "#/")}</code> does not name a screen
+          in this guide. It may be an old bookmark from before a section was renamed.</p>
+      </div>
+    </div>
     ${emptyState({
       title: "Try one of these instead.",
       actions: [
@@ -10961,7 +11394,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017h&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017i&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the

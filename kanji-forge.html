@@ -68,6 +68,47 @@ button { font:inherit; color:inherit; background:none; border:0; cursor:pointer;
   font-size:0.78rem; font-weight:700; letter-spacing:0.04em;
   text-transform:uppercase; color:var(--faint);
 }
+.tom-buddy {
+  display:inline-flex; flex-direction:column; align-items:center;
+  position:relative; pointer-events:none; user-select:none;
+}
+.tom-buddy .tom-face {
+  width:64px; height:64px; object-fit:contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.45));
+  animation: tom-bob 2.4s ease-in-out infinite;
+}
+.tom-buddy .tom-bubble {
+  position:absolute; left:50%; bottom:calc(100% - 2px);
+  transform:translateX(-50%);
+  padding:5px 9px; font-size:11px; font-weight:700;
+  color:var(--ink); background:var(--panel2);
+  border:1px solid var(--gold-dim); border-radius:12px;
+  white-space:nowrap; box-shadow:0 2px 8px rgba(0,0,0,.35);
+}
+.brand .tom-buddy { margin:0 auto 10px; display:flex; }
+.brand .tom-buddy .tom-face { width:72px; height:72px; }
+.reveal { position:relative; }
+.reveal .tom-buddy {
+  position:absolute; right:8px; top:-10px; z-index:3;
+}
+.reveal .tom-buddy .tom-face { width:48px; height:48px; animation: tom-cheer .7s ease-out both; }
+.anvil { position:relative; }
+.anvil > .tom-buddy {
+  position:absolute; right:4px; top:-6px; z-index:3;
+}
+.anvil > .tom-buddy .tom-face { width:40px; height:40px; }
+@keyframes tom-bob {
+  0%,100% { transform:translateY(0); }
+  50% { transform:translateY(-5px); }
+}
+@keyframes tom-cheer {
+  0% { transform:translateY(8px) scale(.9); }
+  40% { transform:translateY(-10px) scale(1.08); }
+  100% { transform:translateY(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .tom-buddy .tom-face { animation:none !important; }
+}
 
 .shell { display:flex; flex-direction:column; gap:12px; min-height: calc(100dvh - 28px - var(--safe-t) - var(--safe-b)); }
 .topbar { display:flex; justify-content:space-between; align-items:center; gap:8px; flex-wrap:wrap; }
@@ -908,12 +949,25 @@ function renderAppChrome() {
   );
 }
 
+function tomBuddy(pose, line, size) {
+  var sz = size || 64;
+  return (
+    '<div class="tom-buddy" aria-hidden="true">' +
+      '<img class="tom-face" src="mascot.png?v=20261017i" alt="" width="' + sz + '" height="' + sz + '" decoding="async">' +
+      (line ? '<span class="tom-bubble">' + esc(line) + '</span>' : '') +
+    '</div>'
+  );
+}
+
 function renderLevelScreen() {
   var n5 = recipesForLevel("N5").length;
   var n4 = recipesForLevel("N4").length;
   return (
     '<div class="screen-level">' +
-      '<div class="brand"><h1>Kanji <span>Forge</span></h1><p>Combine parts. Discover kanji.</p></div>' +
+      '<div class="brand">' +
+        tomBuddy("wave", "鍛えてみよう！", 72) +
+        '<h1>Kanji <span>Forge</span></h1><p>Combine parts. Discover kanji. Tom is watching the forge.</p>' +
+      '</div>' +
       '<div class="choices">' +
         '<button class="choice" data-act="pick-level" data-level="N5"><strong>N5</strong><span>Beginner set — ' + n5 + ' kanji</span></button>' +
         '<button class="choice" data-act="pick-level" data-level="N4"><strong>N4</strong><span>Includes all of N5 — ' + n4 + ' kanji</span></button>' +
@@ -1195,12 +1249,16 @@ function renderWorkbench() {
         '<button class="toggle' + (state.hintsOn ? ' on' : '') + '" data-act="toggle-hints"><span class="dot"></span>Hints ' + (state.hintsOn ? 'on' : 'off') + '</button>' +
         '<span class="note">One tip for the anvil · recipes also on locked Book tiles</span>' +
       '</div>' +
-      '<div class="anvil"><div class="lbl">Anvil</div>' +
+      '<div class="anvil">' +
+        tomBuddy("think", locked ? "復習タイム！" : "合わせて！", 40) +
+        '<div class="lbl">Anvil</div>' +
         '<div class="slots' + (state.shaking ? ' shake' : '') + (locked ? ' locked' : '') + '">' + slotHtml.join("") + '</div>' +
         lockBanner +
         renderAnvilHint() +
       '</div>' +
-      '<div class="reveal">' + (state.card ? renderCard(state.card, state.celebrate) : '') + '</div>' +
+      '<div class="reveal">' +
+        (state.card ? tomBuddy("cheer", "できた！", 48) + renderCard(state.card, state.celebrate) : '') +
+      '</div>' +
       '<div class="inv"><div class="lbl">Inventory</div><div class="grid' + (locked ? ' locked' : '') + '">' + tilesHtml + '</div></div>' +
     '</div>'
   );
