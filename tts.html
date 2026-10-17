@@ -29,6 +29,9 @@
   var objectUrl = null;
   var speakSeq = 0;
   var fetchAbort = null;
+  var fetchTimer = null;
+  var mediaUnlocked = false;
+  var mediaHandlers = null;
 
   function tell(type, extra) {
     try {
@@ -44,6 +47,27 @@
     objectUrl = null;
   }
 
+  function clearMediaHandlers() {
+    if (!mediaHandlers) return;
+    try {
+      audio.removeEventListener("playing", mediaHandlers.onPlaying);
+      audio.removeEventListener("ended", mediaHandlers.onEnded);
+      audio.removeEventListener("error", mediaHandlers.onError);
+    } catch (e) {}
+    mediaHandlers = null;
+  }
+
+  function abortFetch() {
+    if (fetchTimer) {
+      clearTimeout(fetchTimer);
+      fetchTimer = null;
+    }
+    if (fetchAbort) {
+      try { fetchAbort.abort(); } catch (e) {}
+      fetchAbort = null;
+    }
+  }
+
   function ttsUrl(q) {
     return "https://translate.googleapis.com/translate_tts?ie=UTF-8&client=tw-ob&tl=ja&q="
       + encodeURIComponent(q)
@@ -51,16 +75,39 @@
       + "&_=" + Date.now();
   }
 
+  function isSilentSrc() {
+    var src = "";
+    try { src = audio.currentSrc || audio.src || ""; } catch (e) {}
+    return src.indexOf("data:") === 0;
+  }
+
+  /* Unlock once. Re-running silent play on every Arrange tap was pausing the
+     next real utterance when the silent play() promise resolved late. */
   function unlock() {
+    if (mediaUnlocked) {
+      tell("tts-unlocked");
+      return;
+    }
+    var unlockSeq = speakSeq;
+    clearMediaHandlers();
     try { audio.pause(); } catch (e) {}
     audio.src = SILENT;
     var p = audio.play();
     if (p && typeof p.then === "function") {
       p.then(function () {
-        try { audio.pause(); } catch (e) {}
+        mediaUnlocked = true;
+        /* Only pause the silent clip — never a barge-in speak that started
+           while this unlock promise was still settling. */
+        if (speakSeq === unlockSeq && isSilentSrc()) {
+          try { audio.pause(); } catch (e) {}
+        }
         tell("tts-unlocked");
-      }).catch(function () { tell("tts-unlocked"); });
+      }).catch(function () {
+        mediaUnlocked = true;
+        tell("tts-unlocked");
+      });
     } else {
+      mediaUnlocked = true;
       tell("tts-unlocked");
     }
   }
@@ -73,6 +120,7 @@
 
   function playBlobOrSrc(seq, q, src) {
     if (seq !== speakSeq) return;
+    clearMediaHandlers();
     try { audio.pause(); } catch (e) {}
     audio.src = src;
     var settled = false;
@@ -90,9 +138,10 @@
       settled = true;
       fail(seq, q, "media-error");
     }
-    audio.addEventListener("playing", onPlaying, { once: true });
-    audio.addEventListener("ended", onEnded, { once: true });
-    audio.addEventListener("error", onError, { once: true });
+    mediaHandlers = { onPlaying: onPlaying, onEnded: onEnded, onError: onError };
+    audio.addEventListener("playing", onPlaying);
+    audio.addEventListener("ended", onEnded);
+    audio.addEventListener("error", onError);
     var p = audio.play();
     if (p && typeof p.then === "function") {
       p.then(function () {
@@ -101,6 +150,8 @@
         tell("tts-playing", { q: q });
       }).catch(function (err) {
         if (seq !== speakSeq || settled) return;
+        /* AbortError = a newer speak/stop barged in — not a failure. */
+        if (err && err.name === "AbortError") return;
         settled = true;
         fail(seq, q, err && err.name ? err.name : "play-rejected");
       });
@@ -117,12 +168,11 @@
   function speak(q) {
     q = String(q || "");
     if (!q) { tell("tts-error", { reason: "empty" }); return; }
+    /* Barge-in: each speak supersedes any in-flight fetch/play. */
     var seq = ++speakSeq;
+    abortFetch();
+    clearMediaHandlers();
     revoke();
-    if (fetchAbort) {
-      try { fetchAbort.abort(); } catch (e) {}
-      fetchAbort = null;
-    }
     try { audio.pause(); } catch (e) {}
     var url = ttsUrl(q);
     if (typeof fetch !== "function") {
@@ -131,10 +181,9 @@
     }
     var ctrl = typeof AbortController !== "undefined" ? new AbortController() : null;
     fetchAbort = ctrl;
-    var fetchTimer = setTimeout(function () {
+    fetchTimer = setTimeout(function () {
       try { if (ctrl) ctrl.abort(); } catch (e) {}
     }, FETCH_MS);
-    var usedDirect = false;
     fetch(url, {
       referrerPolicy: "no-referrer",
       cache: "no-store",
@@ -142,7 +191,7 @@
       signal: ctrl ? ctrl.signal : undefined
     })
       .then(function (r) {
-        clearTimeout(fetchTimer);
+        if (fetchTimer) { clearTimeout(fetchTimer); fetchTimer = null; }
         if (!r.ok) throw new Error("http-" + r.status);
         return r.blob();
       })
@@ -153,16 +202,19 @@
         playBlobOrSrc(seq, q, objectUrl);
       })
       .catch(function () {
-        clearTimeout(fetchTimer);
+        if (fetchTimer) { clearTimeout(fetchTimer); fetchTimer = null; }
         if (seq !== speakSeq) return;
         /* One direct <audio src> retry, then parent Web-Speech fallback. */
-        if (usedDirect) {
-          fail(seq, q, "fetch-failed");
-          return;
-        }
-        usedDirect = true;
         playBlobOrSrc(seq, q, url);
       });
+  }
+
+  function stop() {
+    speakSeq++;
+    abortFetch();
+    clearMediaHandlers();
+    try { audio.pause(); } catch (e) {}
+    revoke();
   }
 
   window.addEventListener("message", function (ev) {
@@ -170,15 +222,7 @@
     if (!d || typeof d !== "object") return;
     if (d.type === "tts-unlock") unlock();
     else if (d.type === "tts-speak") speak(d.q);
-    else if (d.type === "tts-stop") {
-      speakSeq++;
-      if (fetchAbort) {
-        try { fetchAbort.abort(); } catch (e) {}
-        fetchAbort = null;
-      }
-      try { audio.pause(); } catch (e) {}
-      revoke();
-    }
+    else if (d.type === "tts-stop") stop();
   });
 
   tell("tts-ready");
