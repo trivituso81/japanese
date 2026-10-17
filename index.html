@@ -14,9 +14,9 @@
 <meta name="application-name" content="トム日本語">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
-<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017p">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017p">
-<link rel="manifest" href="site.webmanifest?v=20261017p">
+<link rel="apple-touch-icon" href="apple-touch-icon.png?v=20261017r">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png?v=20261017r">
+<link rel="manifest" href="site.webmanifest?v=20261017r">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -24,7 +24,7 @@
 <script>
 /* Bump __BUILD__ whenever study pages need a fresh fetch. Rewrites ?v= on
    every load so Safari and home-screen shells do not keep a stale copy. */
-window.__BUILD__ = "20261017p";
+window.__BUILD__ = "20261017r";
 (function () {
   try {
     var u = new URL(location.href);
@@ -151,7 +151,7 @@ function staticContinueGuest() {
   if (typeof route === "function" && typeof LESSONS !== "undefined") {
     try { route(); return; } catch (e) {}
   }
-  var v = window.__BUILD__ || "20261017p";
+  var v = window.__BUILD__ || "20261017r";
   var url = "https://trivituso81.github.io/japanese/index.html?v=" + encodeURIComponent(v)
     + "&guest=1&r=" + Date.now() + "#/";
   try { location.replace(url); }
@@ -160,7 +160,7 @@ function staticContinueGuest() {
 
 function staticSignIn() {
   location.assign("https://trivituso81.github.io/japanese/signin.html?v="
-    + encodeURIComponent(window.__BUILD__ || "20261017p"));
+    + encodeURIComponent(window.__BUILD__ || "20261017r"));
 }
 
 function staticRestoreFromText() {
@@ -179,7 +179,7 @@ function staticRestoreFromText() {
     localStorage.setItem(key + ":cloudPushForce", "1");
     localStorage.setItem(key + ":guest", "1");
     location.replace("https://trivituso81.github.io/japanese/index.html?v="
-      + encodeURIComponent(window.__BUILD__ || "20261017p") + "&r=" + Date.now() + "#/");
+      + encodeURIComponent(window.__BUILD__ || "20261017r") + "&r=" + Date.now() + "#/");
   } catch (e) {
     alert((e && e.message) || "Could not restore.");
   }
@@ -3586,10 +3586,10 @@ document.addEventListener("DOMContentLoaded", function () {
     <path d="M64 15 A38 38 0 1 0 88 56" />
   </svg>
   <div class="masthead-inner">
-    <img class="mascot" src="mascot.png?v=20261017p" alt="" width="80" height="80"
+    <img class="mascot" src="mascot.png?v=20261017r" alt="" width="80" height="80"
       decoding="async" aria-hidden="true">
     <h1>トムさんの勉強ガイド <span class="jp" id="masthead-jp">みんなの日本語</span></h1>
-    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017p#/" id="backHome">
+    <a class="back-home" href="https://trivituso81.github.io/japanese/?v=20261017r#/" id="backHome">
       <span class="bh-arrow" aria-hidden="true">←</span>
       <span class="bh-ico" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10.5 12 4l8 6.5V20a1 1 0 0 1-1 1h-5v-6H10v6H5a1 1 0 0 1-1-1v-9.5z"/></svg></span>
       Back home
@@ -3610,7 +3610,7 @@ document.addEventListener("DOMContentLoaded", function () {
 <main id="view">
   <section class="welcome-gate">
     <div class="tom-buddy size-xl pose-wave" aria-hidden="true">
-      <img class="tom-face" src="mascot.png?v=20261017p" alt="" width="96" height="96" decoding="async">
+      <img class="tom-face" src="mascot.png?v=20261017r" alt="" width="96" height="96" decoding="async">
       <span class="tom-bubble">ようこそ！</span>
     </div>
     <h2>トムさんの勉強ガイド<br>へようこそ</h2>
@@ -3715,7 +3715,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 <!-- App first. Firebase loads later in the background so a slow/blocked
      CDN cannot leave this page stuck on the static welcome forever. -->
-<script src="firebase-config.js?v=20261017p"></script>
+<script src="firebase-config.js?v=20261017r"></script>
 <script>
 /* ============================================================
    State
@@ -5300,7 +5300,7 @@ function signInGoogle() {
   if (mobile) {
     const st = document.getElementById("cloudStatus");
     if (st) st.textContent = "Opening Google sign-in…";
-    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017p"));
+    location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017r"));
     return;
   }
   const start = () => {
@@ -5314,7 +5314,7 @@ function signInGoogle() {
     provider.setCustomParameters({ prompt: "select_account" });
     cloudAuth.signInWithPopup(provider).catch(e => {
       if (e && e.code === "auth/popup-blocked") {
-        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017p"));
+        location.assign("signin.html?v=" + encodeURIComponent(window.__BUILD__ || "20261017r"));
         return;
       }
       try { localStorage.removeItem(KEY_EXPECT_AUTH); } catch (err) {}
@@ -5493,10 +5493,14 @@ let speakFrame = null;         // iframe → tts.html (no-referrer document)
 let speakAudioGen = 0;
 let speakMsgGen = 0;
 let speakHeardGen = -1;        // last gen that actually started playing
-/* If Google TTS has not started by this time, fall back to Web Speech.
-   Two stacked 8s timeouts used to leave learners waiting ~15s on iPhone. */
-const TTS_FALLBACK_MS = 1500;
-const TTS_FRAME_WAIT_MS = 2000;
+/* tts.html allows FETCH_MS + PLAY_MS (and one direct-src retry). The old
+   1.5s parent watchdog killed in-flight Google audio, then Web Speech often
+   failed off-gesture on iOS — the intermittent “no dictation” hang. Wait for
+   the iframe to finish its own attempts before stopping it. */
+const TTS_FETCH_MS = 2500;
+const TTS_PLAY_MS = 2500;
+const TTS_FALLBACK_MS = TTS_FETCH_MS + TTS_PLAY_MS + 800;
+const TTS_FRAME_WAIT_MS = TTS_FALLBACK_MS;
 
 const SILENT_WAV = "data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQAAAAA=";
 
@@ -5579,14 +5583,24 @@ function setSpeakBusy(on) {
 function speakViaWebSpeech(text) {
   if (!canSpeakBrowser) { setSpeakBusy(false); return false; }
   try { speechSynthesis.cancel(); } catch (e) {}
+  try { speechSynthesis.resume(); } catch (e) {}
   const u = new SpeechSynthesisUtterance(text);
   u.lang = "ja-JP";
   u.rate = 0.92;
   const voice = jaVoice || pickJaVoice();
   if (voice) { jaVoice = voice; u.voice = voice; }
-  u.addEventListener("end", () => setSpeakBusy(false));
-  u.addEventListener("error", () => setSpeakBusy(false));
-  speakHeardGen = speakAudioGen;
+  const gen = speakAudioGen;
+  /* Only mark heard once audio actually starts — queueing alone used to
+     satisfy the watchdog while iOS silently dropped the utterance. */
+  u.addEventListener("start", () => {
+    if (gen === speakAudioGen) speakHeardGen = gen;
+  });
+  u.addEventListener("end", () => {
+    if (gen === speakAudioGen) setSpeakBusy(false);
+  });
+  u.addEventListener("error", () => {
+    if (gen === speakAudioGen) setSpeakBusy(false);
+  });
   /* Speak synchronously — setTimeout(0) drops the user-gesture token on iOS
      and leaves speechSynthesis silent after a Listen tap. */
   try { speechSynthesis.speak(u); } catch (e) { setSpeakBusy(false); return false; }
@@ -5663,12 +5677,19 @@ function flushPendingSpeak() {
 }
 
 /* Play Google TTS via the persistent no-referrer iframe (postMessage).
-   Reloading tts.html per word would drop iOS's per-document media unlock. */
-function speakViaTtsFrame(text, token, gen) {
+   Reloading tts.html per word would drop iOS's per-document media unlock.
+   onFail is the single parent-owned fallback (do not also Web-Speech here). */
+function speakViaTtsFrame(text, token, gen, onFail) {
   const f = ensureSpeakFrame();
   if (!f) return false;
   const msgGen = ++speakMsgGen;
   let frameSettled = false;
+  const fail = () => {
+    if (frameSettled || msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
+    frameSettled = true;
+    window.removeEventListener("message", onMsg);
+    if (typeof onFail === "function") onFail();
+  };
   const onMsg = ev => {
     const d = ev && ev.data;
     if (!d || typeof d !== "object") return;
@@ -5684,32 +5705,24 @@ function speakViaTtsFrame(text, token, gen) {
       window.removeEventListener("message", onMsg);
       setSpeakBusy(false);
     } else if (d.type === "tts-error") {
-      frameSettled = true;
-      window.removeEventListener("message", onMsg);
-      /* Skip the same-document <audio> path — it usually 404s from github.io
-         Referer and only added another long wait. Go straight to Web Speech. */
-      speakViaWebSpeech(text);
+      fail();
     }
   };
   window.addEventListener("message", onMsg);
+  let sent = false;
   const send = () => {
-    if (msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
+    if (sent || msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
+    sent = true;
     if (!postToSpeakFrame({ type: "tts-speak", q: text })) {
-      window.removeEventListener("message", onMsg);
-      speakViaWebSpeech(text);
+      fail();
     }
   };
+  /* Prefer the ready callback; also nudge once if the frame is already up so
+     we do not depend only on setTimeout (which drops the iOS gesture token). */
   onSpeakFrameReady(send);
-  /* Also try immediately — if the frame is already up, do not wait for the
-     ready ping (and do not rely only on setTimeout, which drops iOS gesture). */
   if (speakFrameReady) send();
-  else setTimeout(send, 0);
-  setTimeout(() => {
-    if (frameSettled || msgGen !== speakMsgGen || gen !== speakAudioGen || token !== speakToken) return;
-    window.removeEventListener("message", onMsg);
-    if (speakHeardGen === gen) return;
-    speakViaWebSpeech(text);
-  }, TTS_FRAME_WAIT_MS);
+  /* Safety net only — tts-error should fire sooner from the iframe. */
+  setTimeout(fail, TTS_FRAME_WAIT_MS);
   return true;
 }
 
@@ -5786,18 +5799,21 @@ function speakJapanese(reading, kanji) {
 
   const token = speakToken;
   const gen = speakAudioGen;
+  let fellBack = false;
 
-  /* Absolute watchdog: never leave the learner waiting on a hung Google CDN.
-     If the iframe has not started playback, Web Speech speaks immediately. */
-  setTimeout(() => {
-    if (token !== speakToken || gen !== speakAudioGen) return;
+  /* One fallback owner: stop the iframe only when giving up on Google TTS,
+     then try Web Speech. Previously a 1.5s watchdog raced a 2s+2s iframe
+     pipeline and cancelled audio that was about to play. */
+  const fallback = () => {
+    if (fellBack || token !== speakToken || gen !== speakAudioGen) return;
     if (speakHeardGen === gen) return;
+    fellBack = true;
     postToSpeakFrame({ type: "tts-stop" });
     speakViaWebSpeech(text);
-  }, TTS_FALLBACK_MS);
+  };
 
   /* iframe-first: reliable no-referrer for Google TTS on iOS Safari / PWA. */
-  if (speakViaTtsFrame(text, token, gen)) return true;
+  if (speakViaTtsFrame(text, token, gen, fallback)) return true;
   if (speakViaAudioElement(text, token, gen)) return true;
   return speakViaWebSpeech(text);
 }
@@ -12253,7 +12269,7 @@ document.addEventListener("click", e => {
   const a = e.target.closest("#backHome");
   if (!a) return;
   e.preventDefault();
-  location.replace("https://trivituso81.github.io/japanese/?v=20261017p&r=" + Date.now() + "#/");
+  location.replace("https://trivituso81.github.io/japanese/?v=20261017r&r=" + Date.now() + "#/");
 });
 
 /* Pin the kanji typing frame to visualViewport. iOS Safari scrolls the
