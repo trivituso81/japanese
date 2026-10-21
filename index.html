@@ -6493,7 +6493,6 @@ function lessonVocabTile(n, vs) {
     .map(([cls, c]) => `<i class="${cls}" style="flex:${c}"></i>`).join("");
   return `<a class="ltile vocab" href="#/cards/${n}"
     aria-label="${esc(`Lesson vocabulary ${pctN}%. ${mastered} of ${total} words mastered`)}">
-    ${tomBuddy({ pose: "peek", size: "xs", cls: "tom-tile", line: false })}
     <div class="lt-top">
       <h2 class="lt-title">Vocabulary</h2>
       <div class="lt-hero"><span class="n">${pctN}</span><span class="u">%</span></div>
@@ -6524,7 +6523,6 @@ function lessonGrammarTile(n) {
     : `<p class="lt-empty">No grammar points in this lesson.</p>`;
   return `<a class="ltile grammar" href="#/drill/${n}"
     aria-label="${esc(`Lesson grammar ${avg}%. ${done} of ${pts.length} points mastered`)}">
-    ${tomBuddy({ pose: "think", size: "xs", cls: "tom-tile", line: false })}
     <div class="lt-top">
       <h2 class="lt-title">Grammar</h2>
       <div class="lt-hero"><span class="n">${avg}</span><span class="u">%</span></div>
@@ -7142,7 +7140,6 @@ function kanjiHomeStat(levels, href) {
   }).join("; ");
   return `<a class="stat kanji-home" href="${href}"
     aria-label="${esc(`Kanji ${known} of ${total}. ${aria}`)}">
-    ${tomBuddy({ pose: "bob", size: "xs", cls: "tom-stat", line: false })}
     <div class="kh-head">
       <span class="kh-title">Kanji</span>
     </div>
@@ -7282,12 +7279,7 @@ function wireVerbBadgeFit() {
 
 function homeStat(k, viz, valHtml, sub, href, cls) {
   const extra = cls ? ` ${cls}` : "";
-  const peek = (cls === "verbs-home")
-    ? tomBuddy({ pose: "nudge", size: "xs", cls: "tom-stat", line: false })
-    : (String(cls || "").includes("kanji") || k === "Kanji")
-      ? tomBuddy({ pose: "bob", size: "xs", cls: "tom-stat", line: false })
-      : "";
-  const inner = `${peek}<div class="k">${esc(k)}</div>
+  const inner = `<div class="k">${esc(k)}</div>
     <div class="viz">${viz}</div>
     <div class="meta">
       <div class="val">${valHtml}</div>
@@ -7405,7 +7397,6 @@ function renderHome() {
       ${resumeCards(["grammar", "cards"])}
 
       <div class="home-lesson-frame" aria-label="Lesson progress">
-        ${tomBuddy({ pose: "peek", size: "sm", cls: "tom-lesson-peek", line: tomLine(filterLesson % 2 ? "vocab" : "grammar") })}
         <div class="home-filter">
           <div class="home-filter-lesson">
             <label for="homefilter">Lesson</label>
